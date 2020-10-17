@@ -1,0 +1,113 @@
+<div class ="col-md-4">
+    <p class="nsw-text-center" style="font-size: 16px">
+        <b>{{_lang "most_02_label_BoKHCN"}}</b>
+    </p>
+    <p class="nsw-text-center">
+        <b>{{_lang "most_02_label_vudoluong"}}</b>
+    </p>
+    <p class="nsw-text-center">
+        Số: {{data.fiSoTb}}
+    </p>
+</div>
+<div class ="col-md-3">
+
+</div>
+<div class ="col-md-5">
+    <p class="nsw-text-center" style="font-size: 16px">
+        <b>{{_lang "most_02_label_xhcnvn"}}</b>
+    </p>
+    <p class="nsw-text-center">
+        <b style="text-decoration: underline">{{_lang "most_02_label_doclaptudo"}}</b>
+    </p>
+    <p class="nsw-text-center">
+        Hà Nội, {{toFormalDate data.fiNgayKy}}
+    </p>
+</div>
+<div class="clearfix">
+    <br>
+</div>
+<br>
+<p class="nsw-text-center" style="font-size: 16px">
+    <b>{{_lang "most_02_thongbaokqktra"}} </b>
+</p>
+<br>
+<p><a href="{{data.context}}/most/02/kqktfile/{{data.tbdhoso.fiIdHoso}}" class="btn blue" id="btnDownload"><i class="fa fa-download" ></i></a></p>
+<br>
+<p>
+    1. {{_lang "most_02_thongbaokqktra_cosonhapkhau"}}: {{data.tbdhoso.fiTenDnNk}}
+</p>
+<p>2. {{_lang "most_02_thongbaokqktra_sodki"}}: <!--{{data.tbdhoso.fiSoDkkt}}--> {{data.tbdhoso.fiMstDn}}</p>
+<p>3. {{_lang "most_02_diachikho"}}: {{data.tbdhoso.fiDiachiKho}}</p>
+<p>4. {{_lang "most_02_thongbaokqktra_cancukiemtra"}}: {{data.fiCancuKt}}</p>
+<p>5. {{_lang "most_02_thongbaokqktra_chungtu"}}:</p>
+    
+    <div class='col col-md-12'>- {{_lang "most_02_thongbaokqktra_hopdong"}}:  {{showAttachments data.tbdhoso.tepDinhKems 1}}</div>
+    <div class='col col-md-12'>- {{_lang "most_02_thongbaokqktra_dmhanghoa"}}: {{showAttachments data.tbdhoso.tepDinhKems 2}}</div>
+    <div class='col col-md-12'>- {{_lang "most_02_thongbaokqktra_giaychungnhanxuatxu"}}: {{showAttachments data.tbdhoso.tepDinhKems 3}}</div>
+    <div class='col col-md-12'>- {{_lang "most_02_thongbaokqktra_tokhai"}}: {{showToKhai data.tbdhoso.toKhaiHQs}}</div>
+    <div class='clearfix'></div>
+    <br>
+    <br>
+    <p><b> {{_lang "most_02_thongbaokqktra_ketquaktra"}}</b></p>
+<table class="table table-striped table-bordered table-hover table-checkable order-column">
+    <thead>
+        <tr>
+            <th class="nsw-text-center"><b>{{_lang "common_table_col_stt"}}</b></th>
+            <th class="nsw-text-center"><b>{{_lang "most_02_hanghoa_tenhanghoa"}}</b></th>
+            <th class="nsw-text-center"><b>{{_lang "most_02_hanghoa_nhan_hieu"}}</b></th>
+            <th class="nsw-text-center"><b>{{_lang "most_02_hanghoa_kieuloai"}}</b></th>
+            <th class="nsw-text-center"><b>{{_lang "most_02_hanghoa_soluong_khoiluong"}}</b></th>
+            <th class="nsw-text-center"><b>{{_lang "most_02_hanghoa_donvitinh"}}</b></th>
+            <th class="nsw-text-center"><b>{{_lang "most_02_thongbaokqktra_ketqua"}}</b></th>
+            <th class="nsw-text-center"><b>{{_lang "most_02_thongbaokqktra_ghichu"}}</b></th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        {{#each data.tbdhoso.hangHoas}}
+        <tr class="odd gradeX">
+            <td class="nsw-text-center"> 
+                {{inc @index}}
+            </td>
+            <td> 
+                {{fiTenHh}}
+            </td>
+            <td>
+                {{fiNhanHh}}
+            </td>
+            <td>
+                {{fiKyhieu}}
+            </td>         
+            <td style="text-align: right;">
+                {{fiKlSl}}
+            </td>  
+            <td>
+                {{fiTenDv}}
+            </td>  
+            <td>
+                {{showResult fiKqkiemtra}}
+            </td>  
+            <td>
+                {{fiLydo}}
+            </td>  
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+
+<br />
+<br />
+<table class="col-md-12">
+    <tr>
+        <td class="w50pc"></td>
+        <td class="w50pc nsw-text-center">
+            <p><b>{{_lang "most_02_thongbaokqktra_chuky_cqktr"}}</b></p>
+            <p>{{_lang "most_02_thongbaokqktra_kyten"}}</p>
+<!--            <p>{{data.fiNguoiKy}}</p>-->
+        </td>
+    </tr>
+</table>
+
+
+

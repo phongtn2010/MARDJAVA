@@ -1,0 +1,137 @@
+
+<div id="formCuaKhau">
+	<div class="col-md-12 row"">
+		<h5>Tìm kiếm cửa khẩu</h5>
+	</div>
+	<div class="col-md-12 row"">
+		<div class="col-md-6">
+				<div class="form-group">
+					<label class="col-sm-4 label-input-right text-right"  >Mã cửa khẩu<span class="nsw-require-field"></span></label>
+					<div class="col-sm-8">
+						<div class="form-group">
+							<input type="text" data-bind="value: searchForm.maCuaKhau">
+						</div>
+					</div>
+				</div>
+		</div>
+		<div class="col-md-6">
+			
+				<div class="form-group">
+					<label class="col-sm-4 label-input-right text-right"  >Tên cửa khẩu<span class="nsw-require-field"></span></label>
+					<div class="col-sm-8">
+						<div class="form-group">
+							<input type="text" data-bind="value: searchForm.tenCuaKhau">
+						</div>
+					</div>
+				</div>
+			
+		</div>
+		
+	</div>
+	
+	<div class="col-md-12 row"">		
+		<div class="form-group">
+			<div class="form-group nsw-text-center">
+				<a href="javascript:;" class="btn green" id="" data-bind="click: $root.searchCuaKhau"><i class="fa fa-search"></i> Tìm kiếm</a> 							
+			</div>		
+		</div>	
+	</div>
+	
+	<div class="col-md-12 row">
+	
+	<div class="form-group">
+			<div class="form-group nsw-text-center">
+				<table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
+					<thead>
+						<tr class="nsw-tr tr-nsw1-bgcolor">
+							<th class="text-center">TT</th>
+							<th class="text-center"></th>
+							<th class="text-center">Mã cửa khẩu</th>
+							<th class="text-center">Tên cửa khẩu</th>
+													
+						</tr>
+					</thead>
+					<tbody data-bind="foreach: { data: $root.danhSachCuaKhau, as: 'item'}">
+						<tr>
+							<td class="text-center" data-bind="text: item.soThuTu"></td>							
+								<td><input type="checkbox" data-bind=" checked: item.checked, event:{ change: $root.checkboxClick}, enable: item.enable"></td>
+							<td class="text-center" data-bind="text: item.maCuaKhau"></td>
+							<td class="text-center" data-bind="text: item.tenCuaKhau"></td>												
+						</tr>
+					</tbody>
+					
+					
+				</table>					
+			</div>	
+			<div class="row">
+					<div class="col-md-12 nsw-text-right">
+						<div class="nsw-flr" data-bind="if: totalData() > 15">
+							<ul class="flip pull-left pagination pagination-sm">
+								<li data-bind="css: { disabled: !pagingVM.firstPageActive() }" class="previous disabled"><a href="#" aria-label="First" data-bind="click: goToFirst">Trang đầu
+								</a></li>
+								<li data-bind="css: { disabled: !pagingVM.previousPageActive()  }" class="previous disabled"><a href="#" aria-label="Previous" data-bind="click: goToPrevious"> Trang trước
+								</a></li>
+								<!-- ko foreach: $root.pagingVM.getPages() -->
+								<li data-bind="css: { active: $data == $root.pagingVM.currentPage() }"><a href="#" data-bind="text: $data, click: $root.goToPage.bind($data)"></a></li>
+								<!-- /ko -->
+								<li data-bind="css: { disabled: !pagingVM.nextPageActive() }" class="next"><a href="#" aria-label="Next" data-bind="click: goToNext"> trang sau
+								</a></li>
+								<li data-bind="css: { disabled: !pagingVM.lastPageActive() }" class="next"><a href="#" aria-label="Last" data-bind="click: goToLast">trang cuối
+								</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>	
+		</div>	
+	</div>
+	
+	<div class="col-md-12 row"">		
+		<div class="form-group">
+			<div class="form-group nsw-text-center">
+				<a href="javascript:;" class="btn green"  data-bind="click: $root.chon" ><i class="glyphicon glyphicon-ok"></i> Chọn</a> 							
+			</div>		
+		</div>	
+	</div>
+	<div class="col-md-12 row"">
+		<h5>Danh sách cửa khẩu được chọn</h5>
+	</div>
+	
+	<div class="form-group" >
+			<div class="form-group nsw-text-center">
+				<table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
+					<thead>
+						<tr class="nsw-tr tr-nsw1-bgcolor">
+							<th class="text-center">TT</th>						
+							<th class="text-center">Mã cửa khẩu</th>
+							<th class="text-center">Tên cửa khẩu</th>
+							<th class="text-center">Thao tác</th>
+													
+						</tr>
+					</thead>
+					<tbody data-bind="foreach: { data: $root.danhSachHSCuaKhau, as: 'item'}">
+						<tr>
+							<td class="text-center" data-bind="text: $index() + 1"></td>													
+							<td class="text-center" data-bind="text: item.maCuaKhau"></td>
+							<td class="text-center" data-bind="text: item.tenCuaKhau" ></td>		
+							<td class="text-center"><a style="color: red; font-weight: bold;"  data-bind="click: $root.checkDelete">
+						<i class="fa fa-lg fa-close tooltips" aria-hidden="true"></i>
+							</a></td>										
+						</tr>
+					</tbody>
+					
+				</table>					
+			</div>		
+		</div>	
+		<div class="col-md-12 row"">		
+			<div class="form-group">
+				<div class="form-group nsw-text-center">
+					<a href="javascript:;" class="btn green" id="searchHoSo" data-bind="click: $root.save"><i class="fa fa-floppy-o"></i> Lưu</a> 				
+				 	<a href="javascript:;" class="btn green" id="searchHoSo" data-bind="click: $root.closePopup"><i class="glyphicon glyphicon-remove"></i> Đóng</a>  				
+				</div>	
+					
+			</div>	
+		</div>
+	
+	
+	
+</div>

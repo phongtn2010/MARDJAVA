@@ -1,0 +1,152 @@
+<style>
+    .btrow {
+        width: 650px;
+        display: block;
+        margin: auto;
+    }
+
+    .btwidth {
+        width: 200px;
+        display: block;
+        float: left;
+        margin-right: 14px;
+    }
+    .small-text span, .small-text b,.small-text label  {
+        font-size: 13px !important;
+    }
+</style>
+<form class="form-sin-rut-ho-so-popup small-text" id="form-sin-rut-ho-so-popup">
+    <div class="row" >
+        <div class="col-md-6">
+            <div class="row form-group">
+                <label class="col-md-12"><b>{{ _lang "TbdToKhaiKyThuat16_fiSortDeclaration"}}<span class="nsw-require-field">*</span></b></label>
+                <div class="col-md-12">
+                    <input id="fiNameOfGoodsDeclaration" class="form-control" data-bind="value: tbdToKhaiKyThuat16.fiNameOfGoodsDeclaration">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row form-group">
+                <label class="col-md-12"><b>{{ _lang "TbdToKhaiKyThuat16_fiNameSicenceOfGoodsDeclaration"}}<span class="nsw-require-field">*</span></b></label>
+                <div class="col-md-12">
+                    <input id="fiNameSicenceOfGoodsDeclaration" class="form-control" data-bind="value: tbdToKhaiKyThuat16.fiNameSicenceOfGoodsDeclaration">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row" >
+        <div class="form-group">
+            <label class="col-md-12"><b>{{ _lang "TbdToKhaiKyThuat16_fiDescription2"}}<span class="nsw-require-field">*</span></b></label>
+            <label class="col-md-12"><i>({{ _lang "TbdToKhaiKyThuat16_fiDescription"}}<span class="nsw-require-field"></span>)</i></label>
+            <div class="col-md-12">
+                <textarea id="fiDescription" class="form-control" data-bind="value: tbdToKhaiKyThuat16.fiDescription"></textarea>
+            </div>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row" >
+                    <div class="form-group">
+                        <label class="col-md-12"><b>{{ _lang "TbdToKhaiKyThuat16_fiPartUsed"}}<span class="nsw-require-field">*</span></b></label>
+                        <div class="col-md-12">
+                            <select multiple="multiple" id="fiPartUsed" class="form-control select5"
+                                    data-bind="options: $root.moduleParent.tbsBoPhan16s(),  optionsText: 'fiName',  optionsValue: 'fiCode', selectedOptions: fiPartUsedSelecteds"></select>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row" >
+                    <div class="form-group">
+                        <label class="col-md-12"><b>{{ _lang "TbdToKhaiKyThuat16_fiUsingValue"}}<span class="nsw-require-field">*</span></b></label>
+                        <div class="col-md-12">
+                            <select multiple id="fiUsingValue" class="form-control select5"
+                                    data-bind="options: $root.moduleParent.tbsGiaTriSuDung16s(),  optionsText: 'fiName',  optionsValue: 'fiCode', selectedOptions: fiUsingValueSelecteds"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    <div class="row" >
+        <!-- ko if: ($root.checkDisplayGroup($root.fiUsingValueSelecteds, ['fiOtherValueSpecified']))-->
+        <div class="col-md-6 ">
+
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "TbdToKhaiKyThuat16_fiOtherValueSpecified"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <textarea rows="2" id="fiOtherValueSpecified" class="form-control" data-bind="value: tbdToKhaiKyThuat16.fiOtherValueSpecified">></textarea>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /ko -->
+        <div class="col-md-6 ">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "TbdToKhaiKyThuat16_fiRequiredEcological"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <textarea rows="2" id="fiRequiredEcological" class="form-control" data-bind="value: tbdToKhaiKyThuat16.fiRequiredEcological">></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 ">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "TbdToKhaiKyThuat16_fiPlantingSeason"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <textarea rows="2" id="fiPlantingSeason" class="form-control" data-bind="value: tbdToKhaiKyThuat16.fiPlantingSeason">></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 ">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "TbdToKhaiKyThuat16_fiDensity"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <textarea rows="2" id="fiDensity" class="form-control" data-bind="value: tbdToKhaiKyThuat16.fiDensity"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 ">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "TbdToKhaiKyThuat16_fiMainDiseases"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <textarea rows="2" id="fiMainDiseases" class="form-control" data-bind="value: tbdToKhaiKyThuat16.fiMainDiseases"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 ">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "TbdToKhaiKyThuat16_fiWarnings"}}<span class="nsw-require-field"></span></b></label>
+                    <div class="col-md-12">
+                        <textarea rows="2" id="fiWarnings" class="form-control" data-bind="value: tbdToKhaiKyThuat16.fiWarnings"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <a title="{{ _lang 'common_button_luu' }}" style="float: right;  margin: 15px auto;" class="btn btn-primary" data-bind="click: $root.save"><i class="fa fa-save"></i>&nbsp;{{ _lang 'common_button_luu' }}</a>
+        </div>
+        <div class="col-md-6">
+            <a title="{{ _lang 'common_button_dong' }}" style="float: left; margin: 15px auto;display: block;" class="btn btn-default" data-bind="click: $root.close"><i class="fa fa-close"></i>&nbsp;{{ _lang 'common_button_dong' }}</a>
+        </div>
+    </div>
+</form>

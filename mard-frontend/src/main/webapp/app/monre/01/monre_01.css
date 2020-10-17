@@ -1,0 +1,32 @@
+.label-input-right {
+	text-align: right;
+}
+
+.bt-row-button {
+	display: block;
+	width: 210px;
+	margin: auto;
+}
+
+.bt-center {
+	width: 100px;
+	margin: auto;
+}
+
+.thong-tin-phe-lieu-nhap-table-th1 {
+	width: 50px;
+}
+
+
+.bt-width-130{
+	width: 130px;
+}
+
+#xemGiayXacNhanTT01 
+{
+    width: 960px; 
+    margin-left:  auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+} 

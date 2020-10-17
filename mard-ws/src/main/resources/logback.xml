@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>
+                %d [%t] %-5p %c - %m%n
+            </Pattern>
+        </encoder>
+    </appender>
+
+
+    <logger name="org.springframework" level="info">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <logger name="springfox.documentation" level="info">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    <logger name="org.apache.tomcat" level="info">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    <logger name="org.apache.catalina" level="info">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    <logger name="sun.rmi." level="info">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <logger name="org.hibernate" level="info">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <root level="debug">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+</configuration>

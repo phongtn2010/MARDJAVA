@@ -1,0 +1,83 @@
+<style>
+    .small-text span, .small-text b,.small-text label  {
+        font-size: 13px !important;
+    }
+    .form-group {
+        padding: 7px;
+    }
+</style>
+<div class="row" id="form-popup">
+    <div class="col-md-12">
+        <form  id="TbdNguoiThamDinh04">
+            <div class='col-md-12'>
+                <div class='row'>
+
+                    <div class='col-md-6 form-group'>
+                        <div class='row'>
+                            <label class="col-md-12"><span data-bind="i18n: {  html: { key: 'TbdNguoiThamDinh04.fiHoTen'}}"></span><span class="nsw-require-field">*</span></label>
+                            <div class="col-md-12">
+                                <input id="TbdNguoiThamDinh04_fiHoTen" class="form-control"  data-bind="value: tbdNguoiThamDinh04.fiHoTen, i18n: {  placeholder: { key: 'TbdNguoiThamDinh04.fiHoTen'}}">
+                                <i data-bind="i18n: {  placeholder: { key: 'TbdNguoiThamDinh04.maIsbnNote'}}"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='col-md-6 form-group'>
+                        <div class='row'>
+                            <label class="col-md-12" ><span data-bind="i18n: {  html: { key: 'TbdNguoiThamDinh04.fiNgaySinh'}}"></span><span class="nsw-require-field">*</span></label>
+                            <div class="col-md-12">
+                                <input id="TbdNguoiThamDinh04_fiNgaySinh"  class="form-control form-control-inline date-picker" data-date-format="dd/mm/yyyy" data-bind="value: tbdNguoiThamDinh04.fiNgaySinh, i18n: {  placeholder: { key: 'TbdNguoiThamDinh04.fiNgaySinh'}},">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='col-md-6 form-group'>
+                        <div class='row'>
+                            <label class="col-md-12"><span  data-bind="i18n: {  html: { key: 'TbdNguoiThamDinh04.fiTrinhDoNghiepVu'}}"></span><span class="nsw-require-field">*</span></label>
+                            <div class="col-md-12">
+                                <textarea id="TbdNguoiThamDinh04_fiTrinhDoNghiepVu" class="form-control"  data-bind="value: tbdNguoiThamDinh04.fiTrinhDoNghiepVu, i18n: {  placeholder: { key: 'TbdNguoiThamDinh04.fiTrinhDoNghiepVu'}}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='col-md-6 form-group'>
+                        <div class='row'>
+                            <label class="col-md-12" ><span data-bind="i18n: {  html: { key: 'TbdNguoiThamDinh04.fiTrinhDoChuyenMon'}}"></span><span class="nsw-require-field">*</span></label>
+                            <div class="col-md-12">
+                                <textarea id="TbdNguoiThamDinh04_fiTrinhDoChuyenMon" class="form-control"  data-bind="value: tbdNguoiThamDinh04.fiTrinhDoChuyenMon, i18n: {  placeholder: { key: 'TbdNguoiThamDinh04.fiTrinhDoChuyenMon'}}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='col-md-6 form-group'>
+                        <div class='row'>
+                            <label class="col-md-12"><span  data-bind="i18n: {  html: { key: 'TbdNguoiThamDinh04.fiTrinhDoNgoaiNgu'}}"></span><span class="nsw-require-field">*</span></label>
+                            <div class="col-md-12">
+                                <textarea id="TbdNguoiThamDinh04_fiTrinhDoNgoaiNgu" class="form-control"  data-bind="value: tbdNguoiThamDinh04.fiTrinhDoNgoaiNgu, i18n: {  placeholder: { key: 'TbdNguoiThamDinh04.fiTrinhDoNgoaiNgu'}}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='col-md-6 form-group'>
+                        <div class='row'>
+                            <label class="col-md-12" ><span data-bind="i18n: {  html: { key: 'TbdNguoiThamDinh04.fiThamNienCongTac'}}"></span><span class="nsw-require-field">*</span></label>
+                            <div class="col-md-12">
+                                <textarea id="TbdNguoiThamDinh04_fiThamNienCongTac" class="form-control"  data-bind="value: tbdNguoiThamDinh04.fiThamNienCongTac, i18n: {  placeholder: { key: 'TbdNguoiThamDinh04.fiThamNienCongTac'}}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <a title="{{ _lang 'common_button_luu' }}" style="float: right;  margin: 15px auto;" class="btn btn-primary" data-bind="click: $root.save"><i class="fa fa-save"></i>&nbsp;{{ _lang 'common_button_luu' }}</a>
+                </div>
+                <div class="col-md-6">
+                    <a title="{{ _lang 'common_button_dong' }}" style="float: left; margin: 15px auto;display: block;" class="btn btn-default" data-bind="click: $root.close"><i class="fa fa-close"></i>&nbsp;{{ _lang 'common_button_dong' }}</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

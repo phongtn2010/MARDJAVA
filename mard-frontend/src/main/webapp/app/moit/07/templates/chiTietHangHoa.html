@@ -1,0 +1,255 @@
+<style>
+.formChiTietHangHoa  {
+	font-size: 12px;
+}
+.formChiTietHangHoa  .form-control {
+	font-size: 12px;
+}
+.formChiTietHangHoa  .form-group {
+	margin-bottom: 8px;
+}
+</style>
+<div id="formChiTietHangHoa" class="row formChiTietHangHoa">
+	<div data-bind="if: !$root.chinhSuaHangHoaGH()">
+		<div class="col-md-12">
+			<div class="">
+				<div class="form-group">
+					<label class="col-sm-2 label-input-right text-right">{{_lang "moit_07_form_cthanghoa_maCSA" }}<span class="nsw-require-field">*</span></label>
+					<div class="col-sm-10">
+						<div class="form-group">
+							<select id="ct_maCAS" class="form-control select5" data-bind="options: $root.tienChats,  optionsText: 'name',  optionsValue: 'maCAS', value: ct.code"></select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="">
+				<div class="form-group" data-bind="foreach: { data: $root.maCASs, as: 'item' }">
+					<span style="background: #b7aeae; border-radius: 20px !important; padding: 7px;"> <span data-bind="text:item"></span> <span> <a data-bind="click: $root.xoaMaCAS"><span><i class="glyphicon glyphicon-remove" style="color: #f00;"></i></span></a>
+					</span>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="col-md-6">
+			<div class="row">
+				<div class="form-group">
+					<label class="col-sm-4 label-input-right text-right">{{_lang "moit_07_form_cthanghoa_maHSChat" }}<span class="nsw-require-field">*</span></label>
+					<div class="col-sm-8">
+						<div class="form-group">
+							<textarea class="form-control" id="ct_maHS" maxlength="20" data-bind="value: ct.maHS" rows="2" readonly="readonly"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="row">
+				<div class="form-group">
+					<label class="col-sm-4 label-input-right text-right">{{_lang "moit_07_form_cthanghoa_congThucHH" }}<span class="nsw-require-field">*</span></label>
+					<div class="col-sm-8">
+						<div class="form-group">
+							<textarea class="form-control" id="ct_congThucHoaHoc" data-bind="value: ct.congThucHoaHoc" rows="2" readonly="readonly"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="col-md-6">
+			<div class="row">
+				<div class="form-group">
+					<label class="col-sm-4 label-input-right text-right">{{_lang "moit_07_form_cthanghoa_tenChatTV" }}<span class="nsw-require-field">*</span></label>
+					<div class="col-sm-8">
+						<div class="form-group">
+							<textarea class="form-control" id="ct_tenTiengViet" data-bind="value: ct.tenTiengViet" rows="2" readonly="readonly"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="row">
+				<div class="form-group">
+					<label class="col-sm-4 label-input-right text-right">{{_lang "moit_07_form_cthanghoa_tenChatTA" }}<span class="nsw-require-field">*</span></label>
+					<div class="col-sm-8">
+						<div class="form-group">
+							<textarea class="form-control" id="ct_tenTiengAnh" data-bind="value: ct.tenTiengAnh" rows="2" readonly="readonly"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="col-md-6">
+			<div class="row">
+				<div class="form-group">
+					<label class="col-sm-4 label-input-right text-right">{{_lang "moit_07_form_cthanghoa_tenKhoaHoc" }}<span class="nsw-require-field">*</span></label>
+					<div class="col-sm-8">
+						<div class="form-group">
+							<textarea class="form-control" id="ct_tenKhoaHoc" data-bind="value: ct.tenKhoaHoc" rows="2" readonly="readonly"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="row">
+				<div class="form-group">
+					<label class="col-sm-4 label-input-right text-right">{{_lang "moit_07_form_cthanghoa_tenTM" }}<span class="nsw-require-field">*</span></label>
+					<div class="col-sm-8">
+						<div class="form-group">
+							<textarea class="form-control" id="ct_tenThuongMai" data-bind="value: ct.tenThuongMai, enable: !$root.loaiHoSoGiaHan()" rows="2"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="col-md-6">
+			<div class="row">
+				<div class="form-group">
+					<label class="col-sm-4 label-input-right text-right">{{_lang "moit_07_form_cthanghoa_maHHC" }}<span class="nsw-require-field">*</span></label>
+					<div class="col-sm-8">
+						<div class="form-group">
+							<input class="form-control" id="ct_maHonHop" data-bind="value: ct.maHonHop, enable: !$root.loaiHoSoGiaHan()" />
+						</div>
+					</div>
+				</div>
+				<div data-bind="visible: $root.showErrorMaHonHop()">
+					<b><i style="color: red;">{{_lang "moit_07_form_cthanghoa_error_maHonHop" }}</i></b>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="row">
+				<div class="form-group">
+					<label class="col-sm-4 label-input-right text-right">{{_lang "moit_07_form_cthanghoa_hamLuong" }}<span class="nsw-require-field">*</span></label>
+					<div class="col-sm-8">
+						<div class="form-group">
+							<input class="form-control" id="ct_hamLuong" data-bind="value: ct.hamLuong,  valueUpdate: 'keypress', event: { keypress: $root.hamLuongNumberInputKeyPressEvent.bind($data, ct.hamLuong()) }, enable: !$root.loaiHoSoGiaHan() " />
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12" style="margin-bottom: 15px;">
+					<b><i style="color: red;float:right;">{{_lang "moit_07_form_cthanghoa_error_chamPhay" }}</i></b>
+				</div>
+				<div data-bind="visible: $root.showErrorHamLuong()">
+					<b><i style="color: red;float:right;">{{_lang "moit_07_form_cthanghoa_error_hamLuong" }}</i></b>
+				</div>
+				<div data-bind="visible: $root.showErrorHamLuongMin4A()">
+					<b><i style="color: red;float:right;">{{_lang "moit_07_form_cthanghoa_error_hamLuongIVA" }}</i></b>
+				</div>
+				<div data-bind="visible: $root.showErrorHamLuongMin4B()">
+					<b><i style="color: red;float:right;">{{_lang "moit_07_form_cthanghoa_error_hamLuongIVB" }}</i></b>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="col-md-6">
+			<div class="row">
+				<div class="form-group">
+					<label class="col-sm-4 label-input-right text-right"><span data-bind="if: !$root.loaiHoSoGiaHan() ">{{_lang "moit_07_form_cthanghoa_soLuongHH" }}</span><span data-bind="if: $root.loaiHoSoGiaHan() ">{{_lang "moit_07_form_cthanghoa_error_soLCapLanDau" }}</span><span class="nsw-require-field">*</span></label>
+					<div class="col-sm-8">
+						<div class="form-group">
+							<input class="form-control" name="soDienThoai" id="ct_soLuong" data-bind="textInput: ct.soLuong, valueUpdate: 'afterkeydown', event: { 'keypress': $root.soLuongNumberInputKeyPressEvent.bind($data, ct.soLuong()), keydown: function(data, event) { return keypressdown(); }  }, enable: !$root.loaiHoSoGiaHan()" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="row">
+				<div class="form-group">
+					<label class="col-sm-4 label-input-right text-right">{{_lang "moit_07_form_cthanghoa_donVT" }}<span class="nsw-require-field">*</span></label>
+					<div class="col-sm-8">
+						<div class="form-group">
+							<select id="ct_donViTinh" class="form-control select55" data-bind="options: $root.donViTinhs,  optionsText: 'name', value: ct.donViTinh,  optionsValue: 'value', enable: !$root.loaiHoSoGiaHan()"></select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div data-bind="if: $root.loaiHoSoGiaHan() ">
+		<div class="col-md-12">
+			<div class="col-md-6">
+				<div class="row">
+					<div class="form-group">
+						<label class="col-sm-4 label-input-right text-right">{{_lang "moit_07_form_cthanghoa_error_soLuongDaNhap" }}<span class="nsw-require-field">*</span></label>
+						<div class="col-sm-8">
+							<div class="form-group">
+								<input class="form-control" type="text" name="soLuongDaNhap" id="ct_soLuongDaNhap" data-bind="value: ct.soLuongDaNhap, valueUpdate: 'afterkeydown', event: { keypress: $root.soLuongNumberInputKeyPressEvent.bind($data, ct.soLuongDaNhap()), keydown: function(data, event) { return keypressdownSoLuongDaNhap(); }  }" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="row">
+					<div class="form-group">
+						<label class="col-sm-4 label-input-right text-right">{{_lang "moit_07_form_cthanghoa_error_err_soLuongConLai" }}<span class="nsw-require-field">*</span></label>
+						<div class="col-sm-8">
+							<div class="form-group">
+								<input class="form-control" name="soLuongConLai" id="ct_soLuongConLai" data-bind="value: ct.soLuongConLai, valueUpdate: 'keypress', event: { keypress: $root.soLuongNumberInputKeyPressEvent.bind($data, ct.soLuongConLai()), keydown: function(data, event) { return keypressdown() }  }, enable: false" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="col-md-6">
+			<div class="row">
+				<div class="form-group">
+					<label class="col-sm-4 label-input-right text-right">{{_lang "moit_07_form_cthanghoa_loaiHinhHH" }}<span class="nsw-require-field">*</span></label>
+					<div class="col-sm-8">
+						<div class="form-group">
+							<select id="ct_trangThaiHangHoa" class="form-control select55" data-bind="options: $root.trangThaiHangHoas,  optionsText: 'name',  optionsValue: 'value', value: ct.trangThaiHangHoa, enable: !$root.loaiHoSoGiaHan()"></select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="">
+			<div class="form-group">
+				<label class="col-sm-2 label-input-right text-right">{{_lang "moit_07_form_cthanghoa_moTaHH" }}<span class="nsw-require-field">*</span></label>
+				<div class="col-sm-10">
+					<div class="form-group">
+						<textarea id="ct_moTa" class="form-control" name="fax" id="fax" id="fax" maxlength="2000" data-bind="value: ct.moTa, enable: !$root.loaiHoSoGiaHan()"></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="form-group">
+			<label class="col-sm-2 label-input-right text-right"><span class="nsw-require-field"></span></label>
+			<div class="col-sm-10">
+					<div class="form-group">
+						<b><i style="color: red;">{{_lang "moit_07_form_cthanghoa_ctXK" }}</i></b>
+					</div>
+				</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div style="margin: auto; width: 250px;">
+			<button style="width: 100px;" type="button" class="btn green bt-center btwidth" id="btGuiHoSo" data-bind="click: $root.save">
+				<i class="fa fa-save" aria-hidden="true"></i>&nbsp;{{_lang "moit_07_form_cthanghoa_ghiLai"}}
+			</button>
+			<button style="width: 100px;" type="button" class="btn  bt-center btwidth" id="btDong" data-bind="click: $root.close">
+				<i class="fa fa-close" aria-hidden="true"></i>&nbsp;{{_lang "moit_07_form_cthanghoa_dong"}}
+			</button>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,207 @@
+
+<div id="danhMucCoSoSXFormTemplate22222222222222">
+	<div class="modal-body">
+		<div class="portlet-body" id="table-search">
+			<div class="table-toolbar">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<span class="caption-subject bold uppercase">{{_lang "monre_01_form_danhmuc_cssx_tieu_de" }}</span>
+							</div>
+							<div class="panel-body">
+								<form class="danh-sach-co-so-san-xuat-form" id="danh-sach-co-so-san-xuat-form-popup">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="col-sm-2 label-input-right">{{_lang "monre_01_form_danhmuc_cssx_ten_co_so" }}<span class="nsw-require-field">*</span>
+											</label>
+											<div class="col-sm-10">
+												<div class="form-group">
+													<input class="form-control" name="tenCoSo" id="tenCoSo" field="monre_01_danh_muc_co_sx_input_label_1" require="true" maxlength="255" data-bind="value: coSoSX.tenCoSo" />
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="col-sm-2 label-input-right">{{_lang "monre_01_form_danhmuc_cssx_dia_chi_co_so" }}<span class="nsw-require-field">*</span>
+											</label>
+											<div class="col-sm-10">
+												<div class="form-group">
+													<input class="form-control" name="diaChiCoSo" id="diaChiCoSo" require="true" maxlength="255" data-bind="value: coSoSX.diaChiCoSo" id="diaChiCoSo" />
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="col-md-6">
+											<div class="row">
+												<div class="form-group">
+													<label class="col-sm-4 label-input-right">{{_lang "monre_01_form_danhmuc_cssx_phone" }}</label>
+													<div class="col-sm-8">
+														<div class="form-group">
+															<input class="form-control" name="soDienThoai" id="soDienThoai" maxlength="20" data-bind="value: coSoSX.soDienThoai" />
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="row">
+												<div class="form-group">
+													<label class="col-sm-4 label-input-right">{{_lang "monre_01_form_danhmuc_cssx_fax" }}</label>
+													<div class="col-sm-8">
+														<div class="form-group">
+															<input class="form-control" name="fax" id="fax" id="fax" maxlength="20" data-bind="value: coSoSX.fax" />
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="col-md-6">
+											<div class="row">
+												<div class="form-group">
+													<label class="col-sm-4 label-input-right">{{_lang "monre_01_form_danhmuc_cssx_email" }}</label>
+													<div class="col-sm-8">
+														<div class="form-group">
+															<input class="form-control" name="email" id="email" type="email" maxlength="250" data-bind="value: coSoSX.email" />
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="row">
+												<div class="form-group">
+													<label class="col-sm-4 label-input-right">{{_lang "monre_01_form_danhmuc_cssx_ten_tinh" }}<span class="nsw-require-field">*</span>
+													</label>
+													<div class="col-sm-8">
+														<div class="form-group">
+															<select class="form-control select5" name="maTinh" id="maTinh" require="true" data-bind="options: dsTatCaTinhThanhPho,  optionsText: 'provinceName',  optionsValue: 'provinceId', value: coSoSX.maTinh"></select>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="col-md-6">
+											<div class="row">
+												<div class="form-group">
+													<label class="col-sm-4 label-input-right">{{_lang "monre_01_form_danhmuc_cssx_ten_huyen" }}<span class="nsw-require-field">*</span>
+													</label>
+													<div class="col-sm-8">
+														<div class="form-group">
+															<select class="form-control select5" name="maHuyen" id="maHuyen" data-bind="options:  dsTatCaQuanHuyen, optionsText: 'districtName', optionsValue: 'districtId', value: coSoSX.maHuyen">
+															</select>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="row">
+												<div class="form-group">
+													<label class="col-sm-4 label-input-right">{{_lang "monre_01_form_danhmuc_cssx_ten_xa" }}<span class="nsw-require-field">*</span>
+													</label>
+													<div class="col-sm-8">
+														<div class="form-group">
+															<select class="form-control select5" name="maXaPhuong" id="maXaPhuong" data-bind="options: dsTatCaXaPhuong, optionsText: 'wardName', optionsValue: 'wardId', value: coSoSX.maXaPhuong">
+															</select>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="bt-row-button">
+											<button type="button" class="btn green bt-center" data-bind="click: luuThongThongTinCoSoSX" id="btLuuLai">
+												<i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; {{_lang "monre_01_form_danhmuc_cssx_button_save" }}
+											</button>
+											<button type="button" class="btn green bt-center" data-bind="click: closePopup"  id="btDongLai">
+												<i class="fa fa-times" aria-hidden="true"></i>&nbsp; {{_lang "monre_01_form_danhmuc_cssx_button_close" }}
+											</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<span class="caption-subject bold uppercase">{{_lang "monre_01_form_danhmuc_cssx_danhsach" }}</span>
+							</div>
+							<div class="panel-body table-responsive">
+								<table class=" table table-striped table-bordered table-hover table-checkable order-column" style="border: 1px solid #c9cdd2;">
+									<thead>
+										<tr>
+											<th><b>{{_lang "monre_01_form_danhmuc_cssx_table_th_01" }}</b></th>
+											<th><b>{{_lang "monre_01_form_danhmuc_cssx_table_th_02" }}</b></th>
+											<th><b>{{_lang "monre_01_form_danhmuc_cssx_table_th_03" }}</b></th>
+											<th><b>{{_lang "monre_01_form_danhmuc_cssx_table_th_04" }}</b></th>
+											<th><b>{{_lang "monre_01_form_danhmuc_cssx_table_th_05" }}</b></th>
+											<th><b>{{_lang "monre_01_form_danhmuc_cssx_table_th_06" }}</b></th>
+											<th><b>{{_lang "monre_01_form_danhmuc_cssx_table_th_07" }}</b></th>
+											<th><b>{{_lang "monre_01_form_danhmuc_cssx_table_th_08" }}</b></th>
+											<th><b>{{_lang "monre_01_form_danhmuc_cssx_table_th_09" }}</b></th>
+											<th width="100px"><b>{{_lang "monre_01_form_danhmuc_cssx_table_th_10" }}</b></th>
+										</tr>
+									</thead>
+									<tbody id="tbodyDanhSachCoSo" data-bind="foreach: { data: dsTatCaCoSoSX, as: 'item'}">
+										<tr>
+											<td data-bind="text: item.soThuTu"></td>
+											<td><input type="checkbox" data-bind=" checked: item.checked, event:{ change: $root.checkboxClick}"></td>
+											<td data-bind="text: item.tenCoSo"></td>
+											<td data-bind="text: item.diaChiCoSo"></td>
+											<td data-bind="text: item.soDienThoai"></td>
+											<td data-bind="text: item.fax"></td>
+											<td data-bind="text: item.tenTinh"></td>
+											<td data-bind="text: item.tenHuyen"></td>
+											<td data-bind="text: item.tenXaPhuong"></td>
+											<td><span data-bind="if: canUpdate()"> <a href="javascript:;" data-bind="attr: { 'title': NSWLang['error_monre_01_label_suaDanhMucCSSS'] }, click: $root.chinhSuaDanhMucCoSoSX"> <i class="fa fa-lg fa-edit request-cancel tooltips"></i>
+												</a>
+											</span> <span data-bind="if: item.canDelete()"> &nbsp;&nbsp;&nbsp; <a href="javascript:;" data-bind="attr: { 'title': NSWLang['error_monre_01_label_xoaDanhMucCSSX'] }, click: $root.xoaDanhMucCoSoSX"> <i class="fa fa-lg fa-remove tooltips"></i>
+												</a>
+											</span></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="row">
+									<div class="col-md-12 nsw-text-right">
+										<div class="nsw-flr" data-bind="if: totalData() > 5">
+											<ul class="flip pull-left pagination pagination-sm">
+												<li data-bind="css: { disabled: !pagingVM.firstPageActive() }" class="previous disabled"><a href="#" aria-label="First" data-bind="click: goToFirst"> {{_lang "monre_01_form_danhmuc_cssx_table_pagination_first" }} </a></li>
+												<li data-bind="css: { disabled: !pagingVM.previousPageActive()  }" class="previous disabled"><a href="#" aria-label="Previous" data-bind="click: goToPrevious"> {{_lang "monre_01_form_danhmuc_cssx_table_pagination_prev" }} </a></li>
+												<!-- ko foreach: $root.pagingVM.getPages() -->
+												<li data-bind="css: { active: $data == $root.pagingVM.currentPage() }"><a href="#" data-bind="text: $data, click: $root.goToPage.bind($data)"></a></li>
+												<!-- /ko -->
+												<li data-bind="css: { disabled: !pagingVM.nextPageActive() }" class="next"><a href="#" aria-label="Next" data-bind="click: goToNext"> {{_lang "monre_01_form_danhmuc_cssx_table_pagination_next" }} </a></li>
+												<li data-bind="css: { disabled: !pagingVM.lastPageActive() }" class="next"><a href="#" aria-label="Last" data-bind="click: goToLast">{{_lang "monre_01_form_danhmuc_cssx_table_pagination_end" }} </a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="">
+		<div class="form-group">
+			<div class="">
+				<button type="button" class="btn green bt-center" style="display: block;" data-bind="click: chonCoSoSXClick" id="btChonCoSoSX">
+					<i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp; {{_lang "monre_01_form_danhmuc_cssx_chon" }}
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+

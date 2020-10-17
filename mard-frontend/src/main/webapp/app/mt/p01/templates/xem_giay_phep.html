@@ -1,0 +1,200 @@
+<style>
+.a4 {
+	width: 100%;
+	display: block;
+	border: 2px solid;
+	margin: 20px auto;
+	padding: 30px 20px;
+	float: left;
+}
+
+.h4 {
+	font-weight: bold;
+	padding: 0 50px;
+	font-size: 15px;
+	text-align: center;
+	float: left;
+	width: 100%;
+	margin-bottom: 5px;
+	margin-top: 0;
+}
+
+.h5 {
+	font-weight: bold;
+	padding: 0 50px;
+	font-size: 13px;
+	text-align: center;
+}
+
+.hr {
+	border-color: #000;
+	width: 30%;
+	margin: auto;
+	margin-bottom: 20px;
+}
+
+.text-i {
+	width: 45px;
+	margin-left: 10px;
+}
+
+.w100 {
+	width: 100%;
+}
+
+.a4 .form-control {
+	margin-bottom: 7px;
+}
+
+.p0 {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.p50 {
+	padding-left: 50px;
+	font-weight: bold;
+	font-size: 13px;
+	font-style: italic;
+}
+
+.inputrow {
+	border-bottom: 2px dotted #000;
+	display: block;
+	float: left;
+	font-weight: bold;
+}
+
+.fl {
+	float: left;
+}
+
+.w50 {
+	min-width: 50px;
+}
+
+.inputrow-block-c {
+	text-align: center;
+	display: block;
+	margin-right: 15px;
+	margin-left: 15px;
+	white-space: nowrap;
+}
+</style>
+{{#data}}
+<form id="form-xuat-bieu-mau-popup" class="form-xuat-bieu-mau-popup">
+	<div class="a4">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="">
+						<h4 class="h4 p0">BỘ GIAO THÔNG VẬN TẢI</h4>
+						<h4 class="h4 p0" style="text-transform: uppercase;">MINISTRY OF TRANSPORT</h4>
+						<h4 class="h4 p0">TỔNG CỤC ĐƯỜNG BỘ VIỆT NAM</h4>
+						<h4 class="h4 p0">DIRECTORATE FOR ROADS OF VIET NAM</h4>
+						<hr class="hr" />
+						<h5 class="h5">
+							<span class="fl">Số:&nbsp;</span><span class="inputrow w50">{{soGiayPhep}}</span>
+						</h5>
+						<p></p>
+					</div>
+				</div>
+				<div class="col-md-8">
+					<h4 class="h4">CỘNG HOÀ XÃ HỘI CHỦ NGHĨA VIỆT NAM</h4>
+					<h4 class="h4">SOCIALIST REPUBLIC OF VIETNAM</h4>
+					<h5 class="h5">Độc lập – Tự do – Hạnh phúc</h5>
+					<h5 class="h5">Independence - Freedom - Happiness</h5>
+					<hr class="hr" />
+				</div>
+			</div>
+		</div>
+		<h4 class="h4" style="padding-top: 30px;">GIẤY PHÉP VẬN TẢI ĐƯỜNG BỘ QUỐC TẾ VIỆT - LÀO</h4>
+		<h4 class="h4" style="text-align: center; padding-left: 0px;padding-bottom: 30px;">VIET - LAOS INTERNATIONAL ROAD TRANSPORT LICENCE</h4>
+		<div class="col-md-12">
+			<div class="row">
+				<span class="fl">Số Giấy phép (Licence No.):&nbsp;</span>
+				<p class="inputrow  inputrow-block-c">{{tenNganHang}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<span class="fl">Đăng ký lần đầu (First Registration) date: &nbsp;</span>
+			<span class="inputrow w50 inputrow-block-c">{{ngay}}</span></i>
+			<i class="fl"><span class="fl">month &nbsp;</span><span class="inputrow w50 inputrow-block-c">{{thang}}</span></i>
+			<i class="fl"><span class="fl">year &nbsp;</span><span class="inputrow w50 inputrow-block-c">{{nam}}</span></i>
+		</div>
+		<div class="col-md-12">
+			<div class="row">
+				<span class="fl">1. Tên công ty (Name of company):&nbsp;</span>
+				<p class="inputrow  inputrow-block-c">{{tenNganHang}}</p>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="row">
+				<span class="fl">2. Địa chỉ (Address): &nbsp;</span>
+				<p class="inputrow  inputrow-block-c">{{diaChi}}</p>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="row">
+						<span class="fl">Điện thoại (Tel): &nbsp;</span>
+						<p class="inputrow  inputrow-block-c">{{dienThoai}}</p>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="row">
+						<span class="fl">Fax: &nbsp;</span>
+						<p class="inputrow  inputrow-block-c">{{fax}}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="row">
+						<span class="fl">Email: &nbsp;</span>
+						<p class="inputrow  inputrow-block-c">{{email}}</p>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="row">
+						<span class="fl">Website: &nbsp;</span>
+						<p class="inputrow  inputrow-block-c">{{Website}}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="row">3.	Loại hình hoạt động vận tải (Type of transport services):</div>
+		</div>
+		<div class="col-md-12">
+			<div class="row">
+				<span class="fl">Ngân hàng Nhà nước chi nhánh chấp thuận đối với việc ngân hàng: &nbsp;</span> <span class="inputrow  inputrow-block-c">{{tenNganHang}}</span> <span>xuất khẩu/nhập khẩu số ngoại tệ dưới đây:</span>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="row">
+				<span class="fl">4. Giấy phép có hiệu lực đến (This licence is valid until):&nbsp;</span> <span class="inputrow  inputrow-block-c">{{hieuLucDenNgay}}</span>
+			</div>
+		</div>
+		<div class="col-md-12" style="padding-top: 50px;">
+			<div class="col-md-7"></div>
+			<div class="col-md-5">
+				<p align="center">Hà Nội, ngày 5 tháng 7 năm 2018</p>
+				<p align="center">Hà Nội, issuing date 5 month 7 year 2018</p>
+				<h5 align="center">
+					<b>Cơ quan cấp phép (Issuing Authority)</b>
+					<b>GIÁM ĐỐC</b>
+				</h5>
+				<p align="center">(Ký tên, đóng dấu/Signature, seal)</p>
+				<p align="center">(ký tên, đóng dấu)</p>
+				<p>
+					<span class="inputrow  inputrow-block-c" style="width: 100%;">{{nguoiKy}}</span>
+				</p>
+			</div>
+		</div>
+	</div>
+</form>
+{{/data}}

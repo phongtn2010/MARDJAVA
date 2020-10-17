@@ -1,0 +1,240 @@
+<style>
+.a4 {
+	width: 100%;
+	display: block;
+	border: 2px solid;
+	margin: 20px auto;
+	padding: 30px 20px;
+	float: left;
+}
+
+.h4 {
+	font-weight: bold;
+	padding: 0 50px;
+	font-size: 15px;
+	text-align: center;
+	float: left;
+	width: 100%;
+	margin-bottom: 5px;
+	margin-top: 0;
+}
+
+.h5 {
+	font-weight: bold;
+	padding: 0 50px;
+	font-size: 13px;
+	text-align: center;
+}
+
+.hr {
+	border-color: #000;
+	width: 30%;
+	margin: auto;
+	margin-bottom: 20px;
+}
+
+.a4 .form-control {
+	margin-bottom: 7px;
+}
+
+.p0 {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+
+.inputrow {
+	border-bottom: 2px dotted #000;
+	display: block;
+	float: left;
+	font-weight: bold;
+}
+
+.fl {
+	float: left;
+}
+.span-control {
+	float:left;
+	font-size:13px;
+}
+.dot{
+	border-bottom:1px dotted #000;
+	padding-left: 15px;
+	padding-right: 15px;
+	color: #000000d6;
+}
+
+
+.inputrow-block-c {
+	text-align: center;
+	display: block;
+	margin-right: 15px;
+	margin-left: 15px;
+	white-space: nowrap;
+}
+	.ptext {
+		color: #000000d6;
+		line-height: 20px;
+	}
+	.fr {
+		float: right;
+		color: #000000d6;
+	}
+	table.hangHoa th, table.hangHoa td {
+		font-size: 12px !important;
+		color: #000000d6 !important;
+	}
+</style>
+{{#data}}
+<form id="form-xuat-bieu-mau-popup_xk" class="form-xuat-bieu-mau-popup">
+	<div class="a4">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-5">
+					<div class="">
+						<h4 class="h4 p0">BỘ CÔNG THƯƠNG</h4>
+						<hr class="hr" />
+						<h5 class="h5">
+							<span class="">Số: </span><span class="dot">{{maSoGP}} </span>
+						</h5>
+						<p></p>
+					</div>
+				</div>
+				<div class="col-md-7">
+					<h4 class="h4">CỘNG HOÀ XÃ HỘI CHỦ NGHĨA VIỆT NAM</h4>
+					<h5 class="h5">Độc lập – Tự do – Hạnh phúc</h5>
+					<hr class="hr" />
+
+					<div class="col-md-12" style="padding: 20px 0px">
+						<i class="fr"><span class="fr dot">{{ngayKy_Nam}}</span><span class="fr">năm&nbsp;</span></i>
+						<i class="fr"><span class="fr dot">{{ngayKy_Thang}}</span><span class="fr">tháng&nbsp;</span></i>
+						<i class="fr"><span class="fr dot">{{ngayKy_Ngay}}</span><span class="fr">ngày&nbsp;</span></i>
+						<i class="fr"><span class="fr dot">Hà Nội,</span></i>
+					</div>
+
+					</p>
+				</div>
+			</div>
+		</div>
+		<h4 class="h4" style="padding-top: 20px;font-size: 16px">GIẤY PHÉP XUẤT KHẨU</h4>
+		<h4 class="h4" style="padding-bottom: 20px;">Tiền chất công nghiệp</h4>
+		<hr class="hr" />
+		<h4 class="h4" style="text-align: center; padding-left: 0px;padding: 15px 0;">CỤC TRƯỞNG CỤC HÓA CHẤT</h4>
+		<p class="ptext">
+			<span class="span-control" style="margin-bottom: 15px;text-indent: 30px;">Căn cứ Nghị định số 58/2003/NĐ-CP ngày 29 tháng 5 năm 2003 của Chính phủ quy định về kiểm soát nhập khẩu, xuất khẩu, vận chuyển quá cảnh lãnh thổ Việt Nam chất ma túy, tiền chất, thuốc gây nghiện, thuốc hướng thần; Nghị định số 113/2017/NĐ-CP ngày 09 tháng 10 năm 2017 của Chính phủ quy định chi tiết và hướng dẫn thi hành một số điều của Luật hóa chất;</span>
+		</p>
+		<p class="ptext">
+			<span class="span-control" style="margin-bottom: 15px;text-indent: 30px;">Căn cứ Quyết định 3828/QĐ-BCT ngày 03 tháng 10 năm 2017 của Bộ trưởng Bộ Công Thương về việc quy định chức năng, nhiệm vụ, quyền hạn và cơ cấu tổ chức của Cục Hóa chất;</span>
+		</p>
+		<p class="ptext">
+			<span class="span-control" style="margin-bottom: 15px;text-indent: 30px;">Căn cứ Thông tư số 32/2017/TT-BCT ngày 28 tháng 12 năm 2017 của Bộ Công Thương quy định cụ thể và hướng dẫn thi hành một số điều của Luật hóa chất và Nghị định số 113/2017/NĐ-CP ngày 09 tháng 10 năm 2017 của Chính phủ;</span>
+		</p>
+		<p class="ptext">
+			<span class="span-control" style="margin-bottom: 15px;text-indent: 30px;">Xét đề nghị cấp giấy phép xuất khẩu tiền chất trong lĩnh vực công nghiệp tại Công văn số <span class="dot">{{maHoSo}}</span>  ngày <span class="dot">{{ngayNop_Ngay}}</span>   tháng <span class="dot">{{ngayNop_Thang}}</span>  năm <span class="dot">{{ngayNop_Nam}}</span>  của <span class="dot">{{tenDoanhNghiep}}</span>,</span>
+		</p>
+		<p class="ptext">
+			<span class="span-control" style="margin-bottom: 15px;text-indent: 30px;width:100%;">Theo đề nghị của Trưởng phòng Quản lý hóa chất,</span>
+		</p>
+		<h4 class="h4" style="padding-top: 20px;"><p class="ptext">QUYẾT ĐỊNH:</p></h4>
+		<p class="ptext">
+			<b>Điều 1.&nbsp;</b> Cho phép <span class="dot">{{tenDoanhNghiep}}</span>; trụ sở <span class="dot">{{truSo}}</span> ; điện thoại <span class="dot">{{dienThoai}}</span> fax <span class="dot">{{fax}}</span>; Giấy chứng nhận đăng ký doanh nghiệp hoặc Giấy chứng nhận đầu tư hoặc Giấy chứng nhận đăng ký kinh doanh số <span class="dot">{{soGiayChungNhanDKKD}}</span> do <span class="dot">{{noiCapGDKKD}}</span> cấp ngày <span class="dot">{{ngayCapGiayChungNhan_Ngay}}</span> tháng <span class="dot">{{ngayCapGiayChungNhan_Thang}}</span>  năm <span class="dot">{{ngayCapGiayChungNhan_Nam}}</span> , được phép:
+		</p>
+		<p class="ptext">
+			1. Xuất khẩu sang <span class="dot">{{#each phuongTiens}}{{tenPhuongTien}};&nbsp;{{/each}}</span> theo các Hợp đồng ký với <span class="dot">{{tenDoanhNghiep}}</span> chi tiết theo phụ lục tại Quyết định này như đề nghị của Công ty.
+		</p>
+		<p class="ptext">
+			2. Mục đích xuất khẩu: <span class="dot">{{mucDich}}</span>
+		</p>
+		<p class="ptext">
+			3. Cửa khẩu xuất khẩu: <span class="dot">{{#each cuaKhaus}}{{tenCuaKhau}};&nbsp;{{/each}}</span>
+		</p>
+		<p class="ptext">
+			4. Phương tiện và điều kiện vận chuyển: <span class="dot">{{#each phuongTiens}}{{tenPhuongTien}};&nbsp;{{/each}}</span>
+		</p>
+		<p class="ptext">
+			5. Thời gian và số lần thực hiện nhập khẩu: từ ngày <span class="dot">{{xuatNhapKhauTuNgay}}</span> đến ngày <span class="dot">{{xuatNhapKhauDenNgay}}</span> và số lần thực hiện: <span class="dot">{{soLanThucHien}}</span>
+		</p>
+		<p class="ptext">
+			<b>Điều 2.</b> <span class="dot">{{tenDoanhNghiep}}</span> phải thực hiện đúng các quy định của Nghị định số 58/2003/NĐ-CP, Nghị định số 113/2017/NĐ-CP, Thông tư số 42/2013/TT-BCT và Thông tư số 32/2017/TT-BCT.
+		</p>
+		<p class="ptext">
+			<b>Điều 3.&nbsp;</b> Giấy phép này có giá trị đến hết ngày <span class="dot">{{ngayHetHan_Ngay}}</span> tháng <span class="dot">{{ngayHetHan_Thang}}</span> năm <span class="dot">{{ngayHetHan_Nam}}</span> ./.
+		</p>
+		<p class="ptext"><b><i>Nơi nhận:</i></b></p>
+		<p class="ptext">- Như Điều 2;</p>
+		<p class="ptext">- Cục Tham mưu Cảnh sát, Bộ Công an; </p>
+		<p class="ptext">- Tổng cục Hải quan, Bộ Tài chính;  </p>
+		<p class="ptext">- Chi cục Hải quan cửa khẩu;</p>
+		<p class="ptext">- Lưu: VT, HC.</p>
+		<div class="col-md-12">
+			<div class="col-md-7">
+			</div>
+			<div class="col-md-5" style="margin-top:30px">
+				<h5 align="center">
+					<b>KT. CỤC TRƯỞNG </br>
+					PHÓ CỤC TRƯỞNG</b>
+				</h5>
+				<p>
+					<span class="inputrow  inputrow-block-c" style="width: 100%;">{{nguoiKy}}</span>
+				</p>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="row">
+				<p class="ptext" align="center" style="padding-top: 30px;">Phụ lục</p>
+				<h4 class="h4" style="text-align: center; padding-left: 0px;padding: 0px 0;">DANH MỤC HÓA CHẤT CÓ CHỨA TIỀN CHẤT </h4>
+				<p class="ptext" align="center">
+					(Kèm theo Giấy phép số: &nbsp;{{maSoGP}}&nbsp;ngày {{ngayKy_Ngay}} tháng {{ngayKy_Thang}} năm {{ngayKy_Nam}})
+				</p>
+				<div class="table-responsive">
+					<table 
+							class="hangHoa table table-striped table-bordered table-hover table-checkable order-column">
+						<thead class="">
+						<th class="text-center">TT</th>
+						<th class="text-center">Mã CAS</th>
+						<th class="text-center">Mã HS của chất</th>
+						<th class="text-center">Tên chất tiếng việt </th>
+						<th class="text-center">Tên chất tiếng anh</th>
+						<th class="text-center">Tên IUPAC (tên khoa học)</th>
+						<th class="text-center">Tên hàng hóa (tên thương mại)</th>
+						<th class="text-center">Mã HS của hỗn hợp</th>
+						<th class="text-center">Công thức hóa học</th>
+						<th class="text-center">Hàm lượng</th>
+						<th class="text-center">Trạng thái</th>
+						<th class="text-center">Khối lượng</th>
+						<th class="text-center">Đơn vị tính</th>
+						<th class="text-center">Mô tả hàng hóa</th>
+						</thead>
+						<tbody id="historyContainer">
+						{{#each hangHoas}}
+						<tr>
+							<td class="text-center">{{inc @index}}</td>
+							<td class="text-center">{{maCAS}}</td>
+							<td class="text-center">{{maHoSoChat}}</td>
+							<td class="text-center">{{tenChatTiengViet}}</td>
+							<td class="text-center">{{tenChatTiengAnh}}</td>
+							<td class="text-center">{{tenIUPAC}}</td>
+							<td class="text-center">{{tenHangHoa}}</td>
+							<td class="text-center">{{maHoSoHonHop}}</td>
+							<td class="text-center">{{congThucHoaHoc}}</td>
+							<td class="text-center">{{hamLuong}}</td>
+							<td class="text-center">{{trangThaiChat}}</td>
+							<td class="text-center">{{soLuong}}</td>
+							<td class="text-center">{{tenDonVi}}</td>
+							<td class="text-center">{{moTaHangHoa}}</td>
+						</tr>
+						{{/each}}
+						</tbody>
+					</table>
+					{{#if data.pagination}}
+					<div id="lich-su-paginaton" style="float: right;">
+						<ul class="flip pull-left pagination pagination-sm" id="lich-su-pagination">
+						</ul>
+					</div>
+					{{/if}}
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+{{/data}}

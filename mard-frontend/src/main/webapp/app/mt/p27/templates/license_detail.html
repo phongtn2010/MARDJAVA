@@ -1,0 +1,265 @@
+<fieldset class="fieldset">
+    <div style="margin-top: 16px;">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="caption-subject bold uppercase">Chi tiết giấy phép</span>
+            </div>
+            <div class="panel-body">
+                <form role="form" class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="col-md-2 label-text-right">
+                                <label>Số giấy phép</label>
+                            </div>
+                            <div class="col-md-4">
+
+                                <input name="ngayNopTuNgay" field="common_tracuu_ngay_tao_tu"
+                                       value="{{data.fiSoGiayphep}}"
+                                       class="form-control form-control-inline " size="16" type="text" disabled/>
+                            </div>
+                            <div class="col-md-2 label-text-right">
+                                <label>Tên đơn vị/người khai thác</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input name="ngayNopTuNgay" field="common_tracuu_ngay_tao_tu"
+                                       value="{{data.fiChuphuongtien}}"
+                                       class="form-control form-control-inline " size="16" type="text" disabled/></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12 label-text-right">
+                            <div class="col-md-2 label-text-right">
+                                <label>Người ký</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input name="ngayNopTuNgay" field="common_tracuu_ngay_tao_tu"
+                                       value="{{data.fiNguoiky}}"
+                                       class="form-control form-control-inline " size="16" type="text" disabled/></div>
+                            <div class="col-md-2 label-text-right">
+                                <label>Chức danh</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input name="ngayNopTuNgay" field="common_tracuu_ngay_tao_tu"
+                                       value="{{data.fiChucdanh}}"
+                                       class="form-control form-control-inline " size="16" type="text" disabled/></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="col-md-2 label-text-right">
+                                <label>Địa điểm ký</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input name="ngayNopTuNgay" field="common_tracuu_ngay_tao_tu"
+                                       value="{{data.fiNoiky}}"
+                                       class="form-control form-control-inline " size="16" type="text" disabled/></div>
+                            <div class="col-md-2 label-text-right">
+                                <label>Ngày ký</label>
+                            </div>
+                            <div class="col-md-4">
+
+                                <input name="ngayNopTuNgay" field="common_tracuu_ngay_tao_tu"
+                                       value="{{formatDate data.fiNgayky 'DD/MM/YYYY'}}" data-date-format="dd/mm/yyyy"
+                                       class="form-control form-control-inline " size="16" type="text" disabled/></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="col-md-2 label-text-right">
+                                <label>Giấy phép có hiệu lực từ</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input name="ngayNopTuNgay" field="common_tracuu_ngay_tao_tu"
+                                       value="{{formatDate data.fiCappheptungay 'DD/MM/YYYY'}}"
+                                       data-date-format="dd/mm/yyyy"
+                                       class="form-control form-control-inline " size="16" type="text" disabled/>
+                            </div>
+                            <div class="col-md-2 label-text-right">
+                                <label>Giấy phép có hiệu lực đến</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input name="ngayNopTuNgay" field="common_tracuu_ngay_tao_tu"
+                                       value="{{formatDate data.fiCapphepdenngay 'DD/MM/YYYY'}}"
+                                       data-date-format="dd/mm/yyyy"
+                                       class="form-control form-control-inline " size="16" type="text" disabled/></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="col-md-2 label-text-right">
+                                <label>Giấy hết hạn</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input name="ngayNopTuNgay" field="common_tracuu_ngay_tao_tu"
+                                       value="{{formatDate data.fiNgayhethan 'DD/MM/YYYY'}}"
+                                       data-date-format="dd/mm/yyyy"
+                                       class="form-control form-control-inline " size="16" type="text" disabled/></div>
+                            <div class="col-md-2 label-text-right">
+                                <label>Số đăng ký phương tiện</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input name="ngayNopTuNgay" field="common_tracuu_ngay_tao_tu"
+                                       value="{{data.fiBienso}}"
+                                       class="form-control form-control-inline " size="16" type="text" disabled/></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="col-md-2 label-text-right">
+                                <label>Thông số kỹ thuật</label>
+                            </div>
+                            
+                            <div class="col-md-10">
+                                <input name="ngayNopTuNgay" field="common_tracuu_ngay_tao_tu"
+                                       value="{{data.fiThongsokt}}"
+                                       class="form-control form-control-inline " size="16" type="text" disabled/></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="col-md-2 label-text-right">
+                                <label>Năm sản xuất</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input name="ngayNopTuNgay" field="common_tracuu_ngay_tao_tu"
+                                       value="{{data.fiNamsanxuat}}"
+                                       class="form-control form-control-inline " size="16" type="text" disabled/></div>
+                            <div class="col-md-2 label-text-right">
+                                <label>Nhãn hiệu</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input name="ngayNopTuNgay" field="common_tracuu_ngay_tao_tu"
+                                       value="{{data.fiTenNhanhieu}}"
+                                       class="form-control form-control-inline " size="16" type="text" disabled/></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="col-md-2 label-text-right">
+                                <label>Loại xe</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input name="ngayNopTuNgay" field="common_tracuu_ngay_tao_tu"
+                                       value="{{data.fiLoaixe}}"
+                                       class="form-control form-control-inline " size="16" type="text" disabled/></div>
+                            <div class="col-md-2 label-text-right">
+                                <label>Loại phương tiện</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input name="ngayNopTuNgay" field="common_tracuu_ngay_tao_tu"
+                                       value="{{data.fiLoaiphuongtien}}"
+                                       class="form-control form-control-inline " size="16" type="text" disabled/></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="col-md-2 label-text-right">
+                                <label>Màu sơn</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input name="ngayNopTuNgay" field="common_tracuu_ngay_tao_tu"
+                                       value="{{data.fiMausac}}"
+                                       class="form-control form-control-inline " size="16" type="text" disabled/></div>
+                            <div class="col-md-2 label-text-right">
+                                <label>Số máy</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input name="ngayNopTuNgay" field="common_tracuu_ngay_tao_tu"
+                                       value="{{data.fiSomay}}"
+                                       class="form-control form-control-inline " size="16" type="text" disabled/></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="col-md-2 label-text-right">
+                                <label>Số khung</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input name="ngayNopTuNgay" field="common_tracuu_ngay_tao_tu"
+                                       value="{{data.fiSokhung}}"
+                                       class="form-control form-control-inline " size="16" type="text" disabled/></div>
+                            <div class="col-md-2 label-text-right">
+                                <label>Cửa khẩu</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input name="ngayNopTuNgay" field="common_tracuu_ngay_tao_tu"
+                                       value="{{data.fiCuakhau}}"
+                                       class="form-control form-control-inline " size="16" type="text" disabled/></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="col-md-2 label-text-right">
+                                <label>Vùng hoạt động</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input name="ngayNopTuNgay" field="common_tracuu_ngay_tao_tu"
+                                       value="{{data.fiVunghoatdong}}"
+                                       class="form-control form-control-inline " size="16" type="text" disabled/></div>
+                            <div class="col-md-2 label-text-right">
+                                <label>Nơi đến	</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input name="ngayNopTuNgay" field="common_tracuu_ngay_tao_tu"
+                                       value="{{data.fiNoiden}}"
+                                       class="form-control form-control-inline " size="16" type="text" disabled/></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="col-md-2 label-text-right">
+                                <label>Loại hình hoạt động</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input name="ngayNopTuNgay" field="common_tracuu_ngay_tao_tu"
+                                       value="{{data.fiLoaihinhhoatdong}}"
+                                       class="form-control form-control-inline " size="16" type="text" disabled/></div>
+                            <div class="col-md-2 label-text-right">
+                                <label>Thời gian gia hạn giấy phép đến ngày</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input name="ngayNopTuNgay" field="common_tracuu_ngay_tao_tu"
+                                       value="{{formatDate data.fiGiahandenngay 'DD/MM/YYYY'}}" data-date-format="dd/mm/yyyy"
+                                       class="form-control form-control-inline " size="16" type="text" disabled/></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="col-md-2 label-text-right">
+                                <label>Mục đích chuyến đi</label>
+                            </div>
+                            <div class="col-md-10">
+                                <input name="ngayNopTuNgay" field="common_tracuu_ngay_tao_tu"
+                                       value="{{data.fiMucdichchuyendi}}"
+                                       class="form-control form-control-inline " size="16" type="text" disabled/></div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="col-md-2 label-text-right">
+                                <label>Ghi chú</label>
+                            </div>
+                            <div class="col-md-10">
+                                <input name="ngayNopTuNgay" field="common_tracuu_ngay_tao_tu"
+                                       value="{{data.fiGhichugiahan}}"
+                                       class="form-control form-control-inline " size="16" type="text" disabled/></div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="col-md-2 label-text-right">
+                                <label>Link giấy phép</label>
+                            </div>
+                            <div class="col-md-10">
+                                <a target="_blank"
+                                   href="{{data.fiLinkGiayphep}}">{{data.fiLinkGiayphep}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</fieldset>

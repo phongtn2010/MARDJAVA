@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:include schemaLocation="mard_type.xsd"/>
+
+    <xsd:element name="Envelope">
+        <xsd:complexType mixed="true">
+            <xsd:sequence>
+                <xsd:element name="Header" type="Header"/>
+                <xsd:element name="Body">
+                    <xsd:complexType mixed="true">
+                        <xsd:sequence>
+                            <xsd:element name="Content">
+                                <xsd:complexType mixed="true">
+                                    <xsd:sequence>
+
+                                        <xsd:element name="VarietyLicenseEdit">
+                                            <xsd:complexType>
+                                                <xsd:sequence>
+
+                                                    <xsd:element name="Reason" minOccurs="0">
+                                                        <xsd:simpleType>
+                                                            <xsd:restriction base="xsd:normalizedString">
+                                                                <xsd:maxLength value="500"/>
+                                                            </xsd:restriction>
+                                                        </xsd:simpleType>
+                                                    </xsd:element>
+
+                                                    <xsd:element name="VarietyLicense">
+                                                        <xsd:complexType>
+                                                            <xsd:sequence>
+                                                                <xsd:element name="Organization">
+                                                                    <xsd:simpleType>
+                                                                        <xsd:restriction base="xsd:normalizedString">
+                                                                            <xsd:minLength value="1"/>
+                                                                            <xsd:maxLength value="250"/>
+                                                                        </xsd:restriction>
+                                                                    </xsd:simpleType>
+                                                                </xsd:element>
+
+                                                                <xsd:element name="Address">
+                                                                    <xsd:simpleType>
+                                                                        <xsd:restriction base="xsd:normalizedString">
+                                                                            <xsd:minLength value="1"/>
+                                                                            <xsd:maxLength value="250"/>
+                                                                        </xsd:restriction>
+                                                                    </xsd:simpleType>
+                                                                </xsd:element>
+
+                                                                <xsd:element name="ApplicationNo">
+                                                                    <xsd:simpleType>
+                                                                        <xsd:restriction base="xsd:normalizedString">
+                                                                            <xsd:minLength value="1"/>
+                                                                            <xsd:maxLength value="50"/>
+                                                                        </xsd:restriction>
+                                                                    </xsd:simpleType>
+                                                                </xsd:element>
+
+                                                                <xsd:element name="SignDate">
+                                                                    <xsd:simpleType>
+                                                                        <xsd:restriction base="xsd:normalizedString">
+                                                                            <xsd:pattern
+                                                                                    value="(\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]) ([01]\d|2[0-3])(:[0-5]\d){2}(\.\d{3})?)"/>
+                                                                        </xsd:restriction>
+                                                                    </xsd:simpleType>
+                                                                </xsd:element>
+
+                                                                <xsd:element name="Base" minOccurs="0">
+                                                                    <xsd:simpleType>
+                                                                        <xsd:restriction base="xsd:normalizedString">
+                                                                            <xsd:maxLength value="500"/>
+                                                                        </xsd:restriction>
+                                                                    </xsd:simpleType>
+                                                                </xsd:element>
+
+                                                                <xsd:element name="Purposes">
+                                                                    <xsd:simpleType>
+                                                                        <xsd:restriction base="xsd:normalizedString">
+                                                                            <xsd:minLength value="1"/>
+                                                                            <xsd:maxLength value="250"/>
+                                                                        </xsd:restriction>
+                                                                    </xsd:simpleType>
+                                                                </xsd:element>
+
+                                                                <xsd:element name="GoodsList">
+                                                                    <xsd:complexType mixed="true">
+                                                                        <xsd:sequence>
+                                                                            <xsd:element name="Goods"
+                                                                                         maxOccurs="unbounded"
+                                                                                         type="Goods"/>
+                                                                        </xsd:sequence>
+                                                                    </xsd:complexType>
+                                                                </xsd:element>
+
+                                                                <xsd:element name="TotalQuantity">
+                                                                    <xsd:simpleType>
+                                                                        <xsd:restriction base="xsd:normalizedString">
+                                                                            <xsd:minLength value="1"/>
+                                                                            <xsd:maxLength value="250"/>
+                                                                        </xsd:restriction>
+                                                                    </xsd:simpleType>
+                                                                </xsd:element>
+
+                                                                <xsd:element name="Scale" minOccurs="0">
+                                                                    <xsd:simpleType>
+                                                                        <xsd:restriction base="xsd:normalizedString">
+                                                                            <xsd:maxLength value="3000"/>
+                                                                        </xsd:restriction>
+                                                                    </xsd:simpleType>
+                                                                </xsd:element>
+
+                                                                <xsd:element name="Location" minOccurs="0">
+                                                                    <xsd:simpleType>
+                                                                        <xsd:restriction base="xsd:normalizedString">
+                                                                            <xsd:maxLength value="3000"/>
+                                                                        </xsd:restriction>
+                                                                    </xsd:simpleType>
+                                                                </xsd:element>
+
+                                                                <xsd:element name="Note" minOccurs="0">
+                                                                    <xsd:simpleType>
+                                                                        <xsd:restriction base="xsd:normalizedString">
+                                                                            <xsd:maxLength value="3000"/>
+                                                                        </xsd:restriction>
+                                                                    </xsd:simpleType>
+                                                                </xsd:element>
+
+                                                                <xsd:element name="LawBase">
+                                                                    <xsd:simpleType>
+                                                                        <xsd:restriction base="xsd:normalizedString">
+                                                                            <xsd:minLength value="1"/>
+                                                                            <xsd:maxLength value="1000"/>
+                                                                        </xsd:restriction>
+                                                                    </xsd:simpleType>
+                                                                </xsd:element>
+
+                                                                <xsd:element name="Report">
+                                                                    <xsd:simpleType>
+                                                                        <xsd:restriction base="xsd:normalizedString">
+                                                                            <xsd:minLength value="1"/>
+                                                                            <xsd:maxLength value="3000"/>
+                                                                        </xsd:restriction>
+                                                                    </xsd:simpleType>
+                                                                </xsd:element>
+
+                                                                <xsd:element name="DealineImport">
+                                                                    <xsd:simpleType>
+                                                                        <xsd:restriction base="xsd:normalizedString">
+                                                                            <xsd:pattern
+                                                                                    value="(\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]) ([01]\d|2[0-3])(:[0-5]\d){2}(\.\d{3})?)"/>
+                                                                        </xsd:restriction>
+                                                                    </xsd:simpleType>
+                                                                </xsd:element>
+
+                                                                <xsd:element name="Recipients" minOccurs="0">
+                                                                    <xsd:simpleType>
+                                                                        <xsd:restriction base="xsd:normalizedString">
+                                                                            <xsd:maxLength value="3000"/>
+                                                                        </xsd:restriction>
+                                                                    </xsd:simpleType>
+                                                                </xsd:element>
+
+                                                                <xsd:element name="DispatchNo">
+                                                                    <xsd:simpleType>
+                                                                        <xsd:restriction base="xsd:normalizedString">
+                                                                            <xsd:minLength value="1"/>
+                                                                            <xsd:maxLength value="50"/>
+                                                                        </xsd:restriction>
+                                                                    </xsd:simpleType>
+                                                                </xsd:element>
+
+                                                                <xsd:element name="SignConfirmDate">
+                                                                    <xsd:simpleType>
+                                                                        <xsd:restriction base="xsd:normalizedString">
+                                                                            <xsd:pattern
+                                                                                    value="(\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]) ([01]\d|2[0-3])(:[0-5]\d){2}(\.\d{3})?)"/>
+                                                                        </xsd:restriction>
+                                                                    </xsd:simpleType>
+                                                                </xsd:element>
+
+                                                                <xsd:element name="SignConfirmName">
+                                                                    <xsd:simpleType>
+                                                                        <xsd:restriction base="xsd:normalizedString">
+                                                                            <xsd:minLength value="1"/>
+                                                                            <xsd:maxLength value="100"/>
+                                                                        </xsd:restriction>
+                                                                    </xsd:simpleType>
+                                                                </xsd:element>
+
+                                                                <xsd:element name="SignConfirmPosition">
+                                                                    <xsd:simpleType>
+                                                                        <xsd:restriction base="xsd:normalizedString">
+                                                                            <xsd:minLength value="1"/>
+                                                                            <xsd:maxLength value="100"/>
+                                                                        </xsd:restriction>
+                                                                    </xsd:simpleType>
+                                                                </xsd:element>
+
+                                                                <xsd:element name="SignConfirmAddress" minOccurs="0">
+                                                                    <xsd:simpleType>
+                                                                        <xsd:restriction base="xsd:normalizedString">
+                                                                        </xsd:restriction>
+                                                                    </xsd:simpleType>
+                                                                </xsd:element>
+                                                            </xsd:sequence>
+                                                        </xsd:complexType>
+                                                    </xsd:element>
+
+                                                </xsd:sequence>
+                                            </xsd:complexType>
+                                        </xsd:element>
+
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="Signature" minOccurs="0" type="xsd:string"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="SystemSignature" minOccurs="0" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

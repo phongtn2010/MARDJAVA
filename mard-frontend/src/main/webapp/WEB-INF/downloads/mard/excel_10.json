@@ -1,0 +1,254 @@
+[
+  {
+    "reader": "hanghoa",
+    "sheetIndex": 2,
+    "feed": "table",
+    "start": 3,
+    "end": 0,
+    "data": [
+      {
+        "col": "A",
+        "field": "fiStt",
+        "type": "Long",
+        "nullBreak": true
+      },
+      {
+        "col": "B",
+        "field": "fiTenHh",
+        "type": "String"
+      },
+      {
+        "col": "C",
+        "field": "fiSoluong",
+        "type": "BigDecimal"
+      },
+      {
+        "col": "D",
+        "field": "fiMdvSl",
+        "type": "String"
+      },
+      {
+        "col": "E",
+        "field": "fiNoiSx",
+        "type": "String"
+      },
+      {
+        "col": "F",
+        "field": "fiTlTinh",
+        "type": "BigDecimal"
+      },
+      {
+        "col": "G",
+        "field": "fiMaTlTinh",
+        "type": "String"
+      },
+      {
+        "col": "H",
+        "field": "fiTlBi",
+        "type": "BigDecimal"
+      },
+      {
+        "col": "I",
+        "field": "fiMaTlBi",
+        "type": "String"
+      },
+      {
+        "col": "J",
+        "field": "fiLoaiBb",
+        "type": "String"
+      },
+      {
+        "col": "K",
+        "field": "fiSoHd",
+        "type": "String"
+      }
+    ]
+  },
+  {
+    "reader": "hoso",
+    "sheetIndex": 1,
+    "feed": "random",
+    "data": [
+      {
+        "col": "B",
+        "row": 3,
+        "field": "fiTenCty",
+        "type": "String"
+      },
+      {
+        "col": "D",
+        "row": 3,
+        "field": "fiEmailCty",
+        "type": "String"
+      },
+      {
+        "col": "B",
+        "row": 4,
+        "field": "fiDiachiCty",
+        "type": "String"
+      },
+      {
+        "col": "B",
+        "row": 5,
+        "field": "fiSdtCty",
+        "type": "String"
+      },
+      {
+        "col": "D",
+        "row": 5,
+        "field": "fiFaxCty",
+        "type": "String"
+      },
+      {
+        "col": "B",
+        "row": 7,
+        "field": "fiMaDvkd",
+        "type": "String"
+      },
+      {
+        "col": "D",
+        "row": 7,
+        "field": "fiMaDvgs",
+        "type": "String"
+      },
+      {
+        "col": "B",
+        "row": 8,
+        "field": "",
+        "type": "String"
+      },
+      {
+        "col": "D",
+        "row": 8,
+        "field": "fiSoVandon",
+        "type": "String"
+      },
+      {
+        "col": "B",
+        "row": 9,
+        "field": "fiSoTk",
+        "type": "String"
+      },
+      {
+        "col": "B",
+        "row": 10,
+        "field": "fiTenDtxk",
+        "type": "String"
+      },
+      {
+        "col": "B",
+        "row": 11,
+        "field": "fiMaQgxk",
+        "type": "String"
+      },
+      {
+        "col": "D",
+        "row": 11,
+        "field": "fiTenQgxk",
+        "type": "String"
+      },
+      {
+        "col": "B",
+        "row": 12,
+        "field": "fiMaCkxk",
+        "type": "String"
+      },
+      {
+        "col": "D",
+        "row": 12,
+        "field": "fiTenCkxk",
+        "type": "String"
+      },
+      {
+        "col": "B",
+        "row": 13,
+        "field": "fiTenDtnk",
+        "type": "String"
+      },
+      {
+        "col": "B",
+        "row": 14,
+        "field": "fiTenQgnk",
+        "type": "String"
+      },
+      {
+        "col": "D",
+        "row": 14,
+        "field": "fiMaCknk",
+        "type": "String"
+      },
+      {
+        "col": "E",
+        "row": 14,
+        "field": "fiTenCknk",
+        "type": "String"
+      },
+      {
+        "col": "B",
+        "row": 15,
+        "field": "fiPtvt",
+        "type": "String"
+      },
+      {
+        "col": "B",
+        "row": 16,
+        "field": "fiMucdichSd",
+        "type": "String"
+      },
+      {
+        "col": "B",
+        "row": 17,
+        "field": "fiVbCtkd",
+        "type": "String"
+      },
+      {
+        "col": "B",
+        "row": 18,
+        "field": "fiDdkd",
+        "type": "String"
+      },
+      {
+        "col": "B",
+        "row": 19,
+        "field": "fiTgkd",
+        "type": "String"
+      },
+      {
+        "col": "D",
+        "row": 19,
+        "field": "fiTggs",
+        "type": "String"
+      },
+      {
+        "col": "B",
+        "row": 20,
+        "field": "fiDdgs",
+        "type": "String"
+      },
+      {
+        "col": "B",
+        "row": 21,
+        "field": "fiSobanGcn",
+        "type": "String"
+      },
+      {
+        "col": "B",
+        "row": 23,
+        "field": "fiNoiky",
+        "type": "String"
+      },
+      {
+        "col": "D",
+        "row": 23,
+        "field": "fiNgayky",
+        "type": "Date"
+      },
+      {
+        "col": "B",
+        "row": 24,
+        "field": "fiNguoiky",
+        "type": "String"
+      }
+    ]
+  }
+]

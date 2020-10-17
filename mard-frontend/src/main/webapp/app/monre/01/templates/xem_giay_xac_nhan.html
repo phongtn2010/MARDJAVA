@@ -1,0 +1,139 @@
+{{#data}}
+<fieldset class="fieldset">
+	<div class="col-md-6" style="padding-bottom: 5px">
+		<div class="row">
+			<label class="col-form-label col-md-4">{{_lang "monre_01_xem_giay_xac_nhan_label_co_quan_cap"}}
+			</label>
+
+			<div class="col-md-8">
+				<input cssClass="form-control" disabled="disabled" value="{{gxn.coQuanCap}}" />
+			</div>
+
+		</div>
+	</div>
+	<div class="col-md-6" style="padding-bottom: 5px">
+		<div class="row">
+			<label class="col-form-label col-md-4">{{_lang "monre_01_xem_giay_xac_nhan_label_so_gxn"}}
+			</label>
+			<div class="col-md-8">
+				<input cssClass="form-control" disabled="disabled" value="{{gxn.soGiayXN}}" />
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6" style="padding-bottom: 5px">
+		<div class="row">
+			<label class="col-form-label col-md-4">{{_lang "monre_01_xem_giay_xac_nhan_label_ngay_ky"}}
+			</label>
+			<div class="col-md-8">
+				<input cssClass="form-control" disabled="disabled" value="{{gxn.ngayKy}}" />
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6" style="padding-bottom: 5px">
+		<div class="row">
+			<label class="col-form-label col-md-4">{{_lang "monre_01_xem_giay_xac_nhan_label_nguoi_ky"}}
+			</label>
+			<div class="col-md-8">
+				<input cssClass="form-control" disabled="disabled" value="{{gxn.nguoiKy}}" />
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6" style="padding-bottom: 5px">
+		<div class="row">
+			<label class="col-form-label col-md-4">{{_lang "monre_01_xem_giay_xac_nhan_label_hieu_luc_tu_ngay"}}
+			</label>
+			<div class="col-md-8">
+				<input cssClass="form-control" disabled="disabled" value="{{gxn.hieuLucTuNgayDateFormat}}"/>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-6" style="padding-bottom: 5px">
+		<div class="row">
+			<label class="col-form-label col-md-4">{{_lang "monre_01_xem_giay_xac_nhan_label_hieu_luc_den_ngay"}}
+			</label>
+			<div class="col-md-8">
+				<input cssClass="form-control" disabled="disabled" value="{{gxn.hieuLucDenNgayDateFormat}}" />
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-12" style="padding-bottom: 5px">
+		<div class="row">
+			<label class="col-form-label col-md-2">{{_lang "monre_01_xem_giay_xac_nhan_label_link_gxn"}}
+			</label>
+			<div class="col-md-10">
+				<a target="_blank" href="{{ctx}}/tepDinhKem/{{gxn.idHS}}">
+					<i class="fa fa-download" aria-hidden="true"></i>
+					<i >{{gxn.tenTepTin}}</i>
+				</a>
+			</div>
+		</div>
+	</div>
+</fieldset>
+
+<fieldset class="fieldset">
+	<b>{{_lang "monre_01_xem_giay_xac_nhan_label_muc_2"}}
+	</b>
+	<div style="margin-top: 16px;">
+		<div class="table-responsive">
+			<table
+				class="table table-striped table-bordered table-hover table-checkable order-column">
+				<thead class="">
+					<th width="50px" class="text-center">{{_lang "monre_01_xem_giay_xac_nhan_label_muc_2_th1"}}</th>
+					<th class="text-center">{{_lang "monre_01_xem_giay_xac_nhan_label_muc_2_th2"}}</th>
+					<th class="text-center">{{_lang "monre_01_xem_giay_xac_nhan_label_muc_2_th3"}}</th>
+
+				</thead>
+				<tbody>
+				{{#each coSoSanXuats}}
+				<tr>
+					<td>{{inc @index}}</td>
+					<td>{{tenCoSo}}</td>
+					<td>{{diaChiCoSo}}</td>
+				</tr>
+				{{/each}}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</fieldset>
+
+<fieldset class="fieldset">
+	<b>{{_lang "monre_01_xem_giay_xac_nhan_label_muc_3"}}
+	</b>
+	
+	<div style="margin-top: 16px;">
+		<div class="table-responsive">
+			<table
+				class="table table-striped table-bordered table-hover table-checkable order-column">
+				<thead class="">
+					<th width="50px" class="text-center">{{_lang "monre_01_xem_giay_xac_nhan_label_muc_3_th1"}}</th>
+					<th width="300px" class="text-center">{{_lang "monre_01_xem_giay_xac_nhan_label_muc_3_th2"}}</th>
+					<th width="100px" class="text-center">{{_lang "monre_01_xem_giay_xac_nhan_label_muc_3_th3"}}</th>
+					<th  class="text-center">{{_lang "monre_01_xem_giay_xac_nhan_label_muc_3_th4"}}</th>
+					<th class="text-center">{{_lang "monre_01_xem_giay_xac_nhan_label_muc_3_th5"}}</th>
+					{{#if show}}
+						<th width="250px" class="text-center">{{_lang "monre_01_xem_giay_xac_nhan_label_muc_3_th6"}}</th>
+					{{/if}}
+				</thead>
+				<tbody>
+				{{#each pheLieus}}
+				<tr>
+					<td>{{inc @index}}</td>
+					<td>{{tenPheLieu}}</td>
+					<td>{{maHS}}</td>
+					<td>{{khoiLuong6}}</td>
+					<td>{{khoiLuong}}</td>
+					{{#if showDonViUyThac }}
+						<td>{{donViUyThac}}</td>
+					{{/if}}
+				</tr>
+				{{/each}}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</fieldset>
+		
+{{/data}}

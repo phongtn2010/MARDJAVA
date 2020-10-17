@@ -1,0 +1,41 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.nsw.most.p06.model;
+
+public class SearchFormKqxl06 {
+
+    private Long fiIdHoso;
+    private String fiMaHoso;
+    private Long fiTrangthai;
+
+    public Long getFiIdHoso() {
+        return fiIdHoso;
+    }
+
+    public void setFiIdHoso(Long fiIdHoso) {
+        this.fiIdHoso = fiIdHoso;
+    }
+
+    public String getFiMaHoso() {
+        return fiMaHoso;
+    }
+
+    public void setFiMaHoso(String fiMaHoso) {
+        this.fiMaHoso = fiMaHoso;
+    }
+
+    public Long getFiTrangthai() {
+        return fiTrangthai;
+    }
+
+    public void setFiTrangthai(Long fiTrangthai) {
+        this.fiTrangthai = fiTrangthai;
+    }
+
+    public SearchFormKqxl06() {
+    }
+
+}

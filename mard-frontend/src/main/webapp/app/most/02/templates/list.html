@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+{{#data}}
+<tr data-tendn="" data-mst="fiMstDn">
+    <td  >{{inc @index}} </td>
+    <td class="nsw-text-center"><a><i class="fa fa-lg fa-history" doc="{{fiIdHoso}}" code="{{fiMaHoso}}"></i></a></td>
+    <td><a class="view" doc="{{fiIdHoso}}">{{fiMaHoso}}</a></td>
+    <td>{{fiTenCqCap}}</td>
+    <td><a class="lsXuly" doc="{{fiIdHoso}}" code="{{fiMaHoso}}">{{convertToDateFromTimeStamp fiNgaytao false}}</a></td>
+    <td>{{fiTenTT}}</td>
+    <td class="nsw-text-center">{{#canEdit fiTrangthai}}<a><i class="fa fa-pencil fa-lg" doc="{{fiIdHoso}}" code="{{fiMaHoso}}"></i></a>{{/canEdit}}</td>
+    <td class="nsw-text-center">
+        {{#showDelayCommand fiTrangthai}}
+        <a><i class="fa fa-level-down fa-lg delay" doc="{{fiIdHoso}}" code="{{fiMaHoso}}"></i></a>
+        {{/showDelayCommand}}
+    </td>
+    <td class="nsw-text-center">{{#canDelete fiTrangthai}}<a><i class="fa fa-remove fa-lg" doc="{{fiIdHoso}}" code="{{fiMaHoso}}"></i></a>{{/canDelete}}</td>
+    <td class="nsw-text-center">
+        {{#canCancel fiTrangthai}}
+        <a><i class="fa fa-retweet fa-lg cancel" trangthai="{{fiTrangthai}}" doc="{{fiIdHoso}}" code="{{fiMaHoso}}"></i></a>
+        {{/canCancel}}
+    </td>
+    <td class="nsw-text-center">{{#showTestAnnounce fiTrangthai}}<a><i class="fa fa-search fa-lg" doc="{{fiIdHoso}}"></i></a>{{/showTestAnnounce}}</td>
+    <td class="nsw-text-center">{{#viewResult fiTrangthai}}<a><i class="fa fa-book fa-lg" doc="{{fiIdHoso}}"></i></a>{{/viewResult}}</td>    
+</tr>
+{{/data}}

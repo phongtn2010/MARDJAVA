@@ -1,0 +1,247 @@
+spring:
+  profiles:
+    active: blameo_test
+---
+server:
+  port: 8080
+  contextPath: /MARDWs
+--- 
+spring:
+  profiles: local, default, dev
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  jmx:
+    default-domain: MARDWs
+management:
+    security:
+        enabled: false
+#URI_BACKEND_ADDRESS: http://localhost:8888/MARDBackend
+URI_BACKEND_ADDRESS: http://localhost:8089/MARDBackend
+URI_ADDRESS_FILE_SERVER: http://localhost:8001/FileServices
+URI_SERVICE_BKHCN: http://10.224.164.16:8008/KHCN/ImportDocumentService?wsdl
+# ENCRYPT MESAGE
+KEY_AES: gWoUo9NBRyTYD234
+ENCRYPT: false
+#debug mode
+DEBUG_MODE: false
+DEBUG_FOLDER_MSG_OUTPUT: C:\upload\
+# GATEWAY
+#GATEWAY_LINK: http://localhost:8888/VNSWSendGateway/ws/gateway.wsdl?
+GATEWAY_LINK: http://localhost:8004/VNSWSendGateway/ws/gateway.wsdl?
+GATEWAY_NAMESPACE_KEY: gen
+GATEWAY_NAMESPACE: http://com/vnsw/send/gateway/generated
+GATEWAY_MOTHOD_TAG: receiveRequest
+GATEWAY_PAYLOAD_TAG_OFFICECODE: officeCode
+GATEWAY_PAYLOAD_TAG_DOCUMENTTYPE: documentType
+GATEWAY_PAYLOAD_TAG_DATA: requestPayload
+FOLDER_TEMP_FILE_SERVICE: C:\TEMP\
+# Thong tin rabbitMQ
+activemq.host: 10.224.164.16
+activemq.port: 5672
+activemq.user: nswlog
+activemq.password: nswlog
+activemq.virtualHost: /
+activemq.exchangeName: logExchange
+activemq.queueName: Log_Error_Queue
+activemq.routingKey: error
+IS_TEST: 1
+---
+spring:
+  profiles: vt_test
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  jmx:
+    default-domain: MARDWs
+management:
+    security:
+        enabled: false
+URI_BACKEND_ADDRESS: http://10.224.164.18:8080/MARDBackend
+URI_ADDRESS_FILE_SERVER: http://10.224.164.18:8001/FileServices
+URI_SERVICE_BKHCN: http://10.224.164.16:8008/KHCN/ImportDocumentService?wsdl
+# ENCRYPT MESAGE
+KEY_AES: gWoUo9NBRyTYD234
+ENCRYPT: false
+#debug mode
+DEBUG_MODE: false
+DEBUG_FOLDER_MSG_OUTPUT: C:\upload\
+# GATEWAY
+GATEWAY_LINK: http://10.224.164.18:8006/VNSWSendGateway/ws/gateway.wsdl?
+GATEWAY_NAMESPACE_KEY: gen
+GATEWAY_NAMESPACE: http://com/vnsw/send/gateway/generated
+GATEWAY_MOTHOD_TAG: receiveRequest
+GATEWAY_PAYLOAD_TAG_OFFICECODE: officeCode
+GATEWAY_PAYLOAD_TAG_DOCUMENTTYPE: documentType
+GATEWAY_PAYLOAD_TAG_DATA: requestPayload
+FOLDER_TEMP_FILE_SERVICE: /home/TEMP
+# Thong tin rabbitMQ
+activemq.host: 10.224.164.16
+activemq.port: 5672
+activemq.user: nswlog
+activemq.password: nswlog
+activemq.virtualHost: /
+activemq.exchangeName: logExchange
+activemq.queueName: Log_Error_Queue
+activemq.routingKey: error
+IS_TEST: 0
+---
+spring:
+  profiles: hq_test
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  jmx:
+    default-domain: MARDWs
+management:
+    security:
+        enabled: false
+URI_BACKEND_ADDRESS: http://192.168.0.99:8100/MARDBackend
+URI_ADDRESS_FILE_SERVER: http://10.224.128.132:8005/FileServices
+URI_SERVICE_BKHCN: http://10.224.164.16:8008/KHCN/ImportDocumentService?wsdl
+# ENCRYPT MESAGE
+KEY_AES: gWoUo9NBRyTYD234
+ENCRYPT: false
+#debug mode
+DEBUG_MODE: false
+DEBUG_FOLDER_MSG_OUTPUT: /home/TEMP
+# GATEWAY
+GATEWAY_LINK: http://27.72.96.51:9595/WS0600011/Gateway0600011.asmx?WSDL
+GATEWAY_NAMESPACE_KEY: gen
+GATEWAY_NAMESPACE: http://com/vnsw/send/gateway/generated
+GATEWAY_MOTHOD_TAG: receiveRequest
+GATEWAY_PAYLOAD_TAG_OFFICECODE: officeCode
+GATEWAY_PAYLOAD_TAG_DOCUMENTTYPE: documentType
+GATEWAY_PAYLOAD_TAG_DATA: requestPayload
+FOLDER_TEMP_FILE_SERVICE: /home/TEMP
+# Thong tin rabbitMQ
+activemq.host: localhost
+activemq.port: 5672
+activemq.user: nswlog
+activemq.password: nswlog
+activemq.virtualHost: /
+activemq.exchangeName: logExchange
+activemq.queueName: Log_Error_Queue
+activemq.routingKey: error
+IS_TEST: 0
+---
+spring:
+  profiles: blameo_test
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  jmx:
+    default-domain: MARDWs
+server:
+  port: 8082
+management:
+  security:
+    enabled: false
+URI_BACKEND_ADDRESS: http://localhost:8081/MARDBackend
+URI_ADDRESS_FILE_SERVER: http://10.224.128.132:8005/FileServices
+URI_SERVICE_BKHCN: http://10.224.164.16:8008/KHCN/ImportDocumentService?wsdl
+# ENCRYPT MESAGE
+KEY_AES: gWoUo9NBRyTYD234
+ENCRYPT: false
+#debug mode
+DEBUG_MODE: false
+DEBUG_FOLDER_MSG_OUTPUT: /home/TEMP
+# GATEWAY
+GATEWAY_LINK: http://192.168.0.99:8111/VNSWSendGateway/ws/gateway.wsdl?
+GATEWAY_NAMESPACE_KEY: gen
+GATEWAY_NAMESPACE: http://com/vnsw/send/gateway/generated
+GATEWAY_MOTHOD_TAG: receiveRequest
+GATEWAY_PAYLOAD_TAG_OFFICECODE: officeCode
+GATEWAY_PAYLOAD_TAG_DOCUMENTTYPE: documentType
+GATEWAY_PAYLOAD_TAG_DATA: requestPayload
+FOLDER_TEMP_FILE_SERVICE: /home/TEMP
+# Thong tin rabbitMQ
+activemq.host: localhost
+activemq.port: 5672
+activemq.user: nswlog
+activemq.password: nswlog
+activemq.virtualHost: /
+activemq.exchangeName: logExchange
+activemq.queueName: Log_Error_Queue
+activemq.routingKey: error
+
+#Tạm dùng để test, bật thì ko call sang BNN
+IS_TEST: 0
+---
+spring:
+  profiles: blameo_debug
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  jmx:
+    default-domain: MARDWs
+management:
+  security:
+    enabled: false
+URI_BACKEND_ADDRESS: http://127.0.0.1:8100/MARDBackend
+URI_ADDRESS_FILE_SERVER: http://10.224.128.132:8005/FileServices
+URI_SERVICE_BKHCN: http://10.224.164.16:8008/KHCN/ImportDocumentService?wsdl
+# ENCRYPT MESAGE
+KEY_AES: gWoUo9NBRyTYD234
+ENCRYPT: false
+#debug mode
+DEBUG_MODE: true
+DEBUG_FOLDER_MSG_OUTPUT: /home/TEMP
+# GATEWAY
+GATEWAY_LINK: http://27.72.96.51:9595/WS0600011/Gateway0600011.asmx?WSDL
+GATEWAY_NAMESPACE_KEY: gen
+GATEWAY_NAMESPACE: http://com/vnsw/send/gateway/generated
+GATEWAY_MOTHOD_TAG: receiveRequest
+GATEWAY_PAYLOAD_TAG_OFFICECODE: officeCode
+GATEWAY_PAYLOAD_TAG_DOCUMENTTYPE: documentType
+GATEWAY_PAYLOAD_TAG_DATA: requestPayload
+FOLDER_TEMP_FILE_SERVICE: /home/TEMP
+# Thong tin rabbitMQ
+activemq.host: localhost
+activemq.port: 5672
+activemq.user: nswlog
+activemq.password: nswlog
+activemq.virtualHost: /
+activemq.exchangeName: logExchange
+activemq.queueName: Log_Error_Queue
+activemq.routingKey: error
+IS_TEST: 1
+---
+spring:
+  profiles: hq_live
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  jmx:
+    default-domain: MARDWs
+management:
+    security:
+        enabled: false
+URI_BACKEND_ADDRESS: http://10.224.128.193:8002/MARDBackend
+URI_ADDRESS_FILE_SERVER: http://10.224.144.58:8001/FileServices
+URI_SERVICE_BKHCN: http://10.224.164.16:8008/KHCN/ImportDocumentService?wsdl
+# ENCRYPT MESAGE
+KEY_AES: gWoUo9NBRyTYD234
+ENCRYPT: false
+#debug mode
+DEBUG_MODE: false
+DEBUG_FOLDER_MSG_OUTPUT: /home/TEMP
+# GATEWAY
+GATEWAY_LINK: http://10.224.140.85:8001/VNSWSendGateway/ws/gateway.wsdl?
+GATEWAY_NAMESPACE_KEY: gen
+GATEWAY_NAMESPACE: http://com/vnsw/send/gateway/generated
+GATEWAY_MOTHOD_TAG: GatewayData
+GATEWAY_PAYLOAD_TAG_OFFICECODE: officeCode
+GATEWAY_PAYLOAD_TAG_DOCUMENTTYPE: documentType
+GATEWAY_PAYLOAD_TAG_DATA: requestPayload
+FOLDER_TEMP_FILE_SERVICE: /home/TEMP
+# Thong tin rabbitMQ
+activemq.host: 10.224.138.93
+activemq.port: 5672
+activemq.user: nswlog
+activemq.password: nswlog
+activemq.virtualHost: /
+activemq.exchangeName: logExchange
+activemq.queueName: Log_Error_Queue
+activemq.routingKey: error
+IS_TEST: 0

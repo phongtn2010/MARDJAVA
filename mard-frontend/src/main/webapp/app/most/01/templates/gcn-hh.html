@@ -1,0 +1,74 @@
+<p><b class="nsw-text-underline">{{_lang 'most_01_gcn_danhsachhhcogcn'}}</b></p>
+{{#data}}
+<table class="table table-striped table-bordered table-hover order-column">
+    <thead>
+        <tr>
+            <th class="w100 nsw-text-center">{{_lang 'common_table_col_stt'}}</th>
+            <th class="nsw-text-center">{{_lang 'most_01_hanghoa_tenhanghoa'}}</th>
+            <th class="w100 nsw-text-center">{{_lang 'most_01_hanghoa_maHS'}}</th>
+            <th class="w50">{{_lang 'most_01_gcn_chucnang'}}</th>                           
+        </tr>
+    </thead>
+    <tbody id="gcn-hh-container1">
+        {{#each data1}}
+        <tr>
+            <td class="w100 nsw-text-center">{{inc @index}}</td>    
+            <td>
+                {{safeString fiTenHh}}
+            </td>
+            <td>
+                {{safeString fiMaHs}}
+            </td>
+            <td class="w50 nsw-text-center">
+                <a><i class="fa fa-lg fa-arrow-down tooltips" data-placement="top" 
+                      data-original-title="{{getCommandName 'most_01_hanghoa_command_sua'}}" data-container="body" item="{{fiIdHh}}"></i></a>                
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<div class="row">                            
+    <div class="col col-md-6">
+
+    </div>
+    <div class="col col-md-6 nsw-text-right">
+        <div id="gcn-hh-pager1"></div>
+    </div>
+</div>
+<p><b class="nsw-text-underline">{{_lang 'most_01_gcn_danhsachhanghoadachon'}}</b></p>
+<table class="table table-striped table-bordered table-hover order-column">
+    <thead>
+        <tr>
+            <th class="w100 nsw-text-center">{{_lang 'common_table_col_stt'}}</th>
+            <th class="nsw-text-center">{{_lang 'most_01_hanghoa_tenhanghoa'}}</th>
+            <th class="w100 nsw-text-center">{{_lang 'most_01_hanghoa_maHS'}}</th>
+            <th class="w50">{{_lang 'most_01_gcn_chucnang'}}</th>                           
+        </tr>
+    </thead>
+    <tbody id="gcn-hh-container2">
+        {{#each data2}}
+        <tr>
+            <td class="w100 nsw-text-center">{{inc @index}}</td>    
+            <td>
+                {{safeString fiTenHh}}
+            </td>
+            <td>
+                {{safeString fiMaHs}}
+            </td>
+            <td class="w50 nsw-text-center">                
+                <a><i class="fa fa-lg fa-remove tooltips" data-placement="top" 
+                      data-original-title="{{getCommandName 'most_01_hanghoa_command_xoa'}}" data-container="body" item="{{fiIdHh}}"></i></a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>  
+{{/data}}
+<div class="row">                            
+    <div class="col col-md-6">
+
+    </div>
+    <div class="col col-md-6 nsw-text-right">
+        <div id="gcn-hh-pager2"></div>
+    </div>
+</div>

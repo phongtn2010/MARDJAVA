@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:include schemaLocation="mard_type.xsd"/>
+
+    <xsd:element name="Envelope">
+        <xsd:complexType mixed="true">
+            <xsd:sequence>
+                <xsd:element name="Header" type="Header"/>
+                <xsd:element name="Body">
+                    <xsd:complexType mixed="true">
+                        <xsd:sequence>
+                            <xsd:element name="Content">
+                                <xsd:complexType mixed="true">
+                                    <xsd:sequence>
+
+                                        <xsd:element name="GeneticResponseEdit">
+                                            <xsd:complexType>
+                                                <xsd:sequence>
+
+                                                    <xsd:element name="Reason" minOccurs="0">
+                                                        <xsd:simpleType>
+                                                            <xsd:restriction base="xsd:normalizedString">
+                                                                <xsd:maxLength value="500"/>
+                                                            </xsd:restriction>
+                                                        </xsd:simpleType>
+                                                    </xsd:element>
+
+                                                    <xsd:element name="SignConfirmDate">
+                                                        <xsd:simpleType>
+                                                            <xsd:restriction base="xsd:normalizedString">
+                                                                <xsd:pattern
+                                                                        value="(\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]) ([01]\d|2[0-3])(:[0-5]\d){2}(\.\d{3})?)"/>
+                                                            </xsd:restriction>
+                                                        </xsd:simpleType>
+                                                    </xsd:element>
+
+                                                    <xsd:element name="Department">
+                                                        <xsd:simpleType>
+                                                            <xsd:restriction base="xsd:normalizedString">
+                                                                <xsd:minLength value="1"/>
+                                                                <xsd:maxLength value="250"/>
+                                                            </xsd:restriction>
+                                                        </xsd:simpleType>
+                                                    </xsd:element>
+
+                                                    <xsd:element name="CreaterName">
+                                                        <xsd:simpleType>
+                                                            <xsd:restriction base="xsd:normalizedString">
+                                                                <xsd:minLength value="1"/>
+                                                                <xsd:maxLength value="250"/>
+                                                            </xsd:restriction>
+                                                        </xsd:simpleType>
+                                                    </xsd:element>
+
+                                                </xsd:sequence>
+                                            </xsd:complexType>
+                                        </xsd:element>
+
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <!--<xsd:element name="Signature" minOccurs="0" type="xsd:string"/>-->
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <!--<xsd:element name="SystemSignature" minOccurs="0" type="xsd:string"/>-->
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <Header>
+        <Reference>
+            <version>01</version>
+            <messageId>14a01761-29e4-4026-a71f-983170f405dd</messageId>
+        </Reference>
+        <From>
+            <name>NSW</name>
+            <identity>NSW</identity>
+            <countryCode>VN</countryCode>
+            <ministryCode>BTC</ministryCode>
+            <organizationCode>TCHQ</organizationCode>
+            <unitCode>NSW</unitCode>
+        </From>
+        <To>
+            <name>BNN</name>
+            <identity>BNN</identity>
+            <countryCode>VN</countryCode>
+            <ministryCode>BNN</ministryCode>
+            <organizationCode>BNN</organizationCode>
+            <unitCode>CTY</unitCode>
+        </To>
+        <Subject>
+            <documentType>BNNPTNT0600011</documentType>
+            <type>10</type>
+            <function>01</function>
+            <reference>BNNPTNT11190000272</reference>
+            <documentYear>2019</documentYear>
+            <preReference>BNNPTNT11190000272</preReference>
+            <preDocumentYear>2019</preDocumentYear>
+            <sendDate>2019-12-12 19:27:22</sendDate>
+        </Subject>
+    </Header>
+    <Body>
+        <Content>
+            <Registration>
+                <NSWFileCode>BNNPTNT11190000272</NSWFileCode>
+                <NameOfRegistration>Công ty TNHH Ánh Sao</NameOfRegistration>
+                <AddressOfRegistration>241281</AddressOfRegistration>
+                <Tel>66225741</Tel>
+                <Fax>66211111</Fax>
+                <Email>hoangnl@viettel.com.vn</Email>
+                <ProductType>1</ProductType>
+                <RegistrationType>1</RegistrationType>
+                <AnimalRegistration>
+                    <AnimalList>
+                        <Animal>
+                            <AnimalName>Lợn nái</AnimalName>
+                            <AnimalQuantityFemale>12</AnimalQuantityFemale>
+                            <AnimalQuantityMale>12</AnimalQuantityMale>
+                            <AnimalExporterStateName>Trung Quốc</AnimalExporterStateName>
+                            <AnimalExporterStateCode>CN</AnimalExporterStateCode>
+                        </Animal>
+                    </AnimalList>
+                    <AnimalCompanyList>
+                        <AnimalCompany>
+                            <AnimalCompanyName>Cty Sao Vàng</AnimalCompanyName>
+                            <AnimalCompanyAddress>Cty Sao Vàng</AnimalCompanyAddress>
+                        </AnimalCompany>
+                    </AnimalCompanyList>
+                    <LocationQuarantineList>
+                        <LocationQuarantine/>
+                    </LocationQuarantineList>
+                    <AnimalExecutionTime>2019-12-24 17:00:00.0</AnimalExecutionTime>
+                    <AnimalPurpose>làm giống</AnimalPurpose>
+                    <AnimalAttachedDoc>văn bản kèm theo 1,2,3</AnimalAttachedDoc>
+                </AnimalRegistration>
+                <SignAddress>Hà nội</SignAddress>
+                <SignDate>2019-12-30T00:00:00+07:00</SignDate>
+                <SignName>Trần Hùng</SignName>
+                <SignerRole>giám đốc</SignerRole>
+                <AttachmentList/>
+            </Registration>
+        </Content>
+        <Signature></Signature>
+    </Body>
+    <SystemSignature></SystemSignature>
+</SOAP:Envelope>

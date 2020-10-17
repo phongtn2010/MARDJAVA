@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:include schemaLocation="mard_type.xsd"/>
+
+    <xsd:element name="Envelope">
+        <xsd:complexType mixed="true">
+            <xsd:sequence>
+                <xsd:element name="Header" type="Header"/>
+                <xsd:element name="Body">
+                    <xsd:complexType mixed="true">
+                        <xsd:sequence>
+                            <xsd:element name="Content">
+                                <xsd:complexType mixed="true">
+                                    <xsd:sequence>
+
+                                        <xsd:element name="MedicinePPFee">
+                                            <xsd:complexType>
+                                                <xsd:sequence>
+
+                                                    <xsd:element name="TotalFee">
+                                                        <xsd:simpleType>
+                                                            <xsd:restriction base="xsd:decimal">
+                                                                <xsd:totalDigits value="15"/>
+                                                                <xsd:fractionDigits value="3"/>
+                                                                <xsd:minInclusive value="0"/>
+                                                            </xsd:restriction>
+                                                        </xsd:simpleType>
+                                                    </xsd:element>
+
+                                                    <xsd:element name="TotalFeeChar">
+                                                        <xsd:simpleType>
+                                                            <xsd:restriction base="xsd:normalizedString">
+                                                                <xsd:minLength value="1"/>
+                                                                <xsd:maxLength value="250"/>
+                                                            </xsd:restriction>
+                                                        </xsd:simpleType>
+                                                    </xsd:element>
+
+                                                    <xsd:element name="Note" minOccurs="0">
+                                                        <xsd:simpleType>
+                                                            <xsd:restriction base="xsd:normalizedString">
+                                                                <xsd:maxLength value="250"/>
+                                                            </xsd:restriction>
+                                                        </xsd:simpleType>
+                                                    </xsd:element>
+
+                                                    <xsd:element name="AccountNo" minOccurs="0">
+                                                        <xsd:simpleType>
+                                                            <xsd:restriction base="xsd:normalizedString">
+                                                                <xsd:maxLength value="250"/>
+                                                            </xsd:restriction>
+                                                        </xsd:simpleType>
+                                                    </xsd:element>
+
+                                                    <xsd:element name="AccountName" minOccurs="0">
+                                                        <xsd:simpleType>
+                                                            <xsd:restriction base="xsd:normalizedString">
+                                                                <xsd:maxLength value="250"/>
+                                                            </xsd:restriction>
+                                                        </xsd:simpleType>
+                                                    </xsd:element>
+
+                                                </xsd:sequence>
+                                            </xsd:complexType>
+                                        </xsd:element>
+
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="Signature" minOccurs="0" type="xsd:string"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="SystemSignature" minOccurs="0" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

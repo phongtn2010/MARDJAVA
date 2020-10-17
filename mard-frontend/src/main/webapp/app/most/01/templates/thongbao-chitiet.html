@@ -1,0 +1,130 @@
+{{#data}}
+<p class="nsw-text-center">
+    <b>{{_lang "most_01_thongbao_tb"}}</b>
+</p>
+<p class="nsw-text-center">
+    <b>{{_lang "most_01_thongbao_ketqua"}}</b>
+</p>
+<br />
+<p><a target="_blank" href="{{context}}/most/01/kqktfile/{{fiIdCqxl}}/{{fiFileCode}}" class="btn blue" id="btnDownload"><i class="fa fa-download" ></i></a></p>
+<br />
+<br />
+<br />
+<p>
+    <b>1 {{_lang "most_01_thongbao_thongtinlohang"}}</b>
+</p>
+<p>- {{_lang "most_01_thongbao_sodangky"}} {{fiSoDkkt}}</p>
+<p>- {{_lang "most_01_thongbao_danhsachtokhai"}}</p>
+<table class="table table-striped table-bordered table-hover table-checkable order-column">
+    <thead>
+        <tr>
+            <th><b>{{_lang "common_table_col_stt"}}</b></th>
+            <th><b>{{_lang "most_01_tokhai_hanghoa_nhapkhau_so"}}</b></th>
+            <th><b>{{_lang "most_01_tokhai_ngay_dang_ky"}}</b></th>
+            <th><b>{{_lang "most_01_tokhai_ma_hai_quan"}}</b></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each tbdhoso.toKhaiHQ}}
+        <tr class="odd gradeX">
+            <td class="nsw-text-center"> 
+                {{inc @index}}
+            </td>
+            <td> 
+                {{fiSoTk}}
+            </td>
+            <td>
+                {{convertToDateFromTimeStamp fiNgayDk false}}
+            </td>
+            <td>
+                {{fiMaHq}}
+            </td>            
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<p>- {{_lang "most_01_thongbao_hopdongso"}} {{showAttachments tbdhoso.tepDinhKem 1}}</p>
+<p>- {{_lang "most_01_thongbao_vandonso"}} {{showAttachments tbdhoso.tepDinhKem 2}}</p>
+<p>- {{_lang "most_01_thongbao_danhmuchanghoaso"}} {{showAttachments tbdhoso.tepDinhKem 3}}</p>
+<p>- {{_lang "most_01_thongbao_hoadonso"}} {{showAttachments tbdhoso.tepDinhKem 4}}</p>
+<p>{{_lang "most_01_thongbao_danhsachhanghoa"}}</p>
+<table class="table table-striped table-bordered table-hover table-checkable order-column">
+    <thead>
+        <tr>
+            <th>{{_lang "common_table_col_stt"}}</th>
+            <th> {{_lang "most_01_hanghoa_tenhanghoa"}} </th>
+            <th> {{_lang "most_01_hanghoa_kyhieu_kieuloai"}} </th>
+            <th> {{_lang "most_01_hanghoa_nhanhieu"}} </th>
+            <th> {{_lang "most_01_hanghoa_nuocxuatxu"}} </th>
+            <th> {{_lang "most_01_hanghoa_soluong_khoiluong"}} </th>
+            <th> {{_lang "most_01_hanghoa_donvitinh"}} </th>
+            <th> {{_lang "most_01_hanghoa_thongsokythuat"}} </th>
+            <th> {{_lang "most_01_hanghoa_maHS"}} </th>
+            <th> {{_lang "most_01_hanghoa_ghichu"}} </th>
+            <th> {{_lang "most_01_hanghoa_ketquakiemtra"}} </th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each tbdhoso.hangHoa1}}
+        <tr class="odd gradeX">
+            <td class="nsw-text-center"> 
+                {{inc @index}}
+            </td>                
+            <td>
+                {{fiTenHh}}
+            </td>
+            <td>
+                {{fiKyhieu}}
+            </td>
+            <td>
+                {{fiNhanHh}}
+            </td>
+            <td>
+                {{fiTenQg}}
+            </td>
+            <td>
+                {{fiKlSl}}
+            </td>
+            <td>
+                {{fiTenDv}}
+            </td>
+            <td>
+                {{fiThongsoKt}}
+            </td>
+            <td>
+                {{fiMaHs}}
+            </td>
+            <td>
+                {{fiLydo}}
+            </td>
+            <td>
+                {{showResult fiKqkiemtra}}
+            </td>                
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<p>
+    <b>2 {{_lang "most_01_thongbao_cancukiemtra"}}</b>
+</p>
+<p>- {{_lang "most_01_thongbao_quychuankythuat"}} {{tbdhoso.fiTenQcvn}}</p>
+<p>- {{_lang "most_01_thongbao_cancukhac"}} </p>
+<p>
+    <b>3 {{_lang "most_01_thongbao_ketquadanhgiasuphuhop"}}</b>
+</p>
+<p>- {{_lang "most_01_thongbao_gcnhopquyso"}} {{giayChungNhan tbdhoso.tepDinhKem 5}} </p>
+<p>- {{_lang "most_01_thongbao_gcnhopquyhoacchungthu"}} {{giayChungNhan tbdhoso.tepDinhKem 6}}{{getResultFromCqxl fiSoCnhq fiNgaycap fiTenTcgd}} </p>
+<br />
+<br />
+<table>
+    <tr>
+        <td class="w50pc"></td>
+        <td class="w50pc nsw-text-center">
+            <p><b>ĐẠI DIỆN CÓ THẨM QUYỀN CỦA CƠ QUAN KIỂM TRA</b></p>
+            <p>{{fiNguoiKy}}</p>
+        </td>
+    </tr>
+</table>
+{{/data}}
+
+
