@@ -233,6 +233,10 @@ $(document).ready(function () {
         // Get attach types
         app.sendGetRequest("/mard/06/danhmuc/dinhkem?systemId=6", function (res) {
             options['lstAtchType'] = res.data;
+        }),
+        // Phân nhóm tacn
+        app.sendGetRequest("/mard/25/danhmuc/phannhomtacn", function (res) {
+            options['lstPhanNhom'] = res.data;
         })
     ).done(function (data) {
         $('#loading10').hide();

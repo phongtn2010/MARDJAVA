@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<div data-bind="with: regAnimalVM">
-    <fieldset data-bind="with: productVM">
+<div>
+<%--    <fieldset data-bind="with: kdnkVM">--%>
         <div class="panel panel-primary">
             <div class="panel-heading" style="font-weight: bold;">
                  <span class="btn-group pull-right">
@@ -68,39 +68,39 @@
                 </form>
             </div>
         </div>
-    </fieldset>
+<%--    </fieldset>--%>
     <!-- modal -->
     <div id="modal_addAnimal" class="modal container in modal-overflow"
          tabindex="-1"
          data-backdrop="static" data-keyboard="false"
-         data-bind="with: productVM"
     >
+
         <div class="modal-header" style="background: #337ab7; color: #fff;">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
             <b class="modal-title"><spring:message code="mard.25.tokhai.hang_hoa"/></b>
         </div>
-        <div class="modal-body">
-            <div class="panel panel-primary">
-                <div class="panel-heading" style="font-weight: bold;"><spring:message code="mard.25.tokhai.hang_hoa.congvan.title"/></div>
-                <div class="panel-body">
-                    <form role="form" class="form-horizontal">
-                        <div class="form-group">
-                            <div class="col-md-2 nsw-text-right">
-                                <label><spring:message code="mard.25.tokhai.hang_hoa.congvan.so"/><a class="nsw-require-field">*</a></label>
-                            </div>
-                            <div class="col-md-4">
-                                <input data-bind="trimedValue: fiProCVMienGiam" class="form-control" value=""/>
-                            </div>
-                            <div class="col-md-2 nsw-text-right">
-                                <label><spring:message code="mard.25.tokhai.hang_hoa.congvan.ngay"/><a class="nsw-require-field">*</a></label>
-                            </div>
-                            <div class="col-md-4">
-                                <input data-bind="trimedValue: fiProCVMienGiamNgay" class="form-control" value=""/>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+        <div class="modal-body" data-bind="with: thongtinChungVM">
+<%--            <div class="panel panel-primary">--%>
+<%--                <div class="panel-heading" style="font-weight: bold;"><spring:message code="mard.25.tokhai.hang_hoa.congvan.title"/></div>--%>
+<%--                <div class="panel-body">--%>
+<%--                    <form role="form" class="form-horizontal">--%>
+<%--                        <div class="form-group">--%>
+<%--                            <div class="col-md-2 nsw-text-right">--%>
+<%--                                <label><spring:message code="mard.25.tokhai.hang_hoa.congvan.so"/><a class="nsw-require-field">*</a></label>--%>
+<%--                            </div>--%>
+<%--                            <div class="col-md-4">--%>
+<%--                                <input data-bind="trimedValue: fiProCVMienGiam" class="form-control" value=""/>--%>
+<%--                            </div>--%>
+<%--                            <div class="col-md-2 nsw-text-right">--%>
+<%--                                <label><spring:message code="mard.25.tokhai.hang_hoa.congvan.ngay"/><a class="nsw-require-field">*</a></label>--%>
+<%--                            </div>--%>
+<%--                            <div class="col-md-4">--%>
+<%--                                <input data-bind="trimedValue: fiProCVMienGiamNgay" class="form-control" value=""/>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </form>--%>
+<%--                </div>--%>
+<%--            </div>--%>
             <div class="panel panel-primary">
                 <div class="panel-heading" style="font-weight: bold;"><spring:message code="mard.25.tokhai.hang_hoa.title"/></div>
                 <div class="panel-body">
@@ -116,11 +116,11 @@
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.nhom"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <select data-bind="options: lstUOMAnimal,
-                                                    optionsText: 'unitname',
-                                                    optionsValue: 'unitcode',
+                                <select data-bind="options: lstNhom,
+                                                    optionsText: 'fiMaphannhom',
+                                                    optionsValue: 'fiTenphannhom',
                                                     optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.nhom"/>',
-                                                    value: fiProIdNhom" class="form-control"></select>
+                                                    value: fiMaphannhom" class="form-control"></select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -128,17 +128,17 @@
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.phan_nhom"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <select data-bind="options: lstUOMAnimal,
-                                                    optionsText: 'unitname',
-                                                    optionsValue: 'unitcode',
+                                <select data-bind="options: lstPhanNhom,
+                                                    optionsText: 'fiTenphannhom',
+                                                    optionsValue: 'fiMaphannhom',
                                                     optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.phan_nhom"/>',
-                                                    value: fiProIdPhanNhom" class="form-control"></select>
+                                                    value: fiMaphannhom" class="form-control"></select>
                             </div>
                             <div class="col-md-2 nsw-text-right">
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.loai"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <select data-bind="options: lstUOMAnimal,
+                                <select data-bind="options: lstLoai,
                                                     optionsText: 'unitname',
                                                     optionsValue: 'unitcode',
                                                     optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.loai"/>',
@@ -151,7 +151,7 @@
                             </div>
                             <div class="col-md-4">
                                 <select
-                                        data-bind="options: lstUOMAnimal,
+                                        data-bind="options: lstPhanLoai,
                                                     optionsText: 'unitname',
                                                     optionsValue: 'unitcode',
                                                     optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.phan_loai"/>',
@@ -175,12 +175,13 @@
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.nuoc_san_xuat"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <select
-                                        data-bind="options: lstUOMAnimal,
-                                                    optionsText: 'unitname',
-                                                    optionsValue: 'unitcode',
-                                                    optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.nuoc_san_xuat"/>',
-                                                    value: fiProCountryCode" class="form-control"></select>
+                                <select id="fiCountrySX" name="fiCountrySX" class="form-control select2"
+                                        data-bind="value : fiCountrySX,
+                                        options : lstCountry,
+                                        optionsValue : 'countrycode',
+                                        optionsCaption: 'Chọn quốc gia',
+                                        optionsText : 'countryname'">
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -491,6 +492,7 @@
                 </button>
             </div>
         </div>
+
     </div>
     <!-- end modal -->
 </div>

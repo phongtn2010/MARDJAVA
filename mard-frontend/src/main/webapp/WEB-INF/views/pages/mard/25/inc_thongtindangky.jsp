@@ -19,7 +19,7 @@
                     </div>
                     <div class="col-md-4">
                         <select id="fiSellCountryCode" name="fiSellCountryCode" class="form-control select2"
-                                data-bind="value : fiSellCountryCode, options : lstCountry, optionsValue : 'countryid', optionsCaption: 'Tất cả...', optionsText : 'countryname'">
+                                data-bind="value : fiSellCountryCode, options : lstCountry, optionsValue : 'countryid',  optionsText : 'countryname'">
                         </select>
                     </div>
                 </div>

@@ -155,6 +155,24 @@ public class Mard25Api extends BaseApi {
         return json;
     }
 
+    @RequestMapping(value = "/danhmuc/phannhomtacn", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseJson getPhanNhomTACN() {
+        ResponseJson json = new ResponseJson();
+        try {
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_PHANNHOM_TACN));
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            json.setData(null);
+            json.setSuccess(false);
+            json.setMessage(ex.getMessage());
+            return json;
+        }
+    }
+
     @RequestMapping(value = "/hoso/create", method = RequestMethod.POST, headers = {"content-type=application/json"})
     public @ResponseBody
     ResponseJson createHoso(

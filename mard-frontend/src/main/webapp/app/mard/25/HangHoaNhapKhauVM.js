@@ -145,6 +145,8 @@ function HangHoaNhapKhauVM (options) {
 
     kdnkVMSelf.regAnimalVM = ko.observable(new RegAnimalVM(options));
     kdnkVMSelf.regAnimalProductVM = ko.observable(new RegAnimalProductVM(options));
+
+    kdnkVMSelf.fiProductList = ko.observableArray((options && options.hasOwnProperty('fiProductList')) ? options.fiProductList : null);
     if (options.fiHSType == 1 || options.fiHSType == "1") {
         kdnkVMSelf.regAnimalVM().applyState(options);
     } else if (options.fiHSType == 2 || options.fiHSType == "2") {
