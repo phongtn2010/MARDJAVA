@@ -825,6 +825,13 @@ function UploadFileVM(lstAtch, lstAtchType) {
     ufVMSelf.errorMsg = ko.observable(null);
     ufVMSelf.uploadedFiles = ko.observableArray([]);
 
+    ufVMSelf.isRequired = ko.observable(null);
+    ufVMSelf.fiFileHD  = ko.observable(null);
+    ufVMSelf.fiFileHDDate = ko.observable(null);
+    ufVMSelf.fiPath  = ko.observable(null);
+    ufVMSelf.fiFileName = ko.observable(null);
+    ufVMSelf.fiHSType = ko.observable(null);
+
     if (lstAtchType) {
         ufVMSelf.lstAtch(mapAttachmentVM(lstAtch, lstAtchType));
     }

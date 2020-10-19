@@ -20,12 +20,12 @@ import java.util.Date;
  */
 @Entity
 @Data
-@Table(name = "TBDDANHMUC25", schema = "MARD")
-public class TbdDanhMuc25 extends CmonBaseEntity implements Serializable {
+@Table(name = "TBSDANHMUC25", schema = "MARD")
+public class TbsDanhmuc25 extends CmonBaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public static final String SEQUENCE_NAME = "TBDDANHMUC25_SEQ";
+    public static final String SEQUENCE_NAME = "TBSDANHMUC25_SEQ";
 
     //----------------------------------------------------------------------
     // ENTITY PRIMARY KEY ( BASED ON A SINGLE FIELD )
@@ -63,7 +63,7 @@ public class TbdDanhMuc25 extends CmonBaseEntity implements Serializable {
     //----------------------------------------------------------------------
     // CONSTRUCTOR(S)
     //----------------------------------------------------------------------
-    public TbdDanhMuc25() {
+    public TbsDanhmuc25() {
         super();
     }
 }

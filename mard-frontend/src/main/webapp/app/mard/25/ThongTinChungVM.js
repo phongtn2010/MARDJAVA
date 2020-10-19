@@ -1,6 +1,7 @@
 function ThongTinChungVM(data) {
     var ttcVMSelf = this;
-    console.log(data);
+
+    ttcVMSelf.errors = ko.validation.group(ttcVMSelf);
     ttcVMSelf.fiHSStatus = ko.observable((data && data.hasOwnProperty('fiHSStatus')) ? data.fiHSStatus : null);
     ttcVMSelf.fiTaxCode = ko.observable((data && data.hasOwnProperty('fiTaxCode')) ? data.fiTaxCode : null);
     ttcVMSelf.fiHSCreatedDate = ko.observable((data && data.hasOwnProperty('fiHSCreatedDate')) ? new Date(data.fiHSCreatedDate) : new Date());
@@ -11,6 +12,7 @@ function ThongTinChungVM(data) {
     //inc_thongtindangky.jsp
     ttcVMSelf.fiSellName = ko.observable((data && data.hasOwnProperty('fiSellName')) ? data.fiSellName : null);
     ttcVMSelf.lstCountry = ko.observableArray((data && data.hasOwnProperty('lstCountry')) ? data.lstCountry : null);
+
     ttcVMSelf.fiSellAddress = ko.observable((data && data.hasOwnProperty('fiSellAddress')) ? data.fiSellAddress : null);
     ttcVMSelf.fiSellTel = ko.observable((data && data.hasOwnProperty('fiSellTel')) ? data.fiSellTel : null);
     ttcVMSelf.fiSellFax = ko.observable((data && data.hasOwnProperty('fiSellFax')) ? data.fiSellFax : null);
@@ -23,6 +25,55 @@ function ThongTinChungVM(data) {
     ttcVMSelf.fiPurchReci = ko.observable((data && data.hasOwnProperty('fiPurchReci')) ? data.fiPurchReci : null);
     ttcVMSelf.fiPurchFromDate = ko.observable((data && data.hasOwnProperty('fiPurchFromDate')) ? new Date(data.fiPurchFromDate) : new Date());
     ttcVMSelf.fiPurchToDate = ko.observable((data && data.hasOwnProperty('fiPurchToDate')) ? new Date(data.fiPurchToDate) : null);
+
+    ttcVMSelf.fiProductList = ko.observableArray((data && data.hasOwnProperty('fiProductList')) ? data.fiProductList : []);
+
+    ttcVMSelf.fiProCVMienGiam = ko.observable((data && data.hasOwnProperty('fiProCVMienGiam')) ? data.fiProCVMienGiam : null);
+    ttcVMSelf.fiProCVMienGiamNgay = ko.observable((data && data.hasOwnProperty('fiProCVMienGiamNgay')) ? new Date(data.fiProCVMienGiamNgay) : null);
+
+    ttcVMSelf.fiProName = ko.observable((data && data.hasOwnProperty('fiProName')) ? data.fiProName : null);
+    ttcVMSelf.fiProCode = ko.observable((data && data.hasOwnProperty('fiProCode')) ? data.fiProCode : null);
+    ttcVMSelf.fiProMadeIn = ko.observable((data && data.hasOwnProperty('fiProMadeIn')) ? data.fiProMadeIn : null);
+    ttcVMSelf.fiProThanhPhan = ko.observable((data && data.hasOwnProperty('fiProThanhPhan')) ? data.fiProThanhPhan : null);
+    ttcVMSelf.fiProColor = ko.observable((data && data.hasOwnProperty('fiProColor')) ? data.fiProColor : null);
+    ttcVMSelf.fiProSoHieu = ko.observable((data && data.hasOwnProperty('fiProSoHieu')) ? data.fiProSoHieu : null);
+    ttcVMSelf.fiProQuyChuan = ko.observable((data && data.hasOwnProperty('fiProQuyChuan')) ? data.fiProQuyChuan : null);
+
+    ttcVMSelf.fiProCLList = ko.observableArray((data && data.hasOwnProperty('fiProCLList')) ? data.fiProCLList : null);
+    ttcVMSelf.EfiProCLTarg = ko.observable(null);
+    ttcVMSelf.EfiProCLCompare = ko.observable(null);
+    ttcVMSelf.EfiProCLContent = ko.observable(null);
+    ttcVMSelf.EfiProCLUnitID = ko.observable(null);
+
+
+    ttcVMSelf.fiProValueVN  = ko.observable((data && data.hasOwnProperty('fiProValueVN ')) ? data.fiProValueVN  : null);
+    ttcVMSelf.fiProValueUSD   = ko.observable((data && data.hasOwnProperty('fiProValueUSD  ')) ? data.fiProValueUSD  : null);
+
+    ttcVMSelf.fiProATList = ko.observableArray((data && data.hasOwnProperty('fiProATList')) ? data.fiProATList : []);
+    ttcVMSelf.EfiProATTarg = ko.observable(null);
+    ttcVMSelf.EfiProATCompare = ko.observable(null);
+    ttcVMSelf.EfiProATContent = ko.observable(null);
+    ttcVMSelf.EfiProATUnitID = ko.observable(null);
+
+    ttcVMSelf.fiProKLList = ko.observableArray((data && data.hasOwnProperty('fiProKLList')) ? data.fiProKLList : []);
+    ttcVMSelf.EfiProSLKLMass = ko.observable(null);
+    ttcVMSelf.EfiProSLKLMassTan = ko.observable(null);
+    ttcVMSelf.EfiProSLKLMassUnitCode = ko.observable(null);
+    ttcVMSelf.EfiProSLKLAmount = ko.observable(null);
+    ttcVMSelf.EfiProSLKLAmountUnitCode = ko.observable(null);
+
+
+    ttcVMSelf.fiPackageUnitCode = ko.observable(null);
+
+
+    ttcVMSelf.fiProIdNhom = ko.observable((data && data.hasOwnProperty('fiProIdNhom')) ? data.fiProIdNhom : null);
+    ttcVMSelf.fiProIdPhanNhom = ko.observable((data && data.hasOwnProperty('fiProIdPhanNhom')) ? data.fiProIdPhanNhom : null);
+    ttcVMSelf.fiProIdLoai = ko.observable((data && data.hasOwnProperty('fiProIdLoai')) ? data.fiProIdLoai : null);
+    ttcVMSelf.fiProIdPhanLoai = ko.observable((data && data.hasOwnProperty('fiProIdPhanLoai')) ? data.fiProIdPhanLoai : null);
+    ttcVMSelf.fiProCountryCode = ko.observable((data && data.hasOwnProperty('fiProCountryCode')) ? data.fiProCountryCode : null);
+    ttcVMSelf.lstUOMAnimal = ko.observable((data && data.hasOwnProperty('lstUOMAnimal')) ? data.lstUOMAnimal : null);
+    ttcVMSelf.errorMsg = ko.observable(null);
+
 
     ttcVMSelf.fiRegistrationNo = ko.observable((data && data.hasOwnProperty('fiRegistrationNo')) ? data.fiRegistrationNo : null);
     ttcVMSelf.fiImporterName = ko.observable((data && data.hasOwnProperty('fiImporterName')) ? data.fiImporterName : null)
@@ -55,14 +106,116 @@ function ThongTinChungVM(data) {
     ttcVMSelf.fiContactAddress = ko.observable((data && data.hasOwnProperty('fiContactAddress')) ? data.fiContactAddress : null);
     ttcVMSelf.fiContactEmail = ko.observable((data && data.hasOwnProperty('fiContactEmail')) ? data.fiContactEmail : null);
 
+    ttcVMSelf.clearForm = function () {
 
-    ttcVMSelf.lstPhanNhom = ko.observableArray((data && data.hasOwnProperty('lstPhanNhom')) ? data.lstPhanNhom : null);
-    ttcVMSelf.lstLoai = ko.observableArray((data && data.hasOwnProperty('lstLoai')) ? data.lstLoai : null);
-    ttcVMSelf.lstNhom = ko.observableArray((data && data.hasOwnProperty('lstNhom')) ? data.lstNhom : null);
-    ttcVMSelf.lstPhanLoai = ko.observableArray((data && data.hasOwnProperty('lstPhanLoai')) ? data.lstPhanLoai : null);
-    ttcVMSelf.fiProMadeIn = ko.observable((data && data.hasOwnProperty('fiProMadeIn')) ? data.fiProMadeIn : null);
-    ttcVMSelf.fiProThanhPhan = ko.observable((data && data.hasOwnProperty('fiProThanhPhan')) ? data.fiProThanhPhan : null);
-    ttcVMSelf.fiProColor = ko.observable((data && data.hasOwnProperty('fiProColor')) ? data.fiProColor : null);
-    ttcVMSelf.fiProSoHieu = ko.observable((data && data.hasOwnProperty('fiProSoHieu')) ? data.fiProSoHieu : null);
-    ttcVMSelf.fiProName =ko.observable((data && data.hasOwnProperty('fiProName')) ? data.fiSellName : null);
+        ttcVMSelf.errorMsg('');
+        ttcVMSelf.EfiProCLTarg = ko.observable(null);
+        ttcVMSelf.EfiProCLCompare = ko.observable(null);
+        ttcVMSelf.EfiProCLContent = ko.observable(null);
+        ttcVMSelf.EfiProCLUnitID = ko.observable(null);
+        $("#EfiProCLTargTx").val('');
+        $("#EfiProCLContentTx").val('');
+
+
+        ttcVMSelf.EfiProATTarg= ko.observable(null);
+        ttcVMSelf.EfiProATCompare= ko.observable(null);
+        ttcVMSelf.EfiProATContent= ko.observable(null);
+        ttcVMSelf.EfiProATUnitID= ko.observable(null);
+        $("#EfiProATTargTx").val('');
+        $("#EfiProATContentTx").val('');
+
+        ttcVMSelf.EfiProSLKLMass = ko.observable(null);
+        ttcVMSelf.EfiProSLKLMassTan = ko.observable(null);
+        ttcVMSelf.EfiProSLKLAmount = ko.observable(null);
+        ttcVMSelf.EfiProSLKLAmountUnitCode = ko.observable(null);
+        ttcVMSelf.EfiProSLKLMassUnitCode = ko.observable(null);
+        $("#EfiProSLKLMass").val('');
+        $("#EfiProSLKLMassTan").val('');
+        $("#EfiProSLKLAmount").val('');
+
+
+    }
+    ttcVMSelf.addProduct=function(){
+        if (!ttcVMSelf.validate()) return;
+        var soLuong;
+        var khoiLuong;
+        console.log(ttcVMSelf.fiProKLList);
+        ttcVMSelf.fiProKLList.foreach(function (entry) {
+            soLuong=''+entry.fiProSLKLMass +' '+ entry.fiProSLKLMassUnitName ;
+            khoiLuong=''+entry.fiProSLKLAmount +' '+ entry.fiProSLKLAmountUnitName;
+        });
+        var item ={
+            fiProName: ttcVMSelf.fiProName,
+
+            fiProductScienceName: ttcVMSelf.soLuong,
+            fiSizeOrType: ttcVMSelf.khoiLuong,
+
+            fiProThanhPhan: ttcVMSelf.fiProThanhPhan,
+            fiProIdNhom: ttcVMSelf.fiProIdNhom,
+            fiProCode: ttcVMSelf.fiProCode,
+            fiProMadeIn: ttcVMSelf.fiProMadeIn,
+            fiProCountryName: ttcVMSelf.fiProCountryName,
+            fiProValueVN: ttcVMSelf.fiProValueVN
+        }
+        ttcVMSelf.fiProductList.push(item);
+        $("#modal_addAnimal").modal('hide');
+    }
+    ttcVMSelf.addThongTinChiTieuChatLuong=function () {
+
+        if (!ttcVMSelf.validate()) return;
+        var item = {
+            fiProCLTarg: ttcVMSelf.EfiProCLTarg,
+            fiProCLCompare: ttcVMSelf.EfiProCLCompare,
+            fiProCLContent: ttcVMSelf.EfiProCLContent,
+            fiProCLUnitName: ttcVMSelf.EfiProCLUnitID,
+            fiProCLUnitID: ttcVMSelf.EfiProCLUnitID
+        }
+        ttcVMSelf.fiProCLList.push(item);
+        ttcVMSelf.clearForm();
+    }
+    ttcVMSelf.addThongTinChiTieuAT=function () {
+        if (!ttcVMSelf.validate()) return;
+        var item = {
+            fiProATTarg: ttcVMSelf.EfiProATTarg,
+            fiProATCompare: ttcVMSelf.EfiProATCompare,
+            fiProATContent: ttcVMSelf.EfiProATContent,
+            fiProATUnitName: ttcVMSelf.EfiProATUnitID,
+            fiProATUnitID: ttcVMSelf.EfiProATUnitID
+        }
+        ttcVMSelf.fiProATList.push(item);
+        ttcVMSelf.clearForm();
+    }
+    ttcVMSelf.addThongTinChiTieuKL=function () {
+        if (!ttcVMSelf.validate()) return;
+        var item = {
+            fiProSLKLMass: ttcVMSelf.EfiProSLKLMass,
+            fiProSLKLMassTan:ttcVMSelf.EfiProSLKLMassTan,
+            fiProSLKLMassUnitName: ttcVMSelf.EfiProSLKLMassUnitCode,
+            fiProSLKLAmount: ttcVMSelf.EfiProSLKLAmount,
+            fiProSLKLAmountUnitName: ttcVMSelf.EfiProSLKLAmountUnitCode,
+            fiProSLKLAmountUnitCode: ttcVMSelf.EfiProSLKLAmountUnitCode
+        }
+        ttcVMSelf.fiProKLList.push(item);
+        ttcVMSelf.clearForm();
+    }
+    ttcVMSelf.validate = function () {
+        if (ttcVMSelf.errors().length > 0) {
+            ttcVMSelf.errors.showAllMessages();
+            return false;
+        }
+        return true;
+    }
+    ttcVMSelf.openUpdateProduct = function (data, index, type) {
+        ko.mapping.fromJS(data, {}, ttcVMSelf);
+        ttcVMSelf.selectedIndex(index);
+        if (type == '1' || type == 1) {
+            $('#modal_addAnimal').modal('show');
+        } else {
+            $('#modal_addAnimal').modal('show');
+        }
+    }
+    ttcVMSelf.removeProduct = function (index) {
+        ttcVMSelf.fiProductList.splice(index, 1);
+    }
+
 }

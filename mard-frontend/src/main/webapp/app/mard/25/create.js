@@ -225,19 +225,15 @@ $(document).ready(function () {
         // Get UOMs
         app.sendGetRequest("/mard/25/danhmuc/unit?unitTypeId=4&systemId=6", function (res) {
             options['lstUOMAnimal'] = res.data;
-        }),
-        // Get profile status
-        app.sendGetRequest("/mard/06/danhmuc/statusHoso?systemId=6", function (res) {
-            options['lstProfileStatus'] = res.data;
-        }),
-        // Get attach types
-        app.sendGetRequest("/mard/06/danhmuc/dinhkem?systemId=6", function (res) {
-            options['lstAtchType'] = res.data;
-        }),
-        // Phân nhóm tacn
-        app.sendGetRequest("/mard/25/danhmuc/phannhomtacn", function (res) {
-            options['lstPhanNhom'] = res.data;
         })
+        // // Get profile status
+        // app.sendGetRequest("/mard/25/danhmuc/statusHoso?systemId=6", function (res) {
+        //     options['lstProfileStatus'] = res.data;
+        // }),
+        // // Get attach types
+        // app.sendGetRequest("/mard/25/danhmuc/dinhkem?systemId=6", function (res) {
+        //     options['lstAtchType'] = res.data;
+        // })
     ).done(function (data) {
         $('#loading10').hide();
         init(options);

@@ -390,7 +390,7 @@
                 <div class="col-md-12" style="padding-top: 10px;">
                     <div class="text-center">
                         <p><span class="nsw-require-field" data-bind="text: errorMsg"></span></p>
-                        <button class="btn btn-primary" data-bind="click: $root.25RegProfile"><i class="fa fa-save"></i> <spring:message code="mard.25.tokhai.file.khac_themmoi"/></button>
+<%--                        <button class="btn btn-primary" data-bind="click: $root.25RegProfile"><i class="fa fa-save"></i> <spring:message code="mard.25.tokhai.file.khac_themmoi"/></button>--%>
                     </div>
                 </div>
             </div>

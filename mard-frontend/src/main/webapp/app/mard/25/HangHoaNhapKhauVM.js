@@ -136,7 +136,7 @@ function HangHoaNhapKhauVM (options) {
     if (options.isRequestEdit) {
         kdnkVMSelf.fiReason.extend({
             required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-        });
+        })
     }
     kdnkVMSelf.fiHSType = ko.observable((options && options.hasOwnProperty('fiHSType')) ? options.fiHSType : null);
     kdnkVMSelf.thongtinChungVM = ko.observable(new ThongTinChungVM(options));
@@ -159,7 +159,6 @@ function HangHoaNhapKhauVM (options) {
             kdnkVMSelf.regAnimalProductVM().productVM().fiPackageUnitCode("KG");
         }
     })
-
     kdnkVMSelf.uploadFileVM = ko.observable(new UploadFileVM(options.fiAttachmentList ? options.fiAttachmentList: [], options.lstAtchType ? options.lstAtchType : []));
 
     kdnkVMSelf.errorMsg = ko.observable(null);
@@ -198,7 +197,6 @@ function HangHoaNhapKhauVM (options) {
             var hasErrorKDTP = false;
             var lstProcessing = kdnkVMSelf.regAnimalProductVM().productMfrVM().fiProcessingList();
             lstProcessing.forEach(function (processing) {
-                console.log('pro', processing);
                 if (!processing.fiProcessingApprovalNumber) {
                     hasErrorKDTP = true;
                 }
