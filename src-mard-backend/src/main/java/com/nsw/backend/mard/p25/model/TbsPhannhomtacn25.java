@@ -19,7 +19,7 @@ public class TbsPhannhomtacn25 implements Serializable {
     @Id
     @Column(name = "FI_ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_NAME)
-    @SequenceGenerator(sequenceName = SEQUENCE_NAME, schema = "MARD", initialValue = 10000, allocationSize = 1, name = SEQUENCE_NAME)
+    @SequenceGenerator(sequenceName = SEQUENCE_NAME, schema = "MARD", initialValue = 1, allocationSize = 1, name = SEQUENCE_NAME)
     private Long fiId;
 
     @Column(name = "FI_MAPHANNHOM")

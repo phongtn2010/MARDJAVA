@@ -2,10 +2,7 @@ package com.nsw.backend.mard.p25.model;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -14,11 +11,14 @@ import java.util.Date;
 @Table(name = "TBSDANHMUC25")
 @Data
 public class TBSDANHMUC25 implements Serializable {
+    public static final String SEQUENCE_NAME = "TBSDANHMUC25_SEQ";
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "FIIDCAT", nullable = false)
+    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_NAME)
+    @SequenceGenerator(sequenceName = SEQUENCE_NAME, schema = "MARD", initialValue = 1, allocationSize = 1, name = SEQUENCE_NAME)
     private Long FIIDCAT;
 
     @Column(name = "FI_CREATED_BY")

@@ -241,7 +241,7 @@ public class EnvelopeService06Impl implements EnvelopeService06 {
     }
 
     /**
-     * Lay gia tri tu xml key co dang /Envelope06/Header06/Subject06/function
+     * Lay gia tri tu xml key co dang /Envelope25/Header25/Subject25/function
      *
      * @param xml
      * @param key
@@ -271,7 +271,7 @@ public class EnvelopeService06Impl implements EnvelopeService06 {
     }
 
     /**
-     * Lay gia tri tu xpath key co dang /Envelope06/Header06/Subject06/function
+     * Lay gia tri tu xpath key co dang /Envelope25/Header25/Subject25/function
      */
     public String getValueFromXml(XPath xpath, Document doc, String key) {
         String value;
@@ -291,7 +291,7 @@ public class EnvelopeService06Impl implements EnvelopeService06 {
     }
 
     /**
-     * Tao ban tin Error06 de phan hoi
+     * Tao ban tin Error25 de phan hoi
      */
     public Error06 createError(String code, String name, Exception ex) {
         try {
@@ -316,7 +316,7 @@ public class EnvelopeService06Impl implements EnvelopeService06 {
     }
 
     /**
-     * Tao ban tin Error06 de phan hoi
+     * Tao ban tin Error25 de phan hoi
      */
     public Error06 createError(String code, String name) {
         try {

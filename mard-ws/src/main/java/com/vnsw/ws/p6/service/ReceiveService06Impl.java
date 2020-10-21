@@ -211,7 +211,7 @@ public class ReceiveService06Impl implements ReceiveService06 {
     }
 
     /**
-     * Tạo Envelope06
+     * Tạo Envelope25
      *
      * @param header
      * @param json

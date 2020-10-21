@@ -35,7 +35,7 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     @Id
     @Column(nullable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_NAME)
-    @SequenceGenerator(sequenceName = SEQUENCE_NAME, schema = "MARD", initialValue = 10000, allocationSize = 1, name = SEQUENCE_NAME)
+    @SequenceGenerator(sequenceName = SEQUENCE_NAME, schema = "MARD", initialValue = 1, allocationSize = 1, name = SEQUENCE_NAME)
     private Integer fiIdHS;
 
     //----------------------------------------------------------------------
@@ -67,7 +67,7 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     private String fiImporterEmail;
 
     @Column(name = "FI_HS_TYPE", nullable = false)
-    private Integer fiHSType = 1;
+    private Integer fiHSType;
 
     @Column(name = "FI_HS_STATUS")
     private Integer fiHSStatus;
@@ -130,14 +130,12 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_PURCH_FAX", length = 15)
     private String fiPurchFax;
 
-
     @Column(name = "FI_PURCH_RECI", nullable = false, length = 500)
     private String fiPurchReci;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "FI_PURCH_FROMDATE")
     private Date fiPurchFromDate;
-
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "FI_PURCH_TODATE")
     private Date fiPurchToDate;
@@ -194,7 +192,23 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     // Dinh kem
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "FI_HS_ID")
-    private List<TbdDinhkem25> fiAttachmentList;
+    private List<Tbdattach25> fiAttachmentList;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "FI_HS_ID")
+    private List<Tbdattach25> fiListAttch;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "FI_HS_ID")
+    private List<TbdattachHoadon25> fiListAttchHoaDon;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "FI_HS_ID")
+    private List<TbdattachHd25> fiListAttchHD;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "FI_HS_ID")
+    private List<TbdattachDg25> fiListAttchPhieu;
 
     @Transient
     private String fiCertNo;

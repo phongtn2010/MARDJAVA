@@ -35,7 +35,7 @@ public class TbdHanghoa25 extends CmonBaseEntity implements Serializable {
     @Id
     @Column(nullable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_NAME)
-    @SequenceGenerator(sequenceName = SEQUENCE_NAME, schema = "MARD", initialValue = 10000, allocationSize = 1, name = SEQUENCE_NAME)
+    @SequenceGenerator(sequenceName = SEQUENCE_NAME, schema = "MARD", initialValue = 1, allocationSize = 1, name = SEQUENCE_NAME)
     private Integer fiIdProduct;
 
     //----------------------------------------------------------------------
@@ -56,11 +56,20 @@ public class TbdHanghoa25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_PRO_ID_PHAN_NHOM")
     private Integer fiProIdPhanNhom;
 
+    @Column(name = "FI_PRO_NAME_PHAN_NHOM")
+    private String fiProNamePhanNhom;
+
     @Column(name = "FI_PRO_ID_LOAI")
     private Integer fiProIdLoai;
 
+    @Column(name = "FI_PRO_NAME_LOAI")
+    private String fiProNameLoai;
+
     @Column(name = "FI_PRO_ID_PHAN_LOAI")
     private Integer fiProIdPhanLoai;
+
+    @Column(name = "FI_PRO_NAME_PHAN_LOAI")
+    private Integer fiProNamePhanLoai;
 
     @Column(name = "FI_PRO_CODE", nullable = false, length = 150)
     private String fiProCode;
@@ -126,7 +135,7 @@ public class TbdHanghoa25 extends CmonBaseEntity implements Serializable {
     @JoinColumn(name = "FI_PRO_ID")
     private List<TbdHanghoaAT25> fiProATList;
 
-    //Danh sách an toàn kèm theo
+    //Danh sách số lượng khối lượng kèm theo
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "FI_PRO_ID")
     private List<TbdHanghoaSLKL25> fiProSLKLList;

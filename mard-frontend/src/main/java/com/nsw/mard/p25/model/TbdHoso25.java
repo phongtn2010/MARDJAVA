@@ -61,5 +61,11 @@ public class TbdHoso25 implements Serializable {
 
     private List<TbdHanghoa25> fiProductList;
 
-    private List<TbdDinhkem25> fiAttachmentList;
+    private List<Tbdattach25> fiListAttch;
+
+    private List<TbdattachHoadon25> fiListAttchHoaDon;
+
+    private List<TbdattachHd25> fiListAttchHD;
+
+    private List<TbdattachDg25> fiListAttchPhieu;
 }
