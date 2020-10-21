@@ -7,8 +7,6 @@ import com.nsw.common.model.json.ResponseJson;
 import com.nsw.constant.AppConstant;
 import com.nsw.helper.BackendRequestHelper;
 import com.nsw.helper.RabbitMQErrorHelper;
-import com.nsw.mard.constant.Mard06Constant;
-import com.nsw.mard.constant.Mard25Constant;
 import com.nsw.mard.constant.Mard25Constant;
 import com.nsw.mard.p25.model.FilterForm;
 import com.nsw.mard.p25.model.TbdHoso25;
@@ -359,9 +357,9 @@ public class Mard25Api extends BaseApi {
     }
     private boolean isOwner(String idHS, String nswFileCode) {
         ResponseJson json = BackendRequestHelper.getInstance().doGetRequest(
-                Mard06Constant.getInstance().getApiUrl(
+                Mard25Constant.getInstance().getApiUrl(
                         environment,
-                        Mard06Constant.API.HOSO_GET_BY_FILTER
+                        Mard25Constant.API.HOSO_GET_BY_FILTER
                 ) + "?id=" +
                         (StringUtils.isEmpty(idHS)? "" : idHS) + "&nswFileCode=" +
                         (StringUtils.isEmpty(nswFileCode)? "" : nswFileCode) + "&taxCode=" + getUsername());

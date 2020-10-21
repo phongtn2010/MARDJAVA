@@ -19,8 +19,8 @@ function ThongTinChungVM(data) {
     ttcVMSelf.lstPhanNhom = ko.observableArray((data && data.hasOwnProperty('lstPhanNhom')) ? data.lstPhanNhom : null);
     ttcVMSelf.lstLoai = ko.observableArray((data && data.hasOwnProperty('lstLoai')) ? data.lstLoai : null);
     ttcVMSelf.lstPhanLoai = ko.observableArray((data && data.hasOwnProperty('lstPhanLoai')) ? data.lstPhanLoai : null);
-    ttcVMSelf.fiSellCountryCode = ko.observableArray((data && data.hasOwnProperty('fiSellCountryCode')) ? data.fiSellCountryCode : null);
-    ttcVMSelf.fiSellCountryName = ko.observableArray((data && data.hasOwnProperty('fiSellCountryName')) ? data.fiSellCountryName : null);
+    ttcVMSelf.fiSellCountryCode = ko.observable((data && data.hasOwnProperty('fiSellCountryCode')) ? data.fiSellCountryCode : null);
+    ttcVMSelf.fiSellCountryName = ko.observable((data && data.hasOwnProperty('fiSellCountryName')) ? data.fiSellCountryName : null);
 
     ttcVMSelf.fiSellAddress = ko.observable((data && data.hasOwnProperty('fiSellAddress')) ? data.fiSellAddress : null);
     ttcVMSelf.fiSellTel = ko.observable((data && data.hasOwnProperty('fiSellTel')) ? data.fiSellTel : null);

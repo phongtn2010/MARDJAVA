@@ -84,7 +84,7 @@ public class Tbdhoso25Controller extends BaseController {
             profileHst.setFiSenderName(result.getFiTaxCode());
             //profileHst.setFiSenderUnitName(result.getFiImporterName());
             profileHst.setFiContent("Gửi mới hồ sơ");
-            profile.setFiHSStatus(regProfileService.findByFiHSCode(profile.getFiNSWFileCode()).getFiHSStatus());
+            profile.setFiHSStatus(profile.getFiHSStatus());
             regProfileService.save(profile);
             hstService.update(profileHst);
             ResponseJson response = wsService.sendProfile(result);

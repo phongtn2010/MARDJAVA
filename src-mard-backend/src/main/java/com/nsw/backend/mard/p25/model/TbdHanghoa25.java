@@ -110,6 +110,12 @@ public class TbdHanghoa25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_PRO_HASH")
     private String fiProHash;
 
+    @Column(name="FI_PRO_KL")
+    private String fiProductKL;
+
+    @Column(name="FI_PRO_SL")
+    private String fiProductSL;
+
     //Danh sách chất lượng kèm theo
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "FI_PRO_ID")

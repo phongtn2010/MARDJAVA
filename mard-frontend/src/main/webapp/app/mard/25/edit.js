@@ -63,7 +63,7 @@ function Mard25EditVM () {
     }
 
     editVMSefl.sendRegProfile = function () {
-        if (!editVMSefl.kdnkVM().validateForm() || !editVMSefl.kdnkVM().validateAttachment()) return;
+        // if (!editVMSefl.kdnkVM().validateForm() || !editVMSefl.kdnkVM().validateAttachment()) return;
         var body = editVMSefl.kdnkVM().getData();
         // return;
         if (!body) return;
@@ -186,64 +186,67 @@ function Mard25EditVM () {
 }
 
 function init(options) {
-    var mard25CreateVM = new Mard25CreateVM();
-    ko.applyBindings(mard25CreateVM, document.getElementById('mard25Create'));
-    mard25CreateVM.applyState(options);
-
-    function getThongTinHoSo(callback) {
-        $('#loading08').show();
-        $.ajax({
-            async: true,
-            type: 'GET',
-            cache: false,
-            crossDomain: true,
-            url: app.appContext + '/mard/25/hoso/find' + "?idHoSo=" + idHoSo,
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader(CSRF_TOKEN_NAME, CSRF_TOKEN_VALUE);
-            },
-            success: function (res) {
-                callback(res);
-                $('#loading08').hide();
-            },
-            error: function (x, t, m) {
-                $('#loading08').hide();
-            },
-        })
+    var mard25EditVM = new Mard25EditVM();
+    ko.applyBindings(mard25EditVM, document.getElementById('mard25Edit'));
+    mard25EditVM.applyState(options);
 }
-
+function getThongTinHoSo(callback) {
+    $('#loading08').show();
+    $.ajax({
+        async: true,
+        type: 'GET',
+        cache: false,
+        crossDomain: true,
+        url: app.appContext + '/mard/25/hoso/find' + "?idHoSo=" + idHoSo,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(CSRF_TOKEN_NAME, CSRF_TOKEN_VALUE);
+        },
+        success: function (res) {
+            callback(res);
+            $('#loading08').hide();
+        },
+        error: function (x, t, m) {
+            $('#loading08').hide();
+        },
+    })
+}
 $(document).ready(function () {
     var options = {};
-    $('#loading10').show();
-    $.when(
-        // Get list country
-        app.sendGetRequest("/mard/25/danhmuc/quocgia", function (res) {
-            options['lstCountry'] = res.data;
-        }),
-        // Get list province
-        app.sendGetRequest("/mard/25/danhmuc/tinhthanh", function (res) {
-            options['lstProvince'] = res.data;
-        }),
-        // Get list port
-        app.sendGetRequest("/mard/25/danhmuc/cuakhau?countryCode=VN", function (res) {
-            options['lstPort'] = res.data;
-        }),
-        // Get UOMs
-        app.sendGetRequest("/mard/25/danhmuc/unit?unitTypeId=4&systemId=6", function (res) {
-            options['lstUOMAnimal'] = res.data;
-        }),
-        // Get profile status
-        app.sendGetRequest("/mard/25/danhmuc/getby-catno/1", function (res) {
-            options['lstNhom'] = res.data;
-            options['lstPhanNhom'] = res.data;
-            options['lstPhanLoai'] = res.data;
-            options['lstLoai'] = res.data;
+    getThongTinHoSo(function (data) {
+        options=data.data;
+        console.log(options);
+        $('#loading10').show();
+        $.when(
+            // Get list country
+            app.sendGetRequest("/mard/25/danhmuc/quocgia", function (res) {
+                options['lstCountry'] = res.data;
+            }),
+            // Get list province
+            app.sendGetRequest("/mard/25/danhmuc/tinhthanh", function (res) {
+                options['lstProvince'] = res.data;
+            }),
+            // Get list port
+            app.sendGetRequest("/mard/25/danhmuc/cuakhau?countryCode=VN", function (res) {
+                options['lstPort'] = res.data;
+            }),
+            // Get UOMs
+            app.sendGetRequest("/mard/25/danhmuc/unit?unitTypeId=4&systemId=6", function (res) {
+                options['lstUOMAnimal'] = res.data;
+            }),
+            // Get profile status
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/1", function (res) {
+                options['lstNhom'] = res.data;
+                options['lstPhanNhom'] = res.data;
+                options['lstPhanLoai'] = res.data;
+                options['lstLoai'] = res.data;
+            })
+            // // Get attach types
+            // app.sendGetRequest("/mard/25/danhmuc/dinhkem?systemId=6", function (res) {
+            //     options['lstAtchType'] = res.data;
+            // })
+        ).done(function (data) {
+            $('#loading10').hide();
+            init(options);
         })
-        // // Get attach types
-        // app.sendGetRequest("/mard/25/danhmuc/dinhkem?systemId=6", function (res) {
-        //     options['lstAtchType'] = res.data;
-        // })
-    ).done(function (data) {
-        $('#loading10').hide();
-        init(options);
     })
 })
