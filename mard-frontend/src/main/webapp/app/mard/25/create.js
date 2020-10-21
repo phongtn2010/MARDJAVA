@@ -9,7 +9,7 @@ function Mard25CreateVM () {
     }
 
     createVMSelf.saveRegProfile = function () {
-        if (!createVMSelf.kdnkVM().validateForm()) return;
+        // if (!createVMSelf.kdnkVM().validateForm()) return;
         var body = createVMSelf.kdnkVM().getData();
         // return;
         if (!body) return;
@@ -225,11 +225,14 @@ $(document).ready(function () {
         // Get UOMs
         app.sendGetRequest("/mard/25/danhmuc/unit?unitTypeId=4&systemId=6", function (res) {
             options['lstUOMAnimal'] = res.data;
+        }),
+        // Get profile status
+        app.sendGetRequest("/mard/25/danhmuc/getby-catno/1", function (res) {
+            options['lstNhom'] = res.data;
+            options['lstPhanNhom'] = res.data;
+            options['lstPhanLoai'] = res.data;
+            options['lstLoai'] = res.data;
         })
-        // // Get profile status
-        // app.sendGetRequest("/mard/25/danhmuc/statusHoso?systemId=6", function (res) {
-        //     options['lstProfileStatus'] = res.data;
-        // }),
         // // Get attach types
         // app.sendGetRequest("/mard/25/danhmuc/dinhkem?systemId=6", function (res) {
         //     options['lstAtchType'] = res.data;

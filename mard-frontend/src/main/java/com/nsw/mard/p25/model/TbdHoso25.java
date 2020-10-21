@@ -10,63 +10,53 @@ import java.util.List;
 public class TbdHoso25 implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static final String SEQUENCE_NAME = "TBDHOSO25_SEQ";
 
     private Long fiIdHS;
-
-    private String fiNSWFileCode;
-
-    private Long fiHSType = 1l;
-
     private Long fiHSStatus;
-
-    private boolean fiActive = true;
+    private Date fiHSCreatedDate;
+    private String fiNSWFileCode;
+    private String fiNSWFileCodeReplace;
+    private String fiGDK;
 
     private String fiTaxCode;
-
-    private Date fiHSCreatedDate;
-
-    private String fiConfirmationNo;
-
-    private String fiRegistrationNo;
-
     private String fiImporterName;
-
     private String fiImporterAddress;
-
     private String fiImporterTel;
-
     private String fiImporterFax;
-
     private String fiImporterEmail;
 
-    private String fiImportPortCode;
+    private String fiAddressGath;
+    private String fiAddressRegSample;
+    private Date fiRegSamFromDate;
+    private Date fiRegSamToDate;
 
-    private String fiImportPortName;
 
-    private String fiPurpose;
-
-    private String fiRelatedDocuments;
-
-    private String fiTimeQuarantine;
-
-    private String fiSignAddress;
-
-    private Date fiSignDate;
+    private String fiContactName;
+    private String fiContactTel;
+    private String fiContactAddress;
+    private String fiContactEmail;
 
     private String fiSignName;
-
     private String fiSignPosition;
+    private String fiSignAddress;
 
-    private String fiModifyReason;
+    private String fiSellName;
+    private String fiSellCountryCode;
+    private String fiSellAddress;
+    private String fiSellTel;
+    private String fiSellFax;
+    private String fiSellExport;
 
-    private String fiBordergateName;
-
-    private Long fiIdHSParent;
+    private String fiPurchName;
+    private String fiPurchTel;
+    private String fiPurchAddress;
+    private String fiPurchFax;
+    private String fiPurchReci;
+    private String fiPurchFromDate;
+    private Date fiPurchToDate;
 
     private String fiReason;
 
-    private String fiRequestDate;
 
     private List<TbdHanghoa25> fiProductList;
 

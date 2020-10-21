@@ -57,6 +57,10 @@ public class TbdHanghoa25 implements Serializable {
 
     private String fiProHash;
 
+    private String fiProductKL;
+
+    private String fiProductSL;
+
     private List<TbdHanghoaCL25> fiProCLList;
 
     private List<TbdHanghoaAT25> fiProATList;

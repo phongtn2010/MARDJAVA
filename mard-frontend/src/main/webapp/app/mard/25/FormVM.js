@@ -821,25 +821,142 @@ function IsoLocationVM(data, validator) {
 function UploadFileVM(lstAtch, lstAtchType) {
     var ufVMSelf = this;
     ufVMSelf.lstAtch = ko.observableArray([]);
+    ufVMSelf.lstHD = ko.observableArray([]);
     ufVMSelf.selectedAttachVM = ko.observable(null);
     ufVMSelf.errorMsg = ko.observable(null);
     ufVMSelf.uploadedFiles = ko.observableArray([]);
 
     ufVMSelf.isRequired = ko.observable(null);
+    ufVMSelf.fiFilePath = ko.observable(null);
+    ufVMSelf.fiFileType = ko.observable(null);
+
     ufVMSelf.fiFileHD  = ko.observable(null);
     ufVMSelf.fiFileHDDate = ko.observable(null);
     ufVMSelf.fiPath  = ko.observable(null);
     ufVMSelf.fiFileName = ko.observable(null);
+
     ufVMSelf.fiHSType = ko.observable(null);
+
+    ufVMSelf.lstHoaDon = ko.observableArray([]);
+    ufVMSelf.fiFileHoaDon = ko.observable(null);
+    ufVMSelf.fiFileHoaDonDate = ko.observable(null);
+    ufVMSelf.fiFileHoaDonPath = ko.observable(null);
+
+    ufVMSelf.lstPhieu = ko.observableArray([]);
+    ufVMSelf.fiFilePhieu = ko.observable(null);
+    ufVMSelf.fiFilePhieuDate = ko.observable(null);
+    ufVMSelf.fiFilePhieuPath = ko.observable(null);
+
+    ufVMSelf.lstKQ = ko.observableArray([]);
+    ufVMSelf.fiFileKQ = ko.observable(null);
+    ufVMSelf.fiFileKQPath = ko.observable(null);
+
+    ufVMSelf.lstTC = ko.observableArray([]);
+    ufVMSelf.fiFileTC = ko.observable(null);
+    ufVMSelf.fiFileTCPath = ko.observable(null);
+
+    ufVMSelf.lstCNLH = ko.observableArray([]);
+    ufVMSelf.fiFileCNLH = ko.observable(null);
+    ufVMSelf.fiFileCNLHPath = ko.observable(null);
+
+    ufVMSelf.lstCNPT = ko.observableArray([]);
+    ufVMSelf.fiFileCNPT = ko.observable(null);
+    ufVMSelf.fiFileCNPTPath = ko.observable(null);
 
     if (lstAtchType) {
         ufVMSelf.lstAtch(mapAttachmentVM(lstAtch, lstAtchType));
     }
 
-    ufVMSelf.addFiles = function (atchVM) {
+    ufVMSelf.addFileHD = function (atchVM) {
+        console.log("Ok");
         ufVMSelf.selectedAttachVM($.extend(true, {}, atchVM));
-        var lstFiles = [];
-        ufVMSelf.uploadedFiles(lstFiles.concat(ufVMSelf.selectedAttachVM().lstFiles()));
+        var fileName=atchVM.fiPath().replace(/^.*[\\\/]/, '');
+        var item ={
+            fiFileHD:ufVMSelf.fiFileHD,
+            fiFileHDDate:ufVMSelf.fiFileHDDate,
+            fiPath:ufVMSelf.fiPath,
+            fiFileHDName: fileName,
+        }
+        ufVMSelf.lstHD.push(item);
+    }
+    ufVMSelf.addFileHoaDon = function (atchVM){
+        ufVMSelf.selectedAttachVM($.extend(true, {}, atchVM));
+        var fileName=atchVM.fiFileHoaDonPath().replace(/^.*[\\\/]/, '');
+        var item ={
+            fiFileHoaDon:ufVMSelf.fiFileHoaDon,
+            fiFileHoaDonDate:ufVMSelf.fiFileHoaDonDate,
+            fiFileHoaDonPath:ufVMSelf.fiFileHoaDonPath,
+            fiFileHoaDonName: fileName,
+        }
+        ufVMSelf.lstHoaDon.push(item);
+    }
+    ufVMSelf.addFilePhieu = function (atchVM){
+        ufVMSelf.selectedAttachVM($.extend(true, {}, atchVM));
+        var fileName=atchVM.fiFilePhieuPath().replace(/^.*[\\\/]/, '');
+        var item ={
+            fiFilePhieu:ufVMSelf.fiFilePhieu,
+            fiFilePhieuDate:ufVMSelf.fiFilePhieuDate,
+            fiFilePhieuPath:ufVMSelf.fiFilePhieuPath,
+            fiFilePhieuName: fileName
+        }
+        ufVMSelf.lstPhieu.push(item);
+    }
+
+    ufVMSelf.addFileKQ = function (atchVM){
+        ufVMSelf.selectedAttachVM($.extend(true, {}, atchVM));
+        var fileName=atchVM.fiFileKQPath().replace(/^.*[\\\/]/, '');
+        var item ={
+            fiFileKQ:ufVMSelf.fiFileKQ,
+            fiFileKQPath:ufVMSelf.fiFileKQPath,
+            fiFileKQName: fileName
+        }
+        ufVMSelf.lstKQ.push(item);
+    }
+
+
+    ufVMSelf.addFileTC = function (atchVM){
+        ufVMSelf.selectedAttachVM($.extend(true, {}, atchVM));
+        var fileName=atchVM.fiFileTCPath().replace(/^.*[\\\/]/, '');
+        var item ={
+            fiFileTC:ufVMSelf.fiFileTC,
+            fiFileTCPath:ufVMSelf.fiFileTCPath,
+            fiFileTCName: fileName
+        }
+        ufVMSelf.lstTC.push(item);
+    }
+
+    ufVMSelf.addFileCNLH = function (atchVM){
+        ufVMSelf.selectedAttachVM($.extend(true, {}, atchVM));
+        var fileName=atchVM.fiFileCNLHPath().replace(/^.*[\\\/]/, '');
+        var item ={
+            fiFileCNLH:ufVMSelf.fiFileCNLH,
+            fiFileCNLHPath:ufVMSelf.fiFileCNLHPath,
+            fiFileCNLHName: fileName
+        }
+        ufVMSelf.lstCNLH.push(item);
+    }
+
+    ufVMSelf.addFileCNPT = function (atchVM){
+        ufVMSelf.selectedAttachVM($.extend(true, {}, atchVM));
+        var fileName=atchVM.fiFileCNPTPath().replace(/^.*[\\\/]/, '');
+        var item ={
+            fiFileCNPT:ufVMSelf.fiFileCNPT,
+            fiFileCNPTPath:ufVMSelf.fiFileCNPTPath,
+            fiFileCNPTName: fileName
+        }
+        ufVMSelf.lstCNPT.push(item);
+    }
+
+
+
+    ufVMSelf.addFiles =function(atchVM){
+        var fileName=ufVMSelf.fiFilePath().replace(/^.*[\\\/]/, '');
+        var item ={
+            fiFileType:ufVMSelf.fiFileType,
+            fiFilePath:ufVMSelf.fiFilePath,
+            fiFileName: fileName
+        }
+        ufVMSelf.lstAtch.push(item);
     }
 
     ufVMSelf.fileChange = function (data, e) {
@@ -971,11 +1088,14 @@ function UploadFileVM(lstAtch, lstAtchType) {
 
     ufVMSelf.getLstAttachments = function () {
         var lstAttachment = ufVMSelf.lstAtch();
+
         var result = [];
+
         for (var i = 0; i < lstAttachment.length; i++) {
             var lstFiles = JSON.parse(ko.toJSON(lstAttachment[i].lstFiles));
             result = result.concat(lstFiles);
         }
+
         return result;
     }
 

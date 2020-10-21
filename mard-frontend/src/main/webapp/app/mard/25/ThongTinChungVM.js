@@ -6,12 +6,20 @@ function ThongTinChungVM(data) {
     ttcVMSelf.fiTaxCode = ko.observable((data && data.hasOwnProperty('fiTaxCode')) ? data.fiTaxCode : null);
     ttcVMSelf.fiHSCreatedDate = ko.observable((data && data.hasOwnProperty('fiHSCreatedDate')) ? new Date(data.fiHSCreatedDate) : new Date());
     ttcVMSelf.fiHSType = ko.observable((data && data.hasOwnProperty('fiHSType')) ? data.fiHSType : null);
+    ttcVMSelf.fiNSWFileCodeReplace = ko.observable((data && data.hasOwnProperty('fiNSWFileCodeReplace')) ? data.fiNSWFileCodeReplace : null);
+    ttcVMSelf.fiGDK = ko.observable((data && data.hasOwnProperty('fiGDK')) ? data.fiGDK : null);
+    ttcVMSelf.fiGDKFile = ko.observable((data && data.hasOwnProperty('fiGDKFile')) ? data.fiGDKFile : null);
 
     ttcVMSelf.fiNSWFileCode = ko.observable((data && data.hasOwnProperty('fiNSWFileCode')) ? data.fiNSWFileCode : null);
 
     //inc_thongtindangky.jsp
     ttcVMSelf.fiSellName = ko.observable((data && data.hasOwnProperty('fiSellName')) ? data.fiSellName : null);
     ttcVMSelf.lstCountry = ko.observableArray((data && data.hasOwnProperty('lstCountry')) ? data.lstCountry : null);
+    ttcVMSelf.lstNhom = ko.observableArray((data && data.hasOwnProperty('lstNhom')) ? data.lstNhom : null);
+    ttcVMSelf.lstPhanNhom = ko.observableArray((data && data.hasOwnProperty('lstPhanNhom')) ? data.lstPhanNhom : null);
+    ttcVMSelf.lstLoai = ko.observableArray((data && data.hasOwnProperty('lstLoai')) ? data.lstLoai : null);
+    ttcVMSelf.lstPhanLoai = ko.observableArray((data && data.hasOwnProperty('lstPhanLoai')) ? data.lstPhanLoai : null);
+    ttcVMSelf.fiSellCountryCode = ko.observableArray((data && data.hasOwnProperty('fiSellCountryCode')) ? data.fiSellCountryCode : null);
 
     ttcVMSelf.fiSellAddress = ko.observable((data && data.hasOwnProperty('fiSellAddress')) ? data.fiSellAddress : null);
     ttcVMSelf.fiSellTel = ko.observable((data && data.hasOwnProperty('fiSellTel')) ? data.fiSellTel : null);
@@ -39,7 +47,7 @@ function ThongTinChungVM(data) {
     ttcVMSelf.fiProSoHieu = ko.observable((data && data.hasOwnProperty('fiProSoHieu')) ? data.fiProSoHieu : null);
     ttcVMSelf.fiProQuyChuan = ko.observable((data && data.hasOwnProperty('fiProQuyChuan')) ? data.fiProQuyChuan : null);
 
-    ttcVMSelf.fiProCLList = ko.observableArray((data && data.hasOwnProperty('fiProCLList')) ? data.fiProCLList : null);
+    ttcVMSelf.fiProCLList = ko.observableArray((data && data.hasOwnProperty('fiProCLList')) ? data.fiProCLList : []);
     ttcVMSelf.EfiProCLTarg = ko.observable(null);
     ttcVMSelf.EfiProCLCompare = ko.observable(null);
     ttcVMSelf.EfiProCLContent = ko.observable(null);
@@ -64,7 +72,11 @@ function ThongTinChungVM(data) {
 
 
     ttcVMSelf.fiPackageUnitCode = ko.observable(null);
+    ttcVMSelf.fiSignName = ko.observable((data && data.hasOwnProperty('fiSignName')) ? data.fiSignName : null);
+    ttcVMSelf.fiSignPosition = ko.observable((data && data.hasOwnProperty('fiSignPosition')) ? data.fiSignPosition : null);
+    ttcVMSelf.fiSignAddress = ko.observable((data && data.hasOwnProperty('fiSignAddress')) ? data.fiSignAddress : null);
 
+    ttcVMSelf.lstProvince  = ko.observableArray((data && data.hasOwnProperty('lstProvince ')) ? data.lstProvince  : []);
 
     ttcVMSelf.fiProIdNhom = ko.observable((data && data.hasOwnProperty('fiProIdNhom')) ? data.fiProIdNhom : null);
     ttcVMSelf.fiProIdPhanNhom = ko.observable((data && data.hasOwnProperty('fiProIdPhanNhom')) ? data.fiProIdPhanNhom : null);
@@ -72,6 +84,7 @@ function ThongTinChungVM(data) {
     ttcVMSelf.fiProIdPhanLoai = ko.observable((data && data.hasOwnProperty('fiProIdPhanLoai')) ? data.fiProIdPhanLoai : null);
     ttcVMSelf.fiProCountryCode = ko.observable((data && data.hasOwnProperty('fiProCountryCode')) ? data.fiProCountryCode : null);
     ttcVMSelf.lstUOMAnimal = ko.observable((data && data.hasOwnProperty('lstUOMAnimal')) ? data.lstUOMAnimal : null);
+
     ttcVMSelf.errorMsg = ko.observable(null);
 
 
@@ -135,27 +148,48 @@ function ThongTinChungVM(data) {
 
 
     }
-    ttcVMSelf.addProduct=function(){
+    ttcVMSelf.addProduct=function(data){
         if (!ttcVMSelf.validate()) return;
-        var soLuong;
-        var khoiLuong;
-        console.log(ttcVMSelf.fiProKLList);
-        ttcVMSelf.fiProKLList.foreach(function (entry) {
-            soLuong=''+entry.fiProSLKLMass +' '+ entry.fiProSLKLMassUnitName ;
-            khoiLuong=''+entry.fiProSLKLAmount +' '+ entry.fiProSLKLAmountUnitName;
-        });
+        // var soLuong='';
+        // var khoiLuong='';
+
+        // console.log(data);
+        // data.fiProKLList.forEach(function (entry, index) {
+        //     soLuong=entry.fiProSLKLMass +' '+ entry.fiProSLKLMassUnitName ;
+        //     khoiLuong=entry.fiProSLKLAmount +' '+ entry.fiProSLKLAmountUnitName;
+        // });
+        var kl='';
+        var sl='';
+        for (var i =0;i<ttcVMSelf.fiProKLList().length;i++){
+            console.log(ttcVMSelf.fiProKLList()[i]);
+            kl+=ttcVMSelf.fiProKLList()[i].fiProSLKLMass()+' '+ttcVMSelf.fiProKLList()[i].fiProSLKLMassUnitName();
+            sl+=ttcVMSelf.fiProKLList()[i].fiProSLKLAmount()+' '+ttcVMSelf.fiProKLList()[i].fiProSLKLAmountUnitName();
+        }
+
+        var countryName='';
+
+        for (var i =0;i<ttcVMSelf.lstCountry().length;i++){
+            if(ttcVMSelf.lstCountry()[i].countryid===ttcVMSelf.fiProCountryCode()){
+                countryName=ttcVMSelf.lstCountry()[i].countryname;
+            }
+        }
+
         var item ={
             fiProName: ttcVMSelf.fiProName,
-
-            fiProductScienceName: ttcVMSelf.soLuong,
-            fiSizeOrType: ttcVMSelf.khoiLuong,
-
+            fiProductKL: kl,
+            fiProductSL: sl,
             fiProThanhPhan: ttcVMSelf.fiProThanhPhan,
             fiProIdNhom: ttcVMSelf.fiProIdNhom,
             fiProCode: ttcVMSelf.fiProCode,
             fiProMadeIn: ttcVMSelf.fiProMadeIn,
-            fiProCountryName: ttcVMSelf.fiProCountryName,
-            fiProValueVN: ttcVMSelf.fiProValueVN
+            fiProCountryName: countryName,
+            fiProCountryCode: ttcVMSelf.fiProCountryCode,
+            fiProValueVN: ttcVMSelf.fiProValueVN,
+            fiProColor: ttcVMSelf.fiProColor,
+            fiProSoHieu: ttcVMSelf.fiProSoHieu,
+            fiProQuyChuan: ttcVMSelf.fiProQuyChuan,
+            fiProValueUSD: ttcVMSelf.fiProValueUSD,
+            fiPackageUnitCode: ttcVMSelf.fiPackageUnitCode
         }
         ttcVMSelf.fiProductList.push(item);
         $("#modal_addAnimal").modal('hide');

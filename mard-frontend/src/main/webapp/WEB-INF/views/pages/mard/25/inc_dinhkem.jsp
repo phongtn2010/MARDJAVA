@@ -15,15 +15,15 @@
                             <th data-bind="visible: $root.isEditable" class="text-center"><spring:message code="mard.25.tokhai.file.hop_dong_thaotac"/></th>
                         </tr>
                         </thead>
-                        <tbody data-bind="foreach: lstAtch">
+                        <tbody data-bind="foreach: lstHD">
                         <tr>
                             <td data-bind="text: ($index() + 1)"></td>
                             <td>
-                                <span data-bind="text : fiFileHD()"></span><a data-bind="visible: isRequired()" class="nsw-require-field">*</a>
+                                <span data-bind="text : fiFileHD"></span>
                             </td>
-                            <td><span data-bind="text : fiFileHDDate()"></span><a data-bind="visible: isRequired()" class="nsw-require-field">*</a></td>
+                            <td><span data-bind="text : fiFileHDDate"></span>
                             <td>
-                                <span data-bind="text : fiPath()"></span><a data-bind="visible: isRequired()" class="nsw-require-field">*</a>
+                                <span data-bind="text : fiFileHDName"></span>
                             </td>
                             <td data-bind="visible: $root.isEditable" class="text-center">
                                 <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;
@@ -46,7 +46,7 @@
                             <input class="form-control" type="file" data-bind="value: fiPath"/>
                         </td>
                         <td data-bind="visible: $root.isEditable" class="text-center">
-                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-plus"></i></a>
+                            <a href="#" data-bind="click:  addFileHD, visible: $root.isEditable()"><i class="fa fa-lg fa-plus"></i></a>
                         </td>
                         </tr>
                         </tfoot>
@@ -69,15 +69,15 @@
                         <th data-bind="visible: $root.isEditable" class="text-center"><spring:message code="mard.25.tokhai.file.hoa_don_thaotac"/></th>
                     </tr>
                     </thead>
-                    <tbody data-bind="foreach: lstAtch">
+                    <tbody data-bind="foreach: lstHoaDon">
                     <tr>
                         <td data-bind="text: ($index() + 1)"></td>
                         <td>
-                            <span data-bind="text : fiFileHD()"></span><a data-bind="visible: isRequired()" class="nsw-require-field">*</a>
+                            <span data-bind="text : fiFileHoaDon"></span>
                         </td>
-                        <td><span data-bind="text : fiFileHDDate()"></span><a data-bind="visible: isRequired()" class="nsw-require-field">*</a></td>
+                        <td><span data-bind="text : fiFileHoaDonDate"></span>
                         <td>
-                            <span data-bind="text : fiPath()"></span><a data-bind="visible: isRequired()" class="nsw-require-field">*</a>
+                            <span data-bind="text : fiFileHoaDonName"></span>
                         </td>
                         <td data-bind="visible: $root.isEditable" class="text-center">
                             <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;
@@ -90,17 +90,17 @@
                     <tr>
                     <td></td>
                     <td>
-                        <input class="form-control" data-bind="value: fiFileHD"/>
+                        <input class="form-control" data-bind="value: fiFileHoaDon"/>
                     </td>
                     <td>
-                        <input data-bind="datepicker: fiFileHDDate" class="form-control form-control-inline date-picker"
+                        <input data-bind="datepicker: fiFileHoaDonDate" class="form-control form-control-inline date-picker"
                                data-date-format="dd/mm/yyyy" type="text" value="" maxlength="10" />
                     </td>
                     <td>
-                        <input class="form-control" type="file" data-bind="value: fiPath"/>
+                        <input class="form-control" type="file" data-bind="value: fiFileHoaDonPath"/>
                     </td>
                     <td data-bind="visible: $root.isEditable" class="text-center">
-                        <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-plus"></i></a>
+                        <a href="#" data-bind="click: addFileHoaDon, visible: $root.isEditable()"><i class="fa fa-lg fa-plus"></i></a>
                     </td>
                     </tr>
                     </tfoot>
@@ -122,15 +122,15 @@
                         <th data-bind="visible: $root.isEditable" class="text-center"><spring:message code="mard.25.tokhai.file.phieu_thaotac"/></th>
                     </tr>
                     </thead>
-                    <tbody data-bind="foreach: lstAtch">
+                    <tbody data-bind="foreach: lstPhieu">
                     <tr>
                         <td data-bind="text: ($index() + 1)"></td>
                         <td>
-                            <span data-bind="text : fiFileHD()"></span><a data-bind="visible: isRequired()" class="nsw-require-field">*</a>
+                            <span data-bind="text : fiFilePhieu"></span>
                         </td>
-                        <td><span data-bind="text : fiFileHDDate()"></span><a data-bind="visible: isRequired()" class="nsw-require-field">*</a></td>
+                        <td><span data-bind="text : fiFilePhieuDate"></span>
                         <td>
-                            <span data-bind="text : fiPath()"></span><a data-bind="visible: isRequired()" class="nsw-require-field">*</a>
+                            <span data-bind="text : fiFilePhieuName"></span>
                         </td>
                         <td data-bind="visible: $root.isEditable" class="text-center">
                             <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;
@@ -144,17 +144,17 @@
                     <tr>
                     <td></td>
                     <td>
-                        <input class="form-control" data-bind="value: fiFileHD"/>
+                        <input class="form-control" data-bind="value: fiFilePhieu"/>
                     </td>
                     <td>
-                        <input data-bind="datepicker: fiFileHDDate" class="form-control form-control-inline date-picker"
+                        <input data-bind="datepicker: fiFilePhieuDate" class="form-control form-control-inline date-picker"
                                data-date-format="dd/mm/yyyy" type="text" value="" maxlength="10" />
                     </td>
                     <td>
-                        <input class="form-control" type="file" data-bind="value: fiPath"/>
+                        <input class="form-control" type="file" data-bind="value: fiFilePhieuPath"/>
                     </td>
                     <td data-bind="visible: $root.isEditable" class="text-center">
-                        <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-plus"></i></a>
+                        <a href="#" data-bind="click: addFilePhieu, visible: $root.isEditable()"><i class="fa fa-lg fa-plus"></i></a>
                     </td>
                     </tr>
                     </tfoot>
@@ -175,14 +175,14 @@
                         <th data-bind="visible: $root.isEditable" class="text-center"><spring:message code="mard.25.tokhai.file.ket_qua_thaotac"/></th>
                     </tr>
                     </thead>
-                    <tbody data-bind="foreach: lstAtch">
+                    <tbody data-bind="foreach: lstKQ">
                     <tr>
                         <td data-bind="text: ($index() + 1)"></td>
                         <td>
-                            <span data-bind="text : fiFileName()"></span><a data-bind="visible: isRequired()" class="nsw-require-field">*</a>
+                            <span data-bind="text : fiFileKQ"></span>
                         </td>
                         <td>
-                            <span data-bind="text : fiPath()"></span><a data-bind="visible: isRequired()" class="nsw-require-field">*</a>
+                            <span data-bind="text : fiFileKQName"></span>
                         </td>
                         <td data-bind="visible: $root.isEditable" class="text-center">
                             <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;
@@ -196,13 +196,13 @@
                     <tr>
                     <td></td>
                     <td>
-                        <input class="form-control" data-bind="value: fiFileName"/>
+                        <input class="form-control" data-bind="value: fiFileKQ"/>
                     </td>
                     <td>
-                        <input class="form-control" type="file" data-bind="value: fiPath"/>
+                        <input class="form-control" type="file" data-bind="value: fiFileKQPath"/>
                     </td>
                     <td data-bind="visible: $root.isEditable" class="text-center">
-                        <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-plus"></i></a>
+                        <a href="#" data-bind="click: addFileKQ, visible: $root.isEditable()"><i class="fa fa-lg fa-plus"></i></a>
                     </td>
                     </tr>
                     </tfoot>
@@ -223,14 +223,14 @@
                         <th data-bind="visible: $root.isEditable" class="text-center"><spring:message code="mard.25.tokhai.file.tieu_chuan_thaotac"/></th>
                     </tr>
                     </thead>
-                    <tbody data-bind="foreach: lstAtch">
+                    <tbody data-bind="foreach: lstTC">
                     <tr>
                         <td data-bind="text: ($index() + 1)"></td>
                         <td>
-                            <span data-bind="text : fiFileName()"></span><a data-bind="visible: isRequired()" class="nsw-require-field">*</a>
+                            <span data-bind="text : fiFileTC">
                         </td>
                         <td>
-                            <span data-bind="text : fiPath()"></span><a data-bind="visible: isRequired()" class="nsw-require-field">*</a>
+                            <span data-bind="text : fiFileTCName">
                         </td>
                         <td data-bind="visible: $root.isEditable" class="text-center">
                             <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;
@@ -244,13 +244,13 @@
                     <tr>
                     <td></td>
                     <td>
-                        <input class="form-control" data-bind="value: fiFileName"/>
+                        <input class="form-control" data-bind="value: fiFileTC"/>
                     </td>
                     <td>
-                        <input class="form-control" type="file" data-bind="value: fiPath"/>
+                        <input class="form-control" type="file" data-bind="value: fiFileTCPath"/>
                     </td>
                     <td data-bind="visible: $root.isEditable" class="text-center">
-                        <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-plus"></i></a>
+                        <a href="#" data-bind="click: addFileTC, visible: $root.isEditable()"><i class="fa fa-lg fa-plus"></i></a>
                     </td>
                     </tr>
                     </tfoot>
@@ -271,14 +271,14 @@
                         <th data-bind="visible: $root.isEditable" class="text-center"><spring:message code="mard.25.tokhai.file.chung_nhan_luu_hanh_thaotac"/></th>
                     </tr>
                     </thead>
-                    <tbody data-bind="foreach: lstAtch">
+                    <tbody data-bind="foreach: lstCNLH">
                     <tr>
                         <td data-bind="text: ($index() + 1)"></td>
                         <td>
-                            <span data-bind="text : fiFileName()"></span><a data-bind="visible: isRequired()" class="nsw-require-field">*</a>
+                            <span data-bind="text : fiFileCNLH"></span>
                         </td>
                         <td>
-                            <span data-bind="text : fiPath()"></span><a data-bind="visible: isRequired()" class="nsw-require-field">*</a>
+                            <span data-bind="text : fiFileCNLHName"></span>
                         </td>
                         <td data-bind="visible: $root.isEditable" class="text-center">
                             <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;
@@ -292,13 +292,13 @@
                     <tr>
                     <td></td>
                     <td>
-                        <input class="form-control" data-bind="value: fiFileName"/>
+                        <input class="form-control" data-bind="value: fiFileCNLH"/>
                     </td>
                     <td>
-                        <input class="form-control" type="file" data-bind="value: fiPath"/>
+                        <input class="form-control" type="file" data-bind="value: fiFileCNLHPath"/>
                     </td>
                     <td data-bind="visible: $root.isEditable" class="text-center">
-                        <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-plus"></i></a>
+                        <a href="#" data-bind="click: addFileCNLH, visible: $root.isEditable()"><i class="fa fa-lg fa-plus"></i></a>
                     </td>
                     </tr>
                     </tfoot>
@@ -319,14 +319,14 @@
                         <th data-bind="visible: $root.isEditable" class="text-center"><spring:message code="mard.25.tokhai.file.chung_nhan_phan_tich_thaotac"/></th>
                     </tr>
                     </thead>
-                    <tbody data-bind="foreach: lstAtch">
+                    <tbody data-bind="foreach: lstCNPT">
                     <tr>
                         <td data-bind="text: ($index() + 1)"></td>
                         <td>
-                            <span data-bind="text : fiFileName()"></span><a data-bind="visible: isRequired()" class="nsw-require-field">*</a>
+                            <span data-bind="text : fiFileCNPT"></span>
                         </td>
                         <td>
-                            <span data-bind="text : fiPath()"></span><a data-bind="visible: isRequired()" class="nsw-require-field">*</a>
+                            <span data-bind="text :  fiFileCNPTName"></span>
                         </td>
                         <td data-bind="visible: $root.isEditable" class="text-center">
                             <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;
@@ -340,13 +340,13 @@
                     <tr>
                     <td></td>
                     <td>
-                        <input class="form-control" data-bind="value: fiFileName"/>
+                        <input class="form-control" data-bind="value: fiFileCNPT"/>
                     </td>
                     <td>
-                        <input class="form-control" type="file" data-bind="value: fiPath"/>
+                        <input class="form-control" type="file" data-bind="value: fiFileCNPTPath"/>
                     </td>
                     <td data-bind="visible: $root.isEditable" class="text-center">
-                        <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-plus"></i></a>
+                        <a href="#" data-bind="click: addFileCNPT, visible: $root.isEditable()"><i class="fa fa-lg fa-plus"></i></a>
                     </td>
                     </tr>
                     </tfoot>
@@ -364,7 +364,7 @@
                             <label><spring:message code="mard.25.tokhai.file.khac_type"/><a class="nsw-require-field">*</a></label>
                         </div>
                             <div class="col-md-4">
-                                <select class="form-control" data-bind="value: fiHSType, enable: $root.isEditable()">
+                                <select class="form-control" data-bind="value: fiFileType, enable: $root.isEditable()">
                                     <option value="1">
                                         <spring:message code="mard.25.tokhai.loai_hinh_thuc_2a"/>
                                     </option>
@@ -381,7 +381,7 @@
 
                         </div>
                         <div class="col-md-6">
-                            <input class="form-control form-control-inline date-picker" type="file" value=""/>
+                            <input class="form-control form-control-inline date-picker" type="file" data-bind="value: fiFilePath"/>
                         </div>
                     </div>
                 </div>
@@ -390,7 +390,7 @@
                 <div class="col-md-12" style="padding-top: 10px;">
                     <div class="text-center">
                         <p><span class="nsw-require-field" data-bind="text: errorMsg"></span></p>
-<%--                        <button class="btn btn-primary" data-bind="click: $root.25RegProfile"><i class="fa fa-save"></i> <spring:message code="mard.25.tokhai.file.khac_themmoi"/></button>--%>
+                        <button class="btn btn-primary" data-bind="click: addFiles"><i class="fa fa-save"></i> <spring:message code="mard.25.tokhai.file.khac_themmoi"/></button>
                     </div>
                 </div>
             </div>
@@ -410,7 +410,7 @@
                     <tr>
                         <td data-bind="text: ($index() + 1)"></td>
                         <td>
-                            <span data-bind="text : fiFileName()"></span><a data-bind="visible: isRequired()" class="nsw-require-field">*</a>
+                            <span data-bind="text : fiFileName"></span>
                         </td>
                         <td data-bind="visible: $root.isEditable" class="text-center">
                             <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-eye"></i></a>

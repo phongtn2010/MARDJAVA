@@ -1,5 +1,5 @@
 
-<fieldset data-bind="with: kyHoSoVM">
+<fieldset data-bind="with: thongtinChungVM">
     <div class="panel panel-primary">
         <div class="panel-heading" style="font-weight: bold;"><spring:message code="mard.tokhai.thong_tin_ky_hs"/></div>
         <div class="panel-body">

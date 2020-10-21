@@ -230,53 +230,54 @@ function HangHoaNhapKhauVM (options) {
     kdnkVMSelf.getData = function () {
         var body = {
             "fiIdHS": kdnkVMSelf.fiIdHS(),
-            "fiNSWFileCode": kdnkVMSelf.fiNSWFileCode(),
+            "fiNSWFileCodefiNSWFileCode": kdnkVMSelf.fiNSWFileCode(),
             "fiReason": kdnkVMSelf.fiReason(),
             "fiHSStatus": 0,
             "fiHSType": kdnkVMSelf.fiHSType(),
-            "fiTaxCode": kdnkVMSelf.thongtinChungVM().fiTaxCode(),
             "fiHSCreatedDate": new Date(kdnkVMSelf.thongtinChungVM().fiHSCreatedDate()).getTime(),
-            "fiRegistrationNo": kdnkVMSelf.thongtinChungVM().fiRegistrationNo(),
-            "fiImporterAddress": kdnkVMSelf.thongtinChungVM().fiImporterAddress(),
+            "fiNSWFileCodeReplace": kdnkVMSelf.thongtinChungVM().fiNSWFileCodeReplace(),
+            "fiGDK": kdnkVMSelf.thongtinChungVM().fiGDK(),
+            // "fiGDKFile": kdnkVMSelf.thongtinChungVM().fiGDKFile(),
+
+            "fiSellName": kdnkVMSelf.thongtinChungVM().fiSellName(),
+            "fiSellCountryCode": kdnkVMSelf.thongtinChungVM().fiSellCountryCode(),
+            "fiSellAddress": kdnkVMSelf.thongtinChungVM().fiSellAddress(),
+            "fiSellTel": kdnkVMSelf.thongtinChungVM().fiSellTel(),
+            "fiSellFax": kdnkVMSelf.thongtinChungVM().fiSellFax(),
+            "fiSellExport": kdnkVMSelf.thongtinChungVM().fiSellExport(),
+
+            "fiPurchName": kdnkVMSelf.thongtinChungVM().fiPurchName(),
+            "fiPurchTel": kdnkVMSelf.thongtinChungVM().fiPurchTel(),
+            "fiPurchAddress": kdnkVMSelf.thongtinChungVM().fiPurchAddress(),
+            "fiPurchFax": kdnkVMSelf.thongtinChungVM().fiPurchFax(),
+            "fiPurchReci": kdnkVMSelf.thongtinChungVM().fiPurchReci(),
+            "fiPurchFromDate": new Date(kdnkVMSelf.thongtinChungVM().fiPurchFromDate()).getTime(),
+            "fiPurchToDate": new Date(kdnkVMSelf.thongtinChungVM().fiPurchToDate()).getTime(),
+
+            "fiTaxCode": kdnkVMSelf.thongtinChungVM().fiTaxCode(),
             "fiImporterName": kdnkVMSelf.thongtinChungVM().fiImporterName(),
+            "fiImporterAddress": kdnkVMSelf.thongtinChungVM().fiImporterAddress(),
             "fiImporterTel": kdnkVMSelf.thongtinChungVM().fiImporterTel(),
             "fiImporterFax": kdnkVMSelf.thongtinChungVM().fiImporterFax(),
             "fiImporterEmail": kdnkVMSelf.thongtinChungVM().fiImporterEmail(),
-            "fiSignAddress": kdnkVMSelf.kyHoSoVM().fiSignAddress(),
-            "fiSignDate": new Date(kdnkVMSelf.kyHoSoVM().fiSignDate()).getTime(),
-            "fiSignName": kdnkVMSelf.kyHoSoVM().fiSignName(),
-            "fiSignPosition": kdnkVMSelf.kyHoSoVM().fiSignPosition(),
-            "fiProductList": [],
-            "fiExporterCountryList": [],
-            "fiLocationQuarantineList": [],
-            "fiProcessingList": [],
+
+            "fiProductList": kdnkVMSelf.thongtinChungVM().fiProductList(),
+
+            "fiAddressGath": kdnkVMSelf.thongtinChungVM().fiAddressGath(),
+            "fiRegSamFromDate": new Date(kdnkVMSelf.thongtinChungVM().fiRegSamFromDate()).getTime(),
+            "fiRegSamToDate": new Date(kdnkVMSelf.thongtinChungVM().fiRegSamToDate()).getTime(),
+            "fiAddressRegSample": kdnkVMSelf.thongtinChungVM().fiAddressRegSample(),
+
+            "fiContactName": kdnkVMSelf.thongtinChungVM().fiContactName(),
+            "fiContactTel": kdnkVMSelf.thongtinChungVM().fiContactTel(),
+            "fiContactAddress": kdnkVMSelf.thongtinChungVM().fiContactAddress(),
+            "fiContactEmail": kdnkVMSelf.thongtinChungVM().fiContactEmail(),
+
+            "fiSignName": kdnkVMSelf.thongtinChungVM().fiSignName(),
+            "fiSignPosition": kdnkVMSelf.thongtinChungVM().fiSignPosition(),
+            "fiSignAddress": kdnkVMSelf.thongtinChungVM().fiSignAddress(),
+
             "fiAttachmentList": kdnkVMSelf.uploadFileVM().getLstAttachments()
-        }
-        switch (kdnkVMSelf.fiHSType().toString()) {
-            case "1": {
-                body["fiProductList"] = kdnkVMSelf.regAnimalVM().productVM().fiProductList();
-                body["fiExporterCountryList"] = kdnkVMSelf.regAnimalVM().exporterVM().fiExporterCountryList();
-                body["fiProcessingList"] = kdnkVMSelf.regAnimalVM().productMfrVM().fiProcessingList();
-                body["fiLocationQuarantineList"] = kdnkVMSelf.regAnimalVM().isoLocationVM().fiLocationQuarantineList();
-
-                body["fiTimeQuarantine"] = kdnkVMSelf.regAnimalVM().fiTimeQuarantine();
-                body["fiBordergateName"] = kdnkVMSelf.regAnimalVM().fiBordergateName();
-                body["fiPurpose"] = kdnkVMSelf.regAnimalVM().fiPurpose();
-                body["fiRelatedDocuments"] = kdnkVMSelf.regAnimalVM().fiRelatedDocuments();
-                break;
-            }
-            case "2": {
-                body["fiProductList"] = kdnkVMSelf.regAnimalProductVM().productVM().fiProductList();
-                body["fiExporterCountryList"] = kdnkVMSelf.regAnimalProductVM().exporterVM().fiExporterCountryList();
-                body["fiProcessingList"] = kdnkVMSelf.regAnimalProductVM().productMfrVM().fiProcessingList();
-
-                body["fiTimeQuarantine"] = kdnkVMSelf.regAnimalProductVM().fiTimeQuarantine();
-                body["fiBordergateName"] = kdnkVMSelf.regAnimalProductVM().fiBordergateName();
-                body["fiPurpose"] = kdnkVMSelf.regAnimalProductVM().fiPurpose();
-                body["fiRelatedDocuments"] = kdnkVMSelf.regAnimalProductVM().fiRelatedDocuments();
-                break;
-            }
-            default: return;
         }
         return body;
     }

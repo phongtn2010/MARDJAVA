@@ -2,6 +2,7 @@ package com.nsw.backend.mard.p25.controller;
 
 import com.nsw.backend.controller.BaseController;
 import com.nsw.backend.mard.p25.model.TbdHoso25;
+import com.nsw.backend.mard.p25.service.TbsDanhmuc25Service;
 import com.nsw.backend.mard.p25.service.TbsPhannhomtacn25Service;
 import com.nsw.backend.util.ResponseJson;
 import org.slf4j.Logger;
@@ -17,12 +18,12 @@ public class TbdDanhMuc25Controller extends BaseController {
 
     private static final Logger LOG = LoggerFactory.getLogger(TbdDanhMuc25Controller.class);
     private static final String TAG = "TbdDanhMuc25Controller";
+
     @Autowired
-    private TbsPhannhomtacn25Service service;
+    private TbsDanhmuc25Service service;
 
-
-    @GetMapping("/phannhomtacn")
-    public ResponseEntity<ResponseJson> getDMPhanNhomTacn() {
-        return createSuccessResponse(service.findAll(), HttpStatus.OK);
+    @GetMapping("/getby-catno/{catNo}")
+    public ResponseEntity<ResponseJson> getByCatNo(@PathVariable Long catNo) {
+        return createSuccessResponse(service.findByFiCatNoOrderByFiOrder(catNo), HttpStatus.OK);
     }
 }

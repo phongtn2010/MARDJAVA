@@ -39,8 +39,8 @@
                                 <tr>
                                     <td class="text-center" data-bind="text: ($index() + 1)"></td>
                                     <td data-bind="text : fiProName"></td>
-                                    <td class="text-right" data-bind="text : fiProductScienceName"></td>
-                                    <td class="text-right" data-bind="text : fiSizeOrType"></td>
+                                    <td class="text-right" data-bind="text : fiProductSL"></td>
+                                    <td class="text-right" data-bind="text : fiProductKL"></td>
                                     <td data-bind="text : fiProThanhPhan"></td>
                                     <td data-bind="text : fiProIdNhom"></td>
                                     <td data-bind="text : fiProCode"></td>
@@ -115,7 +115,7 @@
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.nhom"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <select data-bind="options : lstCountry, optionsValue : 'countryid', optionsCaption: 'Tất cả...', optionsText : 'countryname',
+                                <select data-bind="options : lstNhom, optionsValue : 'fiCatType',  optionsText : 'fiCatTypeName',
                                                     value: fiProIdNhom" class="form-control"></select>
                             </div>
                         </div>
@@ -124,17 +124,17 @@
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.phan_nhom"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <select data-bind="options : lstCountry, optionsValue : 'countryid', optionsCaption: 'Tất cả...', optionsText : 'countryname',
+                                <select data-bind="options : lstPhanNhom, optionsValue : 'fiCatType',  optionsText : 'fiCatTypeName',
                                                     value: fiProIdPhanNhom" class="form-control"></select>
                             </div>
                             <div class="col-md-2 nsw-text-right">
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.loai"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <select data-bind="options: lstCountry,
-                                                    optionsText: 'unitname',
-                                                    optionsValue: 'unitcode',
-                                                    optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.loai"/>',
+                                <select data-bind="options: lstLoai,
+                                                    optionsText: 'fiCatTypeName',
+                                                    optionsValue: 'fiCatType',
+
                                                     value: fiProIdLoai" class="form-control"></select>
                             </div>
                         </div>
@@ -144,10 +144,10 @@
                             </div>
                             <div class="col-md-4">
                                 <select
-                                        data-bind="options: lstCountry,
-                                                    optionsText: 'unitname',
-                                                    optionsValue: 'unitcode',
-                                                    optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.phan_loai"/>',
+                                        data-bind="options: lstPhanLoai,
+                                                    optionsText: 'fiCatTypeName',
+                                                    optionsValue: 'fiCatType',
+
                                                     value: fiProIdPhanLoai" class="form-control"></select>
                             </div>
                             <div class="col-md-2 nsw-text-right">
@@ -170,9 +170,8 @@
                             <div class="col-md-4">
                                 <select
                                         data-bind="options: lstCountry,
-                                                    optionsText: 'unitname',
-                                                    optionsValue: 'unitcode',
-                                                    optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.nuoc_san_xuat"/>',
+                                                    optionsText: 'countryname',
+                                                    optionsValue: 'countryid',
                                                     value: fiProCountryCode" class="form-control"></select>
                             </div>
                         </div>
@@ -248,7 +247,7 @@
         <div class="modal-footer" style="">
             <div class="text-center">
                 <button class="btn green"
-                        data-bind="click: addProduct"
+                        data-bind="click: addProduct.bind($data)"
                 >
                     <spring:message code="conmon.button.them"/>
                 </button>

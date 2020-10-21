@@ -155,12 +155,12 @@ public class Mard25Api extends BaseApi {
         return json;
     }
 
-    @RequestMapping(value = "/danhmuc/phannhomtacn", method = RequestMethod.GET)
+    @RequestMapping(value = "/danhmuc/getby-catno/{catNo}", method = RequestMethod.GET)
     public @ResponseBody
-    ResponseJson getPhanNhomTACN() {
+    ResponseJson getByCatNo(@PathVariable Long catNo) {
         ResponseJson json = new ResponseJson();
         try {
-            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_PHANNHOM_TACN));
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_BY_CAT_NO)+catNo);
             return json;
         } catch (Exception ex) {
             LogUtil.addLog(ex);
@@ -207,7 +207,6 @@ public class Mard25Api extends BaseApi {
     private ResponseJson save(TbdHoso25 tbdhoso25) {
         ResponseJson returnJson = new ResponseJson();
         tbdhoso25.setFiTaxCode(getUsername());
-        tbdhoso25.setFiSignDate(new Date());
         try {
             returnJson = BackendRequestHelper.getInstance().doPostRequest(Mard06Constant.getInstance().getApiUrl(environment, Mard06Constant.API.HOSO_CREATE), tbdhoso25);
             return returnJson;
@@ -225,7 +224,6 @@ public class Mard25Api extends BaseApi {
     private ResponseJson send(TbdHoso25 tbdHoso25) {
         ResponseJson returnJson = new ResponseJson();
         tbdHoso25.setFiTaxCode(getUsername());
-        tbdHoso25.setFiSignDate(new Date());
         try {
             return BackendRequestHelper.getInstance().doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.HOSO_SEND), tbdHoso25);
         } catch (Exception ex) {

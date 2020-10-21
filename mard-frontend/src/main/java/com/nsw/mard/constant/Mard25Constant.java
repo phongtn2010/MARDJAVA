@@ -187,7 +187,7 @@ public class Mard25Constant {
         public static final String SAVE_BEFORE_UPDATE = "mard.06.hoso.save_before_update";
         public static final String GET_XML = "mard.06.getXml";
 
-        public static final String GET_PHANNHOM_TACN = "mard.25.danhmuc.phannhomtacn";
+        public static final String GET_BY_CAT_NO = "mard.25.danhmuc.getbycatno";
 
 
     }
