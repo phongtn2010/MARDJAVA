@@ -5,7 +5,7 @@ import org.springframework.core.env.Environment;
 
 public class Mard25Constant {
     static Mard25Constant instance;
-    public static final String EnableSign = "nsw.mard.06.sign";
+    public static final String EnableSign = "nsw.mard.25.sign";
     public static Mard25Constant getInstance() {
         synchronized (Mard25Constant.class) {
             if (instance == null) {

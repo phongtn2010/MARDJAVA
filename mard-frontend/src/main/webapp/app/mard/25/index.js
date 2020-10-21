@@ -91,21 +91,21 @@ function Mard25VM() {
             app.sendGetRequest("/mard/25/danhmuc/unit?unitTypeId=4&systemId=6", function (res) {
                 options['lstUOMAnimal'] = res.data;
                 self.lstUOMAnimal(res.data);
-            }),
-            // Get attach types
-            app.sendGetRequest("/mard/06/danhmuc/dinhkem?systemId=6", function (res) {
-                options['lstAtchType'] = res.data;
-                self.lstAtchType(res.data);
-            }),
-            // Get profile status
-            app.sendGetRequest("/mard/06/danhmuc/statusHoso?systemId=6", function (res) {
-                options['lstProfileStatus'] = res.data;
-                self.lstProfileStatus(res.data);
-
-                res.data.forEach(function (item) {
-                    mapTrangthai[item.id.toString()] = item.name
-                });
             })
+            // Get attach types
+            // app.sendGetRequest("/mard/06/danhmuc/dinhkem?systemId=6", function (res) {
+            //     options['lstAtchType'] = res.data;
+            //     self.lstAtchType(res.data);
+            // }),
+            // // Get profile status
+            // app.sendGetRequest("/mard/06/danhmuc/statusHoso?systemId=6", function (res) {
+            //     options['lstProfileStatus'] = res.data;
+            //     self.lstProfileStatus(res.data);
+            //
+            //     res.data.forEach(function (item) {
+            //         mapTrangthai[item.id.toString()] = item.name
+            //     });
+            // })
         ).done(function (data) {
             $('#loading10').hide();
             self.searchHoso(1);

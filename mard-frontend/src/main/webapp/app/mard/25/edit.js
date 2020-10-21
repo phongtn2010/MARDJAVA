@@ -1,19 +1,19 @@
-function Mard25CreateVM () {
-    var createVMSelf = this;
-    createVMSelf.kdnkVM = ko.observable(null);
-    createVMSelf.isEditable = ko.observable(true)
+function Mard25EditVM () {
+    var editVMSefl = this;
+    editVMSefl.kdnkVM = ko.observable(null);
+    editVMSefl.isEditable = ko.observable(true)
 
-    createVMSelf.applyState = function (options) {
+    editVMSefl.applyState = function (options) {
         options["fiHSType"] = "1";
-        createVMSelf.kdnkVM(new HangHoaNhapKhauVM(options));
+        editVMSefl.kdnkVM(new HangHoaNhapKhauVM(options));
     }
 
-    createVMSelf.saveRegProfile = function () {
-        // if (!createVMSelf.kdnkVM().validateForm()) return;
-        var body = createVMSelf.kdnkVM().getData();
+    editVMSefl.saveRegProfile = function () {
+        // if (!editVMSefl.kdnkVM().validateForm()) return;
+        var body = editVMSefl.kdnkVM().getData();
         // return;
         if (!body) return;
-        createVMSelf.pop = app.popup({
+        editVMSefl.pop = app.popup({
             title: 'Thông báo',
             html: '<b>Bạn chắc chắn muốn lưu hồ sơ?</b>',
             width: 450,
@@ -23,7 +23,7 @@ function Mard25CreateVM () {
                     class: 'btn',
                     icon: 'fa-save',
                     action: function () {
-                        app.popupRemove(createVMSelf.pop.selector);
+                        app.popupRemove(editVMSefl.pop.selector);
                         app.makePost({
                             url: '/mard/25/hoso/create',
                             data: JSON.stringify(body),
@@ -55,19 +55,19 @@ function Mard25CreateVM () {
                     class: 'btn',
                     icon: 'fa-close',
                     action: function () {
-                        app.popupRemove(createVMSelf.pop.selector);
+                        app.popupRemove(editVMSefl.pop.selector);
                     }
                 }
             ]
         });
     }
 
-    createVMSelf.sendRegProfile = function () {
-        if (!createVMSelf.kdnkVM().validateForm() || !createVMSelf.kdnkVM().validateAttachment()) return;
-        var body = createVMSelf.kdnkVM().getData();
+    editVMSefl.sendRegProfile = function () {
+        if (!editVMSefl.kdnkVM().validateForm() || !editVMSefl.kdnkVM().validateAttachment()) return;
+        var body = editVMSefl.kdnkVM().getData();
         // return;
         if (!body) return;
-        createVMSelf.verifySignature = function (signature, doc) {
+        editVMSefl.verifySignature = function (signature, doc) {
 
             var data = {
                 'signatureXml': signature,
@@ -108,7 +108,7 @@ function Mard25CreateVM () {
             });
         };
 
-        createVMSelf.pop = app.popup({
+        editVMSefl.pop = app.popup({
             title: 'Thông báo',
             html: '<b>Bạn chắc chắn muốn gửi hồ sơ?</b>',
             width: 450,
@@ -118,7 +118,7 @@ function Mard25CreateVM () {
                     class: 'btn',
                     icon: 'fa-save',
                     action: function () {
-                        app.popupRemove(createVMSelf.pop.selector);
+                        app.popupRemove(editVMSefl.pop.selector);
                         app.makePost({
                             url: '/mard/25/hoso/send',
                             data: JSON.stringify(body),
@@ -134,7 +134,7 @@ function Mard25CreateVM () {
                                     var result = d.sign;
                                     var onSuccess = function (res) {
                                         if (res.status == 'ok') {
-                                            createVMSelf.verifySignature(res.outputData, d);
+                                            editVMSefl.verifySignature(res.outputData, d);
                                         } else {
                                             app.Alert('Ký số không thành công, vui lòng thử lại.');
                                         }
@@ -170,17 +170,17 @@ function Mard25CreateVM () {
                     class: 'btn',
                     icon: 'fa-close',
                     action: function () {
-                        app.popupRemove(createVMSelf.pop.selector);
+                        app.popupRemove(editVMSefl.pop.selector);
                     }
                 }
             ]
         });
     }
 
-    createVMSelf.btnBack = function () {
+    editVMSefl.btnBack = function () {
         History.go(-1);
     }
-    createVMSelf.goIndexPage = function () {
+    editVMSefl.goIndexPage = function () {
         window.location.href = app.appContext + "/mard/25/";
     }
 }
@@ -189,18 +189,30 @@ function init(options) {
     var mard25CreateVM = new Mard25CreateVM();
     ko.applyBindings(mard25CreateVM, document.getElementById('mard25Create'));
     mard25CreateVM.applyState(options);
+
+    function getThongTinHoSo(callback) {
+        $('#loading08').show();
+        $.ajax({
+            async: true,
+            type: 'GET',
+            cache: false,
+            crossDomain: true,
+            url: app.appContext + '/mard/25/hoso/find' + "?idHoSo=" + idHoSo,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(CSRF_TOKEN_NAME, CSRF_TOKEN_VALUE);
+            },
+            success: function (res) {
+                callback(res);
+                $('#loading08').hide();
+            },
+            error: function (x, t, m) {
+                $('#loading08').hide();
+            },
+        })
 }
 
 $(document).ready(function () {
-    var options = {
-        fiTaxCode: hosoUsername,
-        fiImporterAddress: hosoCompanyAddress,
-        fiImporterName: hosoCompanyName,
-        fiImporterTel: hosoCompanyPhoneNumber,
-        fiImporterFax: hosoCompanyFax,
-        fiImporterEmail: hosoCompanyEmail,
-        fiHSStatus: 0
-    };
+    var options = {};
     $('#loading10').show();
     $.when(
         // Get list country
