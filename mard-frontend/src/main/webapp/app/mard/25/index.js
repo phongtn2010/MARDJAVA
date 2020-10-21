@@ -345,7 +345,7 @@ function Mard25VM() {
 
 
     self.goEditHoSo = function(item) {
-        window.location.href= app.appContext + "/mard/06/edit/" + item.fiIdHS;
+        window.location.href= app.appContext + "/mard/25/edit/" + item.fiIdHS;
         return true;
     }
 

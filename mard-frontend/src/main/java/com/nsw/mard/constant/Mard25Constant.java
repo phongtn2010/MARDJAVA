@@ -172,7 +172,7 @@ public class Mard25Constant {
         public static final String LIST_STATUS_HOSO_GET = "mard.06.danhmuc.statushoso";
         public static final String ATTACHMENT_TYPE_GET = "mard.25.danhmuc.attachtype";
         public static final String HOSO_CREATE = "mard.25.tbdhoso25.create";
-        public static final String HOSO_SEND = "mard.06.tbdhoso06.send";
+        public static final String HOSO_SEND = "mard.25.tbdhoso25.send";
         public static final String HOSO_EDIT = "mard.06.tbdhoso06.edit";
         public static final String HOSO_GET_BY_FILTER = "mard.25.tbdhoso25.findfilter";
         public static final String HOSO_CANCEL = "mard.06.tbdhoso06.cancel";

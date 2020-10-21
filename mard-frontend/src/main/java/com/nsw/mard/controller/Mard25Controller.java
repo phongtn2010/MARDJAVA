@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -55,6 +56,18 @@ public class Mard25Controller {
         return Mard25Constant.Page.CREATE;
     }
 
+    @RequestMapping(value = {"/edit/{idHoSo}"}, method = RequestMethod.GET)
+    public String editHoso(ModelMap model, @PathVariable("idHoSo") Long idHoSo) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            UserCustom user = (UserCustom) principal;
+            initData(model, user);
+            model.addAttribute(ID_FILED, idHoSo);
+        } else {
+            return AppConstant.redirectPage(AppConstant.Pages.LOGOUT);
+        }
+        return Mard25Constant.Page.EDIT;
+    }
 
     private void initData(ModelMap model, UserCustom user) {
         model.addAttribute(AppConstant.DanhMuc.Menu, AppHelper.GetMenusForUser(user.getTabs(), environment.getRequiredProperty("nsw.fontend.url")));

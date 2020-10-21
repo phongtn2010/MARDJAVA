@@ -1,6 +1,7 @@
 package com.nsw.mard.api;
 
 import com.nsw.api.BaseApi;
+import com.nsw.common.model.SignData;
 import com.nsw.common.model.json.ResponseJson;
 import com.nsw.constant.AppConstant;
 import com.nsw.helper.BackendRequestHelper;
@@ -9,7 +10,10 @@ import com.nsw.mard.constant.Mard06Constant;
 import com.nsw.mard.constant.Mard25Constant;
 import com.nsw.mard.p25.model.FilterForm;
 import com.nsw.mard.p25.model.TbdHoso25;
+import com.nsw.mard.p6.model.SendMessage;
+import com.nsw.mard.p6.model.TbdHoso06;
 import com.nsw.mard.service.DinhkemService;
+import com.nsw.util.Constants;
 import com.nsw.util.LogUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.util.Date;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/mard/25")
@@ -221,11 +226,68 @@ public class Mard25Api extends BaseApi {
         }
     }
 
+    @RequestMapping(value = "/hoso/guihoso", method = RequestMethod.POST, headers = {"content-type=application/json"})
+    public @ResponseBody
+    ResponseJson guiHoso(
+            @RequestBody TbdHoso25 tbdhoso25
+    ) {
+        return send(tbdhoso25);
+    }
     private ResponseJson send(TbdHoso25 tbdHoso25) {
         ResponseJson returnJson = new ResponseJson();
         tbdHoso25.setFiTaxCode(getUsername());
         try {
             return BackendRequestHelper.getInstance().doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.HOSO_SEND), tbdHoso25);
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            returnJson.setData(null);
+            returnJson.setSuccess(false);
+            returnJson.setMessage(ex.getMessage());
+            return returnJson;
+        }
+    }
+
+    @RequestMapping(value = "/hoso/send", method = RequestMethod.POST, headers = {"content-type=application/json"})
+    public @ResponseBody
+    ResponseJson sendHoso(
+            @RequestBody TbdHoso25 tbdHoso25
+    ) {
+        ResponseJson returnJson = new ResponseJson();
+        returnJson.setSuccess(false);
+        try {
+            if (!Constants.SIGN.ON.equals(environment.getRequiredProperty(Mard06Constant.EnableSign))) {
+                returnJson = send(tbdHoso25);
+            } else {
+                tbdHoso25.setFiTaxCode(getUsername());
+                tbdHoso25.setFiSignDate(new Date());
+                ResponseJson tmpJson = save(tbdHoso25);
+                if(tmpJson.isSuccess() == false) {
+                    return tmpJson;
+                }
+                HashMap<String, Object> tmpData = (HashMap<String, Object>) tmpJson.getData();
+                returnJson = getHoSoByID(tmpData.get("fiIdHS").toString());
+                if (returnJson.isSuccess() && returnJson.getData() != null) {
+                    HashMap<String, Object> data = (HashMap<String, Object>) returnJson.getData();
+                    Long fiTrangthai = Long.valueOf(data.get("fiHSStatus").toString());
+                    SendMessage sendMessage = new SendMessage();
+                    sendMessage.setFiNSWFileCode(data.get("fiNSWFileCode").toString());
+                    sendMessage.setType(Mard06Constant.TYPE.TYPE_10);
+
+                    if (fiTrangthai.equals(Mard06Constant.HosoStatus.TAO_MOI)) {
+                        sendMessage.setFunction(Mard06Constant.FUNCTION.FUNCTION_01);
+                    } else if (fiTrangthai.equals(Mard06Constant.HosoStatus.CHO_TIEP_NHAN)) {
+                        sendMessage.setFunction(Mard06Constant.FUNCTION.FUNCTION_02);
+                    } else if (fiTrangthai.equals(Mard06Constant.HosoStatus.YEU_CAU_BO_SUNG)) {
+                        sendMessage.setFunction(Mard06Constant.FUNCTION.FUNCTION_03);
+                    }
+
+                    SignData signData = getXMLForSign(sendMessage);
+                    returnJson.setSign(signData);
+                }
+            }
+            return returnJson;
         } catch (Exception ex) {
             LogUtil.addLog(ex);
             String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();

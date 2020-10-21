@@ -79,11 +79,11 @@ function Mard25CreateVM () {
                 'proceduceCode': '25'
             };
             app.makePost({
-                url: '/mard/06/verify',
-                data: JSON.stringify(data),
-                success: function (d) {
+                    url: '/mard/25/verify',
+                    data: JSON.stringify(data),
+                    success: function (d) {
                     app.makePost({
-                        url: '/mard/06/hoso/guihoso',
+                        url: '/mard/25/hoso/guihoso',
                         data: JSON.stringify(doc.data),
                         success: function (d) {
                             app.Alert('Gửi hồ sơ thành công');
@@ -104,13 +104,6 @@ function Mard25CreateVM () {
                             }
                         }
                     });
-                },
-                error: function (e) {
-                    if(e.hasOwnProperty('message')) {
-                        app.Alert(e.message);
-                    } else {
-                        app.Alert('Ký số không thành công, vui lòng thử lại.');
-                    }
                 }
             });
         };
@@ -127,7 +120,7 @@ function Mard25CreateVM () {
                     action: function () {
                         app.popupRemove(createVMSelf.pop.selector);
                         app.makePost({
-                            url: '/mard/06/hoso/send',
+                            url: '/mard/25/hoso/send',
                             data: JSON.stringify(body),
                             success: function (d) {
                                 if (!app.requireSigning) {
