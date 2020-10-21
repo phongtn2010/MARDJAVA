@@ -171,6 +171,7 @@
                                 <select
                                         data-bind="options: lstCountry,
                                                     optionsText: 'countryname',
+                                                    selectedText2 : fiProCountryName,
                                                     optionsValue: 'countryid',
                                                     value: fiProCountryCode" class="form-control"></select>
                             </div>

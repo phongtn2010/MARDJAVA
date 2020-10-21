@@ -1,4 +1,3 @@
-
 <fieldset data-bind="with: thongtinChungVM">
     <div class="panel panel-primary">
         <div class="panel-heading" style="font-weight: bold;"><spring:message code="mard.tokhai.thong_tin_ky_hs"/></div>
@@ -31,7 +30,7 @@
                         </div>
                         <div class="col-md-4">
                             <select data-bind="options: lstProvince,
-                                        optionsValue: 'provinceName',
+                                        optionsValue: 'provinceId',
                                         optionsText: 'provinceName',
                                         optionsCaption: '<spring:message code="mard.select.noi_ky"/>',
                                         value: fiSignAddress, enable: $root.isEditable()"

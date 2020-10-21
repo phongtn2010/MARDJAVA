@@ -154,7 +154,7 @@
         <form role="form" class="form-horizontal">
             <div class="form-group">
                 <div class="col-md-12">
-                    <span class="nsw-require-field" data-bind="validationMessage: fiProKLList"></span>
+                    <span class="nsw-require-field" data-bind="validationMessage: fiProSLKLList"></span>
                     <table class="table table-striped table-bordered table-hover order-column">
                         <thead>
                         <tr class="nsw-tr tr-nsw1-bgcolor">
@@ -168,7 +168,7 @@
                                 <spring:message code="mard.25.tokhai.hang_hoa.dinh_luong.capnhat"/></th>
                         </tr>
                         </thead>
-                        <tbody data-bind="foreach: fiProKLList">
+                        <tbody data-bind="foreach: fiProSLKLList">
                         <tr>
                             <td class="text-center" data-bind="text: ($index() + 1)"></td>
                             <td data-bind="text : fiProSLKLMass"></td>

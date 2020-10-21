@@ -241,6 +241,7 @@ function HangHoaNhapKhauVM (options) {
 
             "fiSellName": kdnkVMSelf.thongtinChungVM().fiSellName(),
             "fiSellCountryCode": kdnkVMSelf.thongtinChungVM().fiSellCountryCode(),
+            "fiSellCountryName": kdnkVMSelf.thongtinChungVM().fiSellCountryName(),
             "fiSellAddress": kdnkVMSelf.thongtinChungVM().fiSellAddress(),
             "fiSellTel": kdnkVMSelf.thongtinChungVM().fiSellTel(),
             "fiSellFax": kdnkVMSelf.thongtinChungVM().fiSellFax(),

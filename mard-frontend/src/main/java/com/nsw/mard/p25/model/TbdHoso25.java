@@ -42,6 +42,7 @@ public class TbdHoso25 implements Serializable {
 
     private String fiSellName;
     private String fiSellCountryCode;
+    private String fiSellCountryName;
     private String fiSellAddress;
     private String fiSellTel;
     private String fiSellFax;

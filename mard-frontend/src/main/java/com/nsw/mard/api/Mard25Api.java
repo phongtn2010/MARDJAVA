@@ -208,7 +208,7 @@ public class Mard25Api extends BaseApi {
         ResponseJson returnJson = new ResponseJson();
         tbdhoso25.setFiTaxCode(getUsername());
         try {
-            returnJson = BackendRequestHelper.getInstance().doPostRequest(Mard06Constant.getInstance().getApiUrl(environment, Mard06Constant.API.HOSO_CREATE), tbdhoso25);
+            returnJson = BackendRequestHelper.getInstance().doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.HOSO_CREATE), tbdhoso25);
             return returnJson;
         } catch (Exception ex) {
             LogUtil.addLog(ex);
