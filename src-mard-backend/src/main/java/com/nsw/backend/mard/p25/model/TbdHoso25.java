@@ -108,9 +108,6 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_SELL_FAX", length = 15)
     private String fiSellFax;
 
-    @Column(name = "FI_SELL_EMAIL", nullable = false, length = 250)
-    private String fiSellEmail;
-
     @Column(name = "FI_SELL_COUNTRY_CODE")
     private String fiSellCountryCode;
 
