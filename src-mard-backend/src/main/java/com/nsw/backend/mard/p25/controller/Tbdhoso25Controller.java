@@ -54,7 +54,7 @@ public class Tbdhoso25Controller extends BaseController {
 
     //------------------- Create a Tbdhoso06 --------
     // ---------------------------
-    @PostMapping("/")
+    @PostMapping("/create")
     public ResponseEntity<ResponseJson> createHoso(@RequestBody TbdHoso25 profile) {
         try {
             if (profile == null) {

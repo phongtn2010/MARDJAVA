@@ -45,6 +45,27 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_HS_CODE", length = 50)
     private String fiNSWFileCode;
 
+    @Column(name = "FI_HS_Code_R", length = 50)
+    private String fiNSWFileCodeReplace;
+
+    @Column(name = "FI_GDK", length = 250)
+    private String fiGDK;
+
+    @Column(name = "FI_IMPORTER_NAME", length = 2500)
+    private String fiImporterName;
+
+    @Column(name = "FI_IMPORTER_ADD", length = 2500)
+    private String fiImporterAddress;
+
+    @Column(name = "FI_IMPORTER_TEL", length = 50)
+    private String fiImporterTel;
+
+    @Column(name = "FI_IMPORTER_FAX", length = 50)
+    private String fiImporterFax;
+
+    @Column(name = "FI_IMPORTER_EMAIL", length = 500)
+    private String fiImporterEmail;
+
     @Column(name = "FI_HS_TYPE", nullable = false)
     private Integer fiHSType = 1;
 
@@ -112,8 +133,6 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_PURCH_FAX", length = 15)
     private String fiPurchFax;
 
-    @Column(name = "FI_PURCH_EMAIL", nullable = false, length = 250)
-    private String fiPurchEmail;
 
     @Column(name = "FI_PURCH_RECI", nullable = false, length = 500)
     private String fiPurchReci;
@@ -154,18 +173,21 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_CONTACT_EMAIL", nullable = false, length = 250)
     private String fiContactEmail;
 
-    //Thông tin hồ sơ Doanh Nghiệp
-    @Column(name = "FI_SIGN_PROVIN_CODE", nullable = false, length = 6)
-    private String fiSignProvinCode;
-
-    @Column(name = "FI_SIGN_PROVIN_NAME", nullable = false, length = 250)
-    private String fiSignProvinName;
+//    //Thông tin hồ sơ Doanh Nghiệp
+//    @Column(name = "FI_SIGN_PROVIN_CODE", nullable = false, length = 6)
+//    private String fiSignProvinCode;
+//
+//    @Column(name = "FI_SIGN_PROVIN_NAME", nullable = false, length = 250)
+//    private String fiSignProvinName;
 
     @Column(name = "FI_SIGN_NAME", nullable = false, length = 250)
     private String fiSignName;
 
     @Column(name = "FI_SIGN_POSITION", nullable = false, length = 250)
     private String fiSignPosition;
+
+    @Column(name = "FI_SIGN_ADD", nullable = false, length = 250)
+    private String fiSignAddress;
 
     //Danh sách thông tin kèm theo
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
