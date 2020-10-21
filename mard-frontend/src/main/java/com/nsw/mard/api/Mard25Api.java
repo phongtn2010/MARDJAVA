@@ -2,19 +2,22 @@ package com.nsw.mard.api;
 
 import com.nsw.api.BaseApi;
 import com.nsw.common.model.SignData;
+import com.nsw.common.model.TokenInfo;
 import com.nsw.common.model.json.ResponseJson;
 import com.nsw.constant.AppConstant;
 import com.nsw.helper.BackendRequestHelper;
 import com.nsw.helper.RabbitMQErrorHelper;
 import com.nsw.mard.constant.Mard06Constant;
 import com.nsw.mard.constant.Mard25Constant;
+import com.nsw.mard.constant.Mard25Constant;
 import com.nsw.mard.p25.model.FilterForm;
 import com.nsw.mard.p25.model.TbdHoso25;
 import com.nsw.mard.p6.model.SendMessage;
-import com.nsw.mard.p6.model.TbdHoso06;
 import com.nsw.mard.service.DinhkemService;
 import com.nsw.util.Constants;
 import com.nsw.util.LogUtil;
+import com.nsw.util.Utility;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,7 +59,7 @@ public class Mard25Api extends BaseApi {
     ResponseJson getDanhmucTinhthanh() {
         ResponseJson responseJson = new ResponseJson();
         try {
-            responseJson = BackendRequestHelper.getInstance().doGetRequest(Mard06Constant.getInstance().getApiUrl(environment, Mard06Constant.API.PROVINCE_GET));
+            responseJson = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.PROVINCE_GET));
             return responseJson;
         } catch (Exception ex) {
             LogUtil.addLog(ex);
@@ -76,7 +79,7 @@ public class Mard25Api extends BaseApi {
     ) {
         ResponseJson json = new ResponseJson();
         try {
-            json = BackendRequestHelper.getInstance().doGetRequest(Mard06Constant.getInstance().getApiUrl(environment, Mard06Constant.API.PORT_GET) + "?countryCode=" + countryCode);
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.PORT_GET) + "?countryCode=" + countryCode);
             return json;
         } catch (Exception ex) {
             LogUtil.addLog(ex);
@@ -97,7 +100,7 @@ public class Mard25Api extends BaseApi {
     ) {
         ResponseJson json = new ResponseJson();
         try {
-            json = BackendRequestHelper.getInstance().doGetRequest(Mard06Constant.getInstance().getApiUrl(environment, Mard06Constant.API.UOMS_GET) + "?unitTypeId=" + unitTypeId + "&systemId=" + systemId);
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.UOMS_GET) + "?unitTypeId=" + unitTypeId + "&systemId=" + systemId);
             return json;
         } catch (Exception ex) {
             LogUtil.addLog(ex);
@@ -248,6 +251,16 @@ public class Mard25Api extends BaseApi {
             return returnJson;
         }
     }
+    @RequestMapping(value = {"/verify"}, method = RequestMethod.POST)
+    public @ResponseBody
+    ResponseJson verify(@RequestBody TokenInfo token) {
+        token.setUser(this.getUsername());
+        ResponseJson responseJson = new ResponseJson();
+//
+        responseJson.setSuccess(true);
+        return responseJson;
+//        return this.verifySignature(token);
+    }
 
     @RequestMapping(value = "/hoso/send", method = RequestMethod.POST, headers = {"content-type=application/json"})
     public @ResponseBody
@@ -257,11 +270,10 @@ public class Mard25Api extends BaseApi {
         ResponseJson returnJson = new ResponseJson();
         returnJson.setSuccess(false);
         try {
-            if (!Constants.SIGN.ON.equals(environment.getRequiredProperty(Mard06Constant.EnableSign))) {
+            if (!Constants.SIGN.ON.equals(environment.getRequiredProperty(Mard25Constant.EnableSign))) {
                 returnJson = send(tbdHoso25);
             } else {
                 tbdHoso25.setFiTaxCode(getUsername());
-                tbdHoso25.setFiSignDate(new Date());
                 ResponseJson tmpJson = save(tbdHoso25);
                 if(tmpJson.isSuccess() == false) {
                     return tmpJson;
@@ -273,14 +285,14 @@ public class Mard25Api extends BaseApi {
                     Long fiTrangthai = Long.valueOf(data.get("fiHSStatus").toString());
                     SendMessage sendMessage = new SendMessage();
                     sendMessage.setFiNSWFileCode(data.get("fiNSWFileCode").toString());
-                    sendMessage.setType(Mard06Constant.TYPE.TYPE_10);
+                    sendMessage.setType(Mard25Constant.TYPE.TYPE_10);
 
-                    if (fiTrangthai.equals(Mard06Constant.HosoStatus.TAO_MOI)) {
-                        sendMessage.setFunction(Mard06Constant.FUNCTION.FUNCTION_01);
-                    } else if (fiTrangthai.equals(Mard06Constant.HosoStatus.CHO_TIEP_NHAN)) {
-                        sendMessage.setFunction(Mard06Constant.FUNCTION.FUNCTION_02);
-                    } else if (fiTrangthai.equals(Mard06Constant.HosoStatus.YEU_CAU_BO_SUNG)) {
-                        sendMessage.setFunction(Mard06Constant.FUNCTION.FUNCTION_03);
+                    if (fiTrangthai.equals(Mard25Constant.HosoStatus.TAO_MOI)) {
+                        sendMessage.setFunction(Mard25Constant.FUNCTION.FUNCTION_01);
+                    } else if (fiTrangthai.equals(Mard25Constant.HosoStatus.CHO_TIEP_NHAN)) {
+                        sendMessage.setFunction(Mard25Constant.FUNCTION.FUNCTION_02);
+                    } else if (fiTrangthai.equals(Mard25Constant.HosoStatus.YEU_CAU_BO_SUNG)) {
+                        sendMessage.setFunction(Mard25Constant.FUNCTION.FUNCTION_03);
                     }
 
                     SignData signData = getXMLForSign(sendMessage);
@@ -297,5 +309,63 @@ public class Mard25Api extends BaseApi {
             returnJson.setMessage(ex.getMessage());
             return returnJson;
         }
+    }
+    @RequestMapping(value = "/hoso/find", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseJson getHoSoByID(
+            @RequestParam(name = "idHoSo") String idHoSo
+    ) {
+        ResponseJson json = new ResponseJson();
+        try {
+            if (!isOwner(idHoSo, null)) {
+                json.setSuccess(false);
+                json.setMessage("Không có quyền truy cập hồ sơ");
+                return json;
+            }
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.HOSO_GET_BY_FILTER) + "?id=" + idHoSo);
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            json.setData(null);
+            json.setSuccess(false);
+            json.setMessage(ex.getMessage());
+            return json;
+        }
+    }
+    private SignData getXMLForSign(SendMessage sendMessage) throws Exception {
+        ResponseJson resultSignFlow = BackendRequestHelper.getInstance()
+                .doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_XML), sendMessage);
+
+        if (resultSignFlow.isSuccess()) {
+            SignData signData = new SignData();
+            signData.setFiDocumentCode(sendMessage.getFiNSWFileCode());
+            signData.setFiDocType("BNNPTNT2500009");
+            signData.setFiFunc(sendMessage.getFunction());
+            signData.setFiMsgType(sendMessage.getType());
+
+            String xml = resultSignFlow.getData().toString();
+
+            String hashVal = Utility.GetHashData(xml);
+            signData.setFiXml(xml);
+            signData.setFiXmlEncode(encodeXmlMessage(xml));
+            signData.setFiHash(hashVal);
+            signData.setFiHashEncode(encodeXmlMessage("<DS>" + hashVal + "</DS>"));
+            return signData;
+        } else {
+            throw new Exception(resultSignFlow.getMessage());
+        }
+    }
+    private boolean isOwner(String idHS, String nswFileCode) {
+        ResponseJson json = BackendRequestHelper.getInstance().doGetRequest(
+                Mard06Constant.getInstance().getApiUrl(
+                        environment,
+                        Mard06Constant.API.HOSO_GET_BY_FILTER
+                ) + "?id=" +
+                        (StringUtils.isEmpty(idHS)? "" : idHS) + "&nswFileCode=" +
+                        (StringUtils.isEmpty(nswFileCode)? "" : nswFileCode) + "&taxCode=" + getUsername());
+
+        return json != null && json.getData() != null;
     }
 }
