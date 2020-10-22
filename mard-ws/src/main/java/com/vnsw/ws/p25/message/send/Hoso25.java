@@ -1,4 +1,4 @@
-package com.vnsw.ws.p25.entity;
+package com.vnsw.ws.p25.message.send;
 
 import com.vnsw.ws.annotations.DateSerialization;
 import com.vnsw.ws.p25.entity.*;
@@ -61,7 +61,6 @@ public class Hoso25 {
     String fiPurchFax;
     @XmlElement(name = "PortOfDestinationName")
     String fiPurchReci;
-
     @XmlJavaTypeAdapter(DateSerialization.class)
     @XmlElement(name = "ImportingFromDate")
     Date fiPurchFromDate;
@@ -80,24 +79,16 @@ public class Hoso25 {
     String fiTaxCode;
     @XmlElement(name = "TypeAniFeed")
     String fiHSType;
+//
+//    @XmlElement(name = "ImporterName")
+//    String fiImporterName;
+//    @XmlElement(name = "ImporterTel")
+//    String fiImporterTel;
+//    @XmlElement(name = "ImporterAddress")
+//    String fiImporterAddress;
+//    @XmlElement(name = "ImporterEmail")
+//    String fiImporterEmail;
 
-    @XmlElement(name = "ImporterName")
-    String fiImporterName;
-
-    @XmlElement(name = "ImporterTel")
-    String fiImporterTel;
-
-    @XmlElement(name = "ImporterAddress")
-    String fiImporterAddress;
-
-    @XmlElement(name = "ImporterFax")
-    String fiImporterFax;
-
-    @XmlElement(name = "ImporterEmail")
-    String fiImporterEmail;
-
-    @XmlElement(name = "ProductType")
-    Integer fiProductType;
 
     @XmlElementWrapper(name = "GoodsList")
     @XmlElement(name = "Product")
@@ -105,8 +96,10 @@ public class Hoso25 {
 
     @XmlElement(name = "LocationOfStorage")
     private String fiAddressGath;
+    @XmlJavaTypeAdapter(DateSerialization.class)
     @XmlElement(name = "DateOfSamplingFrom")
     private Date fiRegSamFromDate;
+    @XmlJavaTypeAdapter(DateSerialization.class)
     @XmlElement(name = "DateOfSamplingTo")
     private Date fiRegSamToDate;
     @XmlElement(name = "LocationOfSampling")

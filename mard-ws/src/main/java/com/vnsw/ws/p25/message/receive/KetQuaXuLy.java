@@ -10,26 +10,24 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Date;
 
-@XmlType(name = "EvaluationResult")
+@XmlType(name = "Result")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Data
-public class KetQuaThamDinh {
-    @XmlElement(name = "RegistrationComfirmNo")
-    private String fiRegistrationComfirmNo;
-
-    @XmlElement(name = "ReceiveNo")
-    private String fiReceiveNo;
-
+public class KetQuaXuLy {
+    @XmlElement(name = "NSWFileCode")
+    private String fiNSWFileCode;
     @XmlElement(name = "Reason")
     private String fiReason;
+    @XmlElement(name = "AttachmentId")
+    private Long fiAttachmentId;
+    @XmlElement(name = "FileName")
+    private String fiFileName;
+    @XmlElement(name = "FileLink")
+    private String fiFileLink;
+    @XmlElement(name = "NameOfStaff")
+    private String fiNameOfStaff;
 
     @XmlJavaTypeAdapter(DateSerialization.class)
-    @XmlElement(name = "ResultDate")
-    private Date fiResultDate;
-
-    @XmlElement(name = "Department")
-    private String fiDepartment;
-
-    @XmlElement(name = "CreaterName")
-    private String fiCreaterName;
+    @XmlElement(name = "ResponseDate")
+    private Date fiResponseDate;
 }

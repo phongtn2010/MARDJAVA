@@ -14,17 +14,25 @@ import java.util.Date;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Data
 public class DNYeucauHuyHoso {
-    @XmlElement(name = "RegistrationComfirmNo")
-    private String fiRegistrationComfirmNo;
 
     @XmlElement(name = "NSWFileCode")
     private String fiNSWFileCode;
 
 
-    @XmlElement(name = "Reason")
-    private String fiReason;
-
     @XmlJavaTypeAdapter(DateSerialization.class)
     @XmlElement(name = "RequestDate")
     private Date fiRequestDate;
+
+
+    @XmlElement(name = "Reason")
+    private String fiReason;
+
+    @XmlElement(name = "AttachmentId")
+    private Long fiAttachmentId;
+
+    @XmlElement(name = "FileName")
+    private String fiFileName;
+    @XmlElement(name = "Reason")
+    private String fiFileLink;
+
 }

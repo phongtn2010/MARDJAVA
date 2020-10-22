@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlType;
 *
 *
 * @Model
-* @class KetQuaThamDinh
+* @class KetQuaXuLy
 * Created by Nguyen Van Quang
 * 05/12/2018 17:414:10
 *
@@ -75,7 +75,7 @@ public class KetQuaThamDinh {
 
 	@Override
 	public String toString() {
-		return "KetQuaThamDinh [" +
+		return "KetQuaXuLy [" +
 				"fiContent=" + fiContent + "," + 
 				"fiResultDate=" + fiResultDate + "," + 
 				"fiDepartment=" + fiDepartment + "," + 

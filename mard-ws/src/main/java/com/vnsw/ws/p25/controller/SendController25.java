@@ -15,7 +15,7 @@ import com.vnsw.ws.p25.entity.json.SendMessage;
 import com.vnsw.ws.p25.envelop.*;
 import com.vnsw.ws.p25.message.send.DNYeucauHuyHoso;
 import com.vnsw.ws.p25.message.send.DNYeucauSuaHoso;
-import com.vnsw.ws.p25.entity.Hoso25;
+import com.vnsw.ws.p25.message.send.Hoso25;
 import com.vnsw.ws.p25.service.BackendService25;
 import com.vnsw.ws.p25.service.EnvelopeService25;
 import com.vnsw.ws.p8.message.send.DNHuyHS;

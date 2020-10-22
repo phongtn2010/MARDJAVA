@@ -14,18 +14,18 @@ public class Body25 {
     }
     @XmlElement(name = "Content")
     private Content25 Content;
-    private String Signature;
+//    private String Signature;
 
-    public String getSignature() {
-        return Signature;
-    }
-
-    public void setSignature(String Signature) {
-        this.Signature = Signature;
-    }
-    public Content25 getContent() {
-        return Content;
-    }
+//    public String getSignature() {
+//        return Signature;
+//    }
+//
+//    public void setSignature(String Signature) {
+//        this.Signature = Signature;
+//    }
+//    public Content25 getContent() {
+//        return Content;
+//    }
 
     public void setContent(Content25 Content) {
         this.Content = Content;

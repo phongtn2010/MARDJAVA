@@ -3,7 +3,7 @@ package com.vnsw.ws.p25.envelop;
 import com.vnsw.ws.p25.message.receive.*;
 import com.vnsw.ws.p25.message.send.DNYeucauHuyHoso;
 import com.vnsw.ws.p25.message.send.DNYeucauSuaHoso;
-import com.vnsw.ws.p25.entity.Hoso25;
+import com.vnsw.ws.p25.message.send.Hoso25;
 import com.vnsw.ws.p8.message.send.DNHuyHS;
 import lombok.Data;
 
@@ -33,7 +33,7 @@ public class Content25 {
     protected CongVanKDNK congVanKDNK;
 
     @XmlElement(name = "EvaluationResult")
-    protected KetQuaThamDinh ketQuaThamDinh;
+    protected KetQuaXuLy ketQuaXuLy;
 
     @XmlElement(name = "QuarantineCancel")
     protected DNHuyHS dnHuyHS;

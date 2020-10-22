@@ -428,7 +428,7 @@ public class EnvelopeService25Impl implements EnvelopeService25 {
             Envelope25 envl = new Envelope25();
             envl.setHeader(header);
             envl.setBody(body);
-            envl.setSystemSignature("");
+//            envl.setSystemSignature("");
             return envl;
         } catch (Exception ex) {
             String errorInfo = Constants.APP_NAME + Constants.MESSAGE_SEPARATOR + CLASS_NAME
@@ -444,7 +444,7 @@ public class EnvelopeService25Impl implements EnvelopeService25 {
             Envelope25 envl = new Envelope25();
             envl.setHeader(header);
             envl.setBody(body);
-            envl.setSystemSignature("");
+//            envl.setSystemSignature("");
             return envl;
         } catch (Exception ex) {
             String errorInfo = Constants.APP_NAME + Constants.MESSAGE_SEPARATOR + CLASS_NAME

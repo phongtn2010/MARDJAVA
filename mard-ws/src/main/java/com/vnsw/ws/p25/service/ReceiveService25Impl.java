@@ -80,10 +80,10 @@ public class ReceiveService25Impl implements ReceiveService25 {
                 if (errorMsg == null) {
                     switch (type) {
                         case Constants25.MARD06_TYPE.TYPE_11://Ket qua tham dinh ho so
-                            KetQuaThamDinh ketQuaThamDinh = ct.getKetQuaThamDinh();
-                            responseWrapper.setData(ketQuaThamDinh);
+                            KetQuaXuLy ketQuaXuLy = ct.getKetQuaThamDinh();
+                            responseWrapper.setData(ketQuaXuLy);
 
-                            if (ketQuaThamDinh != null) {
+                            if (ketQuaXuLy != null) {
                                 json = backendService.ketquaThamdinh(responseWrapper);
                             }
 

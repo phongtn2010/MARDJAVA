@@ -1,7 +1,6 @@
 package com.vnsw.ws.p25.message.send;
 
 import com.vnsw.ws.annotations.DateSerialization;
-import com.vnsw.ws.p25.entity.Hoso25;
 import lombok.Data;
 
 import javax.xml.bind.annotation.XmlAccessType;
