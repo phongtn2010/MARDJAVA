@@ -170,7 +170,6 @@ public class SendController25 {
                             DNYeucauHuyHoso dnYeucauHuyHoso = new DNYeucauHuyHoso();
                             dnYeucauHuyHoso.setFiRequestDate(new Date());
                             dnYeucauHuyHoso.setFiReason(sendMessage.getReason());
-                            dnYeucauHuyHoso.setFiRegistrationComfirmNo(hoso25.getFiNSWFileCode());
                             dnYeucauHuyHoso.setFiNSWFileCode(hoso25.getFiNSWFileCode());
                             content.setDnYeucauHuyHoso(dnYeucauHuyHoso);
                             body = envelopeService.createBody(content);

@@ -23,9 +23,9 @@ public class Body25 {
 //    public void setSignature(String Signature) {
 //        this.Signature = Signature;
 //    }
-//    public Content25 getContent() {
-//        return Content;
-//    }
+    public Content25 getContent() {
+        return Content;
+    }
 
     public void setContent(Content25 Content) {
         this.Content = Content;

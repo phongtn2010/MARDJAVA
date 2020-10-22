@@ -12,7 +12,7 @@ import java.io.Serializable;
 import java.sql.Date;
 
 
-@XmlType(name = "Attachment")
+@XmlType(name = "Contract")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Data
 public class TbdattachHd25 implements Serializable {

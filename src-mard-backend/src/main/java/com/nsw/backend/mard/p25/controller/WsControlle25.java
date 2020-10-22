@@ -37,7 +37,7 @@ public class WsControlle25 extends BaseController {
         if (result == null) {
             return createErrorResponse("Thông tin hồ sơ không hợp lệ", HttpStatus.OK);
         } else {
-            return createSuccessResponse(RegistrationProfile.parse(result), HttpStatus.OK);
+            return createSuccessResponse(result, HttpStatus.OK);
         }
     }
 

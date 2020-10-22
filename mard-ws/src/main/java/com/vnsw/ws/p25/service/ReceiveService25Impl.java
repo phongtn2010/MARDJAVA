@@ -24,9 +24,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Xử lý bản tin của thủ tục 06 cua MARD
+ * Xử lý bản tin của thủ tục 25 cua MARD
  */
-@Service("receive06Service")
+@Service("receive25Service")
 public class ReceiveService25Impl implements ReceiveService25 {
 
     public static final Logger logger = LoggerFactory.getLogger(ReceiveService25Impl.class);
@@ -79,8 +79,8 @@ public class ReceiveService25Impl implements ReceiveService25 {
                 json = new ResponseJson(false, null, 0L, "");
                 if (errorMsg == null) {
                     switch (type) {
-                        case Constants25.MARD06_TYPE.TYPE_11://Ket qua tham dinh ho so
-                            KetQuaXuLy ketQuaXuLy = ct.getKetQuaThamDinh();
+                        case Constants25.MARD25_TYPE.TYPE_11://Ket qua tham dinh ho so
+                            KetQuaXuLy ketQuaXuLy = ct.getKetQuaXuLy();
                             responseWrapper.setData(ketQuaXuLy);
 
                             if (ketQuaXuLy != null) {
@@ -90,7 +90,7 @@ public class ReceiveService25Impl implements ReceiveService25 {
                             envelopReturn = createEnvelopReturn(maHoso, Constants.MARD_PRO.MARD06, header, json);
                             break;
 
-                        case Constants25.MARD06_TYPE.TYPE_14://BNN phan hoi yeu cau huy HS
+                        case Constants25.MARD25_TYPE.TYPE_14://BNN phan hoi yeu cau huy HS
                             PhanhoiYeucauHuyHoso phanhoiYeucauHuyHoso = ct.getPhanhoiYeucauHuyHoso();
                             responseWrapper.setData(phanhoiYeucauHuyHoso);
 
@@ -101,7 +101,7 @@ public class ReceiveService25Impl implements ReceiveService25 {
                             envelopReturn = createEnvelopReturn(maHoso, Constants.MARD_PRO.MARD06, header, json);
                             break;
 
-                        case Constants25.MARD06_TYPE.TYPE_16://BNN phan hoi yeu cau sua ho so
+                        case Constants25.MARD25_TYPE.TYPE_16://BNN phan hoi yeu cau sua ho so
                             PhanhoiYeucauSuaHoso phanhoiYeucauSuaHoso = ct.getPhanhoiYeucauSuaHoso();
                             responseWrapper.setData(phanhoiYeucauSuaHoso);
 
@@ -112,7 +112,7 @@ public class ReceiveService25Impl implements ReceiveService25 {
                             envelopReturn = createEnvelopReturn(maHoso, Constants.MARD_PRO.MARD06, header, json);
                             break;
 
-                        case Constants25.MARD06_TYPE.TYPE_17://BNN gui cong van VSTY
+                        case Constants25.MARD25_TYPE.TYPE_17://BNN gui cong van VSTY
                             CongVanVSTY congVanVSTY = ct.getCongVanVSTY();
                             responseWrapper.setData(congVanVSTY);
 
@@ -123,7 +123,7 @@ public class ReceiveService25Impl implements ReceiveService25 {
                             envelopReturn = createEnvelopReturn(maHoso, Constants.MARD_PRO.MARD06, header, json);
                             break;
 
-                        case Constants25.MARD06_TYPE.TYPE_18://BNN gui cong van KDNK
+                        case Constants25.MARD25_TYPE.TYPE_18://BNN gui cong van KDNK
                             CongVanKDNK congVanKDNK = ct.getCongVanKDNK();
                             responseWrapper.setData(congVanKDNK);
 
@@ -134,7 +134,7 @@ public class ReceiveService25Impl implements ReceiveService25 {
                             envelopReturn = createEnvelopReturn(maHoso, Constants.MARD_PRO.MARD06, header, json);
                             break;
 
-                        case Constants25.MARD06_TYPE.TYPE_19://BNN tra KQ VSTY
+                        case Constants25.MARD25_TYPE.TYPE_19://BNN tra KQ VSTY
                             KetquaVSTY ketquaVSTY = ct.getKetquaVSTY();
                             responseWrapper.setData(ketquaVSTY);
 

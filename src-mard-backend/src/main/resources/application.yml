@@ -164,9 +164,10 @@ spring:
     default-domain: MARDBackend
 datasource:
   MARDBackend:
-    url: jdbc:oracle:thin:@118.70.125.195:1525:ORCLCDB
-    username: mard
-    password: mard
+    #url: jdbc:oracle:thin:@118.70.125.195:1525:ORCLCDB
+    url: jdbc:oracle:thin:@10.224.130.194:1521:nswstandby
+    username: NSW
+    password: 123456789
     driverClassName: oracle.jdbc.OracleDriver
     defaultSchema: MARD
     maxPoolSize: 20

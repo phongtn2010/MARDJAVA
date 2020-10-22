@@ -226,6 +226,11 @@ $(document).ready(function () {
             options['lstPhanLoai'] = res.data;
             options['lstLoai'] = res.data;
         })
+        ,
+        // Get profile status
+        app.sendGetRequest("/mard/25/danhmuc/getby-catno/10", function (res) {
+            options['lstProfileStatus'] = res.data;
+        })
         // // Get attach types
         // app.sendGetRequest("/mard/25/danhmuc/dinhkem?systemId=6", function (res) {
         //     options['lstAtchType'] = res.data;

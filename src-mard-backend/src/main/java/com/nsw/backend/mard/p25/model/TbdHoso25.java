@@ -45,7 +45,7 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_HS_CODE", length = 50)
     private String fiNSWFileCode;
 
-    @Column(name = "FI_HS_Code_R", length = 50)
+    @Column(name = "FI_HS_CODE_R", length = 50)
     private String fiNSWFileCodeReplace;
 
     @Column(name = "FI_GDK", length = 250)
@@ -66,7 +66,7 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_IMPORTER_EMAIL", length = 500)
     private String fiImporterEmail;
 
-    @Column(name = "FI_HS_TYPE", nullable = false)
+    @Column(name = "FI_HS_TYPE")
     private Integer fiHSType;
 
     @Column(name = "FI_HS_STATUS")
@@ -194,9 +194,6 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     @JoinColumn(name = "FI_HS_ID")
     private List<Tbdattach25> fiAttachmentList;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "FI_HS_ID")
-    private List<Tbdattach25> fiListAttch;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "FI_HS_ID")

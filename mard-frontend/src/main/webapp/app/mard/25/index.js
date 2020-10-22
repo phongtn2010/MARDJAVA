@@ -46,10 +46,10 @@ function Mard25VM() {
     self.getProfileStatus = function (statuscode) {
         var lstProfileStatus = self.lstProfileStatus();
         var pos = lstProfileStatus.find(function (e) {
-            return e.id == statuscode;
+            return e.fiCatType == statuscode;
         })
         if (pos)
-            return pos.name;
+            return pos.fiCatTypeName;
         else return statuscode;
     }
 
@@ -91,21 +91,21 @@ function Mard25VM() {
             app.sendGetRequest("/mard/25/danhmuc/unit?unitTypeId=4&systemId=6", function (res) {
                 options['lstUOMAnimal'] = res.data;
                 self.lstUOMAnimal(res.data);
-            })
+            }),
             // Get attach types
             // app.sendGetRequest("/mard/06/danhmuc/dinhkem?systemId=6", function (res) {
             //     options['lstAtchType'] = res.data;
             //     self.lstAtchType(res.data);
             // }),
             // // Get profile status
-            // app.sendGetRequest("/mard/06/danhmuc/statusHoso?systemId=6", function (res) {
-            //     options['lstProfileStatus'] = res.data;
-            //     self.lstProfileStatus(res.data);
-            //
-            //     res.data.forEach(function (item) {
-            //         mapTrangthai[item.id.toString()] = item.name
-            //     });
-            // })
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/10", function (res) {
+                options['lstProfileStatus'] = res.data;
+                self.lstProfileStatus(res.data);
+
+                // res.data.forEach(function (item) {
+                //     mapTrangthai[item.fiCatType.toString()] = fiCatTypeName.name
+                // });
+            })
         ).done(function (data) {
             $('#loading10').hide();
             self.searchHoso(1);

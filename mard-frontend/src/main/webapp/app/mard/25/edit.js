@@ -67,46 +67,46 @@ function Mard25EditVM () {
         var body = editVMSefl.kdnkVM().getData();
         // return;
         if (!body) return;
-        editVMSefl.verifySignature = function (signature, doc) {
-
-            var data = {
-                'signatureXml': signature,
-                'messageXml': doc.sign.fiXml,
-                'msgFunc': doc.sign.fiFunc,
-                'msgType': doc.sign.fiMsgType,
-                'documentCode': doc.data.fiMaHoso,
-                'ministryCode': 'MARD',
-                'proceduceCode': '25'
-            };
-            app.makePost({
-                    url: '/mard/25/verify',
-                    data: JSON.stringify(data),
-                    success: function (d) {
-                    app.makePost({
-                        url: '/mard/25/hoso/guihoso',
-                        data: JSON.stringify(doc.data),
-                        success: function (d) {
-                            app.Alert('Gửi hồ sơ thành công');
-                            setTimeout(function () {
-                                History.go(-1);
-                            }, 1500);
-                        },
-                        error: function (e) {
-                            if(e.hasOwnProperty('message')) {
-                                app.Alert(e.message);
-                            } else {
-                                if (e.status === 403 || (e.hasOwnProperty('responseText') && e.responseText.includes('<meta charset="utf-8" />'))) {
-                                    app.Alert('Phiên làm việc hết hạn, vui lòng đăng nhập lại!');
-                                } else {
-                                    app.Alert('Không gửi được hồ sơ');
-                                }
-
-                            }
-                        }
-                    });
-                }
-            });
-        };
+        // editVMSefl.verifySignature = function (signature, doc) {
+        //
+        //     var data = {
+        //         'signatureXml': signature,
+        //         'messageXml': doc.sign.fiXml,
+        //         'msgFunc': doc.sign.fiFunc,
+        //         'msgType': doc.sign.fiMsgType,
+        //         'documentCode': doc.data.fiMaHoso,
+        //         'ministryCode': 'MARD',
+        //         'proceduceCode': '25'
+        //     };
+        //     app.makePost({
+        //             url: '/mard/25/verify',
+        //             data: JSON.stringify(data),
+        //             success: function (d) {
+        //             app.makePost({
+        //                 url: '/mard/25/hoso/guihoso',
+        //                 data: JSON.stringify(doc.data),
+        //                 success: function (d) {
+        //                     app.Alert('Gửi hồ sơ thành công');
+        //                     setTimeout(function () {
+        //                         History.go(-1);
+        //                     }, 1500);
+        //                 },
+        //                 error: function (e) {
+        //                     if(e.hasOwnProperty('message')) {
+        //                         app.Alert(e.message);
+        //                     } else {
+        //                         if (e.status === 403 || (e.hasOwnProperty('responseText') && e.responseText.includes('<meta charset="utf-8" />'))) {
+        //                             app.Alert('Phiên làm việc hết hạn, vui lòng đăng nhập lại!');
+        //                         } else {
+        //                             app.Alert('Không gửi được hồ sơ');
+        //                         }
+        //
+        //                     }
+        //                 }
+        //             });
+        //         }
+        //     });
+        // };
 
         editVMSefl.pop = app.popup({
             title: 'Thông báo',
@@ -123,32 +123,38 @@ function Mard25EditVM () {
                             url: '/mard/25/hoso/send',
                             data: JSON.stringify(body),
                             success: function (d) {
-                                if (!app.requireSigning) {
+                                console.log(d);
+                                // if (!app.requireSigning) {
                                     if (d && d.success) {
                                         app.Alert('Gửi hồ sơ thành công');
-                                        window.location.href = app.appContext + '/mard/25/';
+
+                                        var delayInMilliseconds = 3000;
+                                        setTimeout(function() {
+                                            //your code to be executed after 1 second
+                                            window.location.href = app.appContext + '/mard/25/';
+                                        }, delayInMilliseconds);
                                     } else {
                                         app.Alert(d.message);
                                     }
-                                } else {
-                                    var result = d.sign;
-                                    var onSuccess = function (res) {
-                                        if (res.status == 'ok') {
-                                            editVMSefl.verifySignature(res.outputData, d);
-                                        } else {
-                                            app.Alert('Ký số không thành công, vui lòng thử lại.');
-                                        }
-                                    };
-                                    var onFailed = function (e) {
-                                        app.Alert('Ký số không thành công, vui lòng thử lại.');
-                                    };
-
-                                    RTVNSignClient.ping(function(res){
-                                        RTVNSignClient.create64("xml", result.fiHashEncode, onSuccess, onFailed);
-                                    }, function(e){
-                                        app.Alert('Bạn chưa cài hoặc chưa mở phần mềm ký số, vui lòng vào trang chủ để tải về và cài đặt theo hướng dẫn.');
-                                    });
-                                }
+                                // } else {
+                                //     var result = d.sign;
+                                //     var onSuccess = function (res) {
+                                //         if (res.status == 'ok') {
+                                //             editVMSefl.verifySignature(res.outputData, d);
+                                //         } else {
+                                //             app.Alert('Ký số không thành công, vui lòng thử lại.');
+                                //         }
+                                //     };
+                                //     var onFailed = function (e) {
+                                //         app.Alert('Ký số không thành công, vui lòng thử lại.');
+                                //     };
+                                //
+                                //     // RTVNSignClient.ping(function(res){
+                                //     //     RTVNSignClient.create64("xml", result.fiHashEncode, onSuccess, onFailed);
+                                //     // }, function(e){
+                                //     //     app.Alert('Bạn chưa cài hoặc chưa mở phần mềm ký số, vui lòng vào trang chủ để tải về và cài đặt theo hướng dẫn.');
+                                //     // });
+                                // }
                             },
                             error: function (e) {
                                 if(e.hasOwnProperty('message')) {
@@ -214,7 +220,7 @@ $(document).ready(function () {
     var options = {};
     getThongTinHoSo(function (data) {
         options=data.data;
-        console.log(options);
+
         $('#loading10').show();
         $.when(
             // Get list country

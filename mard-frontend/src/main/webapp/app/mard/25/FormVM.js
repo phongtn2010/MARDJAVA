@@ -820,7 +820,7 @@ function IsoLocationVM(data, validator) {
 
 function UploadFileVM(lstAtch, lstAtchType) {
     var ufVMSelf = this;
-    ufVMSelf.lstAtch = ko.observableArray([]);
+    ufVMSelf.lstAtchment = ko.observableArray([]);
     ufVMSelf.lstHD = ko.observableArray([]);
     ufVMSelf.selectedAttachVM = ko.observable(null);
     ufVMSelf.errorMsg = ko.observable(null);
@@ -864,7 +864,7 @@ function UploadFileVM(lstAtch, lstAtchType) {
     ufVMSelf.fiFileCNPTPath = ko.observable(null);
 
     if (lstAtchType) {
-        ufVMSelf.lstAtch(mapAttachmentVM(lstAtch, lstAtchType));
+        ufVMSelf.lstAtchment(mapAttachmentVM(lstAtch, lstAtchType));
     }
 
     ufVMSelf.addFileHD = function (atchVM) {
@@ -956,7 +956,7 @@ function UploadFileVM(lstAtch, lstAtchType) {
             fiFilePath:ufVMSelf.fiFilePath,
             fiFileName: fileName
         }
-        ufVMSelf.lstAtch.push(item);
+        ufVMSelf.lstAtchment.push(item);
     }
 
     ufVMSelf.fileChange = function (data, e) {
@@ -981,7 +981,7 @@ function UploadFileVM(lstAtch, lstAtchType) {
                         token = response.data;
                         var formData = new FormData();
                         formData.append('token', token);
-                        formData.append('documentType', 'BNNPTNT0600009');
+                        formData.append('documentType', 'BNNPTNT0200025');
                         formData.append('fileCode', fiMaLoai);
                         formData.append('fileName', fiFileName);
                         formData.append('file', files[0]);
@@ -1087,7 +1087,7 @@ function UploadFileVM(lstAtch, lstAtchType) {
     }
 
     ufVMSelf.getLstAttachments = function () {
-        var lstAttachment = ufVMSelf.lstAtch();
+        var lstAttachment = ufVMSelf.lstAtchment();
 
         var result = [];
 
@@ -1100,7 +1100,7 @@ function UploadFileVM(lstAtch, lstAtchType) {
     }
 
     ufVMSelf.validate = function () {
-        var lstAttachment = ufVMSelf.lstAtch();
+        var lstAttachment = ufVMSelf.lstAtchment();
         var isMissingFile = false;
         for (var i = 0; i < lstAttachment.length; i++) {
             if (lstAttachment[i].isRequired() && lstAttachment[i].lstFiles().length == 0) {

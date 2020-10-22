@@ -110,10 +110,8 @@ public class RegistrationProfile implements Serializable {
         regProfile.getFiAttachmentList().forEach(atch -> {
             AttachmentFile dtoAttach = new AttachmentFile();
             BeanUtils.copyProperties(atch, dtoAttach);
-            dtoAttach.setFiAttachmentId(atch.getFiGuid());
-            dtoAttach.setFiAttachmentTypeCode(atch.getFiFileTypeID().toString());
-            dtoAttach.setFiLinkFile(atch.getFiPath());
-            dtoAttach.setFiNameOfAttachment(atch.getFiFileName());
+
+
             dto.getFiAttachmentList().add(dtoAttach);
         });
         regProfile.getFiProductList().forEach(product -> {

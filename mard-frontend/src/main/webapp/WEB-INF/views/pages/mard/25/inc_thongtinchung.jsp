@@ -93,7 +93,7 @@
                         </div>
                         <div class="col-md-4">
                             <input
-                                    data-bind="value : fiHSStatus"
+                                    data-bind="value : $parent.getProfileStatus(fiHSStatus())"
                                     class="form-control"
                                     disabled/>
                         </div>

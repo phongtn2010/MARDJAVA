@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.sql.Date;
 
-@XmlType(name = "Attachment")
+@XmlType(name = "Packing")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Data
 public class TbdattachDg25 implements Serializable {

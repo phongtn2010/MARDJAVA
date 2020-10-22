@@ -13,10 +13,12 @@ public class TbdHoso25 implements Serializable {
 
     private Long fiIdHS;
     private Long fiHSStatus;
+    private String fiHSStatusName;
     private Date fiHSCreatedDate;
     private String fiNSWFileCode;
     private String fiNSWFileCodeReplace;
     private String fiGDK;
+    private String fiHSType;
 
     private String fiTaxCode;
     private String fiImporterName;
@@ -61,7 +63,7 @@ public class TbdHoso25 implements Serializable {
 
     private List<TbdHanghoa25> fiProductList;
 
-    private List<Tbdattach25> fiListAttch;
+    private List<Tbdattach25> fiAttachmentList;
 
     private List<TbdattachHoadon25> fiListAttchHoaDon;
 

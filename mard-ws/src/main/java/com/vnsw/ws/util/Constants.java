@@ -49,7 +49,7 @@ public class Constants {
         public static final String MARD_04 = "BNNPTNT0300004";//File Service
 		public static final String MARD_02 = "BNNPTNT0600005";
 		public static final String MARD_03 = "BNNPTNT0600006";
-        public static final String MARD25 = "BNNPTNT0200005";
+        public static final String MARD25 = "BNNPTNT0200025";
     }
 
     public interface MARD_PRO_RECEIVE {

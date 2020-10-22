@@ -113,14 +113,14 @@ public class Hoso25 {
     @XmlElement(name = "ContactEmail")
     private String fiContactEmail;
 
-    @XmlElementWrapper(name = "ContractList")
-    @XmlElement(name = "Contract")
-    private List<Tbdattach25> fiListAttch;
+    @XmlElementWrapper(name = "AttachmentList")
+    @XmlElement(name = "Attachment")
+    private List<com.vnsw.ws.p25.entity.Tbdattach25> fiAttachmentList;
     @XmlElementWrapper(name = "InvoiceList")
     @XmlElement(name = "Invoice")
     private List<TbdattachHoadon25> fiListAttchHoaDon;
-    @XmlElementWrapper(name = "AttachmentList")
-    @XmlElement(name = "Attachment")
+    @XmlElementWrapper(name = "ContractList")
+    @XmlElement(name = "Contract")
     private List<TbdattachHd25> fiListAttchHD;
     @XmlElementWrapper(name = "PackingList")
     @XmlElement(name = "Packing")

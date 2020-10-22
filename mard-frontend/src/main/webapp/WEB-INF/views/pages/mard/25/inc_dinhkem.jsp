@@ -406,7 +406,7 @@
                         <th data-bind="visible: $root.isEditable" class="text-center"><spring:message code="mard.25.tokhai.file.khac_xoa"/></th>
                     </tr>
                     </thead>
-                    <tbody data-bind="foreach: lstAtch">
+                    <tbody data-bind="foreach: lstAtchment">
                     <tr>
                         <td data-bind="text: ($index() + 1)"></td>
                         <td>

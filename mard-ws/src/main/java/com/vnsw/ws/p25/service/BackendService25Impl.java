@@ -22,7 +22,7 @@ import org.springframework.web.client.RestTemplate;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
-@Service("backendService06")
+@Service("backendService25")
 public class BackendService25Impl implements BackendService25 {
 
     private static final String CLASS_NAME = "BackendServiceImpl";

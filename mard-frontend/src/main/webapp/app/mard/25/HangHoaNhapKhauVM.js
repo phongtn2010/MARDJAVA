@@ -166,10 +166,11 @@ function HangHoaNhapKhauVM (options) {
     kdnkVMSelf.getProfileStatus = function (statuscode) {
         var lstProfileStatus = kdnkVMSelf.lstProfileStatus();
         var pos = lstProfileStatus.find(function (e) {
-            return e.id == Number(statuscode);
+            console.log(statuscode);
+            return e.fiCatType === statuscode;
         })
         if (pos)
-            return pos.name;
+            return pos.fiCatTypeName;
         else return statuscode;
     }
 
@@ -278,8 +279,12 @@ function HangHoaNhapKhauVM (options) {
             "fiSignPosition": kdnkVMSelf.thongtinChungVM().fiSignPosition(),
             "fiSignAddress": kdnkVMSelf.thongtinChungVM().fiSignAddress(),
 
-            "fiAttachmentList": kdnkVMSelf.uploadFileVM().getLstAttachments()
+            "fiAttachmentList": kdnkVMSelf.uploadFileVM().lstAtchment(),
+            "fiListAttchHoaDon": kdnkVMSelf.uploadFileVM().lstHoaDon(),
+            "fiListAttchHD": kdnkVMSelf.uploadFileVM().lstHD(),
+            "fiListAttchPhieu": kdnkVMSelf.uploadFileVM().lstPhieu()
         }
+        console.log(body);
         return body;
     }
 }
