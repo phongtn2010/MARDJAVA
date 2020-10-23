@@ -89,6 +89,11 @@ function ThongTinChungVM(data) {
 
     ttcVMSelf.errorMsg = ko.observable(null);
 
+    ttcVMSelf.lstNhomSp = ko.computed(function () {
+        return ko.utils.arrayFilter(data.lstLoaihang, function (re) {
+            return re.fiLoaiDonDangky == "1234";
+        });
+    });
 
     ttcVMSelf.fiRegistrationNo = ko.observable((data && data.hasOwnProperty('fiRegistrationNo')) ? data.fiRegistrationNo : null);
     ttcVMSelf.fiImporterName = ko.observable((data && data.hasOwnProperty('fiImporterName')) ? data.fiImporterName : null)

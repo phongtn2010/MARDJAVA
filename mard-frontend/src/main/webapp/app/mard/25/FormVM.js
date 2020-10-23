@@ -821,7 +821,7 @@ function IsoLocationVM(data, validator) {
 function UploadFileVM(lstAtch, lstAtchType) {
     var ufVMSelf = this;
     ufVMSelf.lstAtchment = ko.observableArray([]);
-    ufVMSelf.lstHD = ko.observableArray([]);
+
     ufVMSelf.selectedAttachVM = ko.observable(null);
     ufVMSelf.errorMsg = ko.observable(null);
     ufVMSelf.uploadedFiles = ko.observableArray([]);
@@ -830,9 +830,10 @@ function UploadFileVM(lstAtch, lstAtchType) {
     ufVMSelf.fiFilePath = ko.observable(null);
     ufVMSelf.fiFileType = ko.observable(null);
 
+    ufVMSelf.lstHD = ko.observableArray([]);
     ufVMSelf.fiFileHD  = ko.observable(null);
     ufVMSelf.fiFileHDDate = ko.observable(null);
-    ufVMSelf.fiPath  = ko.observable(null);
+    ufVMSelf.fiFileHDPath  = ko.observable(null);
     ufVMSelf.fiFileName = ko.observable(null);
 
     ufVMSelf.fiHSType = ko.observable(null);
@@ -870,11 +871,11 @@ function UploadFileVM(lstAtch, lstAtchType) {
     ufVMSelf.addFileHD = function (atchVM) {
         console.log("Ok");
         ufVMSelf.selectedAttachVM($.extend(true, {}, atchVM));
-        var fileName=atchVM.fiPath().replace(/^.*[\\\/]/, '');
+        var fileName=atchVM.fiFileHDPath().replace(/^.*[\\\/]/, '');
         var item ={
             fiFileHD:ufVMSelf.fiFileHD,
             fiFileHDDate:ufVMSelf.fiFileHDDate,
-            fiPath:ufVMSelf.fiPath,
+            fiPath:ufVMSelf.fiFileHDPath,
             fiFileHDName: fileName,
         }
         ufVMSelf.lstHD.push(item);
@@ -959,8 +960,9 @@ function UploadFileVM(lstAtch, lstAtchType) {
         ufVMSelf.lstAtchment.push(item);
     }
 
-    ufVMSelf.fileChange = function (data, e) {
-        var files = e.target.files;
+    ufVMSelf.uploadFileHD = function (data, e) {
+        var files = $('#file-hd')[0].files[0];
+        var fileName=atchVM.fiPath().replace(/^.*[\\\/]/, '');
         if (!files || files.length == 0) {
             return;
         } else {
@@ -982,7 +984,7 @@ function UploadFileVM(lstAtch, lstAtchType) {
                         var formData = new FormData();
                         formData.append('token', token);
                         formData.append('documentType', 'BNNPTNT0200025');
-                        formData.append('fileCode', fiMaLoai);
+                        formData.append('fileCode', '1');
                         formData.append('fileName', fiFileName);
                         formData.append('file', files[0]);
 

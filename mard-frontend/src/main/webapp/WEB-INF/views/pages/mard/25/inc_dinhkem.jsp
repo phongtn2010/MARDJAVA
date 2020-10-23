@@ -43,10 +43,10 @@
                                     data-date-format="dd/mm/yyyy" type="text" value="" maxlength="10" />
                         </td>
                         <td>
-                            <input class="form-control" type="file" data-bind="value: fiPath"/>
+                            <input id="file-hd" class="form-control" type="file" data-bind="value: fiFileHDPath"/>
                         </td>
                         <td data-bind="visible: $root.isEditable" class="text-center">
-                            <a href="#" data-bind="click:  addFileHD, visible: $root.isEditable()"><i class="fa fa-lg fa-plus"></i></a>
+                            <a href="#" data-bind="event: { click: uploadFileHD}, visible: $root.isEditable()"><i class="fa fa-lg fa-plus"></i></a>
                         </td>
                         </tr>
                         </tfoot>
@@ -468,7 +468,7 @@
                 <span class="nsw-require-field" data-bind="text: errorMsg"></span>
             </div>
             <label class="btn blue">
-                <input type="file" id="btnfile3" style="display: none" data-bind="event: { change: fileChange}" accept=".pdf, .jpeg, .jpg, .tif"/>
+                <input type="file" id="btnfile3" style="display: none" data-bind="" accept=".pdf, .jpeg, .jpg, .tif"/>
                 <i class="fa fa-plus upload-file"></i> <spring:message code="mard.button.them_moi"/>
             </label>
         </div>
