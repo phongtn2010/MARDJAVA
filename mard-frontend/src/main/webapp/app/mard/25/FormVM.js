@@ -1123,6 +1123,8 @@ function AttachmentVM(options) {
     atchVMSelf.lstFiles = ko.observableArray([]);
 }
 
+
+
 function FileVM(options) {
     var fileVMSelf = this;
     fileVMSelf.fiIdDinhkem = ko.observable((options && options.hasOwnProperty('fiIdDinhkem')) ? options.fiIdDinhkem : null);
