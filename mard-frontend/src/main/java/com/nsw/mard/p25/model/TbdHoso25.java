@@ -13,6 +13,7 @@ public class TbdHoso25 implements Serializable {
 
     private Long fiIdHS;
     private Long fiHSStatus;
+    private String fiHSStatusName;
     private Date fiHSCreatedDate;
     private String fiNSWFileCode;
     private String fiNSWFileCodeReplace;
