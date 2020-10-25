@@ -80,21 +80,21 @@ public class Hoso25 {
     String fiTaxCode;
     @XmlElement(name = "TypeAniFeed")
     String fiHSType;
-
-    @XmlElement(name = "ImporterName")
-    String fiImporterName;
-
-    @XmlElement(name = "ImporterTel")
-    String fiImporterTel;
-
-    @XmlElement(name = "ImporterAddress")
-    String fiImporterAddress;
-
-    @XmlElement(name = "ImporterFax")
-    String fiImporterFax;
-
-    @XmlElement(name = "ImporterEmail")
-    String fiImporterEmail;
+//
+//    @XmlElement(name = "ImporterName")
+//    String fiImporterName;
+//
+//    @XmlElement(name = "ImporterTel")
+//    String fiImporterTel;
+//
+//    @XmlElement(name = "ImporterAddress")
+//    String fiImporterAddress;
+//
+//    @XmlElement(name = "ImporterFax")
+//    String fiImporterFax;
+//
+//    @XmlElement(name = "ImporterEmail")
+//    String fiImporterEmail;
 
     @XmlElement(name = "ProductType")
     Integer fiProductType;
@@ -122,7 +122,7 @@ public class Hoso25 {
 
     @XmlElementWrapper(name = "ContractList")
     @XmlElement(name = "Contract")
-    private List<Tbdattach25> fiListAttch;
+    private List<Tbdattach25> fiAttach;
     @XmlElementWrapper(name = "InvoiceList")
     @XmlElement(name = "Invoice")
     private List<TbdattachHoadon25> fiListAttchHoaDon;

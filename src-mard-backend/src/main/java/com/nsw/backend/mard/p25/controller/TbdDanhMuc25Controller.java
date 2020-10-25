@@ -1,9 +1,7 @@
 package com.nsw.backend.mard.p25.controller;
 
 import com.nsw.backend.controller.BaseController;
-import com.nsw.backend.mard.p25.model.TbdHoso25;
 import com.nsw.backend.mard.p25.service.TbsDanhmuc25Service;
-import com.nsw.backend.mard.p25.service.TbsPhannhomtacn25Service;
 import com.nsw.backend.util.ResponseJson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -29,6 +29,9 @@ public class Tbdattach25 implements Serializable {
     @Column(name = "FI_TENLOAI")
     private String fiTenloai;
 
+    @Column(name = "FI_TENFILE")
+    private String fiTenFile;
+
     @Column(name = "FI_FILE_ID")
     private Long fiFileId;
 

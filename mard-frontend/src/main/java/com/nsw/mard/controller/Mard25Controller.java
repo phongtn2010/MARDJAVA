@@ -56,6 +56,19 @@ public class Mard25Controller {
         return Mard25Constant.Page.CREATE;
     }
 
+    @RequestMapping(value = {"/hanghoa/{idHoSo}"}, method = RequestMethod.GET)
+    public String viewHangHoaStatus(ModelMap model, @PathVariable("idHoSo") Long idHoSo) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            UserCustom user = (UserCustom) principal;
+            initData(model, user);
+            model.addAttribute(ID_FILED, idHoSo);
+        } else {
+            return AppConstant.redirectPage(AppConstant.Pages.LOGOUT);
+        }
+        return Mard25Constant.Page.VIEW_HANGHOA;
+    }
+
     @RequestMapping(value = {"/edit/{idHoSo}"}, method = RequestMethod.GET)
     public String editHoso(ModelMap model, @PathVariable("idHoSo") Long idHoSo) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

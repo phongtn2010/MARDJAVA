@@ -25,6 +25,7 @@ public class Mard25Constant {
         public static final String CREATE = "mard.25.create";
         public static final String EDIT = "mard.25.edit";
         public static final String VIEW = "mard.25.view";
+        public static final String VIEW_HANGHOA = "mard.25.view.hanghoa";
         public static final String YCS = "mard.25.ycs";
     }
 
@@ -182,13 +183,13 @@ public class Mard25Constant {
         public static final String ATTACHMENT_DELETE = "mard.06.dinhkem.delete";
         public static final String LICENSE_VIEW_GET = "mard.06.tbdhoso06.viewlicense";
         public static final String HISTORY_BY_HS_CODE = "mard.06.tbdhoso06.history";
-
         public static final String UPDATE_ONLY = "mard.06.hoso.update_only";
         public static final String SAVE_BEFORE_UPDATE = "mard.06.hoso.save_before_update";
         public static final String GET_XML = "mard.06.getXml";
 
+        //binhvv5
         public static final String GET_BY_CAT_NO = "mard.25.danhmuc.getbycatno";
-
+        public static final String GET_HANGHOA_BY_IDHS = "mard.25.hanghoa.find";
 
     }
 

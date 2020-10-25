@@ -435,7 +435,14 @@
         <put-attribute name="title" value="Vietnam Single Window" />
         <put-attribute name="body" value="/WEB-INF/views/pages/mard/25/edit.jsp" />
     </definition>
-
+    <definition name="mard.25.view" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/25/view.jsp" />
+    </definition>
+    <definition name="mard.25.view.hanghoa" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/25/trangthaichitiet_hanghoa.jsp" />
+    </definition>
 
     <!--END THU TUC 25-->
 	

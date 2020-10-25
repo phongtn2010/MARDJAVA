@@ -7,15 +7,10 @@ import java.util.List;
 
 @Data
 public class TbdHanghoa25 implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    public static final String SEQUENCE_NAME = "TBDHANGHOA25_SEQ";
 
     private Long fiIdProduct;
 
     private Long fiIdHS;
-
-    private Long fiId;
 
     private String fiProName;
 
@@ -60,6 +55,7 @@ public class TbdHanghoa25 implements Serializable {
     private String fiProductKL;
 
     private String fiProductSL;
+    private Long fiTrangThaiHangHoa;
 
     private List<TbdHanghoaCL25> fiProCLList;
 

@@ -1,15 +1,17 @@
 package com.vnsw.ws.p25.entity;
 
+import com.vnsw.ws.annotations.DateSerialization;
 import lombok.Data;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.sql.Date;
 
-@XmlType(name = "Attachment")
+@XmlType(name = "Packing")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Data
 public class TbdattachDg25 implements Serializable {
@@ -17,6 +19,7 @@ public class TbdattachDg25 implements Serializable {
 
     @XmlElement(name = "PackingNo")
     private String fiSoPhieu;
+    @XmlJavaTypeAdapter(DateSerialization.class)
     @XmlElement(name = "PackingDate")
     private Date fiNgayPhieu;
     @XmlElement(name = "PackingAttachmentId")

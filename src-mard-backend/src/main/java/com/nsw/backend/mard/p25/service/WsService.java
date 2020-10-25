@@ -1,7 +1,6 @@
 package com.nsw.backend.mard.p25.service;
 
 import com.nsw.backend.mard.p25.client.ResponseWrapper;
-import com.nsw.backend.mard.p25.dto.RequestEdit;
 import com.nsw.backend.mard.p25.dto.SendMessage;
 import com.nsw.backend.mard.p25.exception.NSWException;
 import com.nsw.backend.mard.p25.model.TbdHoso25;
@@ -21,14 +20,14 @@ public interface WsService {
      * @param requestEdit
      * @return
      */
-    ResponseJson updateProfile(RequestEdit requestEdit);
+//    ResponseJson updateProfile(RequestEdit requestEdit);
     /**
      * Rút / yêu cầu rút hồ sơ
      *
      * @param
      * @return
      */
-    ResponseJson requestCancelProfile(RequestEdit requestCancel) throws NSWException;
+//    ResponseJson requestCancelProfile(RequestEdit requestCancel) throws NSWException;
     /**
      * Xử lý kết quả thẩm định
      *

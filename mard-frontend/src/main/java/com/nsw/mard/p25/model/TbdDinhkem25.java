@@ -28,9 +28,9 @@ public class TbdDinhkem25 implements Serializable {
 
     private Long fiActive;
 
-    private String fiPath;
+    private String fiLinkBNN;
 
-    private String fiGuid;
+    private String fiGuidBNN;
 
     private Long fiIdHS;
 

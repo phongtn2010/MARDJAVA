@@ -4,10 +4,8 @@ function Mard25EditVM () {
     editVMSefl.isEditable = ko.observable(true)
 
     editVMSefl.applyState = function (options) {
-        options["fiHSType"] = "1";
         editVMSefl.kdnkVM(new HangHoaNhapKhauVM(options));
     }
-
     editVMSefl.saveRegProfile = function () {
         // if (!editVMSefl.kdnkVM().validateForm()) return;
         var body = editVMSefl.kdnkVM().getData();
@@ -214,7 +212,6 @@ $(document).ready(function () {
     var options = {};
     getThongTinHoSo(function (data) {
         options=data.data;
-        console.log(options);
         $('#loading10').show();
         $.when(
             // Get list country
@@ -239,6 +236,20 @@ $(document).ready(function () {
                 options['lstPhanNhom'] = res.data;
                 options['lstPhanLoai'] = res.data;
                 options['lstLoai'] = res.data;
+            })
+            ,
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/11", function (res) {
+                options['lstAtchType'] = res.data;
+            })
+            ,
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/12", function (res) {
+                options['lstLoaiHoSoDangKy'] = res.data;
+            }),
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/25", function (res) {
+                options['lstProfileStatus'] = res.data;
+            }),
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/2", function (res) {
+                options['lstHoSoType'] = res.data;
             })
             // // Get attach types
             // app.sendGetRequest("/mard/25/danhmuc/dinhkem?systemId=6", function (res) {

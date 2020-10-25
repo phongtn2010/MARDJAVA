@@ -79,13 +79,13 @@ public class Tbdhoso25ServiceImpl implements TbdHoso25Service {
         if (StringUtils.isEmpty(entity.getFiNSWFileCode())) {
             entity.setFiNSWFileCode(generateMaHoso(entity.getFiIdHS()));
         }
-        entity.getFiAttachmentList().removeIf(dinhkem -> StringUtils.isEmpty(dinhkem.getFiPath()));
-        entity.getFiAttachmentList().forEach(dinhkem -> dinhkem.setFiActive(Constant25.ACTIVE.intValue()));
-        entity.getFiProductList().forEach((product -> {
-            if (product.getFiId() == null) {
-                product.setFiId(product.getFiIdProduct());
-            }
-        }));
+
+
+//        entity.getFiProductList().forEach((product -> {
+//            if (product.getFiId() == null) {
+//                product.setFiId(product.getFiIdProduct());
+//            }
+//        }));
         return regProfileRepository.save(entity);
     }
 

@@ -8,7 +8,7 @@ package com.nsw.backend.mard.p25.controller;
 import com.nsw.backend.controller.BaseController;
 import com.nsw.backend.helper.RabbitMQErrorHelper;
 import com.nsw.backend.mard.p25.constant.Constant25;
-import com.nsw.backend.mard.p25.dto.RequestEdit;
+//import com.nsw.backend.mard.p25.dto.RequestEdit;
 import com.nsw.backend.mard.p25.dto.SendMessage;
 import com.nsw.backend.mard.p25.model.FilterForm;
 import com.nsw.backend.mard.p25.model.TbdHoso25;
@@ -102,31 +102,8 @@ public class Tbdhoso25Controller extends BaseController {
     @PostMapping(value = "/update")
     public ResponseEntity<ResponseJson> updateHosoAfterProcess(@RequestBody TbdHoso25 hoso) {
         try {
-            if (hoso == null) {
-                return createErrorResponse("No content", HttpStatus.NO_CONTENT);
-            }
-            TbdHoso25 result = regProfileService.updateAfterSendNSW(hoso);
-            RequestEdit requestEdit = new RequestEdit();
-            requestEdit.setFiRequestDate(new Date());
-            requestEdit.setFiNSWFileCode(result.getFiNSWFileCode());
-            requestEdit.setFiReason(result.getFiReason());
-            requestEdit.setRegProfile(result);
-            ResponseJson response = wsService.updateProfile(requestEdit);
-            if (response.isSuccess()) {
-                TbdLichsu25 profileHst = new TbdLichsu25();
-                profileHst.setFiIdHS(result.getFiIdHS());
-                profileHst.setFiHSCode(result.getFiNSWFileCode());
-                profileHst.setFiStatus(result.getFiHSStatus());
-                profileHst.setFiSenderCode(result.getFiCreatedBy());
-                //profileHst.setFiSenderUnitName(result.getFiImporterName());
-                profileHst.setFiSenderName(result.getFiTaxCode());
-                profileHst.setFiContent("Cập nhật hồ sơ tạo yêu cầu xin sửa");
-                hstService.save(profileHst);
-                return createSuccessResponse(result, HttpStatus.OK);
-            } else {
-                regProfileService.rollbackFailedRequestUpdate(result);
-                return createErrorResponse("Có lỗi khi yêu cầu sửa! " + response.getMessage(), HttpStatus.OK);
-            }
+           return null;
+
         } catch (Exception ex) {
             LOG.error(TAG + ex.getMessage(), ex);
             RabbitMQErrorHelper.pushLogToRabbitMQ(getErrorInfo(TAG, ex), rabbitMQService.getRabbitMQInfo());
@@ -165,33 +142,7 @@ public class Tbdhoso25Controller extends BaseController {
     @PostMapping(value = "/update-only")
     public ResponseEntity<ResponseJson> updateOnly(@RequestBody TbdHoso25 hoso) {
         try {
-            if (hoso == null) {
-                return createErrorResponse("No content", HttpStatus.NO_CONTENT);
-            }
-            TbdHoso25 result = regProfileService.findByFiHSCode(hoso.getFiNSWFileCode());
-            RequestEdit requestEdit = new RequestEdit();
-            requestEdit.setFiRequestDate(new Date());
-            requestEdit.setFiNSWFileCode(result.getFiNSWFileCode());
-            requestEdit.setFiReason(result.getFiReason());
-            requestEdit.setRegProfile(result);
-
-            regProfileService.getSignPendingProfiles().invalidate(hoso.getFiNSWFileCode());
-            ResponseJson response = wsService.updateProfile(requestEdit);
-            if (response.isSuccess()) {
-                TbdLichsu25 profileHst = new TbdLichsu25();
-                profileHst.setFiIdHS(result.getFiIdHS());
-                profileHst.setFiHSCode(result.getFiNSWFileCode());
-                profileHst.setFiStatus(result.getFiHSStatus());
-                profileHst.setFiSenderCode(result.getFiCreatedBy());
-                //profileHst.setFiSenderUnitName(result.getFiImporterName());
-                profileHst.setFiSenderName(result.getFiTaxCode());
-                profileHst.setFiContent("Cập nhật hồ sơ tạo yêu cầu xin sửa");
-                hstService.save(profileHst);
-                return createSuccessResponse(result, HttpStatus.OK);
-            } else {
-                regProfileService.rollbackFailedRequestUpdate(result);
-                return createErrorResponse("Có lỗi khi gửi yêu cầu sửa! " + response.getMessage(), HttpStatus.OK);
-            }
+           return null;
         } catch (Exception ex) {
             LOG.error(TAG + ex.getMessage(), ex);
             RabbitMQErrorHelper.pushLogToRabbitMQ(getErrorInfo(TAG, ex), rabbitMQService.getRabbitMQInfo());
@@ -217,21 +168,7 @@ public class Tbdhoso25Controller extends BaseController {
     @PostMapping(value = "/cancel")
     public ResponseEntity<ResponseJson> cancelHosoAfterProcess(@RequestBody TbdYcrut25 requestCancel) {
         try {
-            if (requestCancel == null) {
-                return createErrorResponse("No content", HttpStatus.NO_CONTENT);
-            }
-            RequestEdit requestEdit = new RequestEdit();
-            requestEdit.setFiRequestDate(new Date());
-            requestEdit.setFiNSWFileCode(requestCancel.getFiNSWFileCode());
-            requestEdit.setFiReason(requestCancel.getFiReason());
-            requestEdit.setRegProfile(regProfileService.findByFiHSCode(requestCancel.getFiNSWFileCode()));
-            ResponseJson response = wsService.requestCancelProfile(requestEdit);
-            if (response.isSuccess()) {
-                TbdYcrut25 result = regProfileService.cancelHoso(requestCancel);
-                return createSuccessResponse(result, HttpStatus.OK);
-            } else {
-                return ResponseEntity.ok(response);
-            }
+            return null;
         } catch (Exception ex) {
             LOG.error(TAG + ex.getMessage(), ex);
             RabbitMQErrorHelper.pushLogToRabbitMQ(getErrorInfo(TAG, ex), rabbitMQService.getRabbitMQInfo());

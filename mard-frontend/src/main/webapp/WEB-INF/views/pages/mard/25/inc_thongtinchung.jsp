@@ -93,7 +93,7 @@
                         </div>
                         <div class="col-md-4">
                             <input
-                                    data-bind="value : fiHSStatus"
+                                    data-bind="value : $parent.getProfileStatus(fiHSStatus())"
                                     class="form-control"
                                     disabled/>
                         </div>
@@ -117,19 +117,10 @@
                                     code="mard.25.tokhai.thong_tin_loai"/><a class="nsw-require-field">*</a></label>
                         </div>
                         <div class="col-md-4">
-                            <select class="form-control" data-bind="value: fiHSType, enable: $root.isEditable()">
-                                <option value="1">
-                                    <spring:message code="mard.25.tokhai.loai_hinh_thuc_2a"/>
-                                </option>
-                                <option value="2">
-                                    <spring:message code="mard.25.tokhai.loai_hinh_thuc_2b"/>
-                                </option>
-                                <option value="3">
-                                    <spring:message code="mard.25.tokhai.loai_hinh_thuc_2c"/>
-                                </option>
-                                <option value="4">
-                                    <spring:message code="mard.25.tokhai.loai_hinh_thuc_2d"/>
-                                </option>
+                            <select class="form-control"  data-bind="options : lstHoSoType, optionsValue : 'fiCatType',
+                                                                     selectText2:fiHSTypeName,
+                                                                     optionsText : 'fiCatTypeName',
+                                                    value: fiHSType, enable: $root.isEditable(), event: {change: changeHoSoType(fiHSType())}">
                             </select>
                         </div>
                     </div>

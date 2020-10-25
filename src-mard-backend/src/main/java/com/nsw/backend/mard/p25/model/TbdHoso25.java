@@ -45,7 +45,7 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_HS_CODE", length = 50)
     private String fiNSWFileCode;
 
-    @Column(name = "FI_HS_Code_R", length = 50)
+    @Column(name = "FI_HS_CODE_R", length = 50)
     private String fiNSWFileCodeReplace;
 
     @Column(name = "FI_GDK", length = 250)
@@ -66,7 +66,7 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_IMPORTER_EMAIL", length = 500)
     private String fiImporterEmail;
 
-    @Column(name = "FI_HS_TYPE", nullable = false)
+    @Column(name = "FI_HS_TYPE")
     private Integer fiHSType;
 
     @Column(name = "FI_HS_STATUS")
@@ -168,12 +168,12 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_CONTACT_EMAIL", nullable = false, length = 250)
     private String fiContactEmail;
 
-//    //Thông tin hồ sơ Doanh Nghiệp
-//    @Column(name = "FI_SIGN_PROVIN_CODE", nullable = false, length = 6)
-//    private String fiSignProvinCode;
-//
-//    @Column(name = "FI_SIGN_PROVIN_NAME", nullable = false, length = 250)
-//    private String fiSignProvinName;
+    //Thông tin công văn
+    @Column(name = "FI_SO_CV_MIENGIAM")
+    private String fiProCVMienGiam;
+
+    @Column(name = "FI_NGAY_CV_MIENGIAM")
+    private Date fiProCVMienGiamNgay;
 
     @Column(name = "FI_SIGN_NAME", nullable = false, length = 250)
     private String fiSignName;
@@ -192,23 +192,8 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     // Dinh kem
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "FI_HS_ID")
-    private List<Tbdattach25> fiAttachmentList;
+    private List<TbdDinhkem25> fiAttachmentList;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "FI_HS_ID")
-    private List<Tbdattach25> fiListAttch;
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "FI_HS_ID")
-    private List<TbdattachHoadon25> fiListAttchHoaDon;
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "FI_HS_ID")
-    private List<TbdattachHd25> fiListAttchHD;
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "FI_HS_ID")
-    private List<TbdattachDg25> fiListAttchPhieu;
 
     @Transient
     private String fiCertNo;

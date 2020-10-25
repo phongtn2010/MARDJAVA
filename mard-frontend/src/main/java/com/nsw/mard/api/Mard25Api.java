@@ -1,5 +1,6 @@
 package com.nsw.mard.api;
 
+import com.google.gson.Gson;
 import com.nsw.api.BaseApi;
 import com.nsw.common.model.SignData;
 import com.nsw.common.model.TokenInfo;
@@ -9,28 +10,81 @@ import com.nsw.helper.BackendRequestHelper;
 import com.nsw.helper.RabbitMQErrorHelper;
 import com.nsw.mard.constant.Mard25Constant;
 import com.nsw.mard.p25.model.FilterForm;
+import com.nsw.mard.p25.model.ResponeUploadFile;
 import com.nsw.mard.p25.model.TbdHoso25;
 import com.nsw.mard.p6.model.SendMessage;
 import com.nsw.mard.service.DinhkemService;
 import com.nsw.util.Constants;
 import com.nsw.util.LogUtil;
 import com.nsw.util.Utility;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.codehaus.jackson.map.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping("/mard/25")
 public class Mard25Api extends BaseApi {
     static final String TAG = "mard25Api";
+
     @Autowired
     DinhkemService attachmentService;
+
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public @ResponseBody ResponseJson uploadFileToBNN(@RequestParam("file") MultipartFile multipartfile,
+                                                      @RequestParam("mcode") String mcode,
+                                                      @RequestParam("pcode") String pcode){
+        ResponseJson json = new ResponseJson();
+        try {
+            String fileName = multipartfile.getOriginalFilename();
+            String filePath = "E:\\Project\\NSW\\upload\\" + fileName + "." + FilenameUtils.getExtension(fileName);
+            Path path = Paths.get(filePath);
+            Files.write(path, multipartfile.getBytes());
+            File file = new File(filePath);
+
+            MultiValueMap<String, Object> body
+                    = new LinkedMultiValueMap<>();
+            body.add("file", new FileSystemResource(file));
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+            HttpEntity<MultiValueMap<String, Object>> requestEntity
+                    = new HttpEntity<>(body, headers);
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://mard.adp-p.com/api/fileuploadapi",requestEntity,String.class);
+            Gson g = new Gson();
+            ResponeUploadFile responeUploadFile=g.fromJson(responseEntity.getBody().substring(1,responseEntity.getBody().length()-1), ResponeUploadFile.class);
+            json.setSuccess(true);
+            json.setData(responeUploadFile);
+            json.setMessage("Upload file thành công");
+            return json;
+        } catch (Exception ex) {
+            json.setData(null);
+            json.setSuccess(false);
+            json.setMessage(ex.getMessage());
+            return json;
+        }
+    }
 
     @RequestMapping(value = "/danhmuc/quocgia", method = RequestMethod.GET)
     public @ResponseBody
@@ -321,6 +375,29 @@ public class Mard25Api extends BaseApi {
                 return json;
             }
             json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.HOSO_GET_BY_FILTER) + "?id=" + idHoSo);
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            json.setData(null);
+            json.setSuccess(false);
+            json.setMessage(ex.getMessage());
+            return json;
+        }
+    }
+
+    @RequestMapping(value = "/hanghoa/find/{idHoSo}", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseJson getHangHoaByIDHS(@PathVariable String idHoSo) {
+        ResponseJson json = new ResponseJson();
+        try {
+            if (!isOwner(idHoSo, null)) {
+                json.setSuccess(false);
+                json.setMessage("Không có quyền truy cập hồ sơ");
+                return json;
+            }
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_HANGHOA_BY_IDHS)  + idHoSo);
             return json;
         } catch (Exception ex) {
             LogUtil.addLog(ex);

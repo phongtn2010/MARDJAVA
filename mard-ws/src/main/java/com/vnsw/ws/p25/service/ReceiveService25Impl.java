@@ -24,9 +24,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Xử lý bản tin của thủ tục 06 cua MARD
+ * Xử lý bản tin của thủ tục 25 cua MARD
  */
-@Service("receive06Service")
+@Service("receive25Service")
 public class ReceiveService25Impl implements ReceiveService25 {
 
     public static final Logger logger = LoggerFactory.getLogger(ReceiveService25Impl.class);
@@ -59,7 +59,7 @@ public class ReceiveService25Impl implements ReceiveService25 {
             error = new Error25();
             error.setErrorCode(Constants.ERROR.ERR00_CODE);
             error.setErrorName(Constants.ERROR.ERR00);
-            envelopReturn = envelopeService.createEnvelopeError(maHoso, Constants.MARD_PRO.MARD06, type, error);
+            envelopReturn = envelopeService.createEnvelopeError(maHoso, Constants.MARD_PRO.MARD25, type, error);
         } else {
             try {
                 Envelope25 envelop = (Envelope25) convertXmlService.xmlToEnvelope(xml);
@@ -68,29 +68,39 @@ public class ReceiveService25Impl implements ReceiveService25 {
                 ResponseJson json;
                 type = getType(envelop);
                 maHoso = envelop.getHeader().getSubject().getReference();
-                header = envelopeService.createReceiveHeader(maHoso, Constants.MARD_PRO.MARD06, type,
+                header = envelopeService.createReceiveHeader(maHoso, Constants.MARD_PRO.MARD25, type,
                         Constants.FUNCTION.FUNC_SUCCESS);
                 ct = envelop.getBody().getContent();
 
                 ResponseWrapper responseWrapper = new ResponseWrapper();
                 responseWrapper.setHeader(envelop.getHeader());
                 ValidateXSDHelper validator = new ValidateXSDHelper();
-                errorMsg = validator.validateWithStringXML(xml, "p06/" + Constants.MARD_PRO.MARD06 + type + envelop.getHeader().getSubject().getFunction() + ".xsd");
+//                errorMsg = validator.validateWithStringXML(xml, "p25/" + Constants.MARD_PRO.MARD25 + type + envelop.getHeader().getSubject().getFunction() + ".xsd");
                 json = new ResponseJson(false, null, 0L, "");
                 if (errorMsg == null) {
                     switch (type) {
-                        case Constants25.MARD06_TYPE.TYPE_11://Ket qua tham dinh ho so
-                            KetQuaThamDinh ketQuaThamDinh = ct.getKetQuaThamDinh();
-                            responseWrapper.setData(ketQuaThamDinh);
+                        case Constants25.MARD25_TYPE.TYPE_13://Ket qua tham dinh ho so
+                            XacNhanDon xacNhanDon = ct.getXacNhanDon();
+                            responseWrapper.setData(xacNhanDon);
 
-                            if (ketQuaThamDinh != null) {
+                            if (xacNhanDon != null) {
+                                json = backendService.ketquaThamdinh(responseWrapper);
+                            }
+
+                            envelopReturn = createEnvelopReturn(maHoso, Constants.MARD_PRO.MARD25, header, json);
+                            break;
+                        case Constants25.MARD25_TYPE.TYPE_11://Ket qua tham dinh ho so
+                            KetQuaXuLy ketQuaXuLy = ct.getKetQuaXuLy();
+                            responseWrapper.setData(ketQuaXuLy);
+
+                            if (ketQuaXuLy != null) {
                                 json = backendService.ketquaThamdinh(responseWrapper);
                             }
 
                             envelopReturn = createEnvelopReturn(maHoso, Constants.MARD_PRO.MARD06, header, json);
                             break;
 
-                        case Constants25.MARD06_TYPE.TYPE_14://BNN phan hoi yeu cau huy HS
+                        case Constants25.MARD25_TYPE.TYPE_14://BNN phan hoi yeu cau huy HS
                             PhanhoiYeucauHuyHoso phanhoiYeucauHuyHoso = ct.getPhanhoiYeucauHuyHoso();
                             responseWrapper.setData(phanhoiYeucauHuyHoso);
 
@@ -101,7 +111,7 @@ public class ReceiveService25Impl implements ReceiveService25 {
                             envelopReturn = createEnvelopReturn(maHoso, Constants.MARD_PRO.MARD06, header, json);
                             break;
 
-                        case Constants25.MARD06_TYPE.TYPE_16://BNN phan hoi yeu cau sua ho so
+                        case Constants25.MARD25_TYPE.TYPE_16://BNN phan hoi yeu cau sua ho so
                             PhanhoiYeucauSuaHoso phanhoiYeucauSuaHoso = ct.getPhanhoiYeucauSuaHoso();
                             responseWrapper.setData(phanhoiYeucauSuaHoso);
 
@@ -112,7 +122,7 @@ public class ReceiveService25Impl implements ReceiveService25 {
                             envelopReturn = createEnvelopReturn(maHoso, Constants.MARD_PRO.MARD06, header, json);
                             break;
 
-                        case Constants25.MARD06_TYPE.TYPE_17://BNN gui cong van VSTY
+                        case Constants25.MARD25_TYPE.TYPE_17://BNN gui cong van VSTY
                             CongVanVSTY congVanVSTY = ct.getCongVanVSTY();
                             responseWrapper.setData(congVanVSTY);
 
@@ -123,7 +133,7 @@ public class ReceiveService25Impl implements ReceiveService25 {
                             envelopReturn = createEnvelopReturn(maHoso, Constants.MARD_PRO.MARD06, header, json);
                             break;
 
-                        case Constants25.MARD06_TYPE.TYPE_18://BNN gui cong van KDNK
+                        case Constants25.MARD25_TYPE.TYPE_18://BNN gui cong van KDNK
                             CongVanKDNK congVanKDNK = ct.getCongVanKDNK();
                             responseWrapper.setData(congVanKDNK);
 
@@ -134,7 +144,7 @@ public class ReceiveService25Impl implements ReceiveService25 {
                             envelopReturn = createEnvelopReturn(maHoso, Constants.MARD_PRO.MARD06, header, json);
                             break;
 
-                        case Constants25.MARD06_TYPE.TYPE_19://BNN tra KQ VSTY
+                        case Constants25.MARD25_TYPE.TYPE_19://BNN tra KQ VSTY
                             KetquaVSTY ketquaVSTY = ct.getKetquaVSTY();
                             responseWrapper.setData(ketquaVSTY);
 

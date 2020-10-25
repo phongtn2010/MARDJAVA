@@ -818,9 +818,11 @@ function IsoLocationVM(data, validator) {
     }
 }
 
-function UploadFileVM(lstAtch, lstAtchType) {
+function UploadFileVM(options) {
     var ufVMSelf = this;
-    ufVMSelf.lstAtch = ko.observableArray([]);
+
+    ufVMSelf.lstAtch = ko.observableArray((options && options.hasOwnProperty('lstAtch')) ? options.lstAtch : []);
+    ufVMSelf.lstAtchType = ko.observableArray((options && options.hasOwnProperty('lstAtchType')) ? options.lstAtchType : []);
     ufVMSelf.lstHD = ko.observableArray([]);
     ufVMSelf.selectedAttachVM = ko.observable(null);
     ufVMSelf.errorMsg = ko.observable(null);
@@ -832,7 +834,7 @@ function UploadFileVM(lstAtch, lstAtchType) {
 
     ufVMSelf.fiFileHD  = ko.observable(null);
     ufVMSelf.fiFileHDDate = ko.observable(null);
-    ufVMSelf.fiPath  = ko.observable(null);
+    ufVMSelf.fiFileHDPath  = ko.observable(null);
     ufVMSelf.fiFileName = ko.observable(null);
 
     ufVMSelf.fiHSType = ko.observable(null);
@@ -863,115 +865,99 @@ function UploadFileVM(lstAtch, lstAtchType) {
     ufVMSelf.fiFileCNPT = ko.observable(null);
     ufVMSelf.fiFileCNPTPath = ko.observable(null);
 
-    if (lstAtchType) {
-        ufVMSelf.lstAtch(mapAttachmentVM(lstAtch, lstAtchType));
-    }
+    ufVMSelf.fiFileKhacID = ko.observable(null);
+    ufVMSelf.fiFileKhacName = ko.observable(null);
+    ufVMSelf.lstLoaiFileDinhKemKhac = ko.observableArray((options && options.hasOwnProperty('lstLoaiFileDinhKemKhac')) ? options.lstLoaiFileDinhKemKhac : []);
 
-    ufVMSelf.addFileHD = function (atchVM) {
-        console.log("Ok");
-        ufVMSelf.selectedAttachVM($.extend(true, {}, atchVM));
-        var fileName=atchVM.fiPath().replace(/^.*[\\\/]/, '');
-        var item ={
-            fiFileHD:ufVMSelf.fiFileHD,
-            fiFileHDDate:ufVMSelf.fiFileHDDate,
-            fiPath:ufVMSelf.fiPath,
-            fiFileHDName: fileName,
+    ufVMSelf.fiAttachmentList = ko.observableArray((options && options.hasOwnProperty('fiAttachmentList')) ? options.fiAttachmentList : []);
+    ufVMSelf.lstDinhKemKhac = ko.observableArray([]);
+    if(ufVMSelf.fiAttachmentList().length>0){
+        ufVMSelf.mappingAttachment();
+    }
+    ufVMSelf.mappingAttachment = function () {
+
+        if(ufVMSelf.fiAttachmentList().length>0){
+
+            ufVMSelf.lstHD = ko.computed(function () {
+                return ko.utils.arrayFilter(ufVMSelf.fiAttachmentList(), function (re) {
+                    return re.fiFileTypeID == '1';
+                });
+            });
+            console.log(ufVMSelf.lstHD());
+            ufVMSelf.lstHoaDon = ko.computed(function () {
+                return ko.utils.arrayFilter(ufVMSelf.fiAttachmentList(), function (re) {
+                    return re.fiFileTypeID == '2';
+                });
+            });
+            ufVMSelf.lstPhieu = ko.computed(function () {
+                return ko.utils.arrayFilter(ufVMSelf.fiAttachmentList(), function (re) {
+                    return re.fiFileTypeID == '3';
+                });
+            }); ufVMSelf.lstKQ = ko.computed(function () {
+                return ko.utils.arrayFilter(ufVMSelf.fiAttachmentList(), function (re) {
+                    return re.fiFileTypeID == '4';
+                });
+            });
+            ufVMSelf.lstTC = ko.computed(function () {
+                return ko.utils.arrayFilter(ufVMSelf.fiAttachmentList(), function (re) {
+                    return re.fiFileTypeID == '5';
+                });
+            });
+            ufVMSelf.lstCNLH = ko.computed(function () {
+                return ko.utils.arrayFilter(ufVMSelf.fiAttachmentList(), function (re) {
+                    return re.fiFileTypeID == '6';
+                });
+            });
+            ufVMSelf.lstCNPT = ko.computed(function () {
+                return ko.utils.arrayFilter(ufVMSelf.fiAttachmentList(), function (re) {
+                    return re.fiFileTypeID == '7';
+                });
+            });
         }
-        ufVMSelf.lstHD.push(item);
     }
-    ufVMSelf.addFileHoaDon = function (atchVM){
-        ufVMSelf.selectedAttachVM($.extend(true, {}, atchVM));
-        var fileName=atchVM.fiFileHoaDonPath().replace(/^.*[\\\/]/, '');
-        var item ={
-            fiFileHoaDon:ufVMSelf.fiFileHoaDon,
-            fiFileHoaDonDate:ufVMSelf.fiFileHoaDonDate,
-            fiFileHoaDonPath:ufVMSelf.fiFileHoaDonPath,
-            fiFileHoaDonName: fileName,
+
+
+    ufVMSelf.addFile = function (data,param) {
+        var fileName='';
+        var files;
+        ko.utils.arrayForEach(ufVMSelf.lstAtchType(), function(attachType) {
+            if(attachType.fiCatType==data){
+                fileName=attachType.fiCatTypeName;
+            }
+        });
+        switch (data) {
+            case "1":
+                files = $("#file-HD")[0].files[0];
+                break;
+            case "2":
+                files = $("#file-HoaDon")[0].files[0];
+                break;
+            case "3":
+                files = $("#file-Phieu")[0].files[0];
+                break;
+            case "4":
+                files = $("#file-KQ")[0].files[0];
+                break;
+            case "5":
+                files = $("#file-TC")[0].files[0];
+                break;
+            case "6":
+                files = $("#file-CNLH")[0].files[0];
+                break;
+            case "7":
+                files = $("#file-CNPT")[0].files[0];
+                break;
+            default:
+                files = $("#file-Khac")[0].files[0];
+                fileName = ufVMSelf.fiFileKhacName();
+                break;
         }
-        ufVMSelf.lstHoaDon.push(item);
-    }
-    ufVMSelf.addFilePhieu = function (atchVM){
-        ufVMSelf.selectedAttachVM($.extend(true, {}, atchVM));
-        var fileName=atchVM.fiFilePhieuPath().replace(/^.*[\\\/]/, '');
-        var item ={
-            fiFilePhieu:ufVMSelf.fiFilePhieu,
-            fiFilePhieuDate:ufVMSelf.fiFilePhieuDate,
-            fiFilePhieuPath:ufVMSelf.fiFilePhieuPath,
-            fiFilePhieuName: fileName
-        }
-        ufVMSelf.lstPhieu.push(item);
-    }
 
-    ufVMSelf.addFileKQ = function (atchVM){
-        ufVMSelf.selectedAttachVM($.extend(true, {}, atchVM));
-        var fileName=atchVM.fiFileKQPath().replace(/^.*[\\\/]/, '');
-        var item ={
-            fiFileKQ:ufVMSelf.fiFileKQ,
-            fiFileKQPath:ufVMSelf.fiFileKQPath,
-            fiFileKQName: fileName
-        }
-        ufVMSelf.lstKQ.push(item);
-    }
-
-
-    ufVMSelf.addFileTC = function (atchVM){
-        ufVMSelf.selectedAttachVM($.extend(true, {}, atchVM));
-        var fileName=atchVM.fiFileTCPath().replace(/^.*[\\\/]/, '');
-        var item ={
-            fiFileTC:ufVMSelf.fiFileTC,
-            fiFileTCPath:ufVMSelf.fiFileTCPath,
-            fiFileTCName: fileName
-        }
-        ufVMSelf.lstTC.push(item);
-    }
-
-    ufVMSelf.addFileCNLH = function (atchVM){
-        ufVMSelf.selectedAttachVM($.extend(true, {}, atchVM));
-        var fileName=atchVM.fiFileCNLHPath().replace(/^.*[\\\/]/, '');
-        var item ={
-            fiFileCNLH:ufVMSelf.fiFileCNLH,
-            fiFileCNLHPath:ufVMSelf.fiFileCNLHPath,
-            fiFileCNLHName: fileName
-        }
-        ufVMSelf.lstCNLH.push(item);
-    }
-
-    ufVMSelf.addFileCNPT = function (atchVM){
-        ufVMSelf.selectedAttachVM($.extend(true, {}, atchVM));
-        var fileName=atchVM.fiFileCNPTPath().replace(/^.*[\\\/]/, '');
-        var item ={
-            fiFileCNPT:ufVMSelf.fiFileCNPT,
-            fiFileCNPTPath:ufVMSelf.fiFileCNPTPath,
-            fiFileCNPTName: fileName
-        }
-        ufVMSelf.lstCNPT.push(item);
-    }
-
-
-
-    ufVMSelf.addFiles =function(atchVM){
-        var fileName=ufVMSelf.fiFilePath().replace(/^.*[\\\/]/, '');
-        var item ={
-            fiFileType:ufVMSelf.fiFileType,
-            fiFilePath:ufVMSelf.fiFilePath,
-            fiFileName: fileName
-        }
-        ufVMSelf.lstAtch.push(item);
-    }
-
-    ufVMSelf.fileChange = function (data, e) {
-        var files = e.target.files;
         if (!files || files.length == 0) {
             return;
         } else {
             $('#loading08').show();
-            var fiTenLoai = ufVMSelf.selectedAttachVM().fiTenLoai();
-            var fiMaLoai = ufVMSelf.selectedAttachVM().fiMaLoai();
-            var fiFileName = files[0].name;
-
-            // Upload file
             var token = null;
-
             $.ajax({
                 type: 'GET',
                 cache: false,
@@ -979,47 +965,23 @@ function UploadFileVM(lstAtch, lstAtchType) {
                 success: function (response) {
                     if (response.status == 'Successful') {
                         token = response.data;
-                        var formData = new FormData();
-                        formData.append('token', token);
-                        formData.append('documentType', 'BNNPTNT0600009');
-                        formData.append('fileCode', fiMaLoai);
-                        formData.append('fileName', fiFileName);
-                        formData.append('file', files[0]);
+                        app.uploadFile({
+                            file: files,
+                            mcode: 'mard',
+                            pcode: '25',
+                            url: '/mard/25/upload',
+                            success: function (d) {
+                                var fileLink=d.data.urlFile;
+                                var fileId=d.data.itemId;
+                                ufVMSelf.switchFileType(data, fileName,fileLink,fileId);
+                                $('#loading08').hide();
+                            },
+                            error: function (e) {
+                                ufVMSelf.errorMsg('Có lỗi tải file lên'+e);
+                                $('#loading08').hide();
 
-                        $.ajax({
-                            type: 'POST',
-                            cache: false,
-                            crossDomain: true,
-                            url: UPLOAD_URL,
-                            data: formData,
-                            processData: false,
-                            contentType: false,
-                            success: function (res) {
-                                $('#loading08').hide();
-                                if (res.status == 'Successful') {
-                                    var file = new FileVM({
-                                        fiGuid: res.data.ItemId,
-                                        fiPath: res.data.UrlFile,
-                                        fiFileTypeCode: fiMaLoai,
-                                        fiFileTypeName: fiTenLoai,
-                                        fiFileName: fiFileName,
-                                        fiActive: 0
-                                    })
-                                    $('#btnfile3').val('');
-                                    ufVMSelf.uploadedFiles.push(file);
-                                    ufVMSelf.selectedAttachVM().isUploaded(true);
-                                    ufVMSelf.errorMsg('');
-                                } else {
-                                    ufVMSelf.errorMsg('Có lỗi tải file lên');
-                                }
-                            },
-                            error: function (x, t, m) {
-                                $('#loading08').hide();
-                            },
-                            complete: function (jqXHR, textStatus) {
-                                $(e.target).val("");
                             }
-                        })
+                        });
                     } else {
                         ufVMSelf.errorMsg('Có lỗi tải file lên');
                     }
@@ -1032,7 +994,144 @@ function UploadFileVM(lstAtch, lstAtchType) {
             });
         }
     }
+    ufVMSelf.switchFileType = function(fileType,fileName,fiPath,fiGuid){
+        switch (fileType) {
+            case "1":
+                var fiFileName=ufVMSelf.fiFileHDPath().replace(/^.*[\\\/]/, '');
+                var item= {
+                    fiFileHD:ufVMSelf.fiFileHD(),
+                    fiFileHDDate:ufVMSelf.fiFileHDDate(),
+                    fiFileName:fiFileName,
+                    fiFileTypeID:fileType,
+                    fiFileTypeName:fileName,
+                    fiLinkBNN:fiPath,
+                    fiGuidBNN:fiGuid
+                }
+                ufVMSelf.lstHD.push(item);
+                break;
+            case "2":
+                var fiFileName=ufVMSelf.fiFileHoaDonPath().replace(/^.*[\\\/]/, '');
+                var item ={
+                    fiFileHD:ufVMSelf.fiFileHoaDon(),
+                    fiFileHDDate:ufVMSelf.fiFileHoaDonDate(),
+                    fiLinkBNN:fiPath,
+                    fiGuidBNN:fiGuid,
+                    fiFileName:fiFileName,
+                    fiFileTypeID:fileType,
+                    fiFileTypeName:fileName
+                }
+                ufVMSelf.lstHoaDon.push(item);
+                break;
+            case "3":
+                var fiFileName=ufVMSelf.fiFilePhieuPath().replace(/^.*[\\\/]/, '');
+                var item ={
+                    fiFileHD:ufVMSelf.fiFilePhieu(),
+                    fiFileHDDate:ufVMSelf.fiFilePhieuDate(),
+                    fiLinkBNN:fiPath,
+                    fiGuidBNN:fiGuid,
+                    fiFileName:fiFileName,
+                    fiFileTypeID:fileType,
+                    fiFileTypeName:fileName
+                }
+                ufVMSelf.lstPhieu.push(item);
+                break;
+            case "4":
+                var fiFileName=ufVMSelf.fiFileKQPath().replace(/^.*[\\\/]/, '');
+                var item ={
+                    fiFileHD:ufVMSelf.fiFileKQ(),
+                    fiFileHDDate:ufVMSelf.fiFileHoaDonDate(),
+                    fiLinkBNN:fiPath,
+                    fiGuidBNN:fiGuid,
+                    fiFileName:fiFileName,
+                    fiFileTypeID:fileType,
+                    fiFileTypeName:fileName
+                }
+                ufVMSelf.lstKQ.push(item);
+                break;
+            case "5":
+                var fiFileName=ufVMSelf.fiFileTCPath().replace(/^.*[\\\/]/, '');
+                var item ={
+                    fiFileHD:ufVMSelf.fiFileTC(),
+                    fiLinkBNN:fiPath,
+                    fiGuidBNN:fiGuid,
+                    fiFileName:fiFileName,
+                    fiFileTypeID:fileType,
+                    fiFileTypeName:fileName
+                }
+                ufVMSelf.lstTC.push(item);
+                break;
+            case "6":
+                var fiFileName=ufVMSelf.fiFileCNLHPath().replace(/^.*[\\\/]/, '');
+                var item ={
+                    fiFileHD:ufVMSelf.fiFileCNLH(),
+                    fiLinkBNN:fiPath,
+                    fiGuidBNN:fiGuid,
+                    fiFileName:fiFileName,
+                    fiFileTypeID:fileType,
+                    fiFileTypeName:fileName
+                }
+                ufVMSelf.lstCNLH.push(item);
+                break;
+            case "7":
+                var fiFileName=ufVMSelf.fiFileCNPTPath().replace(/^.*[\\\/]/, '');
+                var item ={
+                    fiFileHD:ufVMSelf.fiFileCNPT(),
+                    fiLinkBNN:fiPath,
+                    fiGuidBNN:fiGuid,
+                    fiFileName:fiFileName,
+                    fiFileTypeID:fileType,
+                    fiFileTypeName:fileName
+                }
+                ufVMSelf.lstCNPT.push(item);
+                break;
+            default:
+                var item ={
+                    fiLinkBNN:fiPath,
+                    fiGuidBNN:fiGuid,
+                    fiFileHD: fileName,
+                    fiFileTypeID:fileType,
+                    fiFileTypeName:fileName
+                }
+                ufVMSelf.lstAtch.push(item);
+                break;
+        }
+        console.log(item);
 
+        ufVMSelf.fiAttachmentList.push(item);
+        console.log(ufVMSelf.fiAttachmentList());
+        ufVMSelf.clearFormUploadFile();
+    }
+
+    ufVMSelf.clearFormUploadFile =function(){
+        $("#fiFileHD").val('');
+        $("#fiFileHDDate").val('');
+        $("#file-HD").val('');
+
+        $("#fiFileHoaDon").val('');
+        $("#fiFileHoaDonDate").val('');
+        $("#file-HoaDon").val('');
+
+        $("#fiFileHD").val('');
+        $("#fiFileHDDate").val('');
+        $("#file-HD").val('');
+
+        $("#fiFilePhieu").val('');
+        $("#fiFilePhieuDate").val('');
+        $("#file-Phieu").val('');
+
+        $("#fiFileKQ").val('');
+        $("#file-KQ").val('');
+
+        $("#fiFileTC").val('');
+        $("#file-TC").val('');
+
+        $("#fiFileCNLH").val('');
+        $("#file-CNLH").val('');
+
+        $("#fiFileCNPT").val('');
+        $("#file-CNPT").val('');
+        $("#file-Khac").val('');
+    }
     ufVMSelf.removeFileUpload = function (file) {
         ufVMSelf.uploadedFiles.remove(function (item) {
             return item.fiGuid() == file.fiGuid();
@@ -1114,12 +1213,9 @@ function UploadFileVM(lstAtch, lstAtchType) {
 
 function AttachmentVM(options) {
     var atchVMSelf = this;
-    atchVMSelf.fiMaLoai = ko.observable((options && options.hasOwnProperty('fiMaLoai')) ? options.fiMaLoai : null);
-    atchVMSelf.fiTenLoai = ko.observable((options && options.hasOwnProperty('fiTenLoai')) ? options.fiTenLoai : null);
-    atchVMSelf.isUploaded = ko.observable((options && options.hasOwnProperty('isUploaded')) ? options.isUploaded : false);
-    atchVMSelf.isRequired = ko.observable((options && options.hasOwnProperty('isRequired')) ? options.isRequired : false);
+    atchVMSelf.fiCatType = ko.observable((options && options.hasOwnProperty('fiCatType')) ? options.fiCatType : null);
+    atchVMSelf.fiCatTypeName = ko.observable((options && options.hasOwnProperty('fiCatTypeName')) ? options.fiCatTypeName : null);
     atchVMSelf.errorMsg = ko.observable(null);
-
     atchVMSelf.lstFiles = ko.observableArray([]);
 }
 
@@ -1151,19 +1247,17 @@ function mapAttachmentVM(lstAtch, lstAtchType) {
 
     for (var i = 0; i < lstAtchType.length; i++) {
         var attachmentVM = new AttachmentVM({
-            fiTenLoai: lstAtchType[i].atchTypeName,
-            isUploaded: false,
-            isRequired: lstAtchType[i].required,
-            fiMaLoai: lstAtchType[i].atchTypeId
+            fiCatType: lstAtchType[i].fiCatType,
+            fiCatTypeName: lstAtchType[i].fiCatTypeName
         });
 
-        for (var j = 0; j < lstAtch.length; j++) {
-            if (lstAtchType[i].atchTypeId === lstAtch[j].fiFileTypeCode) {
-                var file = new FileVM(lstAtch[j]);
-                attachmentVM.lstFiles.push(file);
-                attachmentVM.isUploaded(true);
-            }
-        }
+        // for (var j = 0; j < lstAtch.length; j++) {
+        //     if (lstAtchType[i].atchTypeId === lstAtch[j].fiFileTypeCode) {
+        //         var file = new FileVM(lstAtch[j]);
+        //         attachmentVM.lstFiles.push(file);
+        //         attachmentVM.isUploaded(true);
+        //     }
+        // }
 
         result.push(attachmentVM)
 

@@ -210,5 +210,10 @@ public class Constant25 {
         String CODE = "NSW";
         String NAME = "Cổng thông tin một cửa quốc gia";
     }
-
+    public interface FILE_DINHKEM_TYPE {
+        public static final int HOP_DONG = 1;
+        public static final int HOA_DON = 2;
+        public static final int PHIEU_DG = 3;
+        public static final int KHAC = 10;
+    }
 }

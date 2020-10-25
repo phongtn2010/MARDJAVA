@@ -205,47 +205,47 @@
                             <td class="text-left" data-bind="text: fiProductList.fiProMadeIn"></td>
                             <td class="text-left" data-bind="text: fiProductList.fiProCountryName"></td>
                             <td class="text-center" data-bind="text: $parent.getProfileStatus(fiHSStatus)"></td>
-                            <td class="text-center" data-bind="text: fiHSType"></td>
+                            <td class="text-center" data-bind="text: $parent.getHoSoType(fiHSType)"></td>
 
                             <td class="text-center">
                                 <div>
                                     <a href="javascript:void(0)" data-bind="click: $root.viewHoSo"><i
-                                            class="fa fa-eye"></i></a>
+                                            class="fa fa-file-word-o"></i></a>
                                 </div>
                             </td>
                             <td class="text-center">
-                                <div data-bind="visible: fiHSStatus == 0 || fiHSStatus == 1 || fiHSStatus ==7">
+                                <div data-bind="">
                                     <a href="javascript:void(0)" data-bind="click: $root.goEditHoSo"><i
                                             class="fa fa-edit" src="" alt=""></i></a>
                                 </div>
                             </td>
                             <td class="text-center">
-                                <div data-bind="visible: fiHSStatus == 0 || fiHSStatus == 2">
+                                <div data-bind="">
                                     <a href="javascript:void(0)" data-bind="click: $root.deleteHoso"><i
                                             class="fa fa-lg fa-close" style="color: red"></i></a>
                                 </div>
                             </td>
                             <td class="text-center">
-                                <div data-bind="visible: fiHSStatus == 14 || fiHSStatus == 15 || fiHSStatus == 16">
+                                <div data-bind="">
                                     <a href="javascript:void(0)" data-bind="click: $root.viewGiayPhep"><i
-                                            class="fa fa-eye"></i></a>
+                                            class="fa fa-caret-square-o-down"></i></a>
                                 </div>
                             </td>
                             <td class="text-center">
-                                <div data-bind="visible: fiHSStatus == 3 || fiHSStatus == 10 || fiHSStatus == 12 || fiHSStatus == 13 || fiHSStatus == 9">
+                                <div data-bind="">
                                     <a href="javascript:void(0)" data-bind="click: $root.goYCSHoSo"><i
-                                            class="fa fa-edit"></i></a>
+                                            class="fa fa-download"></i></a>
                                 </div>
                             </td>
                             <td class="text-center">
-                                <div data-bind="visible: fiHSStatus == 3 || fiHSStatus == 1 || fiHSStatus == 7 || fiHSStatus == 9 || fiHSStatus == 10 || fiHSStatus == 12 || fiHSStatus == 13">
-                                    <a href="javascript:void(0)" data-bind="click: $root.goYCRHoSo"><i
-                                            class="fa fa-download"></i></a>
+                                <div data-bind="">
+                                    <a href="javascript:void(0)" data-bind="click: $root.viewHangHoaStatus"><i
+                                            class="fa fa-eye-slash"></i></a>
                                 </div>
                             </td><td class="text-center">
-                                <div data-bind="visible: fiHSStatus == 3 || fiHSStatus == 1 || fiHSStatus == 7 || fiHSStatus == 9 || fiHSStatus == 10 || fiHSStatus == 12 || fiHSStatus == 13">
+                                <div data-bind="">
                                     <a href="javascript:void(0)" data-bind="click: $root.goYCRHoSo"><i
-                                            class="fa fa-download"></i></a>
+                                            class="fa fa-upload"></i></a>
                                 </div>
                             </td>
 

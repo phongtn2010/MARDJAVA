@@ -2,7 +2,7 @@ package com.nsw.backend.mard.p25.controller;
 
 import com.nsw.backend.controller.BaseController;
 import com.nsw.backend.mard.p25.client.ResponseWrapper;
-import com.nsw.backend.mard.p25.dto.RegistrationProfile;
+import com.nsw.backend.mard.p25.dto.Hoso25;
 import com.nsw.backend.mard.p25.exception.NSWException;
 import com.nsw.backend.mard.p25.model.TbdHoso25;
 import com.nsw.backend.mard.p25.service.TbdHoso25Service;
@@ -37,7 +37,7 @@ public class WsControlle25 extends BaseController {
         if (result == null) {
             return createErrorResponse("Thông tin hồ sơ không hợp lệ", HttpStatus.OK);
         } else {
-            return createSuccessResponse(RegistrationProfile.parse(result), HttpStatus.OK);
+            return createSuccessResponse(Hoso25.parseToWSEntity(result), HttpStatus.OK);
         }
     }
 

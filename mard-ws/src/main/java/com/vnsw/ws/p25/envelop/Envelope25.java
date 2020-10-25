@@ -15,8 +15,9 @@ public class Envelope25 {
     private Header25 Header;
     @XmlElement(name = "Body")
     private Body25 Body;
-    @XmlElement(name = "SystemSignature")
-    private String SystemSignature;
+
+//    @XmlElement(name = "SystemSignature")
+//    private String SystemSignature;
 
     public Header25 getHeader() {
         return Header;
@@ -34,12 +35,12 @@ public class Envelope25 {
         this.Body = Body;
     }
 
-    public String getSystemSignature() {
-        return SystemSignature;
-    }
-
-    public void setSystemSignature(String systemSignature) {
-        SystemSignature = systemSignature;
-    }
+//    public String getSystemSignature() {
+//        return SystemSignature;
+//    }
+//
+//    public void setSystemSignature(String systemSignature) {
+//        SystemSignature = systemSignature;
+//    }
 
 }

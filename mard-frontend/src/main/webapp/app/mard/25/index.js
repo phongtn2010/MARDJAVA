@@ -24,6 +24,7 @@ function Mard25VM() {
     self.lstPort = ko.observableArray([]);
     self.lstUOMAnimal = ko.observableArray([]);
     self.lstProfileStatus = ko.observableArray([]);
+    self.lstHoSoType = ko.observableArray([]);
     self.lstAtchType = ko.observableArray([]);
 
     self.giayPhepVM = ko.observable(new GiayPhepVM());
@@ -46,11 +47,20 @@ function Mard25VM() {
     self.getProfileStatus = function (statuscode) {
         var lstProfileStatus = self.lstProfileStatus();
         var pos = lstProfileStatus.find(function (e) {
-            return e.id == statuscode;
+            return e.fiCatType == Number(statuscode);
         })
         if (pos)
-            return pos.name;
+            return pos.fiCatTypeName;
         else return statuscode;
+    }
+    self.getHoSoType = function (hsType) {
+        var lstHoSoType = self.lstHoSoType();
+        var pos = lstHoSoType.find(function (e) {
+            return e.fiCatType == Number(hsType);
+        })
+        if (pos)
+            return pos.fiCatTypeName.substring(0,2);
+        else return hsType;
     }
 
     self.getUnitName = function (unitcode) {
@@ -91,6 +101,14 @@ function Mard25VM() {
             app.sendGetRequest("/mard/25/danhmuc/unit?unitTypeId=4&systemId=6", function (res) {
                 options['lstUOMAnimal'] = res.data;
                 self.lstUOMAnimal(res.data);
+            }),
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/25", function (res) {
+                options['lstProfileStatus'] = res.data;
+                self.lstProfileStatus(res.data);
+            }),
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/2", function (res) {
+                options['lstHoSoType'] = res.data;
+                self.lstHoSoType(res.data);
             })
             // Get attach types
             // app.sendGetRequest("/mard/06/danhmuc/dinhkem?systemId=6", function (res) {
@@ -224,6 +242,11 @@ function Mard25VM() {
                 $('#loading08').hide();
             }
         });
+    }
+
+    self.viewHangHoaStatus = function(item) {
+        window.location.href= app.appContext + "/mard/25/hanghoa/" + item.fiIdHS;
+        return true;
     }
 
     self.deleteHoso = function (item) {

@@ -44,11 +44,10 @@ public class TbdHanghoa25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_HS_ID")
     private Integer fiIdHS;
 
-    @Column(name = "FI_ID")
-    private Integer fiId;
-
     @Column(name = "FI_PRO_NAME", nullable = false, length = 500)
     private String fiProName;
+    @Column(name = "FI_TRANGTHAI_HH")
+    private Long fiTrangThaiHangHoa;
 
     @Column(name = "FI_PRO_ID_NHOM")
     private Integer fiProIdNhom;
@@ -56,20 +55,11 @@ public class TbdHanghoa25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_PRO_ID_PHAN_NHOM")
     private Integer fiProIdPhanNhom;
 
-    @Column(name = "FI_PRO_NAME_PHAN_NHOM")
-    private String fiProNamePhanNhom;
-
     @Column(name = "FI_PRO_ID_LOAI")
     private Integer fiProIdLoai;
 
-    @Column(name = "FI_PRO_NAME_LOAI")
-    private String fiProNameLoai;
-
     @Column(name = "FI_PRO_ID_PHAN_LOAI")
     private Integer fiProIdPhanLoai;
-
-    @Column(name = "FI_PRO_NAME_PHAN_LOAI")
-    private Integer fiProNamePhanLoai;
 
     @Column(name = "FI_PRO_CODE", nullable = false, length = 150)
     private String fiProCode;

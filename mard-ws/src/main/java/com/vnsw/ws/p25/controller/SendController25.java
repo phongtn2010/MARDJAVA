@@ -15,7 +15,7 @@ import com.vnsw.ws.p25.entity.json.SendMessage;
 import com.vnsw.ws.p25.envelop.*;
 import com.vnsw.ws.p25.message.send.DNYeucauHuyHoso;
 import com.vnsw.ws.p25.message.send.DNYeucauSuaHoso;
-import com.vnsw.ws.p25.entity.Hoso25;
+import com.vnsw.ws.p25.message.send.Hoso25;
 import com.vnsw.ws.p25.service.BackendService25;
 import com.vnsw.ws.p25.service.EnvelopeService25;
 import com.vnsw.ws.p8.message.send.DNHuyHS;
@@ -170,7 +170,6 @@ public class SendController25 {
                             DNYeucauHuyHoso dnYeucauHuyHoso = new DNYeucauHuyHoso();
                             dnYeucauHuyHoso.setFiRequestDate(new Date());
                             dnYeucauHuyHoso.setFiReason(sendMessage.getReason());
-                            dnYeucauHuyHoso.setFiRegistrationComfirmNo(hoso25.getFiNSWFileCode());
                             dnYeucauHuyHoso.setFiNSWFileCode(hoso25.getFiNSWFileCode());
                             content.setDnYeucauHuyHoso(dnYeucauHuyHoso);
                             body = envelopeService.createBody(content);

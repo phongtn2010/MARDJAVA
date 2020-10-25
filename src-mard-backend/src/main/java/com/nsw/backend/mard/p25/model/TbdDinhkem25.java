@@ -61,11 +61,11 @@ public class TbdDinhkem25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_ACTIVE", nullable = false)
     private Integer fiActive;
 
-    @Column(name = "FI_PATH", length = 2000)
-    private String fiPath;
+    @Column(name = "FI_LINK_BNN", length = 2000)
+    private String fiLinkBNN;
 
-    @Column(name = "FI_GUID", length = 200)
-    private String fiGuid;
+    @Column(name = "FI_GUID_BNN", length = 200)
+    private String fiGuidBNN;
 
     // id hồ sơ
     @Column(name = "FI_HS_ID")

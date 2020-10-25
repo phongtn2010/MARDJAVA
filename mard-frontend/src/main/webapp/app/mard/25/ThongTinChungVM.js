@@ -12,16 +12,18 @@ function ThongTinChungVM(data) {
 
     ttcVMSelf.fiNSWFileCode = ko.observable((data && data.hasOwnProperty('fiNSWFileCode')) ? data.fiNSWFileCode : null);
 
+    ttcVMSelf.fiTrangThaiHangHoa = ko.observable((data && data.hasOwnProperty('fiTrangThaiHangHoa')) ? data.fiTrangThaiHangHoa : null);
+
     //inc_thongtindangky.jsp
     ttcVMSelf.fiSellName = ko.observable((data && data.hasOwnProperty('fiSellName')) ? data.fiSellName : null);
-    ttcVMSelf.lstCountry = ko.observableArray((data && data.hasOwnProperty('lstCountry')) ? data.lstCountry : null);
+    ttcVMSelf.lstCountry = ko.observableArray((data && data.hasOwnProperty('lstCountry')) ? data.lstCountry : []);
     ttcVMSelf.lstNhom = ko.observableArray((data && data.hasOwnProperty('lstNhom')) ? data.lstNhom : null);
     ttcVMSelf.lstPhanNhom = ko.observableArray((data && data.hasOwnProperty('lstPhanNhom')) ? data.lstPhanNhom : null);
     ttcVMSelf.lstLoai = ko.observableArray((data && data.hasOwnProperty('lstLoai')) ? data.lstLoai : null);
     ttcVMSelf.lstPhanLoai = ko.observableArray((data && data.hasOwnProperty('lstPhanLoai')) ? data.lstPhanLoai : null);
     ttcVMSelf.fiSellCountryCode = ko.observable((data && data.hasOwnProperty('fiSellCountryCode')) ? data.fiSellCountryCode : null);
     ttcVMSelf.fiSellCountryName = ko.observable((data && data.hasOwnProperty('fiSellCountryName')) ? data.fiSellCountryName : null);
-
+    ttcVMSelf.fiTenNhom = ko.observable(null);
     ttcVMSelf.fiSellAddress = ko.observable((data && data.hasOwnProperty('fiSellAddress')) ? data.fiSellAddress : null);
     ttcVMSelf.fiSellTel = ko.observable((data && data.hasOwnProperty('fiSellTel')) ? data.fiSellTel : null);
     ttcVMSelf.fiSellFax = ko.observable((data && data.hasOwnProperty('fiSellFax')) ? data.fiSellFax : null);
@@ -55,6 +57,7 @@ function ThongTinChungVM(data) {
     ttcVMSelf.EfiProCLUnitID = ko.observable(null);
 
 
+
     ttcVMSelf.fiProValueVN  = ko.observable((data && data.hasOwnProperty('fiProValueVN ')) ? data.fiProValueVN  : null);
     ttcVMSelf.fiProValueUSD   = ko.observable((data && data.hasOwnProperty('fiProValueUSD  ')) ? data.fiProValueUSD  : null);
 
@@ -77,7 +80,10 @@ function ThongTinChungVM(data) {
     ttcVMSelf.fiSignPosition = ko.observable((data && data.hasOwnProperty('fiSignPosition')) ? data.fiSignPosition : null);
     ttcVMSelf.fiSignAddress = ko.observable((data && data.hasOwnProperty('fiSignAddress')) ? data.fiSignAddress : null);
 
+
+    ttcVMSelf.fiHSTypeName = ko.observable((data && data.hasOwnProperty('fiHSTypeName')) ? data.fiHSTypeName : null);
     ttcVMSelf.lstProvince  = ko.observableArray((data && data.hasOwnProperty('lstProvince')) ? data.lstProvince : []);
+    ttcVMSelf.lstHoSoType  = ko.observableArray((data && data.hasOwnProperty('lstHoSoType')) ? data.lstHoSoType : []);
 
     ttcVMSelf.fiProIdNhom = ko.observable((data && data.hasOwnProperty('fiProIdNhom')) ? data.fiProIdNhom : null);
     ttcVMSelf.fiProIdPhanNhom = ko.observable((data && data.hasOwnProperty('fiProIdPhanNhom')) ? data.fiProIdPhanNhom : null);
@@ -88,7 +94,6 @@ function ThongTinChungVM(data) {
     ttcVMSelf.lstUOMAnimal = ko.observable((data && data.hasOwnProperty('lstUOMAnimal')) ? data.lstUOMAnimal : null);
 
     ttcVMSelf.errorMsg = ko.observable(null);
-
 
     ttcVMSelf.fiRegistrationNo = ko.observable((data && data.hasOwnProperty('fiRegistrationNo')) ? data.fiRegistrationNo : null);
     ttcVMSelf.fiImporterName = ko.observable((data && data.hasOwnProperty('fiImporterName')) ? data.fiImporterName : null)
@@ -120,6 +125,13 @@ function ThongTinChungVM(data) {
     ttcVMSelf.fiContactTel = ko.observable((data && data.hasOwnProperty('fiContactTel')) ? data.fiContactTel : null);
     ttcVMSelf.fiContactAddress = ko.observable((data && data.hasOwnProperty('fiContactAddress')) ? data.fiContactAddress : null);
     ttcVMSelf.fiContactEmail = ko.observable((data && data.hasOwnProperty('fiContactEmail')) ? data.fiContactEmail : null);
+    ttcVMSelf.changeHoSoType =function(hsType){
+        if(hsType!=4){
+            $("#model-congvan").hide();
+        }else {
+            $("#model-congvan").show();
+        }
+    }
 
     ttcVMSelf.clearForm = function () {
 
@@ -151,6 +163,7 @@ function ThongTinChungVM(data) {
 
     }
     ttcVMSelf.addProduct=function(data){
+        console.log(ttcVMSelf.fiTenNhom());
         if (!ttcVMSelf.validate()) return;
         var kl='';
         var sl='';
@@ -161,10 +174,12 @@ function ThongTinChungVM(data) {
 
         var item ={
             fiProName: ttcVMSelf.fiProName(),
+            fiTrangThaiHangHoa: ttcVMSelf.fiTrangThaiHangHoa(),
             fiProductKL: kl,
             fiProductSL: sl,
             fiProThanhPhan: ttcVMSelf.fiProThanhPhan(),
             fiProIdNhom: ttcVMSelf.fiProIdNhom(),
+            fiTenNhom: ttcVMSelf.fiTenNhom(),
             fiProIdPhanNhom: ttcVMSelf.fiProIdPhanNhom(),
             fiProIdLoai: ttcVMSelf.fiProIdLoai(),
             fiProIdPhanLoai: ttcVMSelf.fiProIdPhanLoai(),
@@ -182,6 +197,7 @@ function ThongTinChungVM(data) {
             fiProSLKLList: ttcVMSelf.fiProSLKLList(),
             fiProATList: ttcVMSelf.fiProATList()
         }
+        console.log(item);
         ttcVMSelf.fiProductList.push(item);
         $("#modal_addAnimal").modal('hide');
     }

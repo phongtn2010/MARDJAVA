@@ -130,6 +130,7 @@ function RegAnimalProductVM(options) {
 
 function HangHoaNhapKhauVM (options) {
     var kdnkVMSelf = this;
+
     kdnkVMSelf.fiIdHS = ko.observable((options && options.hasOwnProperty('fiIdHS')) ? options.fiIdHS : null);
     kdnkVMSelf.fiNSWFileCode = ko.observable((options && options.hasOwnProperty('fiNSWFileCode')) ? options.fiNSWFileCode : null);
     kdnkVMSelf.fiReason = ko.observable((options && options.hasOwnProperty('fiReason')) ? options.fiReason : null);
@@ -138,38 +139,28 @@ function HangHoaNhapKhauVM (options) {
             required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
         })
     }
-    kdnkVMSelf.fiHSType = ko.observable((options && options.hasOwnProperty('fiHSType')) ? options.fiHSType : null);
     kdnkVMSelf.thongtinChungVM = ko.observable(new ThongTinChungVM(options));
     kdnkVMSelf.kyHoSoVM = ko.observable(new KyHoSoVM(options));
-    kdnkVMSelf.lstProfileStatus = ko.observableArray((options && options.hasOwnProperty('lstProfileStatus')) ? options.lstProfileStatus : null);
+    kdnkVMSelf.lstProfileStatus = ko.observableArray((options && options.hasOwnProperty('lstProfileStatus')) ? options.lstProfileStatus : []);
 
     kdnkVMSelf.regAnimalVM = ko.observable(new RegAnimalVM(options));
     kdnkVMSelf.regAnimalProductVM = ko.observable(new RegAnimalProductVM(options));
 
     kdnkVMSelf.fiProductList = ko.observableArray((options && options.hasOwnProperty('fiProductList')) ? options.fiProductList : null);
-    if (options.fiHSType == 1 || options.fiHSType == "1") {
-        kdnkVMSelf.regAnimalVM().applyState(options);
-    } else if (options.fiHSType == 2 || options.fiHSType == "2") {
-        kdnkVMSelf.regAnimalProductVM().applyState(options);
-    }
 
-    kdnkVMSelf.fiHSType.subscribe(function (item) {
-        if (item == 2 || item == '2') {
-            kdnkVMSelf.regAnimalProductVM().productVM().fiProductType(kdnkVMSelf.fiHSType());
-            kdnkVMSelf.regAnimalProductVM().productVM().fiPackageUnitCode("KG");
-        }
-    })
-    kdnkVMSelf.uploadFileVM = ko.observable(new UploadFileVM(options.fiAttachmentList ? options.fiAttachmentList: [], options.lstAtchType ? options.lstAtchType : []));
+
+    // kdnkVMSelf.uploadFileVM = ko.observable(new UploadFileVM(options.fiAttachmentList ? options.fiAttachmentList: [], options.lstAtchType ? options.lstAtchType : []));
+    kdnkVMSelf.uploadFileVM = ko.observable(new UploadFileVM(options));
 
     kdnkVMSelf.errorMsg = ko.observable(null);
 
     kdnkVMSelf.getProfileStatus = function (statuscode) {
         var lstProfileStatus = kdnkVMSelf.lstProfileStatus();
         var pos = lstProfileStatus.find(function (e) {
-            return e.id == Number(statuscode);
+            return e.fiCatType == Number(statuscode);
         })
         if (pos)
-            return pos.name;
+            return pos.fiCatTypeName;
         else return statuscode;
     }
 
@@ -233,7 +224,7 @@ function HangHoaNhapKhauVM (options) {
             "fiNSWFileCodefiNSWFileCode": kdnkVMSelf.fiNSWFileCode(),
             "fiReason": kdnkVMSelf.fiReason(),
             "fiHSStatus": 0,
-            "fiHSType": kdnkVMSelf.fiHSType(),
+            "fiHSType": kdnkVMSelf.thongtinChungVM().fiHSType(),
             "fiHSCreatedDate": new Date(kdnkVMSelf.thongtinChungVM().fiHSCreatedDate()).getTime(),
             "fiNSWFileCodeReplace": kdnkVMSelf.thongtinChungVM().fiNSWFileCodeReplace(),
             "fiGDK": kdnkVMSelf.thongtinChungVM().fiGDK(),
@@ -278,8 +269,12 @@ function HangHoaNhapKhauVM (options) {
             "fiSignPosition": kdnkVMSelf.thongtinChungVM().fiSignPosition(),
             "fiSignAddress": kdnkVMSelf.thongtinChungVM().fiSignAddress(),
 
-            "fiAttachmentList": kdnkVMSelf.uploadFileVM().getLstAttachments()
+            "fiProCVMienGiam": kdnkVMSelf.thongtinChungVM().fiProCVMienGiam(),
+            "fiProCVMienGiamNgay": new Date(kdnkVMSelf.thongtinChungVM().fiProCVMienGiamNgay()).getTime(),
+
+            "fiAttachmentList": kdnkVMSelf.uploadFileVM().fiAttachmentList()
         }
+        console.log(body);
         return body;
     }
 }

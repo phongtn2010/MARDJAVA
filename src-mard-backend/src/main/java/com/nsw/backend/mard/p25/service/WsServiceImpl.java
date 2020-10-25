@@ -6,7 +6,6 @@ import com.nsw.backend.mard.p25.client.From;
 import com.nsw.backend.mard.p25.client.Header;
 import com.nsw.backend.mard.p25.client.ResponseWrapper;
 import com.nsw.backend.mard.p25.constant.Constant25;
-import com.nsw.backend.mard.p25.dto.RequestEdit;
 import com.nsw.backend.mard.p25.dto.SendMessage;
 import com.nsw.backend.mard.p25.helper.WsServiceHelper;
 import com.nsw.backend.mard.p25.model.TbdHoso25;
@@ -74,16 +73,16 @@ public class WsServiceImpl implements WsService {
         }
         return response;
     }
-
-    @Override
-    public ResponseJson updateProfile(RequestEdit requestEdit) {
-        return null;
-    }
-
-    @Override
-    public ResponseJson requestCancelProfile(RequestEdit requestCancel) throws NSWException {
-        return null;
-    }
+//
+//    @Override
+//    public ResponseJson updateProfile(RequestEdit requestEdit) {
+//        return null;
+//    }
+//
+//    @Override
+////    public ResponseJson requestCancelProfile(RequestEdit requestCancel) throws NSWException {
+//        return null;
+//    }
 
     @Override
     public ResponseJson processProfileRegisterResponse(ResponseWrapper request) throws NSWException {
