@@ -5,12 +5,16 @@ function ThongTinChungVM(data) {
     ttcVMSelf.fiHSStatus = ko.observable((data && data.hasOwnProperty('fiHSStatus')) ? data.fiHSStatus : null);
     ttcVMSelf.fiTaxCode = ko.observable((data && data.hasOwnProperty('fiTaxCode')) ? data.fiTaxCode : null);
     ttcVMSelf.fiHSCreatedDate = ko.observable((data && data.hasOwnProperty('fiHSCreatedDate')) ? new Date(data.fiHSCreatedDate) : new Date());
-    ttcVMSelf.fiHSType = ko.observable((data && data.hasOwnProperty('fiHSType')) ? data.fiHSType : null);
+    ttcVMSelf.fiHSType = ko.observable((data && data.hasOwnProperty('fiHSType')) ? data.fiHSType : null).extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    });
     ttcVMSelf.fiNSWFileCodeReplace = ko.observable((data && data.hasOwnProperty('fiNSWFileCodeReplace')) ? data.fiNSWFileCodeReplace : null);
     ttcVMSelf.fiGDK = ko.observable((data && data.hasOwnProperty('fiGDK')) ? data.fiGDK : null);
     ttcVMSelf.fiGDKFile = ko.observable((data && data.hasOwnProperty('fiGDKFile')) ? data.fiGDKFile : null);
 
     ttcVMSelf.fiNSWFileCode = ko.observable((data && data.hasOwnProperty('fiNSWFileCode')) ? data.fiNSWFileCode : null);
+
+    ttcVMSelf.fiTrangThaiHangHoa = ko.observable((data && data.hasOwnProperty('fiTrangThaiHangHoa')) ? data.fiTrangThaiHangHoa : null);
 
     //inc_thongtindangky.jsp
     ttcVMSelf.fiSellName = ko.observable((data && data.hasOwnProperty('fiSellName')) ? data.fiSellName : null).extend({
@@ -46,7 +50,7 @@ function ThongTinChungVM(data) {
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
-    ttcVMSelf.fiPurchTel = ko.observable((data && data.hasOwnProperty('fiPurchTel')) ? data.fiPurchTel : null)..extend({
+    ttcVMSelf.fiPurchTel = ko.observable((data && data.hasOwnProperty('fiPurchTel')) ? data.fiPurchTel : null).extend({
         pattern: {
             params: '^0[1-9][0-9]{8,9}$',
             message: "Số điện thoại không hợp lệ."
@@ -120,12 +124,25 @@ function ThongTinChungVM(data) {
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
 
-
+    ttcVMSelf.changeHoSoType =function(hsType){
+        if(hsType!=4){
+            $("#model-congvan").hide();
+        }else {
+            $("#model-congvan").show();
+        }
+    }
     ttcVMSelf.fiProValueVN  = ko.observable((data && data.hasOwnProperty('fiProValueVN ')) ? data.fiProValueVN  : null).
     extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+        number: {params: true},
+        min: 0
     });
-    ttcVMSelf.fiProValueUSD   = ko.observable((data && data.hasOwnProperty('fiProValueUSD  ')) ? data.fiProValueUSD  : null);
+    ttcVMSelf.fiProValueUSD   = ko.observable((data && data.hasOwnProperty('fiProValueUSD  ')) ? data.fiProValueUSD  : null).
+    extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+        number: {params: true},
+        min: 0
+    });
 
     ttcVMSelf.fiProATList = ko.observableArray((data && data.hasOwnProperty('fiProATList')) ? data.fiProATList : []).
     extend({
@@ -194,7 +211,10 @@ function ThongTinChungVM(data) {
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
 
+    ttcVMSelf.fiHSTypeName = ko.observable((data && data.hasOwnProperty('fiHSTypeName')) ? data.fiHSTypeName : null);
     ttcVMSelf.lstProvince  = ko.observableArray((data && data.hasOwnProperty('lstProvince')) ? data.lstProvince : []);
+    ttcVMSelf.lstHoSoType  = ko.observableArray((data && data.hasOwnProperty('lstHoSoType')) ? data.lstHoSoType : []);
+    ttcVMSelf.fiTenNhom  = ko.observable((data && data.hasOwnProperty('fiTenNhom')) ? data.fiTenNhom : null);
 
     ttcVMSelf.fiProIdNhom = ko.observable((data && data.hasOwnProperty('fiProIdNhom')) ? data.fiProIdNhom : null).
     extend({
@@ -362,10 +382,12 @@ function ThongTinChungVM(data) {
 
         var item ={
             fiProName: ttcVMSelf.fiProName(),
+            fiTrangThaiHangHoa: ttcVMSelf.fiTrangThaiHangHoa(),
             fiProductKL: kl,
             fiProductSL: sl,
             fiProThanhPhan: ttcVMSelf.fiProThanhPhan(),
             fiProIdNhom: ttcVMSelf.fiProIdNhom(),
+            fiTenNhom: ttcVMSelf.fiTenNhom(),
             fiProIdPhanNhom: ttcVMSelf.fiProIdPhanNhom(),
             fiProIdLoai: ttcVMSelf.fiProIdLoai(),
             fiProIdPhanLoai: ttcVMSelf.fiProIdPhanLoai(),

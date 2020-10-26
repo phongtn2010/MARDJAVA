@@ -10,7 +10,8 @@
     console.log('id ho so', idHoSo);
 </script>
 <div class="row" id="mardHangHoa25">
-    <div class="col-md-12">
+    <fieldset>
+    <div class="col-md-12 panel panel-primary">
         <div class="portlet light">
             <div class="portlet-title">
                 <div class="caption font-dark">
@@ -43,7 +44,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <input class="form-control"
-                                                           data-bind="value : fiTrangThaiHangHoa, hasFocus: true"
+                                                           data-bind="value : fiHSStatus, hasFocus: true"
                                                            type="text"/>
                                                 </div>
 
@@ -62,55 +63,22 @@
                             </div>
                         </div>
                     </div>
-<%--                    <div class="row">--%>
-<%--                        <div class="col col-md-6">--%>
-<%--                            <!-- ko with: pagination -->--%>
-<%--                            <spring:message code="common.tong"/> <b data-bind="text: totalCount()"></b> <spring:message--%>
-<%--                                code="common.pager.ban_ghi"/>--%>
-<%--                            <!-- /ko -->--%>
-<%--                        </div>--%>
-<%--                        <div class="col col-md-6 nsw-text-right">--%>
-<%--                            <div class="nsw-flr">--%>
-<%--                                <!-- ko with: pagination -->--%>
-<%--                                <ul data-bind="visible: true" class="flip pull-left pagination pagination-sm">--%>
-<%--                                    <li data-bind="css: { disabled: !firstPageActive() }">--%>
-<%--                                        <a data-bind="click: goToFirst">Trang đầu</a>--%>
-<%--                                    </li>--%>
-<%--                                    <li data-bind="css: { disabled: !previousPageActive() }">--%>
-<%--                                        <a data-bind="click: goToPrevious">Trang trước</a>--%>
-<%--                                    </li>--%>
-<%--                                    <!-- ko foreach: getPages() -->--%>
-<%--                                    <li data-bind="css: { active: $parent.currentPage() === $data }">--%>
-<%--                                        <a data-bind="click: $parent.goToPage, text: $data"></a>--%>
-<%--                                    </li>--%>
-<%--                                    <!-- /ko -->--%>
-<%--                                    <li data-bind="css: { disabled: !nextPageActive() }">--%>
-<%--                                        <a data-bind="click: goToNext">Trang sau</a>--%>
-<%--                                    </li>--%>
-<%--                                    <li data-bind="css: { disabled: !lastPageActive() }">--%>
-<%--                                        <a data-bind="click: goToLast">Trang cuối</a>--%>
-<%--                                    </li>--%>
-<%--                                </ul>--%>
-<%--                                <!-- /ko -->--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
                     <table class="table table-striped table-bordered table-hover order-column">
                         <thead>
                         <tr class="nsw-tr tr-nsw1-bgcolor">
-                            <th class="text-center"> STT</th>
-                            <th class="text-center"> Tên hàng hóa</th>
-                            <th class="text-center"> Nhóm hàng hóa</th>
-                            <th class="text-center"> Mã công nhận</th>
-                            <th class="text-center"> Hãng sản xuất</th>
-                            <th class="text-center"> Nước sản xuất</th>
-                            <th class="text-center"> Khối lượng</th>
-                            <th class="text-center"> Giá trị hàng hóa</th>
-                            <th class="text-center"> Trạng thái hàng hóa</th>
-                            <th class="text-center"> Xem KQĐGSPH (2c)</th>
-                            <th class="text-center"> Gửi sửa</th>
-                            <th class="text-center"> Xem  thông báo kết quả kiểm tra (2c)</th>
-                            <th class="text-center"> Lịch sử tác động</th>
+                            <th class="text-center"> <spring:message code="mard.25.tokhai.hang_hoa_grid_stt"/></th>
+                            <th class="text-center"> <spring:message code="mard.25.tokhai.hang_hoa_grid_ten"/></th>
+                            <th class="text-center"> <spring:message code="mard.25.tokhai.hang_hoa_grid_nhomtacn"/></th>
+                            <th class="text-center"> <spring:message code="mard.25.tokhai.hang_hoa_grid_macongnhan"/></th>
+                            <th class="text-center"> <spring:message code="mard.25.tokhai.hang_hoa_grid_hangsanxuat"/></th>
+                            <th class="text-center"> <spring:message code="mard.25.tokhai.hang_hoa_grid_nuocsanxuat"/></th>
+                            <th class="text-center"> <spring:message code="mard.25.tokhai.hang_hoa_grid_khoiluong"/></th>
+                            <th class="text-center"> <spring:message code="mard.25.tokhai.hang_hoa_grid_giatri"/></th>
+                            <th class="text-center"> <spring:message code="mard.25.hanghoa.status"/></th>
+                            <th class="text-center"> <spring:message code="mard.25.hanghoa.btn_xem_kqdgsph"/></th>
+                            <th class="text-center"> <spring:message code="mard.25.hanghoa.btn_gui_sua"/></th>
+                            <th class="text-center"> <spring:message code="mard.25.hanghoa.btn_xem_tbkqkt"/></th>
+                            <th class="text-center"> <spring:message code="mard.25.hanghoa.btn_xem_lich_su"/></th>
                         </tr>
                         </thead>
                         <tbody data-bind="foreach: mard25HangHoaItems">
@@ -124,19 +92,19 @@
                             <td class="text-center" data-bind="text: fiProductKL"></td>
                             <td class="text-center" data-bind="text: fiProValueUSD"></td>
                             <td class="text-center" data-bind="text: fiTrangThaiHangHoa"></td>
-                            <td>
+                            <td class="text-center">
                                 <a href="javascript:void(0)" data-bind=""><i
                                         class="fa fa-lg fa-send tooltips"></i></a>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <a href="javascript:void(0)" data-bind=""><i
                                         class="fa fa-lg fa-eye tooltips"></i></a>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <a href="javascript:void(0)" data-bind=""><i
                                         class="fa fa-lg fa-file-word-o tooltips"></i></a>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <a href="javascript:void(0)" data-bind=""><i
                                         class="fa fa-lg fa-history tooltips"></i></a>
                             </td>
@@ -145,42 +113,30 @@
                         </tr>
                         </tbody>
                     </table>
-<%--                    <div class="row">--%>
-<%--                        <div class="col col-md-6">--%>
-<%--                            <!-- ko with: pagination -->--%>
-<%--                            <spring:message code="common.tong"/> <b data-bind="text: totalCount()"></b> <spring:message--%>
-<%--                                code="common.pager.ban_ghi"/>--%>
-<%--                            <!-- /ko -->--%>
-<%--                        </div>--%>
-<%--                        <div class="col col-md-6 nsw-text-right">--%>
-<%--                            <div class="nsw-flr">--%>
-<%--                                <!-- ko with: pagination -->--%>
-<%--                                <ul data-bind="visible: true" class="flip pull-left pagination pagination-sm">--%>
-<%--                                    <li data-bind="css: { disabled: !firstPageActive() }">--%>
-<%--                                        <a data-bind="click: goToFirst">Trang đầu</a>--%>
-<%--                                    </li>--%>
-<%--                                    <li data-bind="css: { disabled: !previousPageActive() }">--%>
-<%--                                        <a data-bind="click: goToPrevious">Trang trước</a>--%>
-<%--                                    </li>--%>
-<%--                                    <!-- ko foreach: getPages() -->--%>
-<%--                                    <li data-bind="css: { active: $parent.currentPage() === $data }">--%>
-<%--                                        <a data-bind="click: $parent.goToPage, text: $data"></a>--%>
-<%--                                    </li>--%>
-<%--                                    <!-- /ko -->--%>
-<%--                                    <li data-bind="css: { disabled: !nextPageActive() }">--%>
-<%--                                        <a data-bind="click: goToNext">Trang sau</a>--%>
-<%--                                    </li>--%>
-<%--                                    <li data-bind="css: { disabled: !lastPageActive() }">--%>
-<%--                                        <a data-bind="click: goToLast">Trang cuối</a>--%>
-<%--                                    </li>--%>
-<%--                                </ul>--%>
-<%--                                <!-- /ko -->--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
                 </div>
             </div>
         </div>
+    </div>
+    </fieldset>
+    <div id="modal_xemKQDGSPH" class="modal container in modal-overflow"
+         tabindex="-1"
+         data-backdrop="static" data-keyboard="false">
+
+    </div>
+    <div id="modal_guiSua" class="modal container in modal-overflow"
+         tabindex="-1"
+         data-backdrop="static" data-keyboard="false">
+        <%@include file="inc_guihosocapXNCL.jsp"%>
+    </div>
+    <div id="modal_xemTBKQKT" class="modal container in modal-overflow"
+         tabindex="-1"
+         data-backdrop="static" data-keyboard="false">
+
+    </div>
+    <div id="modal_xemLichSuTacDong" class="modal container in modal-overflow"
+         tabindex="-1"
+         data-backdrop="static" data-keyboard="false">
+
     </div>
 </div>
 <style>

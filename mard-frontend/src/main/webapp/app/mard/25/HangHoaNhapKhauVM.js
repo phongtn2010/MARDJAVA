@@ -164,46 +164,11 @@ function HangHoaNhapKhauVM (options) {
     }
 
     kdnkVMSelf.validateForm = function () {
-        var option = {
-            thongtinChungVM: kdnkVMSelf.thongtinChungVM,
-            kyHoSoVM: kdnkVMSelf.kyHoSoVM,
-            fiReason: kdnkVMSelf.fiReason
-        }
-        switch (kdnkVMSelf.fiHSType().toString()) {
-            case "1":
-                option = $.extend(option, {regAnimalVM: kdnkVMSelf.regAnimalVM().validateObject()});
-
-                kdnkVMSelf.errors = ko.validation.group(option, {deep: true});
-                break;
-            case "2":
-                option = $.extend(option, {regAnimalProductVM: kdnkVMSelf.regAnimalProductVM().validateObject()});
-
-                kdnkVMSelf.errors = ko.validation.group(option, {deep: true});
-                break;
-            default: return;
-        }
-        if (kdnkVMSelf.fiHSType() == "2" && 
-            kdnkVMSelf.regAnimalProductVM().fiPurpose() == 'Kinh doanh thực phẩm') {
-            var hasErrorKDTP = false;
-            var lstProcessing = kdnkVMSelf.regAnimalProductVM().productMfrVM().fiProcessingList();
-            lstProcessing.forEach(function (processing) {
-                if (!processing.fiProcessingApprovalNumber) {
-                    hasErrorKDTP = true;
-                }
-            });
-            if (hasErrorKDTP) {
-                kdnkVMSelf.errorMsg('Vui lòng nhập mã số của cơ sở nuôi, sản xuất giống, cơ sở sơ chế, chế biến sản phẩm động vật thủy sản tại nước xuất khẩu');
-                return false;
-            } else {
-                kdnkVMSelf.errorMsg(null);
-            }
-        }
+        kdnkVMSelf.errors = ko.validation.group(kdnkVMSelf.thongtinChungVM, {deep: true, live: true, observable: true});
         if (kdnkVMSelf.errors().length > 0) {
             kdnkVMSelf.errors.showAllMessages();
-            kdnkVMSelf.errorMsg(NSWLang["common_msg_formvalid_filled"]);
             return false;
         }
-        kdnkVMSelf.errorMsg('');
         return true;
     }
 

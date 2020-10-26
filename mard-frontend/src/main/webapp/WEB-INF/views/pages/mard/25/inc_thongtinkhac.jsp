@@ -80,7 +80,7 @@
                 <div class="form-group">
                     <div class="col-md-12">
                         <div class="col-md-2 nsw-text-right">
-                            <label><spring:message code="mard.25.tokhai.khac.lien_he_item_address"/></label>
+                            <label><spring:message code="mard.25.tokhai.khac.lien_he_item_address"/></label><a class="nsw-require-field">*</a>
                         </div>
                         <div class="col-md-4">
                             <input data-bind="value: fiContactAddress" class="form-control"/>

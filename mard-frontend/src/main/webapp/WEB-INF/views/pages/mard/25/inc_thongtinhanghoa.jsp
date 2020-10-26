@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <div data-bind="with: thongtinChungVM">
-    <fieldset >
+    <fieldset>
         <div class="panel panel-primary">
             <div class="panel-heading" style="font-weight: bold;">
                  <span class="btn-group pull-right">
@@ -9,7 +9,6 @@
                          data-target="#modal_addAnimal"
                          data-toggle="modal"><i class="fa fa-plus"></i>
                     </a>
-<%--                    <a href="#" class="btn btn-default btn-sm">Thêm mới hàng hóa</a>--%>
                 </span>
                 <h5><b><spring:message code="mard.25.tokhai.hang_hoa"/></b></h5>
             </div>
@@ -17,7 +16,7 @@
                 <form role="form" class="form-horizontal">
                     <div class="form-group">
                         <div class="col-md-12">
-                            <span class="nsw-require-field" data-bind="validationMessage: fiProCVMienGiam "></span>
+                            <span class="nsw-require-field" data-bind="validationMessage: fiProductList"></span>
                             <table class="table table-striped table-bordered table-hover order-column">
                                 <thead>
                                 <tr class="nsw-tr tr-nsw1-bgcolor">
@@ -42,7 +41,7 @@
                                     <td class="text-right" data-bind="text : fiProductSL"></td>
                                     <td class="text-right" data-bind="text : fiProductKL"></td>
                                     <td data-bind="text : fiProThanhPhan"></td>
-                                    <td data-bind="text : fiProIdNhom"></td>
+                                    <td data-bind="text : fiTenNhom"></td>
                                     <td data-bind="text : fiProCode"></td>
                                     <td data-bind="text : fiProMadeIn"></td>
                                     <td data-bind="text : fiProCountryName"></td>

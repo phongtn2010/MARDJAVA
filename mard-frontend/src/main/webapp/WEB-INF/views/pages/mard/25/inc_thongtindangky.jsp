@@ -75,7 +75,7 @@
                         <input data-bind="value: fiPurchName" class="form-control"/>
                     </div>
                     <div class="col-md-2 nsw-text-right">
-                        <label><spring:message code="mard.25.tokhai.ben_mua_hang_item_004"/></label>
+                        <label><spring:message code="mard.25.tokhai.ben_mua_hang_item_004"/></label><a class="nsw-require-field">*</a>
                     </div>
                     <div class="col-md-4">
                         <input data-bind="value: fiPurchTel" class="form-control"/>
