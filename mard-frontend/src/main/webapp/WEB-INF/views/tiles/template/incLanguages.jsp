@@ -81,6 +81,7 @@
     NSWLang["common_msg_xoatokhai"] = "<spring:message code="common.msg.xoatokhai" />";
     NSWLang["common_msg_datontaitokhai"] = "<spring:message code="common.msg.datontaitokhai" />";
     NSWLang["common_msg_invalid_email"] = "<spring:message code="common.msg.formvalid.email" />";
+    NSWLang["common_msg_invalid_phonenumber"] = "<spring:message code="common.msg.formvalid.phonenumber" />";
 
     NSWLang["common_msg_formvaild_required"] = "<spring:message code="common.msg.formvaild.required" />";
     NSWLang["common_msg_formvaild_positivenumber"] = "<spring:message code="common.msg.formvalid.positivenumber" />";
@@ -90,6 +91,7 @@
     NSWLang["common_msg_formvaild_format"] = "<spring:message code="common.msg.formvaild.format" />";
     NSWLang["common_msg_formvalid_filled"] = "<spring:message code="common.msg.formvalid.filled"/>"
     NSWLang["common_msg_formvalid_isinteger"] = "<spring:message code="common.msg.formvalid.isinteger"/>"
+
     
     NSWLang["file_msg_chua_chon_file"] = "<spring:message code="file.msg.chua_chon_file" />";    
     NSWLang["file_msg_dung_luong_toi_da"] = "<spring:message code="file.msg.dung_luong_toi_da" />";

@@ -14,7 +14,6 @@ function RegAnimalVM(options) {
         "Chế biến thực phẩm",
         "Khác"
     ])
-
     regAnimalVMSelf.fiTimeQuarantine = ko.observable(null)
         .extend({
             required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
