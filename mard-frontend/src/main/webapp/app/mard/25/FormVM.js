@@ -827,12 +827,48 @@ function UploadFileVM(lstAtch, lstAtchType) {
     ufVMSelf.uploadedFiles = ko.observableArray([]);
 
     ufVMSelf.isRequired = ko.observable(null);
-    ufVMSelf.fiFilePath = ko.observable(null);
+    ufVMSelf.fiFilePath = ko.observable(null).extend({
+        validation: {
+            validator: function (val) {
+                if (val!=null){
+                    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+                    var getFile = $('#file')[0].files[0];
+                    var totalSize = getFile.size/1000;
+                    var getFile = getFile.name;
+                    var extension = getFile.substr( (getFile.lastIndexOf('.') +1) );
+                    var maxSize = 50*1000;
+                    var getName = getFile.split('.').slice(0, -1).join('.')
+                    if (((extension=="jpg")||(extension=="jpg")||(extension=="pdf")||(extension=="PDF")||(extension=="TIF")||(extension=="tif"))&&(totalSize <= maxSize)&&(!format.test(getName))){
+                        return true;
+                    }
+                }
+            },
+            message: 'File không hợp lê'
+        }
+    });
     ufVMSelf.fiFileType = ko.observable(null);
 
     ufVMSelf.fiFileHD  = ko.observable(null);
     ufVMSelf.fiFileHDDate = ko.observable(null);
-    ufVMSelf.fiPath  = ko.observable(null);
+    ufVMSelf.fiPath  = ko.observable(null).extend({
+        validation: {
+            validator: function (val) {
+                if (val!=null){
+                    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+                    var getFile = $('#file-id')[0].files[0];
+                    var totalSize = getFile.size/1000;
+                    var getFile = getFile.name;
+                    var extension = getFile.substr( (getFile.lastIndexOf('.') +1) );
+                    var maxSize = 50*1000;
+                    var getName = getFile.split('.').slice(0, -1).join('.')
+                    if (((extension=="jpg")||(extension=="jpg")||(extension=="pdf")||(extension=="PDF")||(extension=="TIF")||(extension=="tif"))&&(totalSize <= maxSize)&&(!format.test(getName))){
+                        return true;
+                    }
+                }
+            },
+            message: 'File không hợp lê'
+        }
+    });
     ufVMSelf.fiFileName = ko.observable(null);
 
     ufVMSelf.fiHSType = ko.observable(null);
@@ -840,34 +876,152 @@ function UploadFileVM(lstAtch, lstAtchType) {
     ufVMSelf.lstHoaDon = ko.observableArray([]);
     ufVMSelf.fiFileHoaDon = ko.observable(null);
     ufVMSelf.fiFileHoaDonDate = ko.observable(null);
-    ufVMSelf.fiFileHoaDonPath = ko.observable(null);
+    ufVMSelf.fiFileHoaDonPath = ko.observable(null).extend({
+        validation: {
+            validator: function (val) {
+                if (val!=null){
+                    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+                    var getFile = $('#fileHoaDon')[0].files[0];
+                    var totalSize = getFile.size/1000;
+                    var getFile = getFile.name;
+                    var extension = getFile.substr( (getFile.lastIndexOf('.') +1) );
+                    var maxSize = 50*1000;
+                    var getName = getFile.split('.').slice(0, -1).join('.')
+                    if (((extension=="jpg")||(extension=="jpg")||(extension=="pdf")||(extension=="PDF")||(extension=="TIF")||(extension=="tif"))&&(totalSize <= maxSize)&&(!format.test(getName))){
+                        return true;
+                    }
+                }
+            },
+            message: 'File không hợp lê'
+        }
+    });
 
     ufVMSelf.lstPhieu = ko.observableArray([]);
     ufVMSelf.fiFilePhieu = ko.observable(null);
     ufVMSelf.fiFilePhieuDate = ko.observable(null);
-    ufVMSelf.fiFilePhieuPath = ko.observable(null);
+    ufVMSelf.fiFilePhieuPath = ko.observable(null).extend({
+        validation: {
+            validator: function (val) {
+                if (val!=null){
+                    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+                    var getFile = $('#filePhieuPath')[0].files[0];
+                    var totalSize = getFile.size/1000;
+                    var getFile = getFile.name;
+                    var extension = getFile.substr( (getFile.lastIndexOf('.') +1) );
+                    var maxSize = 50*1000;
+                    var getName = getFile.split('.').slice(0, -1).join('.')
+                    if (((extension=="jpg")||(extension=="jpg")||(extension=="pdf")||(extension=="PDF")||(extension=="TIF")||(extension=="tif"))&&(totalSize <= maxSize)&&(!format.test(getName))){
+                        return true;
+                    }
+                }
+            },
+            message: 'File không hợp lê'
+        }
+    });
 
     ufVMSelf.lstKQ = ko.observableArray([]);
     ufVMSelf.fiFileKQ = ko.observable(null);
-    ufVMSelf.fiFileKQPath = ko.observable(null);
+    ufVMSelf.fiFileKQPath = ko.observable(null).extend({
+        validation: {
+            validator: function (val) {
+                if (val!=null){
+                    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+                    var getFile = $('#fileKQ')[0].files[0];
+                    var totalSize = getFile.size/1000;
+                    var getFile = getFile.name;
+                    var extension = getFile.substr( (getFile.lastIndexOf('.') +1) );
+                    var maxSize = 50*1000;
+                    var getName = getFile.split('.').slice(0, -1).join('.')
+                    if (((extension=="jpg")||(extension=="jpg")||(extension=="pdf")||(extension=="PDF")||(extension=="TIF")||(extension=="tif"))&&(totalSize <= maxSize)&&(!format.test(getName))){
+                        return true;
+                    }
+                }
+            },
+            message: 'File không hợp lê'
+        }
+    });
 
     ufVMSelf.lstTC = ko.observableArray([]);
     ufVMSelf.fiFileTC = ko.observable(null);
-    ufVMSelf.fiFileTCPath = ko.observable(null);
+    ufVMSelf.fiFileTCPath = ko.observable(null).extend({
+        validation: {
+            validator: function (val) {
+                if (val!=null){
+                    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+                    var getFile = $('#fileTC')[0].files[0];
+                    var totalSize = getFile.size/1000;
+                    var getFile = getFile.name;
+                    var extension = getFile.substr( (getFile.lastIndexOf('.') +1) );
+                    var maxSize = 50*1000;
+                    var getName = getFile.split('.').slice(0, -1).join('.')
+                    if (((extension=="jpg")||(extension=="jpg")||(extension=="pdf")||(extension=="PDF")||(extension=="TIF")||(extension=="tif"))&&(totalSize <= maxSize)&&(!format.test(getName))){
+                        return true;
+                    }
+                }
+            },
+            message: 'File không hợp lê'
+        }
+    });
 
     ufVMSelf.lstCNLH = ko.observableArray([]);
     ufVMSelf.fiFileCNLH = ko.observable(null);
-    ufVMSelf.fiFileCNLHPath = ko.observable(null);
+    ufVMSelf.fiFileCNLHPath = ko.observable(null).extend({
+        validation: {
+            validator: function (val) {
+                if (val!=null){
+                    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+                    var getFile = $('#fileCNLH')[0].files[0];
+                    var totalSize = getFile.size/1000;
+                    var getFile = getFile.name;
+                    var extension = getFile.substr( (getFile.lastIndexOf('.') +1) );
+                    var maxSize = 50*1000;
+                    var getName = getFile.split('.').slice(0, -1).join('.')
+                    if (((extension=="jpg")||(extension=="jpg")||(extension=="pdf")||(extension=="PDF")||(extension=="TIF")||(extension=="tif"))&&(totalSize <= maxSize)&&(!format.test(getName))){
+                        return true;
+                    }
+                }
+            },
+            message: 'File không hợp lê'
+        }
+    });
 
     ufVMSelf.lstCNPT = ko.observableArray([]);
     ufVMSelf.fiFileCNPT = ko.observable(null);
-    ufVMSelf.fiFileCNPTPath = ko.observable(null);
+    ufVMSelf.fiFileCNPTPath = ko.observable(null).extend({
+        validation: {
+            validator: function (val) {
+                if (val!=null){
+                    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+                    var getFile = $('#fileCNPT')[0].files[0];
+                    var totalSize = getFile.size/1000;
+                    var getFile = getFile.name;
+                    var extension = getFile.substr( (getFile.lastIndexOf('.') +1) );
+                    var maxSize = 50*1000;
+                    var getName = getFile.split('.').slice(0, -1).join('.')
+                    if (((extension=="jpg")||(extension=="jpg")||(extension=="pdf")||(extension=="PDF")||(extension=="TIF")||(extension=="tif"))&&(totalSize <= maxSize)&&(!format.test(getName))){
+                        return true;
+                    }
+                }
+            },
+            message: 'File không hợp lê'
+        }
+    });
 
     if (lstAtchType) {
         ufVMSelf.lstAtch(mapAttachmentVM(lstAtch, lstAtchType));
     }
+    ufVMSelf.validateError = function () {
+        if (ufVMSelf.errors().length > 0) {
+            ufVMSelf.errors.showAllMessages();
+            return false;
+        }
+        return true;
+    }
 
     ufVMSelf.addFileHD = function (atchVM) {
+        var checkFileHD = [ufVMSelf.fiPath];
+        ufVMSelf.errors = ko.validation.group(checkFileHD, {deep: true, live: true, observable: true});
+        if (!ufVMSelf.validateError()) return;
         console.log("Ok");
         ufVMSelf.selectedAttachVM($.extend(true, {}, atchVM));
         var fileName=atchVM.fiPath().replace(/^.*[\\\/]/, '');
@@ -880,6 +1034,9 @@ function UploadFileVM(lstAtch, lstAtchType) {
         ufVMSelf.lstHD.push(item);
     }
     ufVMSelf.addFileHoaDon = function (atchVM){
+        var checkFileHoaDon = [ufVMSelf.fiFileHoaDonPath];
+        ufVMSelf.errors = ko.validation.group(checkFileHoaDon, {deep: true, live: true, observable: true});
+        if (!ufVMSelf.validateError()) return;
         ufVMSelf.selectedAttachVM($.extend(true, {}, atchVM));
         var fileName=atchVM.fiFileHoaDonPath().replace(/^.*[\\\/]/, '');
         var item ={
@@ -891,6 +1048,9 @@ function UploadFileVM(lstAtch, lstAtchType) {
         ufVMSelf.lstHoaDon.push(item);
     }
     ufVMSelf.addFilePhieu = function (atchVM){
+        var checkFilePhieu = [ufVMSelf.fiFilePhieuPath];
+        ufVMSelf.errors = ko.validation.group(checkFilePhieu, {deep: true, live: true, observable: true});
+        if (!ufVMSelf.validateError()) return;
         ufVMSelf.selectedAttachVM($.extend(true, {}, atchVM));
         var fileName=atchVM.fiFilePhieuPath().replace(/^.*[\\\/]/, '');
         var item ={
@@ -903,6 +1063,9 @@ function UploadFileVM(lstAtch, lstAtchType) {
     }
 
     ufVMSelf.addFileKQ = function (atchVM){
+        var checkFileKQ = [ufVMSelf.fiFileKQPath];
+        ufVMSelf.errors = ko.validation.group(checkFileKQ, {deep: true, live: true, observable: true});
+        if (!ufVMSelf.validateError()) return;
         ufVMSelf.selectedAttachVM($.extend(true, {}, atchVM));
         var fileName=atchVM.fiFileKQPath().replace(/^.*[\\\/]/, '');
         var item ={
@@ -915,6 +1078,9 @@ function UploadFileVM(lstAtch, lstAtchType) {
 
 
     ufVMSelf.addFileTC = function (atchVM){
+        var checkFileTC = [ufVMSelf.fiFileTCPath];
+        ufVMSelf.errors = ko.validation.group(checkFileTC, {deep: true, live: true, observable: true});
+        if (!ufVMSelf.validateError()) return;
         ufVMSelf.selectedAttachVM($.extend(true, {}, atchVM));
         var fileName=atchVM.fiFileTCPath().replace(/^.*[\\\/]/, '');
         var item ={
@@ -926,6 +1092,9 @@ function UploadFileVM(lstAtch, lstAtchType) {
     }
 
     ufVMSelf.addFileCNLH = function (atchVM){
+        var checkFileCNLH = [ufVMSelf.fiFileCNLHPath];
+        ufVMSelf.errors = ko.validation.group(checkFileCNLH, {deep: true, live: true, observable: true});
+        if (!ufVMSelf.validateError()) return;
         ufVMSelf.selectedAttachVM($.extend(true, {}, atchVM));
         var fileName=atchVM.fiFileCNLHPath().replace(/^.*[\\\/]/, '');
         var item ={
@@ -937,6 +1106,9 @@ function UploadFileVM(lstAtch, lstAtchType) {
     }
 
     ufVMSelf.addFileCNPT = function (atchVM){
+        var checkFileCNPT = [ufVMSelf.fiFileCNPTPath];
+        ufVMSelf.errors = ko.validation.group(checkFileCNPT, {deep: true, live: true, observable: true});
+        if (!ufVMSelf.validateError()) return;
         ufVMSelf.selectedAttachVM($.extend(true, {}, atchVM));
         var fileName=atchVM.fiFileCNPTPath().replace(/^.*[\\\/]/, '');
         var item ={
@@ -950,6 +1122,9 @@ function UploadFileVM(lstAtch, lstAtchType) {
 
 
     ufVMSelf.addFiles =function(atchVM){
+        var checkFiles = [ufVMSelf.fiFilePath];
+        ufVMSelf.errors = ko.validation.group(checkFiles, {deep: true, live: true, observable: true});
+        if (!ufVMSelf.validateError()) return;
         var fileName=ufVMSelf.fiFilePath().replace(/^.*[\\\/]/, '');
         var item ={
             fiFileType:ufVMSelf.fiFileType,

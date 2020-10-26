@@ -43,7 +43,7 @@
                                     data-date-format="dd/mm/yyyy" type="text" value="" maxlength="10" />
                         </td>
                         <td>
-                            <input class="form-control" type="file" data-bind="value: fiPath"/>
+                            <input class="form-control" id="file-id" type="file" data-bind="value: fiPath"/>
                         </td>
                         <td data-bind="visible: $root.isEditable" class="text-center">
                             <a href="#" data-bind="click:  addFileHD, visible: $root.isEditable()"><i class="fa fa-lg fa-plus"></i></a>
@@ -97,7 +97,7 @@
                                data-date-format="dd/mm/yyyy" type="text" value="" maxlength="10" />
                     </td>
                     <td>
-                        <input class="form-control" type="file" data-bind="value: fiFileHoaDonPath"/>
+                        <input class="form-control" id="fileHoaDon" type="file" data-bind="value: fiFileHoaDonPath"/>
                     </td>
                     <td data-bind="visible: $root.isEditable" class="text-center">
                         <a href="#" data-bind="click: addFileHoaDon, visible: $root.isEditable()"><i class="fa fa-lg fa-plus"></i></a>
@@ -151,7 +151,7 @@
                                data-date-format="dd/mm/yyyy" type="text" value="" maxlength="10" />
                     </td>
                     <td>
-                        <input class="form-control" type="file" data-bind="value: fiFilePhieuPath"/>
+                        <input class="form-control" type="file"  id="filePhieuPath" data-bind="value: fiFilePhieuPath"/>
                     </td>
                     <td data-bind="visible: $root.isEditable" class="text-center">
                         <a href="#" data-bind="click: addFilePhieu, visible: $root.isEditable()"><i class="fa fa-lg fa-plus"></i></a>
@@ -199,7 +199,7 @@
                         <input class="form-control" data-bind="value: fiFileKQ"/>
                     </td>
                     <td>
-                        <input class="form-control" type="file" data-bind="value: fiFileKQPath"/>
+                        <input class="form-control" type="file"  id="fileKQ" data-bind="value: fiFileKQPath"/>
                     </td>
                     <td data-bind="visible: $root.isEditable" class="text-center">
                         <a href="#" data-bind="click: addFileKQ, visible: $root.isEditable()"><i class="fa fa-lg fa-plus"></i></a>
@@ -247,7 +247,7 @@
                         <input class="form-control" data-bind="value: fiFileTC"/>
                     </td>
                     <td>
-                        <input class="form-control" type="file" data-bind="value: fiFileTCPath"/>
+                        <input class="form-control" type="file"  id="fileTC" data-bind="value: fiFileTCPath"/>
                     </td>
                     <td data-bind="visible: $root.isEditable" class="text-center">
                         <a href="#" data-bind="click: addFileTC, visible: $root.isEditable()"><i class="fa fa-lg fa-plus"></i></a>
@@ -295,7 +295,7 @@
                         <input class="form-control" data-bind="value: fiFileCNLH"/>
                     </td>
                     <td>
-                        <input class="form-control" type="file" data-bind="value: fiFileCNLHPath"/>
+                        <input class="form-control" type="file"  id="fileCNLH" data-bind="value: fiFileCNLHPath"/>
                     </td>
                     <td data-bind="visible: $root.isEditable" class="text-center">
                         <a href="#" data-bind="click: addFileCNLH, visible: $root.isEditable()"><i class="fa fa-lg fa-plus"></i></a>
@@ -343,7 +343,7 @@
                         <input class="form-control" data-bind="value: fiFileCNPT"/>
                     </td>
                     <td>
-                        <input class="form-control" type="file" data-bind="value: fiFileCNPTPath"/>
+                        <input class="form-control" type="file"  id="fileCNPT" data-bind="value: fiFileCNPTPath"/>
                     </td>
                     <td data-bind="visible: $root.isEditable" class="text-center">
                         <a href="#" data-bind="click: addFileCNPT, visible: $root.isEditable()"><i class="fa fa-lg fa-plus"></i></a>
@@ -381,7 +381,7 @@
 
                         </div>
                         <div class="col-md-6">
-                            <input class="form-control form-control-inline date-picker" type="file" data-bind="value: fiFilePath"/>
+                            <input class="form-control form-control-inline date-picker"  id="file" type="file" data-bind="value: fiFilePath"/>
                         </div>
                     </div>
                 </div>
