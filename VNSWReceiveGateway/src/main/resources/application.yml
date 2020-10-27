@@ -1,0 +1,134 @@
+spring:
+  profiles:
+    active: hq_test
+---
+server:
+  port: 8002
+  contextPath: /VNSWReceiveGateway
+---
+spring:
+  profiles: local, default, dev
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  jmx:
+    default-domain: VNSWReceiveGateway
+#Spring metric phuc vu monitoring
+management:
+  security:
+    enabled: false
+#Service cua Bo Khoa Hoc cong nghe
+BKHCN: http://10.224.164.18:8002/MOSTWs/ws/most.wsdl
+BYT: http://10.224.164.252:8006/MOHWs/ws/moh.wsdl
+BNN: http://10.224.164.18:8002/MARDWs/ws/mard.wsdl
+BTNMT: http://10.224.164.18:8002/MONREWs/ws/monre.wsdl
+# Thong tin rabbitMQ 
+activemq.host: 10.224.164.16
+activemq.port: 5672
+activemq.user: nswlog
+activemq.password: nswlog
+activemq.virtualHost: /
+activemq.exchangeName: logExchange
+# Loi
+activemq.queueErrName: Log_Error_Queue
+activemq.routingErrKey: error
+# Log
+activemq.queueLogName: Log_ReceiveGateway_Queue
+activemq.routingLogKey: receiveGateway
+---
+spring:
+  profiles: vt_test
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  jmx:
+    default-domain: VNSWReceiveGateway
+#Spring metric phuc vu monitoring
+management:
+  security:
+    enabled: false
+#Service cua Bo Khoa Hoc cong nghe
+BKHCN: http://10.224.164.18:8002/MOSTWs/ws/most.wsdl
+BYT: http://10.224.164.18:8002/MOHWs/ws/moh.wsdl
+BNN: http://10.224.164.18:8002/MARDWs/ws/mard.wsdl
+BTNMT: http://10.224.164.18:8002/MONREWs/ws/monre.wsdl
+# Thong tin rabbitMQ 
+activemq.host: 10.224.164.16
+activemq.port: 5672
+activemq.user: nswlog
+activemq.password: nswlog
+activemq.virtualHost: /
+activemq.exchangeName: logExchange
+# Loi
+activemq.queueErrName: Log_Error_Queue
+activemq.routingErrKey: error
+# Log
+activemq.queueLogName: Log_ReceiveGateway_Queue
+activemq.routingLogKey: receiveGateway
+---
+spring:
+  profiles: hq_test
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  jmx:
+    default-domain: VNSWReceiveGateway
+#Spring metric phuc vu monitoring
+management:
+  security:
+    enabled: false
+#Danh sach cac dia chi service noi bo cua tung bo nganh
+#Service cua Bo Khoa Hoc cong nghe
+BKHCN: http://10.224.128.132:8004/MOSTWs/ws/most.wsdl
+BYT: http://10.224.128.132:8004/MOHWs/ws/moh.wsdl
+BNN: http://10.224.128.132:8004/MARDWs/ws/mard.wsdl
+BTNMT: http://10.224.128.132:8004/MONREWs/ws/monre.wsdl
+BTTTT: http://10.224.83.125:8003/MICWs/ws/mic.wsdl
+BPDT: http://10.224.128.132:8004/MODWs/ws/mod.wsdl
+# Thong tin rabbitMQ 
+activemq.host: 10.224.128.148
+activemq.port: 5672
+activemq.user: nswlog
+activemq.password: nswlog
+activemq.virtualHost: /
+activemq.exchangeName: logExchange
+# Loi
+activemq.queueErrName: Log_Error_Queue
+activemq.routingErrKey: error
+# Log
+activemq.queueLogName: Log_ReceiveGateway_Queue
+activemq.routingLogKey: receiveGateway
+---
+spring:
+  profiles: hq_live
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  jmx:
+    default-domain: VNSWReceiveGateway
+#Spring metric phuc vu monitoring
+management:
+  security:
+    enabled: false
+#Danh sach cac dia chi service noi bo cua tung bo nganh
+#Service cua Bo Khoa Hoc cong nghe
+BKHCN: http://10.224.128.193:8003/MOSTWs/ws/most.wsdl
+BYT: http://10.224.128.193:8003/MOHWs/ws/moh.wsdl
+BNN: http://10.224.128.193:8003/MARDWs/ws/mard.wsdl
+BTNMT: http://10.224.128.193:8003/MONREWs/ws/monre.wsdl
+# Thong tin rabbitMQ 
+activemq.host: 10.224.138.93
+activemq.port: 5672
+activemq.user: nswlog
+activemq.password: nswlog
+activemq.virtualHost: /
+activemq.exchangeName: logExchange
+# Loi
+activemq.queueErrName: Log_Error_Queue
+activemq.routingErrKey: error
+# Log
+activemq.queueLogName: Log_ReceiveGateway_Queue
+activemq.routingLogKey: receiveGateway
+---
+
+
