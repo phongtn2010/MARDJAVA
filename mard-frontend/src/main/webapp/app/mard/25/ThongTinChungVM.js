@@ -2,6 +2,7 @@ function ThongTinChungVM(data) {
     var ttcVMSelf = this;
 
     ttcVMSelf.errors = ko.validation.group(ttcVMSelf);
+    ttcVMSelf.selectedIndex = ko.observable(null);
     ttcVMSelf.fiHSStatus = ko.observable((data && data.hasOwnProperty('fiHSStatus')) ? data.fiHSStatus : null);
     ttcVMSelf.fiTaxCode = ko.observable((data && data.hasOwnProperty('fiTaxCode')) ? data.fiTaxCode : null);
     ttcVMSelf.fiHSCreatedDate = ko.observable((data && data.hasOwnProperty('fiHSCreatedDate')) ? new Date(data.fiHSCreatedDate) : new Date());
@@ -70,7 +71,10 @@ function ThongTinChungVM(data) {
     ttcVMSelf.fiPurchFromDate = ko.observable((data && data.hasOwnProperty('fiPurchFromDate')) ? new Date(data.fiPurchFromDate) : new Date());
     ttcVMSelf.fiPurchToDate = ko.observable((data && data.hasOwnProperty('fiPurchToDate')) ? new Date(data.fiPurchToDate) : null);
 
-    ttcVMSelf.fiProductList = ko.observableArray((data && data.hasOwnProperty('fiProductList')) ? data.fiProductList : []);
+    ttcVMSelf.fiProductList = ko.observableArray((data && data.hasOwnProperty('fiProductList')) ? data.fiProductList : []).
+    extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    });
 
     ttcVMSelf.fiProCVMienGiam = ko.observable((data && data.hasOwnProperty('fiProCVMienGiam')) ? data.fiProCVMienGiam : null);
     ttcVMSelf.fiProCVMienGiamNgay = ko.observable((data && data.hasOwnProperty('fiProCVMienGiamNgay')) ? new Date(data.fiProCVMienGiamNgay) : null);
@@ -165,7 +169,10 @@ function ThongTinChungVM(data) {
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
 
-    ttcVMSelf.fiProSLKLList = ko.observableArray((data && data.hasOwnProperty('fiProSLKLList')) ? data.fiProSLKLList : []);
+    ttcVMSelf.fiProSLKLList = ko.observableArray((data && data.hasOwnProperty('fiProSLKLList')) ? data.fiProSLKLList : []).
+    extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    });
     ttcVMSelf.EfiProSLKLMass = ko.observable(null).
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
@@ -214,7 +221,7 @@ function ThongTinChungVM(data) {
     ttcVMSelf.fiHSTypeName = ko.observable((data && data.hasOwnProperty('fiHSTypeName')) ? data.fiHSTypeName : null);
     ttcVMSelf.lstProvince  = ko.observableArray((data && data.hasOwnProperty('lstProvince')) ? data.lstProvince : []);
     ttcVMSelf.lstHoSoType  = ko.observableArray((data && data.hasOwnProperty('lstHoSoType')) ? data.lstHoSoType : []);
-    ttcVMSelf.fiTenNhom  = ko.observable((data && data.hasOwnProperty('fiTenNhom')) ? data.fiTenNhom : null);
+    ttcVMSelf.fiTenNhom  = ko.observable(null);
 
     ttcVMSelf.fiProIdNhom = ko.observable((data && data.hasOwnProperty('fiProIdNhom')) ? data.fiProIdNhom : null).
     extend({
@@ -294,84 +301,24 @@ function ThongTinChungVM(data) {
     });
 
     ttcVMSelf.clearForm = function () {
-
         ttcVMSelf.errorMsg('');
-        ttcVMSelf.EfiProCLTarg = ko.observable(null).
-        extend({
-            required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-        });
-        ttcVMSelf.EfiProCLCompare = ko.observable(null).
-        extend({
-            required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-        });
-        ttcVMSelf.EfiProCLContent = ko.observable(null).
-        extend({
-            required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
-            number: {params: true},
-            min: 0
-        });
-        ttcVMSelf.EfiProCLUnitID = ko.observable(null).
-        extend({
-            required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-        });
         $("#EfiProCLTargTx").val('');
         $("#EfiProCLContentTx").val('');
-
-
-        ttcVMSelf.EfiProATTarg= ko.observable(null).
-        extend({
-            required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-        });
-        ttcVMSelf.EfiProATCompare= ko.observable(null).
-        extend({
-            required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-        });
-        ttcVMSelf.EfiProATContent= ko.observable(null).
-        extend({
-            required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
-            number: {params: true},
-            min: 0
-        });
-        ttcVMSelf.EfiProATUnitID= ko.observable(null).
-        extend({
-            required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-        });
         $("#EfiProATTargTx").val('');
         $("#EfiProATContentTx").val('');
-
-        ttcVMSelf.EfiProSLKLMass = ko.observable(null).
-        extend({
-            required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
-            number: {params: true},
-            min: 0
-        });
-        ttcVMSelf.EfiProSLKLMassTan = ko.observable(null).
-        extend({
-            required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
-            number: {params: true},
-            min: 0
-        });
-        ttcVMSelf.EfiProSLKLAmount = ko.observable(null).
-        extend({
-            required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
-            number: {params: true},
-            min: 0
-        });
-        ttcVMSelf.EfiProSLKLAmountUnitCode = ko.observable(null).
-        extend({
-            required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-        });
-
-        ttcVMSelf.EfiProSLKLMassUnitCode = ko.observable(null).
-        extend({
-            required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-        });
         $("#EfiProSLKLMass").val('');
         $("#EfiProSLKLMassTan").val('');
         $("#EfiProSLKLAmount").val('');
 
     }
     ttcVMSelf.addProduct=function(data){
+        var addProductValid = [ttcVMSelf.fiProName, ttcVMSelf.fiProIdNhom, ttcVMSelf.fiProIdPhanNhom,ttcVMSelf.fiProIdLoai,ttcVMSelf.fiProValueVN,ttcVMSelf.fiProColor,ttcVMSelf.fiProSoHieu,
+             ttcVMSelf.fiProValueUSA,ttcVMSelf.fiProIdPhanLoai,ttcVMSelf.fiProCode,ttcVMSelf.fiProMadeIn,ttcVMSelf.fiProCountryCode,ttcVMSelf.fiProThanhPhan,ttcVMSelf.fiProQuyChuan,];
+        var chiTieuAT = [ttcVMSelf.EfiProATContent, ttcVMSelf.EfiProATTarg, ttcVMSelf.EfiProATCompare,ttcVMSelf.EfiProATUnitID];
+        var getAllForm = [ttcVMSelf.fiProSLKLList, ttcVMSelf.fiProATList,ttcVMSelf.fiProCLList];
+        var chiTieuChatLuong = [ttcVMSelf.EfiProCLContent, ttcVMSelf.EfiProCLCompare, ttcVMSelf.EfiProCLUnitID,ttcVMSelf.EfiProCLTarg];
+        var chiTieuKL = [ttcVMSelf.EfiProSLKLMass, ttcVMSelf.EfiProSLKLMassTan, ttcVMSelf.EfiProSLKLAmount,ttcVMSelf.EfiProSLKLAmountUnitCode,ttcVMSelf.EfiProSLKLMassUnitCode];
+        ttcVMSelf.errors = ko.validation.group({chiTieuChatLuong,chiTieuKL,chiTieuAT,addProductValid,getAllForm}, {deep: true, live: true, observable: true});
         if (!ttcVMSelf.validate()) return;
         var kl='';
         var sl='';
@@ -405,9 +352,66 @@ function ThongTinChungVM(data) {
             fiProSLKLList: ttcVMSelf.fiProSLKLList(),
             fiProATList: ttcVMSelf.fiProATList()
         }
+
         ttcVMSelf.fiProductList.push(item);
         $("#modal_addAnimal").modal('hide');
     }
+
+    ttcVMSelf.updateAnimal= function () {
+        var addProductValid = [ttcVMSelf.fiProName, ttcVMSelf.fiProIdNhom, ttcVMSelf.fiProIdPhanNhom,ttcVMSelf.fiProIdLoai,ttcVMSelf.fiProValueVN,ttcVMSelf.fiProColor,ttcVMSelf.fiProSoHieu,
+            ttcVMSelf.fiProValueUSA,ttcVMSelf.fiProIdPhanLoai,ttcVMSelf.fiProCode,ttcVMSelf.fiProMadeIn,ttcVMSelf.fiProCountryCode,ttcVMSelf.fiProThanhPhan,ttcVMSelf.fiProQuyChuan,];
+        var chiTieuAT = [ttcVMSelf.EfiProATContent, ttcVMSelf.EfiProATTarg, ttcVMSelf.EfiProATCompare,ttcVMSelf.EfiProATUnitID];
+        var getAllForm = [ttcVMSelf.fiProSLKLList, ttcVMSelf.fiProATList,ttcVMSelf.fiProCLList];
+        var chiTieuChatLuong = [ttcVMSelf.EfiProCLContent, ttcVMSelf.EfiProCLCompare, ttcVMSelf.EfiProCLUnitID,ttcVMSelf.EfiProCLTarg];
+        var chiTieuKL = [ttcVMSelf.EfiProSLKLMass, ttcVMSelf.EfiProSLKLMassTan, ttcVMSelf.EfiProSLKLAmount,ttcVMSelf.EfiProSLKLAmountUnitCode,ttcVMSelf.EfiProSLKLMassUnitCode];
+        ttcVMSelf.errors = ko.validation.group({chiTieuChatLuong,chiTieuKL,chiTieuAT,addProductValid,getAllForm}, {deep: true, live: true, observable: true});
+        if (!ttcVMSelf.validate()) return;
+        var kl='';
+        var sl='';
+        for (var i =0;i<ttcVMSelf.fiProSLKLList().length;i++){
+            kl+=ttcVMSelf.fiProSLKLList()[i].fiProSLKLMass+' '+ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitName;
+            sl+=ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmount+' '+ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitName;
+        }
+
+        var item ={
+            fiProName: ttcVMSelf.fiProName(),
+            fiTrangThaiHangHoa: ttcVMSelf.fiTrangThaiHangHoa(),
+            fiProductKL: kl,
+            fiProductSL: sl,
+            fiProThanhPhan: ttcVMSelf.fiProThanhPhan(),
+            fiProIdNhom: ttcVMSelf.fiProIdNhom(),
+            fiTenNhom: ttcVMSelf.fiTenNhom(),
+            fiProIdPhanNhom: ttcVMSelf.fiProIdPhanNhom(),
+            fiProIdLoai: ttcVMSelf.fiProIdLoai(),
+            fiProIdPhanLoai: ttcVMSelf.fiProIdPhanLoai(),
+            fiProCode: ttcVMSelf.fiProCode(),
+            fiProMadeIn: ttcVMSelf.fiProMadeIn(),
+            fiProCountryName: ttcVMSelf.fiProCountryName(),
+            fiProCountryCode: ttcVMSelf.fiProCountryCode(),
+            fiProValueVN: ttcVMSelf.fiProValueVN(),
+            fiProColor: ttcVMSelf.fiProColor(),
+            fiProSoHieu: ttcVMSelf.fiProSoHieu(),
+            fiProQuyChuan: ttcVMSelf.fiProQuyChuan(),
+            fiProValueUSD: ttcVMSelf.fiProValueUSD(),
+            fiPackageUnitCode: ttcVMSelf.fiPackageUnitCode(),
+            fiProCLList: ttcVMSelf.fiProCLList(),
+            fiProSLKLList: ttcVMSelf.fiProSLKLList(),
+            fiProATList: ttcVMSelf.fiProATList()
+        }
+        var index = ttcVMSelf.selectedIndex();
+        ttcVMSelf.fiProductList.splice(index, 1);
+        ttcVMSelf.fiProductList.splice(index, 0, item);
+        ttcVMSelf.clearForm();
+        if ($('#modal_updateAnimal').hasClass('in')) {
+            $('#modal_updateAnimal').modal('hide')
+        }
+        ;
+        if ($('#modal_updateAnimal').hasClass('in')) {
+            $('#modal_updateAnimal').modal('hide')
+        }
+        ;
+    }
+
     ttcVMSelf.addThongTinChiTieuChatLuong=function () {
         var chiTieuChatLuong = [ttcVMSelf.EfiProCLContent, ttcVMSelf.EfiProCLCompare, ttcVMSelf.EfiProCLUnitID,ttcVMSelf.EfiProCLTarg];
         ttcVMSelf.errors = ko.validation.group(chiTieuChatLuong, {deep: true, live: true, observable: true});
@@ -460,15 +464,18 @@ function ThongTinChungVM(data) {
         }
         return true;
     }
+
     ttcVMSelf.openUpdateProduct = function (data, index, type) {
+        console.log(data);
         ko.mapping.fromJS(data, {}, ttcVMSelf);
         ttcVMSelf.selectedIndex(index);
         if (type == '1' || type == 1) {
-            $('#modal_addAnimal').modal('show');
+            $('#modal_updateAnimal').modal('show');
         } else {
-            $('#modal_addAnimal').modal('show');
+            $('#modal_updateAnimal').modal('show');
         }
     }
+
     ttcVMSelf.removeProduct = function (index) {
         ttcVMSelf.fiProductList.splice(index, 1);
     }
