@@ -92,12 +92,12 @@ public class ReceiveService25Impl implements ReceiveService25 {
 
                             break;
                         case Constants25.MARD25_TYPE.TYPE_13://Xac nhan don
-                            XacNhanDon xacNhanDon = ct.getXacNhanDon();
-                            responseWrapper.setData(xacNhanDon);
-
-                            if (xacNhanDon != null) {
-                                json = backendService.xacNhanDon(responseWrapper);
-                            }
+//                            XacNhanDon xacNhanDon = ct.getXacNhanDon();
+//                            responseWrapper.setData(xacNhanDon);
+//
+//                            if (xacNhanDon != null) {
+//                                json = backendService.xacNhanDon(responseWrapper);
+//                            }
 
                             envelopReturn = createEnvelopReturn(maHoso, Constants.MARD_PRO.MARD25, header, json);
                             break;

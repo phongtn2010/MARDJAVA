@@ -51,20 +51,10 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_GDK", length = 250)
     private String fiGDK;
 
-    @Column(name = "FI_IMPORTER_NAME", length = 2500)
-    private String fiImporterName;
 
-    @Column(name = "FI_IMPORTER_ADD", length = 2500)
-    private String fiImporterAddress;
 
-    @Column(name = "FI_IMPORTER_TEL", length = 50)
-    private String fiImporterTel;
-
-    @Column(name = "FI_IMPORTER_FAX", length = 50)
-    private String fiImporterFax;
-
-    @Column(name = "FI_IMPORTER_EMAIL", length = 500)
-    private String fiImporterEmail;
+//    @Column(name = "FI_IMPORTER_EMAIL", length = 500)
+//    private String fiImporterEmail;
 
     @Column(name = "FI_HS_TYPE")
     private Integer fiHSType;
@@ -96,13 +86,13 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     private Integer fiIdHSParent;
 
     //Thông tin đăng ky bên Bán Hàng
-    @Column(name = "FI_SELL_NAME", nullable = false, length = 250)
+    @Column(name = "FI_SELL_NAME", length = 250)
     private String fiSellName;
 
-    @Column(name = "FI_SELL_ADDRESS", nullable = false, length = 500)
+    @Column(name = "FI_SELL_ADDRESS", length = 500)
     private String fiSellAddress;
 
-    @Column(name = "FI_SELL_TEL", nullable = false, length = 15)
+    @Column(name = "FI_SELL_TEL",  length = 15)
     private String fiSellTel;
 
     @Column(name = "FI_SELL_FAX", length = 15)
@@ -114,23 +104,23 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_SELL_COUNTRY_NAME")
     private String fiSellCountryName;
 
-    @Column(name = "FI_SELL_EXPORT", nullable = false, length = 500)
+    @Column(name = "FI_SELL_EXPORT", length = 500)
     private String fiSellExport;
 
     //Thông tin đăng ky Mua Hàng
-    @Column(name = "FI_PURCH_NAME", nullable = false, length = 250)
-    private String fiPurchName;
+    @Column(name = "FI_IMPORTER_NAME", length = 2500)
+    private String fiImporterName;
 
-    @Column(name = "FI_PURCH_ADDRESS", nullable = false, length = 500)
-    private String fiPurchAddress;
+    @Column(name = "FI_IMPORTER_ADD", length = 2500)
+    private String fiImporterAddress;
 
-    @Column(name = "FI_PURCH_TEL", nullable = false, length = 15)
-    private String fiPurchTel;
+    @Column(name = "FI_IMPORTER_TEL", length = 50)
+    private String fiImporterTel;
 
-    @Column(name = "FI_PURCH_FAX", length = 15)
-    private String fiPurchFax;
+    @Column(name = "FI_IMPORTER_FAX", length = 50)
+    private String fiImporterFax;
 
-    @Column(name = "FI_PURCH_RECI", nullable = false, length = 500)
+    @Column(name = "FI_PURCH_RECI", length = 500)
     private String fiPurchReci;
 
     @Temporal(TemporalType.TIMESTAMP)

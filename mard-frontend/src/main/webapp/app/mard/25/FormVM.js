@@ -997,10 +997,7 @@ function UploadFileVM(options) {
 
     ufVMSelf.fiAttachmentList = ko.observableArray((options && options.hasOwnProperty('fiAttachmentList')) ? options.fiAttachmentList : []);
     ufVMSelf.lstDinhKemKhac = ko.observableArray([]);
-    if(ufVMSelf.fiAttachmentList().length>0){
-        ufVMSelf.mappingAttachment();
-    }
-    ufVMSelf.mappingAttachment = function () {
+
 
         if(ufVMSelf.fiAttachmentList().length>0){
 
@@ -1039,7 +1036,12 @@ function UploadFileVM(options) {
                     return re.fiFileTypeID == '7';
                 });
             });
-        }
+            ufVMSelf.lstAtch = ko.computed(function () {
+                return ko.utils.arrayFilter(ufVMSelf.fiAttachmentList(), function (re) {
+                    return re.fiFileTypeID == '8';
+                });
+            });
+
     }
 
 

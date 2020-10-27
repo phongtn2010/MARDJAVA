@@ -3,6 +3,7 @@ function ThongTinChungVM(data) {
 
     ttcVMSelf.errors = ko.validation.group(ttcVMSelf);
     ttcVMSelf.selectedIndex = ko.observable(null);
+    ttcVMSelf.lstProfileStatus = ko.observableArray((data && data.hasOwnProperty('lstProfileStatus')) ? data.lstProfileStatus : []);
     ttcVMSelf.fiHSStatus = ko.observable((data && data.hasOwnProperty('fiHSStatus')) ? data.fiHSStatus : null);
     ttcVMSelf.fiTaxCode = ko.observable((data && data.hasOwnProperty('fiTaxCode')) ? data.fiTaxCode : null);
     ttcVMSelf.fiHSCreatedDate = ko.observable((data && data.hasOwnProperty('fiHSCreatedDate')) ? new Date(data.fiHSCreatedDate) : new Date());
@@ -108,7 +109,10 @@ function ThongTinChungVM(data) {
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
 
-    ttcVMSelf.fiProCLList = ko.observableArray((data && data.hasOwnProperty('fiProCLList')) ? data.fiProCLList : []);
+    ttcVMSelf.fiProCLList = ko.observableArray((data && data.hasOwnProperty('fiProCLList')) ? data.fiProCLList : []).
+    extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    });
     ttcVMSelf.EfiProCLTarg = ko.observable(null).
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
@@ -299,7 +303,15 @@ function ThongTinChungVM(data) {
     ttcVMSelf.fiContactEmail = ko.observable((data && data.hasOwnProperty('fiContactEmail')) ? data.fiContactEmail : null).extend({
         email: {params: true, message: NSWLang["common_msg_invalid_email"]}
     });
-
+    ttcVMSelf.getProfileStatus = function (statuscode) {
+        var lstProfileStatus = ttcVMSelf.lstProfileStatus();
+        var pos = lstProfileStatus.find(function (e) {
+            return e.fiCatType == Number(statuscode);
+        })
+        if (pos)
+            return pos.fiCatTypeName;
+        else return statuscode;
+    }
     ttcVMSelf.getTenNhom = function (idNhom) {
         var lstNhomHangHoa = ttcVMSelf.lstNhom();
         var pos = lstNhomHangHoa.find(function (e) {
@@ -389,7 +401,6 @@ function ThongTinChungVM(data) {
             fiProductSL: sl,
             fiProThanhPhan: ttcVMSelf.fiProThanhPhan(),
             fiProIdNhom: ttcVMSelf.fiProIdNhom(),
-            fiTenNhom: ttcVMSelf.fiTenNhom(),
             fiProIdPhanNhom: ttcVMSelf.fiProIdPhanNhom(),
             fiProIdLoai: ttcVMSelf.fiProIdLoai(),
             fiProIdPhanLoai: ttcVMSelf.fiProIdPhanLoai(),

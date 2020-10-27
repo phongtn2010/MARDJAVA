@@ -77,7 +77,7 @@ public class Mard25Api extends BaseApi {
             HttpEntity<MultiValueMap<String, Object>> requestEntity
                     = new HttpEntity<>(body, headers);
 
-            file.delete();
+
             RestTemplate restTemplate = new RestTemplate();
             ResponseEntity<String> responseEntity = restTemplate.postForEntity(api_upload_file,requestEntity,String.class);
             Gson g = new Gson();
@@ -85,6 +85,9 @@ public class Mard25Api extends BaseApi {
             json.setSuccess(true);
             json.setData(responeUploadFile);
             json.setMessage("Upload file thành công");
+            if(file.exists()){
+                file.delete();
+            }
             return json;
         } catch (Exception ex) {
             json.setData(null);

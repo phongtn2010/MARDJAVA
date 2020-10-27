@@ -48,13 +48,13 @@ public class Hoso25 {
 
     String fiSellExport;
 
-    String fiPurchName;
+    String fiImporterName;
 
-    String fiPurchAddress;
+    String fiImporterAddress;
 
-    String fiPurchTel;
+    String fiImporterTel;
 
-    String fiPurchFax;
+    String fiImporterFax;
 
     String fiPurchReci;
 

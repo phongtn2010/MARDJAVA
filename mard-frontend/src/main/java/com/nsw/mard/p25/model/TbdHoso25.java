@@ -25,7 +25,6 @@ public class TbdHoso25 implements Serializable {
     private String fiImporterAddress;
     private String fiImporterTel;
     private String fiImporterFax;
-    private String fiImporterEmail;
 
     private String fiAddressGath;
     private String fiAddressRegSample;
@@ -50,10 +49,10 @@ public class TbdHoso25 implements Serializable {
     private String fiSellFax;
     private String fiSellExport;
 
-    private String fiPurchName;
-    private String fiPurchTel;
-    private String fiPurchAddress;
-    private String fiPurchFax;
+//    private String fiPurchName;
+//    private String fiPurchTel;
+//    private String fiPurchAddress;
+//    private String fiPurchFax;
     private String fiPurchReci;
     private String fiPurchFromDate;
     private Date fiPurchToDate;

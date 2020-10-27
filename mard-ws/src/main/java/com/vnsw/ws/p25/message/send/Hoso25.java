@@ -9,8 +9,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Date;
 import java.util.List;
 
-@XmlType(name = "AniFeed")
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "AniFeed")
 @Data
 public class Hoso25 {
     @XmlElement(name = "NSWFileCode")
@@ -52,13 +52,13 @@ public class Hoso25 {
     String fiSellExport;
 
     @XmlElement(name = "Buyer")
-    String fiPurchName;
+    String fiImporterName;
     @XmlElement(name = "BuyerAddress")
-    String fiPurchAddress;
+    String fiImporterAddress;
     @XmlElement(name = "BuyerPhone")
-    String fiPurchTel;
+    String fiImporterTel;
     @XmlElement(name = "BuyerFax")
-    String fiPurchFax;
+    String fiImporterFax;
     @XmlElement(name = "PortOfDestinationName")
     String fiPurchReci;
     @XmlJavaTypeAdapter(DateSerialization.class)
@@ -79,19 +79,9 @@ public class Hoso25 {
     String fiTaxCode;
     @XmlElement(name = "TypeAniFeed")
     String fiHSType;
-//
-//    @XmlElement(name = "ImporterName")
-//    String fiImporterName;
-//    @XmlElement(name = "ImporterTel")
-//    String fiImporterTel;
-//    @XmlElement(name = "ImporterAddress")
-//    String fiImporterAddress;
-//    @XmlElement(name = "ImporterEmail")
-//    String fiImporterEmail;
-
 
     @XmlElementWrapper(name = "GoodsList")
-    @XmlElement(name = "Product")
+    @XmlElement(name = "Goods")
     List<Product> fiProductList;
 
     @XmlElement(name = "LocationOfStorage")

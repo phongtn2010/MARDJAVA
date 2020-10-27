@@ -2,6 +2,7 @@ package com.vnsw.ws.p25.message.receive;
 
 import com.vnsw.ws.annotations.DateSerialization;
 import com.vnsw.ws.p25.entity.receive.Goods;
+import com.vnsw.ws.p25.entity.send.Product;
 import lombok.Data;
 
 import javax.xml.bind.annotation.*;
@@ -9,8 +10,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Date;
 import java.util.List;
 
-@XmlType(name = "ResultConfirm")
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ResultConfirm")
 @Data
 public class XacNhanDon {
 
@@ -43,8 +44,8 @@ public class XacNhanDon {
     String fiAniFeedConfirmOldNo;
 
     @XmlElementWrapper(name = "GoodsList")
-    @XmlElement(name = "Product")
-    List<Goods> fiProductList;
+    @XmlElement(name = "Goods")
+    List<Product> fiProductList;
 
     @XmlElement(name = "NoteGoods")
     String fiNoteGoods;
