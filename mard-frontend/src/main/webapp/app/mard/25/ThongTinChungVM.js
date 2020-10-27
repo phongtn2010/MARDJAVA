@@ -221,7 +221,7 @@ function ThongTinChungVM(data) {
     ttcVMSelf.fiHSTypeName = ko.observable((data && data.hasOwnProperty('fiHSTypeName')) ? data.fiHSTypeName : null);
     ttcVMSelf.lstProvince  = ko.observableArray((data && data.hasOwnProperty('lstProvince')) ? data.lstProvince : []);
     ttcVMSelf.lstHoSoType  = ko.observableArray((data && data.hasOwnProperty('lstHoSoType')) ? data.lstHoSoType : []);
-    ttcVMSelf.fiTenNhom  = ko.observable(null);
+    
 
     ttcVMSelf.fiProIdNhom = ko.observable((data && data.hasOwnProperty('fiProIdNhom')) ? data.fiProIdNhom : null).
     extend({
@@ -300,6 +300,16 @@ function ThongTinChungVM(data) {
         email: {params: true, message: NSWLang["common_msg_invalid_email"]}
     });
 
+    ttcVMSelf.getTenNhom = function (idNhom) {
+        var lstNhomHangHoa = ttcVMSelf.lstNhom();
+        var pos = lstNhomHangHoa.find(function (e) {
+            return e.fiCatType == Number(idNhom);
+        })
+        if (pos)
+            return pos.fiCatTypeName;
+        else return idNhom;
+    }
+
     ttcVMSelf.clearForm = function () {
         ttcVMSelf.errorMsg('');
         $("#EfiProCLTargTx").val('');
@@ -334,7 +344,6 @@ function ThongTinChungVM(data) {
             fiProductSL: sl,
             fiProThanhPhan: ttcVMSelf.fiProThanhPhan(),
             fiProIdNhom: ttcVMSelf.fiProIdNhom(),
-            fiTenNhom: ttcVMSelf.fiTenNhom(),
             fiProIdPhanNhom: ttcVMSelf.fiProIdPhanNhom(),
             fiProIdLoai: ttcVMSelf.fiProIdLoai(),
             fiProIdPhanLoai: ttcVMSelf.fiProIdPhanLoai(),

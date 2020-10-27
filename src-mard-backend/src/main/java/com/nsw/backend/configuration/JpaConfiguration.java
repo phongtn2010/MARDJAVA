@@ -33,23 +33,13 @@ import com.zaxxer.hikari.HikariDataSource;
         "com.nsw.backend.mard.p07.repositories",
         "com.nsw.backend.mard.p08.repositories",
         "com.nsw.backend.mard.p09.repositories",
-        "com.nsw.backend.mard.p10.repositories",
-        "com.nsw.backend.mard.p11.repositories",
-        "com.nsw.backend.mard.p12.repositories",
         "com.nsw.backend.dic.repositories",
-        "com.nsw.backend.mard.p14.repositories",
-        "com.nsw.backend.mard.p15.repositories",
-        "com.nsw.backend.mard.p16.repositories",
-        "com.nsw.backend.mard.p17.repositories",
-        "com.nsw.backend.mard.p18.repositories",
-        "com.nsw.backend.mard.p04.repositories",
-        "com.nsw.backend.mard.p02.repositories",
-        "com.nsw.backend.mard.p03.repositories",
+
         "com.nsw.backend.mard.p25.repositories"},
         entityManagerFactoryRef = "entityManagerFactory",
         transactionManagerRef = "transactionManager")
 @EnableTransactionManagement
-@EnableElasticsearchRepositories("com.nsw.backend.repositories.search")
+//@EnableElasticsearchRepositories("com.nsw.backend.repositories.search")
 public class JpaConfiguration {
 
     @Autowired
@@ -113,14 +103,6 @@ public class JpaConfiguration {
            	"com.nsw.backend.mard.p11.model",
             "com.nsw.backend.mard.p12.model", 
             "com.nsw.backend.dic.model",
-            "com.nsw.backend.mard.p14.model",
-            "com.nsw.backend.mard.p15.model",
-            "com.nsw.backend.mard.p16.model",
-            "com.nsw.backend.mard.p17.model",
-            "com.nsw.backend.mard.p18.model",
-            "com.nsw.backend.mard.p04.model",
-			"com.nsw.backend.mard.p02.model",
-			"com.nsw.backend.mard.p03.model",
             "com.nsw.backend.mard.p25.model"});
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
         factoryBean.setJpaProperties(jpaProperties());

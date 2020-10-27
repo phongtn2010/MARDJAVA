@@ -2,9 +2,9 @@ package com.nsw.backend.mard.p25.service;
 
 
 import com.google.gson.Gson;
-import com.nsw.backend.mard.p25.client.From;
-import com.nsw.backend.mard.p25.client.Header;
-import com.nsw.backend.mard.p25.client.ResponseWrapper;
+import com.nsw.backend.mard.p25.client.*;
+import com.nsw.backend.mard.p25.constant.Constant25;
+import com.nsw.backend.mard.p25.model.TbdHoso25;
 import com.nsw.backend.mard.p25.constant.Constant25;
 import com.nsw.backend.mard.p25.dto.SendMessage;
 import com.nsw.backend.mard.p25.helper.WsServiceHelper;
@@ -85,33 +85,61 @@ public class WsServiceImpl implements WsService {
 //    }
 
     @Override
-    public ResponseJson processProfileRegisterResponse(ResponseWrapper request) throws NSWException {
-        return null;
+    public ResponseJson tiepNhanKetQuaXN(ResponseWrapper request) throws NSWException {
+        String function = request.getHeader().getSubject().getFunction();
+        int status;
+        switch (function) {
+            case Constant25.MessageFunction.FUNC_11:
+                status = Constant25.HosoStatus.DA_TIEP_NHAN.getId();
+                break;
+            default:
+                throw new NSWException("Invalid Function " + function + "on ProfileRegistration Response");
+
+        }
+        Gson gson = new Gson();
+        XacNhanDon xnd = gson.fromJson(gson.toJson(request.getData()), XacNhanDon.class);
+        internalStatusUpdate(request.getHeader(), xnd.getFiAssignName(), status);
+
+        hstService.save(createHistory(
+                    regProfileService.findByFiHSCode(request.getHeader().getSubject().getReference()),
+                    "Xác nhận đơn đăng ký " , request.getHeader(), xnd.getFiAssignName()));
+
+        return new ResponseJson(true, "");
     }
 
     @Override
-    public ResponseJson processRequestUpdateProfileResponse(ResponseWrapper request) throws NSWException {
-        return null;
-    }
+    public ResponseJson tiepNhanKetQuaXuLy(ResponseWrapper request) throws NSWException {
+        String function = request.getHeader().getSubject().getFunction();
+        int status;
+        switch (function) {
+            case Constant25.MessageFunction.FUNC_06:
+                status = Constant25.HosoStatus.DA_TIEP_NHAN.getId();
+                break;
+            case Constant25.MessageFunction.FUNC_07:
+                status = Constant25.HosoStatus.DA_TIEP_NHAN.getId();
+                break;
+            case Constant25.MessageFunction.FUNC_08:
+                status = Constant25.HosoStatus.DA_TIEP_NHAN.getId();
+                break;
+            case Constant25.MessageFunction.FUNC_09:
+                status = Constant25.HosoStatus.DA_TIEP_NHAN.getId();
+                break;
+            case Constant25.MessageFunction.FUNC_10:
+                status = Constant25.HosoStatus.DA_TIEP_NHAN.getId();
+                break;
+            default:
+                throw new NSWException("Invalid Function " + function + "on ProfileRegistration Response");
 
-    @Override
-    public ResponseJson processRequestCancelProfileResponse(ResponseWrapper request) throws NSWException {
-        return null;
-    }
+        }
+        Gson gson = new Gson();
+        KetQuaXuLy xnd = gson.fromJson(gson.toJson(request.getData()), KetQuaXuLy.class);
+        internalStatusUpdate(request.getHeader(), xnd.getFiNameOfStaff(), status);
 
-    @Override
-    public ResponseJson processQuarantineResult(ResponseWrapper request) throws NSWException {
-        return null;
-    }
+        hstService.save(createHistory(
+                regProfileService.findByFiHSCode(request.getHeader().getSubject().getReference()),
+                "Xác nhận đơn đăng ký " , request.getHeader(), xnd.getFiNameOfStaff()));
 
-    @Override
-    public ResponseJson processVeterinaryHygieneResult(ResponseWrapper request) throws NSWException {
-        return null;
-    }
-
-    @Override
-    public ResponseJson processVeterinaryHygieneFail(ResponseWrapper request) throws NSWException {
-        return null;
+        return new ResponseJson(true, "");
     }
 
     @Override
@@ -134,11 +162,11 @@ public class WsServiceImpl implements WsService {
         return createHistory(regProfile, hstContent, header, regProfile.getFiTaxCode());
     }
 
-    private TbdLichsu25 createHistory(TbdHoso25 regProfile, String hstContent, Header sendHeader, String exactSenderName) {
+    private TbdLichsu25 createHistory(TbdHoso25 tbdHoso25, String hstContent, Header sendHeader, String exactSenderName) {
         TbdLichsu25 history = new TbdLichsu25();
         history.setFiContent(hstContent);
-        history.setFiHSCode(regProfile.getFiNSWFileCode());
-        history.setFiIdHS(regProfile.getFiIdHS());
+        history.setFiHSCode(tbdHoso25.getFiNSWFileCode());
+        history.setFiIdHS(tbdHoso25.getFiIdHS());
         history.setFiSenderCode(sendHeader.getFrom().getIdentity());
         history.setFiSenderName(exactSenderName);
         history.setFiSenderUnitCode(sendHeader.getFrom().getUnitCode());
@@ -148,11 +176,31 @@ public class WsServiceImpl implements WsService {
             //TODO: Map đến các đơn vị tương ứng
             history.setFiSenderUnitName(parseSenderUnitName(sendHeader.getFrom().getUnitCode()));
         }
-        history.setFiStatus(regProfile.getFiHSStatus());
+        history.setFiStatus(tbdHoso25.getFiHSStatus());
 
         return history;
     }
     private String parseSenderUnitName(String unitCode) {
         return "Cục Thú Y";
+    }
+
+    private void internalStatusUpdate(Header header, String exactSenderName, int status, String... reasons) throws NSWException {
+        if (status != -1) {
+            TbdHoso25 tb = regProfileService.findByFiHSCode(header.getSubject().getReference());
+            if (tb == null) {
+                throw new NSWException("Mã hồ sơ không tồn tại");
+            }
+            tb.setFiHSStatus(status);
+            String hstContent;
+            if (reasons.length == 0) {
+                hstContent = "Cập nhật trạng thái hồ sơ: " + Constant25.HosoStatus.findById(status).getName();
+            } else {
+                hstContent = reasons[0];
+            }
+            hstService.save(createHistory(tb, hstContent, header, exactSenderName));
+            regProfileService.save(tb);
+        } else {
+            throw new IllegalArgumentException("Status must not be -1");
+        }
     }
 }

@@ -41,8 +41,8 @@
                                     <td class="text-right" data-bind="text : fiProductSL"></td>
                                     <td class="text-right" data-bind="text : fiProductKL"></td>
                                     <td data-bind="text : fiProThanhPhan"></td>
-                                    <td data-bind="text : fiProIdNhom"></td>
-                                    <td data-bind="text : fiProCode"></td>
+									<td data-bind="text : $parent.getTenNhom(fiProIdNhom())"></td>
+                                    <td data-bind="text : fiProIdNhom"></td>                                    <td data-bind="text : fiProCode"></td>
                                     <td data-bind="text : fiProMadeIn"></td>
                                     <td data-bind="text : fiProCountryName"></td>
                                     <td data-bind="text : fiProValueVN"></td>

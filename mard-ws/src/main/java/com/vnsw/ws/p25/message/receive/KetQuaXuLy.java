@@ -24,10 +24,11 @@ public class KetQuaXuLy {
     private String fiFileName;
     @XmlElement(name = "FileLink")
     private String fiFileLink;
-    @XmlElement(name = "NameOfStaff")
-    private String fiNameOfStaff;
+
 
     @XmlJavaTypeAdapter(DateSerialization.class)
     @XmlElement(name = "ResponseDate")
     private Date fiResponseDate;
+    @XmlElement(name = "NameOfStaff")
+    private String fiNameOfStaff;
 }

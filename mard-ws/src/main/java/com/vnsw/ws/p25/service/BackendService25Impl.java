@@ -67,10 +67,10 @@ public class BackendService25Impl implements BackendService25 {
     }
 
     @Override
-    public ResponseJson ketquaThamdinh(ResponseWrapper responseWrapper) {
+    public ResponseJson xacNhanDon(ResponseWrapper responseWrapper) {
         ResponseJson responseJson = new ResponseJson();
         try {
-            String restUri = environment.getRequiredProperty(URI_BACKEND_ADDRESS) + Constants25.RES_URI.URI_UPDATE_KQTD;
+            String restUri = environment.getRequiredProperty(URI_BACKEND_ADDRESS) + Constants25.RES_URI.URI_XAC_NHAN_DON;
             responseJson = receiveService.callResforEntity(restUri, responseWrapper, Constants.RES_METHOD.POST);
         } catch (Exception ex) {
             responseJson.setSuccess(false);
@@ -83,22 +83,6 @@ public class BackendService25Impl implements BackendService25 {
         return responseJson;
     }
 
-    @Override
-    public ResponseJson phanhoiYeucauHuyHoso(ResponseWrapper responseWrapper) {
-        ResponseJson responseJson = new ResponseJson();
-        try {
-            String restUri = environment.getRequiredProperty(URI_BACKEND_ADDRESS) + Constants25.RES_URI.URI_UPDATE_KETQUA_XIN_RUT_HS;
-            responseJson = receiveService.callResforEntity(restUri, responseWrapper, Constants.RES_METHOD.POST);
-        } catch (Exception ex) {
-            responseJson.setSuccess(false);
-            responseJson.setMessage(ex.getMessage());
-            String errorInfo = Constants.APP_NAME + Constants.MESSAGE_SEPARATOR + CLASS_NAME
-                    + Constants.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName()
-                    + Constants.MESSAGE_SEPARATOR + ex.toString();
-            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, rabbitMQService.getRabbitMQInfo());
-        }
-        return responseJson;
-    }
 
     @Override
     public ResponseJson phanhoiYeucauSuaHoso(ResponseWrapper responseWrapper) {
@@ -118,44 +102,10 @@ public class BackendService25Impl implements BackendService25 {
     }
 
     @Override
-    public ResponseJson congvanVSTY(ResponseWrapper responseWrapper) {
+    public ResponseJson ketQuaXuLy(ResponseWrapper responseWrapper) {
         ResponseJson responseJson = new ResponseJson();
         try {
-            String restUri = environment.getRequiredProperty(URI_BACKEND_ADDRESS) + Constants25.RES_URI.URI_UPDATE_GIAY_VSTY;
-            responseJson = receiveService.callResforEntity(restUri, responseWrapper, Constants.RES_METHOD.POST);
-        } catch (Exception ex) {
-            responseJson.setSuccess(false);
-            responseJson.setMessage(ex.getMessage());
-            String errorInfo = Constants.APP_NAME + Constants.MESSAGE_SEPARATOR + CLASS_NAME
-                    + Constants.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName()
-                    + Constants.MESSAGE_SEPARATOR + ex.toString();
-            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, rabbitMQService.getRabbitMQInfo());
-        }
-        return responseJson;
-    }
-
-    @Override
-    public ResponseJson congvanKDNK(ResponseWrapper responseWrapper) {
-        ResponseJson responseJson = new ResponseJson();
-        try {
-            String restUri = environment.getRequiredProperty(URI_BACKEND_ADDRESS) + Constants25.RES_URI.URI_UPDATE_GIAY_KDNK;
-            responseJson = receiveService.callResforEntity(restUri, responseWrapper, Constants.RES_METHOD.POST);
-        } catch (Exception ex) {
-            responseJson.setSuccess(false);
-            responseJson.setMessage(ex.getMessage());
-            String errorInfo = Constants.APP_NAME + Constants.MESSAGE_SEPARATOR + CLASS_NAME
-                    + Constants.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName()
-                    + Constants.MESSAGE_SEPARATOR + ex.toString();
-            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, rabbitMQService.getRabbitMQInfo());
-        }
-        return responseJson;
-    }
-
-    @Override
-    public ResponseJson ketquaVSTY(ResponseWrapper responseWrapper) {
-        ResponseJson responseJson = new ResponseJson();
-        try {
-            String restUri = environment.getRequiredProperty(URI_BACKEND_ADDRESS) + Constants25.RES_URI.URI_UPDATE_KQ_VSTY;
+            String restUri = environment.getRequiredProperty(URI_BACKEND_ADDRESS) + Constants25.RES_URI.URI_KET_QUA_XU_LY;
             responseJson = receiveService.callResforEntity(restUri, responseWrapper, Constants.RES_METHOD.POST);
         } catch (Exception ex) {
             responseJson.setSuccess(false);

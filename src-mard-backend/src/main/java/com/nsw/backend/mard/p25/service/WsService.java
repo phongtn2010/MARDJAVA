@@ -14,54 +14,11 @@ public interface WsService {
      * @return
      */
     ResponseJson sendProfile(TbdHoso25 regProfile) throws NSWException;
-    /**
-     * Cập nhật / Yêu cầu cập nhật hồ sơ
-     *
-     * @param requestEdit
-     * @return
-     */
-//    ResponseJson updateProfile(RequestEdit requestEdit);
-    /**
-     * Rút / yêu cầu rút hồ sơ
-     *
-     * @param
-     * @return
-     */
-//    ResponseJson requestCancelProfile(RequestEdit requestCancel) throws NSWException;
-    /**
-     * Xử lý kết quả thẩm định
-     *
-     * @return
-     */
-    ResponseJson processProfileRegisterResponse(ResponseWrapper request) throws NSWException;
-    /**
-     * Xử lý kết quả yêu cầu chỉnh sửa hồ sơ
-     *
-     * @return
-     */
-    ResponseJson processRequestUpdateProfileResponse(ResponseWrapper request) throws NSWException;
 
-    /**
-     * Xử lý kết quả yêu cầu rút hồ sơ
-     */
+    ResponseJson tiepNhanKetQuaXN(ResponseWrapper request) throws NSWException;
 
-    ResponseJson processRequestCancelProfileResponse(ResponseWrapper request) throws NSWException;
+    ResponseJson tiepNhanKetQuaXuLy(ResponseWrapper request) throws NSWException;
 
-    /**
-     * Xử lý thông tin giấy KDNK
-     */
-    ResponseJson processQuarantineResult(ResponseWrapper request) throws NSWException;
-
-    /**
-     * Xử lý thông tin giấy VSTY
-     */
-    ResponseJson processVeterinaryHygieneResult(ResponseWrapper request) throws NSWException;
-
-
-    /**
-     * Xử lý thông báo VSTY không đạt
-     */
-    ResponseJson processVeterinaryHygieneFail(ResponseWrapper request) throws NSWException;
 
     //=====================
     //Các hàm hỗ trợ khác
