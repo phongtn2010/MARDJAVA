@@ -1,4 +1,4 @@
-package com.vnsw.ws.p25.message.send;
+package com.vnsw.ws.p25.message.receive;
 
 import com.vnsw.ws.annotations.DateSerialization;
 import lombok.Data;
@@ -10,24 +10,30 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Date;
 
-@XmlType(name = "RequestCancel")
+@XmlType(name = "ResultConfirm")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Data
-public class DNYeucauHuyHoso {
-
+public class ThuHoiGDK {
     @XmlElement(name = "NSWFileCode")
     private String fiNSWFileCode;
     @XmlJavaTypeAdapter(DateSerialization.class)
-    @XmlElement(name = "RequestDate")
-    private Date fiRequestDate;
+    @XmlElement(name = "CancelDate")
+    private Date fiNgayHuy;
+    @XmlElement(name = "Reason")
+    private String fiLyDo;
+    @XmlJavaTypeAdapter(DateSerialization.class)
+    @XmlElement(name = "SignConfirmDate")
+    private Date fiNgayKy;
+    @XmlElement(name = "SignConfirmName")
+    private String fiNguoiKy;
+    @XmlElement(name = "AniFeedConfirmNo")
+    private Long fiSoGDKCuaBNN;
 
     @XmlElement(name = "AttachmentId")
-    private Long fiAttachmentId;
+    private String fiFileID;
     @XmlElement(name = "FileName")
     private String fiFileName;
     @XmlElement(name = "FileLink")
     private String fiFileLink;
-    @XmlElement(name = "Reason")
-    private String fiReason;
 
 }

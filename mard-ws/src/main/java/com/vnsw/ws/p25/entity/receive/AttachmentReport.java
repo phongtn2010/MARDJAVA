@@ -1,4 +1,4 @@
-package com.vnsw.ws.p25.entity;
+package com.vnsw.ws.p25.entity.receive;
 
 import lombok.Data;
 
@@ -6,12 +6,11 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
 
-@XmlType(name = "Attachment")
+@XmlType(name = "AttachmentReport")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Data
-public class Tbdattach25{
+public class AttachmentReport {
 
 
     @XmlElement(name = "FileCode")

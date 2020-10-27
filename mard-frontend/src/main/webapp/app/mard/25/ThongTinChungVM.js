@@ -214,7 +214,7 @@ function ThongTinChungVM(data) {
     ttcVMSelf.fiHSTypeName = ko.observable((data && data.hasOwnProperty('fiHSTypeName')) ? data.fiHSTypeName : null);
     ttcVMSelf.lstProvince  = ko.observableArray((data && data.hasOwnProperty('lstProvince')) ? data.lstProvince : []);
     ttcVMSelf.lstHoSoType  = ko.observableArray((data && data.hasOwnProperty('lstHoSoType')) ? data.lstHoSoType : []);
-    ttcVMSelf.fiTenNhom  = ko.observable((data && data.hasOwnProperty('fiTenNhom')) ? data.fiTenNhom : null);
+
 
     ttcVMSelf.fiProIdNhom = ko.observable((data && data.hasOwnProperty('fiProIdNhom')) ? data.fiProIdNhom : null).
     extend({
@@ -292,6 +292,16 @@ function ThongTinChungVM(data) {
     ttcVMSelf.fiContactEmail = ko.observable((data && data.hasOwnProperty('fiContactEmail')) ? data.fiContactEmail : null).extend({
         email: {params: true, message: NSWLang["common_msg_invalid_email"]}
     });
+
+    ttcVMSelf.getTenNhom = function (idNhom) {
+        var lstNhomHangHoa = ttcVMSelf.lstNhom();
+        var pos = lstNhomHangHoa.find(function (e) {
+            return e.fiCatType == Number(idNhom);
+        })
+        if (pos)
+            return pos.fiCatTypeName;
+        else return idNhom;
+    }
 
     ttcVMSelf.clearForm = function () {
 
@@ -387,7 +397,6 @@ function ThongTinChungVM(data) {
             fiProductSL: sl,
             fiProThanhPhan: ttcVMSelf.fiProThanhPhan(),
             fiProIdNhom: ttcVMSelf.fiProIdNhom(),
-            fiTenNhom: ttcVMSelf.fiTenNhom(),
             fiProIdPhanNhom: ttcVMSelf.fiProIdPhanNhom(),
             fiProIdLoai: ttcVMSelf.fiProIdLoai(),
             fiProIdPhanLoai: ttcVMSelf.fiProIdPhanLoai(),

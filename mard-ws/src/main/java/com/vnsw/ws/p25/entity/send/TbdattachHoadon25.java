@@ -1,4 +1,4 @@
-package com.vnsw.ws.p25.entity;
+package com.vnsw.ws.p25.entity.send;
 
 import com.vnsw.ws.annotations.DateSerialization;
 import lombok.Data;
@@ -11,22 +11,21 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.sql.Date;
 
-@XmlType(name = "Packing")
+
+@XmlType(name = "Invoice")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Data
-public class TbdattachDg25 implements Serializable {
-
-
-    @XmlElement(name = "PackingNo")
-    private String fiSoPhieu;
+public class TbdattachHoadon25 implements Serializable {
+    @XmlElement(name = "InvoiceNo")
+    private String fiSoHoadon;
     @XmlJavaTypeAdapter(DateSerialization.class)
-    @XmlElement(name = "PackingDate")
-    private Date fiNgayPhieu;
-    @XmlElement(name = "PackingAttachmentId")
+    @XmlElement(name = "InvoiceDate")
+    private Date fiNgayHoadon;
+    @XmlElement(name = "InvoiceAttachmentId")
     private Long fiFileId;
-    @XmlElement(name = "PackingName")
+    @XmlElement(name = "InvoiceName")
     private String fiFileName;
-    @XmlElement(name = "PackingFileLink")
+    @XmlElement(name = "InvoiceFileLink")
     private String fiFileLink;
 
 }

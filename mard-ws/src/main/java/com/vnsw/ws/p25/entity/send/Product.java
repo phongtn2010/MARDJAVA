@@ -1,11 +1,11 @@
-package com.vnsw.ws.p25.entity;
+package com.vnsw.ws.p25.entity.send;
 
-import com.vnsw.ws.annotations.DoubleSerialization;
+import com.vnsw.ws.p25.entity.send.QualityCriteria;
+import com.vnsw.ws.p25.entity.send.QuantityVolume;
+import com.vnsw.ws.p25.entity.send.SafetyCriteria;
 import lombok.Data;
 
 import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.util.Date;
 import java.util.List;
 
 @XmlType(name = "Goods")

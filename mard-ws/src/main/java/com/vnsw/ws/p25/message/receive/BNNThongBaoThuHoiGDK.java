@@ -13,7 +13,7 @@ import java.util.Date;
 @XmlType(name = "ResultConfirmCancel")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Data
-public class ResultConfirmCancel {
+public class BNNThongBaoThuHoiGDK {
     @XmlElement(name = "NSWFileCode")
     String fiNSWFileCode;
     @XmlJavaTypeAdapter(DateSerialization.class)

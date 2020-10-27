@@ -1,7 +1,7 @@
 package com.vnsw.ws.p25.message.send;
 
 import com.vnsw.ws.annotations.DateSerialization;
-import com.vnsw.ws.p25.entity.*;
+import com.vnsw.ws.p25.entity.send.*;
 import lombok.Data;
 
 import javax.xml.bind.annotation.*;
@@ -124,6 +124,6 @@ public class Hoso25 {
     private List<TbdattachDg25> fiListAttchPhieu;
     @XmlElementWrapper(name = "AttachmentList")
     @XmlElement(name = "Attachment")
-    private List<com.vnsw.ws.p25.entity.Tbdattach25> fiAttach;
+    private List<Attachment> fiAttach;
 
 }

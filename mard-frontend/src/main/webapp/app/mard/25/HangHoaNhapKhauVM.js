@@ -163,16 +163,6 @@ function HangHoaNhapKhauVM (options) {
         else return statuscode;
     }
 
-    kdnkVMSelf.getTenNhom = function (idNhom) {
-        var lstNhomHangHoa = kdnkVMSelf.lstNhom();
-        var pos = lstNhomHangHoa.find(function (e) {
-            return e.fiCatType == Number(idNhom);
-        })
-        if (pos)
-            return pos.fiCatTypeName;
-        else return idNhom;
-    }
-
     kdnkVMSelf.validateForm = function () {
         kdnkVMSelf.errors = ko.validation.group(kdnkVMSelf.thongtinChungVM, {deep: true, live: true, observable: true});
         if (kdnkVMSelf.errors().length > 0) {

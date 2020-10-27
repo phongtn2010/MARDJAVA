@@ -1,4 +1,4 @@
-package com.vnsw.ws.p25.entity;
+package com.vnsw.ws.p25.entity.receive;
 
 import lombok.Data;
 
@@ -7,19 +7,19 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(name = "Attachment")
+@XmlType(name = "AttachmentResult")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Data
-public class Attachment {
+public class AttachmentResult {
+    @XmlElement(name = "FileCode")
+    private Long fiFileCode;
+
     @XmlElement(name = "AttachmentId")
     private String fiAttachmentId;
 
-    @XmlElement(name = "AttachmentTypeCode")
-    private Long fiAttachmentTypeCode;
-
-    @XmlElement(name = "NameOfAttachment")
+    @XmlElement(name = "FileName")
     private String fiNameOfAttachment;
 
-    @XmlElement(name = "LinkFile")
+    @XmlElement(name = "FileLink")
     private String fiLinkFile;
 }

@@ -1,4 +1,4 @@
-package com.vnsw.ws.p25.message.receive;
+package com.vnsw.ws.p25.entity.receive;
 
 import lombok.Data;
 

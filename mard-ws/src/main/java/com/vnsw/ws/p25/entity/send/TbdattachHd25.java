@@ -1,4 +1,4 @@
-package com.vnsw.ws.p25.entity;
+package com.vnsw.ws.p25.entity.send;
 
 import com.vnsw.ws.annotations.DateSerialization;
 import lombok.Data;

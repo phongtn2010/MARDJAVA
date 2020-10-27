@@ -1,7 +1,7 @@
 package com.vnsw.ws.p25.message.receive;
 
 import com.vnsw.ws.annotations.DateSerialization;
-import com.vnsw.ws.p25.entity.*;
+import com.vnsw.ws.p25.entity.receive.Goods;
 import lombok.Data;
 
 import javax.xml.bind.annotation.*;

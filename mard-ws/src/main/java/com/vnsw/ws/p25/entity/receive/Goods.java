@@ -1,6 +1,6 @@
-package com.vnsw.ws.p25.message.receive;
+package com.vnsw.ws.p25.entity.receive;
 
-import com.vnsw.ws.p25.entity.QuantityVolume;
+import com.vnsw.ws.p25.entity.send.QuantityVolume;
 import lombok.Data;
 
 import javax.xml.bind.annotation.*;
@@ -27,5 +27,9 @@ public class Goods {
 
     @XmlElementWrapper(name = "AnanyticalRequiredList")
     @XmlElement(name = "AnanyticalRequired")
-    private List<QuantityVolume> fiAnanyticalRequiredList;
+    private List<Ananytical> fiAnanyticalRequiredList;
+
+    @XmlElementWrapper(name = "QuantityVolumeList")
+    @XmlElement(name = "QuantityVolume")
+    private List<QuantityVolume> fiQuantityVolumeList;
 }
