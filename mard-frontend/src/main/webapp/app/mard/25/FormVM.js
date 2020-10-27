@@ -918,6 +918,8 @@ function UploadFileVM(options) {
 
 
     ufVMSelf.addFile = function (data,param) {
+        var checkFiles = [ufVMSelf.fiFilePath];
+        ufVMSelf.errors = ko.validation.group(checkFiles, {deep: true, live: true, observable: true});
         var fileName='';
         var files;
         ko.utils.arrayForEach(ufVMSelf.lstAtchType(), function(attachType) {
