@@ -141,7 +141,7 @@ function HangHoaNhapKhauVM (options) {
     kdnkVMSelf.thongtinChungVM = ko.observable(new ThongTinChungVM(options));
     kdnkVMSelf.kyHoSoVM = ko.observable(new KyHoSoVM(options));
     kdnkVMSelf.lstProfileStatus = ko.observableArray((options && options.hasOwnProperty('lstProfileStatus')) ? options.lstProfileStatus : []);
-
+    kdnkVMSelf.lstNhom = ko.observableArray((options && options.hasOwnProperty('lstNhom')) ? options.lstNhom : []);
     kdnkVMSelf.regAnimalVM = ko.observable(new RegAnimalVM(options));
     kdnkVMSelf.regAnimalProductVM = ko.observable(new RegAnimalProductVM(options));
 
@@ -161,6 +161,16 @@ function HangHoaNhapKhauVM (options) {
         if (pos)
             return pos.fiCatTypeName;
         else return statuscode;
+    }
+
+    kdnkVMSelf.getTenNhom = function (idNhom) {
+        var lstNhomHangHoa = kdnkVMSelf.lstNhom();
+        var pos = lstNhomHangHoa.find(function (e) {
+            return e.fiCatType == Number(idNhom);
+        })
+        if (pos)
+            return pos.fiCatTypeName;
+        else return idNhom;
     }
 
     kdnkVMSelf.validateForm = function () {

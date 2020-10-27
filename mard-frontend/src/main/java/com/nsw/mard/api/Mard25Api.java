@@ -21,6 +21,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.map.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -49,6 +50,8 @@ public class Mard25Api extends BaseApi {
 
     @Autowired
     DinhkemService attachmentService;
+    @Autowired
+    Environment environment;
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public @ResponseBody ResponseJson uploadFileToBNN(@RequestParam("file") MultipartFile multipartfile,
@@ -57,7 +60,10 @@ public class Mard25Api extends BaseApi {
         ResponseJson json = new ResponseJson();
         try {
             String fileName = multipartfile.getOriginalFilename();
-            String filePath = "E:\\Project\\NSW\\upload\\" + fileName + "." + FilenameUtils.getExtension(fileName);
+            String folder = environment.getProperty("mard.folder.temp");
+            String api_upload_file = environment.getProperty("mard.api.uploadfile");
+
+            String filePath = folder + fileName;
             Path path = Paths.get(filePath);
             Files.write(path, multipartfile.getBytes());
             File file = new File(filePath);
@@ -70,8 +76,10 @@ public class Mard25Api extends BaseApi {
 
             HttpEntity<MultiValueMap<String, Object>> requestEntity
                     = new HttpEntity<>(body, headers);
+
+            file.delete();
             RestTemplate restTemplate = new RestTemplate();
-            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://mard.adp-p.com/api/fileuploadapi",requestEntity,String.class);
+            ResponseEntity<String> responseEntity = restTemplate.postForEntity(api_upload_file,requestEntity,String.class);
             Gson g = new Gson();
             ResponeUploadFile responeUploadFile=g.fromJson(responseEntity.getBody().substring(1,responseEntity.getBody().length()-1), ResponeUploadFile.class);
             json.setSuccess(true);
