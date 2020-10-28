@@ -75,7 +75,6 @@ public class Constants25 {
     }
 
     public interface RES_URI {
-        public static final String URI_UPDATE_STATUS_HOSO = "/mard/25/ws/updateTrangthaiHS";
         public static final String URI_XAC_NHAN_DON = "/mard/25/ws/xacnhandon";
         public static final String URI_UPDATE_KETQUA_XIN_SUA_HS = "/mard/25/ws/updateKQXinSuaHS";
         public static final String URI_GET_HS_BY_ID = "/mard/25/ws/hoso/";
@@ -85,6 +84,7 @@ public class Constants25 {
         public static final String URI_TCCD_XU_LY_KQ = "/mard/25/ws/xulykq/";
         public static final String URI_GIAY_XNCL = "/mard/25/ws/giayxncl/";
         public static final String URI_THU_HOIGIAY_XNCL = "/mard/25/ws/thuhoi-giayxncl/";
+        public static final String URI_TIEP_NHAN_HS2D = "/mard/25/ws/tiepnhan-2d/";
     }
 
     public interface HosoStatus {

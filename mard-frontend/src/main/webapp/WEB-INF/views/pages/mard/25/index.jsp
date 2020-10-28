@@ -220,7 +220,7 @@
                                 </div>
                             </td>
                             <td class="text-center">
-                                <div data-bind="">
+                                <div data-bind="visible: fiHSStatus == 0">
                                     <a href="javascript:void(0)" data-bind="click: $root.deleteHoso"><i
                                             class="fa fa-lg fa-close" style="color: red"></i></a>
                                 </div>
@@ -232,7 +232,7 @@
                                 </div>
                             </td>
                             <td class="text-center">
-                                <div data-bind="">
+                                <div data-bind="visible: $parent.getHoSoType(fiHSType)=='2c'">
                                     <a href="javascript:void(0)" data-bind="click: $root.goYCSHoSo"><i
                                             class="fa fa-download"></i></a>
                                 </div>
@@ -242,8 +242,9 @@
                                     <a href="javascript:void(0)" data-bind="click: $root.viewHangHoaStatus"><i
                                             class="fa fa-eye-slash"></i></a>
                                 </div>
-                            </td><td class="text-center">
-                                <div data-bind="">
+                            </td>
+                            <td class="text-center">
+                                <div data-bind="visible:  $parent.getHoSoType(fiHSType)=='2d'">
                                     <a href="javascript:void(0)" data-bind="click: $root.goYCRHoSo"><i
                                             class="fa fa-upload"></i></a>
                                 </div>

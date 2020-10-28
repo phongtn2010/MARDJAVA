@@ -26,10 +26,7 @@ public class WsControlle25 extends BaseController {
         this.wsService = wsService;
     }
 
-    @PostMapping("/updateTrangthaiHS")
-    public ResponseEntity<ResponseJson> updateTrangThaiHS(@RequestBody ResponseWrapper request) throws NSWException {
-        return new ResponseEntity<>(wsService.updateHSStatus(request), HttpStatus.OK);
-    }
+
 
     @GetMapping("/hoso/{idHS}")
     public ResponseEntity<ResponseJson> findHSById(@PathVariable int idHS) {
@@ -43,7 +40,7 @@ public class WsControlle25 extends BaseController {
 
     @PostMapping("/xacnhandon")
     public ResponseEntity<ResponseJson> updateXacNhanDon(@RequestBody ResponseWrapper request) throws NSWException {
-        ResponseJson response = wsService.tiepNhanKetQuaXN(request);
+        ResponseJson response = wsService.xacNhanDonDK(request);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -53,5 +50,37 @@ public class WsControlle25 extends BaseController {
         return ResponseEntity.ok(response);
     }
 
+    @PostMapping("/thuhoigdk")
+    public ResponseEntity<ResponseJson> thuHoiGDK(@RequestBody ResponseWrapper request) throws NSWException {
+        ResponseJson response = wsService.thuHoiGDK(request);
+        return ResponseEntity.ok(response);
+    }
 
+    @PostMapping("/tccd-guikqkt")
+    public ResponseEntity<ResponseJson> tccdGuiKQKT(@RequestBody ResponseWrapper request) throws NSWException {
+        ResponseJson response = wsService.tccdGuiKQKT(request);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/xulykq")
+    public ResponseEntity<ResponseJson> guiXuLyKQ(@RequestBody ResponseWrapper request) throws NSWException {
+        ResponseJson response = wsService.guiXuLyKQ(request);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/giayxncl")
+    public ResponseEntity<ResponseJson> guiGiayXNCL(@RequestBody ResponseWrapper request) throws NSWException {
+        ResponseJson response = wsService.guiGiayXNCL(request);
+        return ResponseEntity.ok(response);
+    }
+    @PostMapping("/thuhoi-giayxncl")
+    public ResponseEntity<ResponseJson> thuHoiGiayXNCL(@RequestBody ResponseWrapper request) throws NSWException {
+        ResponseJson response = wsService.thuHoiGiayXNCL(request);
+        return ResponseEntity.ok(response);
+    }
+    @PostMapping("/tiepnhan-2d")
+    public ResponseEntity<ResponseJson> tiepNhanHS2D(@RequestBody ResponseWrapper request) throws NSWException {
+        ResponseJson response = wsService.tiepNhanHS2D(request);
+        return ResponseEntity.ok(response);
+    }
 }

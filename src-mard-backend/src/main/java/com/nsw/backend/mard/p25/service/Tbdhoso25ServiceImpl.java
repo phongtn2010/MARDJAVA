@@ -236,29 +236,7 @@ public class Tbdhoso25ServiceImpl implements TbdHoso25Service {
     @Override
     public TbdYcrut25 cancelHoso(TbdYcrut25 cancelRequest){
         TbdHoso25 regProfile = regProfileRepository.findOne(cancelRequest.getFiIdHS());
-        if (regProfile == null || regProfile.getFiHSStatus() != Constant25.HosoStatus.CHO_TIEP_NHAN.getId()
-                && regProfile.getFiHSStatus() != Constant25.HosoStatus.DA_TIEP_NHAN.getId()
-                && regProfile.getFiHSStatus() != Constant25.HosoStatus.DA_TU_CHOI.getId()
-                && regProfile.getFiHSStatus() != Constant25.HosoStatus.CHO_TIEP_NHAN_HO_SO_GUI_BO_SUNG_THEO_PHONG_TACN.getId()
-                && regProfile.getFiHSStatus() != Constant25.HosoStatus.BPMC_YEU_CAU_BO_SUNG_HO_SO.getId()
-        ) {
-            throw new IllegalArgumentException("Trạng thái hồ sơ không hợp lệ");
-        }
-        cancelRequest.setFiActive(1);
-        cancelRequest.setFiStatus(Constant25.HosoDeleteStatus.TAO_MOI.getId());
-        cancelRequest.setFiRequestedDate(DateTimeUtils.getDate());
-
-        if (Constant25.HosoStatus.CHO_TIEP_NHAN.getId() == regProfile.getFiHSStatus()
-                || Constant25.HosoStatus.BPMC_YEU_CAU_BO_SUNG_HO_SO.getId() == regProfile.getFiHSStatus()
-        ) {
-            cancelRequest.setFiRequestType(0); // hố sơ chưa tiếp nhận
-            regProfile.setFiHSStatus(Constant25.HosoStatus.DA_RUT_HO_SO.getId());
-        } else {
-            cancelRequest.setFiRequestType(1);  // hồ sơ đã tiếp nhận
-            regProfile.setFiHSStatus(Constant25.HosoStatus.CHO_TIEP_NHAN_HO_SO_GUI_BO_SUNG_THEO_BPMC.getId());
-        }
-        regProfileRepository.save(regProfile);
-        hstService.save(createHistory(regProfile, "Yêu cầu rút hồ sơ"));
+        
         return requestCancelRepository.save(cancelRequest);
     }
 

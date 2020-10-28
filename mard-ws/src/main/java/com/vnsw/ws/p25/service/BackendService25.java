@@ -14,4 +14,16 @@ public interface BackendService25 {
     ResponseJson xacNhanDon(ResponseWrapper responseWrapper);
     ResponseJson phanhoiYeucauSuaHoso(ResponseWrapper responseWrapper);
     ResponseJson ketQuaXuLy(ResponseWrapper responseWrapper);
+    ResponseJson thuHoiGDK(ResponseWrapper responseWrapper);
+
+    ResponseJson tccdGuiKQKT(ResponseWrapper responseWrapper);
+
+    ResponseJson xuLyKQ(ResponseWrapper responseWrapper);
+
+    ResponseJson giayXNCL(ResponseWrapper responseWrapper);
+
+    ResponseJson thuHoiGiayXNCL(ResponseWrapper responseWrapper);
+
+    ResponseJson tiepNhanHD2D(ResponseWrapper responseWrapper);
+
 }

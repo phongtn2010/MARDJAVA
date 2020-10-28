@@ -49,7 +49,7 @@ public class WsServiceImpl implements WsService {
             message.setFunction(Constant25.MessageFunction.FUNC_01);
         } else if (regProfile.getFiHSStatus() == Constant25.HosoStatus.CHO_TIEP_NHAN.getId()) {
             message.setFunction(Constant25.MessageFunction.FUNC_02);
-        } else if (regProfile.getFiHSStatus() == Constant25.HosoStatus.BPMC_YEU_CAU_BO_SUNG_HO_SO.getId()) {
+        } else if (regProfile.getFiHSStatus() == 0) {
             message.setFunction(Constant25.MessageFunction.FUNC_03);
         } else {
             throw new NSWException("Hồ sơ không hợp lệ");
@@ -59,10 +59,9 @@ public class WsServiceImpl implements WsService {
         log.debug("Response: {}", response);
         if (response.isSuccess()) {
             // Ghi lại lịch sử gửi mới
-            int statusYCBS = Constant25.HosoStatus.BPMC_YEU_CAU_BO_SUNG_HO_SO.getId();
+            int statusYCBS = 0;
             int updateStatus = Constant25.HosoStatus.CHO_TIEP_NHAN.getId();
             if (regProfile.getFiHSStatus() == statusYCBS) {
-                updateStatus = Constant25.HosoStatus.CHO_TIEP_NHAN_HO_SO_GUI_BO_SUNG_THEO_BPMC.getId();
             }
             regProfile.setFiHSStatus(updateStatus);
             regProfile.setFiCreatedDate(new Date());
@@ -85,12 +84,11 @@ public class WsServiceImpl implements WsService {
 //    }
 
     @Override
-    public ResponseJson tiepNhanKetQuaXN(ResponseWrapper request) throws NSWException {
+    public ResponseJson xacNhanDonDK(ResponseWrapper request) throws NSWException {
         String function = request.getHeader().getSubject().getFunction();
-        int status;
+        int status=0;
         switch (function) {
             case Constant25.MessageFunction.FUNC_11:
-                status = Constant25.HosoStatus.DA_TIEP_NHAN.getId();
                 break;
             default:
                 throw new NSWException("Invalid Function " + function + "on ProfileRegistration Response");
@@ -110,22 +108,17 @@ public class WsServiceImpl implements WsService {
     @Override
     public ResponseJson tiepNhanKetQuaXuLy(ResponseWrapper request) throws NSWException {
         String function = request.getHeader().getSubject().getFunction();
-        int status;
+        int status=0;
         switch (function) {
             case Constant25.MessageFunction.FUNC_06:
-                status = Constant25.HosoStatus.DA_TIEP_NHAN.getId();
                 break;
             case Constant25.MessageFunction.FUNC_07:
-                status = Constant25.HosoStatus.DA_TIEP_NHAN.getId();
                 break;
             case Constant25.MessageFunction.FUNC_08:
-                status = Constant25.HosoStatus.DA_TIEP_NHAN.getId();
                 break;
             case Constant25.MessageFunction.FUNC_09:
-                status = Constant25.HosoStatus.DA_TIEP_NHAN.getId();
                 break;
             case Constant25.MessageFunction.FUNC_10:
-                status = Constant25.HosoStatus.DA_TIEP_NHAN.getId();
                 break;
             default:
                 throw new NSWException("Invalid Function " + function + "on ProfileRegistration Response");
@@ -142,15 +135,42 @@ public class WsServiceImpl implements WsService {
         return new ResponseJson(true, "");
     }
 
-    @Override
-    public ResponseJson updateHSStatus(ResponseWrapper request) throws NSWException {
-        return null;
-    }
 
     @Override
     public ResponseJson getXml(SendMessage sendMessage) throws NSWException {
         return null;
     }
+
+    @Override
+    public ResponseJson tiepNhanHS2D(ResponseWrapper request) {
+        return null;
+    }
+
+    @Override
+    public ResponseJson thuHoiGDK(ResponseWrapper request) {
+        return null;
+    }
+
+    @Override
+    public ResponseJson tccdGuiKQKT(ResponseWrapper request) {
+        return null;
+    }
+
+    @Override
+    public ResponseJson guiXuLyKQ(ResponseWrapper request) {
+        return null;
+    }
+
+    @Override
+    public ResponseJson guiGiayXNCL(ResponseWrapper request) {
+        return null;
+    }
+
+    @Override
+    public ResponseJson thuHoiGiayXNCL(ResponseWrapper request) {
+        return null;
+    }
+
     private TbdLichsu25 createHistory(TbdHoso25 regProfile, String hstContent) {
         Header header = new Header();
         From from = new From();

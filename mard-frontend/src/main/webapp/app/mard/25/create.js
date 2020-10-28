@@ -247,23 +247,23 @@ $(document).ready(function () {
         app.sendGetRequest("/mard/25/danhmuc/getby-catno/11", function (res) {
             options['lstAtchType'] = res.data;
         })
-        ,
+        ,//danh muc loai file dinh kem khac
         app.sendGetRequest("/mard/25/danhmuc/getby-catno/12", function (res) {
             options['lstLoaiFileDinhKemKhac'] = res.data;
-        }),
+        }),//danh muc loai ho so dang ky
         app.sendGetRequest("/mard/25/danhmuc/getby-catno/13", function (res) {
             options['lstLoaiHoSoDangKy'] = res.data;
         }),
+        //danh muc trang thai
         app.sendGetRequest("/mard/25/danhmuc/getby-catno/25", function (res) {
             options['lstProfileStatus'] = res.data;
         }),
         app.sendGetRequest("/mard/25/danhmuc/getby-catno/2", function (res) {
             options['lstHoSoType'] = res.data;
-        })
-        ,
-        // Get profile status
-        app.sendGetRequest("/mard/25/danhmuc/getby-catno/10", function (res) {
-            options['lstProfileStatus'] = res.data;
+        }),
+        // Get danh muc tien te
+        app.sendGetRequest("/mard/25/danhmuc/getby-catno/26", function (res) {
+            options['lstLoaiTienTe'] = res.data;
         })
         // // Get attach types
         // app.sendGetRequest("/mard/25/danhmuc/dinhkem?systemId=6", function (res) {

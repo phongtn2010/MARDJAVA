@@ -53,9 +53,12 @@
                                                 <div class="form-group nsw-text-center">
                                                     <button class="btn green" id="searchHoSo"
                                                             data-bind=""><i class="fa fa-search"></i> Tìm kiếm
-                                                    </button>
+                                                    </button><button class="btn green" data-bind="click: backBtn"
+                                                                     data-bind=""><i class="fa fa-search"></i> Thoát
+                                                </button>
                                                 </div>
                                             </div>
+
                                         </div>
 
                                     </form>
@@ -93,12 +96,13 @@
                             <td class="text-center" data-bind="text: fiProValueUSD"></td>
                             <td class="text-center" data-bind="text: fiTrangThaiHangHoa"></td>
                             <td class="text-center">
-                                <a href="javascript:void(0)" data-bind=""><i
-                                        class="fa fa-lg fa-send tooltips"></i></a>
+                                <a href="javascript:void(0)" data-target="#modal_guiSua"
+                                   data-toggle="modal" data-bind="$parent.xemKQDGSPH.bind($data, $data, $index())"><i
+                                        class="fa fa-lg fa-eye tooltips"></i></a>
                             </td>
                             <td class="text-center">
-                                <a href="javascript:void(0)" data-bind=""><i
-                                        class="fa fa-lg fa-eye tooltips"></i></a>
+                                <a href="javascript:void(0)"  data-bind="click: $parent.guiSuaHangHoa.bind($data, $data, $index())"><i
+                                        class="fa fa-lg fa-send tooltips"></i></a>
                             </td>
                             <td class="text-center">
                                 <a href="javascript:void(0)" data-bind=""><i
@@ -123,11 +127,9 @@
          data-backdrop="static" data-keyboard="false">
 
     </div>
-    <div id="modal_guiSua" class="modal container in modal-overflow"
-         tabindex="-1"
-         data-backdrop="static" data-keyboard="false">
-        <%@include file="inc_guihosocapXNCL.jsp"%>
-    </div>
+
+     <%@include file="inc_hanghoa_guisua.jsp"%>
+
     <div id="modal_xemTBKQKT" class="modal container in modal-overflow"
          tabindex="-1"
          data-backdrop="static" data-keyboard="false">

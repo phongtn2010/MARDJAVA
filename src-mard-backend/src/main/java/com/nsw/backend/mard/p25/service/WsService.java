@@ -15,7 +15,7 @@ public interface WsService {
      */
     ResponseJson sendProfile(TbdHoso25 regProfile) throws NSWException;
 
-    ResponseJson tiepNhanKetQuaXN(ResponseWrapper request) throws NSWException;
+    ResponseJson xacNhanDonDK(ResponseWrapper request) throws NSWException;
 
     ResponseJson tiepNhanKetQuaXuLy(ResponseWrapper request) throws NSWException;
 
@@ -23,7 +23,18 @@ public interface WsService {
     //=====================
     //Các hàm hỗ trợ khác
     //=====================
-    ResponseJson updateHSStatus(ResponseWrapper request) throws NSWException;
 
     ResponseJson getXml(SendMessage sendMessage) throws NSWException;
+
+    ResponseJson tiepNhanHS2D(ResponseWrapper request);
+
+    ResponseJson thuHoiGDK(ResponseWrapper request);
+
+    ResponseJson tccdGuiKQKT(ResponseWrapper request);
+
+    ResponseJson guiXuLyKQ(ResponseWrapper request);
+
+    ResponseJson guiGiayXNCL(ResponseWrapper request);
+
+    ResponseJson thuHoiGiayXNCL(ResponseWrapper request);
 }

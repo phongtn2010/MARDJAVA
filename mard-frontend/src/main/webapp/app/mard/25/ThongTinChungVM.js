@@ -205,6 +205,7 @@ function ThongTinChungVM(data) {
     });
 
 
+    ttcVMSelf.fiPackageUnitName = ko.observable(null);
     ttcVMSelf.fiPackageUnitCode = ko.observable(null).
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
@@ -303,6 +304,12 @@ function ThongTinChungVM(data) {
     ttcVMSelf.fiContactEmail = ko.observable((data && data.hasOwnProperty('fiContactEmail')) ? data.fiContactEmail : null).extend({
         email: {params: true, message: NSWLang["common_msg_invalid_email"]}
     });
+
+    ttcVMSelf.lstLoaiTienTe  = ko.observableArray((data && data.hasOwnProperty('lstLoaiTienTe')) ? data.lstLoaiTienTe : []);
+    console.log(ttcVMSelf.lstLoaiTienTe());
+    console.log(data);
+
+
     ttcVMSelf.getProfileStatus = function (statuscode) {
         var lstProfileStatus = ttcVMSelf.lstProfileStatus();
         var pos = lstProfileStatus.find(function (e) {
@@ -385,6 +392,7 @@ function ThongTinChungVM(data) {
             fiProQuyChuan: ttcVMSelf.fiProQuyChuan(),
             fiProValueUSD: ttcVMSelf.fiProValueUSD(),
             fiPackageUnitCode: ttcVMSelf.fiPackageUnitCode(),
+            fiPackageUnitName: ttcVMSelf.fiPackageUnitName(),
             fiProCLList: ttcVMSelf.fiProCLList(),
             fiProSLKLList: ttcVMSelf.fiProSLKLList(),
             fiProATList: ttcVMSelf.fiProATList()
@@ -431,6 +439,7 @@ function ThongTinChungVM(data) {
             fiProQuyChuan: ttcVMSelf.fiProQuyChuan(),
             fiProValueUSD: ttcVMSelf.fiProValueUSD(),
             fiPackageUnitCode: ttcVMSelf.fiPackageUnitCode(),
+            fiPackageUnitName: ttcVMSelf.fiPackageUnitName(),
             fiProCLList: ttcVMSelf.fiProCLList(),
             fiProSLKLList: ttcVMSelf.fiProSLKLList(),
             fiProATList: ttcVMSelf.fiProATList()
@@ -548,7 +557,7 @@ function ThongTinChungVM(data) {
     }
 
     ttcVMSelf.openUpdateProduct = function (data, index, type) {
-        ko.mapping.fromJS(data, {}, ttcVMSelf);
+        console.log(data);        ko.mapping.fromJS(data, {}, ttcVMSelf);
         ttcVMSelf.selectedIndex(index);
         if (type == '1' || type == 1) {
             $('#modal_updateAnimal').modal('show');

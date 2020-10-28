@@ -118,7 +118,7 @@
                         </div>
                         <div class="col-md-4">
                             <select class="form-control"  data-bind="options : lstHoSoType, optionsValue : 'fiCatType',
-                                                                     selectText2:fiHSTypeName,
+                                                                     selectedText:fiHSTypeName,
                                                                      optionsText : 'fiCatTypeName',
                                                     value: fiHSType, enable: $root.isEditable(), event: {change: changeHoSoType(fiHSType())}">
                             </select>

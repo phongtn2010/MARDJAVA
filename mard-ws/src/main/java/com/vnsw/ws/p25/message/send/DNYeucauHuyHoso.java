@@ -20,14 +20,14 @@ public class DNYeucauHuyHoso {
     @XmlJavaTypeAdapter(DateSerialization.class)
     @XmlElement(name = "RequestDate")
     private Date fiRequestDate;
-
+    @XmlElement(name = "Reason")
+    private String fiReason;
     @XmlElement(name = "AttachmentId")
     private Long fiAttachmentId;
     @XmlElement(name = "FileName")
     private String fiFileName;
     @XmlElement(name = "FileLink")
     private String fiFileLink;
-    @XmlElement(name = "Reason")
-    private String fiReason;
+
 
 }
