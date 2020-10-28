@@ -10,24 +10,13 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Date;
 
-@XmlType(name = "Result")
+@XmlType(name = "ResultReception2d")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Data
-public class KetQuaXuLy {
+public class BNNTiepNhanHD2D {
     @XmlElement(name = "NSWFileCode")
-    private String fiNSWFileCode;
-    @XmlElement(name = "Reason")
-    private String fiReason;
-    @XmlElement(name = "AttachmentId")
-    private Long fiAttachmentId;
-    @XmlElement(name = "FileName")
-    private String fiFileName;
-    @XmlElement(name = "FileLink")
-    private String fiFileLink;
-    @XmlElement(name = "NameOfStaff")
-    private String fiNameOfStaff;
+    String fiNSWFileCode;
     @XmlJavaTypeAdapter(DateSerialization.class)
     @XmlElement(name = "ResponseDate")
-    private Date fiResponseDate;
-
+    Date fiResponeDate;
 }

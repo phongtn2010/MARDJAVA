@@ -1,5 +1,6 @@
 package com.vnsw.ws.p25.entity.send;
 
+import com.vnsw.ws.p25.entity.receive.Ananytical;
 import com.vnsw.ws.p25.entity.send.QualityCriteria;
 import com.vnsw.ws.p25.entity.send.QuantityVolume;
 import com.vnsw.ws.p25.entity.send.SafetyCriteria;
@@ -73,17 +74,28 @@ public class Product {
     @XmlElement(name = "TechnicalRegulations")
     private String fiProQuyChuan;
 
+    @XmlElementWrapper(name = "AnanyticalRequiredList")
+    @XmlElement(name = "Ananytical")
+    private List<Ananytical> fiListChiTieu;
+
     @XmlElementWrapper(name = "QuantityVolumeList")
     @XmlElement(name = "QuantityVolume")
     private List<QuantityVolume> fiProSLKLList;
-
-    @XmlElementWrapper(name = "SafetyCriteriaList")
-    @XmlElement(name = "SafetyCriteria")
-    private List<SafetyCriteria> fiProATList;
-
     @XmlElementWrapper(name = "QualityCriteriaList")
     @XmlElement(name = "QualityCriteria")
     private List<QualityCriteria> fiProCLList;
+    @XmlElementWrapper(name = "SafetyCriteriaList")
+    @XmlElement(name = "SafetyCriteria")
+    private List<SafetyCriteria> fiProATList;
+    @XmlElement(name = "GoodsValue")
+    private Float fiProValueVN;
+    @XmlElement(name = "GoodsValueUnitCode")
+    private String fiPackageUnitCode;
+    @XmlElement(name = "GoodsValueUnitName")
+    private String fiPackageUnitName;
+    @XmlElement(name = "GoodsValueUSD")
+    private Float fiProValueUSD;
 
-
+    @XmlElement(name = "NoteGoods")
+    private String fiNoteGoods;
 }

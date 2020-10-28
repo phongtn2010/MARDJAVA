@@ -250,6 +250,10 @@ $(document).ready(function () {
             }),
             app.sendGetRequest("/mard/25/danhmuc/getby-catno/2", function (res) {
                 options['lstHoSoType'] = res.data;
+            }),
+            // Get danh muc tien te
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/26", function (res) {
+                options['lstLoaiTienTe'] = res.data;
             })
             // // Get attach types
             // app.sendGetRequest("/mard/25/danhmuc/dinhkem?systemId=6", function (res) {

@@ -83,51 +83,71 @@ public class ReceiveService25Impl implements ReceiveService25 {
                         case Constants25.MARD25_TYPE.TYPE_12://Ket qua xu ly
                             KetQuaXuLy kqxl = ct.getKetQuaXuLy();
                             responseWrapper.setData(kqxl);
-                            json = new ResponseJson(true, null, 0L, "");
+                            if (kqxl != null) {
+                                json = backendService.ketQuaXuLy(responseWrapper);
+                            }
                             envelopReturn = createEnvelopReturn(maHoso, Constants.MARD_PRO.MARD25, header, json);
-
-//                            if (kqxl != null) {
-//                                json = backendService.ketQuaXuLy(responseWrapper);
-//                            }
-
                             break;
                         case Constants25.MARD25_TYPE.TYPE_13://Xac nhan don
-//                            XacNhanDon xacNhanDon = ct.getXacNhanDon();
-//                            responseWrapper.setData(xacNhanDon);
-//
-//                            if (xacNhanDon != null) {
-//                                json = backendService.xacNhanDon(responseWrapper);
-//                            }
-
+                            XacNhanDon xacNhanDon = ct.getXacNhanDon();
+                            responseWrapper.setData(xacNhanDon);
+                            if (xacNhanDon != null) {
+                                json = backendService.xacNhanDon(responseWrapper);
+                            }
                             envelopReturn = createEnvelopReturn(maHoso, Constants.MARD_PRO.MARD25, header, json);
                             break;
                         case Constants25.MARD25_TYPE.TYPE_14://Thu hoi giay dang ky
+                            BNNThongBaoThuHoiGDK thuHoiGDK=ct.getThongBaoThuHoiGDK();
+                            responseWrapper.setData(thuHoiGDK);
+                            if (thuHoiGDK != null) {
+                                json = backendService.thuHoiGDK(responseWrapper);
+                            }
                             json = new ResponseJson(true, null, 0L, "");
                             envelopReturn = createEnvelopReturn(maHoso, Constants.MARD_PRO.MARD25, header, json);
                             break;
 
                         case Constants25.MARD25_TYPE.TYPE_16://TCCD gui ket qua kiem tra
-                            json = new ResponseJson(true, null, 0L, "");
+                            TCCDGuiKQKT tccdGuiKQKT=ct.getTccdGuiKQKT();
+                            responseWrapper.setData(tccdGuiKQKT);
+                            if (tccdGuiKQKT!=null){
+                                json = backendService.tccdGuiKQKT(responseWrapper);
+                            }
                             envelopReturn = createEnvelopReturn(maHoso, Constants.MARD_PRO.MARD25, header, json);
                             break;
 
                         case Constants25.MARD25_TYPE.TYPE_18://BNN phan hoi ket qua xu ly ho so
-                            json = new ResponseJson(true, null, 0L, "");
+                            BNNXuLyKQ xuLyKQ=ct.getXuLyKQ();
+                            responseWrapper.setData(xuLyKQ);
+                            if (xuLyKQ!=null){
+                                json = backendService.xuLyKQ(responseWrapper);
+                            }
                             envelopReturn = createEnvelopReturn(maHoso, Constants.MARD_PRO.MARD25, header, json);
                             break;
 
                         case Constants25.MARD25_TYPE.TYPE_19://BNN gui giay XNCL
-                            json = new ResponseJson(true, null, 0L, "");
+                            GiayXNCL giayXNCL=ct.getGiayXNCL();
+                            responseWrapper.setData(giayXNCL);
+                            if (giayXNCL!=null){
+                                json = backendService.giayXNCL(responseWrapper);
+                            }
                             envelopReturn = createEnvelopReturn(maHoso, Constants.MARD_PRO.MARD25, header, json);
                             break;
 
                         case Constants25.MARD25_TYPE.TYPE_20://BNN gui thu hoi giay XNCL
-                            json = new ResponseJson(true, null, 0L, "");
+                            BNNThuHoiGiayXNCL thuHoiGiayXNCL=ct.getThuHoiGiayXNCL();
+                            responseWrapper.setData(thuHoiGiayXNCL);
+                            if (thuHoiGiayXNCL!=null){
+                                json = backendService.thuHoiGiayXNCL(responseWrapper);
+                            }
                             envelopReturn = createEnvelopReturn(maHoso, Constants.MARD_PRO.MARD25, header, json);
                             break;
 
                         case Constants25.MARD25_TYPE.TYPE_22://Da tiep nhan KQ ho so mien giam 2d
-                            json = new ResponseJson(true, null, 0L, "");
+                            BNNTiepNhanHD2D tiepNhanHD2D=ct.getTiepNhanHD2D();
+                            responseWrapper.setData(tiepNhanHD2D);
+                            if (tiepNhanHD2D!=null){
+                                json = backendService.tiepNhanHD2D(responseWrapper);
+                            }
                             envelopReturn = createEnvelopReturn(maHoso, Constants.MARD_PRO.MARD25, header, json);
                             break;
                         default:
@@ -238,7 +258,8 @@ public class ReceiveService25Impl implements ReceiveService25 {
     /**
      * Lấy function
      *
-     * @param envelop
+     * @param fuction
      * @return
      */
+
 }

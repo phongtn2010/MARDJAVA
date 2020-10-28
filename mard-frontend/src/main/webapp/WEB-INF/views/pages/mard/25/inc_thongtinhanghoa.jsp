@@ -114,7 +114,7 @@
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.nhom"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <select data-bind="options : lstNhom, optionsValue : 'fiCatType', selectText2:fiTenNhom,  optionsText : 'fiCatTypeName',
+                                <select data-bind="options : lstNhom, optionsValue : 'fiCatType',  optionsText : 'fiCatTypeName',
                                                     value: fiProIdNhom" class="form-control"></select>
                             </div>
                         </div>
@@ -170,7 +170,7 @@
                                 <select
                                         data-bind="options: lstCountry,
                                                     optionsText: 'countryname',
-                                                    selectedText2 : fiProCountryName,
+                                                    selectedText : fiProCountryName,
                                                     optionsValue: 'countryid',
                                                     value: fiProCountryCode" class="form-control"></select>
                             </div>
@@ -230,10 +230,10 @@
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.gia_tri.dvt"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <select data-bind="options: lstUOMAnimal,
-                                                    optionsText: 'unitname',
-                                                    optionsValue: 'unitcode',
-                                                    optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.gia_tri.dvt"/>',
+                                <select data-bind="options: lstLoaiTienTe,
+                                                    optionsText: 'fiCatTypeName',
+                                                    optionsValue: 'fiCatNote',
+                                                    selectedText: fiPackageUnitName,
                                                     value: fiPackageUnitCode" class="form-control"></select>
                             </div>
                         </div>
@@ -303,7 +303,7 @@
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.nhom"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <select data-bind="options : lstNhom, optionsValue : 'fiCatType', selectText2:fiTenNhom,  optionsText : 'fiCatTypeName',
+                                <select data-bind="options : lstNhom, optionsValue : 'fiCatType',  optionsText : 'fiCatTypeName',
                                                     value: fiProIdNhom" class="form-control"></select>
                             </div>
                         </div>
@@ -419,10 +419,9 @@
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.gia_tri.dvt"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <select data-bind="options: lstUOMAnimal,
-                                                    optionsText: 'unitname',
-                                                    optionsValue: 'unitcode',
-                                                    optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.gia_tri.dvt"/>',
+                                <select data-bind="options: lstLoaiTienTe,
+                                                    optionsText: 'fiCatTypeName',
+                                                    optionsValue: 'fiCatType', selectedText:fiPackageUnitName,
                                                     value: fiPackageUnitCode" class="form-control"></select>
                             </div>
                         </div>

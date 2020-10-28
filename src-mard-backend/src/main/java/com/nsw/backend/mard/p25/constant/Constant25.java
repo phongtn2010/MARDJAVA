@@ -69,20 +69,23 @@ public class Constant25 {
     @JsonFormat(shape = JsonFormat.Shape.OBJECT)
     @Getter
     public enum HosoStatus {
-        TAO_MOI(0, "Tạo mới"),
-        CHO_TIEP_NHAN(1, "Chờ tiếp nhận"),
-        DA_CAP_NHAT_MIEN_GIAM(2, "Đã cập nhật miễn giảm"),
-        DA_BAO_CAO_MIEN_GIAM(3, "Đã báo cáo miễn giảm"),
-        BPMC_YEU_CAU_BO_SUNG_HO_SO(4, "BPMC yêu cầu bổ sung hồ sơ"),
-        CHO_TIEP_NHAN_HO_SO_GUI_BO_SUNG_THEO_BPMC(5, "Chờ tiếp nhận hồ sơ gửi bổ sung theo BPMC"),
-        DA_TIEP_NHAN(6, "Đã tiếp nhận"),
-        DA_TU_CHOI(7, "Đã từ chối"),
-        PHONG_TACN_YEU_CAU_BO_SUNG_HO_SO(8, "Phòng TACN Yêu cầu bổ sung hồ sơ"),
-        CHO_TIEP_NHAN_HO_SO_GUI_BO_SUNG_THEO_PHONG_TACN(9, "Chờ tiếp nhận hồ sơ gửi bổ sung theo Phòng TACN"),
-        DA_TU_CHOI_CAP_GDK(10, "Đã từ chối cấp GĐK"),
-        DA_XAC_NHANH_GDK(11, "Đã xác nhận GĐK"),
-        DA_THU_HOI_HO_SO(12, "Đã thu hồi hồ sơ"),
-        DA_RUT_HO_SO(13, "Đã rút hồ sơ");
+        TAO_MOI(0,"Tạo mới"),
+        CHO_TIEP_NHAN(1,"Chờ tiếp nhận"),
+        CHO_TIEP_NHAN_HS_GUI_BS_BPMC(2,"Chờ tiếp nhận hồ sơ gửi bổ sung theo BPMC"),
+        CHO_TIEP_NHAN_HS_GUI_BS_TACN(3,"Chờ tiếp nhận hồ sơ gửi bổ sung theo phòng TACN"),
+        DA_BAO_CAO_MIEN_GIAM(5,"Đã báo cáo miễn giảm"),
+        CHO_KQ_DANH_GIA_SPH(27,"Chờ kết quả đánh giá sự phù hợp"),
+        CHO_TIEP_NHAN_KQ_DANH_GIA_SPH(29,"Chờ tiếp nhận kết quả đánh giá sự phù hợp"),
+        CHO_TIEP_NHAN_KQ_DANH_GIA_SPH_GUI_BS_BPMC(30,"Chờ tiếp nhận kết quả đánh giá sự phù hợp gửi bổ sung theo BPMC"),
+        CHO_TIEP_NHAN_KQ_DANH_GIA_SPH_GUI_BS_TACN(31,"Chờ tiếp nhận kết quả đánh giá sự phù hợp gửi bổ sung theo phòng TACN"),
+        DA_RUT_HO_SO(45,"Đã rút hồ sơ"),
+        DA_TU_CHOI_CAP_GDK(21,"Đã từ chối cấp GĐK"),
+        DA_XAC_NHAN_GDK(26,"Đã xác nhận GĐK"),
+        DA_TIEP_NHAN_KQ_DANH_GIA_SPH(32,"Đã tiếp nhận kết quả đánh giá sự phù hợp"),
+        BPMC_YCBS_KQ_DANH_GIA_SPH(33,"BPMC yêu cầu bổ sung kết quả đánh giá sự phù hợp"),
+        TACN_YCBS_KQ_DANH_GIA_SPH(38,"Phòng TACN yêu cầu bổ sung kết quả đánh giá sự phù hợp"),
+        DA_THU_HOI_TB_KQ_KIEM_TRA(47,"Đã thu hồi thông báo kết quả kiểm tra");
+
 
 
         private int id;
