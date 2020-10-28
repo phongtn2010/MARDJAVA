@@ -20,16 +20,34 @@
                         <tbody data-bind="foreach: fiProCLList">
                         <tr>
                             <td class="text-center" data-bind="text: ($index() + 1)"></td>
-                            <td data-bind="text : fiProCLTarg"></td>
-                            <td class="text-left" data-bind="text : fiProCLCompare"></td>
-                            <td class="text-center" data-bind="text : fiProCLContent"></td>
-                            <td data-bind="text : fiProCLUnitName"></td>
+                            <td><input class="form-control" type="text" data-bind="value: fiProCLTarg, attr: { 'id': 'chiTieu_tenChiTieu_' + $index()}, enable: isEnable()"></td>
+                            <td><select class="form-control" data-bind="value: fiProCLCompare, attr: { 'id': 'chiTieu_hinhThuc' + $index()}, enable: isEnable()">
+                                <option value=">"> > </option>
+                                <option value="<"> < </option>
+                                <option value="="> = </option>
+                                <option value=">="> >= </option>
+                                <option value="<="> <= </option>
+                                <option value="min-max">min-max</option>
+                            </select></td>
+                            <td><input class="form-control" type="text" data-bind="value: fiProCLContent, attr: { 'id': 'chiTieu_hinhThuc_' + $index()}, enable: isEnable()"></td>
+<%--                            <td><select class="form-control" data-bind="options: lstUOMAnimal,--%>
+<%--                                                    optionsText: 'unitname',--%>
+<%--                                                    optionsValue: 'unitcode',--%>
+<%--                                                    optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.chat_luong.dvt"/>',--%>
+<%--                                                    value: fiProCLUnitName, attr: { 'id': 'chiTieu_donVi_' + $index()}"></select></td>--%>
+                            <td><input class="form-control" type="text" data-bind="value: fiProCLUnitName, attr: { 'id': 'chiTieu_donVi_' + $index()},enable: isEnable()"></td>
                             <td class="text-center" data-bind="visible: $root.isEditable()">
-                                <a href="javascript:void(0)" data-bind="click: $parent.openUpdateProduct.bind($data, $data, $index(), 1)"
-                                >
-                                    <i class="fa fa-lg fa-edit"></i>
-                                </a>&nbsp;&nbsp;
-                                <a href="javascript:void(0)" data-bind="click: $parent.removeProduct.bind($data, $index())">
+                                <span data-bind="if: (isUpdate())">
+                                    <a data-bind="click: $root.updateHangHoa"> <i class="fa fa-save" aria-hidden="true"></i>
+                                        </a>
+                                </span>
+
+                                    <a data-bind="click: $parent.editHangHoa"> <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </a>
+
+
+
+                                <a href="javascript:void(0)" data-bind="click: $parent.removeListCL.bind($data, $index())">
                                     <i class="fa fa-lg fa-trash"></i>
                                 </a>
                             </td>
@@ -104,7 +122,7 @@
                                    data-bind="click: $parent.openUpdateProduct.bind($data, $data, $index(), 1)">
                                     <i class="fa fa-lg fa-edit"></i>
                                 </a>&nbsp;&nbsp;
-                                <a href="javascript:void(0)" data-bind="click: $parent.removeProduct.bind($data, $index())">
+                                <a href="javascript:void(0)" data-bind="click: $parent.removeListAT.bind($data, $index())">
                                     <i class="fa fa-lg fa-trash"></i>
                                 </a>
                             </td>
@@ -181,7 +199,7 @@
                                    data-bind="click: $parent.openUpdateProduct.bind($data, $data, $index(), 1)">
                                     <i class="fa fa-lg fa-edit"></i>
                                 </a>&nbsp;&nbsp;
-                                <a href="javascript:void(0)" data-bind="click: $parent.removeProduct.bind($data, $index())">
+                                <a href="javascript:void(0)" data-bind="click: $parent.removeListSLKT.bind($data, $index())">
                                     <i class="fa fa-lg fa-trash"></i>
                                 </a>
                             </td>

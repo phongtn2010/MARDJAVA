@@ -324,23 +324,40 @@ function ThongTinChungVM(data) {
 
     ttcVMSelf.clearForm = function () {
         ttcVMSelf.errorMsg('');
-        $("#EfiProCLTargTx").val('');
-        $("#EfiProCLContentTx").val('');
-        $("#EfiProATTargTx").val('');
-        $("#EfiProATContentTx").val('');
-        $("#EfiProSLKLMass").val('');
-        $("#EfiProSLKLMassTan").val('');
-        $("#EfiProSLKLAmount").val('');
-
+        $("#fiProName").val('');
+        $("#fiProIdNhom").val('');
+        $("#fiProIdPhanNhom").val('');
+        $("#fiProIdLoai").val('');
+        $("#fiProIdPhanLoai").val('');
+        $("#fiProCode").val('');
+        $("#fiProMadeIn").val('');
+        $("#fiProCountryCode").val('');
+        $("#fiProThanhPhan").val('');
+        $("#fiProColor").val('');
+        $("#fiProSoHieu").val('');
+        $("#fiProQuyChuan").val('');
+        $("#fiProSLKLList").val('');
+        $("#fiProATList").val('');
+        $("#fiProCLList").val('');
+        ttcVMSelf.fiProName(null);
+        ttcVMSelf.fiProIdNhom(null);
+        ttcVMSelf.fiProIdPhanNhom(null);
+        ttcVMSelf.fiProIdLoai(null);
+        ttcVMSelf.fiProIdPhanLoai(null);
+        ttcVMSelf.fiProCode(null);
+        ttcVMSelf.fiProMadeIn(null);
+        ttcVMSelf.fiProCountryCode(null);
+        ttcVMSelf.fiProThanhPhan(null);
+        ttcVMSelf.fiProColor(null);
+        ttcVMSelf.fiProSoHieu(null);
+        ttcVMSelf.fiProQuyChuan(null);
+        ttcVMSelf.fiProSLKLList(null);
+        ttcVMSelf.fiProATList(null);
+        ttcVMSelf.fiProCLList(null);
     }
     ttcVMSelf.addProduct=function(data){
-        var addProductValid = [ttcVMSelf.fiProName, ttcVMSelf.fiProIdNhom, ttcVMSelf.fiProIdPhanNhom,ttcVMSelf.fiProIdLoai,ttcVMSelf.fiProValueVN,ttcVMSelf.fiProColor,ttcVMSelf.fiProSoHieu,
-             ttcVMSelf.fiProValueUSA,ttcVMSelf.fiProIdPhanLoai,ttcVMSelf.fiProCode,ttcVMSelf.fiProMadeIn,ttcVMSelf.fiProCountryCode,ttcVMSelf.fiProThanhPhan,ttcVMSelf.fiProQuyChuan,];
-        var chiTieuAT = [ttcVMSelf.EfiProATContent, ttcVMSelf.EfiProATTarg, ttcVMSelf.EfiProATCompare,ttcVMSelf.EfiProATUnitID];
         var getAllForm = [ttcVMSelf.fiProSLKLList, ttcVMSelf.fiProATList,ttcVMSelf.fiProCLList];
-        var chiTieuChatLuong = [ttcVMSelf.EfiProCLContent, ttcVMSelf.EfiProCLCompare, ttcVMSelf.EfiProCLUnitID,ttcVMSelf.EfiProCLTarg];
-        var chiTieuKL = [ttcVMSelf.EfiProSLKLMass, ttcVMSelf.EfiProSLKLMassTan, ttcVMSelf.EfiProSLKLAmount,ttcVMSelf.EfiProSLKLAmountUnitCode,ttcVMSelf.EfiProSLKLMassUnitCode];
-        ttcVMSelf.errors = ko.validation.group({chiTieuChatLuong,chiTieuKL,chiTieuAT,addProductValid,getAllForm}, {deep: true, live: true, observable: true});
+        ttcVMSelf.errors = ko.validation.group({getAllForm}, {deep: true, live: true, observable: true});
         if (!ttcVMSelf.validate()) return;
         var kl='';
         var sl='';
@@ -348,7 +365,6 @@ function ThongTinChungVM(data) {
             kl+=ttcVMSelf.fiProSLKLList()[i].fiProSLKLMass+' '+ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitName;
             sl+=ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmount+' '+ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitName;
         }
-
         var item ={
             fiProName: ttcVMSelf.fiProName(),
             fiTrangThaiHangHoa: ttcVMSelf.fiTrangThaiHangHoa(),
@@ -373,9 +389,10 @@ function ThongTinChungVM(data) {
             fiProSLKLList: ttcVMSelf.fiProSLKLList(),
             fiProATList: ttcVMSelf.fiProATList()
         }
-
         ttcVMSelf.fiProductList.push(item);
+        ttcVMSelf.clearForm();
         $("#modal_addAnimal").modal('hide');
+
     }
 
     ttcVMSelf.updateAnimal= function () {
@@ -432,6 +449,18 @@ function ThongTinChungVM(data) {
         ;
     }
 
+    ttcVMSelf.clearFormCL = function () {
+        ttcVMSelf.errorMsg('');
+        $("#EfiProCLContent").val('');
+        $("#EfiProCLCompare").val('');
+        $("#EfiProCLUnitID").val('');
+        $("#EfiProCLTarg").val('');
+        ttcVMSelf.EfiProCLContent(null);
+        ttcVMSelf.EfiProCLCompare(null);
+        ttcVMSelf.EfiProCLUnitID(null);
+        ttcVMSelf.EfiProCLTarg(null);
+    }
+
     ttcVMSelf.addThongTinChiTieuChatLuong=function () {
         var chiTieuChatLuong = [ttcVMSelf.EfiProCLContent, ttcVMSelf.EfiProCLCompare, ttcVMSelf.EfiProCLUnitID,ttcVMSelf.EfiProCLTarg];
         ttcVMSelf.errors = ko.validation.group(chiTieuChatLuong, {deep: true, live: true, observable: true});
@@ -441,11 +470,31 @@ function ThongTinChungVM(data) {
             fiProCLCompare: ttcVMSelf.EfiProCLCompare(),
             fiProCLContent: ttcVMSelf.EfiProCLContent(),
             fiProCLUnitName: ttcVMSelf.EfiProCLUnitID(),
+            isEnable:ko.observable(false),
+            isUpdate:ko.observable(false),
             fiProCLUnitID: ttcVMSelf.EfiProCLUnitID()
         }
 
         ttcVMSelf.fiProCLList.push(item);
-        ttcVMSelf.clearForm();
+        ttcVMSelf.clearFormCL();
+    }
+    ttcVMSelf.editHangHoa = function(item){
+        console.log(item);
+        // item.isEnable=true;
+        item.isEnable(true);
+        item.isUpdate(true);
+
+    }
+    ttcVMSelf.clearFormAT= function () {
+        ttcVMSelf.errorMsg('');
+        $("#EfiProATContent").val('');
+        $("#EfiProATTarg").val('');
+        $("#EfiProATCompare").val('');
+        $("#EfiProATUnitID").val('');
+        ttcVMSelf.EfiProATContent(null);
+        ttcVMSelf.EfiProATTarg(null);
+        ttcVMSelf.EfiProATCompare(null);
+        ttcVMSelf.EfiProATUnitID(null);
     }
     ttcVMSelf.addThongTinChiTieuAT=function () {
         var chiTieuAT = [ttcVMSelf.EfiProATContent, ttcVMSelf.EfiProATTarg, ttcVMSelf.EfiProATCompare,ttcVMSelf.EfiProATUnitID];
@@ -460,7 +509,20 @@ function ThongTinChungVM(data) {
         }
 
         ttcVMSelf.fiProATList.push(item);
-        ttcVMSelf.clearForm();
+        ttcVMSelf.clearFormAT();
+    }
+    ttcVMSelf.clearFormKL = function () {
+        ttcVMSelf.errorMsg('');
+        $("#EfiProSLKLMass").val('');
+        $("#EfiProSLKLMassTan").val('');
+        $("#EfiProSLKLAmount").val('');
+        $("#EfiProSLKLAmountUnitCode").val('');
+        $("#EfiProSLKLMassUnitCode").val('');
+        ttcVMSelf.EfiProSLKLMass(null);
+        ttcVMSelf.EfiProSLKLMassTan(null);
+        ttcVMSelf.EfiProSLKLAmount(null);
+        ttcVMSelf.EfiProSLKLAmountUnitCode(null);
+        ttcVMSelf.EfiProSLKLMassUnitCode(null);
     }
     ttcVMSelf.addThongTinChiTieuKL=function () {
         var chiTieuKL = [ttcVMSelf.EfiProSLKLMass, ttcVMSelf.EfiProSLKLMassTan, ttcVMSelf.EfiProSLKLAmount,ttcVMSelf.EfiProSLKLAmountUnitCode,ttcVMSelf.EfiProSLKLMassUnitCode];
@@ -475,7 +537,7 @@ function ThongTinChungVM(data) {
             fiProSLKLAmountUnitCode: ttcVMSelf.EfiProSLKLAmountUnitCode()
         }
         ttcVMSelf.fiProSLKLList.push(item);
-        ttcVMSelf.clearForm();
+        ttcVMSelf.clearFormKL();
     }
     ttcVMSelf.validate = function () {
         if (ttcVMSelf.errors().length > 0) {
@@ -486,18 +548,39 @@ function ThongTinChungVM(data) {
     }
 
     ttcVMSelf.openUpdateProduct = function (data, index, type) {
-        console.log(data);
         ko.mapping.fromJS(data, {}, ttcVMSelf);
         ttcVMSelf.selectedIndex(index);
         if (type == '1' || type == 1) {
             $('#modal_updateAnimal').modal('show');
         } else {
-            $('#modal_updateAnimal').modal('show');
+            $('#modal_showAnimal').modal('show');
+        }
+    }
+
+    ttcVMSelf.openUpdateList = function (data, index, type) {
+        ko.mapping.fromJS(data, {}, ttcVMSelf);
+        ttcVMSelf.selectedIndex(index);
+        if (type == '1' || type == 1) {
+            $('#modal_updateCLList').modal('show');
+        } else {
+            $('#modal_showAnimal').modal('show');
         }
     }
 
     ttcVMSelf.removeProduct = function (index) {
         ttcVMSelf.fiProductList.splice(index, 1);
+    }
+
+    ttcVMSelf.removeListCL = function (index) {
+        ttcVMSelf.fiProCLList.splice(index, 1);
+    }
+
+    ttcVMSelf.removeListAT = function (index) {
+        ttcVMSelf.fiProATList.splice(index, 1);
+    }
+
+    ttcVMSelf.removeListSLKT = function (index) {
+        ttcVMSelf.fiProSLKLList.splice(index, 1);
     }
 
 }
