@@ -9,15 +9,6 @@
     var idHoSo = ${idHoSo};
     console.log('id ho so', idHoSo);
 </script>
-<script type="text/javascript">
-    var xemHoSo = <%= form.isXemHoSo() %>;
-    var idHoSo = <%= form.getIdHoSo() %>;
-    var idHoSoGoc = <%= form.getIdHoSoGoc() %>;
-    var requiredSign = <%= form.isSign() %>;
-    var isYeuCauSua = <%= form.getIsChinhSua() %>;
-    var saveFast = <%= form.isSaveFast() %>;
-    ko.validation.locale('vi');
-</script>
 <div id="mard25Edit">
     <div class="row" style="padding-top: 15px; padding-bottom: 15px;" data-bind="with: kdnkVM">
         <div class="col-md-12">

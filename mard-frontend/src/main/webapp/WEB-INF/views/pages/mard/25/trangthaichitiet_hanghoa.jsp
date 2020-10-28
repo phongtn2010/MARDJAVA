@@ -51,10 +51,10 @@
                                             </div>
                                             <div class="col-md-12 margin-top-20">
                                                 <div class="form-group nsw-text-center">
-                                                    <button class="btn green" id="searchHoSo"
+                                                    <button class="btn green margin-right-10" id="searchHoSo"
                                                             data-bind=""><i class="fa fa-search"></i> Tìm kiếm
                                                     </button><button class="btn green" data-bind="click: backBtn"
-                                                                     data-bind=""><i class="fa fa-search"></i> Thoát
+                                                                     data-bind=""><i class="fa fa-sign-out"></i> Thoát
                                                 </button>
                                                 </div>
                                             </div>
@@ -96,12 +96,13 @@
                             <td class="text-center" data-bind="text: fiProValueUSD"></td>
                             <td class="text-center" data-bind="text: fiTrangThaiHangHoa"></td>
                             <td class="text-center">
-                                <a href="javascript:void(0)" data-target="#modal_guiSua"
-                                   data-toggle="modal" data-bind="$parent.xemKQDGSPH.bind($data, $data, $index())"><i
+                                <a href="javascript:void(0)" data-target="#modal_view"
+                                   data-toggle="modal" data-bind="click: $parent.xemKQDGSPH.bind($data, $data, $index())"><i
                                         class="fa fa-lg fa-eye tooltips"></i></a>
                             </td>
                             <td class="text-center">
-                                <a href="javascript:void(0)"  data-bind="click: $parent.guiSuaHangHoa.bind($data, $data, $index())"><i
+                                <a href="javascript:void(0)" data-target="#modal_guiSua"
+                                   data-toggle="modal"  data-bind="click: $parent.guiSuaHangHoa.bind($data, $data, $index())"><i
                                         class="fa fa-lg fa-send tooltips"></i></a>
                             </td>
                             <td class="text-center">
@@ -122,19 +123,9 @@
         </div>
     </div>
     </fieldset>
-    <div id="modal_xemKQDGSPH" class="modal container in modal-overflow"
-         tabindex="-1"
-         data-backdrop="static" data-keyboard="false">
+    <%@include file="inc_hanghoa_guisua.jsp"%>
 
-    </div>
-
-     <%@include file="inc_hanghoa_guisua.jsp"%>
-
-    <div id="modal_xemTBKQKT" class="modal container in modal-overflow"
-         tabindex="-1"
-         data-backdrop="static" data-keyboard="false">
-
-    </div>
+    <%@include file="inc_hanghoa_thongbao_kqdgsph.jsp"%>
     <div id="modal_xemLichSuTacDong" class="modal container in modal-overflow"
          tabindex="-1"
          data-backdrop="static" data-keyboard="false">

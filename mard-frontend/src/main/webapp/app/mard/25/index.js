@@ -391,6 +391,13 @@ function Mard25VM() {
         self.lichsuXuly().show(item.fiNSWFileCode)
         return false;
     };
+
+    self.chuyenTCCD = function () {
+        console.log("ok");
+    }
+    self.thoatOnClick  = function () {
+        $("#modal_view_chuyen").hide();
+    }
 }
 
 function GiayPhepVM(options) {

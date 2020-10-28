@@ -233,8 +233,9 @@
                             </td>
                             <td class="text-center">
                                 <div data-bind="visible: $parent.getHoSoType(fiHSType)=='2c'">
-                                    <a href="javascript:void(0)" data-bind="click: $root.goYCSHoSo"><i
-                                            class="fa fa-download"></i></a>
+                                    <a data-target="#modal_view_chuyen"
+                                       data-toggle="modal" data-bind="click: $root.chuyenTCCD"><i
+                                            class="fa fa-eye"></i></a>
                                 </div>
                             </td>
                             <td class="text-center">
@@ -245,7 +246,8 @@
                             </td>
                             <td class="text-center">
                                 <div data-bind="visible:  $parent.getHoSoType(fiHSType)=='2d'">
-                                    <a href="javascript:void(0)" data-bind="click: $root.goYCRHoSo"><i
+                                    <a data-target="#modal_gui_bao_cao"
+                                       data-toggle="modal" href="javascript:void(0)" data-bind="click: $root.goYCRHoSo"><i
                                             class="fa fa-upload"></i></a>
                                 </div>
                             </td>
@@ -284,6 +286,132 @@
                                 </ul>
                                 <!-- /ko -->
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal_view_chuyen" class="modal container in modal-overflow"
+         tabindex="-1"
+         data-backdrop="static" data-keyboard="false">
+        <div class="modal-header" style="background: #337ab7; color: #fff;">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        </div>
+        <div class="modal-body">
+            <div class="panel panel-primary" id="model-congvan">
+                <ul class="nav nav-tabs ">
+                    <li class="active">
+                        <a href="#tab_tccd" data-toggle="tab"> <b><spring:message code="mard.25.tccd.panel_chuyen_title"/></b></a>
+                    </li>
+                    <li>
+                        <a href="#tab_chitieu" data-toggle="tab"> <b><spring:message code="mard.25.tccd.panel_xem_title"/></b></a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active"id="tab_tccd">
+                        <div class="row margin-bottom-15">
+                            <div class="col-md-2 nsw-text-right">
+                                <label><spring:message code="mard.25.tccd.panel_chuyen_ten_tccd"/><a class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-4">
+                                <input data-bind="" class="form-control" value=""/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group nsw-text-center">
+                                <button class="btn green"
+                                        data-bind=""
+                                ><i class="fa fa-send"></i> <spring:message code="mard.25.tccd.panel_chuyen_btn"/>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab_chitieu">
+                        <table class="table table-striped table-bordered table-hover order-column">
+                            <thead>
+                            <tr class="nsw-tr tr-nsw1-bgcolor">
+                                <th style="width: 3%" class="text-center"><spring:message code="mard.25.tccd.panel_xem_grid_stt"/></th>
+                                <th class="text-center"><spring:message code="mard.25.tccd.panel_xem_grid_ten_tacn"/></th>
+                                <th class="text-center"><spring:message code="mard.25.tccd.panel_xem_grid_chi_tieu"/></th>
+                                <th class="text-center"><spring:message code="mard.25.tccd.panel_xem_grid_hinh_thuc"/></th>
+                                <th class="text-center"><spring:message code="mard.25.tccd.panel_xem_grid_ham_luong"/></th>
+                                <th class="text-center"><spring:message code="mard.25.tccd.panel_xem_grid_dvt"/></th>
+                                <th class="text-center"><spring:message code="mard.25.tccd.panel_xem_grid_ghi_chú"/></th>
+
+                            </tr>
+                            </thead>
+                            <tbody data-bind="">
+                            <tr>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal_gui_bao_cao" class="modal container in modal-overflow"
+         tabindex="-1"
+         data-backdrop="static" data-keyboard="false">
+        <div class="modal-header" style="background: #337ab7; color: #fff;">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <b class="modal-title"><spring:message code="mard.25.tccd.bao_cao_title"/></b>
+        </div>
+        <div class="modal-body">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label><spring:message code="mard.25.tccd.bao_cao_mahs"/><a  class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-4">
+                                <label data-bind=""></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label><spring:message code="mard.25.tccd.bao_cao_ten_file"/><a  class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-10">
+                                <input class="form-control"
+                                       data-bind=""
+                                       type="text"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label><spring:message code="mard.25.tccd.bao_cao_file"/><a  class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-10">
+                                <input class="form-control" type="file" data-bind=""/>
+                            </div>
+                        </div>
+                        <div class="nsw-text-center">
+                            <button class="btn green"
+                                    data-bind="click: btnSearch"
+                            ><i class="fa fa-search"></i><spring:message code="mard.25.tccd.bao_cao_btn"/></button>
+                        </div>
+                        <div class="row">
+                            <table class="table table-striped table-bordered table-hover order-column">
+                                <thead>
+                                <tr class="nsw-tr tr-nsw1-bgcolor">
+                                    <th class="text-center"> <spring:message code="mard.25.tccd.bao_cao_stt"/></th>
+                                    <th class="text-center"> <spring:message code="mard.25.tccd.bao_cao_ten_file"/>
+                                    <th class="text-center"> <spring:message code="mard.25.tccd.bao_cao_file"/>
+                                    <th class="text-center"> <spring:message code="mard.25.tccd.bao_cao_thao_tac"/></th>
+                                </tr>
+                                </thead>
+                                <tbody >
+                                <tr>
+
+                                </tr>
+                                </tbody>
+
+                            </table>
                         </div>
                     </div>
                 </div>
