@@ -26,15 +26,17 @@ public interface WsService {
 
     ResponseJson getXml(SendMessage sendMessage) throws NSWException;
 
-    ResponseJson tiepNhanHS2D(ResponseWrapper request);
+    ResponseJson tiepNhanHS2D(ResponseWrapper request) throws NSWException;
 
-    ResponseJson thuHoiGDK(ResponseWrapper request);
+    ResponseJson thuHoiGDK(ResponseWrapper request)  throws NSWException;
 
-    ResponseJson tccdGuiKQKT(ResponseWrapper request);
+    ResponseJson tccdGuiKQKT(ResponseWrapper request)  throws NSWException;
 
-    ResponseJson guiXuLyKQ(ResponseWrapper request);
+    ResponseJson guiXuLyKQ(ResponseWrapper request)  throws NSWException;
 
-    ResponseJson guiGiayXNCL(ResponseWrapper request);
+    ResponseJson guiGiayXNCL(ResponseWrapper request)  throws NSWException;
 
-    ResponseJson thuHoiGiayXNCL(ResponseWrapper request);
+    ResponseJson thuHoiGiayXNCL(ResponseWrapper request)  throws NSWException;
+
+    ResponseJson chuyenChiTieu(TbdHoso25 tbdHoso25)  throws NSWException;
 }

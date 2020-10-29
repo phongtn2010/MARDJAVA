@@ -236,7 +236,7 @@ public class Tbdhoso25ServiceImpl implements TbdHoso25Service {
     @Override
     public TbdYcrut25 cancelHoso(TbdYcrut25 cancelRequest){
         TbdHoso25 regProfile = regProfileRepository.findOne(cancelRequest.getFiIdHS());
-        
+
         return requestCancelRepository.save(cancelRequest);
     }
 

@@ -25,11 +25,17 @@ function Mard25VM() {
     self.lstUOMAnimal = ko.observableArray([]);
     self.lstProfileStatus = ko.observableArray([]);
     self.lstHoSoType = ko.observableArray([]);
+    self.lstDVXL = ko.observableArray([]);
     self.lstAtchType = ko.observableArray([]);
 
     self.giayPhepVM = ko.observable(new GiayPhepVM());
     self.xinRutHoSoVM = ko.observable(new XinRutHoSoVM());
     self.lichsuXuly = ko.observable(new HistoryPopupView());
+
+    self.fiIdTCCD=ko.observable(null);
+    self.fiNameTCCD=ko.observable(null);
+    self.filstChiTieu = ko.observableArray([]);
+    self.selectedHoSo=ko.observable(null);
 
     self.pagination = ko.observable(new PagingVM({
         pageSize: MAX_PAGE_SIZE,
@@ -109,6 +115,10 @@ function Mard25VM() {
             app.sendGetRequest("/mard/25/danhmuc/getby-catno/2", function (res) {
                 options['lstHoSoType'] = res.data;
                 self.lstHoSoType(res.data);
+            }),
+            app.sendGetRequest("/mard/25/danhmuc/dvxl/1", function (res) {
+                options['lstDVXL'] = res.data;
+                self.lstDVXL(res.data);
             })
             // Get attach types
             // app.sendGetRequest("/mard/06/danhmuc/dinhkem?systemId=6", function (res) {
@@ -392,14 +402,90 @@ function Mard25VM() {
         return false;
     };
 
-    self.chuyenTCCD = function () {
-        console.log("ok");
+    self.chuyenTCCD = function (data,type,index) {
+        self.selectedHoSo(index);
+        ko.utils.arrayForEach(index.fiProductList, function(product) {
+            ko.utils.arrayForEach(product.fiProATList, function(at) {
+                var chiTieu = new ChiTieuVM();
+                chiTieu.fiTenTACN(product.fiProName);
+                chiTieu.fiChiTieu(at.fiProATTarg);
+                chiTieu.fiHinhThuc(at.fiProATCompare);
+                chiTieu.fiHamLuong(at.fiProATContent);
+                chiTieu.fiDonViTinh(at.fiProATUnitID);
+                chiTieu.fiGhiChu("");
+                self.filstChiTieu.push(chiTieu);
+            });
+            ko.utils.arrayForEach(product.fiProCLList, function(cl) {
+                var chiTieu = new ChiTieuVM();
+                chiTieu.fiTenTACN(product.fiProName);
+                chiTieu.fiChiTieu(cl.fiProCLTarg);
+                chiTieu.fiHinhThuc(cl.fiProCLCompare);
+                chiTieu.fiHamLuong(cl.fiProCLContent);
+                chiTieu.fiDonViTinh(cl.fiProCLUnitID);
+                chiTieu.fiGhiChu("");
+                self.filstChiTieu.push(chiTieu);
+            });
+        });
+    }
+    self.chuyenChiTieu =function(){
+        self.selectedHoSo().fiIdDVXL=self.fiIdTCCD();
+        self.selectedHoSo().fiNameDVXL=self.fiNameTCCD();
+        self.pop = app.popup({
+            title: 'Thông báo',
+            html: '<b>Bạn chắc chắn muốn chuyển hồ sơ cho tổ chức chỉ định?</b>',
+            width: 450,
+            buttons: [
+                {
+                    name: NSWLang["common_button_toi_chac_chan"],
+                    class: 'btn',
+                    icon: 'fa-save',
+                    action: function () {
+                        app.popupRemove(self.pop.selector);
+                        app.makePost({
+                            url: '/mard/25/hoso/chuyenchitieu',
+                            data: JSON.stringify(self.selectedHoSo()),
+                            contentType: "application/json; charset=utf-8",
+                            success: function (d) {
+                                if (d && d.success) {
+                                    app.Alert('Gửi yêu cầu thành công');
+                                    self.searchHoso(self.currentPage());
+                                    if ($('#modal_view_chuyen').hasClass('in')) {
+                                        $('#modal_view_chuyen').modal('hide');
+                                    }
+                                } else {
+                                    app.Alert(d.message);
+                                }
+                            },
+                            error: function (e) {
+                                app.Alert('Không gửi được yêu cầu');
+                            }
+                        });
+                    }
+                },
+                {
+                    name: 'Huỷ',
+                    class: 'btn',
+                    icon: 'fa-close',
+                    action: function () {
+                        app.popupRemove(self.pop.selector);
+                    }
+                }
+            ]
+        });
     }
     self.thoatOnClick  = function () {
         $("#modal_view_chuyen").hide();
     }
 }
+function ChiTieuVM(){
 
+    this.fiTenTACN =ko.observable(null);
+    this.fiChiTieu =ko.observable(null);
+    this.fiHinhThuc =ko.observable(null);
+    this.fiHamLuong =ko.observable(null);
+    this.fiDonViTinh =ko.observable(null);
+    this.fiGhiChu =ko.observable(null);
+}
 function GiayPhepVM(options) {
     var gpVMSelf = this;
     gpVMSelf.companyName = hosoCompanyName;
@@ -454,6 +540,7 @@ function GiayPhepVM(options) {
             link.remove();
         }
     }
+
 }
 
 function XinRutHoSoVM () {

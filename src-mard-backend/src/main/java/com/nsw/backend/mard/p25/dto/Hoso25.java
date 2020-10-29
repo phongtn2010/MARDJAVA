@@ -7,6 +7,7 @@ import com.nsw.backend.mard.p25.model.TbdHoso25;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
 
+import javax.persistence.Column;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.ArrayList;
@@ -93,7 +94,9 @@ public class Hoso25 {
 
     private String fiContactEmail;
 
+    private Integer fiIdDVXL;
 
+    private String fiNameDVXL;
 
     private List<TbdattachHoadon25> fiListAttchHoaDon;
 
@@ -158,6 +161,28 @@ public class Hoso25 {
 
 
 
+        });
+
+        //chuyen chi tieu kiem tra
+        List<Ananytical> ananyticalList = new ArrayList<>();
+        List<TbdHanghoa25> lstHangHoa =hoso25.getFiProductList();
+        lstHangHoa.forEach(tbdHanghoa25 -> {
+            tbdHanghoa25.getFiProCLList().forEach(chatluong->{
+                Ananytical ananytical = new Ananytical();
+                ananytical.setFiAnanyticalName(chatluong.getFiProCLTarg());
+                ananytical.setFiFormOfPublication(chatluong.getFiProCLCompare());
+                ananytical.setFiRequired(chatluong.getFiProCLContent());
+                ananytical.setFiAnanyticalName(chatluong.getFiProCLUnitID());
+                ananyticalList.add(ananytical);
+            });
+            tbdHanghoa25.getFiProATList().forEach(anToan->{
+                Ananytical ananytical = new Ananytical();
+                ananytical.setFiAnanyticalName(anToan.getFiProATTarg());
+                ananytical.setFiFormOfPublication(anToan.getFiProATCompare());
+                ananytical.setFiRequired(anToan.getFiProATContent());
+                ananytical.setFiAnanyticalName(anToan.getFiProATUnitID());
+                ananyticalList.add(ananytical);
+            });
         });
 
         return profile;

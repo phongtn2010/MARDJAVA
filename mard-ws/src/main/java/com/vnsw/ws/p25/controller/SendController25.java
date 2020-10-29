@@ -13,6 +13,7 @@ import com.vnsw.ws.helper.SoapHelper;
 import com.vnsw.ws.p25.common.Constants25;
 import com.vnsw.ws.p25.entity.json.SendMessage;
 import com.vnsw.ws.p25.envelop.*;
+import com.vnsw.ws.p25.message.send.GuiHSTCCD;
 import com.vnsw.ws.p25.message.send.Hoso25;
 import com.vnsw.ws.p25.service.BackendService25;
 import com.vnsw.ws.p25.service.EnvelopeService25;
@@ -96,6 +97,7 @@ public class SendController25 {
             ResponseJson response = backendService.getDataFromRestUri(url);
 //            String isTest = environment.getRequiredProperty("IS_TEST");
             String isTest = "0";
+            boolean debugMode = Boolean.parseBoolean(environment.getProperty("DEBUG_MODE"));
             Long fileStatus;
             //RequestCancel requestCancel = null;
             if (response != null && response.isSuccess()) {
@@ -103,41 +105,49 @@ public class SendController25 {
                 mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
                 mapper.enable(SerializationFeature.INDENT_OUTPUT);
                 String jsonData = mapper.writeValueAsString(response.getData());
-                Hoso25 hoso25 = mapper.readValue(jsonData, Hoso25.class);
-                if (hoso25 != null) {
-                    header = envelopeService.createSendHeader(
-                            maHoso,
-                            Constants.MARD_PRO.MARD25,
-                            sendMessage.getType(),
-                            sendMessage.getFunction(),
-                            "CTY");
-                    switch (sendMessage.getType()) {
-                        case Constants25.MARD25_TYPE.TYPE_10: // DN gui ho so
-                            content.setHoso25(hoso25);
-                            body = envelopeService.createBody(content);
-                            envelopeSend = envelopeService.createMessage(header, body);
-                            // Gui message
-                            if (Boolean.TRUE.equals(sendMessage.getXmlOnly())) {
-                                String xml = convertXmlService.ObjectToXml(envelopeSend);
-                                return createResponse(xml, true, errorMessage, httpStatus, null);
-                            }
-                            if (isTest.equals(Constants.STATUS.ACTIVE)) {
-                                isSuccess = true;
-                            } else {
-                                objReturn = send(envelopeSend, sendMessage.getSignedXml(), maHoso, sendMessage.getType());
-                                isSuccess = objReturn.isSuccess();
-                                errorMessage = objReturn.getMessage();
-                            }
+                header = envelopeService.createSendHeader(
+                        maHoso,
+                        Constants.MARD_PRO.MARD25,
+                        sendMessage.getType(),
+                        sendMessage.getFunction(),
+                        "CCN");
+                switch (sendMessage.getType()) {
+                    case Constants25.MARD25_TYPE.TYPE_10: // DN gui ho so
+                        Hoso25 hoso25 = mapper.readValue(jsonData, Hoso25.class);
+                        content.setHoso25(hoso25);
+                        body = envelopeService.createBody(content);
+                        envelopeSend = envelopeService.createMessage(header, body);
+                        // Gui message
+                        if (Boolean.TRUE.equals(sendMessage.getXmlOnly())) {
+                            String xml = convertXmlService.ObjectToXml(envelopeSend);
+                            return createResponse(xml, true, errorMessage, httpStatus, null);
+                        }
+                        if (isTest.equals(Constants.STATUS.ACTIVE)) {
+                            isSuccess = true;
+                        } else {
+                            objReturn = send(envelopeSend, sendMessage.getSignedXml(), maHoso, sendMessage.getType());
+                            isSuccess = objReturn.isSuccess();
+                            errorMessage = objReturn.getMessage();
+                        }
 
-                            if (isSuccess && objReturn == null) {
-                                objReturn = new ResponseJson();
-                                objReturn.setSuccess(true);
-                                objReturn.setMessage(errorMessage);
-                                objReturn.setData(hoso25);
-                            }
-                            logger.info("Sent something!");
-                            break;
-                    }
+                        if (isSuccess && objReturn == null) {
+                            objReturn = new ResponseJson();
+                            objReturn.setSuccess(true);
+                            objReturn.setMessage(errorMessage);
+                            objReturn.setData(hoso25);
+                        }
+                        logger.info("Sent something!");
+                        break;
+                    case Constants25.MARD25_TYPE.TYPE_15:
+                        GuiHSTCCD guiHSTCCD = mapper.readValue(jsonData, GuiHSTCCD.class);
+                        content.setGuiHSTCCD(guiHSTCCD);
+                        if (debugMode) {
+                            isSuccess = true;
+                        } else {
+
+                        }
+                        break;
+
                 }
             }
         } catch (Exception ex) {

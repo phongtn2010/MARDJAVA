@@ -17,8 +17,8 @@ import java.io.Serializable;
  */
 @Entity
 @Data
-@Table(name = "TBDDVXL25", schema = "MARD")
-public class TbdDonViXuLy25 implements Serializable {
+@Table(name = "TBS_DVXL25", schema = "MARD")
+public class TbsDonViXuLy25 implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public static final String SEQUENCE_NAME = "TBDDVXL25_SEQ";
@@ -38,18 +38,20 @@ public class TbdDonViXuLy25 implements Serializable {
     @Column(name = "FI_PU_CODE")
     private String fiPUCode;
 
-    @Column(name = "FI_PU_DESC")
-    private String fiPUDesc;
+    @Column(name = "FI_PU_NAME")
+    private String fiPUName;
 
     @Column(name = "FI_PU_LOCATION")
     private String fiPULocation;
 
-    public TbdDonViXuLy25() {
+    @Column(name = "FI_PU_TYPE")
+    private Integer fiPUType;
+
+    @Column(name = "FI_PU_TYPE_NAME")
+    private String fiPUTypeName;
+
+    public TbsDonViXuLy25() {
     }
 
-    public TbdDonViXuLy25(String fiPUCode, String fiPUDesc, String fiPULocation) {
-        this.fiPUCode = fiPUCode;
-        this.fiPUDesc = fiPUDesc;
-        this.fiPULocation = fiPULocation;
-    }
+
 }

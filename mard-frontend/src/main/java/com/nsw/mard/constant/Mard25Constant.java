@@ -185,11 +185,13 @@ public class Mard25Constant {
         public static final String HISTORY_BY_HS_CODE = "mard.06.tbdhoso06.history";
         public static final String UPDATE_ONLY = "mard.06.hoso.update_only";
         public static final String SAVE_BEFORE_UPDATE = "mard.06.hoso.save_before_update";
+        public static final String CHUYEN_CHI_TIEU = "mard.25.hoso.chuyenchitieu";
         public static final String GET_XML = "mard.06.getXml";
 
         //binhvv5
         public static final String GET_BY_CAT_NO = "mard.25.danhmuc.getbycatno";
         public static final String GET_HANGHOA_BY_IDHS = "mard.25.hanghoa.find";
+        public static final String GET_DANHMUC_TCCD = "mard.25.tochuccd.find";
 
     }
 

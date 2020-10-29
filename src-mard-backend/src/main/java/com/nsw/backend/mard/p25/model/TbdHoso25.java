@@ -165,14 +165,20 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_NGAY_CV_MIENGIAM")
     private Date fiProCVMienGiamNgay;
 
-    @Column(name = "FI_SIGN_NAME", nullable = false, length = 250)
+    @Column(name = "FI_SIGN_NAME", length = 250)
     private String fiSignName;
 
-    @Column(name = "FI_SIGN_POSITION", nullable = false, length = 250)
+    @Column(name = "FI_SIGN_POSITION", length = 250)
     private String fiSignPosition;
 
-    @Column(name = "FI_SIGN_ADD", nullable = false, length = 250)
+    @Column(name = "FI_SIGN_ADD",length = 250)
     private String fiSignAddress;
+
+    @Column(name = "FI_ID_DVXL")
+    private Integer fiIdDVXL;
+
+    @Column(name = "FI_NAME_DVXL", length = 500)
+    private String fiNameDVXL;
 
     //Danh sách thông tin kèm theo
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)

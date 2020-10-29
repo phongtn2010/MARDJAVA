@@ -17,9 +17,7 @@ import com.nsw.mard.service.DinhkemService;
 import com.nsw.util.Constants;
 import com.nsw.util.LogUtil;
 import com.nsw.util.Utility;
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.codehaus.jackson.map.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.FileSystemResource;
@@ -39,9 +37,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 @RestController
 @RequestMapping("/mard/25")
@@ -409,6 +405,45 @@ public class Mard25Api extends BaseApi {
                 return json;
             }
             json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_HANGHOA_BY_IDHS)  + idHoSo);
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            json.setData(null);
+            json.setSuccess(false);
+            json.setMessage(ex.getMessage());
+            return json;
+        }
+    }
+    @RequestMapping(value = "/danhmuc/dvxl/{fiPuType}", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseJson getListTCCD(@PathVariable String fiPuType) {
+        ResponseJson json = new ResponseJson();
+        try {
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_DANHMUC_TCCD)  + fiPuType);
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            json.setData(null);
+            json.setSuccess(false);
+            json.setMessage(ex.getMessage());
+            return json;
+        }
+    }
+    @RequestMapping(value = "/hoso/chuyenchitieu", method = RequestMethod.POST,headers = {"content-type=application/json"})
+    public @ResponseBody
+    ResponseJson chuyenChiTieu(@RequestBody TbdHoso25 tbdHoso25) {
+        ResponseJson json = new ResponseJson();
+        try {
+            if (!isOwner(tbdHoso25.getFiIdHS().toString(), null)) {
+                json.setSuccess(false);
+                json.setMessage("Không có quyền thao tác với hồ sơ này");
+                return json;
+            }
+            json =BackendRequestHelper.getInstance().doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.CHUYEN_CHI_TIEU), tbdHoso25);
             return json;
         } catch (Exception ex) {
             LogUtil.addLog(ex);
