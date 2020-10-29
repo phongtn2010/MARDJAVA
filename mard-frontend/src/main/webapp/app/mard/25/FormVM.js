@@ -820,7 +820,7 @@ function IsoLocationVM(data, validator) {
 
 function UploadFileVM(options) {
     var ufVMSelf = this;
-
+    ufVMSelf.errors = ko.validation.group(ufVMSelf);
     ufVMSelf.lstAtch = ko.observableArray((options && options.hasOwnProperty('lstAtch')) ? options.lstAtch : []);
     ufVMSelf.lstAtchType = ko.observableArray((options && options.hasOwnProperty('lstAtchType')) ? options.lstAtchType : []);
     ufVMSelf.lstHD = ko.observableArray([]);
@@ -848,7 +848,7 @@ function UploadFileVM(options) {
                     if (((extension=="jpg")||(extension=="jpg")||(extension=="pdf")||(extension=="PDF")||(extension=="TIF")||(extension=="tif"))&&(totalSize <= maxSize)&&(!format.test(getName))){
                         return true;
                     }
-                }
+                } else return true;
             },
             message: 'File không hợp lê'
         }
@@ -874,7 +874,7 @@ function UploadFileVM(options) {
                     if (((extension=="jpg")||(extension=="jpg")||(extension=="pdf")||(extension=="PDF")||(extension=="TIF")||(extension=="tif"))&&(totalSize <= maxSize)&&(!format.test(getName))){
                         return true;
                     }
-                }
+                } else return true;
             },
             message: 'File không hợp lê'
         }
@@ -897,7 +897,7 @@ function UploadFileVM(options) {
                     if (((extension=="jpg")||(extension=="jpg")||(extension=="pdf")||(extension=="PDF")||(extension=="TIF")||(extension=="tif"))&&(totalSize <= maxSize)&&(!format.test(getName))){
                         return true;
                     }
-                }
+                } else return true;
             },
             message: 'File không hợp lê'
         }
@@ -919,7 +919,7 @@ function UploadFileVM(options) {
                     if (((extension=="jpg")||(extension=="jpg")||(extension=="pdf")||(extension=="PDF")||(extension=="TIF")||(extension=="tif"))&&(totalSize <= maxSize)&&(!format.test(getName))){
                         return true;
                     }
-                }
+                } else return true;
             },
             message: 'File không hợp lê'
         }
@@ -941,7 +941,7 @@ function UploadFileVM(options) {
                     if (((extension=="jpg")||(extension=="jpg")||(extension=="pdf")||(extension=="PDF")||(extension=="TIF")||(extension=="tif"))&&(totalSize <= maxSize)&&(!format.test(getName))){
                         return true;
                     }
-                }
+                } else return true;
             },
             message: 'File không hợp lê'
         }
@@ -963,7 +963,7 @@ function UploadFileVM(options) {
                     if (((extension=="jpg")||(extension=="jpg")||(extension=="pdf")||(extension=="PDF")||(extension=="TIF")||(extension=="tif"))&&(totalSize <= maxSize)&&(!format.test(getName))){
                         return true;
                     }
-                }
+                } else return true;
             },
             message: 'File không hợp lê'
         }
@@ -985,7 +985,7 @@ function UploadFileVM(options) {
                     if (((extension=="jpg")||(extension=="jpg")||(extension=="pdf")||(extension=="PDF")||(extension=="TIF")||(extension=="tif"))&&(totalSize <= maxSize)&&(!format.test(getName))){
                         return true;
                     }
-                }
+                } else return true;
             },
             message: 'File không hợp lê'
         }
@@ -1043,11 +1043,36 @@ function UploadFileVM(options) {
             });
 
     }
-
+    ufVMSelf.removeLstHD = function (index) {
+        ufVMSelf.lstHD.splice(index, 1);
+    }
+    ufVMSelf.removeLstHoaDon = function (index) {
+        ufVMSelf.lstHoaDon.splice(index, 1);
+    }
+    ufVMSelf.removeLstPhieu = function (index) {
+        ufVMSelf.lstPhieu.splice(index, 1);
+    }
+    ufVMSelf.removeLstKQ = function (index) {
+        ufVMSelf.lstKQ.splice(index, 1);
+    }
+    ufVMSelf.removeLstTC = function (index) {
+        ufVMSelf.lstTC.splice(index, 1);
+    }
+    ufVMSelf.removeLstCNLH = function (index) {
+        ufVMSelf.lstCNLH.splice(index, 1);
+    }
+    ufVMSelf.removeLstCNPT = function (index) {
+        ufVMSelf.lstCNPT.splice(index, 1);
+    }
+    ufVMSelf.removeLstAtch = function (index) {
+        ufVMSelf.lstAtch.splice(index, 1);
+    }
 
     ufVMSelf.addFile = function (data,param) {
-        var checkFiles = [ufVMSelf.fiFilePath];
-        ufVMSelf.errors = ko.validation.group(checkFiles, {deep: true, live: true, observable: true});
+        var checkFiles = [ufVMSelf.fiFileHDPath,ufVMSelf.fiFileHoaDonPath,ufVMSelf.fiFilePhieuPath,ufVMSelf.fiFileKQPath,ufVMSelf.fiFileTCPath
+        ,ufVMSelf.fiFileCNLHPath,ufVMSelf.fiFileCNPTPath,ufVMSelf.fiFilePath];
+        ufVMSelf.errors = ko.validation.group({checkFiles}, {deep: true, live: true, observable: true});
+        if (!ufVMSelf.validateForm()) return;
         var fileName='';
         var files;
         ko.utils.arrayForEach(ufVMSelf.lstAtchType(), function(attachType) {
@@ -1327,6 +1352,14 @@ function UploadFileVM(options) {
         }
 
         return result;
+    }
+
+    ufVMSelf.validateForm = function () {
+        if (ufVMSelf.errors().length > 0) {
+            ufVMSelf.errors.showAllMessages();
+            return false;
+        }
+        return true;
     }
 
     ufVMSelf.validate = function () {

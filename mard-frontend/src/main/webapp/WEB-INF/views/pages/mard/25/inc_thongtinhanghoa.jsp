@@ -435,9 +435,9 @@
         <div class="modal-footer" style="">
             <div class="text-center">
                 <button class="btn green"
-                        data-bind="click: updateAnimal.bind($data)"
+                        data-bind="click: updateAnimal"
                 >
-                    <spring:message code="conmon.button.them"/>
+                    <spring:message code="conmon.button.themsua"/>
                 </button>
                 <button class="btn" data-dismiss="modal">
                     <spring:message code="conmon.button.huy"/>
@@ -717,10 +717,10 @@
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.gia_tri.dvt"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <select disabled data-bind="options: lstUOMAnimal,
-                                                    optionsText: 'unitname',
-                                                    optionsValue: 'unitcode',
-                                                    optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.gia_tri.dvt"/>',
+                                <select data-bind="options: lstLoaiTienTe,
+                                                    optionsText: 'fiCatTypeName',
+                                                    optionsValue: 'fiCatNote',
+                                                    selectedText: fiPackageUnitName,
                                                     value: fiPackageUnitCode" class="form-control"></select>
                             </div>
                         </div>

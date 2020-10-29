@@ -264,6 +264,10 @@ $(document).ready(function () {
         // Get danh muc tien te
         app.sendGetRequest("/mard/25/danhmuc/getby-catno/26", function (res) {
             options['lstLoaiTienTe'] = res.data;
+        }),
+        // Get danh muc dvt
+        app.sendGetRequest("/mard/25/danhmuc/getby-catno/10", function (res) {
+        options['lstDMDVT'] = res.data;
         })
         // // Get attach types
         // app.sendGetRequest("/mard/25/danhmuc/dinhkem?systemId=6", function (res) {
