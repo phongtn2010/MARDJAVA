@@ -62,4 +62,6 @@ public class TbdHanghoa25 implements Serializable {
     private List<TbdHanghoaAT25> fiProATList;
 
     private List<TbdHanghoaSLKL25> fiProSLKLList;
+
+    private List<Ananytical> fiListChiTieu;
 }

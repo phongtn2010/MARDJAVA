@@ -38,17 +38,17 @@ public class Tbdhoso25Controller extends BaseController {
 
     private final RabbitMQService rabbitMQService;
 
-    private final TbdHoso25Service regProfileService;
+    private final TbdHoso25Service tbdHoso25Service;
 
-    private final TbdLichsu25Service hstService;
+    private final TbdLichsu25Service tbdLichsu25Service;
 
     private final WsService wsService;
 
     @Autowired
-    public Tbdhoso25Controller(RabbitMQService rabbitMQService, TbdHoso25Service regProfileService, TbdLichsu25Service hstService, WsService wsService) {
+    public Tbdhoso25Controller(RabbitMQService rabbitMQService, TbdHoso25Service tbdHoso25Service, TbdLichsu25Service tbdLichsu25Service, WsService wsService) {
         this.rabbitMQService = rabbitMQService;
-        this.regProfileService = regProfileService;
-        this.hstService = hstService;
+        this.tbdHoso25Service = tbdHoso25Service;
+        this.tbdLichsu25Service = tbdLichsu25Service;
         this.wsService = wsService;
     }
 
@@ -85,9 +85,10 @@ public class Tbdhoso25Controller extends BaseController {
             //profileHst.setFiSenderUnitName(result.getFiImporterName());
             profileHst.setFiContent("Gửi mới hồ sơ");
             profile.setFiHSStatus(profile.getFiHSStatus());
-            regProfileService.save(profile);
-            hstService.update(profileHst);
+            tbdHoso25Service.save(profile);
+            tbdLichsu25Service.update(profileHst);
             ResponseJson response = wsService.sendProfile(result);
+
             return createResponse(null, response.isSuccess(),
                     response.isSuccess() ?
                             "Hồ sơ đã gửi thành công!" :
@@ -117,8 +118,8 @@ public class Tbdhoso25Controller extends BaseController {
             if (hoso == null) {
                 return createErrorResponse("No content", HttpStatus.NO_CONTENT);
             }
-            TbdHoso25 result = regProfileService.updateAfterSendNSW(hoso);
-            regProfileService.getSignPendingProfiles().put(result.getFiNSWFileCode(), true);
+            TbdHoso25 result = tbdHoso25Service.updateAfterSendNSW(hoso);
+            tbdHoso25Service.getSignPendingProfiles().put(result.getFiNSWFileCode(), true);
             return createSuccessResponse(result, HttpStatus.OK);
         } catch (Exception ex) {
             LOG.error(TAG + ex.getMessage(), ex);
@@ -130,7 +131,7 @@ public class Tbdhoso25Controller extends BaseController {
     @GetMapping(value = "/rollback")
     public ResponseEntity<ResponseJson> manualRollback(@RequestParam String nswFileCode) {
         try {
-            regProfileService.rollbackFailedRequestUpdate(nswFileCode);
+            tbdHoso25Service.rollbackFailedRequestUpdate(nswFileCode);
             return createSuccessResponse(null, HttpStatus.OK);
         } catch (Exception ex) {
             LOG.error(TAG + ex.getMessage(), ex);
@@ -181,12 +182,12 @@ public class Tbdhoso25Controller extends BaseController {
             @RequestParam String fiNSWFileCode,
             @RequestParam String fiTaxCode) {
         try {
-            TbdHoso25 regProfile = regProfileService.findByFiHSCode(fiNSWFileCode);
+            TbdHoso25 regProfile = tbdHoso25Service.findByFiHSCode(fiNSWFileCode);
             if (regProfile == null || !regProfile.getFiTaxCode().equals(fiTaxCode)) {
                 throw new IllegalArgumentException("Hồ sơ không thuộc đơn vị đăng ký");
             } else {
                 regProfile.setFiActive(false);
-                regProfileService.save(regProfile);
+                tbdHoso25Service.save(regProfile);
                 return createResponse("", true, "", HttpStatus.OK);
             }
         } catch (Exception ex) {
@@ -195,7 +196,27 @@ public class Tbdhoso25Controller extends BaseController {
             return createErrorResponse(ex.getMessage(), HttpStatus.OK);
         }
     }
+    @PostMapping("/chuyenchitieu")
+    public ResponseEntity<ResponseJson> chuyenChiTieu(@RequestBody TbdHoso25 tbdHoso25) {
+        try {
+            if (tbdHoso25 == null) {
+                return createErrorResponse("No content", HttpStatus.NO_CONTENT);
+            }
 
+            if (null==tbdHoso25) {
+                return createErrorResponse("Fail", HttpStatus.OK);
+            }
+            //luu thong tin don vi xu ly truoc khi chuyen
+            tbdHoso25Service.update(tbdHoso25);
+            ResponseJson response = wsService.chuyenChiTieu(tbdHoso25);
+
+            return null;
+        } catch (Exception ex) {
+            LOG.error(TAG + ex.getMessage(), ex);
+            RabbitMQErrorHelper.pushLogToRabbitMQ(getErrorInfo(TAG, ex), rabbitMQService.getRabbitMQInfo());
+            return createErrorResponse(ex.getMessage(), HttpStatus.OK);
+        }
+    }
     //---------FOR SEARCHING PURPOSES
     @GetMapping("/find")
     public ResponseEntity<ResponseJson> findById(
@@ -204,9 +225,9 @@ public class Tbdhoso25Controller extends BaseController {
             @RequestParam(required = false) String nswFileCode) {
         TbdHoso25 regProfile;
         if (StringUtils.isNotEmpty(nswFileCode)) {
-            regProfile = regProfileService.findByFiHSCode(nswFileCode);
+            regProfile = tbdHoso25Service.findByFiHSCode(nswFileCode);
         } else if (StringUtils.isNotEmpty(id)) {
-            regProfile = regProfileService.findById(Integer.parseInt(id));
+            regProfile = tbdHoso25Service.findById(Integer.parseInt(id));
         } else {
             regProfile = null;
         }
@@ -220,8 +241,8 @@ public class Tbdhoso25Controller extends BaseController {
 
     @PostMapping("/find")
     public ResponseEntity<ResponseJson> getListByFilter(@RequestBody FilterForm filterForm) {
-        regProfileService.getSignPendingProfiles().cleanUp();
-        return createSuccessResponse(regProfileService.searchHoso(filterForm), HttpStatus.OK);
+        tbdHoso25Service.getSignPendingProfiles().cleanUp();
+        return createSuccessResponse(tbdHoso25Service.searchHoso(filterForm), HttpStatus.OK);
     }
 
     //-----------MISC
@@ -230,11 +251,11 @@ public class Tbdhoso25Controller extends BaseController {
         if (profile.getFiIdHS() == null || profile.getFiHSStatus() == null) {
             profile.setFiHSStatus(Constant25.HosoStatus.TAO_MOI.getId());
             profile.setFiHSCreatedDate(new Date());
-            profile = regProfileService.create(profile);
+            profile = tbdHoso25Service.create(profile);
             historyContent = "Tạo mới hồ sơ";
         } else {
             profile.setFiHSStatus(null);
-            profile = regProfileService.update(profile);
+            profile = tbdHoso25Service.update(profile);
             historyContent = "Cập nhật hồ sơ";
         }
         TbdLichsu25 profileHst = new TbdLichsu25();
@@ -245,7 +266,7 @@ public class Tbdhoso25Controller extends BaseController {
         //profileHst.setFiSenderUnitName(profile.getFiImporterName());
         profileHst.setFiSenderName(profile.getFiTaxCode());
         profileHst.setFiContent(historyContent);
-        hstService.create(profileHst);
+        tbdLichsu25Service.create(profileHst);
         return profile;
     }
 }

@@ -214,7 +214,7 @@
                                 </div>
                             </td>
                             <td class="text-center">
-                                <div data-bind="">
+                                <div data-bind="visible: fiHSStatus == 0 ||fiHSStatus == 1 || fiHSStatus == 2 ||fiHSStatus == 3 || fiHSStatus == 4">
                                     <a href="javascript:void(0)" data-bind="click: $root.goEditHoSo"><i
                                             class="fa fa-edit" src="" alt=""></i></a>
                                 </div>
@@ -234,7 +234,7 @@
                             <td class="text-center">
                                 <div data-bind="visible: $parent.getHoSoType(fiHSType)=='2c'">
                                     <a data-target="#modal_view_chuyen"
-                                       data-toggle="modal" data-bind="click: $root.chuyenTCCD"><i
+                                       data-toggle="modal" data-bind="click: $parent.chuyenTCCD.bind($data,$data,$index())"><i
                                             class="fa fa-eye"></i></a>
                                 </div>
                             </td>
@@ -315,13 +315,17 @@
                                 <label><spring:message code="mard.25.tccd.panel_chuyen_ten_tccd"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <input data-bind="" class="form-control" value=""/>
+                               <select data-bind="options: lstDVXL,
+                                                    optionsText: 'fiPUName',
+                                                    optionsValue: 'fiPUCode',
+                                                    selectedText: fiNameTCCD,
+                                                    value: fiIdTCCD" class="form-control"></select>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row margin-bottom-15">
                             <div class="form-group nsw-text-center">
                                 <button class="btn green"
-                                        data-bind=""
+                                        data-bind="click: chuyenChiTieu"
                                 ><i class="fa fa-send"></i> <spring:message code="mard.25.tccd.panel_chuyen_btn"/>
                                 </button>
                             </div>
@@ -337,13 +341,19 @@
                                 <th class="text-center"><spring:message code="mard.25.tccd.panel_xem_grid_hinh_thuc"/></th>
                                 <th class="text-center"><spring:message code="mard.25.tccd.panel_xem_grid_ham_luong"/></th>
                                 <th class="text-center"><spring:message code="mard.25.tccd.panel_xem_grid_dvt"/></th>
-                                <th class="text-center"><spring:message code="mard.25.tccd.panel_xem_grid_ghi_chú"/></th>
+                                <th class="text-center"><spring:message code="mard.25.tccd.panel_xem_grid_ghi_chu"/></th>
 
                             </tr>
                             </thead>
-                            <tbody data-bind="">
+                            <tbody data-bind="foreach: filstChiTieu">
                             <tr>
-
+                                <td class="text-center" data-bind="text: ($index() + 1)"></td>
+                                <td class="text-left" data-bind=""><label data-bind="text : fiTenTACN"/></td>
+                                <td class="text-left" data-bind=""><label data-bind="text : fiChiTieu"/></td>
+                                <td class="text-left" data-bind=""><label data-bind="text : fiHinhThuc"/></td>
+                                <td class="text-left" data-bind=""><label data-bind="text : fiHamLuong"/></td>
+                                <td class="text-left" data-bind=""><label data-bind="text : fiDonViTinh"/></td>
+                                <td class="text-left" data-bind=""><label data-bind="text : fiGhiChu"/></td>
                             </tr>
                             </tbody>
                         </table>

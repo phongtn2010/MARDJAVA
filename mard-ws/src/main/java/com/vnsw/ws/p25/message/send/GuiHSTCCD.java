@@ -14,10 +14,10 @@ public class GuiHSTCCD {
     @XmlElement(name = "NSWFileCode")
     String fiNSWFileCode;
     @XmlElement(name = "AssignCode")
-    String fiAssignCode;
+    String fiIdDVXL;
     @XmlElement(name = "AssignName")
-    String fiAssignName;
+    String fiNameDVXL;
     @XmlElementWrapper(name = "GoodsList")
     @XmlElement(name = "Goods")
-    List<Product> fiHangHoaList;
+    List<Product> fiProductList;
 }

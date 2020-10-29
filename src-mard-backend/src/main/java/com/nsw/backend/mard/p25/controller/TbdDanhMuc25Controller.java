@@ -2,6 +2,7 @@ package com.nsw.backend.mard.p25.controller;
 
 import com.nsw.backend.controller.BaseController;
 import com.nsw.backend.mard.p25.service.TbsDanhmuc25Service;
+import com.nsw.backend.mard.p25.service.TbsDonViXuLy25Service;
 import com.nsw.backend.util.ResponseJson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,8 +21,16 @@ public class TbdDanhMuc25Controller extends BaseController {
     @Autowired
     private TbsDanhmuc25Service service;
 
+    @Autowired
+    private TbsDonViXuLy25Service tbsDonViXuLy25Service;
+
     @GetMapping("/getby-catno/{catNo}")
     public ResponseEntity<ResponseJson> getByCatNo(@PathVariable Long catNo) {
         return createSuccessResponse(service.findByFiCatNoOrderByFiOrder(catNo), HttpStatus.OK);
+    }
+
+    @GetMapping("/dvxl/{fiPuType}")
+    public ResponseEntity<ResponseJson> getByCatNo(@PathVariable Integer fiPuType) {
+        return createSuccessResponse(tbsDonViXuLy25Service.findByFiPUType(fiPuType), HttpStatus.OK);
     }
 }

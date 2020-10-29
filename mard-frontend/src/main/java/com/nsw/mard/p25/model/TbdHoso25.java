@@ -2,6 +2,7 @@ package com.nsw.mard.p25.model;
 
 import lombok.Data;
 
+import javax.persistence.Column;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -60,7 +61,8 @@ public class TbdHoso25 implements Serializable {
     private String fiReason;
     private String fiProCVMienGiam;
     private Date fiProCVMienGiamNgay;
-
+    private Integer fiIdDVXL;
+    private String fiNameDVXL;
 
     private List<TbdHanghoa25> fiProductList;
 
