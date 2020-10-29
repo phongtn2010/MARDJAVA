@@ -234,7 +234,7 @@ function HangHoaNhapKhauVM (options) {
             "fiSignAddress": kdnkVMSelf.thongtinChungVM().fiSignAddress(),
 
             "fiProCVMienGiam": kdnkVMSelf.thongtinChungVM().fiProCVMienGiam(),
-            "fiProCVMienGiamNgay": new Date(kdnkVMSelf.thongtinChungVM().fiProCVMienGiamNgay()).getTime(),
+            "fiProCVMienGiamNgay": kdnkVMSelf.thongtinChungVM().fiProCVMienGiamNgay()?new Date(kdnkVMSelf.thongtinChungVM().fiProCVMienGiamNgay()).getTime():null,
 
             "fiAttachmentList": kdnkVMSelf.uploadFileVM().fiAttachmentList()
         }

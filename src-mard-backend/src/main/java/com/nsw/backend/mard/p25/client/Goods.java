@@ -1,4 +1,5 @@
 package com.nsw.backend.mard.p25.client;
+import com.nsw.backend.mard.p25.dto.Ananytical;
 import lombok.Data;
 
 
@@ -16,5 +17,5 @@ public class Goods {
     private String fiGoodTypeName;
 
     private String fiNature;
-    private List<QuantityVolume> fiAnanyticalRequiredList;
+    private List<Ananytical> fiAnanyticalRequiredList;
 }

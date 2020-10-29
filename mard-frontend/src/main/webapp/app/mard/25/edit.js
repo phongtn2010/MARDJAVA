@@ -2,8 +2,8 @@ function Mard25EditVM () {
     var editVMSefl = this;
     editVMSefl.kdnkVM = ko.observable(null);
     editVMSefl.isEditable = ko.observable(true)
-
     editVMSefl.applyState = function (options) {
+        options["isEditHS"]="1";
         editVMSefl.kdnkVM(new HangHoaNhapKhauVM(options));
     }
     editVMSefl.saveRegProfile = function () {
@@ -121,32 +121,34 @@ function Mard25EditVM () {
                             url: '/mard/25/hoso/send',
                             data: JSON.stringify(body),
                             success: function (d) {
-                                if (!app.requireSigning) {
+                                // if (!app.requireSigning) {
                                     if (d && d.success) {
                                         app.Alert('Gửi hồ sơ thành công');
-                                        window.location.href = app.appContext + '/mard/25/';
+                                        setTimeout(function () {
+                                            window.location.href = app.appContext + '/mard/25/';
+                                        }, 1500);
                                     } else {
                                         app.Alert(d.message);
                                     }
-                                } else {
-                                    var result = d.sign;
-                                    var onSuccess = function (res) {
-                                        if (res.status == 'ok') {
-                                            editVMSefl.verifySignature(res.outputData, d);
-                                        } else {
-                                            app.Alert('Ký số không thành công, vui lòng thử lại.');
-                                        }
-                                    };
-                                    var onFailed = function (e) {
-                                        app.Alert('Ký số không thành công, vui lòng thử lại.');
-                                    };
-
-                                    RTVNSignClient.ping(function(res){
-                                        RTVNSignClient.create64("xml", result.fiHashEncode, onSuccess, onFailed);
-                                    }, function(e){
-                                        app.Alert('Bạn chưa cài hoặc chưa mở phần mềm ký số, vui lòng vào trang chủ để tải về và cài đặt theo hướng dẫn.');
-                                    });
-                                }
+                                // } else {
+                                //     var result = d.sign;
+                                //     var onSuccess = function (res) {
+                                //         if (res.status == 'ok') {
+                                //             editVMSefl.verifySignature(res.outputData, d);
+                                //         } else {
+                                //             app.Alert('Ký số không thành công, vui lòng thử lại.');
+                                //         }
+                                //     };
+                                //     var onFailed = function (e) {
+                                //         app.Alert('Ký số không thành công, vui lòng thử lại.');
+                                //     };
+                                //
+                                //     RTVNSignClient.ping(function(res){
+                                //         RTVNSignClient.create64("xml", result.fiHashEncode, onSuccess, onFailed);
+                                //     }, function(e){
+                                //         app.Alert('Bạn chưa cài hoặc chưa mở phần mềm ký số, vui lòng vào trang chủ để tải về và cài đặt theo hướng dẫn.');
+                                //     });
+                                // }
                             },
                             error: function (e) {
                                 if(e.hasOwnProperty('message')) {
@@ -254,11 +256,14 @@ $(document).ready(function () {
             // Get danh muc tien te
             app.sendGetRequest("/mard/25/danhmuc/getby-catno/26", function (res) {
                 options['lstLoaiTienTe'] = res.data;
+            }),//danh muc loai file dinh kem khac
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/12", function (res) {
+                options['lstLoaiFileDinhKemKhac'] = res.data;
+            }),
+            // Get danh muc dvt
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/10", function (res) {
+                options['lstDMDVT'] = res.data;
             })
-            // // Get attach types
-            // app.sendGetRequest("/mard/25/danhmuc/dinhkem?systemId=6", function (res) {
-            //     options['lstAtchType'] = res.data;
-            // })
         ).done(function (data) {
             $('#loading10').hide();
             init(options);

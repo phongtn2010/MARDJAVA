@@ -84,7 +84,11 @@ public class Constant25 {
         DA_TIEP_NHAN_KQ_DANH_GIA_SPH(32,"Đã tiếp nhận kết quả đánh giá sự phù hợp"),
         BPMC_YCBS_KQ_DANH_GIA_SPH(33,"BPMC yêu cầu bổ sung kết quả đánh giá sự phù hợp"),
         TACN_YCBS_KQ_DANH_GIA_SPH(38,"Phòng TACN yêu cầu bổ sung kết quả đánh giá sự phù hợp"),
-        DA_THU_HOI_TB_KQ_KIEM_TRA(47,"Đã thu hồi thông báo kết quả kiểm tra");
+        DA_THU_HOI_TB_KQ_KIEM_TRA(47,"Đã thu hồi thông báo kết quả kiểm tra"),
+        BPMC_YCBS_HO_SO(9,"BPMC yêu cầu bổ sung hồ sơ"),
+        TACN_YCBS_HO_SO(15,"Phòng TACN yêu cầu bổ sung hồ sơ"),
+        DA_TU_CHOI(8,"Đã từ chối"),
+        DA_TIEP_NHAN(7,"Đã tiếp nhận");
 
 
 

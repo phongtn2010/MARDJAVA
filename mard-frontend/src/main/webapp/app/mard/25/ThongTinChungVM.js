@@ -1,6 +1,6 @@
 function ThongTinChungVM(data) {
     var ttcVMSelf = this;
-
+    ttcVMSelf.isEditHS = ko.observable((data && data.hasOwnProperty('isEditHS')) ? data.isEditHS : null);
     ttcVMSelf.errors = ko.validation.group(ttcVMSelf);
     ttcVMSelf.selectedIndex = ko.observable(null);
     ttcVMSelf.lstProfileStatus = ko.observableArray((data && data.hasOwnProperty('lstProfileStatus')) ? data.lstProfileStatus : []);
@@ -22,12 +22,12 @@ function ThongTinChungVM(data) {
     ttcVMSelf.fiSellName = ko.observable((data && data.hasOwnProperty('fiSellName')) ? data.fiSellName : null).extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
-    ttcVMSelf.lstCountry = ko.observableArray((data && data.hasOwnProperty('lstCountry')) ? data.lstCountry : null);
-    ttcVMSelf.lstDMDVT = ko.observableArray((data && data.hasOwnProperty('lstDMDVT')) ? data.lstDMDVT : null);
-    ttcVMSelf.lstNhom = ko.observableArray((data && data.hasOwnProperty('lstNhom')) ? data.lstNhom : null);
-    ttcVMSelf.lstPhanNhom = ko.observableArray((data && data.hasOwnProperty('lstPhanNhom')) ? data.lstPhanNhom : null);
-    ttcVMSelf.lstLoai = ko.observableArray((data && data.hasOwnProperty('lstLoai')) ? data.lstLoai : null);
-    ttcVMSelf.lstPhanLoai = ko.observableArray((data && data.hasOwnProperty('lstPhanLoai')) ? data.lstPhanLoai : null);
+    ttcVMSelf.lstCountry = ko.observableArray((data && data.hasOwnProperty('lstCountry')) ? data.lstCountry : []);
+    ttcVMSelf.lstDMDVT = ko.observableArray((data && data.hasOwnProperty('lstDMDVT')) ? data.lstDMDVT : []);
+    ttcVMSelf.lstNhom = ko.observableArray((data && data.hasOwnProperty('lstNhom')) ? data.lstNhom : []);
+    ttcVMSelf.lstPhanNhom = ko.observableArray((data && data.hasOwnProperty('lstPhanNhom')) ? data.lstPhanNhom : []);
+    ttcVMSelf.lstLoai = ko.observableArray((data && data.hasOwnProperty('lstLoai')) ? data.lstLoai : []);
+    ttcVMSelf.lstPhanLoai = ko.observableArray((data && data.hasOwnProperty('lstPhanLoai')) ? data.lstPhanLoai : []);
     ttcVMSelf.fiSellCountryCode = ko.observable((data && data.hasOwnProperty('fiSellCountryCode')) ? data.fiSellCountryCode : null).extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
@@ -307,8 +307,6 @@ function ThongTinChungVM(data) {
     });
 
     ttcVMSelf.lstLoaiTienTe  = ko.observableArray((data && data.hasOwnProperty('lstLoaiTienTe')) ? data.lstLoaiTienTe : []);
-    console.log(ttcVMSelf.lstLoaiTienTe());
-    console.log(data);
 
 
     ttcVMSelf.getProfileStatus = function (statuscode) {
@@ -365,7 +363,7 @@ function ThongTinChungVM(data) {
     }
     ttcVMSelf.addProduct=function(data){
         var getAllForm = [ttcVMSelf.fiProSLKLList, ttcVMSelf.fiProATList,ttcVMSelf.fiProCLList];
-        ttcVMSelf.errors = ko.validation.group({getAllForm}, {deep: true, live: true, observable: true});
+        ttcVMSelf.errors = ko.validation.group(getAllForm, {deep: true, live: true, observable: true});
         if (!ttcVMSelf.validate()) return;
         var kl='';
         var sl='';
@@ -409,7 +407,7 @@ function ThongTinChungVM(data) {
         var addProductValid = [ttcVMSelf.fiProName, ttcVMSelf.fiProIdNhom, ttcVMSelf.fiProIdPhanNhom,ttcVMSelf.fiProIdLoai,ttcVMSelf.fiProValueVN,ttcVMSelf.fiProColor,ttcVMSelf.fiProSoHieu,
             ttcVMSelf.fiProValueUSA,ttcVMSelf.fiProIdPhanLoai,ttcVMSelf.fiProCode,ttcVMSelf.fiProMadeIn,ttcVMSelf.fiProCountryCode,ttcVMSelf.fiProThanhPhan,ttcVMSelf.fiProQuyChuan,];
         var getAllForm = [ttcVMSelf.fiProSLKLList, ttcVMSelf.fiProATList,ttcVMSelf.fiProCLList];
-        ttcVMSelf.errors = ko.validation.group({getAllForm,addProductValid}, {deep: true, live: true, observable: true});
+        ttcVMSelf.errors = ko.validation.group(getAllForm,addProductValid, {deep: true, live: true, observable: true});
         console.log("2");
         if (!ttcVMSelf.validate()) return;
         var kl='';
@@ -461,7 +459,7 @@ function ThongTinChungVM(data) {
 
     ttcVMSelf.updateListCL= function (item) {
         var chiTieuChatLuong = [item.fiProCLContent, item.fiProCLCompare, item.fiProCLUnitID,item.fiProCLTarg];
-        ttcVMSelf.errors = ko.validation.group({chiTieuChatLuong}, {deep: true, live: true, observable: true});
+        ttcVMSelf.errors = ko.validation.group(chiTieuChatLuong, {deep: true, live: true, observable: true});
         if (!ttcVMSelf.validate()) return;
         var index = ttcVMSelf.selectedIndex();
         ttcVMSelf.fiProCLList.splice(index, 1);
@@ -473,7 +471,7 @@ function ThongTinChungVM(data) {
 
     ttcVMSelf.updateListAT= function (item) {
         var chiTieuAT = [item.fiProATContent, item.fiProATCompare, item.fiProATUnitID,item.fiProATTarg];
-        ttcVMSelf.errors = ko.validation.group({chiTieuAT}, {deep: true, live: true, observable: true});
+        ttcVMSelf.errors = ko.validation.group(chiTieuAT, {deep: true, live: true, observable: true});
         if (!ttcVMSelf.validate()) return;
         var index = ttcVMSelf.selectedIndex();
         ttcVMSelf.fiProATList.splice(index, 1);
@@ -484,7 +482,7 @@ function ThongTinChungVM(data) {
 
     ttcVMSelf.updateListSLKT= function (item) {
         var chiTieuKL = [item.fiProSLKLMass, item.fiProSLKLMassTan, item.fiProSLKLAmount,item.fiProSLKLAmountUnitCode,item.fiProSLKLAmountUnitName];
-        ttcVMSelf.errors = ko.validation.group({chiTieuKL}, {deep: true, live: true, observable: true});
+        ttcVMSelf.errors = ko.validation.group(chiTieuKL, {deep: true, live: true, observable: true});
         if (!ttcVMSelf.validate()) return;
         var index = ttcVMSelf.selectedIndex();
         ttcVMSelf.fiProSLKLList.splice(index, 1);
@@ -519,6 +517,7 @@ function ThongTinChungVM(data) {
             isUpdate:ko.observable(false),
             fiProCLUnitID: ttcVMSelf.EfiProCLUnitID()
         }
+        console.log(item);
         item.fiProCLTarg = ko.observable((item && item.hasOwnProperty('fiProCLTarg')) ? item.fiProCLTarg : null).extend({
             required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
         });
@@ -647,6 +646,23 @@ function ThongTinChungVM(data) {
     }
 
     ttcVMSelf.openUpdateProduct = function (data, index, type) {
+        if(ttcVMSelf.isEditHS()=='1'||ttcVMSelf.isEditHS()==1){
+            ko.utils.arrayForEach(data.fiProATList, function(at) {
+                at.isEnable=ko.observable(false);
+                at.isUpdate=ko.observable(false);
+                at.lstDMDVT = ttcVMSelf.lstDMDVT();
+            });
+            ko.utils.arrayForEach(data.fiProCLList, function(cl) {
+                cl.isEnable =ko.observable(false);
+                cl.isUpdate =ko.observable(false);
+                cl.lstDMDVT = ttcVMSelf.lstDMDVT();
+            });
+            ko.utils.arrayForEach(data.fiProSLKLList, function(kl) {
+                kl.isEnable=ko.observable(false);
+                kl.isUpdate=ko.observable(false);
+                kl.lstDMDVT = ttcVMSelf.lstDMDVT();
+            });
+        }
         ko.mapping.fromJS(data, {}, ttcVMSelf);
         ttcVMSelf.selectedIndex(index);
         if (type == '1' || type == 1) {

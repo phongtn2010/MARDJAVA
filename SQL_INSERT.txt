@@ -140,3 +140,11 @@ values(97,'binhvv5',to_timestamp('28-OCT-20 12.00.00.000000000 AM','DD-MON-RR HH
 Insert into TBSDANHMUC25 (FIIDCAT,FI_CREATED_BY,FI_CREATED_DATE,FI_UPDATED_BY,FI_UPDATED_DATE,FI_CAT_NAME,FI_CAT_NO,FI_CAT_NOTE,FI_CAT_PARENT,FI_CAT_TYPE,FI_CAT_TYPE_NAME,FI_ORDER) 
 values(98,'binhvv5',to_timestamp('28-OCT-20 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),null,null,'Danh mục chỉ tiêu khối lượng',10,'KGS',null,33,'Kilogam(KGS)',null);
 
+Insert into TBSDANHMUC25 (FIIDCAT,FI_CREATED_BY,FI_CREATED_DATE,FI_UPDATED_BY,FI_UPDATED_DATE,FI_CAT_NAME,FI_CAT_NO,FI_CAT_NOTE,FI_CAT_PARENT,FI_CAT_TYPE,FI_CAT_TYPE_NAME,FI_ORDER) values 
+(99,'binhvv5',to_timestamp('24-OCT-20 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),null,null,'Danh mục trạng thái',25,'Danh mục trạng thái',null,9,'BPMC yêu cầu bổ sung hồ sơ',null);
+Insert into TBSDANHMUC25 (FIIDCAT,FI_CREATED_BY,FI_CREATED_DATE,FI_UPDATED_BY,FI_UPDATED_DATE,FI_CAT_NAME,FI_CAT_NO,FI_CAT_NOTE,FI_CAT_PARENT,FI_CAT_TYPE,FI_CAT_TYPE_NAME,FI_ORDER) values 
+(100,'binhvv5',to_timestamp('24-OCT-20 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),null,null,'Danh mục trạng thái',25,'Danh mục trạng thái',null,8,'Đã từ chối',null);
+Insert into TBSDANHMUC25 (FIIDCAT,FI_CREATED_BY,FI_CREATED_DATE,FI_UPDATED_BY,FI_UPDATED_DATE,FI_CAT_NAME,FI_CAT_NO,FI_CAT_NOTE,FI_CAT_PARENT,FI_CAT_TYPE,FI_CAT_TYPE_NAME,FI_ORDER) values 
+(101,'binhvv5',to_timestamp('24-OCT-20 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),null,null,'Danh mục trạng thái',25,'Danh mục trạng thái',null,7,'Đã tiếp nhận',null);
+Insert into TBSDANHMUC25 (FIIDCAT,FI_CREATED_BY,FI_CREATED_DATE,FI_UPDATED_BY,FI_UPDATED_DATE,FI_CAT_NAME,FI_CAT_NO,FI_CAT_NOTE,FI_CAT_PARENT,FI_CAT_TYPE,FI_CAT_TYPE_NAME,FI_ORDER) values 
+(102,'binhvv5',to_timestamp('24-OCT-20 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),null,null,'Danh mục trạng thái',25,'Danh mục trạng thái',null,15,'Phòng TACN yêu cầu bổ sung hồ sơ',null);

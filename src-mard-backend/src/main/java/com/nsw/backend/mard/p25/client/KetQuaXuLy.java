@@ -20,5 +20,5 @@ public class KetQuaXuLy {
 
     private String fiNameOfStaff;
 
-    private Date fiResponseDate;
+    private String fiResponseDate;
 }

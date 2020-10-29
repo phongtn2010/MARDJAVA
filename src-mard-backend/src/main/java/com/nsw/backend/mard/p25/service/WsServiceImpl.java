@@ -18,6 +18,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Service("wsService25")
@@ -88,11 +90,14 @@ public class WsServiceImpl implements WsService {
     public ResponseJson xacNhanDonDK(ResponseWrapper request) throws NSWException {
         String function = request.getHeader().getSubject().getFunction();
         int status=0;
+        String action="";
         switch (function) {
             case Constant25.MessageFunction.FUNC_11:
+                status=Constant25.HosoStatus.DA_XAC_NHAN_GDK.getId();
+                action=Constant25.HosoStatus.DA_XAC_NHAN_GDK.getName();
                 break;
             default:
-                throw new NSWException("Invalid Function " + function + "on ProfileRegistration Response");
+                return new ResponseJson(false, "","MESSAGE 15 - "+function+" KHONG DUNG");
 
         }
         Gson gson = new Gson();
@@ -101,7 +106,7 @@ public class WsServiceImpl implements WsService {
 
         tbdLichsu25Service.save(createHistory(
                     tbdHoso25Service.findByFiHSCode(request.getHeader().getSubject().getReference()),
-                    "Xác nhận đơn đăng ký " , request.getHeader(), xnd.getFiAssignName()));
+                action, request.getHeader(), xnd.getFiAssignName()));
 
         return new ResponseJson(true, "");
     }
@@ -110,28 +115,47 @@ public class WsServiceImpl implements WsService {
     public ResponseJson tiepNhanKetQuaXuLy(ResponseWrapper request) throws NSWException {
         String function = request.getHeader().getSubject().getFunction();
         int status=0;
+        String action="";
         switch (function) {
             case Constant25.MessageFunction.FUNC_06:
+                status=Constant25.HosoStatus.DA_TIEP_NHAN.getId();
+                action=Constant25.HosoStatus.DA_TIEP_NHAN.getName();
                 break;
             case Constant25.MessageFunction.FUNC_07:
+                status=Constant25.HosoStatus.BPMC_YCBS_HO_SO.getId();
+                action=Constant25.HosoStatus.BPMC_YCBS_HO_SO.getName();
                 break;
             case Constant25.MessageFunction.FUNC_08:
+                status=Constant25.HosoStatus.DA_TU_CHOI.getId();
+                action=Constant25.HosoStatus.DA_TU_CHOI.getName();
                 break;
             case Constant25.MessageFunction.FUNC_09:
+                status=Constant25.HosoStatus.TACN_YCBS_HO_SO.getId();
+                action=Constant25.HosoStatus.TACN_YCBS_HO_SO.getName();
                 break;
             case Constant25.MessageFunction.FUNC_10:
+                status=Constant25.HosoStatus.DA_TU_CHOI_CAP_GDK.getId();
+                action=Constant25.HosoStatus.DA_TU_CHOI_CAP_GDK.getName();
                 break;
             default:
-                throw new NSWException("Invalid Function " + function + "on ProfileRegistration Response");
+                return new ResponseJson(false, "","MESSAGE 12 - "+function+" KHONG DUNG");
 
         }
         Gson gson = new Gson();
-        KetQuaXuLy xnd = gson.fromJson(gson.toJson(request.getData()), KetQuaXuLy.class);
-        internalStatusUpdate(request.getHeader(), xnd.getFiNameOfStaff(), status);
-
+        KetQuaXuLy xnd=null;
+        try{
+            xnd = gson.fromJson(gson.toJson(request.getData()), KetQuaXuLy.class);
+        }catch (Exception ex){
+            log.info(ex.getMessage());
+        }
+        internalStatusUpdate(request.getHeader(), xnd.getFiNameOfStaff(), status,xnd.getFiReason());
+        TbdHoso25 tbdHoso25 = tbdHoso25Service.findByFiHSCode(xnd.getFiNSWFileCode());
+        if(null==tbdHoso25){
+            return new ResponseJson(false, "","KHONG TIM THAY MA HO SO");
+        }
         tbdLichsu25Service.save(createHistory(
                 tbdHoso25Service.findByFiHSCode(request.getHeader().getSubject().getReference()),
-                "Xác nhận đơn đăng ký " , request.getHeader(), xnd.getFiNameOfStaff()));
+                action , request.getHeader(), xnd.getFiNameOfStaff()));
 
         return new ResponseJson(true, "");
     }

@@ -225,10 +225,10 @@
                     <tr>
                         <td data-bind="text: ($index() + 1)"></td>
                         <td>
-                            <span data-bind="text : fiFileHD">
+                            <span data-bind="text : fiFileHD"/>
                         </td>
                         <td>
-                            <span data-bind="text : fiFileName">
+                            <span data-bind="text : fiFileName"/>
                         </td>
                         <td data-bind="visible: $root.isEditable" class="text-center">
                             <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;
