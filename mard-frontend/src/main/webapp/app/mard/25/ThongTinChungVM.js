@@ -365,6 +365,9 @@ function ThongTinChungVM(data) {
         ttcVMSelf.fiProSLKLList([]);
         ttcVMSelf.fiProATList([]);
         ttcVMSelf.fiProCLList([]);
+        ttcVMSelf.listCL([]);
+        ttcVMSelf.listAT([]);
+        ttcVMSelf.listSLKL([]);
     }
     ttcVMSelf.addProduct=function(data){
         var getAllForm = [ttcVMSelf.fiProSLKLList, ttcVMSelf.fiProATList,ttcVMSelf.fiProCLList];
@@ -413,7 +416,7 @@ function ThongTinChungVM(data) {
                 lstDMDVT: ttcVMSelf.lstDMDVT,
                 isEnable: ttcVMSelf.fiProSLKLList()[i].isEnable(),
                 isUpdate: ttcVMSelf.fiProSLKLList()[i].isUpdate(),
-                iProSLKLAmountUnitCode: ttcVMSelf.fiProSLKLList()[i].iProSLKLAmountUnitCode
+                fiProSLKLAmountUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode
             }
             ttcVMSelf.listSLKL.push(getList);
         }
@@ -465,9 +468,12 @@ function ThongTinChungVM(data) {
         for (var i =0;i<ttcVMSelf.fiProCLList().length;i++){
             var getList = {
                 fiProCLTarg: ttcVMSelf.fiProCLList()[i].fiProCLTarg(),
-                iProCLCompare: ttcVMSelf.fiProCLList()[i].fiProCLCompare(),
+                fiProCLCompare: ttcVMSelf.fiProCLList()[i].fiProCLCompare(),
                 fiProCLContent: ttcVMSelf.fiProCLList()[i].fiProCLContent(),
                 fiProCLUnitName: ttcVMSelf.fiProCLList()[i].fiProCLUnitName(),
+                lstDMDVT: ttcVMSelf.lstDMDVT,
+                isEnable: ttcVMSelf.fiProCLList()[i].isEnable(),
+                isUpdate: ttcVMSelf.fiProCLList()[i].isUpdate(),
                 fiProCLUnitID: ttcVMSelf.fiProCLList()[i].fiProCLUnitID
             }
             ttcVMSelf.listCL.push(getList);
@@ -479,6 +485,9 @@ function ThongTinChungVM(data) {
                 fiProATCompare: ttcVMSelf.fiProATList()[i].fiProATCompare(),
                 fiProATContent:  ttcVMSelf.fiProATList()[i].fiProATContent(),
                 fiProATUnitName: ttcVMSelf.fiProATList()[i].fiProATUnitName(),
+                lstDMDVT: ttcVMSelf.lstDMDVT,
+                isEnable: ttcVMSelf.fiProATList()[i].isEnable(),
+                isUpdate: ttcVMSelf.fiProATList()[i].isUpdate(),
                 fiProATUnitID:  ttcVMSelf.fiProATList()[i].fiProATUnitID
             }
             ttcVMSelf.listAT.push(getList);
@@ -490,7 +499,10 @@ function ThongTinChungVM(data) {
                 fiProSLKLMassUnitName: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitName(),
                 fiProSLKLAmount: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmount(),
                 fiProSLKLAmountUnitName: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitName(),
-                iProSLKLAmountUnitCode: ttcVMSelf.fiProSLKLList()[i].iProSLKLAmountUnitCode
+                lstDMDVT: ttcVMSelf.lstDMDVT,
+                isEnable: ttcVMSelf.fiProSLKLList()[i].isEnable(),
+                isUpdate: ttcVMSelf.fiProSLKLList()[i].isUpdate(),
+                fiProSLKLAmountUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode
             }
             ttcVMSelf.listSLKL.push(getList);
         }
