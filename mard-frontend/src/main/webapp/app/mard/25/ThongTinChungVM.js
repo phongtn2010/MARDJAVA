@@ -47,30 +47,26 @@ function ThongTinChungVM(data) {
             message: "Số điện thoại không hợp lệ."
         }
     });
-    ttcVMSelf.fiSellFax = ko.observable((data && data.hasOwnProperty('fiSellFax')) ? data.fiSellFax : null).extend({
-        number: {param: true}
-    });
+    ttcVMSelf.fiSellFax = ko.observable((data && data.hasOwnProperty('fiSellFax')) ? data.fiSellFax : null);
     ttcVMSelf.fiSellExport = ko.observable((data && data.hasOwnProperty('fiSellExport')) ? data.fiSellExport : null).extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
 
-    ttcVMSelf.fiPurchName = ko.observable((data && data.hasOwnProperty('fiPurchName')) ? data.fiPurchName : null).
-    extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-    });
-    ttcVMSelf.fiPurchTel = ko.observable((data && data.hasOwnProperty('fiPurchTel')) ? data.fiPurchTel : null).extend({
-        pattern: {
-            params: '^0[1-9][0-9]{8,9}$',
-            message: "Số điện thoại không hợp lệ."
-        }
-    });
-    ttcVMSelf.fiPurchAddress = ko.observable((data && data.hasOwnProperty('fiPurchAddress')) ? data.fiPurchAddress : null).
-    extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-    });
-    ttcVMSelf.fiPurchFax = ko.observable((data && data.hasOwnProperty('fiPurchFax')) ? data.fiPurchFax : null).extend({
-        number: {params: true}
-    });
+    // ttcVMSelf.fiPurchName = ko.observable((data && data.hasOwnProperty('fiPurchName')) ? data.fiPurchName : null).
+    // extend({
+    //     required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    // });
+    // ttcVMSelf.fiPurchTel = ko.observable((data && data.hasOwnProperty('fiPurchTel')) ? data.fiPurchTel : null).extend({
+    //     pattern: {
+    //         params: '^0[1-9][0-9]{8,9}$',
+    //         message: "Số điện thoại không hợp lệ."
+    //     }
+    // });
+    // ttcVMSelf.fiPurchAddress = ko.observable((data && data.hasOwnProperty('fiPurchAddress')) ? data.fiPurchAddress : null).
+    // extend({
+    //     required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    // });
+    ttcVMSelf.fiPurchFax = ko.observable((data && data.hasOwnProperty('fiPurchFax')) ? data.fiPurchFax : null);
     ttcVMSelf.fiPurchReci = ko.observable((data && data.hasOwnProperty('fiPurchReci')) ? data.fiPurchReci : null).
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
@@ -306,7 +302,10 @@ function ThongTinChungVM(data) {
             params: '^0[1-9][0-9]{8,9}$',
             message: "Số điện thoại không hợp lệ."}
     });
-    ttcVMSelf.fiContactAddress = ko.observable((data && data.hasOwnProperty('fiContactAddress')) ? data.fiContactAddress : null);
+    ttcVMSelf.fiContactAddress = ko.observable((data && data.hasOwnProperty('fiContactAddress')) ? data.fiContactAddress : null).
+    extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    });
     ttcVMSelf.fiContactEmail = ko.observable((data && data.hasOwnProperty('fiContactEmail')) ? data.fiContactEmail : null).extend({
         email: {params: true, message: NSWLang["common_msg_invalid_email"]}
     });
@@ -363,9 +362,9 @@ function ThongTinChungVM(data) {
         ttcVMSelf.fiProColor(null);
         ttcVMSelf.fiProSoHieu(null);
         ttcVMSelf.fiProQuyChuan(null);
-        ttcVMSelf.fiProSLKLList(null);
-        ttcVMSelf.fiProATList(null);
-        ttcVMSelf.fiProCLList(null);
+        ttcVMSelf.fiProSLKLList([]);
+        ttcVMSelf.fiProATList([]);
+        ttcVMSelf.fiProCLList([]);
     }
     ttcVMSelf.addProduct=function(data){
         var getAllForm = [ttcVMSelf.fiProSLKLList, ttcVMSelf.fiProATList,ttcVMSelf.fiProCLList];
@@ -766,5 +765,4 @@ function ThongTinChungVM(data) {
     ttcVMSelf.removeListSLKT = function (index) {
         ttcVMSelf.fiProSLKLList.splice(index, 1);
     }
-
 }

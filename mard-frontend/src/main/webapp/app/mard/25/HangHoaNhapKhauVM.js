@@ -164,7 +164,15 @@ function HangHoaNhapKhauVM (options) {
     }
 
     kdnkVMSelf.validateForm = function () {
-        kdnkVMSelf.errors = ko.validation.group(kdnkVMSelf.thongtinChungVM, {deep: true, live: true, observable: true});
+        var ttc=kdnkVMSelf.thongtinChungVM();
+        var benBan = [ttc.fiSellName,ttc.fiSellAddress,ttc.fiSellCountryCode,ttc.fiSellExport];
+        var benMua = [ttc.fiImporterName,ttc.fiImporterAddress,ttc.fiPurchReci,ttc.fiImporterTel,ttc.fiPurchFromDate];
+        var diaDiemTapKet = [ttc.fiAddressGath,ttc.fiRegSamFromDate,ttc.fiAddressRegSample,ttc.fiProductList];
+        var thongTinLienHe = [ttc.fiContactName,ttc.fiContactAddress];
+        var thongTinKy = [ttc.fiSignName,ttc.fiSignAddress,ttc.fiSignPosition];
+        kdnkVMSelf.errors = ko.validation.group({benBan,benMua,thongTinKy,thongTinLienHe,diaDiemTapKet}, {deep: true, live: true, observable: true});
+        // kdnkVMSelf.errors = ko.validation.group(kdnkVMSelf.thongtinChungVM, {deep: true, live: true, observable: true});
+        console.log(kdnkVMSelf.errors());
         if (kdnkVMSelf.errors().length > 0) {
             kdnkVMSelf.errors.showAllMessages();
             return false;
@@ -185,7 +193,7 @@ function HangHoaNhapKhauVM (options) {
     kdnkVMSelf.getData = function () {
         var body = {
             "fiIdHS": kdnkVMSelf.fiIdHS(),
-            "fiNSWFileCodefiNSWFileCode": kdnkVMSelf.fiNSWFileCode(),
+            "fiNSWFileCode": kdnkVMSelf.fiNSWFileCode(),
             "fiReason": kdnkVMSelf.fiReason(),
             "fiHSStatus": 0,
             "fiHSType": kdnkVMSelf.thongtinChungVM().fiHSType(),
