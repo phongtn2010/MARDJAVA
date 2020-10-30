@@ -71,7 +71,7 @@ public class Hoso25 {
 
     String fiTaxCode;
 
-    String fiHSType;
+    Integer fiHSType;
 
 
     Integer fiProductType;

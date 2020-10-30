@@ -15,7 +15,7 @@ import java.util.List;
 public class Product {
 
     @XmlElement(name = "GoodsId")
-    private String fiId;
+    private String fiIdProduct;
 
     @XmlElement(name = "NameOfGoods")
     private String fiProName;
@@ -77,13 +77,14 @@ public class Product {
     @XmlElementWrapper(name = "AnanyticalRequiredList")
     @XmlElement(name = "Ananytical")
     private List<Ananytical> fiListChiTieu;
-
-    @XmlElementWrapper(name = "QuantityVolumeList")
-    @XmlElement(name = "QuantityVolume")
-    private List<QuantityVolume> fiProSLKLList;
     @XmlElementWrapper(name = "QualityCriteriaList")
     @XmlElement(name = "QualityCriteria")
     private List<QualityCriteria> fiProCLList;
+    @XmlElementWrapper(name = "QuantityVolumeList")
+    @XmlElement(name = "QuantityVolume")
+    private List<QuantityVolume> fiProSLKLList;
+
+
     @XmlElementWrapper(name = "SafetyCriteriaList")
     @XmlElement(name = "SafetyCriteria")
     private List<SafetyCriteria> fiProATList;

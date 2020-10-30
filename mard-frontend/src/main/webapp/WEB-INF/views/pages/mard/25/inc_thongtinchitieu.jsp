@@ -208,15 +208,15 @@
                             <td><select class="form-control" data-bind="options: lstDMDVT,
                                                     optionsText: 'fiCatTypeName',
                                                     optionsValue: 'fiCatNote',
-                                                    optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.chat_luong.dvt"/>',
-                                                    value: fiProSLKLMassUnitName, enable: isEnable() "></select></td>
+                                                    selectedText:fiProSLKLMassUnitName,
+                                                    value: fiProSLKLMassUnitCode, enable: isEnable() "></select></td>
                             <td><input class="form-control" type="text" data-bind="value: fiProSLKLMassTan,  enable: isEnable()"></td>
                             <td><input class="form-control" type="text" data-bind="value: fiProSLKLAmount, enable: isEnable()"></td>
                             <td><select class="form-control" data-bind="options: lstDMDVT,
                                                     optionsText: 'fiCatTypeName',
                                                     optionsValue: 'fiCatNote',
-                                                    optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.chat_luong.dvt"/>',
-                                                    value: fiProSLKLAmountUnitName, enable: isEnable() "></select></td>
+                                                    selectedText:fiProSLKLAmountUnitName,
+                                                    value: fiProSLKLAmountUnitCode, enable: isEnable() "></select></td>
                             <td class="text-center" data-bind="visible: $root.isEditable()">
                                <span data-bind="if: (isUpdate())">
                                     <a data-bind="click: $parent.updateListSLKT"> <i class="fa fa-save" aria-hidden="true"></i>

@@ -254,6 +254,8 @@ function ThongTinChungVM(data) {
 
 
     ttcVMSelf.fiRegistrationNo = ko.observable((data && data.hasOwnProperty('fiRegistrationNo')) ? data.fiRegistrationNo : null);
+    ttcVMSelf.fiProSLKLAmountUnitName = ko.observable((data && data.hasOwnProperty('fiProSLKLAmountUnitName')) ? data.fiProSLKLAmountUnitName : null);
+    ttcVMSelf.fiProSLKLMassUnitName = ko.observable((data && data.hasOwnProperty('fiProSLKLMassUnitName')) ? data.fiProSLKLMassUnitName : null);
     ttcVMSelf.fiImporterName = ko.observable((data && data.hasOwnProperty('fiImporterName')) ? data.fiImporterName : null)
         .extend({
             required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
@@ -411,6 +413,7 @@ function ThongTinChungVM(data) {
                 fiProSLKLMass: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMass(),
                 fiProSLKLMassTan: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassTan(),
                 fiProSLKLMassUnitName: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitName(),
+                fiProSLKLMassUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitName(),
                 fiProSLKLAmount: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmount(),
                 fiProSLKLAmountUnitName: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitName(),
                 lstDMDVT: ttcVMSelf.lstDMDVT,
@@ -497,6 +500,7 @@ function ThongTinChungVM(data) {
                 fiProSLKLMass: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMass(),
                 fiProSLKLMassTan: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassTan(),
                 fiProSLKLMassUnitName: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitName(),
+                fiProSLKLMassUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitName(),
                 fiProSLKLAmount: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmount(),
                 fiProSLKLAmountUnitName: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitName(),
                 lstDMDVT: ttcVMSelf.lstDMDVT,
@@ -695,6 +699,7 @@ function ThongTinChungVM(data) {
             fiProSLKLMass: ttcVMSelf.EfiProSLKLMass(),
             fiProSLKLMassTan:ttcVMSelf.EfiProSLKLMassTan(),
             fiProSLKLMassUnitName: ttcVMSelf.EfiProSLKLMassUnitCode(),
+            fiProSLKLMassUnitCode: ttcVMSelf.EfiProSLKLMassUnitCode(),
             fiProSLKLAmount: ttcVMSelf.EfiProSLKLAmount(),
             isEnable:ko.observable(false),
             isUpdate:ko.observable(false),
