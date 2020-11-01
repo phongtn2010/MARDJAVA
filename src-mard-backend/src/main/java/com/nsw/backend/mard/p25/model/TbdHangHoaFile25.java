@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Data
@@ -24,7 +25,7 @@ public class TbdHangHoaFile25  implements Serializable {
     private Integer fiId;
 
     @Column(name = "FI_FILE_ID")
-    private Integer fiFileId;
+    private String fiFileId;
     @Column(name = "FI_FILE_LINK")
     private String fiFileLink;
     @Column(name = "FI_FILE_NAME")
@@ -37,5 +38,8 @@ public class TbdHangHoaFile25  implements Serializable {
     private String fiTenLoai;
     @Column(name = "FI_TENFILE")
     private String fiTenFile;
-
+    @Column(name = "FI_SOCV")
+    private String fiSoCV;
+    @Column(name = "FI_NGAY_CAP")
+    private Date fiNgayCap;
 }

@@ -101,8 +101,7 @@
                                         class="fa fa-lg fa-eye tooltips"></i></a>
                             </td>
                             <td class="text-center">
-                                <a href="javascript:void(0)" data-target="#modal_guiSua"
-                                   data-toggle="modal"  data-bind="click: $parent.guiSuaHangHoa.bind($data, $data, $index())"><i
+                                <a href="javascript:void(0)" data-bind="click: $parent.guiSuaHangHoa.bind($data, $data, $index())"><i
                                         class="fa fa-lg fa-send tooltips"></i></a>
                             </td>
                             <td class="text-center">

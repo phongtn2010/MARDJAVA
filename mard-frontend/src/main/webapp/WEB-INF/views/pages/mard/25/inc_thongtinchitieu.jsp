@@ -22,12 +22,12 @@
                             <td class="text-center" data-bind="text: ($index() + 1)"></td>
                             <td><input class="form-control" type="text" data-bind="value: fiProCLTarg,  enable: isEnable()"></td>
                             <td><select class="form-control" data-bind="value: fiProCLCompare,  enable: isEnable()">
-                                <option value=">"> > </option>
-                                <option value="<"> < </option>
-                                <option value="="> = </option>
-                                <option value=">="> >= </option>
-                                <option value="<="> <= </option>
-                                <option value="min-max">min-max</option>
+                                <option value="1"> < </option>
+                                <option value="2"> > </option>
+                                <option value="3"> = </option>
+                                <option value="4"> <= </option>
+                                <option value="5"> >= </option>
+                                <option value="6">min-max</option>
                             </select></td>
                             <td><input class="form-control" type="text" data-bind="value: fiProCLContent, enable: isEnable()"></td>
                             <td><select class="form-control" data-bind="options: lstDMDVT,
@@ -60,12 +60,12 @@
                             </td>
                             <td>
                                 <select class="form-control" data-bind="value: EfiProCLCompare">
-                                    <option value=">"> > </option>
-                                    <option value="<"> < </option>
-                                    <option value="="> = </option>
-                                    <option value=">="> >= </option>
-                                    <option value="<="> <= </option>
-                                    <option value="min-max">min-max</option>
+                                    <option value="1"> < </option>
+                                    <option value="2"> > </option>
+                                    <option value="3"> = </option>
+                                    <option value="4"> <= </option>
+                                    <option value="5"> >= </option>
+                                    <option value="6">min-max</option>
                                 </select>
                             </td>
                             <td>
@@ -113,12 +113,12 @@
                             <td class="text-center" data-bind="text: ($index() + 1)"></td>
                             <td><input class="form-control" type="text" data-bind="value: fiProATTarg,  enable: isEnable()"></td>
                             <td><select class="form-control" data-bind="value: fiProATCompare,  enable: isEnable()">
-                                <option value=">"> > </option>
-                                <option value="<"> < </option>
-                                <option value="="> = </option>
-                                <option value=">="> >= </option>
-                                <option value="<="> <= </option>
-                                <option value="min-max">min-max</option>
+                                <option value="1"> < </option>
+                                <option value="2"> > </option>
+                                <option value="3"> = </option>
+                                <option value="4"> <= </option>
+                                <option value="5"> >= </option>
+                                <option value="6">min-max</option>
                             </select></td>
                             <td><input class="form-control" type="text" data-bind="value: fiProATContent,  enable: isEnable()"></td>
                             <td><select class="form-control" data-bind="options: lstDMDVT,
@@ -151,12 +151,12 @@
                             </td>
                             <td>
                                 <select class="form-control" data-bind="value: EfiProATCompare">
-                                    <option value=">"> > </option>
-                                    <option value="<"> < </option>
-                                    <option value="="> = </option>
-                                    <option value=">="> >= </option>
-                                    <option value="<="> <= </option>
-                                    <option value="min-max">min-max</option>
+                                    <option value="1"> < </option>
+                                    <option value="2"> > </option>
+                                    <option value="3"> = </option>
+                                    <option value="4"> <= </option>
+                                    <option value="5"> >= </option>
+                                    <option value="6">min-max</option>
                                 </select>
                             </td>
                             <td>
@@ -208,14 +208,12 @@
                             <td><select class="form-control" data-bind="options: lstDMDVT,
                                                     optionsText: 'fiCatTypeName',
                                                     optionsValue: 'fiCatNote',
-                                                    selectedText:fiProSLKLMassUnitName,
                                                     value: fiProSLKLMassUnitCode, enable: isEnable() "></select></td>
                             <td><input class="form-control" type="text" data-bind="value: fiProSLKLMassTan,  enable: isEnable()"></td>
                             <td><input class="form-control" type="text" data-bind="value: fiProSLKLAmount, enable: isEnable()"></td>
                             <td><select class="form-control" data-bind="options: lstDMDVT,
                                                     optionsText: 'fiCatTypeName',
                                                     optionsValue: 'fiCatNote',
-                                                    selectedText:fiProSLKLAmountUnitName,
                                                     value: fiProSLKLAmountUnitCode, enable: isEnable() "></select></td>
                             <td class="text-center" data-bind="visible: $root.isEditable()">
                                <span data-bind="if: (isUpdate())">

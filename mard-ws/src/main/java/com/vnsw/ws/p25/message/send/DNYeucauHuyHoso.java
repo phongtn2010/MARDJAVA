@@ -19,7 +19,7 @@ public class DNYeucauHuyHoso {
     private String fiNSWFileCode;
     @XmlJavaTypeAdapter(DateSerialization.class)
     @XmlElement(name = "RequestDate")
-    private Date fiRequestDate;
+    private Date fiRequestedDate;
     @XmlElement(name = "Reason")
     private String fiReason;
     @XmlElement(name = "AttachmentId")

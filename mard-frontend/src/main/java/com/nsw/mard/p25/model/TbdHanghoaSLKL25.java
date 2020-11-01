@@ -23,4 +23,6 @@ public class TbdHanghoaSLKL25 implements Serializable {
     private Integer fiProSLKLAmount;
 
     private String fiProSLKLAmountUnitName;
+    private String fiProSLKLMassUnitCode;
+    private String fiProSLKLAmountUnitCode;
 }

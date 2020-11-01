@@ -34,20 +34,20 @@ public class TbdYcrut25 extends CmonBaseEntity implements Serializable {
     //----------------------------------------------------------------------
     // ENTITY DATA FIELDS 
     //----------------------------------------------------------------------    
-    @Column(name = "FI_HS_ID", nullable = false)
+    @Column(name = "FI_HS_ID")
     private Integer fiIdHS;
 
-    @Column(name = "FI_HS_CODE", nullable = false, length = 20)
+    @Column(name = "FI_HS_CODE", length = 20)
     private String fiNSWFileCode;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "FI_REQUESTED_DATE", nullable = false)
+    @Column(name = "FI_REQUESTED_DATE")
     private Date fiRequestedDate;
 
-    @Column(name = "FI_ACTIVE", nullable = false)
+    @Column(name = "FI_ACTIVE")
     private Integer fiActive;
 
-    @Column(name = "FI_STATUS", nullable = false)
+    @Column(name = "FI_STATUS")
     private Integer fiStatus;
 
     @Column(name = "FI_REASON", length = 2000)
@@ -69,6 +69,8 @@ public class TbdYcrut25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_PROCESSOR", length = 250)
     private String fiProcessor;
 
+    @Column(name = "FI_SIGNER")
+    private String fiSigner;
     //----------------------------------------------------------------------
     // ENTITY LINKS ( RELATIONSHIP )
     //----------------------------------------------------------------------

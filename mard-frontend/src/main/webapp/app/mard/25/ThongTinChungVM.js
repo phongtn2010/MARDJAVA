@@ -71,8 +71,14 @@ function ThongTinChungVM(data) {
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
-    ttcVMSelf.fiPurchFromDate = ko.observable((data && data.hasOwnProperty('fiPurchFromDate')) ? new Date(data.fiPurchFromDate) : new Date());
-    ttcVMSelf.fiPurchToDate = ko.observable((data && data.hasOwnProperty('fiPurchToDate')) ? new Date(data.fiPurchToDate) : null);
+    ttcVMSelf.fiPurchFromDate = ko.observable((data && data.hasOwnProperty('fiPurchFromDate')) ? new Date(data.fiPurchFromDate) : new Date()).
+    extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    });
+    ttcVMSelf.fiPurchToDate = ko.observable((data && data.hasOwnProperty('fiPurchToDate')) ? new Date(data.fiPurchToDate) : new Date()).
+    extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    });
 
     ttcVMSelf.fiProductList = ko.observableArray((data && data.hasOwnProperty('fiProductList')) ? data.fiProductList : []).
     extend({
@@ -168,7 +174,9 @@ function ThongTinChungVM(data) {
     });
     ttcVMSelf.EfiProATContent = ko.observable(null).
     extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+        number: {params: true},
+        min: 0
     });
     ttcVMSelf.EfiProATUnitID = ko.observable(null).
     extend({
@@ -288,8 +296,14 @@ function ThongTinChungVM(data) {
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
-    ttcVMSelf.fiRegSamFromDate = ko.observable((data && data.hasOwnProperty('fiRegSamFromDate')) ? new Date(data.fiRegSamFromDate) : new Date());
-    ttcVMSelf.fiRegSamToDate = ko.observable((data && data.hasOwnProperty('fiRegSamToDate')) ? new Date(data.fiRegSamToDate) : null);
+    ttcVMSelf.fiRegSamFromDate = ko.observable((data && data.hasOwnProperty('fiRegSamFromDate')) ? new Date(data.fiRegSamFromDate) : new Date()).
+    extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    });
+    ttcVMSelf.fiRegSamToDate = ko.observable((data && data.hasOwnProperty('fiRegSamToDate')) ? new Date(data.fiRegSamToDate) : new Date()).
+    extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    });
     ttcVMSelf.fiAddressRegSample = ko.observable((data && data.hasOwnProperty('fiAddressRegSample')) ? data.fiAddressRegSample : null).
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
@@ -375,12 +389,7 @@ function ThongTinChungVM(data) {
         var getAllForm = [ttcVMSelf.fiProSLKLList, ttcVMSelf.fiProATList,ttcVMSelf.fiProCLList];
         ttcVMSelf.errors = ko.validation.group(getAllForm, {deep: true, live: true, observable: true});
         if (!ttcVMSelf.validate()) return;
-        var kl='';
-        var sl='';
-        for (var i =0;i<ttcVMSelf.fiProSLKLList().length;i++){
-            kl+=ttcVMSelf.fiProSLKLList()[i].fiProSLKLMass()+' '+ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitName();
-            sl+=ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmount()+' '+ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitName();
-        }
+
         for (var i =0;i<ttcVMSelf.fiProCLList().length;i++){
             var getList = {
                 fiProCLTarg: ttcVMSelf.fiProCLList()[i].fiProCLTarg(),
@@ -409,21 +418,33 @@ function ThongTinChungVM(data) {
             ttcVMSelf.listAT.push(getList);
         }
         for (var i =0;i<ttcVMSelf.fiProSLKLList().length;i++){
+            var massName=ttcVMSelf.findNameOfCode(ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode());
+            var amountName=ttcVMSelf.findNameOfCode(ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode());
             var getList = {
                 fiProSLKLMass: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMass(),
                 fiProSLKLMassTan: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassTan(),
-                fiProSLKLMassUnitName: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitName(),
-                fiProSLKLMassUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitName(),
+                fiProSLKLMassUnitName: massName,
+                fiProSLKLMassUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode(),
                 fiProSLKLAmount: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmount(),
-                fiProSLKLAmountUnitName: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitName(),
+                fiProSLKLAmountUnitName: amountName,
                 lstDMDVT: ttcVMSelf.lstDMDVT,
                 isEnable: ttcVMSelf.fiProSLKLList()[i].isEnable(),
                 isUpdate: ttcVMSelf.fiProSLKLList()[i].isUpdate(),
-                fiProSLKLAmountUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode
+                fiProSLKLAmountUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode()
             }
             ttcVMSelf.listSLKL.push(getList);
         }
-
+        console.log(ttcVMSelf.listSLKL());
+        var kl;
+        var sl;
+        ko.utils.arrayForEach(ttcVMSelf.listSLKL(), function(slkl) {
+            kl=slkl.fiProSLKLMass+' '+slkl.fiProSLKLMassUnitName;
+            sl=slkl.fiProSLKLAmount+' '+slkl.fiProSLKLAmountUnitName;
+        });
+        var nameNhom=ttcVMSelf.findCodeName(ttcVMSelf.lstNhom(),ttcVMSelf.fiProIdNhom());
+        var namePhanNhom=ttcVMSelf.findCodeName(ttcVMSelf.lstPhanNhom(),ttcVMSelf.fiProIdPhanNhom());
+        var nameLoai=ttcVMSelf.findCodeName(ttcVMSelf.lstLoai(),ttcVMSelf.fiProIdLoai());
+        var namePhanLoai=ttcVMSelf.findCodeName(ttcVMSelf.lstPhanLoai(),ttcVMSelf.fiProIdPhanLoai());
         var item ={
             fiProName: ttcVMSelf.fiProName(),
             fiTrangThaiHangHoa: ttcVMSelf.fiTrangThaiHangHoa(),
@@ -431,9 +452,13 @@ function ThongTinChungVM(data) {
             fiProductSL: sl,
             fiProThanhPhan: ttcVMSelf.fiProThanhPhan(),
             fiProIdNhom: ttcVMSelf.fiProIdNhom(),
+            fiProNameNhom: nameNhom,
             fiProIdPhanNhom: ttcVMSelf.fiProIdPhanNhom(),
+            fiProNamePhanNhom: namePhanNhom,
             fiProIdLoai: ttcVMSelf.fiProIdLoai(),
+            fiProNameLoai: nameLoai,
             fiProIdPhanLoai: ttcVMSelf.fiProIdPhanLoai(),
+            fiProNamePhanLoai: namePhanLoai,
             fiProCode: ttcVMSelf.fiProCode(),
             fiProMadeIn: ttcVMSelf.fiProMadeIn(),
             fiProCountryName: ttcVMSelf.fiProCountryName(),
@@ -462,12 +487,7 @@ function ThongTinChungVM(data) {
         var getAllForm = [ttcVMSelf.fiProSLKLList, ttcVMSelf.fiProATList,ttcVMSelf.fiProCLList];
         ttcVMSelf.errors = ko.validation.group(getAllForm,addProductValid, {deep: true, live: true, observable: true});
         if (!ttcVMSelf.validate()) return;
-        var kl='';
-        var sl='';
-        for (var i =0;i<ttcVMSelf.fiProSLKLList().length;i++){
-            kl+=ttcVMSelf.fiProSLKLList()[i].fiProSLKLMass()+' '+ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitName();
-            sl+=ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmount()+' '+ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitName();
-        }
+
         for (var i =0;i<ttcVMSelf.fiProCLList().length;i++){
             var getList = {
                 fiProCLTarg: ttcVMSelf.fiProCLList()[i].fiProCLTarg(),
@@ -496,20 +516,32 @@ function ThongTinChungVM(data) {
             ttcVMSelf.listAT.push(getList);
         }
         for (var i =0;i<ttcVMSelf.fiProSLKLList().length;i++){
+            var massName=ttcVMSelf.findNameOfCode(ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode());
+            var amountName=ttcVMSelf.findNameOfCode(ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode());
             var getList = {
                 fiProSLKLMass: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMass(),
                 fiProSLKLMassTan: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassTan(),
                 fiProSLKLMassUnitName: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitName(),
-                fiProSLKLMassUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitName(),
+                fiProSLKLMassUnitCode: massName,
                 fiProSLKLAmount: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmount(),
-                fiProSLKLAmountUnitName: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitName(),
+                fiProSLKLAmountUnitName: amountName,
                 lstDMDVT: ttcVMSelf.lstDMDVT,
                 isEnable: ttcVMSelf.fiProSLKLList()[i].isEnable(),
                 isUpdate: ttcVMSelf.fiProSLKLList()[i].isUpdate(),
-                fiProSLKLAmountUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode
+                fiProSLKLAmountUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode()
             }
             ttcVMSelf.listSLKL.push(getList);
         }
+        var kl;
+        var sl;
+        ko.utils.arrayForEach(ttcVMSelf.listSLKL(), function(slkl) {
+            kl=slkl.fiProSLKLMass+' '+slkl.fiProSLKLMassUnitName;
+            sl=slkl.fiProSLKLAmount+' '+slkl.fiProSLKLAmountUnitName;
+        });
+        var nameNhom=ttcVMSelf.findCodeName(ttcVMSelf.lstNhom(),ttcVMSelf.fiProIdNhom());
+        var namePhanNhom=ttcVMSelf.findCodeName(ttcVMSelf.lstPhanNhom(),ttcVMSelf.fiProIdPhanNhom());
+        var nameLoai=ttcVMSelf.findCodeName(ttcVMSelf.lstLoai(),ttcVMSelf.fiProIdLoai());
+        var namePhanLoai=ttcVMSelf.findCodeName(ttcVMSelf.lstPhanLoai(),ttcVMSelf.fiProIdPhanLoai());
         var item ={
             fiProName: ttcVMSelf.fiProName(),
             fiTrangThaiHangHoa: ttcVMSelf.fiTrangThaiHangHoa(),
@@ -517,9 +549,13 @@ function ThongTinChungVM(data) {
             fiProductSL: sl,
             fiProThanhPhan: ttcVMSelf.fiProThanhPhan(),
             fiProIdNhom: ttcVMSelf.fiProIdNhom(),
+            fiProNameNhom: nameNhom,
             fiProIdPhanNhom: ttcVMSelf.fiProIdPhanNhom(),
+            fiProNamePhanNhom: namePhanNhom,
             fiProIdLoai: ttcVMSelf.fiProIdLoai(),
+            fiProNameLoai: nameLoai,
             fiProIdPhanLoai: ttcVMSelf.fiProIdPhanLoai(),
+            fiProNamePhanLoai: namePhanLoai,
             fiProCode: ttcVMSelf.fiProCode(),
             fiProMadeIn: ttcVMSelf.fiProMadeIn(),
             fiProCountryName: ttcVMSelf.fiProCountryName(),
@@ -574,7 +610,7 @@ function ThongTinChungVM(data) {
     }
 
     ttcVMSelf.updateListSLKT= function (item) {
-        var chiTieuKL = [item.fiProSLKLMass, item.fiProSLKLMassTan, item.fiProSLKLAmount,item.fiProSLKLAmountUnitCode,item.fiProSLKLAmountUnitName];
+        var chiTieuKL = [item.fiProSLKLMass, item.fiProSLKLMassTan, item.fiProSLKLAmount,item.fiProSLKLAmountUnitCode,item.fiProSLKLAmountUnitCode];
         ttcVMSelf.errors = ko.validation.group(chiTieuKL, {deep: true, live: true, observable: true});
         if (!ttcVMSelf.validate()) return;
         var index = ttcVMSelf.selectedIndex();
@@ -695,16 +731,18 @@ function ThongTinChungVM(data) {
         var chiTieuKL = [ttcVMSelf.EfiProSLKLMass, ttcVMSelf.EfiProSLKLMassTan, ttcVMSelf.EfiProSLKLAmount,ttcVMSelf.EfiProSLKLAmountUnitCode,ttcVMSelf.EfiProSLKLMassUnitCode];
         ttcVMSelf.errors = ko.validation.group(chiTieuKL, {deep: true, live: true, observable: true});
         if (!ttcVMSelf.validate()) return;
+        var massName=ttcVMSelf.findNameOfCode(ttcVMSelf.EfiProSLKLMassUnitCode());
+        var amountName=ttcVMSelf.findNameOfCode(ttcVMSelf.EfiProSLKLAmountUnitCode());
         var item = {
             fiProSLKLMass: ttcVMSelf.EfiProSLKLMass(),
             fiProSLKLMassTan:ttcVMSelf.EfiProSLKLMassTan(),
-            fiProSLKLMassUnitName: ttcVMSelf.EfiProSLKLMassUnitCode(),
+            fiProSLKLMassUnitName: massName,
             fiProSLKLMassUnitCode: ttcVMSelf.EfiProSLKLMassUnitCode(),
             fiProSLKLAmount: ttcVMSelf.EfiProSLKLAmount(),
             isEnable:ko.observable(false),
             isUpdate:ko.observable(false),
             lstDMDVT: ttcVMSelf.lstDMDVT,
-            fiProSLKLAmountUnitName: ttcVMSelf.EfiProSLKLAmountUnitCode(),
+            fiProSLKLAmountUnitName: amountName,
             fiProSLKLAmountUnitCode: ttcVMSelf.EfiProSLKLAmountUnitCode()
         }
         item.fiProSLKLMass = ko.observable((item && item.hasOwnProperty('fiProSLKLMass')) ? item.fiProSLKLMass : null).extend({
@@ -717,7 +755,7 @@ function ThongTinChungVM(data) {
             number: {params: true},
             min: 0
         });
-        item.fiProSLKLMassUnitName = ko.observable((item && item.hasOwnProperty('fiProSLKLMassUnitName')) ? item.fiProSLKLMassUnitName : null).extend({
+        item.fiProSLKLAmountUnitCode = ko.observable((item && item.hasOwnProperty('fiProSLKLAmountUnitCode')) ? item.fiProSLKLAmountUnitCode : null).extend({
             required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
         });
         item.fiProSLKLAmount = ko.observable((item && item.hasOwnProperty('fiProSLKLAmount')) ? item.fiProSLKLAmount : null).extend({
@@ -725,7 +763,7 @@ function ThongTinChungVM(data) {
             number: {params: true},
             min: 0
         });
-        item.fiProSLKLAmountUnitName = ko.observable((item && item.hasOwnProperty('fiProSLKLAmountUnitName')) ? item.fiProSLKLAmountUnitName : null).extend({
+        item.fiProSLKLMassUnitCode = ko.observable((item && item.hasOwnProperty('fiProSLKLMassUnitCode')) ? item.fiProSLKLMassUnitCode : null).extend({
             required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
         });
         ttcVMSelf.fiProSLKLList.push(item);
@@ -781,5 +819,23 @@ function ThongTinChungVM(data) {
 
     ttcVMSelf.removeListSLKT = function (index) {
         ttcVMSelf.fiProSLKLList.splice(index, 1);
+    }
+    ttcVMSelf.findNameOfCode = function(code){
+        var pos = ttcVMSelf.lstDMDVT().find(function (e) {
+            return e.fiCatNote == code;
+        })
+        if (pos)
+            return pos.fiCatTypeName;
+        else
+            return code;
+    }
+    ttcVMSelf.findCodeName = function(lst,code){
+        var pos = lst.find(function (e) {
+            return e.fiCatType == code;
+        })
+        if (pos)
+            return pos.fiCatTypeName;
+        else
+            return code;
     }
 }

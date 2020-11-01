@@ -16,6 +16,7 @@ import com.nsw.backend.mard.p25.model.TbdLichsu25;
 import com.nsw.backend.mard.p25.model.TbdYcrut25;
 import com.nsw.backend.mard.p25.service.TbdHoso25Service;
 import com.nsw.backend.mard.p25.service.TbdLichsu25Service;
+import com.nsw.backend.mard.p25.service.TbdYcrut25Service;
 import com.nsw.backend.mard.p25.service.WsService;
 import com.nsw.backend.service.RabbitMQService;
 import com.nsw.backend.util.ResponseJson;
@@ -42,14 +43,17 @@ public class Tbdhoso25Controller extends BaseController {
 
     private final TbdLichsu25Service tbdLichsu25Service;
 
+    private final TbdYcrut25Service tbdYcrut25Service;
+
     private final WsService wsService;
 
     @Autowired
-    public Tbdhoso25Controller(RabbitMQService rabbitMQService, TbdHoso25Service tbdHoso25Service, TbdLichsu25Service tbdLichsu25Service, WsService wsService) {
+    public Tbdhoso25Controller(RabbitMQService rabbitMQService, TbdHoso25Service tbdHoso25Service, TbdLichsu25Service tbdLichsu25Service, WsService wsService, TbdYcrut25Service tbdYcrut25Service) {
         this.rabbitMQService = rabbitMQService;
         this.tbdHoso25Service = tbdHoso25Service;
         this.tbdLichsu25Service = tbdLichsu25Service;
         this.wsService = wsService;
+        this.tbdYcrut25Service=tbdYcrut25Service;
     }
 
     //------------------- Create a Tbdhoso06 --------
@@ -169,7 +173,10 @@ public class Tbdhoso25Controller extends BaseController {
     @PostMapping(value = "/cancel")
     public ResponseEntity<ResponseJson> cancelHosoAfterProcess(@RequestBody TbdYcrut25 requestCancel) {
         try {
-            return null;
+
+            TbdHoso25 regProfile = tbdHoso25Service.findByFiHSCode(requestCancel.getFiNSWFileCode());
+            ResponseJson response = wsService.yeuCauRutHS(requestCancel);
+            return  ResponseEntity.ok(response);
         } catch (Exception ex) {
             LOG.error(TAG + ex.getMessage(), ex);
             RabbitMQErrorHelper.pushLogToRabbitMQ(getErrorInfo(TAG, ex), rabbitMQService.getRabbitMQInfo());

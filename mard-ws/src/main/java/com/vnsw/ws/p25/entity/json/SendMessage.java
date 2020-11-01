@@ -15,4 +15,6 @@ public class SendMessage {
     private String cerNo; // Loai giay chung nhan xin sua
 
     private Boolean xmlOnly;
+
+    String dataRequest;
 }

@@ -56,7 +56,7 @@ public class WsControlle25 extends BaseController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/tccd-guikqkt")
+    @PostMapping("/uploadkqkt")
     public ResponseEntity<ResponseJson> tccdGuiKQKT(@RequestBody ResponseWrapper request) throws NSWException {
         ResponseJson response = wsService.tccdGuiKQKT(request);
         return ResponseEntity.ok(response);

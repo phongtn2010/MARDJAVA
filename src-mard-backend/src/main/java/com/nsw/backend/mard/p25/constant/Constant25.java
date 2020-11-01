@@ -21,7 +21,8 @@ public class Constant25 {
 
     public static final Long ACTIVE = 1L;
     public static final Long IN_ACTIVE = 0L;
-
+    public static final Integer NSW_SEND=1;
+    public static final Integer BNN_SEND=2;
     @JsonFormat(shape = JsonFormat.Shape.OBJECT)
     @Getter
     public enum PurposeType {
@@ -88,7 +89,8 @@ public class Constant25 {
         BPMC_YCBS_HO_SO(9,"BPMC yêu cầu bổ sung hồ sơ"),
         TACN_YCBS_HO_SO(15,"Phòng TACN yêu cầu bổ sung hồ sơ"),
         DA_TU_CHOI(8,"Đã từ chối"),
-        DA_TIEP_NHAN(7,"Đã tiếp nhận");
+        DA_TIEP_NHAN(7,"Đã tiếp nhận"),
+        DA_CO_KQ_DANH_GIA_SPH(28,"Đã có kết quả đánh giá sự phù hợp");
 
 
 

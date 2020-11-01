@@ -74,16 +74,12 @@ public class Product {
     @XmlElement(name = "TechnicalRegulations")
     private String fiProQuyChuan;
 
-    @XmlElementWrapper(name = "AnanyticalRequiredList")
-    @XmlElement(name = "Ananytical")
-    private List<Ananytical> fiListChiTieu;
-    @XmlElementWrapper(name = "QualityCriteriaList")
-    @XmlElement(name = "QualityCriteria")
-    private List<QualityCriteria> fiProCLList;
     @XmlElementWrapper(name = "QuantityVolumeList")
     @XmlElement(name = "QuantityVolume")
     private List<QuantityVolume> fiProSLKLList;
-
+    @XmlElementWrapper(name = "QualityCriteriaList")
+    @XmlElement(name = "QualityCriteria")
+    private List<QualityCriteria> fiProCLList;
 
     @XmlElementWrapper(name = "SafetyCriteriaList")
     @XmlElement(name = "SafetyCriteria")

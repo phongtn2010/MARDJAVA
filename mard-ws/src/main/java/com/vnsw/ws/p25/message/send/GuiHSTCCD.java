@@ -1,6 +1,7 @@
 package com.vnsw.ws.p25.message.send;
 
 import com.vnsw.ws.p25.entity.receive.Goods;
+import com.vnsw.ws.p25.entity.send.HangHoaChiTieu;
 import com.vnsw.ws.p25.entity.send.Product;
 import lombok.Data;
 
@@ -17,7 +18,7 @@ public class GuiHSTCCD {
     String fiIdDVXL;
     @XmlElement(name = "AssignName")
     String fiNameDVXL;
-    @XmlElementWrapper(name = "GoodsList")
-    @XmlElement(name = "Goods")
-    List<Product> fiProductList;
+    @XmlElementWrapper(name = "GoodList")
+    @XmlElement(name = "Good")
+    List<HangHoaChiTieu> fiProductList;
 }

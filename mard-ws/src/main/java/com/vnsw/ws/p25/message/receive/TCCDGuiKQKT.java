@@ -21,7 +21,7 @@ public class TCCDGuiKQKT {
     @XmlElement(name = "AssignName")
     String fiAssignName;
     @XmlElement(name = "GoodsId")
-    String fiMaHangHoa;
+    Integer fiMaHangHoa;
     @XmlElement(name = "NameOfGoods")
     String fiTenHangHoa;
     @XmlElement(name = "ResultTest")
@@ -34,6 +34,8 @@ public class TCCDGuiKQKT {
     Date fiNgayCap;
     @XmlElement(name = "TestConfirmAttachmentId")
     String fiMaFileGCN;
+    @XmlElement(name = "TestConfirmFileName")
+    String fiNameFileGCN;
     @XmlElement(name = "TestConfirmFileLink")
     String fiLinkFileGCN;
 

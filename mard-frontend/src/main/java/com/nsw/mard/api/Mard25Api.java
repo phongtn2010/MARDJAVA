@@ -8,10 +8,12 @@ import com.nsw.common.model.json.ResponseJson;
 import com.nsw.constant.AppConstant;
 import com.nsw.helper.BackendRequestHelper;
 import com.nsw.helper.RabbitMQErrorHelper;
+import com.nsw.mard.constant.Mard06Constant;
 import com.nsw.mard.constant.Mard25Constant;
 import com.nsw.mard.p25.model.FilterForm;
 import com.nsw.mard.p25.model.ResponeUploadFile;
 import com.nsw.mard.p25.model.TbdHoso25;
+import com.nsw.mard.p25.model.TbdYcrut25;
 import com.nsw.mard.p6.model.SendMessage;
 import com.nsw.mard.service.DinhkemService;
 import com.nsw.util.Constants;
@@ -453,6 +455,57 @@ public class Mard25Api extends BaseApi {
             json.setSuccess(false);
             json.setMessage(ex.getMessage());
             return json;
+        }
+    }
+
+    @RequestMapping(value = "/hoso/delete", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseJson deleteHoso(
+            @RequestParam String fiNSWFileCode,
+            @RequestParam String fiTaxCode
+    ) {
+        ResponseJson returnJson = new ResponseJson();
+        if (!isOwner(null, fiNSWFileCode)) {
+            returnJson.setSuccess(false);
+            returnJson.setMessage("Không có quyền truy cập hồ sơ");
+            return returnJson;
+        }
+        try {
+            ResponseJson json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.HOSO_DELETE) + "?fiNSWFileCode=" + fiNSWFileCode + "&fiTaxCode=" + fiTaxCode);
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            returnJson.setData(null);
+            returnJson.setSuccess(false);
+            returnJson.setMessage(ex.getMessage());
+            return returnJson;
+        }
+    }
+
+    @RequestMapping(value = "/hoso/cancel", method = RequestMethod.POST, headers = {"content-type=application/json"})
+    public @ResponseBody
+    ResponseJson requestCancelHoso(
+            @RequestBody TbdYcrut25 tbdYcrut25
+    ) {
+        ResponseJson returnJson = new ResponseJson();
+        try {
+            if (!isOwner(tbdYcrut25.getFiIdHS().toString(), tbdYcrut25.getFiNSWFileCode())) {
+                returnJson.setSuccess(false);
+                returnJson.setMessage("Không có quyền truy cập hồ sơ");
+                return returnJson;
+            }
+            ResponseJson json = BackendRequestHelper.getInstance().doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.HOSO_CANCEL), tbdYcrut25);
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            returnJson.setData(null);
+            returnJson.setSuccess(false);
+            returnJson.setMessage(ex.getMessage());
+            return returnJson;
         }
     }
     private SignData getXMLForSign(SendMessage sendMessage) throws Exception {

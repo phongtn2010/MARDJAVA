@@ -4,10 +4,9 @@ package com.nsw.backend.mard.p25.service;
 import com.google.gson.Gson;
 import com.nsw.backend.mard.p25.client.*;
 import com.nsw.backend.mard.p25.constant.Constant25;
-import com.nsw.backend.mard.p25.model.TbdHoso25;
+import com.nsw.backend.mard.p25.model.*;
 import com.nsw.backend.mard.p25.dto.SendMessage;
 import com.nsw.backend.mard.p25.helper.WsServiceHelper;
-import com.nsw.backend.mard.p25.model.TbdLichsu25;
 import com.nsw.backend.mard.p25.exception.NSWException;
 import com.nsw.backend.util.ResponseJson;
 import org.slf4j.Logger;
@@ -20,7 +19,9 @@ import org.springframework.util.StringUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service("wsService25")
 @Transactional(rollbackFor = NSWException.class)
@@ -29,6 +30,12 @@ public class WsServiceImpl implements WsService {
     private final TbdHoso25Service tbdHoso25Service;
     private final TbdLichsu25Service tbdLichsu25Service;
 
+    @Autowired
+    private TbdHangHoa25Service tbdHangHoa25Service;
+    @Autowired
+    private TbdHangHoaFile25Service tbdHangHoaFile25Service;
+    @Autowired
+    private TbdLichSuHH25Service tbdLichSuHH25Service;
     private Gson gson;
 
     private final Environment environment;
@@ -97,16 +104,19 @@ public class WsServiceImpl implements WsService {
                 action=Constant25.HosoStatus.DA_XAC_NHAN_GDK.getName();
                 break;
             default:
-                return new ResponseJson(false, "","MESSAGE 15 - "+function+" KHONG DUNG");
+                return new ResponseJson(false, "","MESSAGE 15 - "+function+" CHUA DUOC DINH NGHIA");
 
         }
         Gson gson = new Gson();
         XacNhanDon xnd = gson.fromJson(gson.toJson(request.getData()), XacNhanDon.class);
         internalStatusUpdate(request.getHeader(), xnd.getFiAssignName(), status);
+        TbdHoso25 tbdHoso25 =tbdHoso25Service.findByFiHSCode(request.getHeader().getSubject().getReference());
 
-        tbdLichsu25Service.save(createHistory(
-                    tbdHoso25Service.findByFiHSCode(request.getHeader().getSubject().getReference()),
-                action, request.getHeader(), xnd.getFiAssignName()));
+        if(tbdHoso25==null){
+            return new ResponseJson(false, "","MA HO SO KHONG TON TAI");
+        }
+
+        tbdLichsu25Service.save(createHistory(tbdHoso25, action, request.getHeader(), xnd.getFiAssignName()));
 
         return new ResponseJson(true, "");
     }
@@ -138,7 +148,7 @@ public class WsServiceImpl implements WsService {
                 action=Constant25.HosoStatus.DA_TU_CHOI_CAP_GDK.getName();
                 break;
             default:
-                return new ResponseJson(false, "","MESSAGE 12 - "+function+" KHONG DUNG");
+                return new ResponseJson(false, "","MESSAGE 12 - "+function+" CHUA DUOC DINH NGHIA");
 
         }
         Gson gson = new Gson();
@@ -178,7 +188,60 @@ public class WsServiceImpl implements WsService {
 
     @Override
     public ResponseJson tccdGuiKQKT(ResponseWrapper request)  throws NSWException{
-        return null;
+        String function = request.getHeader().getSubject().getFunction();
+        int status=0;
+        String action="";
+        switch (function) {
+            case Constant25.MessageFunction.FUNC_14:
+                status=Constant25.HosoStatus.DA_CO_KQ_DANH_GIA_SPH.getId();
+                action=Constant25.HosoStatus.DA_CO_KQ_DANH_GIA_SPH.getName();
+                break;
+            default:
+                return new ResponseJson(false, "","MESSAGE 16 - "+function+" CHUA DUOC DINH NGHIA");
+
+        }
+        Gson gson = new Gson();
+        TCCDGuiKQKT kqkt = gson.fromJson(gson.toJson(request.getData()), TCCDGuiKQKT.class);
+        TbdHoso25 tbdHoso25 = tbdHoso25Service.findByFiHSCode(kqkt.getFiNSWFileCode());
+        List<TbdHanghoa25> listHanghoa25=tbdHoso25.getFiProductList();
+        for (TbdHanghoa25 hanghoa25: listHanghoa25) {
+            if(hanghoa25.getFiIdProduct()==Integer.valueOf(kqkt.getFiMaHangHoa())){
+                List<TbdHangHoaFile25> listHangHoa=new ArrayList<>();
+                hanghoa25.setFiTrangThaiHangHoa(status);
+                if (kqkt.getFiSoGCN().equals("1")){
+                    TbdHangHoaFile25 hangPhuHop=new TbdHangHoaFile25();
+                    hangPhuHop.setFiIDHangHoa(kqkt.getFiMaHangHoa());
+                    hangPhuHop.setFiSoCV(kqkt.getFiSoGCN());
+                    hangPhuHop.setFiNgayCap(kqkt.getFiNgayCap());
+                    hangPhuHop.setFiFileId(kqkt.getFiMaFileGCN());
+                    hangPhuHop.setFiFileLink(kqkt.getFiLinkFileGCN());
+                    hangPhuHop.setFiFileName(kqkt.getFiNameFileGCN());
+                    hangPhuHop.setFiLoaiFile(1);
+                    hangPhuHop.setFiTenLoai("File đính kèm giấy chứng nhận hợp quy lô TACN nhập khẩu");
+                    listHangHoa.add(hangPhuHop);
+                }else{
+                    for (AttachmentResult attach : kqkt.getFiDanhSachDinhKem()) {
+                        TbdHangHoaFile25 hangKhongPhuHop=new TbdHangHoaFile25();
+                        hangKhongPhuHop.setFiIDHangHoa(kqkt.getFiMaHangHoa());
+                        hangKhongPhuHop.setFiFileId(attach.getFiAttachmentId());
+                        hangKhongPhuHop.setFiFileLink(attach.getFiLinkFile());
+                        hangKhongPhuHop.setFiFileName(attach.getFiNameOfAttachment());
+                        hangKhongPhuHop.setFiLoaiFile(1);
+                        hangKhongPhuHop.setFiTenLoai("File đính kèm giấy chứng nhận hợp quy lô TACN nhập khẩu");
+                        listHangHoa.add(hangKhongPhuHop);
+                    }
+
+                }
+                hanghoa25.setFiKqdgsph(kqkt.getFiKetQuaDanhGia());
+                if(listHangHoa!=null&&!listHangHoa.isEmpty()){
+                    hanghoa25.setFiHangHoaFileList(listHangHoa);
+                }
+                tbdHangHoa25Service.save(hanghoa25);
+                tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,hanghoa25,"TCCD gửi kết quả",kqkt.getFiAssignName(),action,Constant25.BNN_SEND));
+            }
+        }
+
+        return new ResponseJson(true, "");
     }
 
     @Override
@@ -210,6 +273,27 @@ public class WsServiceImpl implements WsService {
             tbdLichsu25Service.save(createHistory(tbdHoso25, "Chuyển chỉ tiêu kiểm tra cho cả lô hàng"));
         } else {
             throw new NSWException("Có lỗi trong quá trình gửi hồ sơ! " + response.getMessage());
+        }
+        return response;
+    }
+
+    @Override
+    public ResponseJson yeuCauRutHS(TbdYcrut25 requestCancel) {
+
+        SendMessage message = new SendMessage();
+
+        requestCancel.setFiRequestedDate(null);
+        message.setFiMaHoso(requestCancel.getFiNSWFileCode());
+        message.setType(Constant25.MessageType.TYPE_11);
+        message.setFunction(Constant25.MessageFunction.FUNC_05);
+        message.setDataRequest(new Gson().toJson(requestCancel));
+        message.setFiIdHoso(Long.valueOf(requestCancel.getFiIdHS()));
+        ResponseJson response = WsServiceHelper.createSendRequest(Constant25.WebServiceURL.get(environment), message);
+        if (response.isSuccess()){
+
+        }else{
+            response.setSuccess(false);
+            response.setMessage("Có lỗi xảy ra khi rút hồ sơ");
         }
         return response;
     }
@@ -246,7 +330,21 @@ public class WsServiceImpl implements WsService {
     private String parseSenderUnitName(String unitCode) {
         return "Cục Chăn Nuôi";
     }
-
+    private TbdLichSuHH25 createLichSuHangHoa(TbdHoso25 tbdHoso25,TbdHanghoa25 hangHoa,String hstContent,String nguoiGui,String trangThai,Integer send){
+        TbdLichSuHH25 tbdLichSuHH25 = new TbdLichSuHH25();
+        tbdLichSuHH25.setFiIDHangHoa(hangHoa.getFiIdProduct());
+        tbdLichSuHH25.setFiHoatDong(1);
+        tbdLichSuHH25.setFiNgayGui(new Date());
+        if(null==nguoiGui||nguoiGui.equals("")){
+            tbdLichSuHH25.setFiNguoiGui("Cục Chăn Nuôi");
+        }else{
+            tbdLichSuHH25.setFiNguoiGui(nguoiGui);
+        }
+        tbdLichSuHH25.setFiNguoiNhan(tbdHoso25.getFiImporterName());
+        tbdLichSuHH25.setFiNoiDung(hstContent);
+        tbdLichSuHH25.setFiTrangThai(trangThai);
+        return tbdLichSuHH25;
+    }
     private void internalStatusUpdate(Header header, String exactSenderName, int status, String... reasons) throws NSWException {
         if (status != -1) {
             TbdHoso25 tb = tbdHoso25Service.findByFiHSCode(header.getSubject().getReference());

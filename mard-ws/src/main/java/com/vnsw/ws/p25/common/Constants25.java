@@ -80,7 +80,7 @@ public class Constants25 {
         public static final String URI_GET_HS_BY_ID = "/mard/25/ws/hoso/";
         public static final String URI_KET_QUA_XU_LY = "/mard/25/ws/update-kqxl/";
         public static final String URI_THU_HOI_GDK = "/mard/25/ws/thuhoigdk/";
-        public static final String URI_TCCD_GUI_KQKT = "/mard/25/ws/tccd-guikqkt/";
+        public static final String URI_TCCD_GUI_KQKT = "/mard/25/ws/uploadkqkt/";
         public static final String URI_TCCD_XU_LY_KQ = "/mard/25/ws/xulykq/";
         public static final String URI_GIAY_XNCL = "/mard/25/ws/giayxncl/";
         public static final String URI_THU_HOIGIAY_XNCL = "/mard/25/ws/thuhoi-giayxncl/";

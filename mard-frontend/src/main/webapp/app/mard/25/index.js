@@ -277,7 +277,7 @@ function Mard25VM() {
                             type: 'GET',
                             cache: false,
                             crossDomain: true,
-                            url: app.appContext + "/mard/06/hoso/delete?fiNSWFileCode=" + item.fiNSWFileCode + "&fiTaxCode=" + hosoUsername,
+                            url: app.appContext + "/mard/25/hoso/delete?fiNSWFileCode=" + item.fiNSWFileCode + "&fiTaxCode=" + hosoUsername,
                             beforeSend: function (xhr) {
                                 xhr.setRequestHeader(CSRF_TOKEN_NAME, CSRF_TOKEN_VALUE);
                                 $('#loading10').show();
@@ -312,18 +312,22 @@ function Mard25VM() {
     }
 
     self.requestCancelProfile = function () {
-        var body = {
-            fiNSWFileCode: self.xinRutHoSoVM().fiNSWFileCode(),
-            fiRequestedDate: self.xinRutHoSoVM().fiRequestedDate(),
-            fiReason: self.xinRutHoSoVM().fiReason(),
-            fiIdHS: self.xinRutHoSoVM().fiIdHS()
-        };
-
         if (self.xinRutHoSoVM().fiReason().length == 0) {
             app.Alert('Nhập lý do xin rút');
             return;
         }
-
+        if (self.xinRutHoSoVM().fiSigner().length == 0) {
+            app.Alert('Nhập người ký');
+            return;
+        }
+        var body = {
+            fiNSWFileCode: self.xinRutHoSoVM().fiNSWFileCode(),
+            fiRequestedDate: self.xinRutHoSoVM().fiRequestedDate(),
+            fiReason: self.xinRutHoSoVM().fiReason(),
+            fiIdHS: self.xinRutHoSoVM().fiIdHS(),
+            fiSigner: self.xinRutHoSoVM().fiSigner()
+        };
+        console.log(body);
         self.pop = app.popup({
             title: 'Thông báo',
             html: '<b>Bạn chắc chắn muốn gửi yêu cầu xin rút?</b>',
@@ -336,14 +340,14 @@ function Mard25VM() {
                     action: function () {
                         app.popupRemove(self.pop.selector);
                         app.makePost({
-                            url: '/mard/06/hoso/cancel',
+                            url: '/mard/25/hoso/cancel',
                             data: JSON.stringify(body),
                             success: function (d) {
                                 if (d && d.success) {
                                     app.Alert('Gửi yêu cầu thành công');
                                     self.searchHoso(self.currentPage());
-                                    if ($('#modalXinRut').hasClass('in')) {
-                                        $('#modalXinRut').modal('hide');
+                                    if ($('#modal_xin_rut').hasClass('in')) {
+                                        $('#modal_xin_rut').modal('hide');
                                     }
                                 } else {
                                     app.Alert(d.message);
@@ -384,7 +388,7 @@ function Mard25VM() {
 
     self.goYCRHoSo = function(item) {
         self.xinRutHoSoVM().update(item);
-        $('#modalXinRut').modal('show');
+        $('#modal_xin_rut').modal('show');
     }
 
     self.goYCSHoSo = function(item) {
@@ -473,6 +477,9 @@ function Mard25VM() {
             ]
         });
     }
+    self.closeViewChuyen = function(){
+        self.filstChiTieu([]);
+    }
     self.thoatOnClick  = function () {
         $("#modal_view_chuyen").hide();
     }
@@ -551,7 +558,7 @@ function XinRutHoSoVM () {
     xinRutHoSoVMSelf.fiIdHS = ko.observable(null);
     xinRutHoSoVMSelf.errorMsg = ko.observable('');
     xinRutHoSoVMSelf.fiHSStatus = ko.observable(null);
-
+    xinRutHoSoVMSelf.fiSigner = ko.observable("");
     xinRutHoSoVMSelf.clearForm = function () {
         xinRutHoSoVMSelf.errorMsg('')
     }
@@ -561,9 +568,8 @@ function XinRutHoSoVM () {
         xinRutHoSoVMSelf.fiIdHS(data.fiIdHS);
         xinRutHoSoVMSelf.fiRequestedDate(new Date());
         xinRutHoSoVMSelf.fiHSStatus(data.fiHSStatus);
-        if (data.fiHSStatus == 1) {
-            xinRutHoSoVMSelf.fiReason(" ")
-        }
+        xinRutHoSoVMSelf.fiSigner = ko.observable('');
+        xinRutHoSoVMSelf.fiReason = ko.observable('');
     }
 }
 

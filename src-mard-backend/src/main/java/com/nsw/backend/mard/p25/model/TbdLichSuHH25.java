@@ -49,4 +49,9 @@ public class TbdLichSuHH25  implements Serializable {
     @Column(name = "FI_GHICHU")
     private String fiGhiChu;
 
+    @Column(name = "FI_TRANGTHAI")
+    private String fiTrangThai;
+
+    @Column(name = "FI_NSWSEND")
+    private Integer fiNswSend;
 }

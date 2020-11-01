@@ -116,7 +116,7 @@
                                         type="text"
                                         class="form-control form-control-inline date-picker"
                                         data-date-format="dd/mm/yyyy"
-                                        data-bind="datepicker2: fiPurchFromDate, datepickerOptions: { endDate: fiPurchToDate }"
+                                        data-bind="datepicker2: fiPurchFromDate"
                                 />
                             </div>
                             <div class="col-md-2 no-padding no-margin" style="text-align: center">-</div>
@@ -125,7 +125,7 @@
                                         type="text"
                                         class="form-control form-control-inline date-picker"
                                         data-date-format="dd/mm/yyyy"
-                                        data-bind="datepicker2: fiPurchToDate, datepickerOptions: { startDate: fiPurchFromDate }"
+                                        data-bind="datepicker2: fiPurchToDate"
                                 />
                             </div>
                         </div>

@@ -2,7 +2,6 @@
      tabindex="-1"
      data-backdrop="static" data-keyboard="false">
     <div class="modal-header" style="background: #337ab7; color: #fff;">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
         <b class="modal-title"><spring:message code="mard.25.tokhai.hang_hoa"/></b>
     </div>
     <div class="modal-body">
@@ -41,8 +40,9 @@
                     <div class="col-md-10">
                         <select
                                 data-bind="options: lstToChucDanhGia,
-                                                    optionsText: 'fiCatTypeName',
-                                                    optionsValue: 'fiCatType',
+                                                    optionsText: 'fiPUName',
+                                                    optionsValue: 'fiPUCode',
+                                                    selectedText: fiNameTCCD,
                                                     value: fiToChucDanhGia" class="form-control"></select>
                     </div>
                 </div>
@@ -117,13 +117,13 @@
             </div>
         </div>
         <div class="text-center">
-            <span class="nsw-require-field" data-bind="text: errorMsg"></span>
+            <span class="nsw-require-field" style="font-size: large" data-bind="text: errorMsg"></span>
         </div>
     </div>
     <div class="modal-footer" style="">
         <div class="text-center">
-            <button class="btn btn-warning" data-bind=""><i class="fa fa-send"></i> <spring:message code="common.button.gui"/></button>
-            <button class="btn btn-danger" data-bind=""><i class="fa fa-sign-out"></i><spring:message code="common.button.thoat"/></button>
+            <button class="btn btn-primary" data-bind="click: guiKiemDinhHangHoa"><i class="fa fa-send"></i> <spring:message code="common.button.gui"/></button>
+            <button class="btn btn-danger" data-bind="click: thoatOnClick"><i class="fa fa-sign-out"></i><spring:message code="common.button.thoat"/></button>
         </div>
     </div>
 </div>

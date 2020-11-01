@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface TbdHangHoa25Service {
     public List<TbdHanghoa25> findByFiIdHS(Integer fiIdHS);
+    public void save(TbdHanghoa25 tbdHanghoa25);
 }

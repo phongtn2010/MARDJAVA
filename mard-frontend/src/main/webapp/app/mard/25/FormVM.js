@@ -1071,7 +1071,7 @@ function UploadFileVM(options) {
     ufVMSelf.addFile = function (data,param) {
         var checkFiles = [ufVMSelf.fiFileHDPath,ufVMSelf.fiFileHoaDonPath,ufVMSelf.fiFilePhieuPath,ufVMSelf.fiFileKQPath,ufVMSelf.fiFileTCPath
         ,ufVMSelf.fiFileCNLHPath,ufVMSelf.fiFileCNPTPath,ufVMSelf.fiFilePath];
-        ufVMSelf.errors = ko.validation.group({checkFiles}, {deep: true, live: true, observable: true});
+        ufVMSelf.errors = ko.validation.group(checkFiles, {deep: true, live: true, observable: true});
         if (!ufVMSelf.validateForm()) return;
         var fileName='';
         var files;

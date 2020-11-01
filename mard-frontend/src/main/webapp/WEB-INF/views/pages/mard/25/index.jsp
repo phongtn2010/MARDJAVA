@@ -225,9 +225,10 @@
                                             class="fa fa-lg fa-close" style="color: red"></i></a>
                                 </div>
                             </td>
+
                             <td class="text-center">
                                 <div data-bind="">
-                                    <a href="javascript:void(0)" data-bind="click: $root.viewGiayPhep"><i
+                                    <a  data-bind="click: $root.goYCRHoSo"><i
                                             class="fa fa-caret-square-o-down"></i></a>
                                 </div>
                             </td>
@@ -296,7 +297,7 @@
          tabindex="-1"
          data-backdrop="static" data-keyboard="false">
         <div class="modal-header" style="background: #337ab7; color: #fff;">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" data-bind="click: closeViewChuyen"></button>
         </div>
         <div class="modal-body">
             <div class="panel panel-primary" id="model-congvan">
@@ -424,6 +425,71 @@
                             </table>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="modal_xin_rut" class="modal container in modal-overflow"
+         tabindex="-1"
+         data-backdrop="static" data-keyboard="false" data-bind="with: xinRutHoSoVM">
+        <div class="modal-header" style="background: #337ab7; color: #fff;">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <b class="modal-title"><spring:message code="mard.25.form.xinrut.title"/></b>
+        </div>
+        <div class="modal-body">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label><spring:message code="mard.25.tccd.bao_cao_mahs"/><a  class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-4">
+                                <label data-bind="text: fiNSWFileCode"></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label><spring:message code="mard.25.form.xinrut.lydo"/><a  class="nsw-require-field">*</a></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <textarea class="form-control" type="text" data-bind="trimedValue: fiReason"  rows="5"></textarea>
+                            </div>
+                        </div>
+                    </div></div>
+                        <div class="panel-body">
+                        <div class="form-group">
+                            <div class="tile-body"><b><u><spring:message code="mard.25.form.xinrut.tt"/></u></b></div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label><spring:message code="mard.25.form.xinrut.nguoiky"/><a  class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control" type="text" data-bind="trimedValue: fiSigner"/>
+                            </div>
+                            <div class="col-md-2">
+                                <label><spring:message code="mard.25.form.xinrut.ngayky"/><a  class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-4">
+                                <label data-bind="date: fiRequestedDate"></label>
+                            </div>
+                        </div>
+
+                    </div>
+                            <div class="modal-footer">
+                                <div class="text-center">
+                                    <button class="btn green" data-bind="click: $root.requestCancelProfile">
+                                        <spring:message code="conmon.button.dong_y"/>
+                                    </button>
+                                    <button class="btn red" data-dismiss="modal">
+                                        <spring:message code="conmon.button.huy"/>
+                                    </button>
+                                </div>
+                            </div>
                 </div>
             </div>
         </div>

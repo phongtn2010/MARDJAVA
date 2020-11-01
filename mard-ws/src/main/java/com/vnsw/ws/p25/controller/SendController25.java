@@ -13,6 +13,7 @@ import com.vnsw.ws.helper.SoapHelper;
 import com.vnsw.ws.p25.common.Constants25;
 import com.vnsw.ws.p25.entity.json.SendMessage;
 import com.vnsw.ws.p25.envelop.*;
+import com.vnsw.ws.p25.message.send.DNYeucauHuyHoso;
 import com.vnsw.ws.p25.message.send.GuiHSTCCD;
 import com.vnsw.ws.p25.message.send.Hoso25;
 import com.vnsw.ws.p25.service.BackendService25;
@@ -21,6 +22,7 @@ import com.vnsw.ws.util.Constants;
 import com.vnsw.ws.util.LogUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -111,9 +113,12 @@ public class SendController25 {
                         sendMessage.getType(),
                         sendMessage.getFunction(),
                         "CCN");
+                Hoso25 hoso25 = mapper.readValue(jsonData, Hoso25.class);
                 switch (sendMessage.getType()) {
                     case Constants25.MARD25_TYPE.TYPE_10: // DN gui ho so
-                        Hoso25 hoso25 = mapper.readValue(jsonData, Hoso25.class);
+                        hoso25.setDepartmentCode("1");
+                        hoso25.setDepartmentName("1");
+                        hoso25.getFiProductList().get(0).setFiBanChat("1");
                         content.setHoso25(hoso25);
                         body = envelopeService.createBody(content);
                         envelopeSend = envelopeService.createMessage(header, body);
@@ -136,18 +141,40 @@ public class SendController25 {
                             objReturn.setMessage(errorMessage);
                             objReturn.setData(hoso25);
                         }
-                        logger.info("Sent something!");
+
                         break;
                     case Constants25.MARD25_TYPE.TYPE_15:
                         GuiHSTCCD guiHSTCCD = mapper.readValue(jsonData, GuiHSTCCD.class);
                         content.setGuiHSTCCD(guiHSTCCD);
+                        body = envelopeService.createBody(content);
+                        envelopeSend = envelopeService.createMessage(header, body);
                         if (debugMode) {
                             isSuccess = true;
                         } else {
-
+                            objReturn = send(envelopeSend, sendMessage.getSignedXml(), maHoso, sendMessage.getType());
+                            isSuccess = objReturn.isSuccess();
+                            errorMessage = objReturn.getMessage();
                         }
                         break;
-
+                    case Constants25.MARD25_TYPE.TYPE_11:
+//                        DNYeucauHuyHoso ycrut= new DNYeucauHuyHoso();
+                        DNYeucauHuyHoso ycrut =  mapper.readValue(sendMessage.getDataRequest(), DNYeucauHuyHoso.class);
+                        ycrut.setFiRequestedDate(new Date());
+                        content.setDNYeucauHuyHoso(ycrut);
+                        body = envelopeService.createBody(content);
+                        envelopeSend = envelopeService.createMessage(header, body);
+                        if (debugMode) {
+                            isSuccess = true;
+                            objReturn = new ResponseJson();
+                            objReturn.setSuccess(true);
+                            objReturn.setMessage(errorMessage);
+                            objReturn.setData(hoso25);
+                        } else {
+                            objReturn = send(envelopeSend, sendMessage.getSignedXml(), maHoso, sendMessage.getType());
+                            isSuccess = objReturn.isSuccess();
+                            errorMessage = objReturn.getMessage();
+                        }
+                        break;
                 }
             }
         } catch (Exception ex) {

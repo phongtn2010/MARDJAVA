@@ -166,27 +166,27 @@ public class Mard25Constant {
         }
         public static final String BACKEND = "mard.api.backend.dev";
         public static final String COUNTRY_GET = "mard.25.danhmuc.quocgia";
-        public static final String ROLL_BACK = "mard.06.rollback";
-        public static final String PORT_GET = "mard.06.danhmuc.port";
-        public static final String UOMS_GET = "mard.06.danhmuc.uoms";
-        public static final String PROVINCE_GET = "mard.06.danhmuc.tinhthanh";
+        public static final String ROLL_BACK = "mard.25.rollback";
+        public static final String PORT_GET = "mard.25.danhmuc.port";
+        public static final String UOMS_GET = "mard.25.danhmuc.uoms";
+        public static final String PROVINCE_GET = "mard.25.danhmuc.tinhthanh";
         public static final String LIST_STATUS_HOSO_GET = "mard.06.danhmuc.statushoso";
         public static final String ATTACHMENT_TYPE_GET = "mard.25.danhmuc.attachtype";
         public static final String HOSO_CREATE = "mard.25.tbdhoso25.create";
         public static final String HOSO_SEND = "mard.25.tbdhoso25.send";
-        public static final String HOSO_EDIT = "mard.06.tbdhoso06.edit";
+        public static final String HOSO_EDIT = "mard.25.tbdhoso25.edit";
         public static final String HOSO_GET_BY_FILTER = "mard.25.tbdhoso25.findfilter";
-        public static final String HOSO_CANCEL = "mard.06.tbdhoso06.cancel";
-        public static final String HOSO_DELETE = "mard.06.tbdhoso06.delete";
-        public static final String ATTACHMENT_CREATE = "mard.06.dinhkem.create";
-        public static final String ATTACHMENT_DOWNLOAD = "mard.06.dinhkem.download";
-        public static final String ATTACHMENT_DELETE = "mard.06.dinhkem.delete";
-        public static final String LICENSE_VIEW_GET = "mard.06.tbdhoso06.viewlicense";
-        public static final String HISTORY_BY_HS_CODE = "mard.06.tbdhoso06.history";
-        public static final String UPDATE_ONLY = "mard.06.hoso.update_only";
-        public static final String SAVE_BEFORE_UPDATE = "mard.06.hoso.save_before_update";
+        public static final String HOSO_CANCEL = "mard.25.tbdhoso25.cancel";
+        public static final String HOSO_DELETE = "mard.25.tbdhoso25.delete";
+        public static final String ATTACHMENT_CREATE = "mard.25.dinhkem.create";
+        public static final String ATTACHMENT_DOWNLOAD = "mard.25.dinhkem.download";
+        public static final String ATTACHMENT_DELETE = "mard.25.dinhkem.delete";
+        public static final String LICENSE_VIEW_GET = "mard.25.tbdhoso25.viewlicense";
+        public static final String HISTORY_BY_HS_CODE = "mard.25.tbdhoso25.history";
+        public static final String UPDATE_ONLY = "mard.25.hoso.update_only";
+        public static final String SAVE_BEFORE_UPDATE = "mard.25.hoso.save_before_update";
         public static final String CHUYEN_CHI_TIEU = "mard.25.hoso.chuyenchitieu";
-        public static final String GET_XML = "mard.06.getXml";
+        public static final String GET_XML = "mard.25.getXml";
 
         //binhvv5
         public static final String GET_BY_CAT_NO = "mard.25.danhmuc.getbycatno";
