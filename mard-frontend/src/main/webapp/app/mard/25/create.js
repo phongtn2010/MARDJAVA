@@ -9,10 +9,27 @@ function Mard25CreateVM () {
 
     createVMSelf.saveRegProfile = function () {
         if (!createVMSelf.kdnkVM().validateForm()){
-
             createVMSelf.pop = app.popup({
                 title: 'Thông báo',
                 html: '<b>Bạn cần nhập đẩy đủ các trường bắt buộc</b>',
+                width: 450,
+                buttons: [
+                    {
+                        name: 'OK',
+                        class: 'btn',
+                        icon: 'fa-close',
+                        action: function () {
+                            app.popupRemove(createVMSelf.pop.selector);
+                        }
+                    }
+                ]
+            });
+            return;
+        }
+        if (!createVMSelf.kdnkVM().validateUploadFiles()){
+            createVMSelf.pop = app.popup({
+                title: 'Thông báo',
+                html: '<b>Bạn cần thêm đẩy đủ các tài liệu đính kèm</b>',
                 width: 450,
                 buttons: [
                     {
@@ -81,6 +98,43 @@ function Mard25CreateVM () {
 
     createVMSelf.sendRegProfile = function () {
         // if (!createVMSelf.kdnkVM().validateForm() || !createVMSelf.kdnkVM().validateAttachment()) return;
+        if (!createVMSelf.kdnkVM().validateForm()){
+
+            createVMSelf.pop = app.popup({
+                title: 'Thông báo',
+                html: '<b>Bạn cần nhập đẩy đủ các trường bắt buộc</b>',
+                width: 450,
+                buttons: [
+                    {
+                        name: 'OK',
+                        class: 'btn',
+                        icon: 'fa-close',
+                        action: function () {
+                            app.popupRemove(createVMSelf.pop.selector);
+                        }
+                    }
+                ]
+            });
+            return;
+        }
+        if (!createVMSelf.kdnkVM().validateUploadFiles()){
+            createVMSelf.pop = app.popup({
+                title: 'Thông báo',
+                html: '<b>Bạn cần nhập đẩy đủ các tài liệu đính kèm</b>',
+                width: 450,
+                buttons: [
+                    {
+                        name: 'OK',
+                        class: 'btn',
+                        icon: 'fa-close',
+                        action: function () {
+                            app.popupRemove(createVMSelf.pop.selector);
+                        }
+                    }
+                ]
+            });
+            return;
+        }
         var body = createVMSelf.kdnkVM().getData();
         // return;
         if (!body) return;

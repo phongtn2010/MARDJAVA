@@ -179,6 +179,17 @@ function HangHoaNhapKhauVM (options) {
         }
         return true;
     }
+    kdnkVMSelf.validateUploadFiles = function () {
+        var ttc=kdnkVMSelf.uploadFileVM();
+        var checkFiles= [ttc.lstHD,ttc.lstHoaDon,ttc.lstPhieu,ttc.lstKQ,ttc.lstTC,ttc.lstCNLH,ttc.lstCNPT,ttc.lstAtch];
+        kdnkVMSelf.errors = ko.validation.group({checkFiles}, {deep: true, live: true, observable: true});
+        console.log(kdnkVMSelf.errors());
+        if (kdnkVMSelf.errors().length > 0) {
+            kdnkVMSelf.errors.showAllMessages();
+            return false;
+        }
+        return true;
+    }
 
     kdnkVMSelf.validateAttachment = function () {
         if (!kdnkVMSelf.uploadFileVM().validate()) {

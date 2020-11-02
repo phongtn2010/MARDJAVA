@@ -821,9 +821,15 @@ function IsoLocationVM(data, validator) {
 function UploadFileVM(options) {
     var ufVMSelf = this;
     ufVMSelf.errors = ko.validation.group(ufVMSelf);
-    ufVMSelf.lstAtch = ko.observableArray((options && options.hasOwnProperty('lstAtch')) ? options.lstAtch : []);
+    ufVMSelf.lstAtch = ko.observableArray((options && options.hasOwnProperty('lstAtch')) ? options.lstAtch : []).
+    extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    });
     ufVMSelf.lstAtchType = ko.observableArray((options && options.hasOwnProperty('lstAtchType')) ? options.lstAtchType : []);
-    ufVMSelf.lstHD = ko.observableArray([]);
+    ufVMSelf.lstHD = ko.observableArray([]).
+    extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    });
     ufVMSelf.selectedAttachVM = ko.observable(null);
     ufVMSelf.errorMsg = ko.observable(null);
     ufVMSelf.uploadedFiles = ko.observableArray([]);
@@ -857,7 +863,10 @@ function UploadFileVM(options) {
 
     ufVMSelf.fiHSType = ko.observable(null);
 
-    ufVMSelf.lstHoaDon = ko.observableArray([]);
+    ufVMSelf.lstHoaDon = ko.observableArray([]).
+    extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    });
     ufVMSelf.fiFileHoaDon = ko.observable(null);
     ufVMSelf.fiFileHoaDonDate = ko.observable(null);
     ufVMSelf.fiFileHoaDonPath = ko.observable(null).extend({
@@ -880,7 +889,10 @@ function UploadFileVM(options) {
         }
     });
 
-    ufVMSelf.lstPhieu = ko.observableArray([]);
+    ufVMSelf.lstPhieu = ko.observableArray([]).
+    extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    });
     ufVMSelf.fiFilePhieu = ko.observable(null);
     ufVMSelf.fiFilePhieuDate = ko.observable(null);
     ufVMSelf.fiFilePhieuPath = ko.observable(null).extend({
@@ -903,7 +915,10 @@ function UploadFileVM(options) {
         }
     });
 
-    ufVMSelf.lstKQ = ko.observableArray([]);
+    ufVMSelf.lstKQ = ko.observableArray([]).
+    extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    });
     ufVMSelf.fiFileKQ = ko.observable(null);
     ufVMSelf.fiFileKQPath = ko.observable(null).extend({
         validation: {
@@ -925,7 +940,10 @@ function UploadFileVM(options) {
         }
     });
 
-    ufVMSelf.lstTC = ko.observableArray([]);
+    ufVMSelf.lstTC = ko.observableArray([]).
+    extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    });
     ufVMSelf.fiFileTC = ko.observable(null);
     ufVMSelf.fiFileTCPath = ko.observable(null).extend({
         validation: {
@@ -947,7 +965,10 @@ function UploadFileVM(options) {
         }
     });
 
-    ufVMSelf.lstCNLH = ko.observableArray([]);
+    ufVMSelf.lstCNLH = ko.observableArray([]).
+    extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    });
     ufVMSelf.fiFileCNLH = ko.observable(null);
     ufVMSelf.fiFileCNLHPath = ko.observable(null).extend({
         validation: {
@@ -969,7 +990,10 @@ function UploadFileVM(options) {
         }
     });
 
-    ufVMSelf.lstCNPT = ko.observableArray([]);
+    ufVMSelf.lstCNPT = ko.observableArray([]).
+    extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    });
     ufVMSelf.fiFileCNPT = ko.observable(null);
     ufVMSelf.fiFileCNPTPath = ko.observable(null).extend({
         validation: {
