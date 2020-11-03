@@ -122,6 +122,7 @@ public class SendEndpoint {
                     soapMessage = SoapHelper.createSOAPRequest(xml, nameSpace, nameSpaceKey, methodTag, payloadTag, nameSpaceKeyForMethodTag, nameSpaceKeyForPayloadTag, mqErrInfo, soapAction);
                     break;
             }
+            logger.info("URL SEND"+url);
             String messageSend = SoapHelper.getSOAPResponse(soapMessage, mqErrInfo);
             logger.info("Message gui di: " + messageSend);
             SOAPMessage soapResponse = soapConnection.call(soapMessage, url);
@@ -129,10 +130,11 @@ public class SendEndpoint {
             returnPayLoad = SoapHelper.getSOAPResponse(soapResponse, mqErrInfo);
             logger.info("Message phan hoi: " + returnPayLoad);
             // Day du lieu vao RabbitMQ
-            RabbitMQLogHelper.pushLogToRabbitMQ(xml + Constants.MESSAGE_SEPARATOR + returnPayLoad.replace(Constants.TAG_ENCODE.OPEN_TAG, Constants.TAG_NO_ENCODE.OPEN_TAG)
-                    .replace(Constants.TAG_ENCODE.CLOSE_TAG, Constants.TAG_NO_ENCODE.CLOSE_TAG), mqLogInfo);
-            soapConnection.close();
+//            RabbitMQLogHelper.pushLogToRabbitMQ(xml + Constants.MESSAGE_SEPARATOR + returnPayLoad.replace(Constants.TAG_ENCODE.OPEN_TAG, Constants.TAG_NO_ENCODE.OPEN_TAG)
+//                    .replace(Constants.TAG_ENCODE.CLOSE_TAG, Constants.TAG_NO_ENCODE.CLOSE_TAG), mqLogInfo);
+//            soapConnection.close();
         } catch (UnsupportedOperationException | SOAPException ex) {
+            logger.info("Exception Send endpoint"+ ex);
             error = envelopeService.createError(
                     Constants.ERROR.ERR01_CODE, Constants.ERROR.ERR01);
             envl = envelopeService.createResponseError(xml,
@@ -140,7 +142,7 @@ public class SendEndpoint {
             returnPayLoad = xmlService.ObjectToXml(envl);
             String errorInfo = Constants.APP_NAME + Constants.MESSAGE_SEPARATOR + CLASS_NAME
                     + Constants.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + Constants.MESSAGE_SEPARATOR + ex.toString();
-            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, mqErrInfo);
+//            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, mqErrInfo);
         }
         res.setResponsePayload(returnPayLoad);
         return res;

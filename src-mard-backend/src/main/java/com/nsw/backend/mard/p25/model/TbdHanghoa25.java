@@ -139,9 +139,9 @@ public class TbdHanghoa25 extends CmonBaseEntity implements Serializable {
     private List<TbdHanghoaSLKL25> fiProSLKLList;
 
     //File kèm theo
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "FI_ID_HANGHOA")
-    private List<TbdHangHoaFile25> fiHangHoaFileList;
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name = "FI_ID_HANGHOA")
+//    private List<TbdHangHoaFile25> fiHangHoaFileList;
 
     @Transient
     private List<Ananytical> fiListChiTieu;

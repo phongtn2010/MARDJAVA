@@ -219,6 +219,7 @@ public class WsServiceImpl implements WsService {
                     hangPhuHop.setFiLoaiFile(1);
                     hangPhuHop.setFiTenLoai("File đính kèm giấy chứng nhận hợp quy lô TACN nhập khẩu");
                     listHangHoa.add(hangPhuHop);
+                    tbdHangHoaFile25Service.update(hangPhuHop);
                 }else{
                     for (AttachmentResult attach : kqkt.getFiDanhSachDinhKem()) {
                         TbdHangHoaFile25 hangKhongPhuHop=new TbdHangHoaFile25();
@@ -229,13 +230,14 @@ public class WsServiceImpl implements WsService {
                         hangKhongPhuHop.setFiLoaiFile(1);
                         hangKhongPhuHop.setFiTenLoai("File đính kèm giấy chứng nhận hợp quy lô TACN nhập khẩu");
                         listHangHoa.add(hangKhongPhuHop);
+                        tbdHangHoaFile25Service.update(hangKhongPhuHop);
                     }
 
                 }
                 hanghoa25.setFiKqdgsph(kqkt.getFiKetQuaDanhGia());
-                if(listHangHoa!=null&&!listHangHoa.isEmpty()){
-                    hanghoa25.setFiHangHoaFileList(listHangHoa);
-                }
+//                if(listHangHoa!=null&&!listHangHoa.isEmpty()){
+//                    hanghoa25.setFiHangHoaFileList(listHangHoa);
+//                }
                 tbdHangHoa25Service.save(hanghoa25);
                 tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,hanghoa25,"TCCD gửi kết quả",kqkt.getFiAssignName(),action,Constant25.BNN_SEND));
             }

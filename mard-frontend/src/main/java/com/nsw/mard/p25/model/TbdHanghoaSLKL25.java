@@ -14,13 +14,13 @@ public class TbdHanghoaSLKL25 implements Serializable {
 
     private Integer fiIdProduct;
 
-    private Integer fiProSLKLMass;
+    private Float fiProSLKLMass;
 
     private String fiProSLKLMassUnitName;
 
-    private Integer fiProSLKLMassTan;
+    private Float fiProSLKLMassTan;
 
-    private Integer fiProSLKLAmount;
+    private Float fiProSLKLAmount;
 
     private String fiProSLKLAmountUnitName;
     private String fiProSLKLMassUnitCode;

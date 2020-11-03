@@ -35,7 +35,7 @@ import java.util.Date;
 public class Tbdhoso25Controller extends BaseController {
 
     private static final Logger LOG = LoggerFactory.getLogger(Tbdhoso25Controller.class);
-    private static final String TAG = "Tbdhoso06Controller";
+    private static final String TAG = "Tbdhoso25Controller";
 
     private final RabbitMQService rabbitMQService;
 

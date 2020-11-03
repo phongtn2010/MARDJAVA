@@ -94,7 +94,7 @@ public class SendController25 {
             // Goi den backend theo IdHoso de dong goi ban tin gui di
             Long fiIdHoso = sendMessage.getFiIdHoso();
             String maHoso = sendMessage.getFiMaHoso();
-            String nowStr = formatterDateTime.format(new Date());
+            logger.info("SendAll");
             String url = environment.getRequiredProperty("URI_BACKEND_ADDRESS") + Constants25.RES_URI.URI_GET_HS_BY_ID + fiIdHoso;
             ResponseJson response = backendService.getDataFromRestUri(url);
 //            String isTest = environment.getRequiredProperty("IS_TEST");
@@ -118,7 +118,7 @@ public class SendController25 {
                     case Constants25.MARD25_TYPE.TYPE_10: // DN gui ho so
                         hoso25.setDepartmentCode("1");
                         hoso25.setDepartmentName("1");
-                        hoso25.getFiProductList().get(0).setFiBanChat("1");
+//                        hoso25.getFiProductList().get(0).setFiBanChat("1");
                         content.setHoso25(hoso25);
                         body = envelopeService.createBody(content);
                         envelopeSend = envelopeService.createMessage(header, body);
@@ -231,14 +231,14 @@ public class SendController25 {
             String requestOfficeCode = environment.getProperty("GATEWAY_PAYLOAD_TAG_OFFICECODE");
             String requestDocumentType = environment.getProperty("GATEWAY_PAYLOAD_TAG_DOCUMENTTYPE");
             String requestPayload = environment.getProperty("GATEWAY_PAYLOAD_TAG_DATA");
-            logger.debug("REQ" + xml);
+            logger.debug("REQ 25:" + xml);
             SOAPMessage soapMessage = SoapHelper.createSOAPRequest(xml, officeCode, documentType, nameSpace,
                     nameSpaceKey, methodTag, requestOfficeCode, requestDocumentType, requestPayload);
             //String sendMessage = SoapHelper.getSOAPResponse(soapMessage);
             SOAPMessage soapResponse = soapConnection.call(soapMessage, url);
             responseStr = SoapHelper.getSOAPResponse(soapResponse);
 
-            logger.debug("RES" + responseStr);
+            logger.debug("RES 25:" + responseStr);
             soapConnection.close();
         } catch (Exception ex) {
             LogUtil.addLog(ex);
