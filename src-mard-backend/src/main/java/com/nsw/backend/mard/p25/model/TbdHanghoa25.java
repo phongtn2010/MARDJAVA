@@ -51,19 +51,19 @@ public class TbdHanghoa25 extends CmonBaseEntity implements Serializable {
     private Integer fiTrangThaiHangHoa;
 
     @Column(name = "FI_PRO_ID_NHOM")
-    private Integer fiProIdNhom;
+    private String fiProIdNhom;
     @Column(name = "FI_PRO_NAME_NHOM")
     private String fiProNameNhom;
     @Column(name = "FI_PRO_ID_PHAN_NHOM")
-    private Integer fiProIdPhanNhom;
+    private String fiProIdPhanNhom;
     @Column(name = "FI_PRO_NAME_PHAN_NHOM")
     private String fiProNamePhanNhom;
     @Column(name = "FI_PRO_ID_LOAI")
-    private Integer fiProIdLoai;
+    private String fiProIdLoai;
     @Column(name = "FI_PRO_NAME_LOAI")
     private String fiProNameLoai;
     @Column(name = "FI_PRO_ID_PHAN_LOAI")
-    private Integer fiProIdPhanLoai;
+    private String fiProIdPhanLoai;
     @Column(name = "FI_PRO_NAME_PHAN_LOAI")
     private String fiProNamePhanLoai;
     @Column(name = "FI_PRO_CODE", length = 150)

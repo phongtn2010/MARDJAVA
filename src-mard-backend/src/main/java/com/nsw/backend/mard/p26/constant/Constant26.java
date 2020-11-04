@@ -7,8 +7,8 @@ import java.util.Arrays;
 
 public class Constant26 {
     public static final Long SYSTEM_ID = 25L;
-    public static final String MINISTRY_NAME = "BNNPTNT";
-    public static final String MARD_PROC_CODE = "25";
+    public static final String MINISTRY_NAME = "BNN";
+    public static final String MARD_PROC_CODE = "26";
 
     public static final Long ACTIVE = 1L;
     public static final Long IN_ACTIVE = 0L;

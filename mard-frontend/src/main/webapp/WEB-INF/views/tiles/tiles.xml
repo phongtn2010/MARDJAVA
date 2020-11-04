@@ -1519,5 +1519,20 @@
         <put-attribute name="body" value="/WEB-INF/views/pages/mic/03/edit.jsp" />
     </definition>
 	 <!--END BO THONG TIN TRUYEN THONG-->
+    <!--THU TUC 26 -->
+    <definition name="mard.26.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/26/index.jsp" />
+    </definition>
 
+    <definition name="mard.26.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/26/edit.jsp" />
+    </definition>
+
+    <definition name="mard.26.view" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/26/view.jsp" />
+    </definition>
+    <!--END THU TUC 26-->
 </tiles-definitions>

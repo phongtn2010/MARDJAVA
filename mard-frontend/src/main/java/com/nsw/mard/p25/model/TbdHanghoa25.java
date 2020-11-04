@@ -14,13 +14,13 @@ public class TbdHanghoa25 implements Serializable {
 
     private String fiProName;
 
-    private Integer fiProIdNhom;
+    private String fiProIdNhom;
     private String fiProNameNhom;
-    private Integer fiProIdPhanNhom;
+    private String fiProIdPhanNhom;
     private String fiProNamePhanNhom;
-    private Integer fiProIdLoai;
+    private String fiProIdLoai;
     private String fiProNameLoai;
-    private Integer fiProIdPhanLoai;
+    private String fiProIdPhanLoai;
     private String fiProNamePhanLoai;
     private String fiProCode;
 

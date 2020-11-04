@@ -156,7 +156,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
                 "classpath:moh_01",
 				"classpath:moh_09",
 				"classpath:mic_02",
-                "classpath:mard_25"
+                "classpath:mard_25",
+                "classpath:mard_26"
 				
         );
         messageSource.setDefaultEncoding("UTF-8");

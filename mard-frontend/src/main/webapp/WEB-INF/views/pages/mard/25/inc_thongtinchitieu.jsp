@@ -30,11 +30,11 @@
                                 <option value="6">min-max</option>
                             </select></td>
                             <td><input class="form-control" type="text" data-bind="value: fiProCLContent, enable: isEnable()"></td>
-                            <td><select class="form-control" data-bind="options: lstDMDVT,
+                            <td><select class="form-control" data-bind="options: lstChiTieuAT,
                                                     optionsText: 'fiCatTypeName',
                                                     optionsValue: 'fiCatNote',
                                                     optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.chat_luong.dvt"/>',
-                                                    value: fiProCLUnitName, enable: isEnable() "></select></td>
+                                                    value: fiProCLUnitID, enable: isEnable() "></select></td>
                             <td class="text-center" data-bind="visible: $root.isEditable()">
                                 <span data-bind="if: (isUpdate())">
                                     <a data-bind="click: $parent.updateListCL"> <i class="fa fa-save" aria-hidden="true"></i>
@@ -73,7 +73,7 @@
                             </td>
                             <td>
                                 <select id="EfiProCLUnitIDCBB"
-                                        data-bind="options: lstDMDVT,
+                                        data-bind="options: lstChiTieuAT,
                                                     optionsText: 'fiCatTypeName',
                                                     optionsValue: 'fiCatNote',
                                                     value: EfiProCLUnitID" class="form-control"></select>
@@ -121,11 +121,11 @@
                                 <option value="6">min-max</option>
                             </select></td>
                             <td><input class="form-control" type="text" data-bind="value: fiProATContent,  enable: isEnable()"></td>
-                            <td><select class="form-control" data-bind="options: lstDMDVT,
+                            <td><select class="form-control" data-bind="options: lstChiTieuAT,
                                                     optionsText: 'fiCatTypeName',
                                                     optionsValue: 'fiCatNote',
                                                     optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.chat_luong.dvt"/>',
-                                                    value: fiProATUnitName, enable: isEnable() "></select></td>
+                                                    value: fiProATUnitID, enable: isEnable() "></select></td>
                             <td class="text-center" data-bind="visible: $root.isEditable()">
                                 <span data-bind="if: (isUpdate())">
                                     <a data-bind="click: $parent.updateListAT"> <i class="fa fa-save" aria-hidden="true"></i>
@@ -164,7 +164,7 @@
                             </td>
                             <td>
                                 <select
-                                        data-bind="options: lstDMDVT,
+                                        data-bind="options: lstChiTieuAT,
                                                     optionsText: 'fiCatTypeName',
                                                     optionsValue: 'fiCatNote',
                                                     optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.an_toan.dvt"/>',

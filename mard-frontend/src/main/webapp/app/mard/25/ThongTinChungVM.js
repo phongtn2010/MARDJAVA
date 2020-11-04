@@ -31,9 +31,9 @@ function ThongTinChungVM(data) {
     ttcVMSelf.lstCountry = ko.observableArray((data && data.hasOwnProperty('lstCountry')) ? data.lstCountry : []);
     ttcVMSelf.lstDMDVT = ko.observableArray((data && data.hasOwnProperty('lstDMDVT')) ? data.lstDMDVT : []);
     ttcVMSelf.lstNhom = ko.observableArray((data && data.hasOwnProperty('lstNhom')) ? data.lstNhom : []);
-    ttcVMSelf.lstPhanNhom = ko.observableArray((data && data.hasOwnProperty('lstPhanNhom')) ? data.lstPhanNhom : []);
-    ttcVMSelf.lstLoai = ko.observableArray((data && data.hasOwnProperty('lstLoai')) ? data.lstLoai : []);
-    ttcVMSelf.lstPhanLoai = ko.observableArray((data && data.hasOwnProperty('lstPhanLoai')) ? data.lstPhanLoai : []);
+    ttcVMSelf.lstPhanNhom = ko.observableArray([]);
+    ttcVMSelf.lstLoai = ko.observableArray([]);
+    ttcVMSelf.lstPhanLoai = ko.observableArray([]);
     ttcVMSelf.fiSellCountryCode = ko.observable((data && data.hasOwnProperty('fiSellCountryCode')) ? data.fiSellCountryCode : null).extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
@@ -147,6 +147,7 @@ function ThongTinChungVM(data) {
         }else {
             $("#model-congvan").show();
         }
+        console.log(ttcVMSelf.fiHSType());
     }
     ttcVMSelf.fiProValueVN  = ko.observable((data && data.hasOwnProperty('fiProValueVN ')) ? data.fiProValueVN  : null).
     extend({
@@ -239,19 +240,19 @@ function ThongTinChungVM(data) {
     ttcVMSelf.lstHoSoType  = ko.observableArray((data && data.hasOwnProperty('lstHoSoType')) ? data.lstHoSoType : []);
     
 
-    ttcVMSelf.fiProIdNhom = ko.observable((data && data.hasOwnProperty('fiProIdNhom')) ? data.fiProIdNhom : null).
+    ttcVMSelf.fiProIdNhom = ko.observable(null).
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
-    ttcVMSelf.fiProIdPhanNhom = ko.observable((data && data.hasOwnProperty('fiProIdPhanNhom')) ? data.fiProIdPhanNhom : null).
+    ttcVMSelf.fiProIdPhanNhom = ko.observable(null).
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
-    ttcVMSelf.fiProIdLoai = ko.observable((data && data.hasOwnProperty('fiProIdLoai')) ? data.fiProIdLoai : null).
+    ttcVMSelf.fiProIdLoai = ko.observable(null).
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
-    ttcVMSelf.fiProIdPhanLoai = ko.observable((data && data.hasOwnProperty('fiProIdPhanLoai')) ? data.fiProIdPhanLoai : null).
+    ttcVMSelf.fiProIdPhanLoai = ko.observable(null).
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
@@ -329,34 +330,39 @@ function ThongTinChungVM(data) {
 
     ttcVMSelf.lstLoaiTienTe  = ko.observableArray((data && data.hasOwnProperty('lstLoaiTienTe')) ? data.lstLoaiTienTe : []);
     ttcVMSelf.fiSignAddressName  = ko.observable(null);
+
     ttcVMSelf.eventChangeNhom =function(){
         var id =ttcVMSelf.fiProIdNhom();
-        console.log(id);
-        app.makeGet({
-            url: '/mard/25/danhmuc/getby-catparent/'+id,
-            success: function(res) {
-                ttcVMSelf.lstPhanNhom(res.data);
-                console.log(res);
-            }
-        });
+        if(id !== 'undefined'){
+            app.makeGet({
+                url: '/mard/25/danhmuc/getby-catparent/'+id,
+                success: function(res) {
+                    ttcVMSelf.lstPhanNhom(res.data);
+                }
+            });
+        }
     }
     ttcVMSelf.eventChangePhanNhom =function(){
         var id =ttcVMSelf.fiProIdPhanNhom();
-        app.makeGet({
-            url: '/mard/25/danhmuc/getby-catparent/'+id,
-            success: function(res) {
-                ttcVMSelf.lstLoai=res.data;
-            }
-        });
+        if(id !== 'undefined'){
+            app.makeGet({
+                url: '/mard/25/danhmuc/getby-catparent/'+id,
+                success: function(res) {
+                    ttcVMSelf.lstLoai(res.data);
+                }
+            });
+        }
     }
     ttcVMSelf.eventChangeLoai =function(){
         var id =ttcVMSelf.fiProIdLoai();
-        app.makeGet({
-            url: '/mard/25/danhmuc/getby-catparent/'+id,
-            success: function(res) {
-                ttcVMSelf.lstPhanLoai=res.data;
-            }
-        });
+        if(id !== 'undefined'){
+            app.makeGet({
+                url: '/mard/25/danhmuc/getby-catparent/'+id,
+                success: function(res) {
+                    ttcVMSelf.lstPhanLoai(res.data);
+                }
+            });
+        }
     }
 
     ttcVMSelf.getProfileStatus = function (statuscode) {
@@ -369,13 +375,8 @@ function ThongTinChungVM(data) {
         else return statuscode;
     }
     ttcVMSelf.getTenNhom = function (idNhom) {
-        var lstNhomHangHoa = ttcVMSelf.lstNhom();
-        var pos = lstNhomHangHoa.find(function (e) {
-            return e.fiCatType == Number(idNhom);
-        })
-        if (pos)
-            return pos.fiCatTypeName;
-        else return idNhom;
+        console.log(idNhom);
+        return ttcVMSelf.findCodeName(ttcVMSelf.lstNhom(),idNhom);
     }
 
 
@@ -448,8 +449,8 @@ function ThongTinChungVM(data) {
             ttcVMSelf.listAT.push(getList);
         }
         for (var i =0;i<ttcVMSelf.fiProSLKLList().length;i++){
-            var massName=ttcVMSelf.findNameOfCode(ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode());
-            var amountName=ttcVMSelf.findNameOfCode(ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode());
+            var massName=ttcVMSelf.findNameByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode());
+            var amountName=ttcVMSelf.findNameByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode());
             var getList = {
                 fiProSLKLMass: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMass(),
                 fiProSLKLMassTan: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassTan(),
@@ -475,6 +476,10 @@ function ThongTinChungVM(data) {
         var namePhanNhom=ttcVMSelf.findCodeName(ttcVMSelf.lstPhanNhom(),ttcVMSelf.fiProIdPhanNhom());
         var nameLoai=ttcVMSelf.findCodeName(ttcVMSelf.lstLoai(),ttcVMSelf.fiProIdLoai());
         var namePhanLoai=ttcVMSelf.findCodeName(ttcVMSelf.lstPhanLoai(),ttcVMSelf.fiProIdPhanLoai());
+
+        var phanNhom=ttcVMSelf.findCatNoteById(ttcVMSelf.lstPhanNhom(),ttcVMSelf.fiProIdPhanNhom());
+        var loai=ttcVMSelf.findCatNoteById(ttcVMSelf.lstLoai(),ttcVMSelf.fiProIdLoai());
+        var phanLoai=ttcVMSelf.findCatNoteById(ttcVMSelf.lstPhanLoai(),ttcVMSelf.fiProIdPhanLoai());
         var item ={
             fiProName: ttcVMSelf.fiProName(),
             fiTrangThaiHangHoa: ttcVMSelf.fiTrangThaiHangHoa(),
@@ -483,11 +488,11 @@ function ThongTinChungVM(data) {
             fiProThanhPhan: ttcVMSelf.fiProThanhPhan(),
             fiProIdNhom: ttcVMSelf.fiProIdNhom(),
             fiProNameNhom: nameNhom,
-            fiProIdPhanNhom: ttcVMSelf.fiProIdPhanNhom(),
+            fiProIdPhanNhom: phanNhom,
             fiProNamePhanNhom: namePhanNhom,
-            fiProIdLoai: ttcVMSelf.fiProIdLoai(),
+            fiProIdLoai: loai,
             fiProNameLoai: nameLoai,
-            fiProIdPhanLoai: ttcVMSelf.fiProIdPhanLoai(),
+            fiProIdPhanLoai: phanLoai,
             fiProNamePhanLoai: namePhanLoai,
             fiProCode: ttcVMSelf.fiProCode(),
             fiProMadeIn: ttcVMSelf.fiProMadeIn(),
@@ -546,8 +551,8 @@ function ThongTinChungVM(data) {
             ttcVMSelf.listAT.push(getList);
         }
         for (var i =0;i<ttcVMSelf.fiProSLKLList().length;i++){
-            var massName=ttcVMSelf.findNameOfCode(ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode());
-            var amountName=ttcVMSelf.findNameOfCode(ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode());
+            var massName=ttcVMSelf.findNameByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode());
+            var amountName=ttcVMSelf.findNameByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode());
             var getList = {
                 fiProSLKLMass: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMass(),
                 fiProSLKLMassTan: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassTan(),
@@ -572,6 +577,10 @@ function ThongTinChungVM(data) {
         var namePhanNhom=ttcVMSelf.findCodeName(ttcVMSelf.lstPhanNhom(),ttcVMSelf.fiProIdPhanNhom());
         var nameLoai=ttcVMSelf.findCodeName(ttcVMSelf.lstLoai(),ttcVMSelf.fiProIdLoai());
         var namePhanLoai=ttcVMSelf.findCodeName(ttcVMSelf.lstPhanLoai(),ttcVMSelf.fiProIdPhanLoai());
+
+        var phanNhom=ttcVMSelf.findCatNoteById(ttcVMSelf.lstPhanNhom(),ttcVMSelf.fiProIdPhanNhom());
+        var loai=ttcVMSelf.findCatNoteById(ttcVMSelf.lstLoai(),ttcVMSelf.fiProIdLoai());
+        var phanLoai=ttcVMSelf.findCatNoteById(ttcVMSelf.lstPhanLoai(),ttcVMSelf.fiProIdPhanLoai());
         var item ={
             fiProName: ttcVMSelf.fiProName(),
             fiTrangThaiHangHoa: ttcVMSelf.fiTrangThaiHangHoa(),
@@ -580,11 +589,11 @@ function ThongTinChungVM(data) {
             fiProThanhPhan: ttcVMSelf.fiProThanhPhan(),
             fiProIdNhom: ttcVMSelf.fiProIdNhom(),
             fiProNameNhom: nameNhom,
-            fiProIdPhanNhom: ttcVMSelf.fiProIdPhanNhom(),
+            fiProIdPhanNhom: phanNhom,
             fiProNamePhanNhom: namePhanNhom,
-            fiProIdLoai: ttcVMSelf.fiProIdLoai(),
+            fiProIdLoai: loai,
             fiProNameLoai: nameLoai,
-            fiProIdPhanLoai: ttcVMSelf.fiProIdPhanLoai(),
+            fiProIdPhanLoai: phanLoai,
             fiProNamePhanLoai: namePhanLoai,
             fiProCode: ttcVMSelf.fiProCode(),
             fiProMadeIn: ttcVMSelf.fiProMadeIn(),
@@ -666,11 +675,12 @@ function ThongTinChungVM(data) {
         var chiTieuChatLuong = [ttcVMSelf.EfiProCLContent, ttcVMSelf.EfiProCLCompare, ttcVMSelf.EfiProCLUnitID,ttcVMSelf.EfiProCLTarg];
         ttcVMSelf.errors = ko.validation.group(chiTieuChatLuong, {deep: true, live: true, observable: true});
         if (!ttcVMSelf.validate()) return;
+        var unitName= ttcVMSelf.findNameByCatNote2(ttcVMSelf.lstChiTieuAT(),ttcVMSelf.EfiProCLUnitID());
         var item = {
             fiProCLTarg: ttcVMSelf.EfiProCLTarg(),
             fiProCLCompare: ttcVMSelf.EfiProCLCompare(),
             fiProCLContent: ttcVMSelf.EfiProCLContent(),
-            fiProCLUnitName: ttcVMSelf.EfiProCLUnitID(),
+            fiProCLUnitName: unitName,
             lstChiTieuAT: ttcVMSelf.lstChiTieuAT,
             isEnable:ko.observable(false),
             isUpdate:ko.observable(false),
@@ -717,6 +727,7 @@ function ThongTinChungVM(data) {
         var chiTieuAT = [ttcVMSelf.EfiProATContent, ttcVMSelf.EfiProATTarg, ttcVMSelf.EfiProATCompare,ttcVMSelf.EfiProATUnitID];
         ttcVMSelf.errors = ko.validation.group(chiTieuAT, {deep: true, live: true, observable: true});
         if (!ttcVMSelf.validate()) return;
+        var unitName= ttcVMSelf.findNameByCatNote2(ttcVMSelf.lstChiTieuAT(),ttcVMSelf.EfiProATUnitID());
         var item = {
             fiProATTarg: ttcVMSelf.EfiProATTarg(),
             fiProATCompare: ttcVMSelf.EfiProATCompare(),
@@ -724,7 +735,7 @@ function ThongTinChungVM(data) {
             isEnable:ko.observable(false),
             isUpdate:ko.observable(false),
             lstChiTieuAT: ttcVMSelf.lstChiTieuAT,
-            fiProATUnitName: ttcVMSelf.EfiProATUnitID(),
+            fiProATUnitName: unitName,
             fiProATUnitID: ttcVMSelf.EfiProATUnitID()
         }
         item.fiProATTarg = ko.observable((item && item.hasOwnProperty('fiProATTarg')) ? item.fiProATTarg : null).extend({
@@ -761,8 +772,8 @@ function ThongTinChungVM(data) {
         var chiTieuKL = [ttcVMSelf.EfiProSLKLMass, ttcVMSelf.EfiProSLKLMassTan, ttcVMSelf.EfiProSLKLAmount,ttcVMSelf.EfiProSLKLAmountUnitCode,ttcVMSelf.EfiProSLKLMassUnitCode];
         ttcVMSelf.errors = ko.validation.group(chiTieuKL, {deep: true, live: true, observable: true});
         if (!ttcVMSelf.validate()) return;
-        var massName=ttcVMSelf.findNameOfCode(ttcVMSelf.EfiProSLKLMassUnitCode());
-        var amountName=ttcVMSelf.findNameOfCode(ttcVMSelf.EfiProSLKLAmountUnitCode());
+        var massName=ttcVMSelf.findNameByCatNote(ttcVMSelf.EfiProSLKLMassUnitCode());
+        var amountName=ttcVMSelf.findNameByCatNote(ttcVMSelf.EfiProSLKLAmountUnitCode());
         var item = {
             fiProSLKLMass: ttcVMSelf.EfiProSLKLMass(),
             fiProSLKLMassTan:ttcVMSelf.EfiProSLKLMassTan(),
@@ -850,8 +861,17 @@ function ThongTinChungVM(data) {
     ttcVMSelf.removeListSLKT = function (index) {
         ttcVMSelf.fiProSLKLList.splice(index, 1);
     }
-    ttcVMSelf.findNameOfCode = function(code){
+    ttcVMSelf.findNameByCatNote = function(code){
         var pos = ttcVMSelf.lstDMDVT().find(function (e) {
+            return e.fiCatNote == code;
+        })
+        if (pos)
+            return pos.fiCatTypeName;
+        else
+            return code;
+    }
+    ttcVMSelf.findNameByCatNote2 = function(lst,code){
+        var pos = lst.find(function (e) {
             return e.fiCatNote == code;
         })
         if (pos)
@@ -861,10 +881,19 @@ function ThongTinChungVM(data) {
     }
     ttcVMSelf.findCodeName = function(lst,code){
         var pos = lst.find(function (e) {
-            return e.fiCatType == code;
+            return e.fiidcat == Number(code);
         })
         if (pos)
             return pos.fiCatTypeName;
+        else
+            return code;
+    }
+    ttcVMSelf.findCatNoteById = function(lst,code){
+        var pos = lst.find(function (e) {
+            return e.fiidcat == Number(code);
+        })
+        if (pos)
+            return pos.fiCatNote;
         else
             return code;
     }

@@ -246,7 +246,7 @@ public class Mard25Api extends BaseApi {
     ResponseJson getByCatParent(@PathVariable Long id) {
         ResponseJson json = new ResponseJson();
         try {
-            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_BY_CAT_NO)+id);
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_BY_CAT_PARENT)+id);
             return json;
         } catch (Exception ex) {
             LogUtil.addLog(ex);

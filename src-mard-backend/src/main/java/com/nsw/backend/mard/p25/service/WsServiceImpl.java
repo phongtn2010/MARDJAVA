@@ -109,14 +109,11 @@ public class WsServiceImpl implements WsService {
         }
         Gson gson = new Gson();
         XacNhanDon xnd = gson.fromJson(gson.toJson(request.getData()), XacNhanDon.class);
-        internalStatusUpdate(request.getHeader(), xnd.getFiAssignName(), status);
         TbdHoso25 tbdHoso25 =tbdHoso25Service.findByFiHSCode(request.getHeader().getSubject().getReference());
-
         if(tbdHoso25==null){
             return new ResponseJson(false, "","MA HO SO KHONG TON TAI");
         }
-
-        tbdLichsu25Service.save(createHistory(tbdHoso25, action, request.getHeader(), xnd.getFiAssignName()));
+        internalStatusUpdate(request.getHeader(), xnd.getFiAssignName(), status);
 
         return new ResponseJson(true, "");
     }

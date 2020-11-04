@@ -92,24 +92,33 @@ function Mard25ViewHangHoaVM (options) {
         $("#modal_guiSua").show();
     }
     self.guiKiemDinhHangHoa =function(){
+        if(!self.validateForm()){
+            return;
+        }
+        var item={
+
+        }
+    }
+    self.validateForm =function(){
         if(self.fiHS().fiHSType=='3'||self.fiHS().fiHSType==3){
             if(self.fiSoGCNHopQuy()==''||self.fiSoGCNHopQuy()==null){
                 app.Alert("Chưa điền số GCN hợp quy (đối với hàng 2C)");
-                return;
+                return false;
             }
             if(self.fiNgayCap()=='undefine'||self.fiNgayCap()==null){
                 app.Alert("Chưa điền ngày cấp GCN hợp quy (đối với hàng 2C)");
-                return;
+                return false;
             }
             if(self.lstKetQuaPhanTich().length==0){
                 app.Alert("Chưa đính kèm phiếu kết quả phân tích (đối với hàng 2C)");
-                return;
+                return false;
             }
         }
         if(self.fiFileGCN()==null){
             app.Alert("Chưa có file GCN hợp quy");
-            return;
+            return false;
         }
+        return true;
     }
     self.thoatOnClick = function(index){
         self.clearForm();
