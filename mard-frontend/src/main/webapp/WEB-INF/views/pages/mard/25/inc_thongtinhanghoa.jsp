@@ -115,7 +115,7 @@
                             </div>
                             <div class="col-md-4">
                                 <select data-bind="options : lstNhom, optionsValue : 'fiCatType',  optionsText : 'fiCatTypeName',
-                                                    value: fiProIdNhom" class="form-control"></select>
+                                                    value: fiProIdNhom,event : {change : eventChangeNhom}" class="form-control"></select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -124,7 +124,7 @@
                             </div>
                             <div class="col-md-4">
                                 <select data-bind="options : lstPhanNhom, optionsValue : 'fiCatType',  optionsText : 'fiCatTypeName',
-                                                    value: fiProIdPhanNhom" class="form-control"></select>
+                                                    value: fiProIdPhanNhom,event : {change : eventChangePhanNhom}" class="form-control"></select>
                             </div>
                             <div class="col-md-2 nsw-text-right">
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.loai"/><a class="nsw-require-field">*</a></label>
@@ -134,7 +134,7 @@
                                                     optionsText: 'fiCatTypeName',
                                                     optionsValue: 'fiCatType',
 
-                                                    value: fiProIdLoai" class="form-control"></select>
+                                                    value: fiProIdLoai ,event : {change : eventChangeLoai}" class="form-control"></select>
                             </div>
                         </div>
                         <div class="form-group">

@@ -36,6 +36,8 @@ function Mard25VM() {
     self.fiNameTCCD=ko.observable(null);
     self.filstChiTieu = ko.observableArray([]);
     self.selectedHoSo=ko.observable(null);
+    self.lstNhom = ko.observableArray([]);
+    self.lstProvince = ko.observableArray([]);
 
     self.pagination = ko.observable(new PagingVM({
         pageSize: MAX_PAGE_SIZE,
@@ -49,7 +51,16 @@ function Mard25VM() {
         self.currentPage(newCurrentPage);
         self.searchHoso(newCurrentPage);
     })
-
+    self.getTenNhom = function (idNhom) {
+        // console.log(idNhom);
+        var lstNhomHangHoa = self.lstNhom();
+        var pos = lstNhomHangHoa.find(function (e) {
+            return e.fiCatType == Number(idNhom);
+        })
+        if (pos)
+            return pos.fiCatTypeName;
+        else return idNhom;
+    }
     self.getProfileStatus = function (statuscode) {
         var lstProfileStatus = self.lstProfileStatus();
         var pos = lstProfileStatus.find(function (e) {
@@ -59,6 +70,14 @@ function Mard25VM() {
             return pos.fiCatTypeName;
         else return statuscode;
     }
+    self.getNoiKy = function(provinceId){
+        var pos = self.lstProvince().find(function (e) {
+            return e.provinceId == Number(provinceId);
+        })
+        if (pos)
+            return pos.provinceName.substring(4,pos.provinceName.length);
+        else return provinceId;
+    }
     self.getHoSoType = function (hsType) {
         var lstHoSoType = self.lstHoSoType();
         var pos = lstHoSoType.find(function (e) {
@@ -66,6 +85,15 @@ function Mard25VM() {
         })
         if (pos)
             return pos.fiCatTypeName.substring(0,2);
+        else return hsType;
+    }
+    self.getHoSoTypeFull = function (hsType) {
+        var lstHoSoType = self.lstHoSoType();
+        var pos = lstHoSoType.find(function (e) {
+            return e.fiCatType == Number(hsType);
+        })
+        if (pos)
+            return pos.fiCatTypeName;
         else return hsType;
     }
 
@@ -119,6 +147,14 @@ function Mard25VM() {
             app.sendGetRequest("/mard/25/danhmuc/dvxl/1", function (res) {
                 options['lstDVXL'] = res.data;
                 self.lstDVXL(res.data);
+            }),
+            // Get profile status
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/1", function (res) {
+                self.lstNhom(res.data);
+            }),
+            // Get list province
+            app.sendGetRequest("/mard/25/danhmuc/tinhthanh", function (res) {
+                self.lstProvince(res.data);
             })
             // Get attach types
             // app.sendGetRequest("/mard/06/danhmuc/dinhkem?systemId=6", function (res) {
@@ -199,8 +235,42 @@ function Mard25VM() {
         item.lstProfileStatus = self.lstProfileStatus();
         item.lstUOMAnimal = self.lstUOMAnimal();
         item.lstAtchType = self.lstAtchType();
+
+        item.lstHD = ko.observableArray([]);
+        item.lstHoaDon = ko.observableArray([]);
+        item.lstPhieu = ko.observableArray([]);
+        if(item.fiAttachmentList.length>0) {
+            console.log(item.fiAttachmentList);
+            item.lstHD=ko.computed(function () {
+                return ko.utils.arrayFilter(item.fiAttachmentList, function (re) {
+                    return re.fiFileTypeID == '1';
+                });
+            });
+            item.lstHoaDon=ko.computed(function () {
+                return ko.utils.arrayFilter(item.fiAttachmentList, function (re) {
+                    return re.fiFileTypeID == '2';
+                });
+            });
+            item.lstPhieu=ko.computed(function () {
+                return ko.utils.arrayFilter(item.fiAttachmentList, function (re) {
+                    return re.fiFileTypeID == '3';
+                });
+            });
+        }
+        item.ngayKy = ko.observable(null);
+        item.thangKy = ko.observable(null);
+        item.namKy = ko.observable(null);
+
+        var ngayTao = new Date(item.fiHSCreatedDate);
+        var ngay=ngayTao.getDay();
+        var thang=ngayTao.getMonth();
+        var nam=ngayTao.getFullYear();
+
+        item.ngayKy(ngay);
+        item.thangKy(thang);
+        item.namKy(nam);
         self.selectedHoSo(item);
-        $('#mard06ViewHSModal').modal('show');
+        $('#mard25ViewHSModal').modal('show');
     }
 
     self.viewGiayPhep = function(item) {
@@ -581,11 +651,11 @@ $(document).ready(function () {
     var vm = new Mard25VM();
     ko.applyBindings(vm, document.getElementById('mard06'));
     vm.applyState();
-    $("#title_tab_vsty").click(function(e){
+    $("#title_tab_vsty").click(function (e) {
         $("#tab_vsty").show();
         $("#tab_cnkd").hide();
     });
-    $("#title_tab_kdnk").click(function(e){
+    $("#title_tab_kdnk").click(function (e) {
         $("#tab_cnkd").show();
         $("#tab_vsty").hide();
     })

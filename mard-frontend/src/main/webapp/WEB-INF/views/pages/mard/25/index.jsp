@@ -195,7 +195,7 @@
                             </td>
                             <td class="text-center">
                                 <a href="javascript:void(0)"
-                                   data-bind="click: $root.goViewHoSo, text: fiNSWFileCode"></a>
+                                   data-bind="click: $root.viewHoSo, text: fiNSWFileCode"></a>
                             </td>
                             <td class="text-center" data-bind="datetime: fiCreatedDate"></td>
                             <td class="text-center">
@@ -227,7 +227,7 @@
                             </td>
 
                             <td class="text-center">
-                                <div data-bind="">
+                                <div data-bind="visible: fiHSStatus != 0 && fiHSStatus <26">
                                     <a  data-bind="click: $root.goYCRHoSo"><i
                                             class="fa fa-caret-square-o-down"></i></a>
                                 </div>
@@ -494,6 +494,7 @@
             </div>
         </div>
     </div>
+    <%@include file="inc_view_hoso.jsp" %>
 </div>
 <style>
     .content {

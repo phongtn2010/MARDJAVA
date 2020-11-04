@@ -834,7 +834,7 @@ function UploadFileVM(options) {
     ufVMSelf.errorMsg = ko.observable(null);
     ufVMSelf.uploadedFiles = ko.observableArray([]);
 
-    ufVMSelf.isRequired = ko.observable(null);
+
     ufVMSelf.fiFilePath = ko.observable(null);
     ufVMSelf.fiFileType = ko.observable(null);
 
@@ -965,10 +965,7 @@ function UploadFileVM(options) {
         }
     });
 
-    ufVMSelf.lstCNLH = ko.observableArray([]).
-    extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-    });
+    ufVMSelf.lstCNLH = ko.observableArray([]);
     ufVMSelf.fiFileCNLH = ko.observable(null);
     ufVMSelf.fiFileCNLHPath = ko.observable(null).extend({
         validation: {
@@ -990,10 +987,7 @@ function UploadFileVM(options) {
         }
     });
 
-    ufVMSelf.lstCNPT = ko.observableArray([]).
-    extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-    });
+    ufVMSelf.lstCNPT = ko.observableArray([]);
     ufVMSelf.fiFileCNPT = ko.observable(null);
     ufVMSelf.fiFileCNPTPath = ko.observable(null).extend({
         validation: {
@@ -1015,6 +1009,7 @@ function UploadFileVM(options) {
         }
     });
 
+    ufVMSelf.isRequired = ko.observable(null);
     ufVMSelf.fiFileKhacID = ko.observable(null);
     ufVMSelf.fiFileKhacName = ko.observable(null);
     ufVMSelf.lstLoaiFileDinhKemKhac = ko.observableArray((options && options.hasOwnProperty('lstLoaiFileDinhKemKhac')) ? options.lstLoaiFileDinhKemKhac : []);
@@ -1025,71 +1020,80 @@ function UploadFileVM(options) {
 
         if(ufVMSelf.fiAttachmentList().length>0){
 
-            ufVMSelf.lstHD = ko.computed(function () {
+            ufVMSelf.lstHD(ko.computed(function () {
                 return ko.utils.arrayFilter(ufVMSelf.fiAttachmentList(), function (re) {
                     return re.fiFileTypeID == '1';
                 });
-            });
-            console.log(ufVMSelf.lstHD());
-            ufVMSelf.lstHoaDon = ko.computed(function () {
+            }));
+            ufVMSelf.lstHoaDon(ko.computed(function () {
                 return ko.utils.arrayFilter(ufVMSelf.fiAttachmentList(), function (re) {
                     return re.fiFileTypeID == '2';
                 });
-            });
-            ufVMSelf.lstPhieu = ko.computed(function () {
+            }));
+            ufVMSelf.lstPhieu(ko.computed(function () {
                 return ko.utils.arrayFilter(ufVMSelf.fiAttachmentList(), function (re) {
                     return re.fiFileTypeID == '3';
                 });
-            }); ufVMSelf.lstKQ = ko.computed(function () {
+            }));
+            ufVMSelf.lstKQ(ko.computed(function () {
                 return ko.utils.arrayFilter(ufVMSelf.fiAttachmentList(), function (re) {
                     return re.fiFileTypeID == '4';
                 });
-            });
-            ufVMSelf.lstTC = ko.computed(function () {
+            }));
+            ufVMSelf.lstTC(ko.computed(function () {
                 return ko.utils.arrayFilter(ufVMSelf.fiAttachmentList(), function (re) {
                     return re.fiFileTypeID == '5';
                 });
-            });
-            ufVMSelf.lstCNLH = ko.computed(function () {
+            }));
+            ufVMSelf.lstCNLH(ko.computed(function () {
                 return ko.utils.arrayFilter(ufVMSelf.fiAttachmentList(), function (re) {
                     return re.fiFileTypeID == '6';
                 });
-            });
-            ufVMSelf.lstCNPT = ko.computed(function () {
+            }));
+            ufVMSelf.lstCNPT(ko.computed(function () {
                 return ko.utils.arrayFilter(ufVMSelf.fiAttachmentList(), function (re) {
                     return re.fiFileTypeID == '7';
                 });
-            });
-            ufVMSelf.lstAtch = ko.computed(function () {
+            }));
+            ufVMSelf.lstAtch(ko.computed(function () {
                 return ko.utils.arrayFilter(ufVMSelf.fiAttachmentList(), function (re) {
                     return re.fiFileTypeID == '8';
                 });
-            });
+            }));
 
     }
     ufVMSelf.removeLstHD = function (index) {
         ufVMSelf.lstHD.splice(index, 1);
+        ufVMSelf.fiAttachmentList.splice(index,1);
+        console.log(ufVMSelf.fiAttachmentList());
     }
     ufVMSelf.removeLstHoaDon = function (index) {
         ufVMSelf.lstHoaDon.splice(index, 1);
+        ufVMSelf.fiAttachmentList.splice(index,1);
     }
     ufVMSelf.removeLstPhieu = function (index) {
         ufVMSelf.lstPhieu.splice(index, 1);
+        ufVMSelf.fiAttachmentList.splice(index,1);
     }
     ufVMSelf.removeLstKQ = function (index) {
         ufVMSelf.lstKQ.splice(index, 1);
+        ufVMSelf.fiAttachmentList.splice(index,1);
     }
     ufVMSelf.removeLstTC = function (index) {
         ufVMSelf.lstTC.splice(index, 1);
+        ufVMSelf.fiAttachmentList.splice(index,1);
     }
     ufVMSelf.removeLstCNLH = function (index) {
         ufVMSelf.lstCNLH.splice(index, 1);
+        ufVMSelf.fiAttachmentList.splice(index,1);
     }
     ufVMSelf.removeLstCNPT = function (index) {
         ufVMSelf.lstCNPT.splice(index, 1);
+        ufVMSelf.fiAttachmentList.splice(index,1);
     }
     ufVMSelf.removeLstAtch = function (index) {
         ufVMSelf.lstAtch.splice(index, 1);
+        ufVMSelf.fiAttachmentList.splice(index,1);
     }
 
     ufVMSelf.addFile = function (data,param) {

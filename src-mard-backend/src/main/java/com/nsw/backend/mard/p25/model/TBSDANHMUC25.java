@@ -43,7 +43,7 @@ public class TBSDANHMUC25 implements Serializable {
     private String fiCatNote;
 
     @Column(name = "FI_CAT_PARENT")
-    private String fiCatParent;
+    private Long fiCatParent;
 
     @Column(name = "FI_CAT_TYPE", nullable = false)
     private Long fiCatType;

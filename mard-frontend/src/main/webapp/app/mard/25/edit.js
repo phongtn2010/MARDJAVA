@@ -7,7 +7,42 @@ function Mard25EditVM () {
         editVMSefl.kdnkVM(new HangHoaNhapKhauVM(options));
     }
     editVMSefl.saveRegProfile = function () {
-        // if (!editVMSefl.kdnkVM().validateForm()) return;
+        if (!editVMSefl.kdnkVM().validateForm()){
+            editVMSefl.pop = app.popup({
+                title: 'Thông báo',
+                html: '<b>Bạn cần nhập đẩy đủ các trường bắt buộc</b>',
+                width: 450,
+                buttons: [
+                    {
+                        name: 'OK',
+                        class: 'btn',
+                        icon: 'fa-close',
+                        action: function () {
+                            app.popupRemove(editVMSefl.pop.selector);
+                        }
+                    }
+                ]
+            });
+            return;
+        }
+        // if (!editVMSefl.kdnkVM().validateUploadFiles()){
+        //     editVMSefl.pop = app.popup({
+        //         title: 'Thông báo',
+        //         html: '<b>Bạn cần thêm đẩy đủ các tài liệu đính kèm</b>',
+        //         width: 450,
+        //         buttons: [
+        //             {
+        //                 name: 'OK',
+        //                 class: 'btn',
+        //                 icon: 'fa-close',
+        //                 action: function () {
+        //                     app.popupRemove(editVMSefl.pop.selector);
+        //                 }
+        //             }
+        //         ]
+        //     });
+        //     return;
+        // }
         var body = editVMSefl.kdnkVM().getData();
         // return;
         if (!body) return;
@@ -61,7 +96,42 @@ function Mard25EditVM () {
     }
 
     editVMSefl.sendRegProfile = function () {
-        // if (!editVMSefl.kdnkVM().validateForm() || !editVMSefl.kdnkVM().validateAttachment()) return;
+        if (!editVMSefl.kdnkVM().validateForm()){
+            editVMSefl.pop = app.popup({
+                title: 'Thông báo',
+                html: '<b>Bạn cần nhập đẩy đủ các trường bắt buộc</b>',
+                width: 450,
+                buttons: [
+                    {
+                        name: 'OK',
+                        class: 'btn',
+                        icon: 'fa-close',
+                        action: function () {
+                            app.popupRemove(editVMSefl.pop.selector);
+                        }
+                    }
+                ]
+            });
+            return;
+        }
+        // if (!editVMSefl.kdnkVM().validateUploadFiles()){
+        //     editVMSefl.pop = app.popup({
+        //         title: 'Thông báo',
+        //         html: '<b>Bạn cần thêm đẩy đủ các tài liệu đính kèm</b>',
+        //         width: 450,
+        //         buttons: [
+        //             {
+        //                 name: 'OK',
+        //                 class: 'btn',
+        //                 icon: 'fa-close',
+        //                 action: function () {
+        //                     app.popupRemove(editVMSefl.pop.selector);
+        //                 }
+        //             }
+        //         ]
+        //     });
+        //     return;
+        // }
         var body = editVMSefl.kdnkVM().getData();
         // return;
         if (!body) return;
@@ -263,6 +333,10 @@ $(document).ready(function () {
             // Get danh muc dvt
             app.sendGetRequest("/mard/25/danhmuc/getby-catno/10", function (res) {
                 options['lstDMDVT'] = res.data;
+            }),
+            // Get danh muc dvt
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/3", function (res) {
+                options['lstChiTieuAT'] = res.data;
             })
         ).done(function (data) {
             $('#loading10').hide();

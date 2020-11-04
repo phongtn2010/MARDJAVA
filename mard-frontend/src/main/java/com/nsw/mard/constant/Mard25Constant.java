@@ -190,6 +190,7 @@ public class Mard25Constant {
 
         //binhvv5
         public static final String GET_BY_CAT_NO = "mard.25.danhmuc.getbycatno";
+        public static final String GET_BY_CAT_PARENT = "mard.25.danhmuc.getbycatparent";
         public static final String GET_HANGHOA_BY_IDHS = "mard.25.hanghoa.find";
         public static final String GET_DANHMUC_TCCD = "mard.25.tochuccd.find";
 

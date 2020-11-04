@@ -292,7 +292,12 @@ public class WsServiceImpl implements WsService {
         message.setFiIdHoso(Long.valueOf(requestCancel.getFiIdHS()));
         ResponseJson response = WsServiceHelper.createSendRequest(Constant25.WebServiceURL.get(environment), message);
         if (response.isSuccess()){
-
+            TbdHoso25 hs25= tbdHoso25Service.findById(requestCancel.getFiIdHS());
+            hs25.setFiHSStatus(Constant25.HosoStatus.DA_RUT_HO_SO.getId());
+            tbdLichsu25Service.save(createHistory(hs25,Constant25.HosoStatus.DA_RUT_HO_SO.getName()));
+            tbdHoso25Service.save(hs25);
+            response.setSuccess(true);
+            response.setMessage("Rút hồ sơ thành công");
         }else{
             response.setSuccess(false);
             response.setMessage("Có lỗi xảy ra khi rút hồ sơ");

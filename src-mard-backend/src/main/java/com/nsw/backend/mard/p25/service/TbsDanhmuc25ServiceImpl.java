@@ -18,4 +18,9 @@ public class TbsDanhmuc25ServiceImpl implements TbsDanhmuc25Service {
     public List<TBSDANHMUC25> findByFiCatNoOrderByFiOrder(Long fiCatNo) {
         return repository.findByFiCatNoOrderByFiOrder(fiCatNo);
     }
+
+    @Override
+    public List<TBSDANHMUC25> findByFiCatParentOrderByFiOrder(Long id) {
+        return repository.findByFiCatParentOrderByFiOrder(id);
+    }
 }

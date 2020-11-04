@@ -1,6 +1,7 @@
 function ThongTinChungVM(data) {
     var ttcVMSelf = this;
 
+    ttcVMSelf.lstChiTieuAT = ko.observableArray((data && data.hasOwnProperty('lstChiTieuAT')) ? data.lstChiTieuAT : []);
     ttcVMSelf.listCL = ko.observableArray((data && data.hasOwnProperty('listCL')) ? data.listCL : []);
     ttcVMSelf.listAT = ko.observableArray((data && data.hasOwnProperty('listAT')) ? data.listAT : []);
     ttcVMSelf.listSLKL = ko.observableArray((data && data.hasOwnProperty('listSLKL')) ? data.listSLKL : []);
@@ -327,7 +328,36 @@ function ThongTinChungVM(data) {
     });
 
     ttcVMSelf.lstLoaiTienTe  = ko.observableArray((data && data.hasOwnProperty('lstLoaiTienTe')) ? data.lstLoaiTienTe : []);
-
+    ttcVMSelf.fiSignAddressName  = ko.observable(null);
+    ttcVMSelf.eventChangeNhom =function(){
+        var id =ttcVMSelf.fiProIdNhom();
+        console.log(id);
+        app.makeGet({
+            url: '/mard/25/danhmuc/getby-catparent/'+id,
+            success: function(res) {
+                ttcVMSelf.lstPhanNhom(res.data);
+                console.log(res);
+            }
+        });
+    }
+    ttcVMSelf.eventChangePhanNhom =function(){
+        var id =ttcVMSelf.fiProIdPhanNhom();
+        app.makeGet({
+            url: '/mard/25/danhmuc/getby-catparent/'+id,
+            success: function(res) {
+                ttcVMSelf.lstLoai=res.data;
+            }
+        });
+    }
+    ttcVMSelf.eventChangeLoai =function(){
+        var id =ttcVMSelf.fiProIdLoai();
+        app.makeGet({
+            url: '/mard/25/danhmuc/getby-catparent/'+id,
+            success: function(res) {
+                ttcVMSelf.lstPhanLoai=res.data;
+            }
+        });
+    }
 
     ttcVMSelf.getProfileStatus = function (statuscode) {
         var lstProfileStatus = ttcVMSelf.lstProfileStatus();
@@ -396,7 +426,7 @@ function ThongTinChungVM(data) {
                 fiProCLCompare: ttcVMSelf.fiProCLList()[i].fiProCLCompare(),
                 fiProCLContent: ttcVMSelf.fiProCLList()[i].fiProCLContent(),
                 fiProCLUnitName: ttcVMSelf.fiProCLList()[i].fiProCLUnitName(),
-                lstDMDVT: ttcVMSelf.lstDMDVT,
+                lstChiTieuAT: ttcVMSelf.lstChiTieuAT,
                 isEnable: ttcVMSelf.fiProCLList()[i].isEnable(),
                 isUpdate: ttcVMSelf.fiProCLList()[i].isUpdate(),
                 fiProCLUnitID: ttcVMSelf.fiProCLList()[i].fiProCLUnitID
@@ -410,7 +440,7 @@ function ThongTinChungVM(data) {
                 fiProATCompare: ttcVMSelf.fiProATList()[i].fiProATCompare(),
                 fiProATContent:  ttcVMSelf.fiProATList()[i].fiProATContent(),
                 fiProATUnitName: ttcVMSelf.fiProATList()[i].fiProATUnitName(),
-                lstDMDVT: ttcVMSelf.lstDMDVT,
+                lstChiTieuAT: ttcVMSelf.lstChiTieuAT,
                 isEnable: ttcVMSelf.fiProATList()[i].isEnable(),
                 isUpdate: ttcVMSelf.fiProATList()[i].isUpdate(),
                 fiProATUnitID:  ttcVMSelf.fiProATList()[i].fiProATUnitID
@@ -494,7 +524,7 @@ function ThongTinChungVM(data) {
                 fiProCLCompare: ttcVMSelf.fiProCLList()[i].fiProCLCompare(),
                 fiProCLContent: ttcVMSelf.fiProCLList()[i].fiProCLContent(),
                 fiProCLUnitName: ttcVMSelf.fiProCLList()[i].fiProCLUnitName(),
-                lstDMDVT: ttcVMSelf.lstDMDVT,
+                lstChiTieuAT: ttcVMSelf.lstChiTieuAT,
                 isEnable: ttcVMSelf.fiProCLList()[i].isEnable(),
                 isUpdate: ttcVMSelf.fiProCLList()[i].isUpdate(),
                 fiProCLUnitID: ttcVMSelf.fiProCLList()[i].fiProCLUnitID
@@ -508,7 +538,7 @@ function ThongTinChungVM(data) {
                 fiProATCompare: ttcVMSelf.fiProATList()[i].fiProATCompare(),
                 fiProATContent:  ttcVMSelf.fiProATList()[i].fiProATContent(),
                 fiProATUnitName: ttcVMSelf.fiProATList()[i].fiProATUnitName(),
-                lstDMDVT: ttcVMSelf.lstDMDVT,
+                lstChiTieuAT: ttcVMSelf.lstChiTieuAT,
                 isEnable: ttcVMSelf.fiProATList()[i].isEnable(),
                 isUpdate: ttcVMSelf.fiProATList()[i].isUpdate(),
                 fiProATUnitID:  ttcVMSelf.fiProATList()[i].fiProATUnitID
@@ -641,7 +671,7 @@ function ThongTinChungVM(data) {
             fiProCLCompare: ttcVMSelf.EfiProCLCompare(),
             fiProCLContent: ttcVMSelf.EfiProCLContent(),
             fiProCLUnitName: ttcVMSelf.EfiProCLUnitID(),
-            lstDMDVT: ttcVMSelf.lstDMDVT,
+            lstChiTieuAT: ttcVMSelf.lstChiTieuAT,
             isEnable:ko.observable(false),
             isUpdate:ko.observable(false),
             fiProCLUnitID: ttcVMSelf.EfiProCLUnitID()
@@ -693,7 +723,7 @@ function ThongTinChungVM(data) {
             fiProATContent: ttcVMSelf.EfiProATContent(),
             isEnable:ko.observable(false),
             isUpdate:ko.observable(false),
-            lstDMDVT: ttcVMSelf.lstDMDVT,
+            lstChiTieuAT: ttcVMSelf.lstChiTieuAT,
             fiProATUnitName: ttcVMSelf.EfiProATUnitID(),
             fiProATUnitID: ttcVMSelf.EfiProATUnitID()
         }
@@ -782,12 +812,12 @@ function ThongTinChungVM(data) {
             ko.utils.arrayForEach(data.fiProATList, function(at) {
                 at.isEnable=ko.observable(false);
                 at.isUpdate=ko.observable(false);
-                at.lstDMDVT = ttcVMSelf.lstDMDVT();
+                at.lstChiTieuAT = ttcVMSelf.lstChiTieuAT();
             });
             ko.utils.arrayForEach(data.fiProCLList, function(cl) {
                 cl.isEnable =ko.observable(false);
                 cl.isUpdate =ko.observable(false);
-                cl.lstDMDVT = ttcVMSelf.lstDMDVT();
+                cl.lstChiTieuAT = ttcVMSelf.lstChiTieuAT();
             });
             ko.utils.arrayForEach(data.fiProSLKLList, function(kl) {
                 kl.isEnable=ko.observable(false);

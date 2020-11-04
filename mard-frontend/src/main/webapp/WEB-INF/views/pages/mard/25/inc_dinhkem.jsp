@@ -9,24 +9,24 @@
                         <thead>
                         <tr class="nsw-tr tr-nsw1-bgcolor">
                             <th class="text-center"><spring:message code="mard.25.tokhai.file.hop_dong_stt"/></th>
-                            <th class="text-center"><spring:message code="mard.25.tokhai.file.hop_dong_hd"/><a data-bind="visible: isRequired()" class="nsw-require-field">(*)</a></th>
-                            <th class="text-center"><spring:message code="mard.25.tokhai.file.hop_dong_ngay"/><a data-bind="visible: isRequired()" class="nsw-require-field">(*)</a></th>
-                            <th class="text-center"><spring:message code="mard.25.tokhai.file.hop_dong_file"/><a data-bind="visible: isRequired()" class="nsw-require-field">(*)</a></th>
+                            <th class="text-center"><spring:message code="mard.25.tokhai.file.hop_dong_hd"/><a  class="nsw-require-field">(*)</a></th>
+                            <th class="text-center"><spring:message code="mard.25.tokhai.file.hop_dong_ngay"/><a class="nsw-require-field">(*)</a></th>
+                            <th class="text-center"><spring:message code="mard.25.tokhai.file.hop_dong_file"/><a class="nsw-require-field">(*)</a></th>
                             <th data-bind="visible: $root.isEditable" class="text-center"><spring:message code="mard.25.tokhai.file.hop_dong_thaotac"/></th>
                         </tr>
                         </thead>
-                        <tbody data-bind="foreach: lstHD">
+                        <tbody data-bind="foreach: lstHD()">
                         <tr>
                             <td data-bind="text: ($index() + 1)"></td>
                             <td>
                                 <span data-bind="text : fiFileHD"></span>
                             </td>
-                            <td><span data-bind="text : fiFileHDDate"></span>
+                            <td><span data-bind="date : fiFileHDDate"></span>
                             <td>
                                 <span data-bind="text : fiFileName"></span>
                             </td>
                             <td data-bind="visible: $root.isEditable" class="text-center">
-                                <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;
+<%--                                <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;--%>
                                 <a href="#" data-bind="click: $parent.removeLstHD.bind($data, $index()), visible: $root.isEditable()"><i class="fa fa-lg fa-trash"></i></a>&nbsp;&nbsp;
                                 <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-download"></i></a>
                             </td>
@@ -63,9 +63,9 @@
                     <thead>
                     <tr class="nsw-tr tr-nsw1-bgcolor">
                         <th class="text-center"><spring:message code="mard.25.tokhai.file.hoa_don_stt"/></th>
-                        <th class="text-center"><spring:message code="mard.25.tokhai.file.hoa_don_hd"/><a data-bind="visible: isRequired()" class="nsw-require-field">(*)</a></th>
-                        <th class="text-center"><spring:message code="mard.25.tokhai.file.hoa_don_ngay"/><a data-bind="visible: isRequired()" class="nsw-require-field">(*)</a></th>
-                        <th class="text-center"><spring:message code="mard.25.tokhai.file.hoa_don_file"/><a data-bind="visible: isRequired()" class="nsw-require-field">(*)</a></th>
+                        <th class="text-center"><spring:message code="mard.25.tokhai.file.hoa_don_hd"/><a class="nsw-require-field">(*)</a></th>
+                        <th class="text-center"><spring:message code="mard.25.tokhai.file.hoa_don_ngay"/><a class="nsw-require-field">(*)</a></th>
+                        <th class="text-center"><spring:message code="mard.25.tokhai.file.hoa_don_file"/><a  class="nsw-require-field">(*)</a></th>
                         <th data-bind="visible: $root.isEditable" class="text-center"><spring:message code="mard.25.tokhai.file.hoa_don_thaotac"/></th>
                     </tr>
                     </thead>
@@ -75,12 +75,12 @@
                         <td>
                             <span data-bind="text : fiFileHD"></span>
                         </td>
-                        <td><span data-bind="text : fiFileHDDate"></span>
+                        <td><span data-bind="date : fiFileHDDate"></span>
                         <td>
                             <span data-bind="text : fiFileName"></span>
                         </td>
                         <td data-bind="visible: $root.isEditable" class="text-center">
-                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;
+<%--                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;--%>
                             <a href="#" data-bind="click: $parent.removeLstHoaDon.bind($data, $index()), visible: $root.isEditable()"><i class="fa fa-lg fa-trash"></i></a>&nbsp;&nbsp;
                             <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-download"></i></a>
                         </td>
@@ -116,9 +116,9 @@
                     <thead>
                     <tr class="nsw-tr tr-nsw1-bgcolor">
                         <th class="text-center"><spring:message code="mard.25.tokhai.file.phieu_stt"/></th>
-                        <th class="text-center"><spring:message code="mard.25.tokhai.file.phieu_phieu"/><a data-bind="visible: isRequired()" class="nsw-require-field">(*)</a></th>
-                        <th class="text-center"><spring:message code="mard.25.tokhai.file.phieu_ngay"/><a data-bind="visible: isRequired()" class="nsw-require-field">(*)</a></th>
-                        <th class="text-center"><spring:message code="mard.25.tokhai.file.phieu_file"/><a data-bind="visible: isRequired()" class="nsw-require-field">(*)</a></th>
+                        <th class="text-center"><spring:message code="mard.25.tokhai.file.phieu_phieu"/><a class="nsw-require-field">(*)</a></th>
+                        <th class="text-center"><spring:message code="mard.25.tokhai.file.phieu_ngay"/><a class="nsw-require-field">(*)</a></th>
+                        <th class="text-center"><spring:message code="mard.25.tokhai.file.phieu_file"/><a  class="nsw-require-field">(*)</a></th>
                         <th data-bind="visible: $root.isEditable" class="text-center"><spring:message code="mard.25.tokhai.file.phieu_thaotac"/></th>
                     </tr>
                     </thead>
@@ -128,12 +128,12 @@
                         <td>
                             <span data-bind="text : fiFileHD"></span>
                         </td>
-                        <td><span data-bind="text : fiFileHDDate"></span>
+                        <td><span data-bind="date : fiFileHDDate"></span>
                         <td>
                             <span data-bind="text : fiFileName"></span>
                         </td>
                         <td data-bind="visible: $root.isEditable" class="text-center">
-                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;
+<%--                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;--%>
                             <a href="#" data-bind="click: $parent.removeLstPhieu.bind($data, $index()), visible: $root.isEditable()"><i class="fa fa-lg fa-trash"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
                             <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-download"></i></a>
                         </td>
@@ -169,8 +169,8 @@
                     <thead>
                     <tr class="nsw-tr tr-nsw1-bgcolor">
                         <th class="text-center"><spring:message code="mard.25.tokhai.file.ket_qua_stt"/></th>
-                        <th class="text-center"><spring:message code="mard.25.tokhai.file.ket_qua_name"/><a data-bind="visible: isRequired()" class="nsw-require-field">(*)</a></th>
-                        <th class="text-center"><spring:message code="mard.25.tokhai.file.ket_qua_file"/><a data-bind="visible: isRequired()" class="nsw-require-field">(*)</a></th>
+                        <th class="text-center"><spring:message code="mard.25.tokhai.file.ket_qua_name"/><a class="nsw-require-field">(*)</a></th>
+                        <th class="text-center"><spring:message code="mard.25.tokhai.file.ket_qua_file"/><a  class="nsw-require-field">(*)</a></th>
                         <th data-bind="visible: $root.isEditable" class="text-center"><spring:message code="mard.25.tokhai.file.ket_qua_thaotac"/></th>
                     </tr>
                     </thead>
@@ -184,7 +184,7 @@
                             <span data-bind="text : fiFileName"></span>
                         </td>
                         <td data-bind="visible: $root.isEditable" class="text-center">
-                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;
+<%--                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;--%>
                             <a href="#" data-bind="click: $parent.removeLstKQ.bind($data, $index()), visible: $root.isEditable()"><i class="fa fa-lg fa-trash"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
                             <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-download"></i></a>
                         </td>
@@ -216,8 +216,8 @@
                     <thead>
                     <tr class="nsw-tr tr-nsw1-bgcolor">
                         <th class="text-center"><spring:message code="mard.25.tokhai.file.tieu_chuan_stt"/></th>
-                        <th class="text-center"><spring:message code="mard.25.tokhai.file.tieu_chuan_name"/><a data-bind="visible: isRequired()" class="nsw-require-field">(*)</a></th>
-                        <th class="text-center"><spring:message code="mard.25.tokhai.file.tieu_chuan_file"/><a data-bind="visible: isRequired()" class="nsw-require-field">(*)</a></th>
+                        <th class="text-center"><spring:message code="mard.25.tokhai.file.tieu_chuan_name"/><a class="nsw-require-field">(*)</a></th>
+                        <th class="text-center"><spring:message code="mard.25.tokhai.file.tieu_chuan_file"/><a class="nsw-require-field">(*)</a></th>
                         <th data-bind="visible: $root.isEditable" class="text-center"><spring:message code="mard.25.tokhai.file.tieu_chuan_thaotac"/></th>
                     </tr>
                     </thead>
@@ -231,7 +231,7 @@
                             <span data-bind="text : fiFileName"/>
                         </td>
                         <td data-bind="visible: $root.isEditable" class="text-center">
-                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;
+<%--                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;--%>
                             <a href="#" data-bind="click: $parent.removeLstTC.bind($data, $index()), visible: $root.isEditable()"><i class="fa fa-lg fa-trash"></i></a>&nbsp;&nbsp;&nbsp;
                             <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-download"></i></a>
                         </td>
@@ -278,7 +278,7 @@
                             <span data-bind="text : fiFileName"></span>
                         </td>
                         <td data-bind="visible: $root.isEditable" class="text-center">
-                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;
+<%--                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;--%>
                             <a href="#" data-bind="click: $parent.removeLstCNLH.bind($data, $index()), visible: $root.isEditable()"><i class="fa fa-lg fa-trash"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
                             <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-download"></i></a>
                         </td>
@@ -325,7 +325,7 @@
                             <span data-bind="text :  fiFileName"></span>
                         </td>
                         <td data-bind="visible: $root.isEditable" class="text-center">
-                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;
+<%--                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;--%>
                             <a href="#" data-bind="click: $parent.removeLstCNPT.bind($data, $index()), visible: $root.isEditable()"><i class="fa fa-lg fa-trash"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
                             <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-download"></i></a>
                         </td>
@@ -385,7 +385,7 @@
                     <tr class="nsw-tr tr-nsw1-bgcolor">
                         <th class="text-center"><spring:message code="mard.25.tokhai.file.khac_stt"/></th>
                         <th class="text-center"><spring:message code="mard.25.tokhai.file.khac_type"/><a data-bind="visible: isRequired()" class="nsw-require-field">(*)</a></th>
-<%--                        <th data-bind="visible: $root.isEditable" class="text-center"><spring:message code="mard.25.tokhai.file.khac_xem"/></th>--%>
+                        <th data-bind="visible: $root.isEditable" class="text-center"><spring:message code="mard.25.tokhai.file.khac_xem"/></th>
                         <th data-bind="visible: $root.isEditable" class="text-center"><spring:message code="mard.25.tokhai.file.khac_tai"/></th>
                         <th data-bind="visible: $root.isEditable" class="text-center"><spring:message code="mard.25.tokhai.file.khac_xoa"/></th>
                     </tr>

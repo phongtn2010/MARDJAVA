@@ -55,7 +55,7 @@ public class TbdHoso25 implements Serializable {
 //    private String fiPurchAddress;
 //    private String fiPurchFax;
     private String fiPurchReci;
-    private String fiPurchFromDate;
+    private Date fiPurchFromDate;
     private Date fiPurchToDate;
 
     private String fiReason;

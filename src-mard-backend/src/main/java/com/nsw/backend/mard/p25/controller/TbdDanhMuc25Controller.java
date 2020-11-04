@@ -28,6 +28,10 @@ public class TbdDanhMuc25Controller extends BaseController {
     public ResponseEntity<ResponseJson> getByCatNo(@PathVariable Long catNo) {
         return createSuccessResponse(service.findByFiCatNoOrderByFiOrder(catNo), HttpStatus.OK);
     }
+    @GetMapping("/getby-catparent/{id}")
+    public ResponseEntity<ResponseJson> getByCatParent(@PathVariable Long id) {
+        return createSuccessResponse(service.findByFiCatParentOrderByFiOrder(id), HttpStatus.OK);
+    }
 
     @GetMapping("/dvxl/{fiPuType}")
     public ResponseEntity<ResponseJson> getByCatNo(@PathVariable Integer fiPuType) {
