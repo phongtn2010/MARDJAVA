@@ -2,6 +2,8 @@ package com.nsw.backend.mard.p25.service;
 
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializer;
 import com.nsw.backend.mard.p25.client.*;
 import com.nsw.backend.mard.p25.constant.Constant25;
 import com.nsw.backend.mard.p25.dto.Ananytical;
@@ -34,6 +36,11 @@ public class WsServiceImpl implements WsService {
     private final TbdHangHoaFile25Service tbdHangHoaFile25Service;
     private final TbdLichSuHH25Service tbdLichSuHH25Service;
     private final TbdChiTieuDG25Service tbdChiTieuDG25Service;
+
+    @Autowired
+    private TbdHosoTccd25Service tbdHosoTccd25Service;
+    @Autowired
+    private TbdKQXL25Service tbdKQXL25Service;
     private Gson gson;
 
     private final Environment environment;
@@ -50,7 +57,14 @@ public class WsServiceImpl implements WsService {
         this.tbdLichSuHH25Service = tbdLichSuHH25Service;
         this.tbdChiTieuDG25Service = tbdChiTieuDG25Service;
     }
-
+    private Gson getGson() {
+        if (gson == null) {
+            gson = new GsonBuilder()
+                    .registerTypeAdapter(Date.class, (JsonDeserializer<Date>) (jsonElement, type, context) -> new Date(jsonElement.getAsJsonPrimitive().getAsLong()))
+                    .create();
+        }
+        return gson;
+    }
     @Override
     public ResponseJson sendProfile(TbdHoso25 tbdHoso25) throws NSWException {
         SendMessage message = SendMessage.parse(tbdHoso25);
@@ -110,8 +124,8 @@ public class WsServiceImpl implements WsService {
                 return new ResponseJson(false, "","MESSAGE 13 - "+function+" CHUA DUOC DINH NGHIA");
 
         }
-        Gson gson = new Gson();
-        XacNhanDon xnd = gson.fromJson(gson.toJson(request.getData()), XacNhanDon.class);
+
+        XacNhanDon xnd = getGson().fromJson(getGson().toJson(request.getData()), XacNhanDon.class);
         TbdHoso25 tbdHoso25 =tbdHoso25Service.findByFiHSCode(request.getHeader().getSubject().getReference());
 
         if(tbdHoso25==null){
@@ -155,10 +169,9 @@ public class WsServiceImpl implements WsService {
                 return new ResponseJson(false, "","MESSAGE 12 - "+function+" CHUA DUOC DINH NGHIA");
 
         }
-        Gson gson = new Gson();
         KetQuaXuLy xnd=null;
         try{
-            xnd = gson.fromJson(gson.toJson(request.getData()), KetQuaXuLy.class);
+            xnd = getGson().fromJson(getGson().toJson(request.getData()), KetQuaXuLy.class);
         }catch (Exception ex){
             log.info(ex.getMessage());
         }
@@ -199,7 +212,7 @@ public class WsServiceImpl implements WsService {
                 return new ResponseJson(false, "","MESSAGE 14 - "+function+" CHUA DUOC DINH NGHIA");
 
         }
-        BNNThongBaoThuHoiGDK thuHoiGDK = new Gson().fromJson(new Gson().toJson(request.getData()),BNNThongBaoThuHoiGDK.class);
+        BNNThongBaoThuHoiGDK thuHoiGDK = getGson().fromJson(getGson().toJson(request.getData()),BNNThongBaoThuHoiGDK.class);
         TbdXacNhanDon25 xacNhanDon25 = tbdXacNhanDon25Service.findByFiNSWFileCode(thuHoiGDK.getFiNSWFileCode());
         if(null==xacNhanDon25){
             return new ResponseJson(false, "","MA HO SO KHONG TON TAI");
@@ -217,66 +230,102 @@ public class WsServiceImpl implements WsService {
 
     @Override
     public ResponseJson tccdGuiKQKT(ResponseWrapper request)  throws NSWException{
-        String function = request.getHeader().getSubject().getFunction();
-        int status=0;
-        String action="";
-        switch (function) {
-            case Constant25.MessageFunction.FUNC_14:
-                status=Constant25.HosoStatus.DA_CO_KQ_DANH_GIA_SPH.getId();
-                action=Constant25.HosoStatus.DA_CO_KQ_DANH_GIA_SPH.getName();
-                break;
-            default:
-                return new ResponseJson(false, "","MESSAGE 16 - "+function+" CHUA DUOC DINH NGHIA");
+        try{
+            String function = request.getHeader().getSubject().getFunction();
+            int status=0;
+            String action="";
+            switch (function) {
+                case Constant25.MessageFunction.FUNC_14:
+                    status=Constant25.HosoStatus.DA_CO_KQ_DANH_GIA_SPH.getId();
+                    action=Constant25.HosoStatus.DA_CO_KQ_DANH_GIA_SPH.getName();
+                    break;
+                default:
+                    return new ResponseJson(false, "","MESSAGE 16 - "+function+" CHUA DUOC DINH NGHIA");
 
-        }
-        Gson gson = new Gson();
-        TCCDGuiKQKT kqkt = gson.fromJson(gson.toJson(request.getData()), TCCDGuiKQKT.class);
-        TbdHoso25 tbdHoso25 = tbdHoso25Service.findByFiHSCode(kqkt.getFiNSWFileCode());
-        List<TbdHanghoa25> listHanghoa25=tbdHoso25.getFiProductList();
-        for (TbdHanghoa25 hanghoa25: listHanghoa25) {
-            if(hanghoa25.getFiIdProduct()==Integer.valueOf(kqkt.getFiMaHangHoa())){
-                List<TbdHangHoaFile25> listHangHoa=new ArrayList<>();
-                hanghoa25.setFiTrangThaiHangHoa(status);
-                if (kqkt.getFiSoGCN().equals("1")){
-                    TbdHangHoaFile25 hangPhuHop=new TbdHangHoaFile25();
-                    hangPhuHop.setFiIDHangHoa(kqkt.getFiMaHangHoa());
-                    hangPhuHop.setFiSoCV(kqkt.getFiSoGCN());
-                    hangPhuHop.setFiNgayCap(kqkt.getFiNgayCap());
-                    hangPhuHop.setFiFileId(kqkt.getFiMaFileGCN());
-                    hangPhuHop.setFiFileLink(kqkt.getFiLinkFileGCN());
-                    hangPhuHop.setFiFileName(kqkt.getFiNameFileGCN());
-                    hangPhuHop.setFiLoaiFile(1);
-                    hangPhuHop.setFiTenLoai("File đính kèm giấy chứng nhận hợp quy lô TACN nhập khẩu");
-                    listHangHoa.add(hangPhuHop);
-                    tbdHangHoaFile25Service.update(hangPhuHop);
-                }else{
-                    for (AttachmentResult attach : kqkt.getFiDanhSachDinhKem()) {
-                        TbdHangHoaFile25 hangKhongPhuHop=new TbdHangHoaFile25();
-                        hangKhongPhuHop.setFiIDHangHoa(kqkt.getFiMaHangHoa());
-                        hangKhongPhuHop.setFiFileId(attach.getFiAttachmentId());
-                        hangKhongPhuHop.setFiFileLink(attach.getFiLinkFile());
-                        hangKhongPhuHop.setFiFileName(attach.getFiNameOfAttachment());
-                        hangKhongPhuHop.setFiLoaiFile(1);
-                        hangKhongPhuHop.setFiTenLoai("File đính kèm giấy chứng nhận hợp quy lô TACN nhập khẩu");
-                        listHangHoa.add(hangKhongPhuHop);
-                        tbdHangHoaFile25Service.update(hangKhongPhuHop);
-                    }
-
-                }
-                hanghoa25.setFiKqdgsph(kqkt.getFiKetQuaDanhGia());
-//                if(listHangHoa!=null&&!listHangHoa.isEmpty()){
-//                    hanghoa25.setFiHangHoaFileList(listHangHoa);
-//                }
-                tbdHangHoa25Service.save(hanghoa25);
-                tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,hanghoa25,"TCCD gửi kết quả",kqkt.getFiAssignName(),action,Constant25.BNN_SEND));
             }
+
+            TCCDGuiKQKT kqkt = getGson().fromJson(getGson().toJson(request.getData()), TCCDGuiKQKT.class);
+            TbdHoso25 tbdHoso25 = tbdHoso25Service.findByFiHSCode(kqkt.getFiNSWFileCode());
+            List<TbdHanghoa25> listHanghoa25=tbdHoso25.getFiProductList();
+            for (TbdHanghoa25 hanghoa25: listHanghoa25) {
+                if(hanghoa25.getFiIdProduct().equals(Integer.valueOf(kqkt.getFiMaHangHoa()))){
+                    List<TbdHangHoaFile25> listHangHoa=new ArrayList<>();
+                    hanghoa25.setFiTrangThaiHangHoa(status);
+                    for (AttachmentResult attach : kqkt.getFiDanhSachDinhKem()) {
+                        TbdHangHoaFile25 hanghoaFile = new TbdHangHoaFile25();
+                        hanghoaFile.setFiIDHangHoa(kqkt.getFiMaHangHoa());
+                        hanghoaFile.setFiFileId(attach.getFiAttachmentId());
+                        hanghoaFile.setFiFileLink(attach.getFiLinkFile());
+                        hanghoaFile.setFiFileName(attach.getFiNameOfAttachment());
+                        hanghoaFile.setFiLoaiFile(1);
+                        hanghoaFile.setFiTenLoai("File thông tin kết quả phân tích");
+                        listHangHoa.add(hanghoaFile);
+                    }
+                    if(!listHangHoa.isEmpty()&&null!=listHangHoa){
+                        tbdHangHoaFile25Service.saveAll(listHangHoa);
+                    }
+                    hanghoa25.setFiKqdgsph(kqkt.getFiKetQuaDanhGia());
+                    tbdHangHoa25Service.save(hanghoa25);
+                    tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,hanghoa25,"TCCD gửi kết quả",kqkt.getFiAssignName(),action,Constant25.BNN_SEND));
+                }
+            }
+            TbdhosoTccd25 tbdhosoTccd25 = new TbdhosoTccd25();
+            tbdhosoTccd25.setFiMaCqkt(tbdHoso25.getFiIdDVXL());
+            tbdhosoTccd25.setFiTenCqkt(tbdHoso25.getFiNameDVXL());
+            tbdhosoTccd25.setFiHsCode(kqkt.getFiNSWFileCode());
+            tbdhosoTccd25.setFiIdFileGcn(kqkt.getFiMaFileGCN());
+            tbdhosoTccd25.setFiNameFileGcn(kqkt.getFiNameFileGCN());
+            tbdhosoTccd25.setFiLinkGcn(kqkt.getFiLinkFileGCN());
+            tbdhosoTccd25.setFiIdHangHoa(kqkt.getFiMaHangHoa());
+            tbdhosoTccd25.setFiTenHangHoa(kqkt.getFiTenHangHoa());
+            tbdhosoTccd25.setFiLoaiDanhgia(kqkt.getFiKetQuaDanhGia());
+            tbdhosoTccd25.setFiNgaycap(kqkt.getFiNgayCap());
+            tbdhosoTccd25.setFiSoGcn(kqkt.getFiSoGCN());
+            tbdHosoTccd25Service.save(tbdhosoTccd25);
+            return new ResponseJson(true, "");
+        }catch (Exception e){
+            return new ResponseJson(false, "LOI TRONG QUA TRINH XU LY BAN TIN");
         }
 
-        return new ResponseJson(true, "");
     }
 
     @Override
     public ResponseJson guiXuLyKQ(ResponseWrapper request) throws NSWException {
+        try{
+            String function = request.getHeader().getSubject().getFunction();
+            int status=0;
+            String action="";
+            switch (function) {
+                case Constant25.MessageFunction.FUNC_19:
+                    status=Constant25.HosoStatus.BPMC_YCBS_KQ_DANH_GIA_SPH.getId();
+                    action=Constant25.HosoStatus.BPMC_YCBS_KQ_DANH_GIA_SPH.getName();
+                    break;
+                case Constant25.MessageFunction.FUNC_20:
+                    status=Constant25.HosoStatus.DA_TIEP_NHAN_KQ_DANH_GIA_SPH.getId();
+                    action=Constant25.HosoStatus.DA_TIEP_NHAN_KQ_DANH_GIA_SPH.getName();
+                    break;
+                default:
+                    return new ResponseJson(false, "","MESSAGE 18 - "+function+" CHUA DUOC DINH NGHIA");
+
+            }
+            BNNXuLyKQ bnnXuLyKQ = getGson().fromJson(getGson().toJson(request.getData()),BNNXuLyKQ.class);
+
+            TbdKQXL25 tbdKQXL25 = tbdKQXL25Service.findByFiNSWFileCodeAndFiProId(bnnXuLyKQ.getFiNSWFileCode(),bnnXuLyKQ.getFiMaHangHoa());
+            TbdHanghoa25 tbdHanghoa25 = tbdHangHoa25Service.findByFiIdProduct(bnnXuLyKQ.getFiMaHangHoa());
+            TbdHoso25 tbdHoso25 = tbdHoso25Service.findByFiHSCode(bnnXuLyKQ.getFiNSWFileCode());
+            if(tbdKQXL25==null||tbdHanghoa25==null||tbdHoso25==null){
+                return new ResponseJson(false, "","KHONG TIM THAY HO SO/HANG HOA");
+            }
+            tbdKQXL25.setFiLyDo(bnnXuLyKQ.getFiLyDo());
+            tbdKQXL25.setFiNgayPhanHoi(bnnXuLyKQ.getFiResponseDate());
+            tbdKQXL25.setFiNguoiXL(bnnXuLyKQ.getFiNameOfStaff());
+            tbdKQXL25Service.save(tbdKQXL25);
+            tbdHanghoa25.setFiTrangThaiHangHoa(status);
+            tbdHangHoa25Service.save(tbdHanghoa25);
+            tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,tbdHanghoa25,action,bnnXuLyKQ.getFiNameOfStaff(),action,2));
+        }catch (Exception ex){
+
+        }
         return null;
     }
 
@@ -297,13 +346,38 @@ public class WsServiceImpl implements WsService {
         SendMessage message = SendMessage.parse(tbdHoso25);
         message.setType(Constant25.MessageType.TYPE_15);
         message.setFunction(Constant25.MessageFunction.FUNC_13);
+
+        GuiHSTCCD guiHSTCCD = new GuiHSTCCD();
+        guiHSTCCD.setFiIdDVXL(tbdHoso25.getFiIdDVXL());
+        guiHSTCCD.setFiNameDVXL(tbdHoso25.getFiNameDVXL());
+        guiHSTCCD.setFiNSWFileCode(tbdHoso25.getFiNSWFileCode());
+
+        List<TbdHanghoa25> tbdHanghoa25s = tbdHoso25.getFiProductList();
+        List<TbdHanghoa25> tbdHangHoaBT = new ArrayList<>();
+        for (TbdHanghoa25 hangHoa: tbdHanghoa25s){
+            TbdHanghoa25 hang = new TbdHanghoa25();
+            hang.setFiIdProduct(hangHoa.getFiIdProduct());
+            hang.setFiProName(hangHoa.getFiProName());
+            hang.setFiProIdLoai(hangHoa.getFiProIdLoai());
+            hang.setFiProNameLoai(hangHoa.getFiProNameLoai());
+            List<TbdChiTieuDG25> lstChiTieuDG25 = tbdChiTieuDG25Service.findByFiIdProduct(hangHoa.getFiIdProduct());
+            hang.setFiListChiTieu(lstChiTieuDG25);
+            tbdHangHoaBT.add(hang);
+        }
+
+        guiHSTCCD.setFiProductList(tbdHangHoaBT);
+        message.setDataRequest(getGson().toJson(guiHSTCCD));
         ResponseJson response = WsServiceHelper.createSendRequest(Constant25.WebServiceURL.get(environment), message);
         if (response.isSuccess()) {
             // Ghi lại lịch sử gửi mới
             int statusUpdate=Constant25.HosoStatus.CHO_KQ_DANH_GIA_SPH.getId();
-            tbdHoso25.setFiHSStatus(statusUpdate);
-            tbdHoso25Service.update(tbdHoso25);
-            tbdLichsu25Service.save(createHistory(tbdHoso25, "Chuyển chỉ tiêu kiểm tra cho cả lô hàng"));
+            String action=Constant25.HosoStatus.CHO_KQ_DANH_GIA_SPH.getName();
+            List<TbdHanghoa25> lsHangHoa=tbdHoso25.getFiProductList();
+            for (TbdHanghoa25 tbdHanghoa25: lsHangHoa){
+                tbdHanghoa25.setFiTrangThaiHangHoa(statusUpdate);
+                tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,tbdHanghoa25,action,tbdHoso25.getFiImporterName(),action,1));
+            }
+            tbdHangHoa25Service.saveAll(lsHangHoa);
         } else {
             throw new NSWException("Có lỗi trong quá trình gửi hồ sơ! " + response.getMessage());
         }
@@ -319,7 +393,7 @@ public class WsServiceImpl implements WsService {
         message.setFiMaHoso(requestCancel.getFiNSWFileCode());
         message.setType(Constant25.MessageType.TYPE_11);
         message.setFunction(Constant25.MessageFunction.FUNC_05);
-        message.setDataRequest(new Gson().toJson(requestCancel));
+        message.setDataRequest(getGson().toJson(requestCancel));
         message.setFiIdHoso(Long.valueOf(requestCancel.getFiIdHS()));
         ResponseJson response = WsServiceHelper.createSendRequest(Constant25.WebServiceURL.get(environment), message);
         if (response.isSuccess()){
@@ -340,7 +414,7 @@ public class WsServiceImpl implements WsService {
     public ResponseJson dnNopKQ(TbdKQXL25 tbdKQXL25, TbdHoso25 tbdHoso25) throws NSWException {
         SendMessage message = new SendMessage();
         message.setFiMaHoso(tbdKQXL25.getFiNSWFileCode());
-        message.setDataRequest(new Gson().toJson(tbdKQXL25));
+        message.setDataRequest(getGson().toJson(tbdKQXL25));
         message.setFiIdHoso(Long.valueOf(tbdHoso25.getFiIdHS()));
         String type=Constant25.MessageType.TYPE_17;
         String function="";
@@ -369,12 +443,15 @@ public class WsServiceImpl implements WsService {
         message.setType(type);
         ResponseJson response = WsServiceHelper.createSendRequest(Constant25.WebServiceURL.get(environment), message);
         if (response.isSuccess()){
+            tbdKQXL25Service.save(tbdKQXL25);
             TbdHanghoa25 tbdHanghoa25 = tbdHangHoa25Service.findByFiIdProduct(tbdKQXL25.getFiProId());
-            tbdHoso25.setFiHSStatus(status);
-            tbdHoso25.setFiIdDVXL(tbdKQXL25.getFiDVXLCode());
-            tbdHoso25.setFiNameDVXL(tbdKQXL25.getFiDVXLName());
-            tbdHoso25.setFiUpdatedDate(new Date());
-            tbdHoso25Service.save(tbdHoso25);
+            tbdHanghoa25.setFiTrangThaiHangHoa(status);
+            if(tbdHoso25.getFiHSType()==3){
+                tbdHoso25.setFiIdDVXL(tbdKQXL25.getFiDVXLCode());
+                tbdHoso25.setFiNameDVXL(tbdKQXL25.getFiDVXLName());
+                tbdHoso25Service.save(tbdHoso25);
+            }
+            tbdHangHoa25Service.save(tbdHanghoa25);
             tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,tbdHanghoa25,action,tbdHoso25.getFiImporterName(),action,1));
             response.setSuccess(true);
         }else{

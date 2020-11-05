@@ -144,7 +144,7 @@ public class TbdHanghoa25 extends CmonBaseEntity implements Serializable {
 //    private List<TbdHangHoaFile25> fiHangHoaFileList;
 
     @Transient
-    private List<Ananytical> fiListChiTieu;
+    private List<TbdChiTieuDG25> fiListChiTieu;
     public TbdHanghoa25() {
         super();
         fiProCLList = new ArrayList<>();

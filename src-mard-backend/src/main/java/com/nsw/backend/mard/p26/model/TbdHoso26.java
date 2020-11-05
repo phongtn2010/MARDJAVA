@@ -60,33 +60,36 @@ public class TbdHoso26 extends CmonBaseEntity implements Serializable {
     private Integer fiIdHSParent;
 
     //Thông tin to chuc, ca nhan
-    @Column(name = "FI_BUS_NAME", nullable = false, length = 250)
-    private String fiBusName;
+    @Column(name = "FI_BUS_NAME", length = 250)
+    private String fiTenDn;
 
-    @Column(name = "FI_BUS_ADDRESS", nullable = false, length = 500)
-    private String fiBusAddress;
+    @Column(name = "FI_BUS_ADDRESS", length = 500)
+    private String fiDiachiDn;
 
-    @Column(name = "FI_BUS_TEL", nullable = false, length = 15)
-    private String fiBusTel;
+    @Column(name = "FI_BUS_TEL",length = 15)
+    private String fiSdtDn;
 
     @Column(name = "FI_BUS_FAX", length = 15)
-    private String fiBusFax;
+    private String fiFaxDn;
 
-    @Column(name = "FI_BUS_EMAIL", nullable = false, length = 250)
-    private String fiBusEmail;
+    @Column(name = "FI_BUS_EMAIL",  length = 250)
+    private String fiEmailDn;
 
     //Thông tin hồ sơ Doanh Nghiệp
-    @Column(name = "FI_SIGN_PROVIN_CODE", nullable = false, length = 6)
+    @Column(name = "FI_SIGN_PROVIN_CODE", length = 6)
     private String fiSignProvinCode;
 
-    @Column(name = "FI_SIGN_PROVIN_NAME", nullable = false, length = 250)
+    @Column(name = "FI_SIGN_PROVIN_NAME", length = 250)
     private String fiSignProvinName;
 
-    @Column(name = "FI_SIGN_NAME", nullable = false, length = 250)
-    private String fiSignName;
+    @Column(name = "FI_SIGN_NAME", length = 250)
+    private String fiNguoiKy;
 
-    @Column(name = "FI_SIGN_POSITION", nullable = false, length = 250)
-    private String fiSignPosition;
+    @Column(name = "FI_SIGN_POSITION", length = 250)
+    private String fiDiadiemKy;
+
+    @Column(name = "FI_NGAYKY")
+    private Date fiNgayKy;
 
     //Danh sách thông tin kèm theo
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)

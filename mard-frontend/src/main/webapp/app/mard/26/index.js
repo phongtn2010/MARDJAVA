@@ -544,7 +544,7 @@ function IndexVM(params) {
 $(document).ready(function () {
     var d = {};
     $('#loading10').show();
-    $.when(app.getCategory('/mard/12/danhmuc', 'HS_TRANGTHAI', null, function (res) {
+    $.when(app.getCategory('/mard/26/danhmuc', 'HS_TRANGTHAI', null, function (res) {
         if (res.success) {
             d.lstTrangThai = res.data;
         } else {

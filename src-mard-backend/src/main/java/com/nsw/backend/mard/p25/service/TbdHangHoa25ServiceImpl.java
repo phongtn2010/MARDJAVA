@@ -27,4 +27,10 @@ public class TbdHangHoa25ServiceImpl implements TbdHangHoa25Service{
     public TbdHanghoa25 findByFiIdProduct(Integer id) {
         return tbdHangHoa25Repository.findByFiIdProduct(id);
     }
+
+    @Override
+    public void saveAll(List<TbdHanghoa25> tbdHanghoa25s) {
+        tbdHangHoa25Repository.save(tbdHanghoa25s);
+    }
+
 }

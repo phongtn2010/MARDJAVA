@@ -214,7 +214,7 @@ public class Tbdhoso25Controller extends BaseController {
             //luu thong tin don vi xu ly truoc khi chuyen
             tbdHoso25Service.update(tbdHoso25);
             ResponseJson response = wsService.chuyenChiTieu(tbdHoso25);
-            return null;
+            return ResponseEntity.ok(response);
         } catch (Exception ex) {
             LOG.error(TAG + ex.getMessage(), ex);
             RabbitMQErrorHelper.pushLogToRabbitMQ(getErrorInfo(TAG, ex), rabbitMQService.getRabbitMQInfo());
@@ -250,7 +250,8 @@ public class Tbdhoso25Controller extends BaseController {
             }
             TbdHoso25 tbdHoso25 = tbdHoso25Service.findByFiHSCode(tbdKQXL25.getFiNSWFileCode());
             ResponseJson response = wsService.dnNopKQ(tbdKQXL25,tbdHoso25);
-            return null;
+
+            return ResponseEntity.ok(response);
         } catch (Exception ex) {
             LOG.error(TAG + ex.getMessage(), ex);
             RabbitMQErrorHelper.pushLogToRabbitMQ(getErrorInfo(TAG, ex), rabbitMQService.getRabbitMQInfo());

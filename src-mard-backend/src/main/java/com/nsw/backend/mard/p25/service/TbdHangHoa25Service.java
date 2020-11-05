@@ -8,4 +8,5 @@ public interface TbdHangHoa25Service {
     public List<TbdHanghoa25> findByFiIdHS(Integer fiIdHS);
     public void save(TbdHanghoa25 tbdHanghoa25);
     public TbdHanghoa25 findByFiIdProduct(Integer id);
+    public void saveAll(List<TbdHanghoa25> tbdHanghoa25s);
 }

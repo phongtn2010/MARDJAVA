@@ -15,11 +15,11 @@ public class AttachmentResult {
     private Long fiFileCode;
 
     @XmlElement(name = "AttachmentId")
-    private String fiFileId;
+    private String fiAttachmentId;
 
     @XmlElement(name = "FileName")
-    private String fiFileName;
+    private String fiNameOfAttachment;
 
     @XmlElement(name = "FileLink")
-    private String fiFileLink;
+    private String fiLinkFile;
 }

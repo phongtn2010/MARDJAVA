@@ -39,9 +39,9 @@ public class Hoso25 {
     @XmlElement(name = "Seller")
     String fiSellName;
     @XmlElement(name = "SellerState")
-    String fiSellCountryName;
-    @XmlElement(name = "NameSellerState")
     String fiSellCountryCode;
+    @XmlElement(name = "NameSellerState")
+    String fiSellCountryName;
     @XmlElement(name = "SellerAddress")
     String fiSellAddress;
     @XmlElement(name = "SellerPhone")

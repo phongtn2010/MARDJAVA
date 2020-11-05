@@ -486,27 +486,14 @@ function Mard25VM() {
 
     self.chuyenTCCD = function (data,type,index) {
         self.selectedHoSo(index);
-        ko.utils.arrayForEach(index.fiProductList, function(product) {
-            ko.utils.arrayForEach(product.fiProATList, function(at) {
-                var chiTieu = new ChiTieuVM();
-                chiTieu.fiTenTACN(product.fiProName);
-                chiTieu.fiChiTieu(at.fiProATTarg);
-                chiTieu.fiHinhThuc(at.fiProATCompare);
-                chiTieu.fiHamLuong(at.fiProATContent);
-                chiTieu.fiDonViTinh(at.fiProATUnitID);
-                chiTieu.fiGhiChu("");
-                self.filstChiTieu.push(chiTieu);
-            });
-            ko.utils.arrayForEach(product.fiProCLList, function(cl) {
-                var chiTieu = new ChiTieuVM();
-                chiTieu.fiTenTACN(product.fiProName);
-                chiTieu.fiChiTieu(cl.fiProCLTarg);
-                chiTieu.fiHinhThuc(cl.fiProCLCompare);
-                chiTieu.fiHamLuong(cl.fiProCLContent);
-                chiTieu.fiDonViTinh(cl.fiProCLUnitID);
-                chiTieu.fiGhiChu("");
-                self.filstChiTieu.push(chiTieu);
-            });
+        app.makeGet({
+            url: '/mard/25/chitieu/'+index.fiNSWFileCode,
+            success: function(res) {
+                self.filstChiTieu(res.data);
+            },
+            error: function (d) {
+
+            }
         });
     }
     self.chuyenChiTieu =function(){
@@ -556,21 +543,13 @@ function Mard25VM() {
         });
     }
     self.closeViewChuyen = function(){
-        self.filstChiTieu([]);
+
     }
     self.thoatOnClick  = function () {
         $("#modal_view_chuyen").hide();
     }
 }
-function ChiTieuVM(){
 
-    this.fiTenTACN =ko.observable(null);
-    this.fiChiTieu =ko.observable(null);
-    this.fiHinhThuc =ko.observable(null);
-    this.fiHamLuong =ko.observable(null);
-    this.fiDonViTinh =ko.observable(null);
-    this.fiGhiChu =ko.observable(null);
-}
 function GiayPhepVM(options) {
     var gpVMSelf = this;
     gpVMSelf.companyName = hosoCompanyName;

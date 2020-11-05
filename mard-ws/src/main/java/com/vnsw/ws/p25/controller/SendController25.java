@@ -3,6 +3,9 @@ package com.vnsw.ws.p25.controller;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializer;
 import com.vnsw.ws.common.entity.json.ResponseDownload;
 import com.vnsw.ws.common.entity.json.ResponseJson;
 import com.vnsw.ws.common.service.EncryptService;
@@ -49,6 +52,7 @@ import java.util.List;
 
 import static com.vnsw.ws.helper.JsonHelper.createResponse;
 
+@SuppressWarnings("ALL")
 @RestController
 @RequestMapping("/send/25")
 public class SendController25 {
@@ -73,13 +77,22 @@ public class SendController25 {
 
     @Autowired
     BackendService25 backendService;
-
+    private Gson gson=null;
+    private Gson getGson() {
+        if (gson == null) {
+            gson = new GsonBuilder()
+                    .registerTypeAdapter(Date.class, (JsonDeserializer<Date>) (jsonElement, type, context) -> new Date(jsonElement.getAsJsonPrimitive().getAsLong()))
+                    .create();
+        }
+        return gson;
+    }
     /**
      * Gui moi ho so; gui sua ho so; rut ho so; nop phi; xin sua Chung nhan
      *
      * @param sendMessage
      * @return
      */
+
     @RequestMapping(value = "/sendAll/", method = RequestMethod.POST)
     public ResponseEntity<ResponseJson> sendAll(@RequestBody SendMessage sendMessage) {
         HttpStatus httpStatus = null;
@@ -145,7 +158,7 @@ public class SendController25 {
 
                         break;
                     case Constants25.MARD25_TYPE.TYPE_15:
-                        GuiHSTCCD guiHSTCCD = mapper.readValue(jsonData, GuiHSTCCD.class);
+                        GuiHSTCCD guiHSTCCD = getGson().fromJson(getGson().toJson(sendMessage.getDataRequest()),GuiHSTCCD.class);
                         content.setGuiHSTCCD(guiHSTCCD);
                         body = envelopeService.createBody(content);
                         envelopeSend = envelopeService.createMessage(header, body);
@@ -158,7 +171,6 @@ public class SendController25 {
                         }
                         break;
                     case Constants25.MARD25_TYPE.TYPE_11:
-//                        DNYeucauHuyHoso ycrut= new DNYeucauHuyHoso();
                         DNYeucauHuyHoso ycrut =  mapper.readValue(sendMessage.getDataRequest(), DNYeucauHuyHoso.class);
                         ycrut.setFiRequestedDate(new Date());
                         content.setDNYeucauHuyHoso(ycrut);

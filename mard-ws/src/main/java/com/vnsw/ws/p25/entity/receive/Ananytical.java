@@ -12,15 +12,15 @@ import javax.xml.bind.annotation.XmlType;
 @Data
 public class Ananytical {
     @XmlElement(name = "AnanyticalName")
-    String fiAnanyticalName;
+    String fiTenChiTieu;
     @XmlElement(name = "FormOfPublication")
-    Integer fiFormOfPublication;
+    Integer fiHinhThucCB;
     @XmlElement(name = "Required")
-    String fiRequired;
+    String fiHamLuong;
     @XmlElement(name = "RequireUnitID")
-    String fiRequireUnitID;
+    String fiMaDVT;
     @XmlElement(name = "RequireUnitName")
-    String fiRequireUnitName;
+    String fiTenDVT;
     @XmlElement(name = "Note")
-    String fiNote;
+    String fiGhiChu;
 }

@@ -18,7 +18,7 @@ public class GuiHSTCCD {
     String fiIdDVXL;
     @XmlElement(name = "AssignName")
     String fiNameDVXL;
-    @XmlElementWrapper(name = "GoodList")
-    @XmlElement(name = "Good")
-    List<HangHoaChiTieu> fiProductList;
+    @XmlElementWrapper(name = "GoodsList")
+    @XmlElement(name = "Goods")
+    List<Product> fiProductList;
 }

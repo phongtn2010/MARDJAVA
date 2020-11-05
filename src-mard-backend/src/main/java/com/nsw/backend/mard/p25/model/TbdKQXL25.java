@@ -71,8 +71,5 @@ public class TbdKQXL25 implements Serializable {
 
     @Column(name = "FI_NGUOIXL")
     private String fiNguoiXL;
-    // Dinh kem
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "FI_ID_HANGHOA")
-    private List<TbdHangHoaFile25> fiListHangHoaFile;
+
 }

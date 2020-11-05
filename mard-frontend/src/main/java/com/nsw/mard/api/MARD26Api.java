@@ -68,15 +68,6 @@ public class MARD26Api extends BaseApi {
                 case MARD26Constant.DANHMUC.HS_TRANGTHAI:
                     json = BackendRequestHelper.getInstance().doGetRequest(MARD26Constant.getInstance().getApiUrl(environment, MARD26Constant.API.DANHMUC_TRANGTHAI));
                     break;
-                case MARD26Constant.DANHMUC.HS_CQGS_PHIABAC:
-                    json = BackendRequestHelper.getInstance().doGetRequest(MARD26Constant.getInstance().getApiUrl(environment, MARD26Constant.API.DANHMUC_CQGS) + id);
-                    break;
-                case MARD26Constant.DANHMUC.HS_CQGS_PHIATRUNG:
-                    json = BackendRequestHelper.getInstance().doGetRequest(MARD26Constant.getInstance().getApiUrl(environment, MARD26Constant.API.DANHMUC_CQGS) + id);
-                    break;
-                case MARD26Constant.DANHMUC.HS_CQGS_PHIANAM:
-                    json = BackendRequestHelper.getInstance().doGetRequest(MARD26Constant.getInstance().getApiUrl(environment, MARD26Constant.API.DANHMUC_CQGS) + id);
-                    break;
                 default:
                     break;
             }

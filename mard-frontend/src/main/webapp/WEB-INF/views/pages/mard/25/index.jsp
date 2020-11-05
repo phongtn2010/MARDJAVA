@@ -350,11 +350,11 @@
                             <tbody data-bind="foreach: filstChiTieu">
                             <tr>
                                 <td class="text-center" data-bind="text: ($index() + 1)"></td>
-                                <td class="text-left" data-bind=""><label data-bind="text : fiTenTACN"/></td>
-                                <td class="text-left" data-bind=""><label data-bind="text : fiChiTieu"/></td>
-                                <td class="text-left" data-bind=""><label data-bind="text : fiHinhThuc"/></td>
+                                <td class="text-left" data-bind=""><label data-bind="text : fiTenHangHoa"/></td>
+                                <td class="text-left" data-bind=""><label data-bind="text : fiTenChiTieu"/></td>
+                                <td class="text-left" data-bind=""><label data-bind="text : fiHinhThucCB"/></td>
                                 <td class="text-left" data-bind=""><label data-bind="text : fiHamLuong"/></td>
-                                <td class="text-left" data-bind=""><label data-bind="text : fiDonViTinh"/></td>
+                                <td class="text-left" data-bind=""><label data-bind="text : fiTenDVT"/></td>
                                 <td class="text-left" data-bind=""><label data-bind="text : fiGhiChu"/></td>
                             </tr>
                             </tbody>

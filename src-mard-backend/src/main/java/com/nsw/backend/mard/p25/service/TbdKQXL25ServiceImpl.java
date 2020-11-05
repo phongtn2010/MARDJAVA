@@ -8,11 +8,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class TbdKQXLServiceImpl implements TbdKQXLService{
+public class TbdKQXL25ServiceImpl implements TbdKQXL25Service {
     @Autowired
     private TbdKQXL25Repository repository;
     @Override
     public void save(TbdKQXL25 tbdKQXL25) {
         repository.save(tbdKQXL25);
+    }
+
+    @Override
+    public TbdKQXL25 findByFiNSWFileCodeAndFiProId(String nswFileCode, Integer proId) {
+        return repository.findByFiNSWFileCodeAndFiProId(nswFileCode,proId);
     }
 }

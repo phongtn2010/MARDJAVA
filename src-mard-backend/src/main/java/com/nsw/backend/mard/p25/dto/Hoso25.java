@@ -163,32 +163,6 @@ public class Hoso25 {
 
         });
 
-        //chuyen chi tieu kiem tra
-
-        List<TbdHanghoa25> lstHangHoa =hoso25.getFiProductList();
-        lstHangHoa.forEach(tbdHanghoa25 -> {
-            List<Ananytical> ananyticalList = new ArrayList<>();
-            tbdHanghoa25.getFiProCLList().forEach(chatluong->{
-                Ananytical ananytical = new Ananytical();
-                ananytical.setFiAnanyticalName(chatluong.getFiProCLTarg());
-                ananytical.setFiFormOfPublication(Integer.parseInt(chatluong.getFiProCLCompare()));
-                ananytical.setFiRequired(chatluong.getFiProCLContent());
-                ananytical.setFiRequireUnitID(chatluong.getFiProCLUnitID());
-                ananytical.setFiRequireUnitName(chatluong.getFiProCLUnitName());
-                ananyticalList.add(ananytical);
-            });
-            tbdHanghoa25.getFiProATList().forEach(anToan->{
-                Ananytical ananytical = new Ananytical();
-                ananytical.setFiAnanyticalName(anToan.getFiProATTarg());
-                ananytical.setFiFormOfPublication(Integer.parseInt(anToan.getFiProATCompare()));
-                ananytical.setFiRequired(anToan.getFiProATContent());
-                ananytical.setFiRequireUnitID(anToan.getFiProATUnitID());
-                ananytical.setFiRequireUnitName(anToan.getFiProATUnitName());
-                ananyticalList.add(ananytical);
-
-            });
-            tbdHanghoa25.setFiListChiTieu(ananyticalList);
-        });
 
         return profile;
     }

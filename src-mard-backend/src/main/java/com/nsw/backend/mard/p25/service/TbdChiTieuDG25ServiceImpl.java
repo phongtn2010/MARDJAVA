@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class TbdChiTieuDG25ServiceImpl implements TbdChiTieuDG25Service{
@@ -14,5 +16,15 @@ public class TbdChiTieuDG25ServiceImpl implements TbdChiTieuDG25Service{
     @Override
     public void save(TbdChiTieuDG25 tbdChiTieuDG25) {
         repository.save(tbdChiTieuDG25);
+    }
+
+    @Override
+    public List<TbdChiTieuDG25> findByFiNSWFileCode(String fiNSWFileCode) {
+        return repository.findByFiNSWFileCode(fiNSWFileCode);
+    }
+
+    @Override
+    public List<TbdChiTieuDG25> findByFiIdProduct(Integer id) {
+        return repository.findByFiIdProduct(id);
     }
 }

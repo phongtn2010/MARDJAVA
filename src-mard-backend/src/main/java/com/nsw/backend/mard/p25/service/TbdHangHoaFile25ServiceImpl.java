@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class TbdHangHoaFile25ServiceImpl implements TbdHangHoaFile25Service{
@@ -14,5 +16,10 @@ public class TbdHangHoaFile25ServiceImpl implements TbdHangHoaFile25Service{
     @Override
     public void update(TbdHangHoaFile25 tbdHangHoaFile25){
         repository.save(tbdHangHoaFile25);
+    }
+
+    @Override
+    public void saveAll(List<TbdHangHoaFile25> lstTbdHangHoaFile25s) {
+        repository.save(lstTbdHangHoaFile25s);
     }
 }

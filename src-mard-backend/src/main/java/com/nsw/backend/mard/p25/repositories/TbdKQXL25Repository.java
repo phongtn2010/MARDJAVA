@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TbdKQXL25Repository extends JpaRepository<TbdKQXL25, Integer> {
-
+    TbdKQXL25 findByFiNSWFileCodeAndFiProId(String nswFileCode, Integer proId);
 }
