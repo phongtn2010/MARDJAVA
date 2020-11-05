@@ -88,7 +88,7 @@
                         <tr>
                             <td class="text-center" data-bind="text: $index() + 1"></td>
                             <td class="text-center" data-bind="text: fiProName"></td>
-                            <td class="text-center" data-bind="text: fiProIdNhom"></td>
+                            <td class="text-center" data-bind="text: $parent.getTenNhom(fiProIdNhom)"></td>
                             <td class="text-center" data-bind="text: fiProCode"></td>
                             <td class="text-center" data-bind="text: fiProMadeIn"></td>
                             <td class="text-center" data-bind="text: fiProCountryCode"></td>
@@ -97,15 +97,15 @@
                             <td class="text-center" data-bind="text: fiTrangThaiHangHoa"></td>
                             <td class="text-center">
                                 <a href="javascript:void(0)" data-target="#modal_view"
-                                   data-toggle="modal" data-bind="click: $parent.xemKQDGSPH.bind($data, $data, $index())"><i
+                                   data-toggle="modal" data-bind="click: $parent.xemKQDGSPH.bind($data, $data, $index()),visible: $root.fiHSType()==3"><i
                                         class="fa fa-lg fa-eye tooltips"></i></a>
                             </td>
                             <td class="text-center">
-                                <a href="javascript:void(0)" data-bind="click: $parent.guiSuaHangHoa.bind($data, $data, $index())"><i
+                                <a href="javascript:void(0)" data-bind="click: $parent.guiSuaHangHoa.bind($data, $data, $index()),"><i
                                         class="fa fa-lg fa-send tooltips"></i></a>
                             </td>
                             <td class="text-center">
-                                <a href="javascript:void(0)" data-bind=""><i
+                                <a href="javascript:void(0)" data-bind="visible: $root.fiHSType()==3"><i
                                         class="fa fa-lg fa-file-word-o tooltips"></i></a>
                             </td>
                             <td class="text-center">

@@ -14,7 +14,7 @@ public class Ananytical {
     @XmlElement(name = "AnanyticalName")
     String fiAnanyticalName;
     @XmlElement(name = "FormOfPublication")
-    String fiFormOfPublication;
+    Integer fiFormOfPublication;
     @XmlElement(name = "Required")
     String fiRequired;
     @XmlElement(name = "RequireUnitID")

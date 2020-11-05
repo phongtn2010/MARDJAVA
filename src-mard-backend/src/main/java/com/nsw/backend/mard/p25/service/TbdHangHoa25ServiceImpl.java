@@ -22,4 +22,9 @@ public class TbdHangHoa25ServiceImpl implements TbdHangHoa25Service{
     public void save(TbdHanghoa25 tbdHanghoa25) {
         tbdHangHoa25Repository.save(tbdHanghoa25);
     }
+
+    @Override
+    public TbdHanghoa25 findByFiIdProduct(Integer id) {
+        return tbdHangHoa25Repository.findByFiIdProduct(id);
+    }
 }

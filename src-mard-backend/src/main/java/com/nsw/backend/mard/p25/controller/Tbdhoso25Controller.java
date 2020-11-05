@@ -10,10 +10,7 @@ import com.nsw.backend.helper.RabbitMQErrorHelper;
 import com.nsw.backend.mard.p25.constant.Constant25;
 //import com.nsw.backend.mard.p25.dto.RequestEdit;
 import com.nsw.backend.mard.p25.dto.SendMessage;
-import com.nsw.backend.mard.p25.model.FilterForm;
-import com.nsw.backend.mard.p25.model.TbdHoso25;
-import com.nsw.backend.mard.p25.model.TbdLichsu25;
-import com.nsw.backend.mard.p25.model.TbdYcrut25;
+import com.nsw.backend.mard.p25.model.*;
 import com.nsw.backend.mard.p25.service.TbdHoso25Service;
 import com.nsw.backend.mard.p25.service.TbdLichsu25Service;
 import com.nsw.backend.mard.p25.service.TbdYcrut25Service;
@@ -89,6 +86,7 @@ public class Tbdhoso25Controller extends BaseController {
             //profileHst.setFiSenderUnitName(result.getFiImporterName());
             profileHst.setFiContent("Gửi mới hồ sơ");
             profile.setFiHSStatus(profile.getFiHSStatus());
+            profileHst.setFiStatus(profile.getFiHSStatus());
             tbdHoso25Service.save(profile);
             tbdLichsu25Service.update(profileHst);
             ResponseJson response = wsService.sendProfile(result);
@@ -216,7 +214,6 @@ public class Tbdhoso25Controller extends BaseController {
             //luu thong tin don vi xu ly truoc khi chuyen
             tbdHoso25Service.update(tbdHoso25);
             ResponseJson response = wsService.chuyenChiTieu(tbdHoso25);
-
             return null;
         } catch (Exception ex) {
             LOG.error(TAG + ex.getMessage(), ex);
@@ -245,7 +242,21 @@ public class Tbdhoso25Controller extends BaseController {
         }
         return createSuccessResponse(regProfile, HttpStatus.OK);
     }
-
+    @PostMapping("/nopkq")
+    public ResponseEntity<ResponseJson> guiXuLyKQ(@RequestBody TbdKQXL25 tbdKQXL25) {
+        try {
+            if (null==tbdKQXL25) {
+                return createErrorResponse("Fail", HttpStatus.OK);
+            }
+            TbdHoso25 tbdHoso25 = tbdHoso25Service.findByFiHSCode(tbdKQXL25.getFiNSWFileCode());
+            ResponseJson response = wsService.dnNopKQ(tbdKQXL25,tbdHoso25);
+            return null;
+        } catch (Exception ex) {
+            LOG.error(TAG + ex.getMessage(), ex);
+            RabbitMQErrorHelper.pushLogToRabbitMQ(getErrorInfo(TAG, ex), rabbitMQService.getRabbitMQInfo());
+            return createErrorResponse(ex.getMessage(), HttpStatus.OK);
+        }
+    }
     @PostMapping("/find")
     public ResponseEntity<ResponseJson> getListByFilter(@RequestBody FilterForm filterForm) {
         tbdHoso25Service.getSignPendingProfiles().cleanUp();

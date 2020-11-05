@@ -90,7 +90,8 @@ public class Constant25 {
         TACN_YCBS_HO_SO(15,"Phòng TACN yêu cầu bổ sung hồ sơ"),
         DA_TU_CHOI(8,"Đã từ chối"),
         DA_TIEP_NHAN(7,"Đã tiếp nhận"),
-        DA_CO_KQ_DANH_GIA_SPH(28,"Đã có kết quả đánh giá sự phù hợp");
+        DA_CO_KQ_DANH_GIA_SPH(28,"Đã có kết quả đánh giá sự phù hợp"),
+        DA_THU_HOI_GXN(48,"Đã thu hồi giấy đăng ký");
 
 
 

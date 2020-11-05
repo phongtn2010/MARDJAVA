@@ -171,7 +171,7 @@ public class Hoso25 {
             tbdHanghoa25.getFiProCLList().forEach(chatluong->{
                 Ananytical ananytical = new Ananytical();
                 ananytical.setFiAnanyticalName(chatluong.getFiProCLTarg());
-                ananytical.setFiFormOfPublication(chatluong.getFiProCLCompare());
+                ananytical.setFiFormOfPublication(Integer.parseInt(chatluong.getFiProCLCompare()));
                 ananytical.setFiRequired(chatluong.getFiProCLContent());
                 ananytical.setFiRequireUnitID(chatluong.getFiProCLUnitID());
                 ananytical.setFiRequireUnitName(chatluong.getFiProCLUnitName());
@@ -180,7 +180,7 @@ public class Hoso25 {
             tbdHanghoa25.getFiProATList().forEach(anToan->{
                 Ananytical ananytical = new Ananytical();
                 ananytical.setFiAnanyticalName(anToan.getFiProATTarg());
-                ananytical.setFiFormOfPublication(anToan.getFiProATCompare());
+                ananytical.setFiFormOfPublication(Integer.parseInt(anToan.getFiProATCompare()));
                 ananytical.setFiRequired(anToan.getFiProATContent());
                 ananytical.setFiRequireUnitID(anToan.getFiProATUnitID());
                 ananytical.setFiRequireUnitName(anToan.getFiProATUnitName());

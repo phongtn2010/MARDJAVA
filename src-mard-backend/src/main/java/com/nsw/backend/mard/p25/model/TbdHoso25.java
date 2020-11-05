@@ -48,11 +48,14 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_HS_CODE_R", length = 50)
     private String fiNSWFileCodeReplace;
 
-    @Column(name = "FI_GDK", length = 250)
-    private String fiGDK;
-
-
-
+    @Column(name = "FI_SO_GDK")
+    private String fiSoGDK;
+    @Column(name = "FI_LINK_GDK", length = 250)
+    private String fiLinkGDK;
+    @Column(name = "FI_FILE_NAME_GDK", length = 250)
+    private String fiFileNameGDK;
+    @Column(name = "FI_FILE_ID_GDK", length = 250)
+    private String fiFileIdGDK;
 //    @Column(name = "FI_IMPORTER_EMAIL", length = 500)
 //    private String fiImporterEmail;
 
@@ -175,11 +178,13 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     private String fiSignAddress;
 
     @Column(name = "FI_ID_DVXL")
-    private Integer fiIdDVXL;
+    private String fiIdDVXL;
 
     @Column(name = "FI_NAME_DVXL", length = 500)
     private String fiNameDVXL;
 
+    @Column(name = "FI_SO_GXN", length = 500)
+    private String fiSoGXN;
     //Danh sách thông tin kèm theo
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "FI_HS_ID")

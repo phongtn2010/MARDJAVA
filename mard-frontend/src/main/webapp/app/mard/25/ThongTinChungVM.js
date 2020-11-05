@@ -142,12 +142,12 @@ function ThongTinChungVM(data) {
     });
 
     ttcVMSelf.changeHoSoType =function(hsType){
-        if(hsType!=4){
-            $("#model-congvan").hide();
-        }else {
-            $("#model-congvan").show();
-        }
-        console.log(ttcVMSelf.fiHSType());
+        // if(hsType!=4){
+        //     $("#model-congvan").hide();
+        // }else {
+        //     $("#model-congvan").show();
+        // }
+        // console.log(ttcVMSelf.fiHSType());
     }
     ttcVMSelf.fiProValueVN  = ko.observable((data && data.hasOwnProperty('fiProValueVN ')) ? data.fiProValueVN  : null).
     extend({

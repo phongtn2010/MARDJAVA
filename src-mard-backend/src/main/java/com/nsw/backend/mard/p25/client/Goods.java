@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class Goods {
 
-    private String fiGoodsId;
+    private Integer fiGoodsId;
 
     private String fiNameOfGoods;
 

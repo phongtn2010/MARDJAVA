@@ -75,7 +75,7 @@ function Mard25VM() {
             return e.provinceId == Number(provinceId);
         })
         if (pos)
-            return pos.provinceName.substring(4,pos.provinceName.length);
+            return pos.provinceName;
         else return provinceId;
     }
     self.getHoSoType = function (hsType) {

@@ -78,7 +78,7 @@
             <b class="modal-title"><spring:message code="mard.25.tokhai.hang_hoa"/></b>
         </div>
         <div class="modal-body">
-            <div class="panel panel-primary" id="model-congvan">
+            <div class="panel panel-primary" id="model-congvan" data-bind="visible: fiHSType()==4">
                 <div class="panel-heading" style="font-weight: bold;"><spring:message code="mard.25.tokhai.hang_hoa.congvan.title"/></div>
                 <div class="panel-body">
                     <form role="form" class="form-horizontal">
@@ -265,7 +265,7 @@
             <b class="modal-title"><spring:message code="mard.25.tokhai.hang_hoa"/></b>
         </div>
         <div class="modal-body">
-            <div class="panel panel-primary" id="model-congvan">
+            <div class="panel panel-primary" id="model-congvan" data-bind="visible: fiHSType()==4">
                 <div class="panel-heading" style="font-weight: bold;"><spring:message code="mard.25.tokhai.hang_hoa.congvan.title"/></div>
                 <div class="panel-body">
                     <form role="form" class="form-horizontal">
@@ -451,7 +451,7 @@
             <b class="modal-title"><spring:message code="mard.25.tokhai.hang_hoa"/></b>
         </div>
         <div class="modal-body">
-            <div class="panel panel-primary" id="model-congvan">
+            <div class="panel panel-primary" id="model-congvan" data-bind="visible: fiHSType()==4">
                 <div class="panel-heading" style="font-weight: bold;"><spring:message code="mard.25.tokhai.hang_hoa.congvan.title"/></div>
                 <div class="panel-body">
                     <form role="form" class="form-horizontal">

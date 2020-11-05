@@ -10,10 +10,7 @@ import com.nsw.helper.BackendRequestHelper;
 import com.nsw.helper.RabbitMQErrorHelper;
 import com.nsw.mard.constant.Mard06Constant;
 import com.nsw.mard.constant.Mard25Constant;
-import com.nsw.mard.p25.model.FilterForm;
-import com.nsw.mard.p25.model.ResponeUploadFile;
-import com.nsw.mard.p25.model.TbdHoso25;
-import com.nsw.mard.p25.model.TbdYcrut25;
+import com.nsw.mard.p25.model.*;
 import com.nsw.mard.p6.model.SendMessage;
 import com.nsw.mard.service.DinhkemService;
 import com.nsw.util.Constants;
@@ -549,6 +546,29 @@ public class Mard25Api extends BaseApi {
             returnJson.setSuccess(false);
             returnJson.setMessage(ex.getMessage());
             return returnJson;
+        }
+    }
+
+    @RequestMapping(value = "/hoso/guikqxl", method = RequestMethod.POST,headers = {"content-type=application/json"})
+    public @ResponseBody
+    ResponseJson guiKQXL(@RequestBody TbdKQXL25 tbdKQXL25) {
+        ResponseJson json = new ResponseJson();
+        try {
+            if (!isOwner(tbdKQXL25.getFiNSWFileCode(), null)) {
+                json.setSuccess(false);
+                json.setMessage("Không có quyền thao tác với hồ sơ này");
+                return json;
+            }
+            json =BackendRequestHelper.getInstance().doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.CHUYEN_CHI_TIEU), tbdKQXL25);
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            json.setData(null);
+            json.setSuccess(false);
+            json.setMessage(ex.getMessage());
+            return json;
         }
     }
     private SignData getXMLForSign(SendMessage sendMessage) throws Exception {

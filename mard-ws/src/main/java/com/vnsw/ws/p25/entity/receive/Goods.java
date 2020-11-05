@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 public class Goods {
     @XmlElement(name = "GoodsId")
-    private String fiGoodsId;
+    private Integer fiGoodsId;
 
     @XmlElement(name = "NameOfGoods")
     private String fiNameOfGoods;

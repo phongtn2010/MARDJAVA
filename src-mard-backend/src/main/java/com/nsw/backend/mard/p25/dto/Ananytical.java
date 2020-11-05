@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class Ananytical {
     String fiAnanyticalName;
-    String fiFormOfPublication;
+    Integer fiFormOfPublication;
     String fiRequired;
     String fiRequireUnitID;
     String fiRequireUnitName;

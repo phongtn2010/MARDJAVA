@@ -13,6 +13,7 @@ import com.vnsw.ws.helper.SoapHelper;
 import com.vnsw.ws.p25.common.Constants25;
 import com.vnsw.ws.p25.entity.json.SendMessage;
 import com.vnsw.ws.p25.envelop.*;
+import com.vnsw.ws.p25.message.send.DNNopKetQua;
 import com.vnsw.ws.p25.message.send.DNYeucauHuyHoso;
 import com.vnsw.ws.p25.message.send.GuiHSTCCD;
 import com.vnsw.ws.p25.message.send.Hoso25;
@@ -161,6 +162,23 @@ public class SendController25 {
                         DNYeucauHuyHoso ycrut =  mapper.readValue(sendMessage.getDataRequest(), DNYeucauHuyHoso.class);
                         ycrut.setFiRequestedDate(new Date());
                         content.setDNYeucauHuyHoso(ycrut);
+                        body = envelopeService.createBody(content);
+                        envelopeSend = envelopeService.createMessage(header, body);
+                        if (debugMode) {
+                            isSuccess = true;
+                            objReturn = new ResponseJson();
+                            objReturn.setSuccess(true);
+                            objReturn.setMessage(errorMessage);
+                            objReturn.setData(hoso25);
+                        } else {
+                            objReturn = send(envelopeSend, sendMessage.getSignedXml(), maHoso, sendMessage.getType());
+                            isSuccess = objReturn.isSuccess();
+                            errorMessage = objReturn.getMessage();
+                        }
+                        break;
+                    case Constants25.MARD25_TYPE.TYPE_17:
+                        DNNopKetQua dnNopKetQua =  mapper.readValue(sendMessage.getDataRequest(), DNNopKetQua.class);
+                        content.setNopKetQua(dnNopKetQua);
                         body = envelopeService.createBody(content);
                         envelopeSend = envelopeService.createMessage(header, body);
                         if (debugMode) {

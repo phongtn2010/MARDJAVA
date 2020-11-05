@@ -1141,13 +1141,13 @@ function UploadFileVM(options) {
         } else {
             $('#loading08').show();
             var token = null;
-            $.ajax({
-                type: 'GET',
-                cache: false,
-                url: TOKEN_URL,
-                success: function (response) {
-                    if (response.status == 'Successful') {
-                        token = response.data;
+            // $.ajax({
+            //     type: 'GET',
+            //     cache: false,
+            //     url: TOKEN_URL,
+            //     success: function (response) {
+            //         if (response.status == 'Successful') {
+            //             token = response.data;
                         app.uploadFile({
                             file: files,
                             mcode: 'mard',
@@ -1166,16 +1166,16 @@ function UploadFileVM(options) {
 
                             }
                         });
-                    } else {
-                        ufVMSelf.errorMsg('Có lỗi tải file lên');
-                    }
-                },
-                error: function (x, t, m) {
-                    $('#loading08').hide();
-                },
-                complete: function (jqXHR, textStatus) {
-                }
-            });
+            //         } else {
+            //             ufVMSelf.errorMsg('Có lỗi tải file lên');
+            //         }
+            //     },
+            //     error: function (x, t, m) {
+            //         $('#loading08').hide();
+            //     },
+            //     complete: function (jqXHR, textStatus) {
+            //     }
+            // });
         }
     }
     ufVMSelf.switchFileType = function(fileType,fileName,fiPath,fiGuid){

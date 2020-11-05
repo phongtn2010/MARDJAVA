@@ -4,6 +4,7 @@ import com.nsw.backend.mard.p25.client.ResponseWrapper;
 import com.nsw.backend.mard.p25.dto.SendMessage;
 import com.nsw.backend.mard.p25.exception.NSWException;
 import com.nsw.backend.mard.p25.model.TbdHoso25;
+import com.nsw.backend.mard.p25.model.TbdKQXL25;
 import com.nsw.backend.mard.p25.model.TbdYcrut25;
 import com.nsw.backend.util.ResponseJson;
 
@@ -43,4 +44,5 @@ public interface WsService {
 
     ResponseJson yeuCauRutHS(TbdYcrut25 requestCancel);
 
+    ResponseJson dnNopKQ(TbdKQXL25 tbdKQXL25, TbdHoso25 tbdHoso25)  throws NSWException;
 }
