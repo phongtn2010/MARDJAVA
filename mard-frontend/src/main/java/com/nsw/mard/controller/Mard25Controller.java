@@ -24,6 +24,7 @@ import java.util.HashMap;
 @RequestMapping("/mard/25")
 public class Mard25Controller {
     private static final String ID_FILED = "idHoSo";
+    private static final String IS_COPY = "isCopy";
 
     @Autowired
     Environment environment;
@@ -76,6 +77,21 @@ public class Mard25Controller {
             UserCustom user = (UserCustom) principal;
             initData(model, user);
             model.addAttribute(ID_FILED, idHoSo);
+            model.addAttribute(IS_COPY, false);
+        } else {
+            return AppConstant.redirectPage(AppConstant.Pages.LOGOUT);
+        }
+        return Mard25Constant.Page.EDIT;
+    }
+
+    @RequestMapping(value = {"/copy/{idHoSo}"}, method = RequestMethod.GET)
+    public String copyHoso(ModelMap model, @PathVariable("idHoSo") Long idHoSo) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            UserCustom user = (UserCustom) principal;
+            initData(model, user);
+            model.addAttribute(ID_FILED, idHoSo);
+            model.addAttribute(IS_COPY, true);
         } else {
             return AppConstant.redirectPage(AppConstant.Pages.LOGOUT);
         }

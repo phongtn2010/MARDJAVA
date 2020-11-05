@@ -8,6 +8,8 @@
 <script type="text/javascript">
     var idHoSo = ${idHoSo};
     console.log('id ho so', idHoSo);
+    var isCopy = ${isCopy};
+    console.log('isCopy', isCopy);
 </script>
 <div id="mard25Edit">
     <div class="row" style="padding-top: 15px; padding-bottom: 15px;" data-bind="with: kdnkVM">

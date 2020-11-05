@@ -272,6 +272,10 @@ function Mard25VM() {
         self.selectedHoSo(item);
         $('#mard25ViewHSModal').modal('show');
     }
+    self.showLSXL = function (item) {
+        self.lichsuXuly().show(item.fiNSWFileCode);
+        return false;
+    };
 
     self.viewGiayPhep = function(item) {
         var code = item.fiNSWFileCode;
@@ -453,6 +457,10 @@ function Mard25VM() {
 
     self.goEditHoSo = function(item) {
         window.location.href= app.appContext + "/mard/25/edit/" + item.fiIdHS;
+        return true;
+    }
+    self.goCopyHoSo = function(item) {
+        window.location.href= app.appContext + "/mard/25/copy/" + item.fiIdHS;
         return true;
     }
 
@@ -660,3 +668,4 @@ $(document).ready(function () {
         $("#tab_vsty").hide();
     })
 })
+

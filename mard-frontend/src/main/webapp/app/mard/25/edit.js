@@ -4,6 +4,35 @@ function Mard25EditVM () {
     editVMSefl.isEditable = ko.observable(true)
     editVMSefl.applyState = function (options) {
         options["isEditHS"]="1";
+        if (isCopy) {
+            options["fiIdHS"]=null;
+            options["fiNSWFileCode"]=null;
+            for (var i =0;i<options.fiProductList.length;i++){
+                options.fiProductList[i].fiIdHS=null;
+                options.fiProductList[i].fiIdProduct=null;
+                var getLstCL = options.fiProductList[i].fiProCLList;
+                var getLstAT = options.fiProductList[i].fiProATList;
+                var getLstSLKL = options.fiProductList[i].fiProSLKLList;
+                for (var j =0;j<getLstCL.length;j++){
+                    getLstCL[j].fiIdProduct=null;
+                    getLstCL[j].fiIdProCL=null;
+                }
+                for (var j =0;j<getLstAT.length;j++){
+                    getLstAT[j].fiIdProduct=null;
+                    getLstAT[j].fiIdProAT=null;
+                }
+                for (var j =0;j<getLstSLKL.length;j++){
+                    getLstSLKL[j].fiIdProduct=null;
+                    getLstSLKL[j].fiIdProSLKL=null;
+                }
+            }
+            for (var i =0;i<options.fiAttachmentList.length;i++){
+                options.fiAttachmentList[i].fiFileHD=null;
+                options.fiAttachmentList[i].fiIdHS=null;
+                options.fiAttachmentList[i].fiIdDinhkem=null;
+            }
+        }
+        console.log(options);
         editVMSefl.kdnkVM(new HangHoaNhapKhauVM(options));
     }
     editVMSefl.saveRegProfile = function () {

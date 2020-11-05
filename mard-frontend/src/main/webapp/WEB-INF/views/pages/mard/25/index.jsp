@@ -5,6 +5,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@include file="incLanguage.jsp" %>
 <%@include file="inc_script.jsp" %>
+<%@include file="inc_view_lichsuXuly.jsp" %>
 <div class="row" id="mard25">
     <div class="col-md-12">
         <div class="portlet light">
@@ -186,11 +187,11 @@
                         <tr>
                             <td class="text-center" data-bind="text: $index() + 1"></td>
                             <td class="text-center">
-                                <a href="javascript:void(0)" data-bind="click: $root.viewLichSu"><i
+                                <a href="javascript:void(0)" data-bind="click: $root.showLSXL"><i
                                         class="fa fa-lg fa-history tooltips"></i></a>
                             </td>
                             <td class="text-center">
-                                <a href="javascript:void(0)" data-bind="click: $root.viewCopy"><i
+                                <a href="javascript:void(0)" data-bind="click: $root.goCopyHoSo"><i
                                         class="fa fa-lg fa-file tooltips"></i></a>
                             </td>
                             <td class="text-center">
