@@ -4,6 +4,7 @@ function Mard25ViewHangHoaVM (options) {
     self.fiHSCode = ko.observable(null);
     self.fiHSStatus = ko.observable(null);
     self.errorMsg  = ko.observable('');
+    self.lstFilePT  = ko.observableArray();
     self.lstFileGCN  = ko.observableArray();
     self.mard25HangHoaItems  = ko.observableArray((options && options.hasOwnProperty('mard25HangHoaItems')) ? options.mard25HangHoaItems :[]);
     self.lstProfileStatus  = ko.observableArray((options && options.hasOwnProperty('lstProfileStatus')) ? options.lstProfileStatus :[]);
@@ -138,20 +139,30 @@ function Mard25ViewHangHoaVM (options) {
     }
     self.xemKQDGSPH = function(data,type,index){
         self.getFileGCN(index.fiIdProduct,function (res) {
-            console.log(res);
-            self.lstFileGCN =res.data ;
+            self.lstFileGCN(res.data);
+            self.fiMaCqkt(self.lstFileGCN.fiMaCqkt);
+            self.fiLoaiDanhGia(self.lstFileGCN.fiLoaiDanhgia);
+            console.log(self.lstFileGCN());
         });
-
-        if(self.lstFileGCN().length>0){
-
-            self.fiMaCqkt(self.lstFileGCN().fiMaCqkt);
-            self.fiLoaiDanhGia(self.lstFileGCN().fiLoaiDanhgia);
-        }
-        console.log(self.lstFileGCN());
-        self.getFileKQPT(index.fiIdProduct);
-
+        self.getFileKQPT(index.fiIdProduct,function (res) {
+            self.lstFilePT(res.data);
+            console.log(self.lstFilePT())
+        });
         self.fiProName(index.fiProName);
         $("#modal_view").show();
+    }
+    self.downloadFile =function(data,type,index){
+        if(index.fiLinkGcn){
+            window.open(index.fiLinkGcn);
+        }else{
+            window.open(index.fiFileLink);
+        }
+
+    }
+
+    self.xemThongBao = function(data,type,index){
+
+        $("#mard25KQKT").show();
     }
     self.lichsuXuly = ko.observable(new HistoryPopupView());
     self.showLSHH = function (item) {
@@ -309,12 +320,12 @@ function Mard25ViewHangHoaVM (options) {
             }
         });
     }
-    self.getFileKQPT =function (idHangHoa) {
+    self.getFileKQPT =function (idHangHoa,callback) {
         app.makeGet({
             url: '/mard/25/filekqpt/'+idHangHoa,
             success: function (d) {
                 if (d.success) {
-                    return d.data;
+                    callback(d);
                 }
             }
         });

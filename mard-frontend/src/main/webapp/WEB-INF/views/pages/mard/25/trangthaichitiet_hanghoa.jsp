@@ -99,14 +99,15 @@
                             <td class="text-center" data-bind="text: $parent.getTrangThaiHangHoa(fiTrangThaiHangHoa)"></td>
                             <td class="text-center">
                                 <a href="javascript:void(0)" data-target="#modal_view"
-                                   data-toggle="modal" data-bind="click: $parent.xemKQDGSPH.bind($data, $data, $index()),visible: $root.fiHSType()==3&&fiTrangThaiHangHoa==28"><i                                        class="fa fa-lg fa-eye tooltips"></i></a>
+                                   data-toggle="modal" data-bind="click: $parent.xemKQDGSPH.bind($data, $data, $index()),visible: $root.fiHSType()==3&&fiTrangThaiHangHoa==28"><i
+                                        class="fa fa-lg fa-eye tooltips"></i></a>
                             </td>
                             <td class="text-center">
                                 <a href="javascript:void(0)" data-bind="click: $parent.guiSuaHangHoa.bind($data, $data, $index()),"><i
                                         class="fa fa-lg fa-send tooltips"></i></a>
                             </td>
                             <td class="text-center">
-                                <a href="javascript:void(0)" data-bind="visible: $root.fiHSType()==3"><i
+                                <a href="javascript:void(0)" data-bind="click: $parent.xemThongBao.bind($data, $data, $index()),visible: $root.fiHSType()==3"><i
                                         class="fa fa-lg fa-file-word-o tooltips"></i></a>
                             </td>
                             <td class="text-center">
@@ -187,6 +188,7 @@
             </div>
         </div>
     </div>
+    <%@include file="inc_thongbaoketqua.jsp" %>
 </div>
 <style>
     .content {

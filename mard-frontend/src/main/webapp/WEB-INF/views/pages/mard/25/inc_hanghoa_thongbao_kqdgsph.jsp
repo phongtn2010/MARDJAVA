@@ -68,9 +68,9 @@
                         <td class="text-center" data-bind="text: ($index() + 1)"></td>
                         <td data-bind="text : fiSoGcn"></td>
                         <td data-bind="date : fiNgaycap"></td>
-                        <td data-bind="date : fiNameFileGcn"></td>
+                        <td data-bind="text : fiNameFileGcn"></td>
                         <td class="text-center">
-                            <a href="javascript:void(0)" data-bind="">
+                            <a href="javascript:void(0)" data-bind="click: $parent.downloadFile.bind($data, $data, $index())">
                                 <i class="fa fa-lg fa-download"></i>
                             </a>
                         </td>
@@ -90,13 +90,13 @@
                                     <th class="text-center"> <spring:message code="mard.25.hanghoa.tai_file"/></th>
                                 </tr>
                                 </thead>
-                                <tbody data-bind="foreach: lstKetQuaPhanTich">
+                                <tbody data-bind="foreach: lstFilePT">
                                 <tr>
                                     <td class="text-center" data-bind="text: ($index() + 1)"></td>
-                                    <td data-bind="text : fiTenFile"></td>
+                                    <td data-bind="text : fiFileName"></td>
                                     <td class="text-center">
-                                        <a href="javascript:void(0)" data-bind="click: $parent.removeFile.bind($data, $index())">
-                                            <i class="fa fa-lg fa-trash"></i>
+                                        <a href="javascript:void(0)" data-bind="click: $parent.downloadFile.bind($data, $data, $index())">
+                                            <i class="fa fa-lg fa-download"></i>
                                         </a>
                                     </td>
                                 </tr>
