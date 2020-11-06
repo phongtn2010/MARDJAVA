@@ -183,12 +183,13 @@ public class Mard25Constant {
         public static final String ATTACHMENT_DELETE = "mard.25.dinhkem.delete";
         public static final String LICENSE_VIEW_GET = "mard.25.tbdhoso25.viewlicense";
         public static final String HISTORY_BY_HS_CODE = "mard.25.tbdhoso25.history";
+        public static final String HISTORY_BY_FIPRODUCT_ID = "mard.25.tbdhoso25.historyHH";
         public static final String UPDATE_ONLY = "mard.25.hoso.update_only";
         public static final String SAVE_BEFORE_UPDATE = "mard.25.hoso.save_before_update";
         public static final String CHUYEN_CHI_TIEU = "mard.25.hoso.chuyenchitieu";
         public static final String GUI_KQXL = "mard.25.hoso.guikqxl";
         public static final String GET_XML = "mard.25.getXml";
-
+        public static final String HANGHOA_GET_BY_FILTER = "mard.25.tbdhanghoa25.findfilter";
         //binhvv5
         public static final String GET_BY_CAT_NO = "mard.25.danhmuc.getbycatno";
         public static final String GET_BY_CAT_PARENT = "mard.25.danhmuc.getbycatparent";

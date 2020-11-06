@@ -2,6 +2,7 @@ package com.nsw.backend.mard.p25.controller;
 
 import com.nsw.backend.controller.BaseController;
 import com.nsw.backend.helper.RabbitMQErrorHelper;
+import com.nsw.backend.mard.p25.model.FilterForm;
 import com.nsw.backend.mard.p25.model.TbdHanghoa25;
 import com.nsw.backend.mard.p25.service.TbdHangHoa25Service;
 import com.nsw.backend.util.ResponseJson;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class TbdHangHoa25Controller extends BaseController {
     private static final Logger LOG = LoggerFactory.getLogger(TbdHangHoa25Controller.class);
     private static final String TAG = "Tbdhoso25Controller";
-
+    private final TbdHangHoa25Service tbdHangHoa25Service;
     @Autowired
     private TbdHangHoa25Service hangHoa25Service;
 
@@ -26,4 +27,10 @@ public class TbdHangHoa25Controller extends BaseController {
     public ResponseEntity<ResponseJson> manualRollback(@PathVariable Integer idHoSo) {
          return createSuccessResponse(hangHoa25Service.findByFiIdHS(idHoSo), HttpStatus.OK);
     }
+
+//    @PostMapping("/find")
+//    public ResponseEntity<ResponseJson> getListByFilter(@RequestBody FilterForm filterForm) {
+//        tbdHangHoa25Service.getSignPendingProfiles().cleanUp();
+//        return createSuccessResponse(tbdHangHoa25Service.searchHoso(filterForm), HttpStatus.OK);
+//    }
 }

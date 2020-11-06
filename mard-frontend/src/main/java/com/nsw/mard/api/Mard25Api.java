@@ -524,6 +524,33 @@ public class Mard25Api extends BaseApi {
         }
     }
 
+    @RequestMapping(value = "/lichsu/hanghoa", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseJson getLichsuHH(
+            @RequestParam(name = "fiIdProduct") Integer fiIdProduct,
+            @RequestParam(required = false) Integer p,
+            @RequestParam(required = false) Integer s
+    ) {
+        ResponseJson json = new ResponseJson();
+        try {
+//            if (!isOwner(null, fiIdProduct)) {
+//                json.setSuccess(false);
+//                json.setMessage("Không có quyền truy cập hồ sơ");
+//                return json;
+//            }
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.HISTORY_BY_FIPRODUCT_ID) + "?fiIdProduct=" + fiIdProduct + "&p=" + p + "&s=" + s);
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            json.setData(null);
+            json.setSuccess(false);
+            json.setMessage(ex.getMessage());
+            return json;
+        }
+    }
+
     @RequestMapping(value = "/hoso/cancel", method = RequestMethod.POST, headers = {"content-type=application/json"})
     public @ResponseBody
     ResponseJson requestCancelHoso(
@@ -571,6 +598,17 @@ public class Mard25Api extends BaseApi {
             return json;
         }
     }
+
+    @RequestMapping(value = "/hanghoa/timkiem", method = RequestMethod.POST, headers = {"content-type=application/json"})
+    public @ResponseBody
+    ResponseJson searchHangHoa(
+            @RequestBody FilterForm filter
+    ) {
+        filter.setFiCompanyTaxCode(getUsername());
+        ResponseJson json = BackendRequestHelper.getInstance().doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.HANGHOA_GET_BY_FILTER), filter);
+        return json;
+    }
+
     private SignData getXMLForSign(SendMessage sendMessage) throws Exception {
         ResponseJson resultSignFlow = BackendRequestHelper.getInstance()
                 .doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_XML), sendMessage);

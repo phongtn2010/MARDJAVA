@@ -7,9 +7,11 @@ function Mard25ViewHangHoaVM (options) {
     self.lstToChucDanhGia  = ko.observableArray((options && options.hasOwnProperty('lstToChucDanhGia')) ? options.lstToChucDanhGia :[]);
     self.lstKetQuaPhanTich  = ko.observableArray((options && options.hasOwnProperty('lstKetQuaPhanTich')) ? options.lstKetQuaPhanTich :[]);
     self.lstNhom  = ko.observableArray((options && options.hasOwnProperty('lstNhom')) ? options.lstNhom :[]);
-
+    var MAX_PAGE_SIZE = 10;
+    self.size = ko.observable(MAX_PAGE_SIZE);
     self.fiNSWFileCode = ko.observable(null);
     self.fiHSType = ko.observable(null);
+    self.fiHSTypeName = ko.observable((options && options.hasOwnProperty('fiHSTypeName')) ? options.fiHSTypeName : null);
     self.fiProName = ko.observable(null);
     self.fiLoaiDanhGia = ko.observable(null);
     self.fiToChucDanhGia = ko.observable(null);
@@ -22,10 +24,69 @@ function Mard25ViewHangHoaVM (options) {
     self.fiFileGCNLink = ko.observable(null);
     self.fiFileKQ = ko.observable(null);
     self.fiHS = ko.observable((options && options.hasOwnProperty('fiHS')) ? options.fiHS : null);
-
+    self.isEditable = ko.observable(true);
     self.fiNameTCCD = ko.observable(null);
     self.guiKetQuaVM= new GuiKetQuaVM();
-
+    self.lstProfileStatus = ko.observableArray((options && options.hasOwnProperty('lstProfileStatus')) ?options.lstProfileStatus: []);
+    self.getProfileStatus = function (statuscode) {
+        var lstProfileStatus = self.lstProfileStatus();
+        var pos = lstProfileStatus.find(function (e) {
+            return e.fiCatType == Number(statuscode);
+        })
+        if (pos)
+            return pos.fiCatTypeName;
+        else return statuscode;
+    }
+    self.changeHoSoType =function(hsType){
+        // if(hsType!=4){
+        //     $("#model-congvan").hide();
+        // }else {
+        //     $("#model-congvan").show();
+        // }
+        // console.log(ttcVMSelf.fiHSType());
+    }
+    self.searchProduct = function () {
+        self.searchHoso(1);
+    }
+    self.searchHoso = function (page) {
+        var filter = {
+            fiProName: self.fiProName(),
+            fiHSType: self.fiHSType(),
+            page: page,
+            size: self.size()
+        }
+        $.ajax({
+            async: true,
+            type: 'POST',
+            cache: false,
+            crossDomain: true,
+            url: app.appContext + "/mard/25/hoso/timkiem",
+            data: JSON.stringify(filter),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(CSRF_TOKEN_NAME, CSRF_TOKEN_VALUE);
+                $('#loading08').show();
+            },
+            success: function (res) {
+                if (res.success) {
+                    var list = res.data ? res.data.data : [];
+                    self.mard25HangHoaItems(list);
+                    self.pagination().update({
+                        totalCount: res.data.total,
+                        pageSize: MAX_PAGE_SIZE,
+                        currentPage: page
+                    })
+                }
+            },
+            error: function (err) {
+            },
+            complete: function (jqXHR, textStatus) {
+                $('#loading08').hide();
+                window.stateChanging = false;
+            }
+        });
+    }
     self.hangHoaSelected = ko.observable(null);
     self.backBtn = function(){
         window.location.href=app.appContext+"/mard/25/home";
@@ -76,6 +137,11 @@ function Mard25ViewHangHoaVM (options) {
         self.fiProName(index.fiProName);
         $("#modal_view").show();
     }
+    self.lichsuXuly = ko.observable(new HistoryPopupView());
+    self.showLSHH = function (item) {
+        self.lichsuXuly().getLSHH(item.fiIdProduct);
+        return false;
+    };
     self.fileKQChange = function(data, e){
         var files = e.target.files;
         app.uploadFile({
@@ -106,6 +172,7 @@ function Mard25ViewHangHoaVM (options) {
         self.fiNSWFileCode(self.fiHS().fiNSWFileCode);
         $("#modal_guiSua").show();
     }
+
     self.guiKiemDinhHangHoa =function(){
         // if(!self.validateForm()){
         //     return;
@@ -228,6 +295,7 @@ function getThongTinHangHoa(callback) {
 }
 function init(options) {
     var mard25ViewHangHoaVM = new Mard25ViewHangHoaVM(options);
+    options["fiTrangThaiHangHoa"]="0";
     ko.applyBindings(mard25ViewHangHoaVM, document.getElementById('mardHangHoa25'));
 }
 $(document).ready(function () {
@@ -246,6 +314,10 @@ $(document).ready(function () {
             app.sendGetRequest("/mard/25/danhmuc/getby-catno/1", function (res) {
                 options['lstNhom'] = res.data;
             }),
+            //danh muc trang thai
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/25", function (res) {
+                options['lstProfileStatus'] = res.data;
+            })
         ).done(function (data) {
             $('#loading10').hide();
             init(options);

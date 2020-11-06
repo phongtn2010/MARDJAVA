@@ -27,7 +27,8 @@ public class FilterForm {
     private Integer size = 20;
     private String sortBy = "fiNSWFileCode";
     private String order = "asc";
-
+    private String fiProName;
+    private String fiHSType;
     @JsonIgnore
     private List<String> fiLstNSWFileCode;
 

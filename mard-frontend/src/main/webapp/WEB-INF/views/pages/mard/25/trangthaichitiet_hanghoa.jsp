@@ -36,23 +36,25 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <input class="form-control"
-                                                           data-bind="value : fiHSCode, hasFocus: true"
+                                                           data-bind="value : fiProName, hasFocus: true"
                                                            type="text"/>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <label>Trạng thái hồ sơ</label>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input class="form-control"
-                                                           data-bind="value : fiHSStatus, hasFocus: true"
-                                                           type="text"/>
+                                                    <select class="form-control"  data-bind="options : lstProfileStatus, optionsValue : 'fiCatType',
+                                                                     selectedText:fiHSTypeName,
+                                                                     optionsText : 'fiCatTypeName',
+                                                    value: fiHSType, enable: $root.isEditable(), event: {change: changeHoSoType(fiHSType())}">
+                                                    </select>
                                                 </div>
 
                                             </div>
                                             <div class="col-md-12 margin-top-20">
                                                 <div class="form-group nsw-text-center">
                                                     <button class="btn green margin-right-10" id="searchHoSo"
-                                                            data-bind=""><i class="fa fa-search"></i> Tìm kiếm
+                                                            data-bind="click: searchProduct"><i class="fa fa-search"></i> Tìm kiếm
                                                     </button><button class="btn green" data-bind="click: backBtn"
                                                                      data-bind=""><i class="fa fa-sign-out"></i> Thoát
                                                 </button>
@@ -97,7 +99,7 @@
                             <td class="text-center" data-bind="text: fiTrangThaiHangHoa"></td>
                             <td class="text-center">
                                 <a href="javascript:void(0)" data-target="#modal_view"
-                                   data-toggle="modal" data-bind="click: $parent.xemKQDGSPH.bind($data, $data, $index()),visible: $root.fiHSType()==3&&fiTrangThaiHangHoa()==28"><i
+                                   data-toggle="modal" data-bind="click: $parent.xemKQDGSPH.bind($data, $data, $index()),visible: $root.fiHSType==3&&fiTrangThaiHangHoa==28"><i
                                         class="fa fa-lg fa-eye tooltips"></i></a>
                             </td>
                             <td class="text-center">
@@ -109,8 +111,8 @@
                                         class="fa fa-lg fa-file-word-o tooltips"></i></a>
                             </td>
                             <td class="text-center">
-                                <a href="javascript:void(0)" data-bind=""><i
-                                        class="fa fa-lg fa-history tooltips"></i></a>
+                                <a href="javascript:void(0)" data-bind="click: $root.showLSHH"><i
+                                    class="fa fa-lg fa-history tooltips"></i></a>
                             </td>
                         </td>
 
@@ -129,6 +131,62 @@
          tabindex="-1"
          data-backdrop="static" data-keyboard="false">
 
+    </div>
+    <div id="modal_lichsuHangHoa" class="modal container in modal-overflow" tabindex="-1"
+         data-backdrop="static" data-keyboard="false"
+         data-bind="with: lichsuXuly"
+    >
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <b class="modal-title">Lịch sử hồ sơ: <span data-bind="text: fiHSCode"></span></b>
+        </div>
+        <div class="modal-body">
+            <div class="tab-content" id="pageView">
+                <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                    <thead>
+                    <tr>
+                        <th class="text-center" width="5%"><spring:message code="mard.xemgiayphep.stt" /></th>
+                        <th class="text-center" width="10%">Đơn vị xử lý</th>
+                        <th class="text-center" width="15%">Người xử lý</th>
+                        <th class="text-center" width="10%">Thời gian</th>
+                        <th class="text-center" width="30%">Nội dung</th>
+                        <th class="text-center" width="15%">File đính kèm</th>
+                        <th class="text-center" width="40%">Trạng thái</th>
+                    </tr>
+                    </thead>
+                    <tbody data-bind="foreach: historyItems">
+                    <tr>
+                        <td data-bind="text: ($parent.historyPageingVM.currentPage() - 1)* $parent.historyPageingVM.pageSize() + $index() + 1"></td>
+                        <td data-bind="text: fiNswSend"></td>
+                        <td data-bind="text:'' "></td>
+                        <td data-bind="datetime: fiNgayGui"></td>
+                        <td data-bind="html: fiNoiDung"></td>
+                        <td></td>
+                        <td data-bind="text: $root.getProfileStatus(fiTrangThai())"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-12 nsw-text-right">
+                        <div class="nsw-flr" data-bind="if: historyPageingVM.totalCount() > historyPageingVM.pageSize()">
+                            <ul class="flip pull-left pagination pagination-sm">
+                                <li data-bind="css: { disabled: !historyPageingVM.firstPageActive() }" class="previous disabled"><a href="#" aria-label="First" data-bind="click: goToFirst">Trang đầu
+                                </a></li>
+                                <li data-bind="css: { disabled: !historyPageingVM.previousPageActive()  }" class="previous disabled"><a href="#" aria-label="Previous" data-bind="click: goToPrevious">Trang trước
+                                </a></li>
+                                <!-- ko foreach: historyPageingVM.getPages() -->
+                                <li data-bind="css: { active: $data == $parent.historyPageingVM.currentPage() }"><a href="#" data-bind="text: $data, click: $parent.goToPage.bind($data)"></a></li>
+                                <!-- /ko -->
+                                <li data-bind="css: { disabled: !historyPageingVM.nextPageActive() }" class="next"><a href="#" aria-label="Next" data-bind="click: goToNext">Trang sau
+                                </a></li>
+                                <li data-bind="css: { disabled: !historyPageingVM.lastPageActive() }" class="next"><a href="#" aria-label="Last" data-bind="click: goToLast">Trang cuối
+                                </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <style>
