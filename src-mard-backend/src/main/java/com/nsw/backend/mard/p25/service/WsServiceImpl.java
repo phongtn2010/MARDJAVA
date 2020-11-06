@@ -36,17 +36,15 @@ public class WsServiceImpl implements WsService {
     private final TbdHangHoaFile25Service tbdHangHoaFile25Service;
     private final TbdLichSuHH25Service tbdLichSuHH25Service;
     private final TbdChiTieuDG25Service tbdChiTieuDG25Service;
-
-    @Autowired
-    private TbdHosoTccd25Service tbdHosoTccd25Service;
-    @Autowired
-    private TbdKQXL25Service tbdKQXL25Service;
+    private final TbdGiayXNCL25Service tbdGiayXNCL25Service;
+    private final TbdHosoTccd25Service tbdHosoTccd25Service;
+    private final TbdKQXL25Service tbdKQXL25Service;
     private Gson gson;
 
     private final Environment environment;
 
     @Autowired
-    public WsServiceImpl(TbdHoso25Service tbdHoso25Service, TbdLichsu25Service tbdLichsu25Service, Environment environment, TbdXacNhanDon25Service tbdXacNhanDon25Service, TbdHangHoa25Service tbdHangHoa25Service, TbdHangHoaFile25Service tbdHangHoaFile25Service, TbdLichSuHH25Service tbdLichSuHH25Service, TbdChiTieuDG25Service tbdChiTieuDG25Service) {
+    public WsServiceImpl(TbdHoso25Service tbdHoso25Service, TbdLichsu25Service tbdLichsu25Service, Environment environment, TbdXacNhanDon25Service tbdXacNhanDon25Service, TbdHangHoa25Service tbdHangHoa25Service, TbdHangHoaFile25Service tbdHangHoaFile25Service, TbdLichSuHH25Service tbdLichSuHH25Service, TbdChiTieuDG25Service tbdChiTieuDG25Service, TbdGiayXNCL25Service tbdGiayXNCL25Service, TbdHosoTccd25Service tbdHosoTccd25Service, TbdKQXL25Service tbdKQXL25Service) {
         this.tbdHoso25Service = tbdHoso25Service;
         this.tbdLichsu25Service = tbdLichsu25Service;
        // this.certService = certService;
@@ -56,6 +54,9 @@ public class WsServiceImpl implements WsService {
         this.tbdHangHoaFile25Service = tbdHangHoaFile25Service;
         this.tbdLichSuHH25Service = tbdLichSuHH25Service;
         this.tbdChiTieuDG25Service = tbdChiTieuDG25Service;
+        this.tbdGiayXNCL25Service = tbdGiayXNCL25Service;
+        this.tbdHosoTccd25Service = tbdHosoTccd25Service;
+        this.tbdKQXL25Service = tbdKQXL25Service;
     }
     private Gson getGson() {
         if (gson == null) {
@@ -134,6 +135,11 @@ public class WsServiceImpl implements WsService {
 
         mappingXacNhanDon(xnd);
         tbdHoso25.setFiHSStatus(status);
+        List<TbdHanghoa25> tbdHanghoa25s = tbdHangHoa25Service.findByFiIdHS(tbdHoso25.getFiIdHS());
+        for (TbdHanghoa25 hanghoa25: tbdHanghoa25s){
+            hanghoa25.setFiTrangThaiHangHoa(status);
+        }
+        tbdHangHoa25Service.saveAll(tbdHanghoa25s);
         tbdHoso25Service.save(tbdHoso25);
         tbdLichsu25Service.save(createHistory(tbdHoso25,action,request.getHeader(),xnd.getDepartmentName()));
         return new ResponseJson(true, "");
@@ -324,16 +330,47 @@ public class WsServiceImpl implements WsService {
             tbdHangHoa25Service.save(tbdHanghoa25);
             tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,tbdHanghoa25,action,bnnXuLyKQ.getFiNameOfStaff(),action,2));
         }catch (Exception ex){
-
+            return new ResponseJson(false, "");
         }
-        return null;
+        return new ResponseJson(true, "");
     }
 
 
 
     @Override
     public ResponseJson guiGiayXNCL(ResponseWrapper request)  throws NSWException{
-        return null;
+        try{
+            String function = request.getHeader().getSubject().getFunction();
+            int status=0;
+            String action="";
+            switch (function) {
+                case Constant25.MessageFunction.FUNC_22:
+                    status=Constant25.HosoStatus.DA_CAP_THONG_BAO_KQKT.getId();
+                    action=Constant25.HosoStatus.DA_CAP_THONG_BAO_KQKT.getName();
+                    break;
+                default:
+                    return new ResponseJson(false, "","MESSAGE 19 - "+function+" CHUA DUOC DINH NGHIA");
+
+            }
+            TbdGiayXNCL25 tbdGiayXNCL25 = getGson().fromJson(getGson().toJson(request.getData()),TbdGiayXNCL25.class);
+            TbdHanghoa25 tbdHanghoa25 =tbdGiayXNCL25.getFiProductList().get(0);
+            TbdHoso25 tbdHoso25 = tbdHoso25Service.findByFiHSCode(tbdGiayXNCL25.getFiNSWFileCode());
+            TbdHanghoa25 hangHoaHoso=tbdHangHoa25Service.findByFiIdProduct(tbdHanghoa25.getFiIdProduct());
+            if(tbdHoso25==null||hangHoaHoso==null){
+                return new ResponseJson(false, "","MA HO SO KHONG TON TAI");
+            }
+            tbdGiayXNCL25.setFiIdHangHoa(hangHoaHoso.getFiIdProduct());
+            tbdGiayXNCL25.setFiTenHangHoa(hangHoaHoso.getFiProName());
+            hangHoaHoso.setFiTrangThaiHangHoa(status);
+
+            tbdGiayXNCL25Service.save(tbdGiayXNCL25);
+            tbdHangHoa25Service.save(hangHoaHoso);
+            tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,tbdHanghoa25,action,tbdGiayXNCL25.getFiNguoiKy(),action,2));
+        }catch (Exception e){
+            log.info(e.getMessage());
+            return new ResponseJson(false, "",e.getMessage());
+        }
+        return new ResponseJson(true, "");
     }
 
     @Override
@@ -356,11 +393,18 @@ public class WsServiceImpl implements WsService {
         List<TbdHanghoa25> tbdHangHoaBT = new ArrayList<>();
         for (TbdHanghoa25 hangHoa: tbdHanghoa25s){
             TbdHanghoa25 hang = new TbdHanghoa25();
+            hang.setFiProIdNhom(hangHoa.getFiProIdNhom());
             hang.setFiIdProduct(hangHoa.getFiIdProduct());
             hang.setFiProName(hangHoa.getFiProName());
             hang.setFiProIdLoai(hangHoa.getFiProIdLoai());
             hang.setFiProNameLoai(hangHoa.getFiProNameLoai());
+            hang.setFiProATList(null);
+            hang.setFiProSLKLList(null);
+            hang.setFiProCLList(null);
             List<TbdChiTieuDG25> lstChiTieuDG25 = tbdChiTieuDG25Service.findByFiIdProduct(hangHoa.getFiIdProduct());
+            for (TbdChiTieuDG25 chiTieuDG25: lstChiTieuDG25){
+                chiTieuDG25.setFiGhiChu("");
+            }
             hang.setFiListChiTieu(lstChiTieuDG25);
             tbdHangHoaBT.add(hang);
         }
@@ -393,7 +437,7 @@ public class WsServiceImpl implements WsService {
         message.setFiMaHoso(requestCancel.getFiNSWFileCode());
         message.setType(Constant25.MessageType.TYPE_11);
         message.setFunction(Constant25.MessageFunction.FUNC_05);
-        message.setDataRequest(getGson().toJson(requestCancel));
+        message.setDataRequest(new Gson().toJson(requestCancel));
         message.setFiIdHoso(Long.valueOf(requestCancel.getFiIdHS()));
         ResponseJson response = WsServiceHelper.createSendRequest(Constant25.WebServiceURL.get(environment), message);
         if (response.isSuccess()){
@@ -540,17 +584,10 @@ public class WsServiceImpl implements WsService {
         tbdXacNhanDon25.setFiNguoiXN(xnd.getFiSignName());
         tbdXacNhanDon25.setFiDvdg(xnd.getFiAssignNameOther());
         tbdXacNhanDon25.setFiGhiChu(xnd.getFiNoteGoods());
-        for(Goods hangHoa:xnd.getFiProductList()){
-            for (Ananytical ananytical:hangHoa.getFiAnanyticalRequiredList()) {
-                TbdChiTieuDG25 tbdChiTieuDG25 = new TbdChiTieuDG25();
-                tbdChiTieuDG25.setFiIdProduct(hangHoa.getFiGoodsId());
-                tbdChiTieuDG25.setFiTenHangHoa(hangHoa.getFiNameOfGoods());
-                tbdChiTieuDG25.setFiTenChiTieu(ananytical.getFiAnanyticalName());
-                tbdChiTieuDG25.setFiHinhThucCB(ananytical.getFiFormOfPublication());
-                tbdChiTieuDG25.setFiHamLuong(ananytical.getFiRequired());
-                tbdChiTieuDG25.setFiMaDVT(ananytical.getFiRequireUnitID());
-                tbdChiTieuDG25.setFiTenDVT(ananytical.getFiRequireUnitName());
-                tbdChiTieuDG25.setFiGhiChu(ananytical.getFiNote());
+        for(TbdHanghoa25 hangHoa:xnd.getFiProductList()){
+            for (TbdChiTieuDG25 tbdChiTieuDG25 : hangHoa.getFiListChiTieu()) {
+                tbdChiTieuDG25.setFiIdProduct(hangHoa.getFiIdProduct());
+                tbdChiTieuDG25.setFiTenHangHoa(hangHoa.getFiProName());
                 tbdChiTieuDG25.setFiNSWFileCode(xnd.getFiNSWFileCode());
                 tbdChiTieuDG25Service.save(tbdChiTieuDG25);
             }

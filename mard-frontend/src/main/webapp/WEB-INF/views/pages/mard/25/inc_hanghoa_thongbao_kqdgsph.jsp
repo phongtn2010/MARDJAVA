@@ -30,10 +30,10 @@
                         </div>
                         <div class="col-md-4">
                             <select
-                                    data-bind="options: lstToChucDanhGia,
-                                                    optionsText: 'fiCatTypeName',
-                                                    optionsValue: 'fiCatType',
-                                                    value: fiToChucDanhGia" class="form-control" disabled></select>
+                                    data-bind="options: lstToChucDanhGia,,
+                                                    optionsText: 'fiPUName',
+                                                    optionsValue: 'fiPUCode',
+                                                    value: fiMaCqkt" class="form-control" disabled></select>
                         </div>
                         <div class="col-md-2">
                             <label><spring:message code="mard.25.hanghoa.ket_qua_danh_gia_su_phu_hop"/>
@@ -63,13 +63,15 @@
                         <th class="text-center"><spring:message code="mard.25.hanghoa.tai_file"/></th>
                     </tr>
                     </thead>
-                    <tbody data-bind="foreach: lstKetQuaPhanTich">
+                    <tbody data-bind="foreach: lstFileGCN">
                     <tr>
                         <td class="text-center" data-bind="text: ($index() + 1)"></td>
-                        <td data-bind="text : fiTenFile"></td>
+                        <td data-bind="text : fiSoGcn"></td>
+                        <td data-bind="date : fiNgaycap"></td>
+                        <td data-bind="date : fiNameFileGcn"></td>
                         <td class="text-center">
-                            <a href="javascript:void(0)" data-bind="click: $parent.removeFile.bind($data, $index())">
-                                <i class="fa fa-lg fa-trash"></i>
+                            <a href="javascript:void(0)" data-bind="">
+                                <i class="fa fa-lg fa-download"></i>
                             </a>
                         </td>
                     </tr>

@@ -170,6 +170,12 @@ function HangHoaNhapKhauVM (options) {
         var diaDiemTapKet = [ttc.fiAddressGath,ttc.fiRegSamFromDate,ttc.fiAddressRegSample,ttc.fiProductList];
         var thongTinLienHe = [ttc.fiContactName,ttc.fiContactAddress];
         var thongTinKy = [ttc.fiSignName,ttc.fiSignAddress,ttc.fiSignPosition];
+        if(ttc.fiNSWFileCodeReplace()!=null){
+            if (ttc.fiFileNameGDK()==null){
+                app.Alert("Bạn chưa đính kèm file GDK");
+                return false;
+            }
+        }
         kdnkVMSelf.errors = ko.validation.group({benBan,benMua,thongTinKy,thongTinLienHe,diaDiemTapKet}, {deep: true, live: true, observable: true});
         // kdnkVMSelf.errors = ko.validation.group(kdnkVMSelf.thongtinChungVM, {deep: true, live: true, observable: true});
         console.log(kdnkVMSelf.errors());

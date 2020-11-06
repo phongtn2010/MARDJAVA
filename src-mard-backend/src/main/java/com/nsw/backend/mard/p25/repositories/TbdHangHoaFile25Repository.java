@@ -6,7 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface TbdHangHoaFile25Repository extends JpaRepository<TbdHangHoaFile25, Integer>, JpaSpecificationExecutor<TbdHangHoaFile25> {
-
+    List<TbdHangHoaFile25> findByFiIDHangHoa(Integer idHangHoa);
 }

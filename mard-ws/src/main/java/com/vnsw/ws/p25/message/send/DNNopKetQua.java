@@ -16,30 +16,30 @@ public class DNNopKetQua {
     @XmlElement(name = "NSWFileCode")
     String fiNSWFileCode;
     @XmlElement(name = "AssignCode")
-    String fiAssignCode;
+    String fiDVXLCode;
     @XmlElement(name = "AssignName")
-    String fiAssignName;
+    String fiDVXLName;
 
     @XmlElement(name = "GoodsId")
-    String fiMaHangHoa;
+    String fiProId;
     @XmlElement(name = "NameOfGoods")
-    String fiTenHangHoa;
+    String fiProName;
     @XmlElement(name = "ResultTest")
-    Integer fiKetQuaDanhGia;
+    Integer fiLoaiKQDG;
 
     @XmlElement(name = "TestConfirmNumber")
     String fiSoGCN;
 
     @XmlJavaTypeAdapter(DateSerialization.class)
     @XmlElement(name = "TestConfirmDate")
-    Date fiNgayCap;
+    Date fiNgayDG;
 
     @XmlElement(name = "TestConfirmAttachmentId")
-    String fiMaFileCN;
+    String fiIDFileGCN;
     @XmlElement(name = "TestConfirmFileName")
-    String fiTenFileCN;
+    String fiNameGCN;
     @XmlElement(name = "TestConfirmFileLink")
-    String fiLinkFileCN;
+    String fiLinkGCN;
 
     @XmlElementWrapper(name = "AttachmentResultList")
     @XmlElement(name = "AttachmentResult")

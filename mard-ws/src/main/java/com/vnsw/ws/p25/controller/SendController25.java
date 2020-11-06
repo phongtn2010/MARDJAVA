@@ -15,6 +15,7 @@ import com.vnsw.ws.helper.RabbitMQErrorHelper;
 import com.vnsw.ws.helper.SoapHelper;
 import com.vnsw.ws.p25.common.Constants25;
 import com.vnsw.ws.p25.entity.json.SendMessage;
+import com.vnsw.ws.p25.entity.send.Product;
 import com.vnsw.ws.p25.envelop.*;
 import com.vnsw.ws.p25.message.send.DNNopKetQua;
 import com.vnsw.ws.p25.message.send.DNYeucauHuyHoso;
@@ -22,6 +23,7 @@ import com.vnsw.ws.p25.message.send.GuiHSTCCD;
 import com.vnsw.ws.p25.message.send.Hoso25;
 import com.vnsw.ws.p25.service.BackendService25;
 import com.vnsw.ws.p25.service.EnvelopeService25;
+import com.vnsw.ws.p9.message.receive.GiayXNCL;
 import com.vnsw.ws.util.Constants;
 import com.vnsw.ws.util.LogUtil;
 import org.slf4j.Logger;
@@ -158,7 +160,12 @@ public class SendController25 {
 
                         break;
                     case Constants25.MARD25_TYPE.TYPE_15:
-                        GuiHSTCCD guiHSTCCD = getGson().fromJson(getGson().toJson(sendMessage.getDataRequest()),GuiHSTCCD.class);
+                        GuiHSTCCD guiHSTCCD = mapper.readValue(sendMessage.getDataRequest(),GuiHSTCCD.class);
+                        for(Product product: guiHSTCCD.getFiProductList()){
+                            product.setFiProATList(null);
+                            product.setFiProCLList(null);
+                            product.setFiProSLKLList(null);
+                        }
                         content.setGuiHSTCCD(guiHSTCCD);
                         body = envelopeService.createBody(content);
                         envelopeSend = envelopeService.createMessage(header, body);
@@ -189,7 +196,7 @@ public class SendController25 {
                         }
                         break;
                     case Constants25.MARD25_TYPE.TYPE_17:
-                        DNNopKetQua dnNopKetQua =  mapper.readValue(sendMessage.getDataRequest(), DNNopKetQua.class);
+                        DNNopKetQua dnNopKetQua =  new Gson().fromJson(sendMessage.getDataRequest(), DNNopKetQua.class);
                         content.setNopKetQua(dnNopKetQua);
                         body = envelopeService.createBody(content);
                         envelopeSend = envelopeService.createMessage(header, body);

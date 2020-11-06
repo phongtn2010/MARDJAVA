@@ -10,6 +10,7 @@ function Mard25EditVM () {
             for (var i =0;i<options.fiProductList.length;i++){
                 options.fiProductList[i].fiIdHS=null;
                 options.fiProductList[i].fiIdProduct=null;
+                options.fiProductList[i].fiTrangThaiHangHoa=null;
                 var getLstCL = options.fiProductList[i].fiProCLList;
                 var getLstAT = options.fiProductList[i].fiProATList;
                 var getLstSLKL = options.fiProductList[i].fiProSLKLList;

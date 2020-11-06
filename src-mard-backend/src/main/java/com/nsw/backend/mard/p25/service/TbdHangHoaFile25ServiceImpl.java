@@ -22,4 +22,9 @@ public class TbdHangHoaFile25ServiceImpl implements TbdHangHoaFile25Service{
     public void saveAll(List<TbdHangHoaFile25> lstTbdHangHoaFile25s) {
         repository.save(lstTbdHangHoaFile25s);
     }
+
+    @Override
+    public List<TbdHangHoaFile25> findByFiIDHangHoa(Integer idHangHoa) {
+        return repository.findByFiIDHangHoa(idHangHoa);
+    }
 }

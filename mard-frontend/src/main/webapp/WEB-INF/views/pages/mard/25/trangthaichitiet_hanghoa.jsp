@@ -96,11 +96,10 @@
                             <td class="text-center" data-bind="text: fiProCountryCode"></td>
                             <td class="text-center" data-bind="text: fiProductKL"></td>
                             <td class="text-center" data-bind="text: fiProValueUSD"></td>
-                            <td class="text-center" data-bind="text: fiTrangThaiHangHoa"></td>
+                            <td class="text-center" data-bind="text: $parent.getTrangThaiHangHoa(fiTrangThaiHangHoa)"></td>
                             <td class="text-center">
                                 <a href="javascript:void(0)" data-target="#modal_view"
-                                   data-toggle="modal" data-bind="click: $parent.xemKQDGSPH.bind($data, $data, $index()),visible: $root.fiHSType==3&&fiTrangThaiHangHoa==28"><i
-                                        class="fa fa-lg fa-eye tooltips"></i></a>
+                                   data-toggle="modal" data-bind="click: $parent.xemKQDGSPH.bind($data, $data, $index()),visible: $root.fiHSType()==3&&fiTrangThaiHangHoa()==28"><i                                        class="fa fa-lg fa-eye tooltips"></i></a>
                             </td>
                             <td class="text-center">
                                 <a href="javascript:void(0)" data-bind="click: $parent.guiSuaHangHoa.bind($data, $data, $index()),"><i

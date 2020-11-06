@@ -195,6 +195,10 @@ public class Mard25Constant {
         public static final String GET_BY_CAT_PARENT = "mard.25.danhmuc.getbycatparent";
         public static final String GET_HANGHOA_BY_IDHS = "mard.25.hanghoa.find";
         public static final String GET_DANHMUC_TCCD = "mard.25.tochuccd.find";
+        public static final String GET_LIST_CHI_TIEU_BY_NSWFILECODE = "mard.25.chitieu.find";
+        public static final String FIND_HOSO_BY_STATUS = "mard.25.hoso.findbystatus";
+        public static final String FIND_FILE_GCN = "mard.25.filegcn.find";
+        public static final String FIND_FILE_KQPT = "mard.25.filekqpt.find";
 
     }
 

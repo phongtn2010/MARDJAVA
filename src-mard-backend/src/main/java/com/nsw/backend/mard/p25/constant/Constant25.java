@@ -91,7 +91,8 @@ public class Constant25 {
         DA_TU_CHOI(8,"Đã từ chối"),
         DA_TIEP_NHAN(7,"Đã tiếp nhận"),
         DA_CO_KQ_DANH_GIA_SPH(28,"Đã có kết quả đánh giá sự phù hợp"),
-        DA_THU_HOI_GXN(48,"Đã thu hồi giấy đăng ký");
+        DA_THU_HOI_GXN(48,"Đã thu hồi giấy đăng ký"),
+        DA_CAP_THONG_BAO_KQKT(44,"Đã cấp thông báo kết quả kiểm tra");
 
 
 

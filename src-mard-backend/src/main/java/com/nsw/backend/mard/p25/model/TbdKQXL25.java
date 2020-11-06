@@ -19,7 +19,7 @@ public class TbdKQXL25 implements Serializable {
     // ENTITY PRIMARY KEY ( BASED ON A SINGLE FIELD )
     //----------------------------------------------------------------------
     @Id
-    @Column(nullable = false)
+    @Column(nullable = false,name = "FI_ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_NAME)
     @SequenceGenerator(sequenceName = SEQUENCE_NAME, schema = "MARD", initialValue = 1, allocationSize = 1, name = SEQUENCE_NAME)
     private Integer fiId;
@@ -72,4 +72,6 @@ public class TbdKQXL25 implements Serializable {
     @Column(name = "FI_NGUOIXL")
     private String fiNguoiXL;
 
+    @Transient
+    private List<TbdHangHoaFile25> fiListHangHoaFile;
 }

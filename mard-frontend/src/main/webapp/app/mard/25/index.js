@@ -228,14 +228,12 @@ function Mard25VM() {
             }
         });
     }
-
-    self.viewHoSo = function(item) {
+    self.setValueForIndexPage = function(item){
         item.lstCountry = self.lstCountry();
         item.lstPort = self.lstPort();
         item.lstProfileStatus = self.lstProfileStatus();
         item.lstUOMAnimal = self.lstUOMAnimal();
         item.lstAtchType = self.lstAtchType();
-
         item.lstHD = ko.observableArray([]);
         item.lstHoaDon = ko.observableArray([]);
         item.lstPhieu = ko.observableArray([]);
@@ -269,7 +267,13 @@ function Mard25VM() {
         item.ngayKy(ngay);
         item.thangKy(thang);
         item.namKy(nam);
-        self.selectedHoSo(item);
+        return item;
+    }
+    self.viewHoSo = function(item) {
+
+        console.log("10");
+        var value = self.setValueForIndexPage(item);
+        self.selectedHoSo(value);
         $('#mard25ViewHSModal').modal('show');
     }
     self.showLSXL = function (item) {
@@ -485,11 +489,15 @@ function Mard25VM() {
     };
 
     self.chuyenTCCD = function (data,type,index) {
-        self.selectedHoSo(index);
+        console.log("vao ham");
+        var value = self.setValueForIndexPage(index);
+        self.selectedHoSo(value);
+        console.log()
         app.makeGet({
             url: '/mard/25/chitieu/'+index.fiNSWFileCode,
             success: function(res) {
                 self.filstChiTieu(res.data);
+                console.log(res);
             },
             error: function (d) {
 

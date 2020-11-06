@@ -95,7 +95,8 @@ public class Product {
 
     @XmlElement(name = "NoteGoods")
     private String fiNoteGoods;
-
+    @XmlElement(name = "Note")
+    String fiNote;
     @XmlElementWrapper(name = "AnanyticalRequiredList")
     @XmlElement(name = "Ananytical")
     private List<Ananytical> fiListChiTieu;

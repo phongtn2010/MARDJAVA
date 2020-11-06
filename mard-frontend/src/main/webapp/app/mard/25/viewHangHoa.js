@@ -1,9 +1,12 @@
 function Mard25ViewHangHoaVM (options) {
     var self=this;
+    self.fiMaCqkt = ko.observable(null);
     self.fiHSCode = ko.observable(null);
     self.fiHSStatus = ko.observable(null);
     self.errorMsg  = ko.observable('');
+    self.lstFileGCN  = ko.observableArray();
     self.mard25HangHoaItems  = ko.observableArray((options && options.hasOwnProperty('mard25HangHoaItems')) ? options.mard25HangHoaItems :[]);
+    self.lstProfileStatus  = ko.observableArray((options && options.hasOwnProperty('lstProfileStatus')) ? options.lstProfileStatus :[]);
     self.lstToChucDanhGia  = ko.observableArray((options && options.hasOwnProperty('lstToChucDanhGia')) ? options.lstToChucDanhGia :[]);
     self.lstKetQuaPhanTich  = ko.observableArray((options && options.hasOwnProperty('lstKetQuaPhanTich')) ? options.lstKetQuaPhanTich :[]);
     self.lstNhom  = ko.observableArray((options && options.hasOwnProperty('lstNhom')) ? options.lstNhom :[]);
@@ -134,6 +137,19 @@ function Mard25ViewHangHoaVM (options) {
         });
     }
     self.xemKQDGSPH = function(data,type,index){
+        self.getFileGCN(index.fiIdProduct,function (res) {
+            console.log(res);
+            self.lstFileGCN =res.data ;
+        });
+
+        if(self.lstFileGCN().length>0){
+
+            self.fiMaCqkt(self.lstFileGCN().fiMaCqkt);
+            self.fiLoaiDanhGia(self.lstFileGCN().fiLoaiDanhgia);
+        }
+        console.log(self.lstFileGCN());
+        self.getFileKQPT(index.fiIdProduct);
+
         self.fiProName(index.fiProName);
         $("#modal_view").show();
     }
@@ -178,6 +194,7 @@ function Mard25ViewHangHoaVM (options) {
         //     return;
         // }
         var jsonData=self.getBodyGuiKQ();
+        console.log(jsonData);
         self.pop = app.popup({
             title: 'Thông báo',
             html: '<b>Bạn chắc chắn muốn gửi?</b>',
@@ -204,6 +221,7 @@ function Mard25ViewHangHoaVM (options) {
                                 }
                             },
                             error: function (e) {
+                                console.log(e);
                                 app.Alert('Không gửi được yêu cầu');
                             }
                         });
@@ -221,20 +239,21 @@ function Mard25ViewHangHoaVM (options) {
         });
     }
     self.getBodyGuiKQ = function(){
-        var guiKetQuaVM = new GuiKetQuaVM();
-        guiKetQuaVM.fiNSWFileCode(self.fiNSWFileCode());
-        guiKetQuaVM.fiDVXLCode(self.fiToChucDanhGia());
-        guiKetQuaVM.fiDVXLName(self.fiNameTCCD());
-        guiKetQuaVM.fiProId(self.hangHoaSelected().fiIdProduct);
-        guiKetQuaVM.fiProName(self.fiProName());
-        guiKetQuaVM.fiLoaiKQDG(self.fiLoaiDanhGia());
-        guiKetQuaVM.fiSoGCN(self.fiSoGCNHopQuy());
-        guiKetQuaVM.fiNgayDG(self.fiNgayCap());
-        guiKetQuaVM.fiIDFileGCN(self.fiFileGCNId());
-        guiKetQuaVM.fiLinkGCN(self.fiFileGCNLink());
-        guiKetQuaVM.fiNameGCN(self.fiFileGCNName());
-        guiKetQuaVM.fiListHangHoaFile(self.lstKetQuaPhanTich());
-        return JSON.stringify(guiKetQuaVM);
+        var item = {
+            fiNSWFileCode:self.fiNSWFileCode(),
+            fiDVXLCode:self.fiToChucDanhGia(),
+            fiDVXLName:self.fiNameTCCD(),
+            fiProId:self.hangHoaSelected().fiIdProduct,
+            fiProName:self.fiProName(),
+            fiLoaiKQDG:self.fiLoaiDanhGia(),
+            fiSoGCN:self.fiSoGCNHopQuy(),
+            fiNgayDG:self.fiNgayCap(),
+            fiIDFileGCN:self.fiFileGCNId(),
+            fiLinkGCN:self.fiFileGCNLink(),
+            fiNameGCN:self.fiFileGCNName(),
+            fiListHangHoaFile:self.lstKetQuaPhanTich()
+        }
+        return JSON.stringify(item);
     }
     self.validateForm =function(){
         if(self.fiHS().fiHSType=='3'||self.fiHS().fiHSType==3){
@@ -270,6 +289,35 @@ function Mard25ViewHangHoaVM (options) {
         self.fiFileGCN(null);
         self.fiFileKQ(null);
         self.lstKetQuaPhanTich([]);
+    }
+    self.getTrangThaiHangHoa = function (statuscode) {
+        var lstProfileStatus = self.lstProfileStatus();
+        var pos = lstProfileStatus.find(function (e) {
+            return e.fiCatType == Number(statuscode);
+        })
+        if (pos)
+            return pos.fiCatTypeName;
+        else return statuscode;
+    }
+    self.getFileGCN =function (idHangHoa,callback) {
+        app.makeGet({
+            url: '/mard/25/filegcn/'+idHangHoa,
+            success: function (d) {
+                if (d.success) {
+                    callback(d);
+                }
+            }
+        });
+    }
+    self.getFileKQPT =function (idHangHoa) {
+        app.makeGet({
+            url: '/mard/25/filekqpt/'+idHangHoa,
+            success: function (d) {
+                if (d.success) {
+                    return d.data;
+                }
+            }
+        });
     }
 }
 
@@ -313,7 +361,7 @@ $(document).ready(function () {
             // Get profile status
             app.sendGetRequest("/mard/25/danhmuc/getby-catno/1", function (res) {
                 options['lstNhom'] = res.data;
-            }),
+            })
             //danh muc trang thai
             app.sendGetRequest("/mard/25/danhmuc/getby-catno/25", function (res) {
                 options['lstProfileStatus'] = res.data;

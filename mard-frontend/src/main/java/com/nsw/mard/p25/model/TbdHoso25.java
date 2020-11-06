@@ -19,6 +19,9 @@ public class TbdHoso25 implements Serializable {
     private String fiNSWFileCode;
     private String fiNSWFileCodeReplace;
     private String fiGDK;
+    private String fiLinkGDK;
+    private String fiFileNameGDK;
+    private String fiFileIdGDK;
     private String fiHSType;
 
     private String fiTaxCode;

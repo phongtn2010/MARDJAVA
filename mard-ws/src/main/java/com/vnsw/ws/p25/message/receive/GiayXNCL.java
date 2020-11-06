@@ -20,16 +20,17 @@ public class GiayXNCL {
     String fiMaCQKT;
     @XmlElement(name = "DepartmentName")
     String fiTenCQKT;
+
+    @XmlElement(name = "CerNumber")
+    String fiSoGXN;
     @XmlElement(name = "SignCerPlace")
     String fiNoiKy;
     @XmlJavaTypeAdapter(DateSerialization.class)
     @XmlElement(name = "SignCerDate")
     Date fiNgayKy;
     @XmlElementWrapper(name = "GoodsList")
-    @XmlElement(name = "Product")
+    @XmlElement(name = "Goods")
     List<Product> fiProductList;
-    @XmlElement(name = "Note")
-    String fiNote;
     @XmlElement(name = "PortOfDestinationName")
     String fiNoiNhanHang;
     @XmlJavaTypeAdapter(DateSerialization.class)
@@ -39,4 +40,17 @@ public class GiayXNCL {
     @XmlElement(name = "ImportingToDate")
     Date fiNhapKhauTo;
 
+    @XmlElement(name = "AniFeedConfirmNo")
+    String fiSoGDK ;
+    @XmlElement(name = "ImportCerNo")
+    String fiGCNHopQuy;
+    @XmlElement(name = "AssignCode")
+    String fiIDCoQuanDanhGia;
+    @XmlElement(name = "AssignName")
+    String fiNameCoQuanDanhGia;
+    @XmlJavaTypeAdapter(DateSerialization.class)
+    @XmlElement(name = "ImportCerDate")
+    Date fiNgayCap;
+    @XmlElement(name = "SignCerName")
+    String fiNguoiKy;
 }

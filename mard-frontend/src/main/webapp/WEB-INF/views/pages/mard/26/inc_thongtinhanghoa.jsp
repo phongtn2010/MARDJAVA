@@ -93,7 +93,7 @@
                         </div>
                     </div>
                 </div>
-                <label>Được phép chọn 1 hàng hóa trong danh sách hàng hóa được tính miễn kiểm</label>
+                <label>Được phép chọn 1 hàng hóa trong danh sách hàng hóa được tính miễn giảm kiểm tra</label>
                 <table class="table table-striped table-bordered table-hover table-checkable order-column">
                     <thead>
                         <tr class="nsw-tr tr-nsw1-bgcolor">

@@ -1,6 +1,7 @@
 package com.nsw.backend.mard.p25.client;
 
 
+import com.nsw.backend.mard.p25.model.TbdHanghoa25;
 import lombok.Data;
 
 import java.util.Date;
@@ -33,7 +34,7 @@ public class XacNhanDon {
 
     String fiAniFeedConfirmOldNo;
 
-    List<Goods> fiProductList;
+    List<TbdHanghoa25> fiProductList;
 
     String fiNoteGoods;
 }

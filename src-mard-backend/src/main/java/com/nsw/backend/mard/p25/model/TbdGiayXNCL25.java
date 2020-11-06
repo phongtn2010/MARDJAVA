@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -33,38 +34,41 @@ public class TbdGiayXNCL25 extends CmonBaseEntity implements Serializable {
     private String fiNSWFileCode;
 
     @Column(name = "FI_DP_CODE", length = 12)
-    private String fiDPCode;
+    private String fiMaCQKT;
 
     @Column(name = "FI_DP_NAME", length = 250)
-    private String fiDPName;
+    private String fiTenCQKT;
 
     @Column(name = "FI_CER_NO")
-    private Date fiCerNo;
+    private String fiSoGXN;
 
     @Column(name = "FI_SIGN_CER_PLACE", length = 100)
-    private String fiSignCerPlace;
+    private String fiNoiKy;
 
     @Column(name = "FI_SIGN_CER_DATE")
-    private Date fiSignCerDate;
+    private Date fiNgayKy;
 
     @Column(name = "FI_GOOD_ID", length = 20)
-    private Integer fiGoodId;
+    private Integer fiIdHangHoa;
 
     @Column(name = "FI_GOOD_NAME", length = 250)
-    private String fiGoodName;
+    private String fiTenHangHoa;
 
     @Column(name = "FI_IMPORT_CER_NO", length = 50)
-    private String fiImportCerNo;
+    private String fiGCNHopQuy;
 
     @Column(name = "FI_ASSIGN_CODE", length = 12)
-    private String fiAssignCode;
+    private String fiIDCoQuanDanhGia;
 
     @Column(name = "FI_ASSIGN_NAME", length = 250)
-    private String fiAssignName;
+    private String fiNameCoQuanDanhGia;
 
     @Column(name = "FI_IMPORT_CER_DATE")
-    private Date fiImportCerDate;
+    private Date fiNgayCap;
 
     @Column(name = "FI_SIGN_CER_NAME", length = 100)
-    private String fiSignCerName;
+    private String fiNguoiKy;
+
+    @Transient
+    private List<TbdHanghoa25> fiProductList;
 }

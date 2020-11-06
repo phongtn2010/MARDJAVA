@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class TbdHosoTccd25ServiceImpl implements TbdHosoTccd25Service {
@@ -14,5 +16,10 @@ public class TbdHosoTccd25ServiceImpl implements TbdHosoTccd25Service {
     @Override
     public void save(TbdhosoTccd25 tbdhosoTccd25) {
         repository.save(tbdhosoTccd25);
+    }
+
+    @Override
+    public List<TbdhosoTccd25> findByFiIdHangHoa(Integer idHangHoa) {
+        return repository.findByFiIdHangHoa(idHangHoa);
     }
 }

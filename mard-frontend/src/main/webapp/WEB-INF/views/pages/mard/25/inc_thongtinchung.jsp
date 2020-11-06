@@ -132,7 +132,10 @@
                                     code="mard.25.tokhai.thong_tin_hoso_thay_the"/></label>
                         </div>
                         <div class="col-md-4">
-                            <select class="form-control"  data-bind="value: fiNSWFileCodeReplace, enable: $root.isEditable()">
+                            <select class="form-control"  data-bind="options:lstMaHoSoThayThe,optionsCaption: 'Chọn...',
+                                                                     optionsValue : 'fiNSWFileCodeR',
+                                                                     optionsText : 'fiNSWFileCodeR',
+                                                                     value: fiNSWFileCodeReplace, enable: $root.isEditable()">
                             </select>
                         </div>
                         <div class="col-md-2 nsw-text-right">
@@ -155,7 +158,7 @@
                                     code="mard.25.tokhai.thong_tin_giay_thay_the"/></label>
                         </div>
                         <div class="col-md-4">
-                            <input class="form-control" type="file" data-bind="value: fiGDKFile"/>
+                            <input class="form-control" type="file" data-bind="event:{change: changeFileGDK},value: fiGDKFile"/>
                         </div>
                     </div>
                 </div>

@@ -250,13 +250,20 @@ public class Tbdhoso25Controller extends BaseController {
             }
             TbdHoso25 tbdHoso25 = tbdHoso25Service.findByFiHSCode(tbdKQXL25.getFiNSWFileCode());
             ResponseJson response = wsService.dnNopKQ(tbdKQXL25,tbdHoso25);
-
             return ResponseEntity.ok(response);
         } catch (Exception ex) {
             LOG.error(TAG + ex.getMessage(), ex);
             RabbitMQErrorHelper.pushLogToRabbitMQ(getErrorInfo(TAG, ex), rabbitMQService.getRabbitMQInfo());
             return createErrorResponse(ex.getMessage(), HttpStatus.OK);
         }
+    }
+
+    @GetMapping("/find-by-status")
+    public ResponseEntity<ResponseJson> findByStatus(
+            @RequestParam(name = "taxCode") String taxCode,
+            @RequestParam(name = "from") Integer from,
+            @RequestParam(name = "to") Integer to) {
+        return createSuccessResponse(tbdHoso25Service.findByFiHSStatus(taxCode,from, to), HttpStatus.OK);
     }
     @PostMapping("/find")
     public ResponseEntity<ResponseJson> getListByFilter(@RequestBody FilterForm filterForm) {

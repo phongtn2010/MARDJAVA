@@ -260,4 +260,10 @@ public class Tbdhoso25ServiceImpl implements TbdHoso25Service {
                 Calendar.getInstance().get(Calendar.YEAR) % 100,
                 id);
     }
+
+    @Override
+    public List<TbdHoso25> findByFiHSStatus(String taxCode,Integer from, Integer to) {
+        return regProfileRepository.findByFiHSStatus(taxCode,from, to);
+    }
+
 }

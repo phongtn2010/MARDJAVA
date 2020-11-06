@@ -1,6 +1,7 @@
 function ThongTinChungVM(data) {
     var ttcVMSelf = this;
 
+
     ttcVMSelf.lstChiTieuAT = ko.observableArray((data && data.hasOwnProperty('lstChiTieuAT')) ? data.lstChiTieuAT : []);
     ttcVMSelf.listCL = ko.observableArray((data && data.hasOwnProperty('listCL')) ? data.listCL : []);
     ttcVMSelf.listAT = ko.observableArray((data && data.hasOwnProperty('listAT')) ? data.listAT : []);
@@ -330,7 +331,32 @@ function ThongTinChungVM(data) {
 
     ttcVMSelf.lstLoaiTienTe  = ko.observableArray((data && data.hasOwnProperty('lstLoaiTienTe')) ? data.lstLoaiTienTe : []);
     ttcVMSelf.fiSignAddressName  = ko.observable(null);
+    ttcVMSelf.lstMaHoSoThayThe = ko.observableArray([]);
 
+    ttcVMSelf.fiLinkGDK  = ko.observable(null);
+    ttcVMSelf.fiFileNameGDK  = ko.observable(null);
+    ttcVMSelf.fiFileIdGDK  = ko.observable(null);
+
+    app.makeGet({
+        url: '/mard/25/hoso/find-by-status?taxCode=' + ttcVMSelf.fiTaxCode() + '&from=26&to=29',
+        success: function(res) {
+            if (res.data){
+                var arr=res.data;
+                for (var i=0;i<arr.length;i++){
+                    console.log(arr[i]);
+                    var item = {
+                        fiNSWFileCodeR:arr[i].fiNSWFileCode,
+                        fiIdHSR:arr[i].fiIdHS
+                    };
+                    ttcVMSelf.lstMaHoSoThayThe.push(item);
+                }
+                console.log(ttcVMSelf.lstMaHoSoThayThe());
+            }
+        },
+        error: function (d) {
+
+        }
+    });
     ttcVMSelf.eventChangeNhom =function(){
         var id =ttcVMSelf.fiProIdNhom();
         if(id !== 'undefined'){
@@ -896,5 +922,26 @@ function ThongTinChungVM(data) {
             return pos.fiCatNote;
         else
             return code;
+    }
+    ttcVMSelf.changeFileGDK =function (data, e) {
+        var files = e.target.files;
+        app.uploadFile({
+            file: files[0],
+            mcode: 'mard',
+            pcode: '25',
+            url: '/mard/25/upload',
+            success: function (d) {
+                if(d.success){
+                    ttcVMSelf.fiLinkGDK(d.data.urlFile);
+                    ttcVMSelf.fiFileIdGDK(d.data.itemId);
+                    ttcVMSelf.fiFileNameGDK(files[0].name);
+                }else{
+                    app.Alert("Có lỗi tải file lên");
+                }
+            },
+            error: function (e) {
+                app.Alert("Có lỗi tải file lên");
+            }
+        });
     }
 }

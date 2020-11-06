@@ -34,8 +34,8 @@ import com.zaxxer.hikari.HikariDataSource;
         "com.nsw.backend.mard.p08.repositories",
         "com.nsw.backend.mard.p09.repositories",
         "com.nsw.backend.dic.repositories",
-
-        "com.nsw.backend.mard.p25.repositories","com.nsw.backend.mard.p26.repositories"},
+        "com.nsw.backend.mard.p25.repositories",
+        "com.nsw.backend.mard.p26.repositories"},
         entityManagerFactoryRef = "entityManagerFactory",
         transactionManagerRef = "transactionManager")
 @EnableTransactionManagement
@@ -103,7 +103,7 @@ public class JpaConfiguration {
            	"com.nsw.backend.mard.p11.model",
             "com.nsw.backend.mard.p12.model", 
             "com.nsw.backend.dic.model",
-            "com.nsw.backend.mard.p25.model","com.nsw.backend.mard.p26.model"});
+            "com.nsw.backend.mard.p25.model", "com.nsw.backend.mard.p26.model"});
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
         factoryBean.setJpaProperties(jpaProperties());
         return factoryBean;

@@ -12,6 +12,7 @@ import java.util.List;
 @Service
 @Transactional
 public class TbsDanhmuc26ServiceImpl implements TbsDanhmuc26Service {
+
     @Autowired
     private TBSDANHMUC26Repository repository;
     @Override

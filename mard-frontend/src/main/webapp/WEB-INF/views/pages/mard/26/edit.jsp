@@ -11,7 +11,7 @@
         <div class="portlet light ">
             <div class="portlet-title">
                 <div class="caption font-dark">
-                    <span class="caption-subject bold uppercase"> ĐĂNG KÝ MIỄN KIỂM TRA XÁC NHẬN CHẤT LƯỢNG THỨC ĂN CHĂN NUÔI NHẬP KHẨU</span>
+                    <span class="caption-subject bold uppercase"> ĐĂNG KÝ MIỄN GIẢM KIỂM TRA XÁC NHẬN CHẤT LƯỢNG THỨC ĂN CHĂN NUÔI NHẬP KHẨU</span>
                 </div>
             </div>
             <div class="portlet-body">

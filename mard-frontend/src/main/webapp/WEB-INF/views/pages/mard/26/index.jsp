@@ -15,7 +15,7 @@
             <div class="portlet-title">
                 <div class="caption font-dark">
                     <i class="icon-settings font-dark"></i>
-                    <span class="caption-subject bold uppercase"><span class="caption-subject bold uppercase"> <spring:message code="mard.12.tenthutuc" /></span>
+                    <span class="caption-subject bold uppercase"><span class="caption-subject bold uppercase"> ĐỀ NGHỊ MIỄN GIẢM KIỂM TRA GIẢM CHẤT LƯỢNG THỨC ĂN CHĂN NUÔI CÓ THỜI HẠN</span>
                 </div>
             </div>
             <div class="portlet-body">

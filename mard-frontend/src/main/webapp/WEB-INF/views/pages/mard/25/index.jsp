@@ -234,14 +234,14 @@
                                 </div>
                             </td>
                             <td class="text-center">
-                                <div data-bind="visible: $parent.getHoSoType(fiHSType)=='2c'">
+                                <div data-bind="visible: $parent.getHoSoType(fiHSType)=='2c' && fiHSStatus ==26">
                                     <a data-target="#modal_view_chuyen"
                                        data-toggle="modal" data-bind="click: $parent.chuyenTCCD.bind($data,$data,$index())"><i
                                             class="fa fa-eye"></i></a>
                                 </div>
                             </td>
                             <td class="text-center">
-                                <div data-bind="">
+                                <div data-bind="visible: fiHSStatus ==26">
                                     <a href="javascript:void(0)" data-bind="click: $root.viewHangHoaStatus"><i
                                             class="fa fa-eye-slash"></i></a>
                                 </div>
