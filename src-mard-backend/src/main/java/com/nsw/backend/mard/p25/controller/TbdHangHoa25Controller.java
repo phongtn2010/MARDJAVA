@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class TbdHangHoa25Controller extends BaseController {
     private static final Logger LOG = LoggerFactory.getLogger(TbdHangHoa25Controller.class);
     private static final String TAG = "Tbdhoso25Controller";
-    private final TbdHangHoa25Service tbdHangHoa25Service;
+
     @Autowired
     private TbdHangHoa25Service hangHoa25Service;
 

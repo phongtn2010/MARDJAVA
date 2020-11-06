@@ -30,7 +30,6 @@ function Mard25ViewHangHoaVM (options) {
     self.isEditable = ko.observable(true);
     self.fiNameTCCD = ko.observable(null);
     self.guiKetQuaVM= new GuiKetQuaVM();
-    self.lstProfileStatus = ko.observableArray((options && options.hasOwnProperty('lstProfileStatus')) ?options.lstProfileStatus: []);
     self.getProfileStatus = function (statuscode) {
         var lstProfileStatus = self.lstProfileStatus();
         var pos = lstProfileStatus.find(function (e) {
@@ -98,6 +97,7 @@ function Mard25ViewHangHoaVM (options) {
         self.lstKetQuaPhanTich.splice(index,1);
     }
     self.fiHSType(self.fiHS().fiHSType);
+
     self.getTenNhom = function (idNhom) {
         var pos = self.lstNhom().find(function (e) {
             return e.fiidcat == Number(idNhom);
@@ -157,7 +157,7 @@ function Mard25ViewHangHoaVM (options) {
     self.showLSHH = function (item) {
         self.lichsuXuly().getLSHH(item.fiIdProduct);
         return false;
-    };
+    }
     self.fileKQChange = function(data, e){
         var files = e.target.files;
         app.uploadFile({
@@ -361,7 +361,7 @@ $(document).ready(function () {
             // Get profile status
             app.sendGetRequest("/mard/25/danhmuc/getby-catno/1", function (res) {
                 options['lstNhom'] = res.data;
-            })
+            }),
             //danh muc trang thai
             app.sendGetRequest("/mard/25/danhmuc/getby-catno/25", function (res) {
                 options['lstProfileStatus'] = res.data;
