@@ -14,10 +14,13 @@ import java.util.List;
 
 @Data
 public class FilterForm {
-    private String fiCompanyTaxCode;
-    private boolean fiActive = true;
+    private String fiCertNo;
+    private String fiProCountryName;
+    private String fiProMadeIn;
+
     private String fiHSCode;
-    private Integer fiHSStatus = -1;
+    private String fiTenHangHoa;
+    private Integer fiHSStatus ;
     private Date sentStartDate;
     private Date sentEndDate;
     private String licenseNo;
@@ -27,7 +30,6 @@ public class FilterForm {
     private Integer size = 20;
     private String sortBy = "fiNSWFileCode";
     private String order = "asc";
-    private String fiProName;
     private String fiHSType;
     @JsonIgnore
     private List<String> fiLstNSWFileCode;

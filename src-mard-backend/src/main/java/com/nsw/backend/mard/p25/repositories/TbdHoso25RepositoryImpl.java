@@ -21,15 +21,13 @@ public class TbdHoso25RepositoryImpl implements TbdHoso25RepositoryCustom{
     public FilterResult searchHoso(FilterForm filter){
         //RESETTING PAGE TO ZERO
         filter.setPage(filter.getPage() == 0 ? 0 : filter.getPage() - 1);
-
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<TbdHoso25> cq = cb.createQuery(TbdHoso25.class);
         Root<TbdHoso25> root = cq.from(TbdHoso25.class);
         List<Predicate> listPredicate = new ArrayList<>();
-        if (!StringUtils.isEmpty(filter.getFiCompanyTaxCode())) {
-            listPredicate.add(cb.equal(root.get("fiTaxCode"), filter.getFiCompanyTaxCode()));
+        if (!StringUtils.isEmpty(filter.getFiCertNo())) {
+            listPredicate.add(cb.equal(root.get("fiCertNo"), filter.getFiCertNo()));
         }
-        listPredicate.add(cb.equal(root.get("fiActive"), filter.isFiActive()));
         if (!StringUtils.isEmpty(filter.getFiHSCode())) {
             listPredicate.add(cb.like(root.get("fiNSWFileCode"), String.format("%%%s%%", filter.getFiHSCode())));
         }
@@ -41,6 +39,15 @@ public class TbdHoso25RepositoryImpl implements TbdHoso25RepositoryCustom{
         }
         if (filter.getSentEndDate() != null) {
             listPredicate.add(cb.lessThanOrEqualTo(root.get("fiHSCreatedDate"), filter.getSentEndDate()));
+        }
+//        if (filter.getFiProCountryName() != null) {
+//            listPredicate.add(cb.like(root.get("fiProCountryName"), String.format("%%%s%%", filter.getFiProCountryName())));
+//        }
+//        if (filter.getFiProMadeIn() != null) {
+//            listPredicate.add(cb.like(root.get("fiProMadeIn"), String.format("%%%s%%", filter.getFiProMadeIn())));
+//        }
+        if (filter.getFiHSType() != null) {
+            listPredicate.add(cb.lessThanOrEqualTo(root.get("fiHSType"), filter.getFiHSType()));
         }
         if (filter.isValidForLicenseQuery()) {
             if (filter.getFiLstNSWFileCode().isEmpty() == false) {

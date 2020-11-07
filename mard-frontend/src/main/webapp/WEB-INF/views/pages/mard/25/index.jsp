@@ -40,7 +40,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <input class="form-control"
-                                                           data-bind="value : fiHSCode, hasFocus: true"
+                                                           data-bind="value : fiCertNo, hasFocus: true"
                                                            type="text"/>
                                                 </div>
                                             </div>
@@ -52,7 +52,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <input class="form-control"
-                                                           data-bind="value : fiHSCode, hasFocus: true"
+                                                           data-bind="value : fiProName, hasFocus: true"
                                                            type="text"/>
                                                 </div>
                                                 <div class="col-md-2">

@@ -2,7 +2,7 @@ var mapTrangthai = {}
 
 function Mard25VM() {
     var self = this;
-
+    self.fiCertNo = ko.observable(null);
     self.fiCompanyTaxCode = ko.observable(hosoUsername);
     self.fiHSCode = ko.observable(null);
     self.fiHSStatus = ko.observable(null);
@@ -10,6 +10,8 @@ function Mard25VM() {
     self.sentStartDate = ko.observable(null);
     self.sentEndDate = ko.observable(null);
     self.licenseNo = ko.observable(null);
+    self.fiProMadeIn = ko.observable(null);
+    self.fiProName = ko.observable(null);
     self.licenseStartDate = ko.observable(null);
     self.licenseEndDate = ko.observable(null);
     // self.page = ko.observable(DEFAULT_PAGE_NUM);
@@ -182,12 +184,14 @@ function Mard25VM() {
 
     self.searchHoso = function (page) {
         var filter = {
-            fiCompanyTaxCode: self.fiCompanyTaxCode(),
+            fiCertNo: self.fiCertNo(),
             fiHSCode: self.fiHSCode(),
+            fiTenHangHoa: self.fiProName(),
             fiHSStatus: self.fiHSStatus(),
-            fiCounttry: self.fiCounttry(),
             sentStartDate: self.sentStartDate(),
             sentEndDate: self.sentEndDate(),
+            fiProCountryName: self.fiCounttry(),
+            fiProMadeIn: self.fiProMadeIn(),
             licenseNo: self.licenseNo(),
             licenseStartDate: self.licenseStartDate(),
             licenseEndDate: self.licenseEndDate(),
