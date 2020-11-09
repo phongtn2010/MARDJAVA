@@ -48,7 +48,7 @@ public interface TbdHoso25Service {
      *
      * @param fiIdHoso
      */
-    void delete(int fIdHoso);
+    void delete(int fiIdHoso);
     /**
      * Deletes an entity
      *

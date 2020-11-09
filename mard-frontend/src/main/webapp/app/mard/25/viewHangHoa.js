@@ -49,21 +49,23 @@ function Mard25ViewHangHoaVM (options) {
         // console.log(ttcVMSelf.fiHSType());
     }
     self.searchProduct = function () {
-        self.searchHoso(1);
+        self.getHangHoa(1);
     }
-    self.searchHoso = function (page) {
+    self.getHangHoa = function (page) {
         var filter = {
             fiProName: self.fiProName(),
-            fiHSType: self.fiHSType(),
+            fiHSStatus: self.fiHSStatus(),
             page: page,
-            size: self.size()
+            size: self.size(),
+            sortBy: self.sortBy(),
+            order: self.order()
         }
         $.ajax({
             async: true,
             type: 'POST',
             cache: false,
             crossDomain: true,
-            url: app.appContext + "/mard/25/hoso/timkiem",
+            url: app.appContext + "/mard/25/hanghoa/timkiem",
             data: JSON.stringify(filter),
             contentType: "application/json; charset=utf-8",
             dataType: "json",

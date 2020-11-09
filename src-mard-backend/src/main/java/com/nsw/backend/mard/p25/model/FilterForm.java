@@ -19,7 +19,7 @@ public class FilterForm {
     private String fiProMadeIn;
 
     private String fiHSCode;
-    private String fiTenHangHoa;
+    private String fiProName;
     private Integer fiHSStatus ;
     private Date sentStartDate;
     private Date sentEndDate;
@@ -30,7 +30,7 @@ public class FilterForm {
     private Integer size = 20;
     private String sortBy = "fiNSWFileCode";
     private String order = "asc";
-    private String fiHSType;
+    private Integer fiHSType;
     @JsonIgnore
     private List<String> fiLstNSWFileCode;
 

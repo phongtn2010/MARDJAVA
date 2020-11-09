@@ -1,8 +1,11 @@
 package com.nsw.backend.mard.p25.service;
 
+
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import com.nsw.backend.mard.p25.model.FilterHangHoa;
+import com.nsw.backend.mard.p25.model.FilterResult;
 import com.nsw.backend.mard.p25.model.TbdHanghoa25;
 import com.nsw.backend.mard.p25.repositories.TbdHangHoa25Repository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +16,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+
 @Service
 @Transactional
 public class TbdHangHoa25ServiceImpl implements TbdHangHoa25Service{
     @Autowired
     private TbdHangHoa25Repository tbdHangHoa25Repository;
-//    private List<String> pendingProfiles;
-//    private LoadingCache<String, Boolean> pendingQueue;
+    private List<String> pendingProfiles;
+    private LoadingCache<String, Boolean> pendingQueue;
 
     @Override
     public List<TbdHanghoa25> findByFiIdHS(Integer fiIdHS) {
@@ -37,9 +41,15 @@ public class TbdHangHoa25ServiceImpl implements TbdHangHoa25Service{
     }
 
     @Override
+    public FilterResult searchHangHoa (FilterHangHoa filterHangHoa) {
+        //filterForm.setFiLstNSWFileCode(findLstNSWFileCode(filterForm));
+        return tbdHangHoa25Repository.searchHangHoa(filterHangHoa);
+    }
+    @Override
     public void saveAll(List<TbdHanghoa25> tbdHanghoa25s) {
         tbdHangHoa25Repository.save(tbdHanghoa25s);
     }
+
 //    @Override
 //    public LoadingCache<String, Boolean> getSignPendingProfiles() {
 //        if(pendingQueue == null){
@@ -51,7 +61,7 @@ public class TbdHangHoa25ServiceImpl implements TbdHangHoa25Service{
 //                        if(removalNotification.wasEvicted()){
 //                            //we should rollback automatically
 //                            String nswFileCode = (String) removalNotification.getKey();
-//                            rollbackFailedRequestUpdate(findByFiHSCode(nswFileCode));
+//                            rollbackFailedRequestUpdate(findByFiIdHS(nswFileCode));
 //                        }
 //                    })
 //                    .build(new CacheLoader<String, Boolean>() {
@@ -64,12 +74,11 @@ public class TbdHangHoa25ServiceImpl implements TbdHangHoa25Service{
 //        return pendingQueue;
 //    }
 //    @Override
-//    public void rollbackFailedRequestUpdate(TbdHanghoa25 result) {
-//        TbdHanghoa25 parent = tbdHangHoa25Repository.findOne(result.getFiIdHS());
-//        parent.setFiActive(true);
-//
-//        tbdHangHoa25Repository.save(parent);
-//        tbdHangHoa25Repository.delete(result.getFiIdHS());
-//        getSignPendingProfiles().invalidate(result.getFiNSWFileCode());
+//    public void rollbackFailedRequestUpdate(String nswFileCode) {
+//        TbdHanghoa25 current = findByFiIdHS(nswFileCode);
+//        if(Boolean.TRUE.equals(getSignPendingProfiles().getIfPresent(nswFileCode))) {
+//            rollbackFailedRequestUpdate(current);
+//        }
 //    }
+
 }

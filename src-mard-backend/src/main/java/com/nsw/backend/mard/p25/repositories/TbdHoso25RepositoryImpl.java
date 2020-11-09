@@ -2,11 +2,13 @@ package com.nsw.backend.mard.p25.repositories;
 
 import com.nsw.backend.mard.p25.model.FilterForm;
 import com.nsw.backend.mard.p25.model.FilterResult;
+import com.nsw.backend.mard.p25.model.TbdHanghoa25;
 import com.nsw.backend.mard.p25.model.TbdHoso25;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
@@ -24,10 +26,11 @@ public class TbdHoso25RepositoryImpl implements TbdHoso25RepositoryCustom{
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<TbdHoso25> cq = cb.createQuery(TbdHoso25.class);
         Root<TbdHoso25> root = cq.from(TbdHoso25.class);
+        Join<TbdHoso25, TbdHanghoa25> hanghoa25Join = root.join("fiProductList", JoinType.INNER);
         List<Predicate> listPredicate = new ArrayList<>();
-        if (!StringUtils.isEmpty(filter.getFiCertNo())) {
-            listPredicate.add(cb.equal(root.get("fiCertNo"), filter.getFiCertNo()));
-        }
+//        if (!StringUtils.isEmpty(filter.getFiCertNo())) {
+//            listPredicate.add(cb.equal(root.get("fiCertNo"), filter.getFiCertNo()));
+//        }
         if (!StringUtils.isEmpty(filter.getFiHSCode())) {
             listPredicate.add(cb.like(root.get("fiNSWFileCode"), String.format("%%%s%%", filter.getFiHSCode())));
         }
@@ -40,12 +43,15 @@ public class TbdHoso25RepositoryImpl implements TbdHoso25RepositoryCustom{
         if (filter.getSentEndDate() != null) {
             listPredicate.add(cb.lessThanOrEqualTo(root.get("fiHSCreatedDate"), filter.getSentEndDate()));
         }
-//        if (filter.getFiProCountryName() != null) {
-//            listPredicate.add(cb.like(root.get("fiProCountryName"), String.format("%%%s%%", filter.getFiProCountryName())));
-//        }
-//        if (filter.getFiProMadeIn() != null) {
-//            listPredicate.add(cb.like(root.get("fiProMadeIn"), String.format("%%%s%%", filter.getFiProMadeIn())));
-//        }
+        if (filter.getFiProName() != null) {
+            listPredicate.add(cb.like(hanghoa25Join.get("fiProName"), String.format("%%%s%%", filter.getFiProName())));
+        }
+        if (filter.getFiProCountryName() != null) {
+            listPredicate.add(cb.like(hanghoa25Join.get("fiProCountryName"), String.format("%%%s%%", filter.getFiProCountryName())));
+        }
+        if (filter.getFiProMadeIn() != null) {
+            listPredicate.add(cb.like(hanghoa25Join.get("fiProMadeIn"), String.format("%%%s%%", filter.getFiProMadeIn())));
+        }
         if (filter.getFiHSType() != null) {
             listPredicate.add(cb.lessThanOrEqualTo(root.get("fiHSType"), filter.getFiHSType()));
         }
@@ -70,6 +76,7 @@ public class TbdHoso25RepositoryImpl implements TbdHoso25RepositoryCustom{
         //Get all count
         CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
         Root<TbdHoso25> countRoot = countQuery.from(TbdHoso25.class);
+        Join<TbdHoso25, TbdHanghoa25> tesst = countRoot.join("fiProductList", JoinType.INNER);
         Long count = em.createQuery(countQuery.select(cb.count(countRoot)).where(cb.and(finalPredicate))).getSingleResult();
 
         List<TbdHoso25> result = query.getResultList();

@@ -46,7 +46,7 @@
                                                     <select class="form-control"  data-bind="options : lstProfileStatus, optionsValue : 'fiCatType',
                                                                      selectedText:fiHSTypeName,
                                                                      optionsText : 'fiCatTypeName',
-                                                    value: fiHSType, enable: $root.isEditable(), event: {change: changeHoSoType(fiHSType())}">
+                                                    value: fiHSStatus, enable: $root.isEditable(), event: {change: changeHoSoType(fiHSType())}">
                                                     </select>
                                                 </div>
 

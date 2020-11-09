@@ -672,10 +672,9 @@ public class Mard25Api extends BaseApi {
     @RequestMapping(value = "/hanghoa/timkiem", method = RequestMethod.POST, headers = {"content-type=application/json"})
     public @ResponseBody
     ResponseJson searchHangHoa(
-            @RequestBody FilterForm filter
+            @RequestBody FilterHangHoa filterHangHoa
     ) {
-        filter.setFiCompanyTaxCode(getUsername());
-        ResponseJson json = BackendRequestHelper.getInstance().doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.HANGHOA_GET_BY_FILTER), filter);
+        ResponseJson json = BackendRequestHelper.getInstance().doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.HANGHOA_GET_BY_FILTER), filterHangHoa);
         return json;
     }
 

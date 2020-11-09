@@ -1,8 +1,10 @@
 package com.nsw.backend.mard.p25.controller;
 
+import com.google.common.cache.LoadingCache;
 import com.nsw.backend.controller.BaseController;
 import com.nsw.backend.helper.RabbitMQErrorHelper;
 import com.nsw.backend.mard.p25.model.FilterForm;
+import com.nsw.backend.mard.p25.model.FilterHangHoa;
 import com.nsw.backend.mard.p25.model.TbdHanghoa25;
 import com.nsw.backend.mard.p25.service.TbdHangHoa25Service;
 import com.nsw.backend.util.ResponseJson;
@@ -13,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/mard/25/hanghoa")
@@ -25,12 +29,14 @@ public class TbdHangHoa25Controller extends BaseController {
 
     @RequestMapping(value = "/find/{idHoSo}")
     public ResponseEntity<ResponseJson> manualRollback(@PathVariable Integer idHoSo) {
+       // hangHoa25Service.getSignPendingProfiles().cleanUp();
          return createSuccessResponse(hangHoa25Service.findByFiIdHS(idHoSo), HttpStatus.OK);
     }
 
-//    @PostMapping("/find")
-//    public ResponseEntity<ResponseJson> getListByFilter(@RequestBody FilterForm filterForm) {
-//        tbdHangHoa25Service.getSignPendingProfiles().cleanUp();
-//        return createSuccessResponse(tbdHangHoa25Service.searchHoso(filterForm), HttpStatus.OK);
-//    }
+    @PostMapping("/find")
+    public ResponseEntity<ResponseJson> getListByFilter(@RequestBody FilterHangHoa filterHangHoa) {
+     //   hangHoa25Service.getSignPendingProfiles().cleanUp();
+        return createSuccessResponse(hangHoa25Service.searchHangHoa(filterHangHoa), HttpStatus.OK);
+    }
+
 }

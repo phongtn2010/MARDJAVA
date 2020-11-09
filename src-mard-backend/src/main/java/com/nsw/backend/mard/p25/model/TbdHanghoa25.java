@@ -42,6 +42,7 @@ public class TbdHanghoa25 extends CmonBaseEntity implements Serializable {
     //----------------------------------------------------------------------
     // ENTITY DATA FIELDS
     //----------------------------------------------------------------------
+
     @Column(name = "FI_HS_ID")
     private Integer fiIdHS;
 
