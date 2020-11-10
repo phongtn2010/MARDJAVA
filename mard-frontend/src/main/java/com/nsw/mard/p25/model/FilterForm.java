@@ -10,7 +10,8 @@ public class FilterForm {
     private boolean fiActive = true;
     private String fiHSCode;
     private Long fiHSStatus = -1L;
-    private Long fiCounttry = -1L;
+    private Long fiProCountryName = -1L;
+
     private Date sentStartDate;
     private Date sentEndDate;
     private String licenseNo;

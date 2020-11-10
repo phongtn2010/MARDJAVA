@@ -188,6 +188,8 @@ function Mard25VM() {
             fiHSCode: self.fiHSCode(),
             fiTenHangHoa: self.fiProName(),
             fiHSStatus: self.fiHSStatus(),
+            fiCompanyTaxCode: hosoUsername,
+
             sentStartDate: self.sentStartDate(),
             sentEndDate: self.sentEndDate(),
             fiProCountryName: self.fiCounttry(),
@@ -200,6 +202,7 @@ function Mard25VM() {
             sortBy: self.sortBy(),
             order: self.order()
         }
+        console.log(filter);
         $.ajax({
             async: true,
             type: 'POST',

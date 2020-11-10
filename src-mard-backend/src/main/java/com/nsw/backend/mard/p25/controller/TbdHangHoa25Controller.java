@@ -37,7 +37,7 @@ public class TbdHangHoa25Controller extends BaseController {
 
     @PostMapping("/find")
     public ResponseEntity<ResponseJson> getListByFilter(@RequestBody FilterHangHoa filterHangHoa) {
-     //   hangHoa25Service.getSignPendingProfiles().cleanUp();
+       // hangHoa25Service.getSignPendingProfiles().cleanUp();
         return createSuccessResponse(hangHoa25Service.searchHangHoa(filterHangHoa), HttpStatus.OK);
     }
 

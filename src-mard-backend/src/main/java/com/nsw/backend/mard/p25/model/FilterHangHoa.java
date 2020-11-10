@@ -11,6 +11,7 @@ import java.util.List;
 public class FilterHangHoa {
     private String fiProName;
     private Integer fiHSStatus;
+    private Integer fiIdHS;
     private Integer page = 1;
     private Integer size = 20;
     private String sortBy = "fiNSWFileCode";

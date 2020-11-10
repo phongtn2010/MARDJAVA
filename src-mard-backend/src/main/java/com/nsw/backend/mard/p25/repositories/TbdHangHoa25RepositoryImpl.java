@@ -19,30 +19,33 @@ public class TbdHangHoa25RepositoryImpl implements TbdHangHoa25RepositoryCustom 
         filterHangHoa.setPage(filterHangHoa.getPage() == 0 ? 0 : filterHangHoa.getPage() - 1);
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<TbdHanghoa25> cq = cb.createQuery(TbdHanghoa25.class);
-        Root<TbdHanghoa25> root = cq.from(TbdHanghoa25.class);
-      //  Join<TbdHoso25, TbdHanghoa25> hoso25Join = root.join("fiProductList", JoinType.INNER);
+        Root<TbdHoso25> root = cq.from(TbdHoso25.class);
+        Join<TbdHoso25, TbdHanghoa25> hanghoa25Join = root.join("fiProductList", JoinType.INNER);
         List<Predicate> listPredicate = new ArrayList<>();
-        if (filterHangHoa.getFiProName() != null) {
-            listPredicate.add(cb.like(root.get("fiProName"), String.format("%%%s%%", filterHangHoa.getFiProName())));
+        if (filterHangHoa.getFiIdHS() != null) {
+            listPredicate.add(cb.equal(hanghoa25Join.get("fiIdHS"), filterHangHoa.getFiIdHS()));
         }
-//        if (filterHangHoa.getFiHSStatus() != -1L) {
-//            listPredicate.add(cb.equal(root.get("fiHSStatus"), filterHangHoa.getFiHSStatus()));
-//        }
+        if (filterHangHoa.getFiProName() != null) {
+            listPredicate.add(cb.like(hanghoa25Join.get("fiProName"), String.format("%%%s%%", filterHangHoa.getFiProName())));
+        }
+        if (filterHangHoa.getFiHSStatus() != -1L) {
+            listPredicate.add(cb.equal(root.get("fiHSStatus"), filterHangHoa.getFiHSStatus()));
+        }
         Path<Object> sortBy = root.get(filterHangHoa.getSortBy());
         Order order = (filterHangHoa.getOrder().equals("asc")) ? cb.asc(sortBy) : cb.desc(sortBy);
         Predicate[] finalPredicate = new Predicate[listPredicate.size()];
         listPredicate.toArray(finalPredicate);
 
         //Initialize Pagination
-        TypedQuery<TbdHanghoa25> query = em.createQuery(cq.select(root).where(cb.and(finalPredicate)).orderBy(order));
+        TypedQuery<TbdHanghoa25> query = em.createQuery(cq.select(hanghoa25Join).where(cb.and(finalPredicate)).orderBy(order));
         query.setMaxResults(filterHangHoa.getSize());
         query.setFirstResult(filterHangHoa.getPage() * filterHangHoa.getSize());
 
         //Get all count
         CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
-        Root<TbdHanghoa25> countRoot = countQuery.from(TbdHanghoa25.class);
-       // Join<TbdHoso25, TbdHanghoa25> tesst = countRoot.join("fiProductList", JoinType.INNER);
-        Long count = em.createQuery(countQuery.select(cb.count(countRoot)).where(cb.and(finalPredicate))).getSingleResult();
+        Root<TbdHoso25> countRoot = countQuery.from(TbdHoso25.class);
+        Join<TbdHoso25, TbdHanghoa25> tesst = countRoot.join("fiProductList", JoinType.INNER);
+        Long count = em.createQuery(countQuery.select(cb.count(tesst)).where(cb.and(finalPredicate))).getSingleResult();
 
         List<TbdHanghoa25> result = query.getResultList();
         result.forEach(hs ->{

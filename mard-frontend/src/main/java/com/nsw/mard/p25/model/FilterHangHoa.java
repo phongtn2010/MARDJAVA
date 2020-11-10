@@ -6,9 +6,10 @@ import lombok.Data;
 @Data
 public class FilterHangHoa {
     private String fiProName;
-    private Integer fiHSType;
+    private Integer fiHSStatus;
+    private Integer fiIdHS;
     private Integer page = 1;
-    private Integer size = 20;
-    private String sortBy = "fiHSCode";
-    private String order = "asc";
+    private Integer size = 10;
+    private String sortBy = "fiCreatedDate";
+    private String order = "desc";
 }

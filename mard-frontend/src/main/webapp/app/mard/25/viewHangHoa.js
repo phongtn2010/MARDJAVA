@@ -6,6 +6,8 @@ function Mard25ViewHangHoaVM (options) {
     self.errorMsg  = ko.observable('');
     self.lstFilePT  = ko.observableArray();
     self.lstFileGCN  = ko.observableArray();
+    self.sortBy = ko.observable("fiCreatedDate");
+    self.order = ko.observable("desc");
     self.mard25HangHoaItems  = ko.observableArray((options && options.hasOwnProperty('mard25HangHoaItems')) ? options.mard25HangHoaItems :[]);
     self.lstProfileStatus  = ko.observableArray((options && options.hasOwnProperty('lstProfileStatus')) ? options.lstProfileStatus :[]);
     self.lstToChucDanhGia  = ko.observableArray((options && options.hasOwnProperty('lstToChucDanhGia')) ? options.lstToChucDanhGia :[]);
@@ -48,6 +50,16 @@ function Mard25ViewHangHoaVM (options) {
         // }
         // console.log(ttcVMSelf.fiHSType());
     }
+    self.currentPage = ko.observable(1);
+    self.pagination = ko.observable(new PagingVM({
+        pageSize: MAX_PAGE_SIZE,
+        totalCount: 0,
+        currentPage: 1
+    }));
+    self.pagination().currentPage.subscribe(function (newCurrentPage) {
+        self.currentPage(newCurrentPage);
+        self.searchProduct(newCurrentPage);
+    })
     self.searchProduct = function () {
         self.getHangHoa(1);
     }
@@ -55,11 +67,13 @@ function Mard25ViewHangHoaVM (options) {
         var filter = {
             fiProName: self.fiProName(),
             fiHSStatus: self.fiHSStatus(),
+            fiIdHS: idHoSo,
             page: page,
             size: self.size(),
             sortBy: self.sortBy(),
             order: self.order()
         }
+        console.log(filter);
         $.ajax({
             async: true,
             type: 'POST',
@@ -358,6 +372,7 @@ function init(options) {
     var mard25ViewHangHoaVM = new Mard25ViewHangHoaVM(options);
     options["fiTrangThaiHangHoa"]="0";
     ko.applyBindings(mard25ViewHangHoaVM, document.getElementById('mardHangHoa25'));
+
 }
 $(document).ready(function () {
     var options = {};
@@ -381,6 +396,7 @@ $(document).ready(function () {
             })
         ).done(function (data) {
             $('#loading10').hide();
+
             init(options);
         })
     })

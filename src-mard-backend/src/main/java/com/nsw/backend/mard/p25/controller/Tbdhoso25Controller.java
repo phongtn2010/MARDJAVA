@@ -267,7 +267,7 @@ public class Tbdhoso25Controller extends BaseController {
     }
     @PostMapping("/find")
     public ResponseEntity<ResponseJson> getListByFilter(@RequestBody FilterForm filterForm) {
-        tbdHoso25Service.getSignPendingProfiles().cleanUp();
+//        tbdHoso25Service.getSignPendingProfiles().cleanUp();
         return createSuccessResponse(tbdHoso25Service.searchHoso(filterForm), HttpStatus.OK);
     }
 

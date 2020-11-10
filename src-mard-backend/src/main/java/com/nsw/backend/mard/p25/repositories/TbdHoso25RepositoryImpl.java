@@ -22,7 +22,7 @@ public class TbdHoso25RepositoryImpl implements TbdHoso25RepositoryCustom{
     @Override
     public FilterResult searchHoso(FilterForm filter){
         //RESETTING PAGE TO ZERO
-        filter.setPage(filter.getPage() == 0 ? 0 : filter.getPage() - 1);
+         filter.setPage(filter.getPage() == 0 ? 0 : filter.getPage() - 1);
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<TbdHoso25> cq = cb.createQuery(TbdHoso25.class);
         Root<TbdHoso25> root = cq.from(TbdHoso25.class);
@@ -34,8 +34,14 @@ public class TbdHoso25RepositoryImpl implements TbdHoso25RepositoryCustom{
         if (!StringUtils.isEmpty(filter.getFiHSCode())) {
             listPredicate.add(cb.like(root.get("fiNSWFileCode"), String.format("%%%s%%", filter.getFiHSCode())));
         }
+        if (filter.isFiActive()) {
+            listPredicate.add(cb.equal(root.get("fiActive"), filter.isFiActive()));
+        }
         if (filter.getFiHSStatus() != -1L) {
             listPredicate.add(cb.equal(root.get("fiHSStatus"), filter.getFiHSStatus()));
+        }
+        if (filter.getFiCompanyTaxCode() != null) {
+            listPredicate.add(cb.equal(root.get("fiTaxCode"), filter.getFiCompanyTaxCode()));
         }
         if (filter.getSentStartDate() != null) {
             listPredicate.add(cb.greaterThanOrEqualTo(root.get("fiHSCreatedDate"), filter.getSentStartDate()));
@@ -46,14 +52,14 @@ public class TbdHoso25RepositoryImpl implements TbdHoso25RepositoryCustom{
         if (filter.getFiProName() != null) {
             listPredicate.add(cb.like(hanghoa25Join.get("fiProName"), String.format("%%%s%%", filter.getFiProName())));
         }
-        if (filter.getFiProCountryName() != null) {
-            listPredicate.add(cb.like(hanghoa25Join.get("fiProCountryName"), String.format("%%%s%%", filter.getFiProCountryName())));
+        if (filter.getFiProCountryName() != -1L) {
+            listPredicate.add(cb.equal(hanghoa25Join.get("fiProCountryName"),filter.getFiProCountryName()));
         }
         if (filter.getFiProMadeIn() != null) {
             listPredicate.add(cb.like(hanghoa25Join.get("fiProMadeIn"), String.format("%%%s%%", filter.getFiProMadeIn())));
         }
         if (filter.getFiHSType() != null) {
-            listPredicate.add(cb.lessThanOrEqualTo(root.get("fiHSType"), filter.getFiHSType()));
+            listPredicate.add(cb.equal(root.get("fiHSType"), filter.getFiHSType()));
         }
         if (filter.isValidForLicenseQuery()) {
             if (filter.getFiLstNSWFileCode().isEmpty() == false) {
