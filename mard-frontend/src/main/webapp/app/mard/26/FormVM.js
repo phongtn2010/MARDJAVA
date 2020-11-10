@@ -185,7 +185,7 @@ function FormVM(options) {
     self.fiMaThutuc = ko.observable(options.maThuTuc);
     self.fiTenThutuc = ko.observable(null);
 
-    self.lstHanghoas = ko.observableArray(hosoInfo ? hosoInfo.lstHanghoas : []);
+    self.lstHanghoas = ko.observableArray((options && options.hasOwnProperty('lstHanghoas')) ? options.lstHanghoas :[]);
 
     //Danh muc
     self.lstCqgsBac = ko.observableArray(mapCategory(options ? options.lstCqgsBac : [], 'fiMaCqgs', 'fiTenCqgs'));

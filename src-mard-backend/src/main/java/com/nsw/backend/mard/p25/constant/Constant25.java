@@ -16,7 +16,7 @@ import java.util.Arrays;
 public class Constant25 {
 
     public static final Long SYSTEM_ID = 25L;
-    public static final String MINISTRY_NAME = "BNNPTNT";
+    public static final String MINISTRY_NAME = "AN";
     public static final String MARD_PROC_CODE = "25";
 
     public static final Long ACTIVE = 1L;
@@ -92,7 +92,8 @@ public class Constant25 {
         DA_TIEP_NHAN(7,"Đã tiếp nhận"),
         DA_CO_KQ_DANH_GIA_SPH(28,"Đã có kết quả đánh giá sự phù hợp"),
         DA_THU_HOI_GXN(48,"Đã thu hồi giấy đăng ký"),
-        DA_CAP_THONG_BAO_KQKT(44,"Đã cấp thông báo kết quả kiểm tra");
+        DA_CAP_THONG_BAO_KQKT(44,"Đã cấp thông báo kết quả kiểm tra"),
+        DA_CAP_NHAP_MIEN_GIAM(4,"Đã cập nhập miễn giảm");
 
 
 

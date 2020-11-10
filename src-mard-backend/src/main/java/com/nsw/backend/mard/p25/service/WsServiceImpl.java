@@ -201,7 +201,26 @@ public class WsServiceImpl implements WsService {
 
     @Override
     public ResponseJson tiepNhanHS2D(ResponseWrapper request)  throws NSWException{
-        return null;
+        String function = request.getHeader().getSubject().getFunction();
+        int status=0;
+        String action="";
+        switch (function) {
+            case Constant25.MessageFunction.FUNC_25:
+                status=Constant25.HosoStatus.DA_CAP_NHAP_MIEN_GIAM.getId();
+                action=Constant25.HosoStatus.DA_CAP_NHAP_MIEN_GIAM.getName();
+                break;
+            default:
+                return new ResponseJson(false, "","MESSAGE 22 - "+function+" CHUA DUOC DINH NGHIA");
+
+        }
+        TbdHoso25 tbdHoso25=tbdHoso25Service.findByFiHSCode(request.getHeader().getSubject().getReference());
+        if(null==tbdHoso25){
+            return new ResponseJson(false, "","KHONG TIM THAY MA HO SO");
+        }
+        tbdHoso25.setFiHSStatus(status);
+        tbdHoso25Service.save(tbdHoso25);
+        tbdLichsu25Service.save(createHistory(tbdHoso25,action,request.getHeader(),"Cục Chăn Nuôi"));
+        return new ResponseJson(true, "");
     }
 
     @Override
@@ -362,7 +381,7 @@ public class WsServiceImpl implements WsService {
             tbdGiayXNCL25.setFiIdHangHoa(hangHoaHoso.getFiIdProduct());
             tbdGiayXNCL25.setFiTenHangHoa(hangHoaHoso.getFiProName());
             hangHoaHoso.setFiTrangThaiHangHoa(status);
-
+            hangHoaHoso.setFiSoGCN(tbdGiayXNCL25.getFiSoGCN());
             tbdGiayXNCL25Service.save(tbdGiayXNCL25);
             tbdHangHoa25Service.save(hangHoaHoso);
             tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,tbdHanghoa25,action,tbdGiayXNCL25.getFiNguoiKy(),action,2));

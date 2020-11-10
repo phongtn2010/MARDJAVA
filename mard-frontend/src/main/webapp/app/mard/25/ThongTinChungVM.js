@@ -133,9 +133,7 @@ function ThongTinChungVM(data) {
     });
     ttcVMSelf.EfiProCLContent = ko.observable(null).
     extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
-        number: {params: true},
-        min: 0
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
     ttcVMSelf.EfiProCLUnitID = ko.observable(null).
     extend({
@@ -177,9 +175,7 @@ function ThongTinChungVM(data) {
     });
     ttcVMSelf.EfiProATContent = ko.observable(null).
     extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
-        number: {params: true},
-        min: 0
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
     ttcVMSelf.EfiProATUnitID = ko.observable(null).
     extend({
@@ -533,7 +529,8 @@ function ThongTinChungVM(data) {
             fiPackageUnitName: ttcVMSelf.fiPackageUnitName(),
             fiProCLList:  ttcVMSelf.listCL(),
             fiProSLKLList: ttcVMSelf.listSLKL(),
-            fiProATList: ttcVMSelf.listAT()
+            fiProATList: ttcVMSelf.listAT(),
+            fiTaxCode: ttcVMSelf.fiTaxCode()
         }
         ttcVMSelf.fiProductList.push(item);
         console.log(item);
@@ -634,7 +631,8 @@ function ThongTinChungVM(data) {
             fiPackageUnitName: ttcVMSelf.fiPackageUnitName(),
             fiProCLList: ttcVMSelf.listCL(),
             fiProSLKLList: ttcVMSelf.listSLKL(),
-            fiProATList: ttcVMSelf.listAT()
+            fiProATList: ttcVMSelf.listAT(),
+            fiTaxCode: ttcVMSelf.fiTaxCode()
         }
         console.log(item);
         var index = ttcVMSelf.selectedIndex();

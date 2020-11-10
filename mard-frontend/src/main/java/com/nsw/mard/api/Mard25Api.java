@@ -474,17 +474,17 @@ public class Mard25Api extends BaseApi {
     @RequestMapping(value = "/hoso/delete", method = RequestMethod.GET)
     public @ResponseBody
     ResponseJson deleteHoso(
-            @RequestParam String fiNSWFileCode,
+            @RequestParam String fiIdHS,
             @RequestParam String fiTaxCode
     ) {
         ResponseJson returnJson = new ResponseJson();
-        if (!isOwner(null, fiNSWFileCode)) {
+        if (!isOwner(fiIdHS, null)) {
             returnJson.setSuccess(false);
             returnJson.setMessage("Không có quyền truy cập hồ sơ");
             return returnJson;
         }
         try {
-            ResponseJson json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.HOSO_DELETE) + "?fiNSWFileCode=" + fiNSWFileCode + "&fiTaxCode=" + fiTaxCode);
+            ResponseJson json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.HOSO_DELETE) + "?fiIdHS=" + fiIdHS + "&fiTaxCode=" + fiTaxCode);
             return json;
         } catch (Exception ex) {
             LogUtil.addLog(ex);

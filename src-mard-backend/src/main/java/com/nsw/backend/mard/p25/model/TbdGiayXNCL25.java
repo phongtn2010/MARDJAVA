@@ -40,7 +40,7 @@ public class TbdGiayXNCL25 extends CmonBaseEntity implements Serializable {
     private String fiTenCQKT;
 
     @Column(name = "FI_CER_NO")
-    private String fiSoGXN;
+    private String fiSoGCN;
 
     @Column(name = "FI_SIGN_CER_PLACE", length = 100)
     private String fiNoiKy;

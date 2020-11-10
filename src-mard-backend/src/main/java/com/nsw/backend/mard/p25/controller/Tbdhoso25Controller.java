@@ -184,10 +184,10 @@ public class Tbdhoso25Controller extends BaseController {
 
     @GetMapping("/delete")
     public ResponseEntity<ResponseJson> deleteHoso(
-            @RequestParam String fiNSWFileCode,
+            @RequestParam Integer fiIdHS,
             @RequestParam String fiTaxCode) {
         try {
-            TbdHoso25 regProfile = tbdHoso25Service.findByFiHSCode(fiNSWFileCode);
+            TbdHoso25 regProfile = tbdHoso25Service.findById(fiIdHS);
             if (regProfile == null || !regProfile.getFiTaxCode().equals(fiTaxCode)) {
                 throw new IllegalArgumentException("Hồ sơ không thuộc đơn vị đăng ký");
             } else {

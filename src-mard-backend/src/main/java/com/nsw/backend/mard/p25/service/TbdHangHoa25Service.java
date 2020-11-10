@@ -11,6 +11,7 @@ public interface TbdHangHoa25Service {
     public TbdHanghoa25 findByFiIdProduct(Integer id);
     public void saveAll(List<TbdHanghoa25> tbdHanghoa25s);
     FilterResultHH searchHangHoa(FilterHangHoa filterHangHoa);
+    public List<TbdHanghoa25> findByFiTaxCodeAndFiTrangThaiHangHoa(String taxcode, Integer fiTrangThai);
 //    LoadingCache<String, Boolean> getSignPendingProfiles();
 //    void rollbackFailedRequestUpdate(String nswFileCode);
 }

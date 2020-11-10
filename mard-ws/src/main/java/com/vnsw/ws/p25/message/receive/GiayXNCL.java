@@ -22,7 +22,7 @@ public class GiayXNCL {
     String fiTenCQKT;
 
     @XmlElement(name = "CerNumber")
-    String fiSoGXN;
+    String fiSoGCN;
     @XmlElement(name = "SignCerPlace")
     String fiNoiKy;
     @XmlJavaTypeAdapter(DateSerialization.class)

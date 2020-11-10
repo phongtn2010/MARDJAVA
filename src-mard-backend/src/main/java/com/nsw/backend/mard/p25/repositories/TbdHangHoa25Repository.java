@@ -10,4 +10,5 @@ import java.util.List;
 public interface TbdHangHoa25Repository  extends JpaRepository<TbdHanghoa25, Integer>, TbdHangHoa25RepositoryCustom{
     public List<TbdHanghoa25> findByFiIdHS(Integer idHoSo);
     public TbdHanghoa25 findByFiIdProduct(Integer id);
+    public List<TbdHanghoa25> findByFiTaxCodeAndFiTrangThaiHangHoa(String taxcode, Integer fiTrangThai);
 }

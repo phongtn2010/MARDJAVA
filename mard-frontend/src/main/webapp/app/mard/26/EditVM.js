@@ -148,19 +148,8 @@ $(document).ready(function () {
     var options = app.parseQuerystring();
     $('#loading10').show();
     $.when(
-            app.getCategory('/mard/12/danhmuc', 'HS_CQGS_PHIABAC', 1, function (res) {
-                if (res.success) {
-                    options.lstCqgsBac = res.data;
-                } else {
-                    options.lstCqgsBac = [];
-                }
-            }),
-            app.getCategory('/mard/12/danhmuc', 'HS_CQGS_PHIATRUNG', 1, function (res) {
-                if (res.success) {
-                    options.lstCqgsTrung = res.data;
-                } else {
-                    options.lstCqgsTrung = [];
-                }
+            app.sendGetRequest('/mard/26/hanghoa/getlist?taxCode='+hosoUsername, function (res) {
+                options.lstHanghoas=res.data;
             }),
             app.getCategory('/mard/12/danhmuc', 'HS_CQGS_PHIANAM', 1, function (res) {
                 if (res.success) {
@@ -185,9 +174,6 @@ $(document).ready(function () {
                         options.hoso = d.data;
                         var editVM = new EditVM(options);
                         ko.applyBindings(editVM, document.getElementById('EditVM'));
-                        $("#fiMaCqgsBac").select2({placeholder: '-- Chọn --', width: '100%', allowClear: true});
-                        $("#fiMaCqgsTrung").select2({placeholder: '-- Chọn --', width: '100%', allowClear: true});
-                        $("#fiMaCqgsNam").select2({placeholder: '-- Chọn --', width: '100%', allowClear: true});
                     }
                 },
                 error: function (e) {
@@ -197,9 +183,6 @@ $(document).ready(function () {
         } else {
             var editVM = new EditVM(options);
             ko.applyBindings(editVM, document.getElementById('EditVM'));
-            $("#fiMaCqgsBac").select2({placeholder: '-- Chọn --', width: '100%', allowClear: true});
-            $("#fiMaCqgsTrung").select2({placeholder: '-- Chọn --', width: '100%', allowClear: true});
-            $("#fiMaCqgsNam").select2({placeholder: '-- Chọn --', width: '100%', allowClear: true});
         }
     };
 });

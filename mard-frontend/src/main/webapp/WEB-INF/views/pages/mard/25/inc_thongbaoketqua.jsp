@@ -3,10 +3,8 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<div id="mard25KQKT" data-bind="" class="modal container in modal-overflow" tabindex="-1">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-    </div>
+<div id="mard25KQKT" data-bind="with: thongBaoKQVM" class="modal container in modal-overflow" tabindex="-1">
+
     <div class="modal-body container" style="display: flex">
         <div id="content-hoso" size="a4" class="a4 col-md-12">
 
@@ -57,8 +55,16 @@
                             <th class="text-center bold"> Ghi chú</th>
                         </tr>
                         </thead>
-                        <tbody >
+                        <tbody data-bind="foreach: listHangHoa">
                         <tr>
+                            <td class="text-center" data-bind="text: $index() + 1"></td>
+                            <td class="text-center" data-bind="text: fiProName"></td>
+                            <td class="text-center" data-bind="text: fiProSoHieu"></td>
+                            <td class="text-center" data-bind="text: fiProMadeIn"></td>
+                            <td class="text-center" data-bind="text: fiProCountryCode"></td>
+                            <td class="text-center" data-bind="text: fiProductSL"></td>
+                            <td class="text-center" data-bind="text: fiProductKL"></td>
+                            <td class="text-center" data-bind=""></td>
                         </tr>
                         </tbody>
                     </table>
@@ -68,22 +74,22 @@
                 - Cửa khẩu nhập:
             </div>
             <div class="row">
-                - Thời gian nhập khẩu (tháng, năm):
+                - Thời gian nhập khẩu (tháng, năm): <span data-bind="text: thoiGianNhap"></span>
             </div>
             <div class="row">
                 - Thuộc lô hàng có các chứng từ sau: <br/>
                 + Hợp đồng số:<br/>
                 + Hóa đơn số:<br/>
                 + Giấy đăng ký kiểm tra xác nhận chất lượng số:<br/>
-                - Tên tổ chức nhập khẩu:<br/>
-                Địa chỉ: <br/>
+                - Tên tổ chức nhập khẩu: <span data-bind="text: tenCongTyNK"></span><br/>
+                Địa chỉ: <span data-bind="text: diaChiCongTyNK"></span><br/>
             </div>
             <div class="row">
                 <b>2. Căn cứ kiểm tra:</b><br/>
-                + Tiêu chuẩn công bố áp dụng (số hiệu TCCS):<br/>
-                + Quy chuẩn kỹ thuật (nhóm, loại hàng hóa tại QCVN 01-190/BNNPTNT):<br/>
+                + Tiêu chuẩn công bố áp dụng (số hiệu TCCS): <span data-bind="text: tieuChuanApDung"></span><br/>
+                + Quy chuẩn kỹ thuật (nhóm, loại hàng hóa tại QCVN 01-190/BNNPTNT): <span data-bind="text: quyChuanKT"></span><br/>
                 <b>3. Kết quả đánh giá sự phù hợp</b><br/>
-                Giấy chứng nhận hợp quy lô TACN nhập khẩu số:<br/>
+                Giấy chứng nhận hợp quy lô TACN nhập khẩu số: <span data-bind="text: giayCN"></span><br/>
                 <b>3. Kết quả kiểm tra nhà nước:</b><br/>
                 Lô hàng đáp ứng yêu cầu chất lượng hàng hóa nhập khẩu./.<br/>
 
@@ -105,7 +111,7 @@
             <a class="btn green" data-bind="">
                 <spring:message code="common.button.tai_ve"/>
             </a>
-            <a class="btn" href="javascript:void(0)" data-dismiss="modal">
+            <a class="btn" href="javascript:void(0)" data-dismiss="modal" data-bind="click: closeThongBao">
                 <spring:message code="conmon.button.dong"/>
             </a>
         </div>

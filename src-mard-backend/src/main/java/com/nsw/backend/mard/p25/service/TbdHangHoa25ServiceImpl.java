@@ -1,8 +1,6 @@
 package com.nsw.backend.mard.p25.service;
 
 
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.nsw.backend.mard.p25.model.FilterHangHoa;
 import com.nsw.backend.mard.p25.model.FilterResult;
@@ -13,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
 @Service
@@ -51,7 +47,11 @@ public class TbdHangHoa25ServiceImpl implements TbdHangHoa25Service{
         tbdHangHoa25Repository.save(tbdHanghoa25s);
     }
 
-//    @Override
+    @Override
+    public List<TbdHanghoa25> findByFiTaxCodeAndFiTrangThaiHangHoa(String taxcode,Integer fiTrangThai) {
+        return tbdHangHoa25Repository.findByFiTaxCodeAndFiTrangThaiHangHoa(taxcode, fiTrangThai);
+    }
+    //    @Override
 //    public LoadingCache<String, Boolean> getSignPendingProfiles() {
 //        if(pendingQueue == null){
 //            pendingProfiles = new ArrayList<>();

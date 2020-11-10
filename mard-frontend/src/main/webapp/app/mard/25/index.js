@@ -345,6 +345,7 @@ function Mard25VM() {
     }
 
     self.deleteHoso = function (item) {
+        console.log(item);
         // return;
         self.pop = app.popup({
             title: 'Thông báo',
@@ -362,7 +363,7 @@ function Mard25VM() {
                             type: 'GET',
                             cache: false,
                             crossDomain: true,
-                            url: app.appContext + "/mard/25/hoso/delete?fiNSWFileCode=" + item.fiNSWFileCode + "&fiTaxCode=" + hosoUsername,
+                            url: app.appContext + "/mard/25/hoso/delete?fiIdHS=" + item.fiIdHS + "&fiTaxCode=" + hosoUsername,
                             beforeSend: function (xhr) {
                                 xhr.setRequestHeader(CSRF_TOKEN_NAME, CSRF_TOKEN_VALUE);
                                 $('#loading10').show();

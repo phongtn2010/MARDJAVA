@@ -6,9 +6,9 @@ function Mard25ViewHangHoaVM (options) {
     self.errorMsg  = ko.observable('');
     self.lstFilePT  = ko.observableArray();
     self.lstFileGCN  = ko.observableArray();
-    self.sortBy = ko.observable("fiCreatedDate");
-    self.order = ko.observable("desc");
-    self.mard25HangHoaItems  = ko.observableArray((options && options.hasOwnProperty('mard25HangHoaItems')) ? options.mard25HangHoaItems :[]);
+	self.lstCountry  = ko.observableArray((options && options.hasOwnProperty('lstCountry')) ? options.lstCountry :[]);
+	self.sortBy = ko.observable("fiCreatedDate");
+    self.order = ko.observable("desc");    self.mard25HangHoaItems  = ko.observableArray((options && options.hasOwnProperty('mard25HangHoaItems')) ? options.mard25HangHoaItems :[]);
     self.lstProfileStatus  = ko.observableArray((options && options.hasOwnProperty('lstProfileStatus')) ? options.lstProfileStatus :[]);
     self.lstToChucDanhGia  = ko.observableArray((options && options.hasOwnProperty('lstToChucDanhGia')) ? options.lstToChucDanhGia :[]);
     self.lstKetQuaPhanTich  = ko.observableArray((options && options.hasOwnProperty('lstKetQuaPhanTich')) ? options.lstKetQuaPhanTich :[]);
@@ -32,7 +32,7 @@ function Mard25ViewHangHoaVM (options) {
     self.fiHS = ko.observable((options && options.hasOwnProperty('fiHS')) ? options.fiHS : null);
     self.isEditable = ko.observable(true);
     self.fiNameTCCD = ko.observable(null);
-    self.guiKetQuaVM= new GuiKetQuaVM();
+
     self.getProfileStatus = function (statuscode) {
         var lstProfileStatus = self.lstProfileStatus();
         var pos = lstProfileStatus.find(function (e) {
@@ -149,7 +149,7 @@ function Mard25ViewHangHoaVM (options) {
                 }
             },
             error: function (e) {
-                ufVMSelf.errorMsg('Có lỗi tải file lên'+e);
+                self.errorMsg('Có lỗi tải file lên'+e);
             }
         });
     }
@@ -175,11 +175,21 @@ function Mard25ViewHangHoaVM (options) {
         }
 
     }
-
+    self.thongBaoKQVM = ko.observable(new ThongBaoKQVM());
     self.xemThongBao = function(data,type,index){
+        console.log(index);
+        self.thongBaoKQVM().listHangHoa(index);
+        self.thongBaoKQVM().thoiGianNhap("Từ ngày: "+  new Date(self.fiHS().fiPurchFromDate).toShortDateString() + " tới ngày " + new Date(self.fiHS().fiPurchToDate).toShortDateString());
 
-        $("#mard25KQKT").show();
+        self.thongBaoKQVM().tenCongTyNK(self.fiHS().fiImporterName);
+        self.thongBaoKQVM().diaChiCongTyNK(self.fiHS().fiImporterAddress);
+        self.thongBaoKQVM().quyChuanKT(index.fiProQuyChuan);
+        self.thongBaoKQVM().tieuChuanApDung(index.fiProSoHieu);
+        self.thongBaoKQVM().giayCN(index.fiSoGCN);
+        console.log(self.fiHS());
+            $("#mard25KQKT").show();
     }
+
     self.lichsuXuly = ko.observable(new HistoryPopupView());
     self.showLSHH = function (item) {
         self.lichsuXuly().getLSHH(item.fiIdProduct);
@@ -393,7 +403,10 @@ $(document).ready(function () {
             //danh muc trang thai
             app.sendGetRequest("/mard/25/danhmuc/getby-catno/25", function (res) {
                 options['lstProfileStatus'] = res.data;
-            })
+            }),
+            app.sendGetRequest("/mard/25/danhmuc/quocgia", function (res) {
+                options['lstCountry'] = res.data;
+            }),
         ).done(function (data) {
             $('#loading10').hide();
 
@@ -401,19 +414,21 @@ $(document).ready(function () {
         })
     })
 })
-function GuiKetQuaVM(){
-    var self=this;
 
-    self.fiNSWFileCode=ko.observable(null);
-    self.fiDVXLCode=ko.observable(null);
-    self.fiDVXLName=ko.observable(null);
-    self.fiProId=ko.observable(null);
-    self.fiProName=ko.observable(null);
-    self.fiLoaiKQDG=ko.observable(null);
-    self.fiSoGCN=ko.observable(null);
-    self.fiNgayDG=ko.observable(null);
-    self.fiIDFileGCN=ko.observable(null);
-    self.fiLinkGCN=ko.observable(null);
-    self.fiNameGCN=ko.observable(null);
-    self.fiListHangHoaFile=ko.observableArray([]);
+function ThongBaoKQVM() {
+    var thongBaoVMSefl = this;
+    thongBaoVMSefl.listHangHoa = ko.observableArray([]);
+    thongBaoVMSefl.thoiGianNhap = ko.observable(null);
+    thongBaoVMSefl.hopDong=ko.observable(null);
+    thongBaoVMSefl.hoaDon=ko.observable(null);
+    thongBaoVMSefl.giayDKXN=ko.observable(null);
+    thongBaoVMSefl.tenCongTyNK=ko.observable(null);
+    thongBaoVMSefl.diaChiCongTyNK=ko.observable(null);
+    thongBaoVMSefl.tieuChuanApDung=ko.observable(null);
+    thongBaoVMSefl.quyChuanKT=ko.observable(null);
+    thongBaoVMSefl.giayCN=ko.observable(null);
+    thongBaoVMSefl.closeThongBao = function(data,type,index){
+
+        $("#mard25KQKT").hide();
+    }
 }
