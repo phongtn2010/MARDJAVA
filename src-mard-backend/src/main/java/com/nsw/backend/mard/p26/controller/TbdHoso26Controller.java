@@ -7,4 +7,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/mard/26/hoso")
 public class TbdHoso26Controller {
 
+
 }

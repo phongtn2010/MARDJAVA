@@ -18,8 +18,8 @@ public class TbdHangHoa26Controller extends BaseController {
         this.tbdHangHoa25Service = tbdHangHoa25Service;
     }
 
-    @PostMapping("/getlist")
-    public ResponseEntity<ResponseJson> getListByFilter(@RequestParam String taxcode) {
+    @RequestMapping(value = "/getlist", method = RequestMethod.GET)
+    public ResponseEntity<ResponseJson> getListByFilter(@RequestParam(name = "taxCode") String taxcode) {
         return createSuccessResponse(tbdHangHoa25Service.findByFiTaxCodeAndFiTrangThaiHangHoa(taxcode,44), HttpStatus.OK);
     }
 }

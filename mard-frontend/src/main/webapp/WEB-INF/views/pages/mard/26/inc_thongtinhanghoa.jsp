@@ -28,27 +28,10 @@
                 </thead>
                 <tbody data-bind="foreach: lstHanghoas">
                     <tr>
-                        <td data-bind="text: fiStt"></td>  
-                        <td>
-                            <!-- ko if: rowSpan() > 0 -->
-                                <span data-bind="text: fiTenHh"></span>
-                            <!-- /ko -->
-                        </td> 
-                        <td data-bind="text: fiMahosoXncl"></td> 
-                        <td data-bind="text: fiMsChungnhan"></td>                        
-                        <td data-bind="text: fiMucChatluong"></td> 
-                        <td data-bind="text: fiSodkXncl"></td>                         
-                        <td data-bind="text: fiHangSx"></td> 
-                        <td data-bind="text: fiNuocSx"></td> 
-                        <td >
-                            <span data-bind="text : fiNgaycapXnclText"></span>
-                        </td> 
-                        <td data-bind="text : fiSogiayXncl">
-                        </td> 
+                        <td data-bind="text: ($index() + 1)"></td>
+
                         <td class="text-center">
-                            <!-- ko if: rowSpan() > 0 -->
                             <a class="btn red bt-center" data-bind="click: $parent.removeProductClick.bind($parent)"><i class="fa fa-trash"></i> Xoá</a>
-                            <!-- /ko -->
                         </td>
                     </tr>
                 </tbody>
@@ -110,25 +93,8 @@
                     </thead>
                     <tbody data-bind="foreach: lstProdutList">
                         <tr>
-                            <td data-bind="text: fiStt"></td>  
-                            
-                            <td>
-                                <!-- ko if: rowSpan() > 0 -->
-                                    <span data-bind="text: fiTenHh"></span>
-                                <!-- /ko -->
-                            </td> 
-                            <td data-bind="text: fiMahosoXncl"></td> 
-                            <td data-bind="text: fiMsChungnhan"></td>                        
-                            <td data-bind="text: fiMucChatluong"></td> 
-                            <td data-bind="text: fiSodkXncl"></td>                         
-                            <td data-bind="text: fiHangSx"></td> 
-                            <td data-bind="text: fiNuocSx"></td> 
-                            <td >
-                                <span data-bind="text : fiNgaycapXnclText"></span>
-                            </td> 
-                            <td>
-                                <span data-bind="text: fiSogiayXncl"></span>
-                            </td> 
+                            <td data-bind="text: ($index() + 1)"></td>
+
                             <td class="text-center">
                                 <!-- ko if: rowSpan() > 0 -->
                                 <a class="btn red bt-center" data-bind="text: lable, click: $parent.onChange.bind($parent)"><i class="fa fa-trash"></i></a>

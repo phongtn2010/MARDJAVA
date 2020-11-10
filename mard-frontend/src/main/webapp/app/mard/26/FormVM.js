@@ -39,20 +39,11 @@ function HangHoaVM(op) {
             inspectionType : op.inspectionType - 0
         };
         
-        app.makePost({
-            url: '/mard/12/product/find',
-            data: JSON.stringify(data),
-            contentType: "application/json; charset=utf-8",
-            dataType: 'json',
+        app.makeGet({
+            url: '/mard/26/hanghoa/getlist?taxCode=' +hosoUsername,
             success: function (res) {
                 if (res.success) {
-                    var list = res.data ? mapTbdhsHanghoa12Ext(res.data) : [];
-                    self.lstProdutList([]);
-                    self.lstProdutList(list);
-                    self.totalCount(res.data ? res.total : 0);
-                    if (cb) {
-                        cb();
-                    }
+                    lstProduct(res.data);
                 }
             },
             error: function (e) {
@@ -237,11 +228,7 @@ function FormVM(options) {
             self.fiCqgsNam(hoso.hasOwnProperty('fiCqgsNam') ? hoso.fiCqgsNam : null);
             self.fiMaCqgsNam(hoso.hasOwnProperty('fiMaCqgsNam') ? hoso.fiMaCqgsNam : null);
 
-            self.lstHanghoas(mapTbdhsHanghoa12(hoso.hasOwnProperty('lstHanghoas') ? hoso.lstHanghoas : []));
-
-            //$("#fiMaCqgsBac").select2('destroy').val(self.fiMaCqgsBac()).select2({placeholder: '-- Chọn --', width: '100%', allowClear: true});
-            //$("#fiMaCqgsTrung").select2('destroy').val(self.fiMaCqgsTrung()).select2({placeholder: '-- Chọn --', width: '100%', allowClear: true});
-            //$("#fiMaCqgsNam").select2('destroy').val(self.fiMaCqgsNam()).select2({placeholder: '-- Chọn --', width: '100%', allowClear: true});
+            self.lstHanghoas(mapTbdhsHanghoa26(hoso.hasOwnProperty('lstHanghoas') ? hoso.lstHanghoas : []));
         }
 
         self.hosoErrors.showAllMessages(false);
@@ -318,6 +305,8 @@ function FormVM(options) {
         var html = [
             $('#thongtinhanghoa-tmpl').html()
         ].join('');
+
+
         var data = {
             item: null,
             inspectionType : options.maThuTuc,
@@ -326,7 +315,7 @@ function FormVM(options) {
 
         delete self.pop;
         delete self.hangHoaVM;
-
+        //
         var cb = function () {
 
             self.pop = app.popup({
@@ -348,7 +337,7 @@ function FormVM(options) {
                                     var product = products[i];
                                     product.fiIdXe = -1 * new Date().getTime();
                                     product.fiStt = self.lstHanghoas().length + 1;
-                                    var product = new TbdhsHanghoa12(product);
+                                    var product = new TbdhsHanghoa26(product);
                                     self.lstHanghoas.push(product);
                                 }
 

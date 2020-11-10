@@ -59,8 +59,8 @@ function ResultVM(options) {
         self.fiNgayKyText2(data[0].fiNgayKy ? new Date(data[0].fiNgayKy).toDayFirstString() : null);
         self.fiNgayKyText(data[0].fiNgayKy ? getDateText(data[0].fiNgayKy) : null);
         self.fiNgayHetHieuLuc(data[0].fiNgayHetHl ? new Date(data[0].fiNgayHetHl).toDayFirstString() : null);
-        self.lstHanghoas(mapTbdhsHanghoa12(data[0].lstHanghoas));
-        self.lstHanghoasUnique(mapTbdhsHanghoa12(uniqueTbdhsHanghoa12(data[0].lstHanghoas)));
+        self.lstHanghoas(mapTbdhsHanghoa26(data[0].lstHanghoas));
+        self.lstHanghoasUnique(mapTbdhsHanghoa26(uniqueTbdhsHanghoa12(data[0].lstHanghoas)));
         
         if (parseInt(options.maThuTuc) === 2 || self.fiLoaiDon() === 2) {
             self.fiCheDo('kiểm tra giảm');

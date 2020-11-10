@@ -46,7 +46,7 @@ function HangHoaVM(op) {
             dataType: 'json',
             success: function (res) {
                 if (res.success) {
-                    var list = res.data ? mapTbdhsHanghoa12Ext(res.data) : [];
+                    var list = res.data ? mapTbdhsHanghoa26Ext(res.data) : [];
                     self.lstProdutList([]);
                     self.lstProdutList(list);
                     self.totalCount(res.data ? res.total : 0);
@@ -237,7 +237,7 @@ function FormVM(options) {
             self.fiCqgsNam(hoso.hasOwnProperty('fiCqgsNam') ? hoso.fiCqgsNam : null);
             self.fiMaCqgsNam(hoso.hasOwnProperty('fiMaCqgsNam') ? hoso.fiMaCqgsNam : null);
 
-            self.lstHanghoas(mapTbdhsHanghoa12(hoso.hasOwnProperty('lstHanghoas') ? hoso.lstHanghoas : []));
+            self.lstHanghoas(mapTbdhsHanghoa26(hoso.hasOwnProperty('lstHanghoas') ? hoso.lstHanghoas : []));
 
             //$("#fiMaCqgsBac").select2('destroy').val(self.fiMaCqgsBac()).select2({placeholder: '-- Chọn --', width: '100%', allowClear: true});
             //$("#fiMaCqgsTrung").select2('destroy').val(self.fiMaCqgsTrung()).select2({placeholder: '-- Chọn --', width: '100%', allowClear: true});
@@ -348,7 +348,7 @@ function FormVM(options) {
                                     var product = products[i];
                                     product.fiIdXe = -1 * new Date().getTime();
                                     product.fiStt = self.lstHanghoas().length + 1;
-                                    var product = new TbdhsHanghoa12(product);
+                                    var product = new TbdhsHanghoa26(product);
                                     self.lstHanghoas.push(product);
                                 }
 

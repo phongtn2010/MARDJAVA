@@ -109,7 +109,7 @@ function Tbdhoso12(STT, item) {
     self.fiNgayguiText = ko.observable(item.fiNgaygui ? new Date(item.fiNgaygui).toDayFirstWithTime() : null);
 }
 
-function TbdhsHanghoa12(data) {
+function TbdhsHanghoa26(data) {
     var self = this;
     self.fiIdHh = ko.observable(data ? data.fiIdHh : null);
     self.fiStt = ko.observable(data ? data.fiStt : null);
@@ -132,22 +132,22 @@ function TbdhsHanghoa12(data) {
     self.group = ko.observable(data ? data.group : null);
     self.fiNgaycapXnclText = ko.observable(data.fiNgaycapXncl ? new Date(data.fiNgaycapXncl).toDayFirstWithTime() : null);
 }
-var mapTbdhsHanghoa12 = function (d) {
+var mapTbdhsHanghoa26 = function (d) {
     d = calcRowSpanByGroup(setGroup(d));
     return ko.utils.arrayMap(d, function (item, index) {
         item.fiStt = index + 1;
-        return new TbdhsHanghoa12(item);
+        return new TbdhsHanghoa26(item);
     });
 };
 
-function TbdhsHanghoa12Ext(data) {
+function TbdhsHanghoa26Ext(data) {
     var self = this;
-    self.fiIdHh = ko.observable(data.fiIdHh ? data.fiIdHh : null);
-    self.fiStt = ko.observable(data.fiStt ? data.fiStt : null);
-    self.fiIdHoso = ko.observable(data.fiIdHoso ? data.fiIdHoso : null);
-    self.fiMaHoso = ko.observable(data.fiMaHoso ? data.fiMaHoso : null);
-    self.fiMahosoXncl = ko.observable(data.fiMahosoXncl ? data.fiMahosoXncl : null);
-    self.fiTenHh = ko.observable(data.fiTenHh ? data.fiTenHh : null);
+    self.fiIdProduct = ko.observable(data.fiIdProduct ? data.fiIdProduct : null);
+    // self.fiStt = ko.observable(data.fiStt ? data.fiStt : null);
+    // self.fiIdHoso = ko.observable(data.fiIdHoso ? data.fiIdHoso : null);
+    // self.fiMaHoso = ko.observable(data.fiMaHoso ? data.fiMaHoso : null);
+    // self.fiMahosoXncl = ko.observable(data.fiMahosoXncl ? data.fiMahosoXncl : null);
+    self.fiProName = ko.observable(data.fiProName ? data.fiProName : null);
     self.fiMsChungnhan = ko.observable(data.fiMsChungnhan ? data.fiMsChungnhan : null);
     self.fiMucChatluong = ko.observable(data.fiMucChatluong ? data.fiMucChatluong : null);
     self.fiHangSx = ko.observable(data.fiHangSx ? data.fiHangSx : null);
@@ -165,11 +165,11 @@ function TbdhsHanghoa12Ext(data) {
     self.fiNgaycapXnclText = ko.observable(data.fiNgaycapXncl ? new Date(data.fiNgaycapXncl).toDayFirstWithTime() : null);
 }
 
-var mapTbdhsHanghoa12Ext = function (d) {
+var mapTbdhsHanghoa26Ext = function (d) {
     d = calcRowSpanByGroup(d);
     return ko.utils.arrayMap(d, function (item, index) {
         item.fiStt = index + 1;
-        return new TbdhsHanghoa12Ext(item);
+        return new TbdhsHanghoa26Ext(item);
     });
 };
 
