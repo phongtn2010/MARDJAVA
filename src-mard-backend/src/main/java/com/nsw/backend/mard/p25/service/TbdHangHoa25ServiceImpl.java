@@ -6,6 +6,7 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.nsw.backend.mard.p25.model.FilterHangHoa;
 import com.nsw.backend.mard.p25.model.FilterResult;
+import com.nsw.backend.mard.p25.model.FilterResultHH;
 import com.nsw.backend.mard.p25.model.TbdHanghoa25;
 import com.nsw.backend.mard.p25.repositories.TbdHangHoa25Repository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class TbdHangHoa25ServiceImpl implements TbdHangHoa25Service{
     }
 
     @Override
-    public FilterResult searchHangHoa (FilterHangHoa filterHangHoa) {
+    public FilterResultHH searchHangHoa (FilterHangHoa filterHangHoa) {
         //filterForm.setFiLstNSWFileCode(findLstNSWFileCode(filterForm));
         return tbdHangHoa25Repository.searchHangHoa(filterHangHoa);
     }
@@ -61,7 +62,7 @@ public class TbdHangHoa25ServiceImpl implements TbdHangHoa25Service{
 //                        if(removalNotification.wasEvicted()){
 //                            //we should rollback automatically
 //                            String nswFileCode = (String) removalNotification.getKey();
-//                            rollbackFailedRequestUpdate(findByFiIdHS(nswFileCode));
+//                            rollbackFailedRequestUpdate(findByFiHSCode(nswFileCode));
 //                        }
 //                    })
 //                    .build(new CacheLoader<String, Boolean>() {

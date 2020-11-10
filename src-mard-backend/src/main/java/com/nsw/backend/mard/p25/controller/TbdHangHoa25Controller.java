@@ -7,6 +7,7 @@ import com.nsw.backend.mard.p25.model.FilterForm;
 import com.nsw.backend.mard.p25.model.FilterHangHoa;
 import com.nsw.backend.mard.p25.model.TbdHanghoa25;
 import com.nsw.backend.mard.p25.service.TbdHangHoa25Service;
+import com.nsw.backend.mard.p25.service.TbdHoso25Service;
 import com.nsw.backend.util.ResponseJson;
 import io.swagger.models.auth.In;
 import org.slf4j.Logger;
@@ -27,9 +28,10 @@ public class TbdHangHoa25Controller extends BaseController {
     @Autowired
     private TbdHangHoa25Service hangHoa25Service;
 
+
     @RequestMapping(value = "/find/{idHoSo}")
     public ResponseEntity<ResponseJson> manualRollback(@PathVariable Integer idHoSo) {
-       // hangHoa25Service.getSignPendingProfiles().cleanUp();
+//        hangHoa25Service.getSignPendingProfiles().cleanUp();
          return createSuccessResponse(hangHoa25Service.findByFiIdHS(idHoSo), HttpStatus.OK);
     }
 
