@@ -575,6 +575,20 @@
         <put-attribute name="body" value="/WEB-INF/views/pages/sbv/01/edit.jsp" />  
     </definition>
     <!--END THU TUC sbv.01-->
+
+    <!--THU TUC sbv.02-->
+    <!-- Home Page -->
+    <definition name="sbv.02.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/sbv/02/index.jsp" />
+    </definition>
+    <definition name="sbv.02.create" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/sbv/02/create.jsp" />
+    </definition>
+
+    <!--END THU TUC sbv.02-->
+
     <!--END OF SBV-->
     <!--  BO GT  -->
     <definition name="mt.00.home" extends="base-definition">  

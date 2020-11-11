@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="Envelope">
+        <xsd:complexType mixed="true">
+            <xsd:sequence>
+
+                <xsd:element name="Header">
+                    <xsd:complexType mixed="true">
+                        <xsd:sequence>
+                            <xsd:element name="Reference">
+                                <xsd:complexType mixed="true">
+                                    <xsd:sequence>
+                                        <xsd:element name="version" type="xsd:decimal" />
+                                        <xsd:element name="messageId">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:normalizedString">
+                                                    <xsd:maxLength value="36" />
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="From">
+                                <xsd:complexType mixed="true">
+                                    <xsd:sequence>
+                                        <xsd:element name="name">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:normalizedString">
+                                                    <xsd:minLength value="1" />
+                                                    <xsd:maxLength value="255" />
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
+
+                                        <xsd:element name="identity" minOccurs="0">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:normalizedString">
+                                                    <xsd:minLength value="1" />
+                                                    <xsd:maxLength value="13" />
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
+
+                                        <xsd:element name="countryCode">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:normalizedString">
+                                                    <xsd:minLength value="1" />
+                                                    <xsd:maxLength value="2" />
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
+
+                                        <xsd:element name="ministryCode">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:normalizedString">
+                                                    <xsd:minLength value="1" />
+                                                    <xsd:maxLength value="20" />
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
+
+                                        <xsd:element name="organizationCode">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:normalizedString">
+                                                    <xsd:minLength value="1" />
+                                                    <xsd:maxLength value="20" />
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
+
+                                        <xsd:element name="unitCode" minOccurs="0">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:normalizedString">
+                                                    <xsd:maxLength value="20" />
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
+
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="To">
+                                <xsd:complexType mixed="true">
+                                    <xsd:sequence>
+
+                                        <xsd:element name="name">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:normalizedString">
+                                                    <xsd:minLength value="1" />
+                                                    <xsd:maxLength value="255" />
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
+
+                                        <xsd:element name="identity" minOccurs="0">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:normalizedString">
+                                                    <xsd:minLength value="1" />
+                                                    <xsd:maxLength value="13" />
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
+
+                                        <xsd:element name="countryCode">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:normalizedString">
+                                                    <xsd:minLength value="1" />
+                                                    <xsd:maxLength value="2" />
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
+
+                                        <xsd:element name="ministryCode">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:normalizedString">
+                                                    <xsd:minLength value="1" />
+                                                    <xsd:maxLength value="20" />
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
+
+                                        <xsd:element name="organizationCode">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:normalizedString">
+                                                    <xsd:minLength value="1" />
+                                                    <xsd:maxLength value="20" />
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
+
+                                        <xsd:element name="unitCode" minOccurs="0">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:normalizedString">
+                                                    <xsd:maxLength value="20" />
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
+
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            
+                            <xsd:element name="Subject" minOccurs="0">
+                                <xsd:complexType mixed="true">
+                                    <xsd:sequence>
+
+                                        <xsd:element name="documentType">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:normalizedString">
+                                                    <xsd:enumeration value="NHNN.QLNH0001" />
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
+
+                                        <xsd:element name="type">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:integer">
+                                                    <xsd:minInclusive value="0" />
+                                                    <xsd:maxInclusive value="999" />
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
+
+                                        <xsd:element name="function" type="xsd:integer"/>
+
+                                        <xsd:element name="reference">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:normalizedString">
+                                                    <xsd:minLength value="1" />
+                                                    <xsd:pattern value="[a-zA-Z0-9]+" />
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
+
+                                        <xsd:element name="documentYear">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:int">
+                                                    <xsd:pattern value="[2-9][0-9][0-9][0-9]" />
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
+
+                                        <xsd:element name="preReference">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:normalizedString">
+                                                    <xsd:minLength value="1" />
+                                                    <xsd:pattern value="[a-zA-Z0-9]+" />
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
+                                         
+                                        <xsd:element name="preDocumentYear">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:int">
+                                                    <xsd:pattern value="[2-9][0-9][0-9][0-9]" />
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
+
+                                        <xsd:element name="sendDate">
+                                            <xsd:simpleType>
+                                                <xsd:restriction base="xsd:normalizedString">
+                                                    <xsd:pattern
+                                                        value="(\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]) ([01]\d|2[0-3])(:[0-5]\d){2}(\.\d{3})?)" />
+                                                </xsd:restriction>
+                                            </xsd:simpleType>
+                                        </xsd:element>
+
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+
+                <xsd:element name="Body" minOccurs="0">
+                    <xsd:complexType mixed="true">
+                        <xsd:sequence>
+                            <xsd:element name="Content" minOccurs="0">
+                                <xsd:complexType mixed="true">
+                                    <xsd:sequence>
+                                        <xsd:element name="Result" minOccurs="0">
+                                            <xsd:complexType mixed="true">
+                                                <xsd:sequence>
+                                                    <xsd:element name="Reason">
+                                                        <xsd:simpleType>
+                                                             <xsd:restriction base="xsd:normalizedString">
+                                                                <xsd:minLength value="1"/>
+                                                                <xsd:maxLength value="255"/>
+                                                             </xsd:restriction>
+                                                        </xsd:simpleType>
+                                                    </xsd:element>
+
+                                                    <xsd:element name="ResultDate">
+                                                        <xsd:simpleType>
+                                                            <xsd:restriction base="xsd:normalizedString">
+                                                                <xsd:pattern
+                                                                    value="(\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]) ([01]\d|2[0-3])(:[0-5]\d){2}(\.\d{3})?)" />
+                                                            </xsd:restriction>
+                                                        </xsd:simpleType>
+                                                    </xsd:element>
+
+                                                    <xsd:element name="Department">
+                                                        <xsd:simpleType>
+                                                             <xsd:restriction base="xsd:normalizedString">
+                                                                <xsd:minLength value="1"/>
+                                                                <xsd:maxLength value="255"/>
+                                                             </xsd:restriction>
+                                                        </xsd:simpleType>
+                                                    </xsd:element>
+
+                                                    <xsd:element name="CreaterName">
+                                                        <xsd:simpleType>
+                                                             <xsd:restriction base="xsd:normalizedString">
+                                                                <xsd:minLength value="1"/>
+                                                                <xsd:maxLength value="255"/>
+                                                             </xsd:restriction>
+                                                        </xsd:simpleType>
+                                                    </xsd:element>
+
+                                                    <xsd:element name="Attachment" minOccurs="0">
+                                                                    <xsd:complexType mixed="true">
+                                                                        <xsd:sequence>
+
+                                                                            <xsd:element name="AttachTypeCode" minOccurs="0">
+                                                                                <xsd:simpleType>
+                                                                                     <xsd:restriction base="xsd:normalizedString">
+                                                                                        <xsd:maxLength value="20"/>
+                                                                                     </xsd:restriction>
+                                                                                </xsd:simpleType>
+                                                                            </xsd:element>
+
+                                                                            <xsd:element name="AttachTypeName" minOccurs="0">
+                                                                                <xsd:simpleType>
+                                                                                     <xsd:restriction base="xsd:normalizedString">
+                                                                                        <xsd:maxLength value="255"/>
+                                                                                     </xsd:restriction>
+                                                                                </xsd:simpleType>
+                                                                            </xsd:element>
+
+                                                                            <xsd:element name="FileName" minOccurs="0">
+                                                                                <xsd:simpleType>
+                                                                                     <xsd:restriction base="xsd:normalizedString">
+                                                                                        <xsd:maxLength value="255"/>
+                                                                                     </xsd:restriction>
+                                                                                </xsd:simpleType>
+                                                                            </xsd:element>
+
+                                                                            <xsd:element name="FileByte" type="xsd:string" minOccurs="0"/>
+
+                                                                        </xsd:sequence>
+                                                                    </xsd:complexType>
+                                                                </xsd:element>
+                                                </xsd:sequence>
+
+                                            </xsd:complexType>
+                                        </xsd:element>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="Signature" minOccurs="0" type="xsd:string"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="SystemSignature" minOccurs="0" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

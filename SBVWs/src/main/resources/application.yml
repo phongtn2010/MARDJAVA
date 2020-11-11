@@ -1,0 +1,172 @@
+spring:
+  profiles:
+    active: hq_test
+---
+server:
+  port: 8002
+  contextPath: /SBVWs
+--- 
+spring:
+  profiles: local, default, dev
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  jmx:
+    default-domain: SBVWs
+management:
+    security:
+        enabled: false
+client:
+  default-uri: http://localhost:8084/SBVWs/ws/
+URI_BACKEND: http://localhost:8080/SBVBackend
+URI_BACKEND_ADDRESS: http://localhost:8080/SBVBackend
+URI_ADDRESS_FILE_SERVER: http://10.224.164.18:8001/FileServices
+# ENCRYPT MESAGE
+KEY_AES: gWoUo9NBRyTYD234
+ENCRYPT: false
+#debug mode
+DEBUG_MODE: true
+DEBUG_FOLDER_MSG_OUTPUT: C:\DEBUG_MSG\
+# GATEWAY
+#GATEWAY_LINK: http://localhost:8888/VNSWSendGateway/ws/gateway.wsdl?
+GATEWAY_LINK: http://10.224.164.18:8006/VNSWSendGateway/ws/gateway.wsdl?
+GATEWAY_NAMESPACE_KEY: gen
+GATEWAY_NAMESPACE: http://com/vnsw/send/gateway/generated
+GATEWAY_MOTHOD_TAG: receiveRequest
+GATEWAY_PAYLOAD_TAG_OFFICECODE: officeCode
+GATEWAY_PAYLOAD_TAG_DOCUMENTTYPE: documentType
+GATEWAY_PAYLOAD_TAG_DATA: requestPayload
+FOLDER_TEMP_FILE_SERVICE: C:\TEMP\
+# Thong tin rabbitMQ
+activemq.host: 10.224.164.16
+activemq.port: 5672
+activemq.user: nswlog
+activemq.password: nswlog
+activemq.virtualHost: /
+activemq.exchangeName: logExchange
+activemq.queueName: Log_Error_Queue
+activemq.routingKey: error
+IS_TEST: 0
+---
+spring:
+  profiles: vt_test
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  jmx:
+    default-domain: SBVWs
+management:
+    security:
+        enabled: false
+client:
+  default-uri: http://10.224.164.18:8002/SBVWs/ws/
+URI_ADDRESS: http://10.224.164.18:8080/SBVBackend
+URI_BACKEND_ADDRESS: http://10.224.164.18:8080/SBVBackend
+URI_ADDRESS_FILE_SERVER: http://10.224.164.18:8001/FileServices
+URI_SERVICE_BKHCN: http://10.224.164.16:8008/KHCN/ImportDocumentService?wsdl
+# ENCRYPT MESAGE
+KEY_AES: gWoUo9NBRyTYD234
+ENCRYPT: false
+# GATEWAY
+GATEWAY_LINK: http://10.224.83.18:8006/VNSWSendGateway/ws/gateway.wsdl?
+GATEWAY_NAMESPACE_KEY: gen
+GATEWAY_NAMESPACE: http://com/vnsw/send/gateway/generated
+GATEWAY_MOTHOD_TAG: receiveRequest
+GATEWAY_PAYLOAD_TAG_OFFICECODE: officeCode
+GATEWAY_PAYLOAD_TAG_DOCUMENTTYPE: documentType
+GATEWAY_PAYLOAD_TAG_DATA: requestPayload
+FOLDER_TEMP_FILE_SERVICE: /home/TEMP
+# Thong tin rabbitMQ
+activemq.host: 10.224.164.16
+activemq.port: 5672
+activemq.user: nswlog
+activemq.password: nswlog
+activemq.virtualHost: /
+activemq.exchangeName: logExchange
+activemq.queueName: Log_Error_Queue
+activemq.routingKey: error
+#debug mode
+DEBUG_MODE: false
+DEBUG_FOLDER_MSG_OUTPUT: /home/TEMP/DEBUG_MSG/
+---
+spring:
+  profiles: hq_test
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  jmx:
+    default-domain: SBVWs
+management:
+    security:
+        enabled: false
+client:
+  default-uri: http://10.224.128.132:8004/SBVWs/ws/
+URI_ADDRESS: http://10.224.128.132:8002/SBVBackend		
+URI_BACKEND_ADDRESS: http://10.224.128.132:8002/SBVBackend
+URI_ADDRESS_FILE_SERVER: http://10.224.128.132:8005/FileServices
+# ENCRYPT MESAGE
+KEY_AES: gWoUo9NBRyTYD234
+ENCRYPT: false
+#debug mode
+DEBUG_MODE: true
+DEBUG_FOLDER_MSG_OUTPUT: /home/TEMP/DEBUG_MSG/
+# GATEWAY
+GATEWAY_LINK: http://10.224.138.82:8002/VNSWSendGateway/ws/gateway.wsdl?
+GATEWAY_NAMESPACE_KEY: gen
+GATEWAY_NAMESPACE: http://com/vnsw/send/gateway/generated
+GATEWAY_MOTHOD_TAG: receiveRequest
+GATEWAY_PAYLOAD_TAG_OFFICECODE: officeCode
+GATEWAY_PAYLOAD_TAG_DOCUMENTTYPE: documentType
+GATEWAY_PAYLOAD_TAG_DATA: requestPayload
+FOLDER_TEMP_FILE_SERVICE: /home/TEMP
+# Thong tin rabbitMQ
+activemq.host: 10.224.128.148
+activemq.port: 5672
+activemq.user: nswlog
+activemq.password: nswlog
+activemq.virtualHost: /
+activemq.exchangeName: logExchange
+activemq.queueName: Log_Error_Queue
+activemq.routingKey: error
+IS_TEST: 0
+---
+spring:
+  profiles: hq_live
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  jmx:
+    default-domain: SBVWs
+management:
+    security:
+        enabled: false
+URI_ADDRESS: http://10.224.128.193:8002/SBVBackend
+URI_BACKEND_ADDRESS: http://10.224.128.193:8002/SBVBackend
+URI_ADDRESS_FILE_SERVER: http://10.224.144.58:8001/FileServices
+client:
+  default-uri: http://10.224.128.194:8003/SBVWs/ws/
+# ENCRYPT MESAGE
+KEY_AES: gWoUo9NBRyTYD234
+ENCRYPT: false
+#debug mode
+DEBUG_MODE: false
+DEBUG_FOLDER_MSG_OUTPUT: /home/TEMP/
+# GATEWAY
+GATEWAY_LINK: http://10.224.140.85:8001/VNSWSendGateway/ws/gateway.wsdl?
+GATEWAY_NAMESPACE_KEY: gen
+GATEWAY_NAMESPACE: http://com/vnsw/send/gateway/generated
+GATEWAY_MOTHOD_TAG: receiveRequest
+GATEWAY_PAYLOAD_TAG_OFFICECODE: officeCode
+GATEWAY_PAYLOAD_TAG_DOCUMENTTYPE: documentType
+GATEWAY_PAYLOAD_TAG_DATA: requestPayload
+FOLDER_TEMP_FILE_SERVICE: /home/TEMP/
+# Thong tin rabbitMQ
+activemq.host: 10.224.138.93
+activemq.port: 5672
+activemq.user: nswlog
+activemq.password: nswlog
+activemq.virtualHost: /
+activemq.exchangeName: logExchange
+activemq.queueName: Log_Error_Queue
+activemq.routingKey: error
+IS_TEST: 0
