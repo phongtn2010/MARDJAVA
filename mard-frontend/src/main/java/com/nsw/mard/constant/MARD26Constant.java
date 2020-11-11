@@ -51,6 +51,7 @@ public class MARD26Constant {
         //Danh muc
         public static final String DANHMUC_CQGS = "mard.26.danhmuc.cqgs";
         public static final String DANHMUC_TRANGTHAI = "mard.26.danhmuc.trangthai";
+        public static final String GET_BY_CAT_NO = "mard.26.danhmuc.getbycatno";
 
         //Upload and download file
         public static final String ATTACHMENT_DOWNLOAD = "mard.26.api.hoso.download";

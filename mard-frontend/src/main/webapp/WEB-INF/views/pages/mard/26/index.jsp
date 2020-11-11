@@ -41,7 +41,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <select id="trangThaiHoSo" name="trangThaiHoSo" class="form-control select2" 
-                                                            data-bind="value : trangThaiHoSo, options : fiTrangthaiList, optionsValue : 'id', optionsCaption: 'Tất cả...', optionsText : 'name'">
+                                                            data-bind="value : trangThaiHoSo, options : fiTrangthaiList, optionsValue : 'fiCatType', optionsCaption: 'Tất cả...', optionsText : 'fiCatTypeName'">
                                                     </select>
                                                 </div>
                                             </div>  

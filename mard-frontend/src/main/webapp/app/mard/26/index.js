@@ -173,7 +173,7 @@ function IndexVM(params) {
      */
     self.search = function (page, pushState) {
         if (!RAW_HS_STATUS || RAW_HS_STATUS.length <= 0) {
-            app.getCategory('/mard/26/danhmuc', 'HS_TRANGTHAI', null, function (res) {
+            app.sendGetRequest('/mard/26/danhmuc/getby-catno/1',  function (res) {
                 if (res.success) {
                     RAW_HS_STATUS = res.data;
                     self.fiTrangthaiList(mapCategory(RAW_HS_STATUS));
@@ -543,8 +543,8 @@ function IndexVM(params) {
 
 $(document).ready(function () {
     var d = {};
-    $('#loading10').show();
-    $.when(app.getCategory('/mard/26/danhmuc', 'HS_TRANGTHAI', null, function (res) {
+
+    $.when(app.sendGetRequest('/mard/26/danhmuc/getby-catno/1',  function (res) {
         if (res.success) {
             d.lstTrangThai = res.data;
         } else {
@@ -553,7 +553,6 @@ $(document).ready(function () {
         RAW_HS_STATUS = d.lstTrangThai;
     })).done(function (data) {
         init();
-        $('#loading10').hide();
     });
 
     var init = function () {

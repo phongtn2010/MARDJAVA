@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,5 +26,10 @@ public class TbsDanhmuc26Controller extends BaseController {
     @GetMapping("/trangthai/")
     public ResponseEntity<ResponseJson> getByCatNo() {
         return createSuccessResponse(service.findByFiCatNoOrderByFiOrder(1L), HttpStatus.OK);
+    }
+
+    @GetMapping("/getby-catno/{catNo}")
+    public ResponseEntity<ResponseJson> getByCatNo(@PathVariable Long catNo) {
+        return createSuccessResponse(service.findByFiCatNoOrderByFiOrder(catNo), HttpStatus.OK);
     }
 }
