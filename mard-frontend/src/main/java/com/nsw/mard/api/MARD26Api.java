@@ -12,6 +12,7 @@ import com.nsw.helper.BackendRequestHelper;
 import com.nsw.helper.FileServiceHelper;
 import com.nsw.helper.RabbitMQErrorHelper;
 import com.nsw.mard.constant.MARD26Constant;
+import com.nsw.mard.p26.model.TbdHoso26;
 import com.nsw.util.LogUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -34,7 +35,7 @@ public class MARD26Api extends BaseApi {
             @RequestParam(name = "taxCode") String taxCode) {
         ResponseJson json = new ResponseJson();
         try {
-            json = BackendRequestHelper.getInstance().doGetRequest(MARD26Constant.getInstance().getApiUrl(environment, MARD26Constant.API.SEARCH_PRODUCT_FROM_TACN) + "?taxCode="+taxCode );
+            json = BackendRequestHelper.getInstance().doGetRequest(MARD26Constant.getInstance().getApiUrl(environment, MARD26Constant.TbdHoso26API.SEARCH_PRODUCT_FROM_TACN) + "?taxCode=" + taxCode);
             return json;
         } catch (Exception ex) {
             LogUtil.addLog(ex);
@@ -52,7 +53,7 @@ public class MARD26Api extends BaseApi {
     ResponseJson getByCatNo(@PathVariable Long catNo) {
         ResponseJson json = new ResponseJson();
         try {
-            json = BackendRequestHelper.getInstance().doGetRequest(MARD26Constant.getInstance().getApiUrl(environment, MARD26Constant.API.GET_BY_CAT_NO)+catNo);
+            json = BackendRequestHelper.getInstance().doGetRequest(MARD26Constant.getInstance().getApiUrl(environment, MARD26Constant.TbdHoso26API.GET_BY_CAT_NO) + catNo);
             return json;
         } catch (Exception ex) {
             LogUtil.addLog(ex);
@@ -64,4 +65,23 @@ public class MARD26Api extends BaseApi {
             return json;
         }
     }
+
+    @RequestMapping(value = "/hoso/create", method = RequestMethod.POST, headers = {"content-type=application/json"})
+    public @ResponseBody
+    ResponseJson createHoso(@RequestBody TbdHoso26 tbdhoso26) {
+        ResponseJson returnJson = new ResponseJson();
+        try {
+            returnJson = BackendRequestHelper.getInstance().doPostRequest(MARD26Constant.getInstance().getApiUrl(environment, MARD26Constant.TbdHoso26API.HOSO_INSERT), tbdhoso26);
+            return returnJson;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            returnJson.setData(null);
+            returnJson.setSuccess(false);
+            returnJson.setMessage(ex.getMessage());
+            return returnJson;
+        }
+    }
+
 }

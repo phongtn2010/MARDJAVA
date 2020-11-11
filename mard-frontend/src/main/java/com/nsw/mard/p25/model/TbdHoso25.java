@@ -2,7 +2,6 @@ package com.nsw.mard.p25.model;
 
 import lombok.Data;
 
-import javax.persistence.Column;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;

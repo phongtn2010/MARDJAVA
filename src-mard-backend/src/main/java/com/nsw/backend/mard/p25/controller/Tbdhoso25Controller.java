@@ -280,7 +280,6 @@ public class Tbdhoso25Controller extends BaseController {
             profile = tbdHoso25Service.create(profile);
             historyContent = "Tạo mới hồ sơ";
         } else {
-            profile.setFiHSStatus(null);
             profile = tbdHoso25Service.update(profile);
             historyContent = "Cập nhật hồ sơ";
         }

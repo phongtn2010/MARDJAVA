@@ -16,7 +16,8 @@ import java.util.Arrays;
 public class Constant25 {
 
     public static final Long SYSTEM_ID = 25L;
-    public static final String MINISTRY_NAME = "AN";
+    public static final String MINISTRY_NAME = "BNNPTNT";
+    public static final String NSW_FILE_COE = "AN";
     public static final String MARD_PROC_CODE = "25";
 
     public static final Long ACTIVE = 1L;

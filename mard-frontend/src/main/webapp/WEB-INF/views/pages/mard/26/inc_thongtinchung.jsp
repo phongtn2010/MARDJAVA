@@ -5,7 +5,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<fieldset>
+<fieldset data-bind="with: form26VM">
     <legend><b>Thêm mới hồ sơ</b></legend>
     <div class="form-group">
         <div class="col-md-12">
@@ -31,7 +31,7 @@
                 <label>Ngày tạo</label>
             </div>
             <div class="col-md-4">
-                <input class="form-control form-control-inline date-picker" id="fiTenTt" name="fiTenTt" data-bind="" type="text"/>
+                <input  readonly="readonly" data-bind="datepicker : fiNgaytao" class="form-control form-control-inline date-picker" data-date-format="dd/mm/yyyy"  type="text" value="" maxlength="10"/>
             </div>
         </div>
     </div>

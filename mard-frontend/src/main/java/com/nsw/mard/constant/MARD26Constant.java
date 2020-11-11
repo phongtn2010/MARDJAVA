@@ -19,14 +19,14 @@ public class MARD26Constant {
     }
 
     public String getApiUrl(Environment environment, String key) {
-        return environment.getRequiredProperty(MARD26Constant.API.BACKEND) + environment.getRequiredProperty(key);
+        return environment.getRequiredProperty(MARD26Constant.TbdHoso26API.BACKEND) + environment.getRequiredProperty(key);
     }
 
     public String getBackendCommonApiUrl(Environment environment, String key) {
-        return environment.getRequiredProperty(MARD26Constant.API.BACKEND_COMMON) + environment.getRequiredProperty(key);
+        return environment.getRequiredProperty(MARD26Constant.TbdHoso26API.BACKEND_COMMON) + environment.getRequiredProperty(key);
     }
 
-    public interface API {
+    public interface TbdHoso26API {
 
         public static final String BACKEND_COMMON = "nsw.common.url";
         public static final String BACKEND = "mard.api.backend";

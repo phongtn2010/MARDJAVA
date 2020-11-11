@@ -5,7 +5,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<fieldset>
+<fieldset data-bind="with: form26VM">
     <legend><b><spring:message code="mard.hoso.thongtinkyhoso" /></b></legend>
     <div class="form-group">
         <div class="col-md-12">

@@ -24,30 +24,30 @@ public class TbdHoso26 extends CmonBaseEntity implements Serializable {
     // ENTITY PRIMARY KEY ( BASED ON A SINGLE FIELD )
     //----------------------------------------------------------------------
     @Id
-    @Column(nullable = false)
+    @Column(nullable = false,name = "FI_ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_NAME)
     @SequenceGenerator(sequenceName = SEQUENCE_NAME, schema = "MARD", initialValue = 10000, allocationSize = 1, name = SEQUENCE_NAME)
-    private Integer fiIdHS;
+    private Integer fiIdHoso;
 
     //----------------------------------------------------------------------
     // ENTITY DATA FIELDS
     //----------------------------------------------------------------------
     //Thong tin ho so
     @Column(name = "FI_HS_CODE", length = 50)
-    private String fiNSWFileCode;
+    private String fiMaHoso;
 
     @Column(name = "FI_HS_TYPE", nullable = false)
     private Integer fiHSType = 1;
 
     @Column(name = "FI_HS_STATUS")
-    private Integer fiHSStatus;
+    private Integer fiTrangthai;
 
     @Column(name = "FI_ACTIVE_STATUS")
     private boolean fiActive = true;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "FI_HS_CREATED_DATE")
-    private Date fiHSCreatedDate;
+    private Date fiNgaytao;
 
     //Các field phục vụ yêu cầu sửa.
     @Column(name = "FI_MODIFY_REASON", length = 250)
@@ -60,6 +60,8 @@ public class TbdHoso26 extends CmonBaseEntity implements Serializable {
     private Integer fiIdHSParent;
 
     //Thông tin to chuc, ca nhan
+    @Column(name = "FI_TAX_CODE", length = 25)
+    private String fiMasothue;
     @Column(name = "FI_BUS_NAME", length = 250)
     private String fiTenDn;
 

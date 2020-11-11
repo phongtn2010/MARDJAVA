@@ -6,7 +6,7 @@
 <%@include file="incLanguage.jsp"%>
 <%@include file="inc_script.jsp" %>
 
-<div class="row" id="EditVM">
+<div class="row" id="edit26Page">
     <div class="col-md-12">
         <div class="portlet light ">
             <div class="portlet-title">
@@ -29,12 +29,10 @@
 
                                     <div class="tab-pane active" id="tab_mt_1" >
                                         <form role="form" class="form-horizontal">
-                                            <!-- ko with: formVM() -->
+
                                             <%@include file="inc_thongtinchung.jsp" %>
                                             <%@include file="inc_thongtinhanghoa.jsp" %>
-<%--                                            <%@include file="inc_thongtingiamsat.jsp" %>--%>
                                             <%@include file="inc_thongtinkydon.jsp" %>
-                                            <!-- /ko -->
                                         </form>
                                     </div>
 
@@ -52,11 +50,10 @@
         </div>
     </div>
 </div>
-<%@include file="inc_script.jsp" %>      
 <script type="text/javascript" charset="UTF-8">
     var user = JSON.parse('${user}');
 </script>
 <script src="<c:url value='/app/mard/26/model.js?v=${version}'/>" type="text/javascript" charset="utf-8"></script>
-<script src="<c:url value='/app/mard/26/FormVM.js?v=${version}'/>" type="text/javascript" charset="utf-8"></script>
 <script src="<c:url value='/app/mard/26/EditVM.js?v=${version}'/>" type="text/javascript" charset="utf-8"></script>
+<script src="<c:url value='/app/mard/26/FormVM.js?v=${version}'/>" type="text/javascript" charset="utf-8"></script>
 

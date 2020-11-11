@@ -113,6 +113,9 @@ public class TbdHanghoa26 extends CmonBaseEntity implements Serializable {
     @Column(name="FI_PRO_SL")
     private String fiProductSL;
 
+    @Column(name = "FI_CER_NO")
+    private String fiSoGCN;
+
     @Column(name="FI_KQDGSPH")
     private Integer fiKqdgsph;
 

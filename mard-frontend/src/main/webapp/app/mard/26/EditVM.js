@@ -4,100 +4,27 @@
  * and open the template in the editor.
  */
 ko.validation.rules.pattern.message = 'Invalid.';
-ko.validation.init({registerExtenders: true, messagesOnModified: true, insertMessages: true, parseInputAttributes: true, messageTemplate: null}, true);
+ko.validation.init({
+    registerExtenders: true,
+    messagesOnModified: true,
+    insertMessages: true,
+    parseInputAttributes: true,
+    messageTemplate: null
+}, true);
 
 function EditVM(options) {
-    self = this;
-    self.formVM = ko.observable(new FormVM(options));
-    self.formVM().hosoErrors.showAllMessages(false);
-    self.btnLuu = ko.observable(false);
-    self.btnGui = ko.observable(false);
-
-    if (self.formVM().fiIdHoso() > 0) {
-        if (self.formVM().fiTrangthai() == TAO_MOI) {
-            self.btnLuu(true);
-        }
-    } else {
-        self.btnLuu(true);
+    var edit26VMSefl = this;
+    edit26VMSefl.form26VM = ko.observable(null);
+    edit26VMSefl.applyState =function () {
+        edit26VMSefl.form26VM(new FormVM(options));
     }
 
-    if (self.formVM().fiIdHoso() > 0) {
-        if (self.formVM().fiTrangthai() == TAO_MOI) {
-            self.btnGui(true);
-        }
-    } else {
-        self.btnGui(true);
-    }
-
-    /**
-     * Luu ho so
-     * @returns {undefined}
-     */
-    self.btnLuuClick = function () {
-        var cb = function (d) {
-            self.formVM().fiIdHoso(d.data.fiIdHoso);
-            self.formVM().fiMaHoso(d.data.fiMaHoso);
-            self.formVM().fiNguoitao(d.data.fiNguoitao);
-            self.formVM().fiTrangthai(d.data.fiTrangthai);
-            self.formVM().fiTenTt(d.data.fiTenTt);
-        };
-
-        if (!self.formVM().isValidForm()) {
-            app.Alert('Phải nhập đúng và đủ thông tin các trường dữ liệu yêu cầu (đánh dấu màu đỏ).');
-            return;
-        }
-
-        var fiIdHoso = self.formVM().fiIdHoso();
-        var data = self.formVM().toJSON();
-
-        delete data['__ko_mapping__'];
-
-        var url = !fiIdHoso || fiIdHoso <= 0 ? '/mard/12/hoso/taomoi' : '/mard/12/hoso/capnhap';
-
-        app.makePost({
-            url: url,
-            data: JSON.stringify(ko.toJS(data)),
-            success: function (d) {
-                if (d && d.success) {
-                    app.Alert('Lưu dữ liệu thành công');
-                    cb(d);
-                } else {
-                    app.Alert('Lưu dữ liệu không thành công');
-                }
-            },
-            error: function (e) {
-                app.Alert('Lưu dữ liệu không thành công');
-            }
-        });
-    };
-    /**
-     * Gui ho so
-     * @returns {undefined}
-     */
-    self.btnGuiClick = function () {
-        var cb = function (d) {
-            self.formVM().fiIdHoso(d.data.fiIdHoso);
-            self.formVM().fiMaHoso(d.data.fiMaHoso);
-            self.formVM().fiNguoitao(d.data.fiNguoitao);
-            self.formVM().fiTrangthai(d.data.fiTrangthai);
-            self.formVM().fiTenTt(d.data.fiTenTt);
-            self.btnLuu(false);
-            self.btnGui(false);
-        };
-
-        if (!self.formVM().isValidForm()) {
-            app.Alert('Phải nhập đúng và đủ thông tin các trường dữ liệu yêu cầu (đánh dấu màu đỏ).');
-            return;
-        }
-
-        var fiIdHoso = self.formVM().fiIdHoso();
-        var data = self.formVM().toJSON();
-
-        //console.log(data);
-
-        self.pop = app.popup({
+    edit26VMSefl.btnLuuClick= function () {
+        var body = edit26VMSefl.form26VM().getData();
+        console.log(body);
+        edit26VMSefl.pop = app.popup({
             title: 'Thông báo',
-            html: '<b>Bạn chắc chắn muốn gửi hồ sơ?</b>',
+            html: '<b>Bạn chắc chắn muốn lưu hồ sơ?</b>',
             width: 450,
             buttons: [
                 {
@@ -105,20 +32,29 @@ function EditVM(options) {
                     class: 'btn',
                     icon: 'fa-save',
                     action: function () {
-                        app.popupRemove(self.pop.selector);
+                        app.popupRemove(edit26VMSefl.pop.selector);
                         app.makePost({
-                            url: '/mard/12/hoso/send',
-                            data: JSON.stringify(data),
+                            url: '/mard/26/hoso/create',
+                            data: JSON.stringify(body),
                             success: function (d) {
                                 if (d && d.success) {
-                                    app.Alert('Gửi hồ sơ thành công');
-                                    cb(d);
+                                    app.Alert('Lưu hồ sơ thành công');
+                                    window.location.href = app.appContext + '/mard/26/';
                                 } else {
-                                    app.Alert('Không gửi được hồ sơ');
+                                    app.Alert(d.message);
                                 }
                             },
                             error: function (e) {
-                                app.Alert('Không gửi được hồ sơ');
+                                if(e.hasOwnProperty('message')) {
+                                    app.Alert(e.message);
+                                } else {
+                                    if (e.status === 403 || (e.hasOwnProperty('responseText') && e.responseText.includes('<meta charset="utf-8" />'))) {
+                                        app.Alert('Phiên làm việc hết hạn, vui lòng đăng nhập lại!');
+                                    } else {
+                                        app.Alert('Không lưu được hồ sơ');
+                                    }
+
+                                }
                             }
                         });
                     }
@@ -128,62 +64,36 @@ function EditVM(options) {
                     class: 'btn',
                     icon: 'fa-close',
                     action: function () {
-                        app.popupRemove(self.pop.selector);
+                        app.popupRemove(edit26VMSefl.pop.selector);
                     }
                 }
             ]
         });
-    };
-    /**
-     * Tro lai man hinh danh sach
-     * @returns {undefined}
-     */
-    self.btnTroLaiClick = function () {
-        History.go(-1);
-    };
+    }
+    edit26VMSefl.btnGuiClick =function () {
+
+    }
+    edit26VMSefl.btnTroLaiClick= function () {
+        document.location = app.appContext + '/mard/26/home';
+        return false;
+    }
 }
-
+function init(data) {
+    var edit26VM = new EditVM(data);
+    ko.applyBindings(edit26VM, document.getElementById('edit26Page'));
+    edit26VM.applyState(data);
+}
 $(document).ready(function () {
-
-    var options = app.parseQuerystring();
-    $('#loading10').show();
+    var options={};
     $.when(
-            app.sendGetRequest('/mard/26/hanghoa/getlist?taxCode='+hosoUsername, function (res) {
-                options.lstHanghoas=res.data;
-            }),
-            app.getCategory('/mard/12/danhmuc', 'HS_CQGS_PHIANAM', 1, function (res) {
-                if (res.success) {
-                    options.lstCqgsNam = res.data;
-                } else {
-                    options.lstCqgsNam = [];
-                }
-            })
-            ).done(function (data) {
-        init();
-        $('#loading10').hide();
+        app.sendGetRequest('/mard/26/danhmuc/getby-catno/1', function (res) {
+            if (res.success) {
+                options.fiTrangthaiList = res.data;
+            }
+        })
+    ).done(function (data) {
+        init(options);
     });
 
-    var init = function () {
-        if (options && options.fiIdHoso > 0) {
-            var url = '/mard/12/hoso/t/' + options.fiIdHoso;
-            app.makePost({
-                url: url,
-                data: JSON.stringify({}),
-                success: function (d) {
-                    if (d.success) {
-                        options.hoso = d.data;
-                        var editVM = new EditVM(options);
-                        ko.applyBindings(editVM, document.getElementById('EditVM'));
-                    }
-                },
-                error: function (e) {
-                    app.Alert('Không lấy được dữ liệu hồ sơ');
-                }
-            });
-        } else {
-            var editVM = new EditVM(options);
-            ko.applyBindings(editVM, document.getElementById('EditVM'));
-        }
-    };
 });
 

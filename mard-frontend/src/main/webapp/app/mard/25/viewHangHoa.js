@@ -382,7 +382,6 @@ function init(options) {
     var mard25ViewHangHoaVM = new Mard25ViewHangHoaVM(options);
     options["fiTrangThaiHangHoa"]="0";
     ko.applyBindings(mard25ViewHangHoaVM, document.getElementById('mardHangHoa25'));
-
 }
 $(document).ready(function () {
     var options = {};

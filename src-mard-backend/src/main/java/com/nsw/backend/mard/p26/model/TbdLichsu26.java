@@ -26,7 +26,7 @@ public class TbdLichsu26 extends CmonBaseEntity implements Serializable {
     // ENTITY PRIMARY KEY ( BASED ON A SINGLE FIELD )
     //----------------------------------------------------------------------
     @Id
-    @Column(nullable = false)
+    @Column(nullable = false,name = "FI_ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_NAME)
     @SequenceGenerator(sequenceName = SEQUENCE_NAME, schema = "MARD", initialValue = 10000, allocationSize = 1, name = SEQUENCE_NAME)
     private Integer fiIdHst;

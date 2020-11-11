@@ -254,8 +254,8 @@ public class Tbdhoso25ServiceImpl implements TbdHoso25Service {
 
     private String generateMaHoso(long id) {
         //HSCode Pattern: {Ministry's name}{Year[4]}{ID of HS[7]}
-        return String.format("%s%s%02d%07d",
-                Constant25.MINISTRY_NAME,
+        return String.format("%s%04d%07d",
+                Constant25.NSW_FILE_COE,
                 Calendar.getInstance().get(Calendar.YEAR),
                 id);
     }
