@@ -26,7 +26,7 @@ public class SendMessage {
     public static SendMessage parse(TbdHoso26 regProfile){
         SendMessage message = new SendMessage();
         message.setFiNguoitao(regProfile.getFiCreatedBy());
-        message.setFiIdHoso(regProfile.getFiIdHoso().longValue());
+        message.setFiIdHoso(regProfile.getFiIdHS().longValue());
         message.setFiMaHoso(regProfile.getFiMaHoso());
         message.setFiMaHoso(regProfile.getFiMaHoso());
         return message;

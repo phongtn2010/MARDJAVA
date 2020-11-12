@@ -74,7 +74,6 @@ function HistoryPopupView() {
             url: '/mard/25/lichsu?fiHSCode=' + self.mahoso + '&p=' + pageable.number + '&s=5',
             success: function(res) {
                 $("#loading10").hide();
-                console.log(res);
                 self.historyPageingVM.totalCount(res.total);
                 self.historyItems(ko.utils.arrayMap(res.data, function (item) {
                     var itemVM = {};

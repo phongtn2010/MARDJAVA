@@ -38,19 +38,74 @@ function IndexVM(data) {
     index26Self.maSoThue = ko.observable(null);
 
     index26Self.Items = ko.observableArray([]);
-    index26Self.totalCount = ko.observable(0);
-    index26Self.pageSize = ko.observable(MAX_PAGE_SIZE);
-    index26Self.paging = ko.observable(new PagingVM({
-        pageSize: index26Self.pageSize(),
-        totalCount: 0
-    }));
-
+    index26Self.size = ko.observable(MAX_PAGE_SIZE);
     index26Self.searchFieldEnter = function(){
 
-    }
-    index26Self.searchHoSoClick = function () {
-        index26Self.search(0, true);
     };
+    index26Self.sortBy = ko.observable("fiMaHoso");
+    index26Self.order = ko.observable("desc");
+    index26Self.pagination = ko.observable(new PagingVM({
+        pageSize: MAX_PAGE_SIZE,
+        totalCount: 0,
+        currentPage: 1
+    }));
+
+    index26Self.currentPage = ko.observable(1);
+
+    index26Self.pagination().currentPage.subscribe(function (newCurrentPage) {
+        index26Self.currentPage(newCurrentPage);
+        index26Self.searchHoso(newCurrentPage);
+    })
+    index26Self.searchHoSoClick = function () {
+        index26Self.searchHoso(0, true);
+    };
+    index26Self.searchHoso = function (page) {
+        var filter = {
+            maHoSo: index26Self.maHoSo(),
+            ngayTaoTuNgay: index26Self.ngayTaoTuNgay(),
+            ngayTaoDenNgay: index26Self.ngayTaoDenNgay(),
+            soCongVan: index26Self.soCongVan(),
+            ngayCapTuNgay: index26Self.ngayCapTuNgay(),
+            ngayCapDenNgay: index26Self.ngayCapDenNgay(),
+            trangThaiHoSo:index26Self.trangThaiHoSo(),
+            page: page,
+            size: index26Self.size(),
+            sortBy: index26Self.sortBy(),
+            order: index26Self.order()
+        }
+        $.ajax({
+            async: true,
+            type: 'POST',
+            cache: false,
+            crossDomain: true,
+            url: app.appContext + "/mard/26/hoso/timkiem",
+            data: JSON.stringify(filter),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(CSRF_TOKEN_NAME, CSRF_TOKEN_VALUE);
+                $('#loading08').show();
+            },
+            success: function (res) {
+                if (res.success) {
+                    console.log(res);
+                    var list = res.data ? res.data.data : [];
+                    index26Self.Items(list);
+                    index26Self.pagination().update({
+                        totalCount: res.data.total,
+                        pageSize: MAX_PAGE_SIZE,
+                        currentPage: page
+                    })
+                }
+            },
+            error: function (err) {
+            },
+            complete: function (jqXHR, textStatus) {
+                $('#loading08').hide();
+                window.stateChanging = false;
+            }
+        });
+    }
     index26Self.btnAddNewClick = function (e) {
         document.location = app.appContext + '/mard/26/edit';
         return false;
@@ -60,6 +115,7 @@ function init(data) {
     var index26VM = new IndexVM(data);
     ko.applyBindings(index26VM, document.getElementById('index26Page'));
     // index26VM.applyState(options);
+    index26VM.searchHoso(1);
 }
 $(document).ready(function () {
     var options = {};
@@ -71,6 +127,5 @@ $(document).ready(function () {
     })).done(function (data) {
         init(options);
     });
-
 
 });

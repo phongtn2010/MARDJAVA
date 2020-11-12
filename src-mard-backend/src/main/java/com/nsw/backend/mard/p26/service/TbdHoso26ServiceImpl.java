@@ -1,6 +1,8 @@
 package com.nsw.backend.mard.p26.service;
 
 import com.nsw.backend.mard.p26.constant.Constant26;
+import com.nsw.backend.mard.p26.model.FilterForm;
+import com.nsw.backend.mard.p26.model.FilterResult;
 import com.nsw.backend.mard.p26.model.TbdHoso26;
 import com.nsw.backend.mard.p26.repositories.TbdHoso26Repository;
 import org.apache.commons.lang3.StringUtils;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
+import java.util.List;
 
 @Service
 @Transactional
@@ -32,11 +35,16 @@ public class TbdHoso26ServiceImpl implements TbdHoso26Service{
 
     @Override
     public TbdHoso26 create(TbdHoso26 tbdHoso26) {
-        tbdHoso26 = repository.save(tbdHoso26);
+        TbdHoso26 entity = repository.save(tbdHoso26);
         if (StringUtils.isEmpty(tbdHoso26.getFiMaHoso())) {
-            tbdHoso26.setFiMaHoso(generateMaHoso(tbdHoso26.getFiIdHoso()));
+            entity.setFiMaHoso(generateMaHoso(entity.getFiIdHS()));
         }
-        repository.save(tbdHoso26);
-        return tbdHoso26;
+
+        return repository.save(entity);
+    }
+
+    @Override
+    public FilterResult searchHoso(FilterForm filterForm) {
+        return repository.searchHoso(filterForm);
     }
 }

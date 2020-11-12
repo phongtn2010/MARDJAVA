@@ -107,13 +107,7 @@ public class RegistrationProfile implements Serializable {
         dto.clrLst();
         dto.setFiProductType(regProfile.getFiHSType());
 
-        regProfile.getFiProductList().forEach(product -> {
-            RegistrationProduct dtoProduct = new RegistrationProduct();
-            BeanUtils.copyProperties(product, dtoProduct);
-//            dtoProduct.setFiOriginCountryName(CmonHelper.instance().findCountryByCode(product.getFiOriginCountryCode()).getCountryname());
-//            dtoProduct.setFiPackageUnitName(CmonHelper.instance().findUomByCode(product.getFiPackageUnitCode()).getUnitname());
-            dto.getFiProductList().add(dtoProduct);
-        });
+
         return dto;
     }
 

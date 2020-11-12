@@ -215,7 +215,7 @@
                                 </div>
                             </td>
                             <td class="text-center">
-                                <div data-bind="visible: fiHSStatus == 0 ||fiHSStatus == 1 || fiHSStatus == 2 ||fiHSStatus == 3 || fiHSStatus == 4">
+                                <div data-bind="visible: fiHSStatus == 0 ||fiHSStatus == 1 || fiHSStatus == 2 ||fiHSStatus == 3 || fiHSStatus == 4 || fiHSStatus==9|| fiHSStatus==15">
                                     <a href="javascript:void(0)" data-bind="click: $root.goEditHoSo"><i
                                             class="fa fa-edit" src="" alt=""></i></a>
                                 </div>

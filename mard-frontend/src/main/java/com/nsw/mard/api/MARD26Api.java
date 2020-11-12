@@ -12,6 +12,7 @@ import com.nsw.helper.BackendRequestHelper;
 import com.nsw.helper.FileServiceHelper;
 import com.nsw.helper.RabbitMQErrorHelper;
 import com.nsw.mard.constant.MARD26Constant;
+import com.nsw.mard.p26.model.FilterForm;
 import com.nsw.mard.p26.model.TbdHoso26;
 import com.nsw.util.LogUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,4 +85,13 @@ public class MARD26Api extends BaseApi {
         }
     }
 
+    @RequestMapping(value = "/hoso/timkiem", method = RequestMethod.POST, headers = {"content-type=application/json"})
+    public @ResponseBody
+    ResponseJson searchHoso(
+            @RequestBody FilterForm filter
+    ) {
+        filter.setNguoiTao(getUsername());
+        ResponseJson json = BackendRequestHelper.getInstance().doPostRequest(MARD26Constant.getInstance().getApiUrl(environment, MARD26Constant.TbdHoso26API.HOSO_SEARCH), filter);
+        return json;
+    }
 }

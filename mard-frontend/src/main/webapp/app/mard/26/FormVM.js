@@ -123,6 +123,20 @@ function FormVM(options) {
                     ko.utils.arrayForEach(res.data, function(product) {
                         product.isSelected = ko.observable(true);
                         product.label = ko.observable('Chọn');
+                        product.fiIdHS = ko.observable(null);
+                        product.fiIdProduct = ko.observable(null);
+                        ko.utils.arrayForEach(product.fiProCLList, function(cl) {
+                            cl.fiIdProCL=ko.observable(null);
+                            cl.fiIdProduct=ko.observable(null);
+                        });
+                        ko.utils.arrayForEach(product.fiProATList, function(at) {
+                            at.fiIdProAT=ko.observable(null);
+                            at.fiIdProduct=ko.observable(null);
+                        });
+                        ko.utils.arrayForEach(product.fiProSLKLList, function(at) {
+                            at.fiIdProSLKL=ko.observable(null);
+                            at.fiIdProduct=ko.observable(null);
+                        });
                     });
                     form26Sefl.hangHoa26VM().lstProductList(res.data);
                 }

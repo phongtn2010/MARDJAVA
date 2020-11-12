@@ -24,10 +24,10 @@ public class TbdHoso26 extends CmonBaseEntity implements Serializable {
     // ENTITY PRIMARY KEY ( BASED ON A SINGLE FIELD )
     //----------------------------------------------------------------------
     @Id
-    @Column(nullable = false,name = "FI_ID")
+    @Column(nullable = false,name = "FI_HS_ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_NAME)
     @SequenceGenerator(sequenceName = SEQUENCE_NAME, schema = "MARD", initialValue = 10000, allocationSize = 1, name = SEQUENCE_NAME)
-    private Integer fiIdHoso;
+    private Integer fiIdHS;
 
     //----------------------------------------------------------------------
     // ENTITY DATA FIELDS
@@ -93,6 +93,13 @@ public class TbdHoso26 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_NGAYKY")
     private Date fiNgayKy;
 
+    @Column(name = "FI_CONGVAN_MK", length = 250)
+    private String fiSoCVMienKiem;
+
+    @Column(name = "FI_NUOCSX", length = 250)
+    private String fiNuocSX;
+    @Column(name = "FI_HANGSX", length = 250)
+    private String fiHangSX;
     //Danh sách thông tin kèm theo
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "FI_HS_ID")

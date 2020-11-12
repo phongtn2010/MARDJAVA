@@ -145,14 +145,14 @@
                         </div>
                         <div class="row">
                             <div class="col col-md-6">
-                                <spring:message code="common.tong"/> <b><a id="lbTotalRecords"
-                                                                           data-bind="text: totalCount"
-                                                                           href="javascript:void(0);"></a>
-                            </b><spring:message code="common.pager.ban_ghi"/>
+                                <!-- ko with: pagination -->
+                                <spring:message code="common.tong"/> <b data-bind="text: totalCount()"></b> <spring:message
+                                    code="common.pager.ban_ghi"/>
+                                <!-- /ko -->
                             </div>
                             <div class="col col-md-6 nsw-text-right">
-                                <div id="list-pager" class="nsw-flr">
-                                    <!-- ko with:paging()-->
+                                <div class="nsw-flr">
+                                    <!-- ko with: pagination -->
                                     <ul data-bind="visible: true" class="flip pull-left pagination pagination-sm">
                                         <li data-bind="css: { disabled: !firstPageActive() }">
                                             <a data-bind="click: goToFirst">Trang đầu</a>
@@ -184,13 +184,13 @@
                                         code="mard.danhsach.stt"/></th>
                                 <th class="text-center" style="width: 100px;"><spring:message
                                         code="mard.danhsach.lichsuxuly"/></th>
+                                <th class="text-center" style="width: 100px;">Sao chép hồ sơ</th>
                                 <th class="text-center" style="width: 100px;"><spring:message
                                         code="mard.danhsach.mahoso"/></th>
-                                <th class="text-center" style="width: 100px;"><spring:message
-                                        code="mard.danhsach.ngaygui"/></th>
+                                <th class="text-center" style="width: 100px;">Ngày tạo</th>
                                 <th class="text-center" style="width: 100px;"><spring:message
                                         code="mard.danhsach.ngaycapphep"/></th>
-                                <th class="text-center"><spring:message code="mard.danhsach.tenhanghoa"/></th>
+                                <th class="text-center">Tên Doanh nghiệp</th>
                                 <th class="text-center"><spring:message code="mard.danhsach.trangthai"/></th>
                                 <th class="text-center" style="width: 25px;"><spring:message
                                         code="mard.danhsach.sua"/></th>
@@ -204,41 +204,46 @@
                             </tbody>
                             <script id="itemTmpl" type="text/html">
                                 <tr>
-                                    <td data-bind="text : STT">
+                                    <td data-bind="text: $index()+1">
                                     </td>
                                     <td class="text-center">
                                         <a href="javascript:void(0)"><i class="fa fa-history"
-                                                                        data-bind="visible: true, click: $parent.bXemLichSuClick.bind($parent)"
+                                                                        data-bind=""
+                                                                        src="" alt=""/></a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="javascript:void(0)"><i class="fa fa-copy"
+                                                                        data-bind=""
                                                                         src="" alt=""/></a>
                                     </td>
                                     <td class="text-center">
                                         <a href="javascript:void(0)"
-                                           data-bind="text : fiMaHoso, click: $parent.bXemClick.bind($parent)"></a>
+                                           data-bind="text : fiMaHoso"></a>
                                     </td>
-                                    <td class="text-center" data-bind="text : fiNgayguiText"></td>
-                                    <td class="text-center" data-bind="text : fiNgaycapCvText"></td>
+                                    <td class="text-center" data-bind=""></td>
+                                    <td class="text-center" data-bind=""></td>
                                     <td data-bind="text: fiTenHanghoa"></td>
                                     <td>
                                         <a href="javascript:void(0)"
-                                           data-bind="text : fiTenTt, event : {click : $parent.fiTrangThaiClick.bind($parent)}"></a>
+                                           data-bind=""></a>
                                     </td>
                                     <td class="text-center">
                                         <a href="javascript:void(0)"><i class="fa fa-lg fa-edit tooltips"
                                                                         data-original-title="Sửa hồ sơ"
-                                                                        data-bind="visible: bSuaHoSo, click: $parent.bSuaClick.bind($parent)"
+                                                                        data-bind=""
                                                                         src="" alt=""/></a>
                                     </td>
                                     <td class="text-center">
                                         <a href="javascript:void(0)"><i class="fa fa-lg fa-search tooltips"
                                                                         data-original-title="Xem thông báo"
-                                                                        data-bind="visible: bXemThongBao, click: $parent.bXemThongBaoClick.bind($parent)"
+                                                                        data-bind=""
                                                                         src="" alt=""/></a>
                                     </td>
                                     <td class="text-center">
                                         <a href="javascript:void(0)"><i class="fa fa-lg fa-close tooltips"
                                                                         style="color:red"
                                                                         data-original-title="Xoá hồ sơ"
-                                                                        data-bind="visible: bXoaHoSo, click: $parent.bXoaClick.bind($parent)"
+                                                                        data-bind=""
                                                                         src="" alt=""/></a>
                                     </td>
                                 </tr>
@@ -246,10 +251,14 @@
                         </table>
                         <div class="row">
                             <div class="col col-md-6">
+                                <!-- ko with: pagination -->
+                                <spring:message code="common.tong"/> <b data-bind="text: totalCount()"></b> <spring:message
+                                    code="common.pager.ban_ghi"/>
+                                <!-- /ko -->
                             </div>
                             <div class="col col-md-6 nsw-text-right">
-                                <div id="list-pager" class="nsw-flr">
-                                    <!-- ko with:paging()-->
+                                <div class="nsw-flr">
+                                    <!-- ko with: pagination -->
                                     <ul data-bind="visible: true" class="flip pull-left pagination pagination-sm">
                                         <li data-bind="css: { disabled: !firstPageActive() }">
                                             <a data-bind="click: goToFirst">Trang đầu</a>
@@ -303,13 +312,14 @@
                 <p><spring:message code="common.history.mahoso"/> <b data-bind="text: fiMaHoso"></b></p>
                 <div class="row">
                     <div class="col col-md-6">
-                        <spring:message code="common.tong"/> <b><a id="lbTotalRecords" data-bind="text: totalCount"
-                                                                   href="javascript:void(0);"></a> </b><spring:message
+                        <!-- ko with: pagination -->
+                        <spring:message code="common.tong"/> <b data-bind="text: totalCount()"></b> <spring:message
                             code="common.pager.ban_ghi"/>
+                        <!-- /ko -->
                     </div>
                     <div class="col col-md-6 nsw-text-right">
                         <div class="nsw-flr">
-                            <!-- ko with:paging()-->
+                            <!-- ko with: pagination -->
                             <ul data-bind="visible: true" class="flip pull-left pagination pagination-sm">
                                 <li data-bind="css: { disabled: !firstPageActive() }">
                                     <a data-bind="click: goToFirst">Trang đầu</a>
@@ -348,7 +358,7 @@
                     </tbody>
                     <script id="historyItemTmpl" type="text/html">
                         <tr>
-                            <td data-bind="text : STT"></td>
+                            <td data-bind="text : $index()+1"></td>
                             <td class="text-left" data-bind="text : fiTenNggui"></td>
                             <td class="text-left" data-bind="text : fiTenDvgui"></td>
                             <td class="text-left" data-bind="text : fiNoidung"></td>

@@ -28,12 +28,11 @@ function Mard25EditVM () {
                 }
             }
             for (var i =0;i<options.fiAttachmentList.length;i++){
-                options.fiAttachmentList[i].fiFileHD=null;
+
                 options.fiAttachmentList[i].fiIdHS=null;
                 options.fiAttachmentList[i].fiIdDinhkem=null;
             }
         }
-        console.log(options);
         editVMSefl.kdnkVM(new HangHoaNhapKhauVM(options));
     }
     editVMSefl.saveRegProfile = function () {

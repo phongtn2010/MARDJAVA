@@ -73,7 +73,6 @@ function Mard25ViewHangHoaVM (options) {
             sortBy: self.sortBy(),
             order: self.order()
         }
-        console.log(filter);
         $.ajax({
             async: true,
             type: 'POST',
@@ -143,7 +142,6 @@ function Mard25ViewHangHoaVM (options) {
                         fiTenLoai:'Phiếu kết quả phân tích',
                         fiTenFile:fiFileName
                     };
-                    console.log(item);
                     self.lstKetQuaPhanTich.push(item);
                 }else{
                     self.errorMsg('Có lỗi tải file lên');
@@ -159,11 +157,9 @@ function Mard25ViewHangHoaVM (options) {
             self.lstFileGCN(res.data);
             self.fiMaCqkt(self.lstFileGCN.fiMaCqkt);
             self.fiLoaiDanhGia(self.lstFileGCN.fiLoaiDanhgia);
-            console.log(self.lstFileGCN());
         });
         self.getFileKQPT(index.fiIdProduct,function (res) {
             self.lstFilePT(res.data);
-            console.log(self.lstFilePT())
         });
         self.fiProName(index.fiProName);
         $("#modal_view").show();
@@ -178,7 +174,6 @@ function Mard25ViewHangHoaVM (options) {
     }
     self.thongBaoKQVM = ko.observable(new ThongBaoKQVM());
     self.xemThongBao = function(data,type,index){
-        console.log(index);
         self.thongBaoKQVM().listHangHoa(index);
         self.thongBaoKQVM().thoiGianNhap("Từ ngày: "+  new Date(self.fiHS().fiPurchFromDate).toShortDateString() + " tới ngày " + new Date(self.fiHS().fiPurchToDate).toShortDateString());
 
@@ -187,7 +182,6 @@ function Mard25ViewHangHoaVM (options) {
         self.thongBaoKQVM().quyChuanKT(index.fiProQuyChuan);
         self.thongBaoKQVM().tieuChuanApDung(index.fiProSoHieu);
         self.thongBaoKQVM().giayCN(index.fiSoGCN);
-        console.log(self.fiHS());
             $("#mard25KQKT").show();
     }
 
@@ -208,7 +202,6 @@ function Mard25ViewHangHoaVM (options) {
                     self.fiFileGCNLink(d.data.urlFile);
                     self.fiFileGCNId(d.data.itemId);
                     self.fiFileGCNName(files[0].name);
-                    console.log(d);
                 }else{
                     self.errorMsg('Có lỗi tải file lên');
                 }
@@ -233,7 +226,6 @@ function Mard25ViewHangHoaVM (options) {
         //     return;
         // }
         var jsonData=self.getBodyGuiKQ();
-        console.log(jsonData);
         self.pop = app.popup({
             title: 'Thông báo',
             html: '<b>Bạn chắc chắn muốn gửi?</b>',
@@ -260,7 +252,6 @@ function Mard25ViewHangHoaVM (options) {
                                 }
                             },
                             error: function (e) {
-                                console.log(e);
                                 app.Alert('Không gửi được yêu cầu');
                             }
                         });

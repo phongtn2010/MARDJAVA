@@ -54,7 +54,6 @@ function Mard25VM() {
         self.searchHoso(newCurrentPage);
     })
     self.getTenNhom = function (idNhom) {
-        // console.log(idNhom);
         var lstNhomHangHoa = self.lstNhom();
         var pos = lstNhomHangHoa.find(function (e) {
             return e.fiCatType == Number(idNhom);
@@ -202,7 +201,6 @@ function Mard25VM() {
             sortBy: self.sortBy(),
             order: self.order()
         }
-        console.log(filter);
         $.ajax({
             async: true,
             type: 'POST',
@@ -245,7 +243,6 @@ function Mard25VM() {
         item.lstHoaDon = ko.observableArray([]);
         item.lstPhieu = ko.observableArray([]);
         if(item.fiAttachmentList.length>0) {
-            console.log(item.fiAttachmentList);
             item.lstHD=ko.computed(function () {
                 return ko.utils.arrayFilter(item.fiAttachmentList, function (re) {
                     return re.fiFileTypeID == '1';
@@ -278,8 +275,6 @@ function Mard25VM() {
     }
     self.viewHoSo = function(item) {
 
-        console.log("10");
-        var value = self.setValueForIndexPage(item);
         self.selectedHoSo(value);
         $('#mard25ViewHSModal').modal('show');
     }
@@ -296,7 +291,6 @@ function Mard25VM() {
     }
 
     self.deleteHoso = function (item) {
-        console.log(item);
         // return;
         self.pop = app.popup({
             title: 'Thông báo',
@@ -364,7 +358,6 @@ function Mard25VM() {
             fiIdHS: self.xinRutHoSoVM().fiIdHS(),
             fiSigner: self.xinRutHoSoVM().fiSigner()
         };
-        console.log(body);
         self.pop = app.popup({
             title: 'Thông báo',
             html: '<b>Bạn chắc chắn muốn gửi yêu cầu xin rút?</b>',
@@ -440,15 +433,12 @@ function Mard25VM() {
     };
 
     self.chuyenTCCD = function (data,type,index) {
-        console.log("vao ham");
         var value = self.setValueForIndexPage(index);
         self.selectedHoSo(value);
-        console.log()
         app.makeGet({
             url: '/mard/25/chitieu/'+index.fiNSWFileCode,
             success: function(res) {
                 self.filstChiTieu(res.data);
-                console.log(res);
             },
             error: function (d) {
 
