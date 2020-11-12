@@ -1549,4 +1549,8 @@
         <put-attribute name="body" value="/WEB-INF/views/pages/mard/26/view.jsp" />
     </definition>
     <!--END THU TUC 26-->
+    <definition name="mard.cssx.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/cssx.jsp" />
+    </definition>
 </tiles-definitions>

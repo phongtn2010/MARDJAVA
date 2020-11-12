@@ -143,6 +143,7 @@ function Mard25ViewHangHoaVM (options) {
                         fiTenLoai:'Phiếu kết quả phân tích',
                         fiTenFile:fiFileName
                     };
+                    console.log(item);
                     self.lstKetQuaPhanTich.push(item);
                 }else{
                     self.errorMsg('Có lỗi tải file lên');
@@ -207,6 +208,7 @@ function Mard25ViewHangHoaVM (options) {
                     self.fiFileGCNLink(d.data.urlFile);
                     self.fiFileGCNId(d.data.itemId);
                     self.fiFileGCNName(files[0].name);
+                    console.log(d);
                 }else{
                     self.errorMsg('Có lỗi tải file lên');
                 }

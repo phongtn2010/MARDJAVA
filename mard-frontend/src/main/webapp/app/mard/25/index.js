@@ -288,56 +288,7 @@ function Mard25VM() {
         return false;
     };
 
-    self.viewGiayPhep = function(item) {
-        var code = item.fiNSWFileCode;
-        $.ajax({
-            async: true,
-            type: 'GET',
-            cache: false,
-            crossDomain: true,
-            url: app.appContext + "/mard/06/giayphep/view?code=" + code + "&type=all",
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader(CSRF_TOKEN_NAME, CSRF_TOKEN_VALUE);
-                $('#loading08').show();
-            },
-            success: function (res) {
-                $('#loading08').hide();
-                if (res.success) {
-                    self.giayPhepVM().update({
-                        vsty: res.data.vsty,
-                        cnkd: res.data.cnkd
-                    })
-                    if (res.data.vsty && res.data.cnkd) {
-                        $("#title_tab_vsty").show();
-                        $("#title_tab_kdnk").show();
-                        $("#title_tab_vsty").removeClass('active');
-                        $("#title_tab_vsty").addClass('active');
-                        $("#title_tab_kdnk").removeClass('active');
-                    } else if (res.data.vsty && !res.data.cnkd) {
-                        $("#title_tab_vsty").show();
-                        $("#title_tab_kdnk").hide();
-                        $("#tab_vsty").show();
-                        $("#tab_cnkd").hide();
-                        $("#title_tab_vsty").removeClass('active');
-                        $("#title_tab_vsty").addClass('active');
-                    } else if (!res.data.vsty && res.data.cnkd) {
-                        $("#title_tab_kdnk").show();
-                        $("#title_tab_vsty").hide();
-                        $("#tab_vsty").hide();
-                        $("#tab_cnkd").show();
-                        $("#title_tab_kdnk").removeClass('active');
-                        $("#title_tab_kdnk").addClass('active');
-                    }
-                    $('#modal_viewGiayPhep').modal('show');
-                }
-            },
-            error: function (err) {
-            },
-            complete: function (jqXHR, textStatus) {
-                $('#loading08').hide();
-            }
-        });
-    }
+
 
     self.viewHangHoaStatus = function(item) {
         window.location.href= app.appContext + "/mard/25/hanghoa/" + item.fiIdHS;
@@ -481,15 +432,7 @@ function Mard25VM() {
         $('#modal_xin_rut').modal('show');
     }
 
-    self.goYCSHoSo = function(item) {
-        window.location.href= app.appContext + "/mard/06/ycs/" + item.fiIdHS;
-        return true;
-    }
 
-    self.goViewHoSo = function(item) {
-        window.location.href= app.appContext + "/mard/06/view/" + item.fiIdHS;
-        return true;
-    }
 
     self.viewLichSu = function (item, e) {
         self.lichsuXuly().show(item.fiNSWFileCode)
