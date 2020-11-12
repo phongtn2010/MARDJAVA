@@ -1,10 +1,46 @@
-REM INSERTING into TBSTRANGTHAI2
-SET DEFINE OFF;
-Insert into TBSTRANGTHAI2 (PK_IDTRANGTHAI,FI_IDTRANGTHAI,FI_TENTRANGTHAI) values (1,0,'Mới tạo');
-Insert into TBSTRANGTHAI2 (PK_IDTRANGTHAI,FI_IDTRANGTHAI,FI_TENTRANGTHAI) values (2,1,'Chờ tiếp nhận');
-Insert into TBSTRANGTHAI2 (PK_IDTRANGTHAI,FI_IDTRANGTHAI,FI_TENTRANGTHAI) values (3,2,'Đã sửa đổi, bổ sung');
-Insert into TBSTRANGTHAI2 (PK_IDTRANGTHAI,FI_IDTRANGTHAI,FI_TENTRANGTHAI) values (4,3,'Yêu cầu sửa đổi, bổ sung hồ sơ');
-Insert into TBSTRANGTHAI2 (PK_IDTRANGTHAI,FI_IDTRANGTHAI,FI_TENTRANGTHAI) values (5,4,'Từ chối hồ sơ');
-Insert into TBSTRANGTHAI2 (PK_IDTRANGTHAI,FI_IDTRANGTHAI,FI_TENTRANGTHAI) values (6,5,'Đã tiếp nhận');
-Insert into TBSTRANGTHAI2 (PK_IDTRANGTHAI,FI_IDTRANGTHAI,FI_TENTRANGTHAI) values (7,6,'Đã cấp phép');
-Insert into TBSTRANGTHAI2 (PK_IDTRANGTHAI,FI_IDTRANGTHAI,FI_TENTRANGTHAI) values (8,7,'Từ chối cấp phép');
+Insert into TBSTRANGTHAI2 (FI_ID_TRANGTHAI,FI_TEN_TRANGTHAI) values (0,'Mới tạo');
+Insert into TBSTRANGTHAI2 (FI_ID_TRANGTHAI,FI_TEN_TRANGTHAI) values (1,'Chờ tiếp nhận');
+Insert into TBSTRANGTHAI2 (FI_ID_TRANGTHAI,FI_TEN_TRANGTHAI) values (2,'Đã sửa đổi, bổ sung');
+Insert into TBSTRANGTHAI2 (FI_ID_TRANGTHAI,FI_TEN_TRANGTHAI) values (3,'Yêu cầu sửa đổi, bổ sung hồ sơ');
+Insert into TBSTRANGTHAI2 (FI_ID_TRANGTHAI,FI_TEN_TRANGTHAI) values (4,'Từ chối hồ sơ');
+Insert into TBSTRANGTHAI2 (FI_ID_TRANGTHAI,FI_TEN_TRANGTHAI) values (5,'Đã tiếp nhận');
+Insert into TBSTRANGTHAI2 (FI_ID_TRANGTHAI,FI_TEN_TRANGTHAI) values (6,'Đã cấp phép');
+Insert into TBSTRANGTHAI2 (FI_ID_TRANGTHAI,FI_TEN_TRANGTHAI) values (7,'Từ chối cấp phép');
+
+Insert into TBSDANHMUCVANG2 (FI_ID_DANHMUCVANG,FI_TEN_DANHMUCVANG) values (0,'1K');
+Insert into TBSDANHMUCVANG2 (FI_ID_DANHMUCVANG,FI_TEN_DANHMUCVANG) values (1,'2K');
+Insert into TBSDANHMUCVANG2 (FI_ID_DANHMUCVANG,FI_TEN_DANHMUCVANG) values (2,'3K');
+Insert into TBSDANHMUCVANG2 (FI_ID_DANHMUCVANG,FI_TEN_DANHMUCVANG) values (3,'4K');
+Insert into TBSDANHMUCVANG2 (FI_ID_DANHMUCVANG,FI_TEN_DANHMUCVANG) values (4,'5K');
+Insert into TBSDANHMUCVANG2 (FI_ID_DANHMUCVANG,FI_TEN_DANHMUCVANG) values (5,'6K');
+Insert into TBSDANHMUCVANG2 (FI_ID_DANHMUCVANG,FI_TEN_DANHMUCVANG) values (6,'7K');
+Insert into TBSDANHMUCVANG2 (FI_ID_DANHMUCVANG,FI_TEN_DANHMUCVANG) values (7,'8K');
+Insert into TBSDANHMUCVANG2 (FI_ID_DANHMUCVANG,FI_TEN_DANHMUCVANG) values (8,'9K');
+Insert into TBSDANHMUCVANG2 (FI_ID_DANHMUCVANG,FI_TEN_DANHMUCVANG) values (9,'10K');
+Insert into TBSDANHMUCVANG2 (FI_ID_DANHMUCVANG,FI_TEN_DANHMUCVANG) values (10,'11K');
+Insert into TBSDANHMUCVANG2 (FI_ID_DANHMUCVANG,FI_TEN_DANHMUCVANG) values (11,'12K');
+Insert into TBSDANHMUCVANG2 (FI_ID_DANHMUCVANG,FI_TEN_DANHMUCVANG) values (12,'13K');
+Insert into TBSDANHMUCVANG2 (FI_ID_DANHMUCVANG,FI_TEN_DANHMUCVANG) values (13,'14K');
+Insert into TBSDANHMUCVANG2 (FI_ID_DANHMUCVANG,FI_TEN_DANHMUCVANG) values (14,'15K');
+Insert into TBSDANHMUCVANG2 (FI_ID_DANHMUCVANG,FI_TEN_DANHMUCVANG) values (15,'16K');
+Insert into TBSDANHMUCVANG2 (FI_ID_DANHMUCVANG,FI_TEN_DANHMUCVANG) values (16,'17K');
+Insert into TBSDANHMUCVANG2 (FI_ID_DANHMUCVANG,FI_TEN_DANHMUCVANG) values (17,'18K');
+Insert into TBSDANHMUCVANG2 (FI_ID_DANHMUCVANG,FI_TEN_DANHMUCVANG) values (18,'19K');
+Insert into TBSDANHMUCVANG2 (FI_ID_DANHMUCVANG,FI_TEN_DANHMUCVANG) values (19,'20K');
+Insert into TBSDANHMUCVANG2 (FI_ID_DANHMUCVANG,FI_TEN_DANHMUCVANG) values (20,'21K');
+Insert into TBSDANHMUCVANG2 (FI_ID_DANHMUCVANG,FI_TEN_DANHMUCVANG) values (21,'22K');
+Insert into TBSDANHMUCVANG2 (FI_ID_DANHMUCVANG,FI_TEN_DANHMUCVANG) values (22,'23K');
+Insert into TBSDANHMUCVANG2 (FI_ID_DANHMUCVANG,FI_TEN_DANHMUCVANG) values (23,'24K');
+
+Insert into TBSDONVITINH2 (FI_ID_DON_VI_TINH,FI_DON_VI_TINH) values (1,'Kg');
+Insert into TBSDONVITINH2 (FI_ID_DON_VI_TINH,FI_DON_VI_TINH) values (2,'g');
+
+Insert into TBSDANHMUCDINHKEM2 (FI_MA_DINH_KEM,FI_TEN_LOAI_DINH_KEM) values (1,'Giấy chứng nhận đầu tư (bắt buộc đính kèm)');
+Insert into TBSDANHMUCDINHKEM2 (FI_MA_DINH_KEM,FI_TEN_LOAI_DINH_KEM) values (2,'Báo cáo tình hình thực hiện xuất khẩu, nhập khẩu và tiêu thụ sản phẩm vàng tại thị trường Việt Nam trong thời hạn 12 (mười hai) tháng liền kề trước thời điểm báo cáo (trường hợp đề nghị cấp Giấy phép nhập khẩu trong năm kế hoạch) hoặc từ đầu năm đến thời điểm báo cáo (trường hợp bổ sung khối lượng nhập khẩu vàng nguyên liệu), kèm bảng kê các tờ khai Hải quan xuất khẩu, nhập khẩu và phiếu trừ lùi có xác nhận của Hải quan');
+Insert into TBSDANHMUCDINHKEM2 (FI_MA_DINH_KEM,FI_TEN_LOAI_DINH_KEM) values (3,'Bản kế hoạch sản xuất, kinh doanh của doanh nghiệp; văn bản, tài liệu chứng minh năng lực sản xuất của doanh nghiệp (bắt buộc đính kèm)');
+Insert into TBSDANHMUCDINHKEM2 (FI_MA_DINH_KEM,FI_TEN_LOAI_DINH_KEM) values (4,'Hợp đồng gia công vàng trang sức, mỹ nghệ với nước ngoài. (bắt buộc đính kèm)');
+Insert into TBSDANHMUCDINHKEM2 (FI_MA_DINH_KEM,FI_TEN_LOAI_DINH_KEM) values (5,'Tài liệu khác');
+
+
+Insert into TBSDANHMUCCUAKHAU2 (FI_ID_CUA_KHAU,FI_TEN_CUA_KHAU) values (1,'Cửa khẩu Lạng Sơn');
+Insert into TBSDANHMUCCUAKHAU2 (FI_ID_CUA_KHAU,FI_TEN_CUA_KHAU) values (2,'Cửa khẩu Móng Cái');

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<div data-bind="with: regAnimalVM">
+<div data-bind="with: thongtinHangHoa">
     <fieldset data-bind="with: productVM">
         <legend><b><spring:message code="sbv.02.thongtin_hanghoa"/></b>
             <a style="margin-left: 10px" class="btn green" title=""
@@ -11,7 +11,7 @@
         <form role="form" class="form-horizontal">
             <div class="form-group">
                 <div class="col-md-12">
-                    <span class="nsw-require-field" data-bind="validationMessage: fiProductList"></span>
+<%--                    <span class="nsw-require-field" data-bind="validationMessage: fiProductList"></span>--%>
                     <table class="table table-striped table-bordered table-hover order-column">
                         <thead>
                         <tr class="nsw-tr tr-nsw1-bgcolor">
@@ -25,27 +25,27 @@
                                 <spring:message code="sbv.02.thao_tac"/></th>
                         </tr>
                         </thead>
-                        <tbody
-                                data-bind="foreach: fiProductList">
-                        <tr>
-                            <td class="text-center" data-bind="text: ($index() + 1)"></td>
-                            <td data-bind="text : fiProductBusinessName">
-                            </td>
-                            <td data-bind="text : fiProductScienceName">
-                            </td>
-                            <td data-bind="text : fiSizeOrType"></td>
-                            <td class="text-right" data-bind="text : fiQuantity"></td>
-                            <td class="text-center" data-bind="visible: $root.isEditable()">
-                                <a href="javascript:void(0)"
-                                   data-bind="click: $parent.openUpdateProduct.bind($data, $data, $index(), 1)">
-                                    <i class="fa fa-lg fa-edit"></i>
-                                </a>
-                                <a href="javascript:void(0)" data-bind="click: $parent.removeProduct.bind($data, $index())">
-                                    <i class="fa fa-lg fa-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        </tbody>
+<%--                        <tbody--%>
+<%--                                data-bind="foreach: fiProductList">--%>
+<%--                        <tr>--%>
+<%--                            <td class="text-center" data-bind="text: ($index() + 1)"></td>--%>
+<%--                            <td data-bind="text : fiProductBusinessName">--%>
+<%--                            </td>--%>
+<%--                            <td data-bind="text : fiProductScienceName">--%>
+<%--                            </td>--%>
+<%--                            <td data-bind="text : fiSizeOrType"></td>--%>
+<%--                            <td class="text-right" data-bind="text : fiQuantity"></td>--%>
+<%--                            <td class="text-center" data-bind="visible: $root.isEditable()">--%>
+<%--                                <a href="javascript:void(0)"--%>
+<%--                                   data-bind="click: $parent.openUpdateProduct.bind($data, $data, $index(), 1)">--%>
+<%--                                    <i class="fa fa-lg fa-edit"></i>--%>
+<%--                                </a>--%>
+<%--                                <a href="javascript:void(0)" data-bind="click: $parent.removeProduct.bind($data, $index())">--%>
+<%--                                    <i class="fa fa-lg fa-trash"></i>--%>
+<%--                                </a>--%>
+<%--                            </td>--%>
+<%--                        </tr>--%>
+<%--                        </tbody>--%>
                     </table>
                 </div>
             </div>
@@ -75,13 +75,13 @@
                         <label><spring:message code="sbv.02.cua_nhap_khau"/><a class="nsw-require-field">*</a></label>
                     </div>
                     <div class="col-md-4">
-                        <select data-bind="options: lstProvince,
-                                        optionsValue: 'provinceName',
-                                        optionsText: 'provinceName',
-                                        optionsCaption: '<spring:message code="mard.select.noi_ky"/>',
-                                        value: fiSignAddress, enable: $root.isEditable()"
-                                class="form-control">
-                        </select>
+<%--                        <select data-bind="options: lstProvince,--%>
+<%--                                        optionsValue: 'provinceName',--%>
+<%--                                        optionsText: 'provinceName',--%>
+<%--                                        optionsCaption: '<spring:message code="mard.select.noi_ky"/>',--%>
+<%--                                        value: fiSignAddress, enable: $root.isEditable()"--%>
+<%--                                class="form-control">--%>
+<%--                        </select>--%>
                     </div>
                     <div class="col-md-2 nsw-text-right">
                         <label><spring:message code="sbv.02.thoi_gian_nhap"/><a class="nsw-require-field">*</a></label>
@@ -115,87 +115,87 @@
             </div>
         </form>
     </fieldset>
+    <!-- modal -->
+    <div id="modal_addProduct" class="modal container in modal-overflow"
+         tabindex="-1"
+         data-backdrop="static" data-keyboard="false"
+         data-bind="with: productVM"
+    >
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <b class="modal-title"><spring:message code="sbv.02.thongtin_hanghoa"/></b>
+        </div>
+        <div class="modal-body">
+            <form role="form" class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-md-2 nsw-text-right">
+                        <label><spring:message code="sbv.02.dien_giai"/><a
+                                class="nsw-require-field">*</a></label>
+                    </div>
+                    <div class="col-md-4">
+                        <input
+                                data-bind="trimedValue: fiDienGiai"
+                                class="form-control" value=""/>
+                    </div>
+                    <div class="col-md-2 nsw-text-right">
+                        <label><spring:message code="sbv.02.ham_luong"/><a
+                                class="nsw-require-field">*</a></label>
+                    </div>
+                    <div class="col-md-4">
+                        <input
+                                data-bind="trimedValue: fiHamLuong"
+                                class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2 nsw-text-right">
+                        <label><spring:message code="sbv.02.khoi_luong"/><a
+                                class="nsw-require-field">*</a></label>
+                    </div>
+                    <div class="col-md-4">
+                        <input
+                                data-bind="trimedValue: fiKhoiLuong"
+                                class="form-control" value=""/>
+                    </div>
+                    <div class="col-md-2 nsw-text-right">
+                        <label><spring:message code="sbv.02.don_vi_tinh"/><a
+                                class="nsw-require-field">*</a></label>
+                    </div>
+                    <div class="col-md-4">
+                        <input
+                                data-bind="value: fiDonViTinh"
+                                class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2 nsw-text-right">
+                        <label><spring:message code="sbv.02.gia_tri_uoc_tinh"/><a
+                                class="nsw-require-field">*</a></label>
+                    </div>
+                    <div class="col-md-4">
+                        <input
+                                data-bind="value: fiGiaTriUocTinh"
+                                class="form-control"/>
+                    </div>
+                </div>
+            </form>
+            <div class="text-center">
+                <span class="nsw-require-field" data-bind="text: errorMsg"></span>
+            </div>
+        </div>
+        <div class="modal-footer" style="">
+            <div class="text-center">
+                <button class="btn green"
+                        data-bind="click: addProduct"
+                >
+                    <spring:message code="conmon.button.them"/>
+                </button>
+                <button class="btn" data-dismiss="modal">
+                    <spring:message code="conmon.button.huy"/>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- end modal -->
 </div>
 
-<!-- modal -->
-<div id="modal_addProduct" class="modal container in modal-overflow"
-     tabindex="-1"
-     data-backdrop="static" data-keyboard="false"
-     data-bind="with: productVM"
->
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <b class="modal-title"><spring:message code="sbv.02.thongtin_hanghoa"/></b>
-    </div>
-    <div class="modal-body">
-        <form role="form" class="form-horizontal">
-            <div class="form-group">
-                <div class="col-md-2 nsw-text-right">
-                    <label><spring:message code="sbv.02.dien_giai"/><a
-                            class="nsw-require-field">*</a></label>
-                </div>
-                <div class="col-md-4">
-                    <input
-                            data-bind="trimedValue: fiProductBusinessName"
-                            class="form-control" value=""/>
-                </div>
-                <div class="col-md-2 nsw-text-right">
-                    <label><spring:message code="sbv.02.ham_luong"/><a
-                            class="nsw-require-field">*</a></label>
-                </div>
-                <div class="col-md-4">
-                    <input
-                            data-bind="trimedValue: fiProductScienceName"
-                            class="form-control"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-2 nsw-text-right">
-                    <label><spring:message code="sbv.02.khoi_luong"/><a
-                            class="nsw-require-field">*</a></label>
-                </div>
-                <div class="col-md-4">
-                    <input
-                            data-bind="trimedValue: fiSizeOrType"
-                            class="form-control" value=""/>
-                </div>
-                <div class="col-md-2 nsw-text-right">
-                    <label><spring:message code="sbv.02.don_vi_tinh"/><a
-                            class="nsw-require-field">*</a></label>
-                </div>
-                <div class="col-md-4">
-                    <input type="number"
-                           data-bind="value: fiQuantity"
-                           class="form-control"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-2 nsw-text-right">
-                    <label><spring:message code="sbv.02.gia_tri_uoc_tinh"/><a
-                            class="nsw-require-field">*</a></label>
-                </div>
-                <div class="col-md-4">
-                    <input type="number"
-                           data-bind="value: fiQuantity"
-                           class="form-control"/>
-                </div>
-            </div>
-        </form>
-        <div class="text-center">
-            <span class="nsw-require-field" data-bind="text: errorMsg"></span>
-        </div>
-    </div>
-    <div class="modal-footer" style="">
-        <div class="text-center">
-            <button class="btn green"
-                    data-bind="click: addProduct"
-            >
-                <spring:message code="conmon.button.them"/>
-            </button>
-            <button class="btn" data-dismiss="modal">
-                <spring:message code="conmon.button.huy"/>
-            </button>
-        </div>
-    </div>
-</div>
-<!-- end modal -->

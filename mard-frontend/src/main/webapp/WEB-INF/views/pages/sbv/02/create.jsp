@@ -7,7 +7,7 @@
 <%@include file="inc_script.jsp" %>
 
 <div id="sbv02Create">
-    <div class="row" style="padding-top: 15px; padding-bottom: 15px;" data-bind="with: kdnkVM">
+    <div class="row" style="padding-top: 15px; padding-bottom: 15px;" data-bind="with: hsxnkv">
         <div class="col-md-12">
             <div class="portlet light">
                 <div class="portlet-title">
@@ -43,7 +43,7 @@
                                     <div class="row">
                                         <div class="col-md-12" style="padding-top: 10px;">
                                             <div class="text-center">
-                                                <p><span class="nsw-require-field" data-bind="text: errorMsg"></span></p>
+<%--                                                <p><span class="nsw-require-field" data-bind="text: errorMsg"></span></p>--%>
                                                 <button class="btn green" data-bind="click: $root.saveRegProfile">
                                                     <i class="fa fa-save"></i> <spring:message code="common.button.luu"/>
                                                 </button>
@@ -69,9 +69,11 @@
         </div>
     </div>
 </div>
-<%--<script type="text/javascript" src="<c:url value='/app/mard/06/init.js?v=${version}'/>"></script>--%>
-<%--<script type="text/javascript" src="<c:url value='/app/mard/06/create.js?v=${version}'/>"></script>--%>
-<%--<script type="text/javascript" src="<c:url value='/app/mard/06/FormVM.js?v=${version}'/>"></script>--%>
-<%--<script type="text/javascript" src="<c:url value='/app/mard/06/KyHoSoVM.js?v=${version}'/>"></script>--%>
-<%--<script type="text/javascript" src="<c:url value='/app/mard/06/ThongTinChungVM.js?v=${version}'/>"></script>--%>
+<script type="text/javascript" src="<c:url value='/app/sbv/02/init.js?v=${version}'/>"></script>
+<script type="text/javascript" src="<c:url value='/app/sbv/02/create.js?v=${version}'/>"></script>
+<script type="text/javascript" src="<c:url value='/app/sbv/02/FormVM.js?v=${version}'/>"></script>
+<script type="text/javascript" src="<c:url value='/app/sbv/02/ThongTinHangHoa.js?v=${version}'/>"></script>
+<script type="text/javascript" src="<c:url value='/app/sbv/02/KyHoSo.js?v=${version}'/>"></script>
+<script type="text/javascript" src="<c:url value='/app/sbv/02/ThongTinHoSo.js?v=${version}'/>"></script>
+<script type="text/javascript" src="<c:url value='/app/sbv/02/ThongTinDoanhNghiep.js?v=${version}'/>"></script>
 <%--<script type="text/javascript" src="<c:url value='/app/mard/06/KiemDichNhapKhauVM.js?v=${version}'/>"></script>--%>

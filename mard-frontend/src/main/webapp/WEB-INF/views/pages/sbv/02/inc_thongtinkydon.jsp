@@ -8,7 +8,7 @@
                 </div>
                 <div class="col-md-4">
                     <input
-                            data-bind="trimedValue: fiSignName, enable: $root.isEditable()"
+                            data-bind="trimedValue: fiNguoiKyHS, enable: $root.isEditable()"
                             class="form-control"/>
                 </div>
                 <div class="col-md-2 nsw-text-right">
@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-md-4">
                     <input
-                            data-bind="trimedValue : fiSignPosition, enable: $root.isEditable()"
+                            data-bind="value : fiChucVuKy, enable: $root.isEditable()"
                             class="form-control"/>
                 </div>
             </div>
@@ -27,21 +27,18 @@
                     <label><spring:message code="sbv.02.noi_ky"/><a class="nsw-require-field">*</a></label>
                 </div>
                 <div class="col-md-4">
-                    <select data-bind="options: lstProvince,
-                                        optionsValue: 'provinceName',
-                                        optionsText: 'provinceName',
-                                        optionsCaption: '<spring:message code="mard.select.noi_ky"/>',
-                                        value: fiSignAddress, enable: $root.isEditable()"
-                            class="form-control">
+                    <input
+                            data-bind="value : fiNoiKy, enable: $root.isEditable()"
+                            class="form-control"/>
                     </select>
                 </div>
                 <div class="col-md-2 nsw-text-right">
                     <label><spring:message code="sbv.02.ngay_ky"/><a class="nsw-require-field">*</a></label>
                 </div>
                 <div class="col-md-4">
-                    <select data-bind=""
-                            class="form-control">
-                    </select>
+                    <input
+                            data-bind="trimedValue : fiNgayKyHS, enable: $root.isEditable()"
+                            class="form-control"/>
                 </div>
             </div>
         </div>

@@ -1,4 +1,5 @@
 package com.nsw.sbv.Constant;
+import com.nsw.mard.constant.Mard06Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 
@@ -25,6 +26,17 @@ public class SBV02Constant {
         public static final String EDIT = "mard.06.edit";
         public static final String VIEW = "mard.06.view";
     }
+    public static class API {
+        private API(){
+
+        }
+        public static final String BACKEND = "sbv.api.backend.dev";
+        public static final String CUAKHAU = "sbv.02.danhmuc.cuakhau";
 
 
+
+    }
+    public String getApiUrl(Environment environment, String key) {
+        return environment.getRequiredProperty(SBV02Constant.API.BACKEND) + environment.getRequiredProperty(key);
+    }
 }

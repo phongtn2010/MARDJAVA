@@ -39,7 +39,7 @@ public class CommonController extends BaseController {
     CmonCountryService cmonCountryService;
     @Autowired
     CmonPortService cmonPortService;
-    @Autowired
+    @Autowireda
     CmonAttachtypeService cmonAttachtypeService;
     @Autowired
     CmonDvkdService cmonDvkdService;

@@ -1,4 +1,4 @@
-<fieldset data-bind="with: thongtinChungVM">
+<fieldset data-bind="with: thongtinDNVM">
     <legend><b><spring:message code="sbv.02.tokhai.thong_tin_dn"/></b></legend>
     <form role="form" class="form-horizontal">
         <div class="form-group" style="margin-top: 15px">
@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-md-4">
                     <input
-                            data-bind="fiTenDoanhNghiep"
+                            data-bind="value: fiTenDoanhNghiep"
                             class="form-control"
                             disabled/>
                 </div>
@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-md-4">
                     <input
-                            data-bind="fiTruSoChinh"
+                            data-bind="value: fiTruSoChinh "
                             class="form-control"
                             disabled/>
                 </div>
@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-md-4">
                     <input
-                            data-bind="fiDienThoai"
+                            data-bind="value: fiDienThoai "
                             class="form-control"/>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                 </div>
                 <div class="col-md-4">
                     <input
-                            data-bind="fiMSThue"
+                            data-bind="value: fiMSThue "
                             class="form-control"
                             disabled/>
                 </div>
@@ -56,7 +56,7 @@
                 </div>
                 <div class="col-md-4">
                     <input
-                            data-bind="fiFax"
+                            data-bind="value: fiSoFax "
                             class="form-control"/>
                 </div>
             </div>
@@ -69,7 +69,7 @@
                 </div>
                 <div class="col-md-4">
                     <input
-                            data-bind="fiSoDonDN"
+                            data-bind="value: fiSoDonDN , enable: $root.isEditable()"
                             class="form-control"/>
                 </div>
                 <div class="col-md-2 nsw-text-right">
@@ -78,7 +78,7 @@
                 </div>
                 <div class="col-md-4">
                     <input
-                            data-bind="fiNguoiDaiDien"
+                            data-bind="value: fiNguoiDaiDien , enable: $root.isEditable()"
                             class="form-control"/>
                 </div>
             </div>
@@ -91,7 +91,7 @@
                 </div>
                 <div class="col-md-4">
                     <input
-                            data-bind="fiGiayCNDT"
+                            data-bind="value: fiGiayCNDT , enable: $root.isEditable()"
                             class="form-control"/>
                 </div>
                 <div class="col-md-2 nsw-text-right">
@@ -100,7 +100,7 @@
                 </div>
                 <div class="col-md-4">
                     <input
-                            data-bind="datepicker: fiNgayCap"
+                            data-bind="value: fiNgayCapGiay , enable: $root.isEditable()"
                             class="form-control form-control-inline date-picker"
                             data-date-format="dd/mm/yyyy" type="text" value=""
                             maxlength="10" />
@@ -115,7 +115,7 @@
                 </div>
                 <div class="col-md-10">
                     <input
-                            data-bind="fiHinhThucDauTu"
+                            data-bind="value: fiHinhThucDauTu , enable: $root.isEditable()"
                             class="form-control"/>
                 </div>
             </div>
@@ -128,7 +128,7 @@
                 </div>
                 <div class="col-md-10">
                     <input
-                            data-bind="fiTongVon"
+                            data-bind="value: fiTongVon"
                             class="form-control"/>
                 </div>
             </div>
@@ -141,7 +141,7 @@
                 </div>
                 <div class="col-md-4">
                     <input
-                            data-bind="fiVonPhapDinh"
+                            data-bind="value: fiVonPhapDinh"
                             class="form-control"/>
                 </div>
                 <div class="col-md-2 nsw-text-right">
@@ -150,7 +150,7 @@
                 </div>
                 <div class="col-md-4">
                     <input
-                            data-bind="fiVonVay"
+                            data-bind="value: fiVonVay"
                             class="form-control"/>
                 </div>
             </div>
@@ -163,7 +163,7 @@
                 </div>
                 <div class="col-md-4">
                     <input
-                            data-bind="fiTiLeXK"
+                            data-bind="value: fiTiLeXK"
                             class="form-control"/>
                 </div>
                 <div class="col-md-2 nsw-text-right">
@@ -172,7 +172,7 @@
                 </div>
                 <div class="col-md-4">
                     <input
-                            data-bind="fiSoLuongCBCN"
+                            data-bind="value: fiSoLuongCBCN"
                             class="form-control"/>
                 </div>
             </div>
@@ -185,7 +185,7 @@
                 </div>
                 <div class="col-md-4">
                     <input
-                            data-bind="fiThoiGianHD"
+                            data-bind="value: fiThoiGianHD"
                             class="form-control"/>
                 </div>
                 <div class="col-md-2 nsw-text-right">
@@ -194,7 +194,7 @@
                 </div>
                 <div class="col-md-4">
                     <input
-                            data-bind="fiNamDeNghi"
+                            data-bind="value: fiNamDeNghi"
                             class="form-control"/>
                 </div>
             </div>
