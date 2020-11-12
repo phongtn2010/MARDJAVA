@@ -7,10 +7,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="MARDBackend" />
         <module name="MARDWs" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="MARDBackend" target="1.8" />
       <module name="MARDWs" target="1.8" />
     </bytecodeTargetLevel>
   </component>
