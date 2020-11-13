@@ -3,7 +3,7 @@ spring:
     active: hq_test
 ---
 server:
-  port: 8080
+  port: 8081
   contextPath: /SBVBackend
 ---
 spring:
@@ -147,7 +147,8 @@ spring:
     default-domain: SBVBackend
 datasource:
   SBVBackend:
-    url: jdbc:oracle:thin:@10.224.130.194:1521/nswstandby
+#    url: jdbc:oracle:thin:@10.224.130.194:1521/nswstandby
+    url: jdbc:oracle:thin:@10.60.157.111:1521/dbpt
     username: SBV
     password: SBV
     driverClassName: oracle.jdbc.OracleDriver

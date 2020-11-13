@@ -37,8 +37,10 @@
                 </div>
                 <div class="col-md-4">
                     <input
-                            data-bind="trimedValue : fiNgayKyHS, enable: $root.isEditable()"
-                            class="form-control"/>
+                            data-bind="datepicker: fiNgayKyHS , enable: $root.isEditable()"
+                            class="form-control form-control-inline date-picker"
+                            data-date-format="dd/mm/yyyy" type="text" value=""
+                            maxlength="10" />
                 </div>
             </div>
         </div>

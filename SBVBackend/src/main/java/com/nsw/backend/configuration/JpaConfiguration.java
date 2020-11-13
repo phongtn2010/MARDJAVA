@@ -29,7 +29,9 @@ import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @EnableJpaRepositories(basePackages = {"com.nsw.backend.repositories",
-    "com.nsw.backend.sbv.p01.repositories"
+    "com.nsw.backend.sbv.p01.repositories",
+        "com.nsw.backend.sbv.p02.repositories",
+        "com.nsw.backend.dic.repositories"
 },
         entityManagerFactoryRef = "entityManagerFactory",
         transactionManagerRef = "transactionManager")
@@ -92,6 +94,8 @@ public class JpaConfiguration {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(dataSource());
         factoryBean.setPackagesToScan(new String[]{"com.nsw.backend.model",
+                "com.nsw.backend.dic.model",
+                "com.nsw.backend.sbv.p02.model",
             "com.nsw.backend.sbv.p01.model"});
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
         factoryBean.setJpaProperties(jpaProperties());
