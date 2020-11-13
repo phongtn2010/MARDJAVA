@@ -2,7 +2,10 @@ package com.nsw.backend.mard.p26.constant;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.nsw.backend.mard.p25.constant.Constant25;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.springframework.core.env.Environment;
 
 import java.util.Arrays;
 
@@ -59,6 +62,68 @@ public class Constant26 {
         public static Constant25.HosoStatus findById(int i) {
             return Arrays.stream(Constant25.HosoStatus.values()).filter(st -> st.getId() == i)
                     .findFirst().orElse(null);
+        }
+    }
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    public static class MessageFunction {
+        public static final String FUNC_01 = "01";
+        public static final String FUNC_02 = "02";
+        public static final String FUNC_03 = "03";
+        public static final String FUNC_04 = "04";
+        public static final String FUNC_05 = "05";
+        public static final String FUNC_06 = "06";
+        public static final String FUNC_07 = "07";
+        public static final String FUNC_08 = "08";
+        public static final String FUNC_09 = "09";
+        public static final String FUNC_10 = "10";
+        public static final String FUNC_11 = "11";
+        public static final String FUNC_12 = "12";
+        public static final String FUNC_13 = "13";
+        public static final String FUNC_14 = "14";
+        public static final String FUNC_15 = "15";
+        public static final String FUNC_17 = "17";
+        public static final String FUNC_18 = "18";
+        public static final String FUNC_19 = "19";
+        public static final String FUNC_20 = "20";
+        public static final String FUNC_21 = "21";
+        public static final String FUNC_22 = "22";
+        public static final String FUNC_23 = "23";
+        public static final String FUNC_24 = "24";
+        public static final String FUNC_25 = "25";
+        public static final String FUNC_26 = "26";
+        public static final String FUNC_27 = "27";
+        public static final String FUNC_28 = "28";
+        public static final String FUNC_00 = "00";
+        public static final String FUNC_99 = "99";
+    }
+
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    public static class MessageType { // Loại chứng từ Response - Request
+        public static final String TYPE_10 = "10";  // Hồ sơ đăng ký kiểm tra xác nhận thức ăn chăn nuôi nhập khẩu
+        public static final String TYPE_11 = "11";  // Yêu cầu huỷ hồ sơ của doanh nghiệp
+        public static final String TYPE_12 = "12";  // Thông tin xử lý hồ sơ của cán bộ
+        public static final String TYPE_13 = "13";  // Thông tin xác nhận đơn đăng ký kiểm tra xác nhận
+        public static final String TYPE_14 = "14";  // BNN gửi thông báo thu hồi Giấy đăng ký xác nhận chất lượng
+        public static final String TYPE_15 = "15";  // Hồ sơ tổ chức chỉ định
+        public static final String TYPE_16 = "16";  // Kết quả đánh giá sự phù hợp
+        public static final String TYPE_17 = "17";  // Nộp kết quả đánh giá sự phù hợp quy chuẩn kỹ thuật
+        public static final String TYPE_18 = "18";  // Thông báo kết quả tiếp nhận kết quả
+        public static final String TYPE_19 = "19";  // Giấy xác nhận chất lượng
+        public static final String TYPE_20 = "20";  // BNN gửi thông báo thu hồi Giấy phép xác nhận chất lượng
+        public static final String TYPE_21 = "21";  // NSW gửi kết quả báo cáo
+        public static final String TYPE_22 = "22";  // BNN gửi thông báo đã tiếp nhận hồ sơ miễn giảm
+        public static final String TYPE_23 = "23";  // BNN gửi thông tin phân nhóm hàng hóa
+        public static final String TYPE_24 = "24";  // BNN gửi thông tin loại hàng hóa
+        public static final String TYPE_25 = "25";  // BNN gửi thông tin phân loại
+    }
+    public static class WebServiceURL {
+        private static final String WS_URL = "send/26/sendAll/";
+
+        private WebServiceURL() {
+        }
+
+        public static String get(Environment environment) {
+            return environment.getRequiredProperty("SEND_WS_ROOT_URL") + WS_URL;
         }
     }
 }

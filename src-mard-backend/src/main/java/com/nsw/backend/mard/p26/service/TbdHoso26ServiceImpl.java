@@ -1,5 +1,6 @@
 package com.nsw.backend.mard.p26.service;
 
+import com.nsw.backend.mard.p25.model.TbdHoso25;
 import com.nsw.backend.mard.p26.constant.Constant26;
 import com.nsw.backend.mard.p26.model.FilterForm;
 import com.nsw.backend.mard.p26.model.FilterResult;
@@ -37,7 +38,7 @@ public class TbdHoso26ServiceImpl implements TbdHoso26Service{
     public TbdHoso26 create(TbdHoso26 tbdHoso26) {
         TbdHoso26 entity = repository.save(tbdHoso26);
         if (StringUtils.isEmpty(tbdHoso26.getFiMaHoso())) {
-            entity.setFiMaHoso(generateMaHoso(entity.getFiIdHS()));
+            entity.setFiMaHoso(generateMaHoso(entity.getFiIdHoSo26()));
         }
 
         return repository.save(entity);
@@ -46,5 +47,15 @@ public class TbdHoso26ServiceImpl implements TbdHoso26Service{
     @Override
     public FilterResult searchHoso(FilterForm filterForm) {
         return repository.searchHoso(filterForm);
+    }
+
+    @Override
+    public TbdHoso26 findById(int parseInt) {
+        return repository.findByFiIdHoSo26(parseInt);
+    }
+
+    @Override
+    public TbdHoso26 findByFiHSCode(String nswFileCode) {
+        return repository.findByFiMaHoso(nswFileCode);
     }
 }

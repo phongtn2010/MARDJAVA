@@ -12,12 +12,13 @@ public class TbdHanghoa26 implements Serializable {
     //----------------------------------------------------------------------
     // ENTITY PRIMARY KEY ( BASED ON A SINGLE FIELD )
     //----------------------------------------------------------------------
+    private Integer fiIdHH26;
     private Integer fiIdProduct;
 
     //----------------------------------------------------------------------
     // ENTITY DATA FIELDS
     //----------------------------------------------------------------------
-    private Integer fiIdHS;
+    private Integer fiIdHoSo26;
     private String fiNSWFileCode;
     private String fiProName;
     private Integer fiTrangThaiHangHoa;

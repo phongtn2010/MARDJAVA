@@ -24,10 +24,12 @@ public class TbdHanghoaSLKL26  implements Serializable {
     // ENTITY PRIMARY KEY ( BASED ON A SINGLE FIELD )
     //----------------------------------------------------------------------
     private Integer fiIdProSLKL;
+    private Integer fiIdSLKL26;
 
     //----------------------------------------------------------------------
     // ENTITY DATA FIELDS
     //----------------------------------------------------------------------
+    private Integer fiIdHH26;
     private Integer fiIdProduct;
 
     private Float fiProSLKLMass;

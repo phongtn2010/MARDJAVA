@@ -11,4 +11,8 @@ public interface TbdHoso26Service {
     public TbdHoso26 create(TbdHoso26 tbdHoso26);
 
     FilterResult searchHoso(FilterForm filterForm);
+
+    TbdHoso26 findById(int parseInt);
+
+    TbdHoso26 findByFiHSCode(String nswFileCode);
 }

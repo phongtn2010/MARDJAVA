@@ -32,7 +32,10 @@ function HangHoaVM(options) {
 
     }
     hanghoa26Sefl.onChoose =function (item) {
-
+        if(hanghoa26Sefl.lstHangHoaChosen().length>0 && item.isSelected()){
+            app.Alert("Bạn chỉ được chọn duy nhất một hàng hóa.");
+            return;
+        }
         if (item.isSelected()){
             item.isSelected(false);
             item.label('Bỏ chọn');
@@ -42,18 +45,23 @@ function HangHoaVM(options) {
             item.label('Chọn');
             hanghoa26Sefl.lstHangHoaChosen.splice(item,1);
         }
+
     }
 
 }
 
 function FormVM(options) {
     var form26Sefl =this;
+    form26Sefl.fiTbdHoso26 = ko.observable((options && options.hasOwnProperty('fiTbdHoso26')) ? options.fiTbdHoso26 :null);
+    console.log(options);
+    console.log(options.fiTrangthaiList);
+    console.log(options.fiTbdHoso26);
     form26Sefl.hangHoa26VM = ko.observable(new HangHoaVM());
-    form26Sefl.lstHanghoa = ko.observableArray((options && options.hasOwnProperty('lstHanghoa')) ? options.lstHanghoa :[]);
+    form26Sefl.lstHanghoa = ko.observableArray(form26Sefl.fiTbdHoso26()  ? form26Sefl.fiTbdHoso26().fiProductList :[]);
     form26Sefl.errorHangHoaMessage = ko.observable(null);
-    form26Sefl.fiIdHoso = ko.observable(null);
-    form26Sefl.fiMaHoso = ko.observable(null);
-    form26Sefl.fiMstDn = ko.observable(null).extend({
+    form26Sefl.fiIdHoso = ko.observable(form26Sefl.fiTbdHoso26()  ? form26Sefl.fiTbdHoso26().fiIdHoSo26 :null);
+    form26Sefl.fiMaHoso = ko.observable(form26Sefl.fiTbdHoso26()  ? form26Sefl.fiTbdHoso26().fiMaHoso :null);
+    form26Sefl.fiMstDn = ko.observable(hosoUsername).extend({
         required: {message: NSWLang["common_msg_formvaild_required"], params: true},
         maxLength: {message: 'Tối đa 13 ký tự', params: 13}
     });
@@ -80,24 +88,24 @@ function FormVM(options) {
         email: {message: 'Email không đúng định dạng', params: true}
     });
 
-    form26Sefl.fiNgayKy = ko.observable(null).extend({
+    form26Sefl.fiNgayKy = ko.observable(form26Sefl.fiTbdHoso26()  ? new Date(form26Sefl.fiTbdHoso26().fiNgayKy) :new Date()).extend({
         required: {message: NSWLang["common_msg_formvaild_required"], params: true}
     });
-    form26Sefl.fiDiadiemKy = ko.observable(null).extend({
+    form26Sefl.fiDiadiemKy = ko.observable(form26Sefl.fiTbdHoso26()  ? form26Sefl.fiTbdHoso26().fiDiadiemKy :null).extend({
         required: {message: NSWLang["common_msg_formvaild_required"], params: true},
         maxLength: {message: 'Tối đa 255 ký tự', params: 255}
     });
-    form26Sefl.fiNguoiKy = ko.observable(null).extend({
+    form26Sefl.fiNguoiKy = ko.observable(form26Sefl.fiTbdHoso26()  ? form26Sefl.fiTbdHoso26().fiNguoiKy :null).extend({
         required: {message: NSWLang["common_msg_formvaild_required"], params: true},
         maxLength: {message: 'Tối đa 100 ký tự', params: 100}
     });
 
-    form26Sefl.fiNgaygui = ko.observable(null);
+    form26Sefl.fiNgaygui = ko.observable(form26Sefl.fiTbdHoso26()  ? form26Sefl.fiTbdHoso26().fiNgaygui :null);
     form26Sefl.fiHoatdong = ko.observable(1);
-    form26Sefl.fiNguoitao = ko.observable(null);
-    form26Sefl.fiNgaytao = ko.observable(new Date());
+    form26Sefl.fiNguoitao = ko.observable(hosoUsername);
+    form26Sefl.fiNgaytao = ko.observable(form26Sefl.fiTbdHoso26()  ? new Date(form26Sefl.fiTbdHoso26().fiNgaytao) :new Date());
     form26Sefl.fiNgCapnhat = ko.observable(null);
-    form26Sefl.fiTrangthai = ko.observable(0);
+    form26Sefl.fiTrangthai = ko.observable(form26Sefl.fiTbdHoso26()  ? form26Sefl.fiTbdHoso26().fiTrangthai :0);
     form26Sefl.fiTenTt = ko.observable(null);
 
     form26Sefl.fiSoCv = ko.observable(null);
@@ -110,46 +118,20 @@ function FormVM(options) {
     }
     form26Sefl.addHangHoa  =function () {
         form26Sefl.lstHanghoa(form26Sefl.hangHoa26VM().lstHangHoaChosen());
+        form26Sefl.hangHoa26VM().lstHangHoaChosen([]);
         $("#modal_add_hanghoa").modal('hide');
     }
     form26Sefl.removeProductClick =function (item) {
         form26Sefl.lstHanghoa.splice(item,1)
     }
     form26Sefl.addProductOnClick = function (){
-        app.makeGet({
-            url: '/mard/26/hanghoa/getlist?taxCode='+hosoUsername,
-            success: function (res) {
-                if (res.success) {
-                    ko.utils.arrayForEach(res.data, function(product) {
-                        product.isSelected = ko.observable(true);
-                        product.label = ko.observable('Chọn');
-                        product.fiIdHS = ko.observable(null);
-                        product.fiIdProduct = ko.observable(null);
-                        ko.utils.arrayForEach(product.fiProCLList, function(cl) {
-                            cl.fiIdProCL=ko.observable(null);
-                            cl.fiIdProduct=ko.observable(null);
-                        });
-                        ko.utils.arrayForEach(product.fiProATList, function(at) {
-                            at.fiIdProAT=ko.observable(null);
-                            at.fiIdProduct=ko.observable(null);
-                        });
-                        ko.utils.arrayForEach(product.fiProSLKLList, function(at) {
-                            at.fiIdProSLKL=ko.observable(null);
-                            at.fiIdProduct=ko.observable(null);
-                        });
-                    });
-                    form26Sefl.hangHoa26VM().lstProductList(res.data);
-                }
-            },
-            error: function (e) { }
-        });
 
     }
     form26Sefl.getData = function () {
         var item={
-            fiIdHoso:form26Sefl.fiIdHoso(),
+            fiIdHoSo26:form26Sefl.fiIdHoso(),
             fiMaHoso:form26Sefl.fiMaHoso(),
-            fiHSStatus:form26Sefl.fiTrangthai(),
+            fiTrangthai:form26Sefl.fiTrangthai(),
             fiNgaytao:form26Sefl.fiNgaytao(),
             fiTenDn:form26Sefl.fiTenDn(),
             fiDiachiDn:form26Sefl.fiDiachiDn(),
@@ -163,6 +145,22 @@ function FormVM(options) {
             fiMasothue:hosoUsername,
         }
         return item;
+    }
+    form26Sefl.applyStates =function () {
+        app.makeGet({
+            url: '/mard/26/hanghoa/getlist?taxCode='+hosoUsername,
+            success: function (res) {
+                if (res.success) {
+                    ko.utils.arrayForEach(res.data, function(product) {
+                        product.isSelected = ko.observable(true);
+                        product.label = ko.observable('Chọn');
+
+                    });
+                    form26Sefl.hangHoa26VM().lstProductList(res.data);
+                }
+            },
+            error: function (e) { }
+        });
     }
 }
 

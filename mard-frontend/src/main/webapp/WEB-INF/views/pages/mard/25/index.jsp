@@ -203,8 +203,8 @@
                                 <span data-bind="text: fiCertNo"></span>
                             </td>
                             <td class="text-center" data-bind="text: fiImporterName"></td>
-                            <td class="text-left" data-bind="text: fiProductList.fiProMadeIn"></td>
-                            <td class="text-left" data-bind="text: fiProductList.fiProCountryName"></td>
+                            <td class="text-left" data-bind="text: fiTbdHanghoa26List.fiProMadeIn"></td>
+                            <td class="text-left" data-bind="text: fiTbdHanghoa26List.fiProCountryName"></td>
                             <td class="text-center" data-bind="text: $parent.getProfileStatus(fiHSStatus)"></td>
                             <td class="text-center" data-bind="text: $parent.getHoSoType(fiHSType)"></td>
 

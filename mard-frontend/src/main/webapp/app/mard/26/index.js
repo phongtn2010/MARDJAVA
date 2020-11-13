@@ -107,9 +107,13 @@ function IndexVM(data) {
         });
     }
     index26Self.btnAddNewClick = function (e) {
-        document.location = app.appContext + '/mard/26/edit';
+        document.location = app.appContext + '/mard/26/create';
         return false;
     };
+    index26Self.onEditHS = function (item) {
+        console.log(item);
+        document.location = app.appContext + '/mard/26/edit/'+item.fiIdHoSo26;
+    }
 }
 function init(data) {
     var index26VM = new IndexVM(data);

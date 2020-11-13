@@ -1543,6 +1543,10 @@
         <put-attribute name="title" value="Vietnam Single Window" />
         <put-attribute name="body" value="/WEB-INF/views/pages/mard/26/edit.jsp" />
     </definition>
+    <definition name="mard.26.create" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/26/edit.jsp" />
+    </definition>
 
     <definition name="mard.26.view" extends="base-definition">
         <put-attribute name="title" value="Vietnam Single Window" />

@@ -16,7 +16,7 @@ public class TbdHoso26  implements Serializable{
     //----------------------------------------------------------------------
     // ENTITY PRIMARY KEY ( BASED ON A SINGLE FIELD )
     //----------------------------------------------------------------------
-    private Integer fiIdHoso;
+    private Integer fiIdHoSo26;
 
     //----------------------------------------------------------------------
     // ENTITY DATA FIELDS

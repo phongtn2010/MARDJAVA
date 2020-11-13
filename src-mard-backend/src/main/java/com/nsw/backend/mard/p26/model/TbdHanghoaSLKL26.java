@@ -30,17 +30,20 @@ public class TbdHanghoaSLKL26 extends CmonBaseEntity implements Serializable {
     // ENTITY PRIMARY KEY ( BASED ON A SINGLE FIELD )
     //----------------------------------------------------------------------
     @Id
-    @Column(nullable = false)
+    @Column(nullable = false,name = "FI_ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_NAME)
     @SequenceGenerator(sequenceName = SEQUENCE_NAME, schema = "MARD", initialValue = 1, allocationSize = 1, name = SEQUENCE_NAME)
-    private Integer fiIdProSLKL;
+    private Integer fiIdSLKL26;
 
     //----------------------------------------------------------------------
     // ENTITY DATA FIELDS
     //----------------------------------------------------------------------
     @Column(name = "FI_PRO_ID")
+    private Integer fiIdHH26;
+    @Column(name = "FI_ID_HH_25")
     private Integer fiIdProduct;
-
+    @Column(name = "FI_PRO_SLKL25")
+    private Integer fiIdProSLKL;
     @Column(name = "FI_PROSLKL_MASS", nullable = false)
     private Float fiProSLKLMass;
 

@@ -25,11 +25,13 @@ public class TbdHanghoaCL26  implements Serializable {
     //----------------------------------------------------------------------
     // ENTITY PRIMARY KEY ( BASED ON A SINGLE FIELD )
     //----------------------------------------------------------------------
+    private Integer fiIdCL26;
     private Integer fiIdProCL;
 
     //----------------------------------------------------------------------
     // ENTITY DATA FIELDS
     //----------------------------------------------------------------------
+    private Integer fiIdHH26;
     private Integer fiIdProduct;
 
     private String fiProCLTarg;

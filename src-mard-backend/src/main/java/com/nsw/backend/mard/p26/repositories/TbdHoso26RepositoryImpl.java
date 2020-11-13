@@ -59,7 +59,6 @@ public class TbdHoso26RepositoryImpl implements TbdHoso26RepositoryCustom{
         //Get all count
         CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
         Root<TbdHoso26> countRoot = countQuery.from(TbdHoso26.class);
-        Join<TbdHoso26, TbdHanghoa26> tesst = countRoot.join("fiProductList", JoinType.INNER);
         Long count = em.createQuery(countQuery.select(cb.count(countRoot)).where(cb.and(finalPredicate))).getSingleResult();
 
         List<TbdHoso26> result = query.getResultList();

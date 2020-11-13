@@ -66,18 +66,30 @@ public class MARD26Controller extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create(ModelMap model) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails) {
             UserCustom user = (UserCustom) principal;
             initData(model, user);
+            model.addAttribute("idHS",0);
         } else {
             return AppConstant.redirectPage(AppConstant.Pages.LOGOUT);
         }
         return MARD26Constant.ViewType.EDIT;
     }
-
+    @RequestMapping(value = "/edit/{idHS}", method = RequestMethod.GET)
+    public String edit(ModelMap model,@PathVariable Integer idHS) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            UserCustom user = (UserCustom) principal;
+            initData(model, user);
+            model.addAttribute("idHS",idHS);
+        } else {
+            return AppConstant.redirectPage(AppConstant.Pages.LOGOUT);
+        }
+        return MARD26Constant.ViewType.EDIT;
+    }
     /**
      * View document page
      *

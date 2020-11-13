@@ -43,6 +43,7 @@ public class MARD26Constant {
         public static final String HOSO_GET_BYCODE = "mard.26.tbdhoso26.getbymahoso";
         public static final String HOSO_THONGBAO = "mard.26.api.vanban";
         public static final String CONGVAN_THUHOI_DINHKEM = "mard.26.api.thuhoi.congvan";
+        public static final String HOSO_FIND_BY_FILTER = "mard.26.tbdhoso26.find";
 
         //Lich su
         public static final String LICHSU_SEARCH = "mard.26.tbdlichsu26.search";

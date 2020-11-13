@@ -27,7 +27,7 @@ public class TbdHoso26 extends CmonBaseEntity implements Serializable {
     @Column(nullable = false,name = "FI_HS_ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_NAME)
     @SequenceGenerator(sequenceName = SEQUENCE_NAME, schema = "MARD", initialValue = 10000, allocationSize = 1, name = SEQUENCE_NAME)
-    private Integer fiIdHS;
+    private Integer fiIdHoSo26;
 
     //----------------------------------------------------------------------
     // ENTITY DATA FIELDS

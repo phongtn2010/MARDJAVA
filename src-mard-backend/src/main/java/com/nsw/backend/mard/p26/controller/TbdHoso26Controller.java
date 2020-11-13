@@ -2,7 +2,6 @@ package com.nsw.backend.mard.p26.controller;
 
 import com.nsw.backend.controller.BaseController;
 import com.nsw.backend.helper.RabbitMQErrorHelper;
-import com.nsw.backend.mard.p25.model.TbdHanghoa25;
 import com.nsw.backend.mard.p26.constant.Constant26;
 import com.nsw.backend.mard.p26.model.FilterForm;
 import com.nsw.backend.mard.p26.model.TbdHanghoa26;
@@ -10,17 +9,16 @@ import com.nsw.backend.mard.p26.model.TbdHoso26;
 import com.nsw.backend.mard.p26.model.TbdLichsu26;
 import com.nsw.backend.mard.p26.service.TbdHoso26Service;
 import com.nsw.backend.mard.p26.service.TbdLichsu26Service;
+import com.nsw.backend.mard.p26.service.WebService26;
 import com.nsw.backend.service.RabbitMQService;
 import com.nsw.backend.util.ResponseJson;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
@@ -32,11 +30,13 @@ public class TbdHoso26Controller extends BaseController {
     private final RabbitMQService rabbitMQService;
     private final TbdHoso26Service tbdHoso26Service;
     private final TbdLichsu26Service tbdLichsu26Service;
+    private final WebService26 webService26;
     @Autowired
-    public TbdHoso26Controller(RabbitMQService rabbitMQService, TbdHoso26Service tbdHoso26Service, TbdLichsu26Service tbdLichsu26Service) {
+    public TbdHoso26Controller(RabbitMQService rabbitMQService, TbdHoso26Service tbdHoso26Service, TbdLichsu26Service tbdLichsu26Service, WebService26 webService26) {
         this.rabbitMQService = rabbitMQService;
         this.tbdHoso26Service = tbdHoso26Service;
         this.tbdLichsu26Service = tbdLichsu26Service;
+        this.webService26 = webService26;
     }
 
     @PostMapping("/create")
@@ -59,7 +59,7 @@ public class TbdHoso26Controller extends BaseController {
     }
     private TbdHoso26 saveDraftTbdhoso26(@RequestBody TbdHoso26 tbdHoso26) {
         String historyContent;
-        if (tbdHoso26.getFiIdHS() == null || tbdHoso26.getFiTrangthai() == null) {
+        if (tbdHoso26.getFiIdHoSo26() == null || tbdHoso26.getFiTrangthai() == null) {
             tbdHoso26.setFiTrangthai(Constant26.HosoStatus.TAO_MOI.getId());
             tbdHoso26.setFiNgaytao(new Date());
             tbdHoso26 = tbdHoso26Service.create(tbdHoso26);
@@ -69,7 +69,7 @@ public class TbdHoso26Controller extends BaseController {
             historyContent = "Cập nhật hồ sơ";
         }
         TbdLichsu26 profileHst = new TbdLichsu26();
-        profileHst.setFiIdHS(tbdHoso26.getFiIdHS());
+        profileHst.setFiIdHS(tbdHoso26.getFiIdHoSo26());
         profileHst.setFiHSCode(tbdHoso26.getFiMaHoso());
         profileHst.setFiStatus(tbdHoso26.getFiTrangthai());
         profileHst.setFiSenderCode(tbdHoso26.getFiCreatedBy());
@@ -82,5 +82,57 @@ public class TbdHoso26Controller extends BaseController {
     @PostMapping("/timkiem")
     public ResponseEntity<ResponseJson> getListByFilter(@RequestBody FilterForm filterForm) {
         return createSuccessResponse(tbdHoso26Service.searchHoso(filterForm), HttpStatus.OK);
+    }
+    @GetMapping("/find")
+    public ResponseEntity<ResponseJson> findById(
+            @RequestParam(required = false) String id,
+            @RequestParam(required = false) String taxCode,
+            @RequestParam(required = false) String nswFileCode) {
+        TbdHoso26 regProfile;
+        if (StringUtils.isNotEmpty(nswFileCode)) {
+            regProfile = tbdHoso26Service.findByFiHSCode(nswFileCode);
+        } else if (StringUtils.isNotEmpty(id)) {
+            regProfile = tbdHoso26Service.findById(Integer.parseInt(id));
+        } else {
+            regProfile = null;
+        }
+        if (regProfile != null
+                && StringUtils.isNotEmpty(taxCode)
+                && taxCode.equals(regProfile.getFiMasothue()) == false) {
+            regProfile = null;
+        }
+        return createSuccessResponse(regProfile, HttpStatus.OK);
+    }
+
+    @PostMapping("/send")
+    public ResponseEntity<ResponseJson> sendHoso(@RequestBody TbdHoso26 profile) {
+        try {
+            if (profile == null) {
+                return createErrorResponse("No content", HttpStatus.NO_CONTENT);
+            }
+            TbdHoso26 result = saveDraftTbdhoso26(profile);
+            TbdLichsu26 profileHst = new TbdLichsu26();
+            profileHst.setFiIdHS(result.getFiIdHoSo26());
+            profileHst.setFiHSCode(result.getFiMaHoso());
+            profileHst.setFiStatus(result.getFiTrangthai());
+            profileHst.setFiSenderCode(result.getFiCreatedBy());
+            profileHst.setFiSenderName(result.getFiMasothue());
+            //profileHst.setFiSenderUnitName(result.getFiImporterName());
+            profileHst.setFiContent("Gửi mới hồ sơ");
+            profile.setFiTrangthai(profile.getFiTrangthai());
+            profileHst.setFiStatus(profile.getFiTrangthai());
+            tbdHoso26Service.update(profile);
+            tbdLichsu26Service.save(profileHst);
+            ResponseJson response = webService26.sendHoso26(result);
+
+            return createResponse(null, response.isSuccess(),
+                    response.isSuccess() ?
+                            "Hồ sơ đã gửi thành công!" :
+                            "Có lỗi trong quá trình gửi! " + response.getMessage(), HttpStatus.OK);
+        } catch (Exception ex) {
+            LOG.error(TAG + ex.getMessage(), ex);
+            RabbitMQErrorHelper.pushLogToRabbitMQ(getErrorInfo(TAG, ex), rabbitMQService.getRabbitMQInfo());
+            return createErrorResponse(ex.getMessage(), HttpStatus.OK);
+        }
     }
 }

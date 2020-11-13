@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TbdHoso26Repository extends JpaRepository<TbdHoso26, Integer>, TbdHoso26RepositoryCustom{
 
+    TbdHoso26 findByFiIdHoSo26(Integer parseInt);
+    TbdHoso26 findByFiMaHoso(String nswFileCode);
 }

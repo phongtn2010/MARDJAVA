@@ -182,7 +182,7 @@
                                         <th rowspan="2">Nước xuất xứ</th>
                                     </tr>
                                     </thead>
-                                    <tbody data-bind="foreach: fiProductList">
+                                    <tbody data-bind="foreach: fiTbdHanghoa26List">
                                     <tr>
                                         <td data-bind="text: $index() + 1"></td>
                                         <td style="text-align: center" data-bind="text: fiProductBusinessName"></td>
@@ -203,7 +203,7 @@
                                         <th rowspan="2">Cửa khẩu nhập</th>
                                     </tr>
                                     </thead>
-                                    <tbody data-bind="foreach: fiProductList">
+                                    <tbody data-bind="foreach: fiTbdHanghoa26List">
                                     <tr>
                                         <td data-bind="text: $index() + 1"></td>
                                         <td style="text-align: center" data-bind="text: fiProductBusinessName"></td>

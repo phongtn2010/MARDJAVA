@@ -192,8 +192,7 @@
                                         code="mard.danhsach.ngaycapphep"/></th>
                                 <th class="text-center">Tên Doanh nghiệp</th>
                                 <th class="text-center"><spring:message code="mard.danhsach.trangthai"/></th>
-                                <th class="text-center" style="width: 25px;"><spring:message
-                                        code="mard.danhsach.sua"/></th>
+                                <th class="text-center" style="width: 25px;">Sửa/Gửi</th>
                                 <th class="text-center" style="width: 100px;"><spring:message
                                         code="mard.danhsach.xemcongvan"/></th>
                                 <th class="text-center" style="width: 25px;"><spring:message
@@ -220,17 +219,14 @@
                                         <a href="javascript:void(0)"
                                            data-bind="text : fiMaHoso"></a>
                                     </td>
+                                    <td class="text-center" data-bind="date: fiNgaytao"></td>
                                     <td class="text-center" data-bind=""></td>
-                                    <td class="text-center" data-bind=""></td>
-                                    <td data-bind="text: fiTenHanghoa"></td>
-                                    <td>
-                                        <a href="javascript:void(0)"
-                                           data-bind=""></a>
-                                    </td>
+                                    <td class="text-center" data-bind="text: fiTenDn"></td>
+                                    <td class="text-center" data-bind="text: fiTrangthai"></td>
                                     <td class="text-center">
                                         <a href="javascript:void(0)"><i class="fa fa-lg fa-edit tooltips"
                                                                         data-original-title="Sửa hồ sơ"
-                                                                        data-bind=""
+                                                                        data-bind="click: $parent.onEditHS"
                                                                         src="" alt=""/></a>
                                     </td>
                                     <td class="text-center">

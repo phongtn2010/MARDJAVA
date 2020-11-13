@@ -22,7 +22,7 @@
                             <td class="text-center" data-bind="text: ($index() + 1)"></td>
                             <td><input class="form-control" type="text" data-bind="value: fiProCLTarg,  enable: isEnable()"></td>
                             <td><select class="form-control" data-bind="value: fiProCLCompare,  enable: isEnable()">
-                                <option value="0"> Không có </option>
+                                <option value="0"> <spring:message code="mard.25.chitieu.khongco"/></option>
                                 <option value="1"> < </option>
                                 <option value="2"> > </option>
                                 <option value="3"> = </option>
@@ -61,7 +61,7 @@
                             </td>
                             <td>
                                 <select class="form-control" data-bind="value: EfiProCLCompare">
-                                    <option value="0"> Không có </option>
+                                    <option value="0"> <spring:message code="mard.25.chitieu.khongco"/> </option>
                                     <option value="1"> < </option>
                                     <option value="2"> > </option>
                                     <option value="3"> = </option>
@@ -115,7 +115,7 @@
                             <td class="text-center" data-bind="text: ($index() + 1)"></td>
                             <td><input class="form-control" type="text" data-bind="value: fiProATTarg,  enable: isEnable()"></td>
                             <td><select class="form-control" data-bind="value: fiProATCompare,  enable: isEnable()">
-                                <option value="0"> Không có </option>
+                                <option value="0"> <spring:message code="mard.25.chitieu.khongco"/> </option>
                                 <option value="1"> < </option>
                                 <option value="2"> > </option>
                                 <option value="3"> = </option>
@@ -154,7 +154,7 @@
                             </td>
                             <td>
                                 <select class="form-control" data-bind="value: EfiProATCompare">
-                                    <option value="0"> Không có </option>
+                                    <option value="0"> <spring:message code="mard.25.chitieu.khongco"/> </option>
                                     <option value="1"> < </option>
                                     <option value="2"> > </option>
                                     <option value="3"> = </option>
