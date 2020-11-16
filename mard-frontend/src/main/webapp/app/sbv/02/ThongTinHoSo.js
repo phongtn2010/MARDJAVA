@@ -1,12 +1,17 @@
 function ThongTinHoSoVM(options) {
     var self = this;
+    self.fiIdHS = ko.observable((options && options.hasOwnProperty('fiIdHS')) ? options.fiIdHS : null);
+    self.fiHSType = ko.observable((options && options.hasOwnProperty('fiHSType')) ? options.fiHSType : null);
     self.thongtinDNVM = ko.observable(new ThongTinDNVM(options));
     self.kyHoSoVM = ko.observable(new KyHoSoVM(options));
     self.thongtinHangHoa = ko.observable(new ThongTinHangHoaVM(options));
+    // self.lstProfileStatus  = ko.observableArray((options && options.hasOwnProperty('lstProfileStatus')) ? options.lstProfileStatus :[]);
     self.getData = function () {
         var body = {
+            "fiIdHS": self.fiIdHS(),
             "fiTenDoanhNghiep": self.thongtinDNVM().fiTenDoanhNghiep(),
             "fiTruSoChinh": self.thongtinDNVM().fiTruSoChinh(),
+            "fiMaSoThue": self.thongtinDNVM().fiMaSoThue(),
             "fiDienThoai": self.thongtinDNVM().fiDienThoai(),
             "fiTrangThaiHoSo": 0,
             "fiFax": self.thongtinDNVM().fiSoFax(),
@@ -17,6 +22,7 @@ function ThongTinHoSoVM(options) {
             "fiHinhThucDauTu": self.thongtinDNVM().fiHinhThucDauTu(),
             "fiTongVon": self.thongtinDNVM().fiTongVon(),
             "fiVonVay": self.thongtinDNVM().fiVonVay(),
+            "fiVonPhapDinh": self.thongtinDNVM().fiVonPhapDinh(),
             "fiTiLeXK": self.thongtinDNVM().fiTiLeXK(),
             "fiSoLuongCBCN": self.thongtinDNVM().fiSoLuongCBCN(),
             "fiThoiGianHD": self.thongtinDNVM().fiThoiGianHD(),
@@ -25,24 +31,22 @@ function ThongTinHoSoVM(options) {
             "fiChucVuKy": self.kyHoSoVM().fiChucVuKy(),
             "fiNguoiKy": self.kyHoSoVM().fiNguoiKyHS(),
             "fiNgayKy": self.kyHoSoVM().fiNgayKyHS(),
-            // "fiMSThue": self.fiMSThue(),
-            // "fiTaxCode": self.thongtinChungVM().fiTaxCode(),
-            // "fiHSCreatedDate": new Date(self.thongtinChungVM().fiHSCreatedDate()).getTime(),
-            // "fiRegistrationNo": self.thongtinChungVM().fiRegistrationNo(),
-            // "fiImporterAddress": self.thongtinChungVM().fiImporterAddress(),
-            // "fiImporterName": self.thongtinChungVM().fiImporterName(),
-            // "fiImporterTel": self.thongtinChungVM().fiImporterTel(),
-            // "fiImporterFax": self.thongtinChungVM().fiImporterFax(),
-            // "fiImporterEmail": self.thongtinChungVM().fiImporterEmail(),
-            // "fiSignAddress": self.kyHoSoVM().fiSignAddress(),
-            // "fiSignDate": new Date(self.kyHoSoVM().fiSignDate()).getTime(),
-            // "fiSignName": self.kyHoSoVM().fiSignName(),
-            // "fiSignPosition": self.kyHoSoVM().fiSignPosition(),
-            // "fiProductList": [],
-            // "fiExporterCountryList": [],
-            // "fiLocationQuarantineList": [],
-            // "fiProcessingList": [],
-            // "fiAttachmentList": self.uploadFileVM().getLstAttachments()
+            "fiThoiGianXNK": self.thongtinHangHoa().fiThoiGianXNK(),
+            "fiIdCuaKhau": self.thongtinHangHoa().fiIdCuaKhau(),
+            "fiSoGiayDaCap": self.thongtinHangHoa().fiSoGiayDaCap(),
+            "fiCapLanDau": self.thongtinHangHoa().fiCapLanDau(),
+            "fiProductList": []
+        }
+        switch (self.fiHSType().toString()) {
+            case "1": {
+                body["fiProductList"] = self.thongtinHangHoa().productVM().fiProductList();
+                break;
+            }
+            case "2": {
+                body["fiProductList"] = self.thongtinHangHoa().productVM().fiProductList();
+                break;
+            }
+            default: return;
         }
         return body;
     }

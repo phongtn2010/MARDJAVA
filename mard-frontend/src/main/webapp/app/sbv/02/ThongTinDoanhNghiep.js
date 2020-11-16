@@ -7,7 +7,7 @@ function ThongTinDNVM(data) {
         });
     ttdnVMSelf.fiTruSoChinh = ko.observable((data && data.hasOwnProperty('fiImporterAddress')) ? data.fiImporterAddress : null);
     ttdnVMSelf.fiDienThoai = ko.observable((data && data.hasOwnProperty('fiDienThoai')) ? data.fiDienThoai : null);
-    ttdnVMSelf.fiMSThue = ko.observable((data && data.hasOwnProperty('fiTaxCode')) ? data.fiTaxCode : null);
+    ttdnVMSelf.fiMaSoThue = ko.observable((data && data.hasOwnProperty('fiTaxCode')) ? data.fiTaxCode : null);
     ttdnVMSelf.fiSoFax = ko.observable((data && data.hasOwnProperty('fiSoFax')) ? data.fiSoFax : null);
     ttdnVMSelf.fiSoDonDN = ko.observable((data && data.hasOwnProperty('fiSoDonDN')) ? data.fiSoDonDN : null);
     ttdnVMSelf.fiNguoiDaiDien = ko.observable((data && data.hasOwnProperty('fiNguoiDaiDien')) ? data.fiNguoiDaiDien : null);

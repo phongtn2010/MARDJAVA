@@ -27,11 +27,16 @@ public class SBV02Constant {
         public static final String VIEW = "mard.06.view";
     }
     public static class API {
+
         private API(){
 
         }
+        public static final String VANG = "sbv.02.danhmuc.vang";
         public static final String BACKEND = "sbv.api.backend.dev";
         public static final String CUAKHAU = "sbv.02.danhmuc.cuakhau";
+        public static final String HOSO_CREATE = "sbv.02.tbdhosovang2.create";
+        public static final String DVT = "sbv.02.danhmuc.dvt";
+        public static final String TIENTE = "sbv.02.danhmuc.tiente";
 
 
 

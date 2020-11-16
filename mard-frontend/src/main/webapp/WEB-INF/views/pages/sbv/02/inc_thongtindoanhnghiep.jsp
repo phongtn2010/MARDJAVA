@@ -46,13 +46,13 @@
                 </div>
                 <div class="col-md-4">
                     <input
-                            data-bind="value: fiMSThue "
+                            data-bind="value: fiMaSoThue "
                             class="form-control"
                             disabled/>
                 </div>
                 <div class="col-md-2 nsw-text-right">
                     <label><spring:message
-                            code="sbv.02.fax"/><a class="nsw-require-field">*</a></label>
+                            code="sbv.02.fax"/><a class="nsw-require-field"></a></label>
                 </div>
                 <div class="col-md-4">
                     <input
@@ -100,7 +100,7 @@
                 </div>
                 <div class="col-md-4">
                     <input
-                            data-bind="value: fiNgayCapGiay , enable: $root.isEditable()"
+                            data-bind="datepicker: fiNgayCapGiay , enable: $root.isEditable()"
                             class="form-control form-control-inline date-picker"
                             data-date-format="dd/mm/yyyy" type="text" value=""
                             maxlength="10" />
@@ -185,8 +185,10 @@
                 </div>
                 <div class="col-md-4">
                     <input
-                            data-bind="value: fiThoiGianHD"
-                            class="form-control"/>
+                            data-bind="datepicker: fiThoiGianHD , enable: $root.isEditable()"
+                            class="form-control form-control-inline date-picker"
+                            data-date-format="dd/mm/yyyy" type="text" value=""
+                            maxlength="10" />
                 </div>
                 <div class="col-md-2 nsw-text-right">
                     <label><spring:message
