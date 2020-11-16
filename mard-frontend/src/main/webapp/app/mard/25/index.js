@@ -40,7 +40,7 @@ function Mard25VM() {
     self.selectedHoSo=ko.observable(null);
     self.lstNhom = ko.observableArray([]);
     self.lstProvince = ko.observableArray([]);
-
+    self.guiBaoCaoHS2dVM = ko.observable(new GuiBaoCaoHS2D());
     self.pagination = ko.observable(new PagingVM({
         pageSize: MAX_PAGE_SIZE,
         totalCount: 0,
@@ -425,7 +425,9 @@ function Mard25VM() {
         $('#modal_xin_rut').modal('show');
     }
 
-
+    self.guiBaoCaoHS2d = function(item){
+        self.guiBaoCaoHS2dVM().update(item);
+    }
 
     self.viewLichSu = function (item, e) {
         self.lichsuXuly().show(item.fiNSWFileCode)
@@ -554,6 +556,50 @@ function GiayPhepVM(options) {
         }
     }
 
+}
+
+function GuiBaoCaoHS2D(){
+    var self =this;
+    self.fiHSCode = ko.observable(null);
+    self.fiFile = ko.observable(null);
+    self.fiTenFile = ko.observable(null);
+    self.fiListAttach = ko.observableArray([]);
+
+    self.update = function(data){
+        self.fiHSCode(data.fiNSWFileCode);
+    }
+    self.themMoiFileBaoCao =function () {
+        var files = $("#file-baocao")[0].files[0];
+        if (!files || files.length == 0) {
+            app.Alert("Bạn chưa đính kèm file");
+            return;
+        }
+        var fiFileName = self.fiFile().replace(/^.*[\\\/]/, '');
+        $('#loading08').show();
+        app.uploadFile({
+            file: files,
+            mcode: 'mard',
+            pcode: '25',
+            url: '/mard/25/upload',
+            success: function (d) {
+                var fileLink = d.data.urlFile;
+                var fileId = d.data.itemId;
+                var item ={
+                    fiLinkBNN: fileLink,
+                    fiGuidBNN: fileId,
+                    fiFileHD: fiFileName,
+                    fiFileTypeID: 9,
+                    fiFileTypeName: 'File báo cáo hồ sơ 2D'
+                }
+                $('#loading08').hide();
+            },
+            error: function (e) {
+                self.errorMsg('Có lỗi tải file lên' + e);
+                $('#loading08').hide();
+
+            }
+        });
+    }
 }
 
 function XinRutHoSoVM () {

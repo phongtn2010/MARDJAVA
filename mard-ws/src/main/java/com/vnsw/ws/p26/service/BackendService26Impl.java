@@ -22,7 +22,7 @@ import org.springframework.web.client.RestTemplate;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
-@Service("backendService25")
+@Service("backendService26")
 public class BackendService26Impl implements BackendService26 {
 
     private static final String CLASS_NAME = "BackendServiceImpl";
@@ -67,59 +67,20 @@ public class BackendService26Impl implements BackendService26 {
     }
 
     @Override
-    public ResponseJson xacNhanDon(ResponseWrapper responseWrapper) {
-        String restUri = environment.getRequiredProperty(URI_BACKEND_ADDRESS) + Constants26.RES_URI.URI_XAC_NHAN_DON;
-        return callServiceBackend(responseWrapper,restUri);
-    }
-
-
-    @Override
-    public ResponseJson phanhoiYeucauSuaHoso(ResponseWrapper responseWrapper) {
-        String restUri = environment.getRequiredProperty(URI_BACKEND_ADDRESS) + Constants26.RES_URI.URI_UPDATE_KETQUA_XIN_SUA_HS;
-        return callServiceBackend(responseWrapper,restUri);
+    public ResponseJson phanHoiDonDK(ResponseWrapper responseWrapper) {
+        return callServiceBackend(responseWrapper,Constants26.RES_URI.URI_PHAN_HOI_DON_DK);
     }
 
     @Override
-    public ResponseJson ketQuaXuLy(ResponseWrapper responseWrapper) {
-        String restUri = environment.getRequiredProperty(URI_BACKEND_ADDRESS) + Constants26.RES_URI.URI_KET_QUA_XU_LY;
-        return callServiceBackend(responseWrapper,restUri);
+    public ResponseJson guiCVMienKiem(ResponseWrapper responseWrapper) {
+        return callServiceBackend(responseWrapper,Constants26.RES_URI.URI_GUI_CV_MIEN_KIEM);
     }
 
     @Override
-    public ResponseJson thuHoiGDK(ResponseWrapper responseWrapper) {
-        String restUri = environment.getRequiredProperty(URI_BACKEND_ADDRESS) + Constants26.RES_URI.URI_THU_HOI_GDK;
-        return callServiceBackend(responseWrapper,restUri);
+    public ResponseJson thuHoiCVMienKiem(ResponseWrapper responseWrapper) {
+        return callServiceBackend(responseWrapper,Constants26.RES_URI.URI_THU_HOI_CV_MIEN_KIEM);
     }
 
-    @Override
-    public ResponseJson xuLyKQ(ResponseWrapper responseWrapper) {
-        String restUri = environment.getRequiredProperty(URI_BACKEND_ADDRESS) + Constants26.RES_URI.URI_TCCD_XU_LY_KQ;
-        return callServiceBackend(responseWrapper,restUri);
-    }
-
-    @Override
-    public ResponseJson tccdGuiKQKT(ResponseWrapper responseWrapper) {
-        String restUri = environment.getRequiredProperty(URI_BACKEND_ADDRESS) + Constants26.RES_URI.URI_TCCD_GUI_KQKT;
-        return callServiceBackend(responseWrapper,restUri);
-    }
-
-    @Override
-    public ResponseJson giayXNCL(ResponseWrapper responseWrapper) {
-        String restUri = environment.getRequiredProperty(URI_BACKEND_ADDRESS) + Constants26.RES_URI.URI_GIAY_XNCL;
-        return callServiceBackend(responseWrapper,restUri);
-    }
-
-    @Override
-    public ResponseJson thuHoiGiayXNCL(ResponseWrapper responseWrapper) {
-        String restUri = environment.getRequiredProperty(URI_BACKEND_ADDRESS) + Constants26.RES_URI.URI_THU_HOIGIAY_XNCL;
-        return callServiceBackend(responseWrapper,restUri);
-    }
-
-    @Override
-    public ResponseJson tiepNhanHD2D(ResponseWrapper responseWrapper) {
-        String restUri = environment.getRequiredProperty(URI_BACKEND_ADDRESS) + Constants26.RES_URI.URI_TIEP_NHAN_HS2D;
-        return callServiceBackend(responseWrapper,restUri);
-    }
 
     private ResponseJson callServiceBackend(ResponseWrapper responseWrapper, String restUri){
         ResponseJson responseJson = new ResponseJson();

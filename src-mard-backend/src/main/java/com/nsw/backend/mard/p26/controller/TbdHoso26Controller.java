@@ -110,6 +110,7 @@ public class TbdHoso26Controller extends BaseController {
             if (profile == null) {
                 return createErrorResponse("No content", HttpStatus.NO_CONTENT);
             }
+
             TbdHoso26 result = saveDraftTbdhoso26(profile);
             TbdLichsu26 profileHst = new TbdLichsu26();
             profileHst.setFiIdHS(result.getFiIdHoSo26());

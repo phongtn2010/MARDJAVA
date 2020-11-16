@@ -50,6 +50,7 @@ public class Constants {
 		public static final String MARD_02 = "BNNPTNT0600005";
 		public static final String MARD_03 = "BNNPTNT0600006";
         public static final String MARD25 = "BNNPTNT0200025";
+        public static final String MARD26 = "BNNPTNT0200026";
     }
 
     public interface MARD_PRO_RECEIVE {

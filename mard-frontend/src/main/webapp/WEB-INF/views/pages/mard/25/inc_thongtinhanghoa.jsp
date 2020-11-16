@@ -16,7 +16,7 @@
                 <form role="form" class="form-horizontal">
                     <div class="form-group">
                         <div class="col-md-12">
-                            <span class="nsw-require-field" data-bind="validationMessage: fiTbdHanghoa26List"></span>
+                            <span class="nsw-require-field" data-bind="validationMessage: fiProductList"></span>
                             <table class="table table-striped table-bordered table-hover order-column">
                                 <thead>
                                 <tr class="nsw-tr tr-nsw1-bgcolor">
@@ -34,7 +34,7 @@
                                         <spring:message code="mard.25.tokhai.hang_hoa_grid_thaotac"/></th>
                                 </tr>
                                 </thead>
-                                <tbody data-bind="foreach: fiTbdHanghoa26List">
+                                <tbody data-bind="foreach: fiProductList">
                                 <tr>
                                     <td class="text-center" data-bind="text: ($index() + 1)"></td>
                                     <td data-bind="text : fiProName"></td>

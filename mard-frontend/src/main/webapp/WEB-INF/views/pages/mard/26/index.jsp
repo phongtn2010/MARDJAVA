@@ -222,7 +222,7 @@
                                     <td class="text-center" data-bind="date: fiNgaytao"></td>
                                     <td class="text-center" data-bind=""></td>
                                     <td class="text-center" data-bind="text: fiTenDn"></td>
-                                    <td class="text-center" data-bind="text: fiTrangthai"></td>
+                                    <td class="text-center" data-bind="text: $parent.getTrangThaiHS(fiTrangthai)"></td>
                                     <td class="text-center">
                                         <a href="javascript:void(0)"><i class="fa fa-lg fa-edit tooltips"
                                                                         data-original-title="Sửa hồ sơ"

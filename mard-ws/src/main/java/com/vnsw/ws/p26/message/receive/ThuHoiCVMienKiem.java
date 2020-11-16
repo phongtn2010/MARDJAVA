@@ -10,29 +10,28 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Date;
 
-@XmlType(name = "AniFeedResultCertificateCancel")
+@XmlType(name = "ApplicationCancel")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Data
-public class BNNThuHoiGiayXNCL {
+public class ThuHoiCVMienKiem {
     @XmlElement(name = "NSWFileCode")
-    private String fiNSWFileCode;
+    private String fiMaHoso;
     @XmlJavaTypeAdapter(DateSerialization.class)
-    @XmlElement(name = "CancelDate")
-    private Date fiNgayHuy;
+    @XmlElement(name = "SignConfirmDate")
+    private Date fiNgayThuHoi;
     @XmlElement(name = "Reason")
-    private String fiLyDo;
+    private String fiLyDoThuHoi;
     @XmlJavaTypeAdapter(DateSerialization.class)
     @XmlElement(name = "SignConfirmDate")
     private Date fiNgayKy;
     @XmlElement(name = "SignConfirmName")
     private String fiNguoiKy;
-    @XmlElement(name = "AniFeedConfirmNo")
-    private Long fiSoGDKCuaBNN;
+    @XmlElement(name = "ConfirmApplicationNo")
+    private String fiSoCVMienKiem;
     @XmlElement(name = "AttachmentId")
-    private String fiFileID;
+    private String fiFileId;
     @XmlElement(name = "FileName")
     private String fiFileName;
     @XmlElement(name = "FileLink")
     private String fiFileLink;
-
 }

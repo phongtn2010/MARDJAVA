@@ -35,7 +35,7 @@ import java.util.UUID;
  *
  * @author Linhdx
  */
-@Service("envelopeService25")
+@Service("envelopeService26")
 public class EnvelopeService26Impl implements EnvelopeService26 {
 
     private static final String CLASS_NAME = "EnvelopeServiceImpl";
@@ -44,7 +44,7 @@ public class EnvelopeService26Impl implements EnvelopeService26 {
     private static final String IDENTITY = "BNNPTNT";
     private static final String COUNTRY_CODE = "VN";
     private static final String MINISTRY_CODE = "BNNPTNT";
-    private static final String ORAGANIZATION_CODE = "25";
+    private static final String ORAGANIZATION_CODE = "26";
     private static final String UNIT_CODE = "BNNPTNT";
     
     @Autowired

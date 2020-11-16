@@ -7,6 +7,7 @@
 <%@include file="inc_script.jsp" %>
 <script type="text/javascript">
     var idHS = ${idHS};
+    var isCopy = ${isCopy};
 </script>
 <div class="row" id="edit26Page">
     <div class="col-md-12">

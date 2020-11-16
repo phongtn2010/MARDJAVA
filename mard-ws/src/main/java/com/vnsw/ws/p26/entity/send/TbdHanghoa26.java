@@ -10,10 +10,12 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Data
 public class TbdHanghoa26 {
-
+	@XmlElement(name = "GoodsId")
+	private Integer fiIdHH26;
+	
     @XmlElement(name = "NSWRegisterFileCode")
     private String fiNSWFileCode;
-
+	
     @XmlElement(name = "GoodsCode")
     private String fiIdProduct;
 
@@ -74,9 +76,9 @@ public class TbdHanghoa26 {
     @XmlElement(name = "TechnicalRegulations")
     private String fiProQuyChuan;
 
-    @XmlElementWrapper(name = "QuantityVolumeList")
-    @XmlElement(name = "QuantityVolume")
-    private List<QuantityVolume> fiProSLKLList;
+//    @XmlElementWrapper(name = "QuantityVolumeList")
+//    @XmlElement(name = "QuantityVolume")
+//    private List<QuantityVolume> fiProSLKLList;
     @XmlElementWrapper(name = "QualityCriteriaList")
     @XmlElement(name = "QualityCriteria")
     private List<QualityCriteria> fiProCLList;

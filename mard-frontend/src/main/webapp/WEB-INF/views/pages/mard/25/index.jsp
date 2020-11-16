@@ -203,8 +203,8 @@
                                 <span data-bind="text: fiCertNo"></span>
                             </td>
                             <td class="text-center" data-bind="text: fiImporterName"></td>
-                            <td class="text-left" data-bind="text: fiTbdHanghoa26List.fiProMadeIn"></td>
-                            <td class="text-left" data-bind="text: fiTbdHanghoa26List.fiProCountryName"></td>
+                            <td class="text-left" data-bind="text: fiProductList.fiProMadeIn"></td>
+                            <td class="text-left" data-bind="text: fiProductList.fiProCountryName"></td>
                             <td class="text-center" data-bind="text: $parent.getProfileStatus(fiHSStatus)"></td>
                             <td class="text-center" data-bind="text: $parent.getHoSoType(fiHSType)"></td>
 
@@ -247,9 +247,9 @@
                                 </div>
                             </td>
                             <td class="text-center">
-                                <div data-bind="visible:  $parent.getHoSoType(fiHSType)=='2d'">
+                                <div data-bind="visible:  $parent.getHoSoType(fiHSType)=='2d' ">
                                     <a data-target="#modal_gui_bao_cao"
-                                       data-toggle="modal" href="javascript:void(0)" data-bind="click: $root.goYCRHoSo"><i
+                                       data-toggle="modal" href="javascript:void(0)" data-bind="click: $parent.guiBaoCaoHS2d"><i
                                             class="fa fa-upload"></i></a>
                                 </div>
                             </td>
@@ -367,7 +367,7 @@
 
     <div id="modal_gui_bao_cao" class="modal container in modal-overflow"
          tabindex="-1"
-         data-backdrop="static" data-keyboard="false">
+         data-backdrop="static" data-keyboard="false" data-bind="with: guiBaoCaoHS2dVM">
         <div class="modal-header" style="background: #337ab7; color: #fff;">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
             <b class="modal-title"><spring:message code="mard.25.tccd.bao_cao_title"/></b>
@@ -376,38 +376,38 @@
             <div class="panel panel-primary">
                 <div class="panel-body">
                     <div class="form-group">
-                        <div class="row">
+                        <div class="row form-group">
                             <div class="col-md-2">
                                 <label><spring:message code="mard.25.tccd.bao_cao_mahs"/><a  class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <label data-bind=""></label>
+                                <label data-bind="text: fiHSCode"></label>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row form-group">
                             <div class="col-md-2">
                                 <label><spring:message code="mard.25.tccd.bao_cao_ten_file"/><a  class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-10">
                                 <input class="form-control"
-                                       data-bind=""
+                                       data-bind="value: fiTenFile"
                                        type="text"/>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row form-group">
                             <div class="col-md-2">
                                 <label><spring:message code="mard.25.tccd.bao_cao_file"/><a  class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-10">
-                                <input class="form-control" type="file" data-bind=""/>
+                                <input class="form-control" id="file-baocao"  type="file" data-bind="value: fiFile"/>
                             </div>
                         </div>
-                        <div class="nsw-text-center">
+                        <div class="nsw-text-center form-group">
                             <button class="btn green"
-                                    data-bind="click: btnSearch"
-                            ><i class="fa fa-search"></i><spring:message code="mard.25.tccd.bao_cao_btn"/></button>
+                                    data-bind="click: themMoiFileBaoCao"
+                            ><i class="fa fa-plus"></i><spring:message code="mard.25.tccd.bao_cao_btn"/></button>
                         </div>
-                        <div class="row">
+                        <div class="row form-group">
                             <table class="table table-striped table-bordered table-hover order-column">
                                 <thead>
                                 <tr class="nsw-tr tr-nsw1-bgcolor">

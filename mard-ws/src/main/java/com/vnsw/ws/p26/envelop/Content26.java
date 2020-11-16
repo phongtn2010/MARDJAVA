@@ -23,4 +23,15 @@ public class Content26 {
     @XmlElement(name = "Application")
     protected Hoso26 hoso26;
 
+    // Phan hoi
+    @XmlElement(name = "ApplicationResponse")
+    protected PhanHoiDonDK phanHoiDonDK;
+
+    // BNN cap cv
+    @XmlElement(name = "ApplicationReplies")
+    protected CVMienKiem cvMienKiem;
+
+    // BNN cap cv
+    @XmlElement(name = "ApplicationCancel")
+    protected ThuHoiCVMienKiem thuHoiCVMienKiem;
 }

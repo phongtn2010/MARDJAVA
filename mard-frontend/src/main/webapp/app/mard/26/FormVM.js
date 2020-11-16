@@ -53,9 +53,16 @@ function HangHoaVM(options) {
 function FormVM(options) {
     var form26Sefl =this;
     form26Sefl.fiTbdHoso26 = ko.observable((options && options.hasOwnProperty('fiTbdHoso26')) ? options.fiTbdHoso26 :null);
-    console.log(options);
-    console.log(options.fiTrangthaiList);
-    console.log(options.fiTbdHoso26);
+    if(isCopy&&form26Sefl.fiTbdHoso26()){
+        form26Sefl.fiTbdHoso26().fiIdHoSo26(null);
+        ko.utils.arrayForEach(form26Sefl.fiTbdHoso26().fiProductList, function(product) {
+            product.isSelected = ko.observable(false);
+            product.label = ko.observable('Bỏ chọn');
+            product.fiIdHH26=null;
+            form26Sefl.lstHanghoa(product);
+        });
+
+    }
     form26Sefl.hangHoa26VM = ko.observable(new HangHoaVM());
     form26Sefl.lstHanghoa = ko.observableArray(form26Sefl.fiTbdHoso26()  ? form26Sefl.fiTbdHoso26().fiProductList :[]);
     form26Sefl.errorHangHoaMessage = ko.observable(null);

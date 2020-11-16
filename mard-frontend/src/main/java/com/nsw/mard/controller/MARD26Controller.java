@@ -73,6 +73,7 @@ public class MARD26Controller extends BaseController {
             UserCustom user = (UserCustom) principal;
             initData(model, user);
             model.addAttribute("idHS",0);
+            model.addAttribute("isCopy",false);
         } else {
             return AppConstant.redirectPage(AppConstant.Pages.LOGOUT);
         }
@@ -85,6 +86,7 @@ public class MARD26Controller extends BaseController {
             UserCustom user = (UserCustom) principal;
             initData(model, user);
             model.addAttribute("idHS",idHS);
+            model.addAttribute("isCopy",false);
         } else {
             return AppConstant.redirectPage(AppConstant.Pages.LOGOUT);
         }
@@ -107,7 +109,19 @@ public class MARD26Controller extends BaseController {
         }
         return MARD26Constant.ViewType.VIEW;
     }
-
+    @RequestMapping(value = "/copy/{idHS}", method = RequestMethod.GET)
+    public String copy(ModelMap model,@PathVariable Integer idHS) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            UserCustom user = (UserCustom) principal;
+            initData(model, user);
+            model.addAttribute("idHS",idHS);
+            model.addAttribute("isCopy",true);
+        } else {
+            return AppConstant.redirectPage(AppConstant.Pages.LOGOUT);
+        }
+        return MARD26Constant.ViewType.EDIT;
+    }
     /**
      * Khởi tạo dữ liệu
      *

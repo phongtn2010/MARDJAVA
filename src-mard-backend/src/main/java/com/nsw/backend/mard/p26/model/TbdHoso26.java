@@ -26,7 +26,7 @@ public class TbdHoso26 extends CmonBaseEntity implements Serializable {
     @Id
     @Column(nullable = false,name = "FI_HS_ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_NAME)
-    @SequenceGenerator(sequenceName = SEQUENCE_NAME, schema = "MARD", initialValue = 10000, allocationSize = 1, name = SEQUENCE_NAME)
+    @SequenceGenerator(sequenceName = SEQUENCE_NAME, schema = "MARD", initialValue = 1, allocationSize = 1, name = SEQUENCE_NAME)
     private Integer fiIdHoSo26;
 
     //----------------------------------------------------------------------
@@ -77,7 +77,7 @@ public class TbdHoso26 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_BUS_EMAIL",  length = 250)
     private String fiEmailDn;
 
-    //Thông tin hồ sơ Doanh Nghiệp
+    //Thông tin hồ sơ ky don
     @Column(name = "FI_SIGN_PROVIN_CODE", length = 6)
     private String fiSignProvinCode;
 
@@ -93,9 +93,25 @@ public class TbdHoso26 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_NGAYKY")
     private Date fiNgayKy;
 
+    //Thông tin cv mien kiem
     @Column(name = "FI_CONGVAN_MK", length = 250)
     private String fiSoCVMienKiem;
 
+    @Column(name = "FI_NOIKYCV", length = 500)
+    private String fiNoiKyCV;
+
+    @Column(name = "FI_NGAYKY_CV")
+    private Date fiNgayKyCV;
+
+    @Column(name = "FI_HIEULUC_TUNGAY")
+    private Date fiHieuLucTuNgay;
+
+    @Column(name = "FI_HIEULUC_TOINGAY")
+    private Date fiHieuLucToiNgay;
+
+    @Column(name = "FI_TENNGUOIKY_CV", length = 200)
+    private String fiTenNguoiKyCV;
+    //thong tin hang hoa
     @Column(name = "FI_NUOCSX", length = 250)
     private String fiNuocSX;
     @Column(name = "FI_HANGSX", length = 250)

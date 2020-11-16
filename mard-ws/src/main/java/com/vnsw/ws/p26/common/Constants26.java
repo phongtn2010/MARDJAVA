@@ -7,7 +7,7 @@ package com.vnsw.ws.p26.common;
 
 public class Constants26 {
     public static final String MARD26 = "BNNPTNT0200026";
-    public interface MARD25_TYPE {
+    public interface MARD26_TYPE {
 
         public static final String TYPE_10 = "10";
         public static final String TYPE_11 = "11";
@@ -32,7 +32,7 @@ public class Constants26 {
 
     }
 
-    public interface MARD25_FUNCTION {
+    public interface MARD26_FUNCTION {
 
         public static final String FUNCTION_01 = "01";
         public static final String FUNCTION_02 = "02";
@@ -76,6 +76,9 @@ public class Constants26 {
 
     public interface RES_URI {
         public static final String URI_GET_HS_BY_ID = "/mard/26/ws/hoso/";
+        public static final String URI_PHAN_HOI_DON_DK = "/mard/26/ws/phanhoidondk/";
+        public static final String URI_GUI_CV_MIEN_KIEM = "/mard/26/ws/guicv/";
+        public static final String URI_THU_HOI_CV_MIEN_KIEM = "/mard/26/ws/thuhoicv/";
     }
 
     public interface HosoStatus {

@@ -114,6 +114,16 @@ function IndexVM(data) {
         console.log(item);
         document.location = app.appContext + '/mard/26/edit/'+item.fiIdHoSo26;
     }
+
+    index26Self.getTrangThaiHS =function (id) {
+        var lstProfileStatus = index26Self.fiTrangthaiList();
+        var pos = lstProfileStatus.find(function (e) {
+            return e.fiCatType == Number(id);
+        })
+        if (pos)
+            return pos.fiCatTypeName;
+        else return id;
+    }
 }
 function init(data) {
     var index26VM = new IndexVM(data);

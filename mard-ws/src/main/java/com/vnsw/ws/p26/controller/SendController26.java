@@ -15,6 +15,7 @@ import com.vnsw.ws.helper.RabbitMQErrorHelper;
 import com.vnsw.ws.helper.SoapHelper;
 import com.vnsw.ws.p26.common.Constants26;
 import com.vnsw.ws.p26.entity.json.SendMessage;
+import com.vnsw.ws.p26.entity.send.ProductInfo;
 import com.vnsw.ws.p26.entity.send.TbdHanghoa26;
 import com.vnsw.ws.p26.envelop.*;
 import com.vnsw.ws.p26.message.send.DNNopKetQua;
@@ -47,6 +48,7 @@ import javax.xml.soap.SOAPMessage;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -54,10 +56,10 @@ import static com.vnsw.ws.helper.JsonHelper.createResponse;
 
 @SuppressWarnings("ALL")
 @RestController
-@RequestMapping("/send/25")
+@RequestMapping("/send/26")
 public class SendController26 {
     public static final Logger logger = LoggerFactory.getLogger(SendController26.class);
-    private static final String CLASS_NAME = "SendController25";
+    private static final String CLASS_NAME = "SendController26";
 
     @Autowired
     private Environment environment;
@@ -126,10 +128,13 @@ public class SendController26 {
                         "CCN");
                 Hoso26 hoso26 = mapper.readValue(jsonData, Hoso26.class);
                 switch (sendMessage.getType()) {
-                    case Constants26.MARD25_TYPE.TYPE_10: // DN gui ho so
+                    case Constants26.MARD26_TYPE.TYPE_10: // DN gui ho so
+                        logger.info("Gui moi hs");
                         hoso26.setDepartmentCode("1");
                         hoso26.setDepartmentName("1");
-//                        hoso25.getFiProductList().get(0).setFiBanChat("1");
+
+                        //bo the khoi luong so luong
+//                        hoso26.getFiProductList().get(0).setFiProSLKLList(null);
                         content.setHoso26(hoso26);
                         body = envelopeService.createBody(content);
                         envelopeSend = envelopeService.createMessage(header, body);
@@ -217,7 +222,7 @@ public class SendController26 {
             SOAPMessage soapResponse = soapConnection.call(soapMessage, url);
             responseStr = SoapHelper.getSOAPResponse(soapResponse);
 
-            logger.debug("RES 25:" + responseStr);
+            logger.debug("RES 26:" + responseStr);
             soapConnection.close();
         } catch (Exception ex) {
             LogUtil.addLog(ex);
@@ -267,7 +272,7 @@ public class SendController26 {
      */
     private boolean checkTypeReturn(Envelope26 envelopeReturn) {
         return envelopeReturn != null && envelopeReturn.getHeader() != null
-                && envelopeReturn.getHeader().getSubject() != null && Constants26.MARD25_FUNCTION.FUNCTION_99
+                && envelopeReturn.getHeader().getSubject() != null && Constants26.MARD26_FUNCTION.FUNCTION_99
                 .equals(envelopeReturn.getHeader().getSubject().getFunction());
     }
 

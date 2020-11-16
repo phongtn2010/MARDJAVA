@@ -24,7 +24,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Xử lý bản tin của thủ tục 25 cua MARD
+ * Xử lý bản tin của thủ tục 26 cua MARD
  */
 @Service("receive26Service")
 public class ReceiveService26Impl implements ReceiveService26 {
@@ -79,7 +79,30 @@ public class ReceiveService26Impl implements ReceiveService26 {
                 json = new ResponseJson(false, null, 0L, "");
                 if (errorMsg == null) {
                     switch (type) {
-
+                        case Constants26.MARD26_TYPE.TYPE_11: //Phan hoi don XMK
+                            PhanHoiDonDK phanHoiDonDK =ct.getPhanHoiDonDK();
+                            responseWrapper.setData(phanHoiDonDK);
+                            if (phanHoiDonDK!=null){
+                                json = backendService.phanHoiDonDK(responseWrapper);
+                            }
+                            envelopReturn= createEnvelopReturn(maHoso,Constants.MARD_PRO.MARD26,header,json);
+                            break;
+                        case Constants26.MARD26_TYPE.TYPE_12: //CV mien kiem
+                            CVMienKiem cvMienKiem =ct.getCvMienKiem();
+                            responseWrapper.setData(cvMienKiem);
+                            if (cvMienKiem!=null){
+                                json=backendService.guiCVMienKiem(responseWrapper);
+                            }
+                            envelopReturn= createEnvelopReturn(maHoso,Constants.MARD_PRO.MARD26,header,json);
+                            break;
+                        case Constants26.MARD26_TYPE.TYPE_13: // Thu hoi CV
+                            ThuHoiCVMienKiem thuHoiCVMienKiem =ct.getThuHoiCVMienKiem();
+                            responseWrapper.setData(thuHoiCVMienKiem);
+                            if(thuHoiCVMienKiem!=null){
+                                json=backendService.thuHoiCVMienKiem(responseWrapper);
+                            }
+                            envelopReturn= createEnvelopReturn(maHoso,Constants.MARD_PRO.MARD26,header,json);
+                            break;
                         default:
                             error = new Error26();
                             error.setErrorCode(Constants.ERROR.ERR04_CODE);

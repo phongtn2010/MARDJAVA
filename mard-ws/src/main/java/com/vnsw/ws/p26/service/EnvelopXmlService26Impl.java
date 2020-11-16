@@ -22,7 +22,7 @@ import java.io.StringWriter;
  *
  * @author Linhdx
  */
-@Service("convertXmlService25")
+@Service("convertXmlService26")
 public class EnvelopXmlService26Impl implements EnvelopXmlService26 {
 
     private static final String CLASS_NAME = "EnvelopeServiceImpl";

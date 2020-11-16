@@ -74,6 +74,7 @@ function EditVM(options) {
         });
     }
     edit26VMSefl.btnGuiClick =function () {
+        var body = edit26VMSefl.form26VM().getData();
         edit26VMSefl.pop = app.popup({
             title: 'Thông báo',
             html: '<b>Bạn chắc chắn muốn gửi hồ sơ?</b>',

@@ -126,4 +126,8 @@ public class Constant26 {
             return environment.getRequiredProperty("SEND_WS_ROOT_URL") + WS_URL;
         }
     }
+    public interface SENDER {
+        String CODE = "NSW";
+        String NAME = "Cổng thông tin một cửa quốc gia";
+    }
 }

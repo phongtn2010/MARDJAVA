@@ -76,7 +76,7 @@
                         <td class="text-center">Số lượng</td>
                     </tr>
                 </thead>
-                <tbody data-bind="foreach: fiTbdHanghoa26List">
+                <tbody data-bind="foreach: fiProductList">
                     <tr>
                         <td class="text-center" data-bind="text: ($index() + 1)"></td>
                         <td data-bind="text : fiProName"></td>
