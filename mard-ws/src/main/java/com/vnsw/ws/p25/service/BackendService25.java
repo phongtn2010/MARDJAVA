@@ -11,11 +11,19 @@ import com.vnsw.ws.p25.message.ResponseWrapper;
 
 public interface BackendService25 {
     ResponseJson getDataFromRestUri(String restUri);
-    ResponseJson ketquaThamdinh(ResponseWrapper responseWrapper);
-    ResponseJson phanhoiYeucauHuyHoso(ResponseWrapper responseWrapper);
+    ResponseJson xacNhanDon(ResponseWrapper responseWrapper);
     ResponseJson phanhoiYeucauSuaHoso(ResponseWrapper responseWrapper);
-    ResponseJson congvanVSTY(ResponseWrapper responseWrapper);
-    ResponseJson congvanKDNK(ResponseWrapper responseWrapper);
-    ResponseJson ketquaVSTY(ResponseWrapper responseWrapper);
+    ResponseJson ketQuaXuLy(ResponseWrapper responseWrapper);
+    ResponseJson thuHoiGDK(ResponseWrapper responseWrapper);
+
+    ResponseJson tccdGuiKQKT(ResponseWrapper responseWrapper);
+
+    ResponseJson xuLyKQ(ResponseWrapper responseWrapper);
+
+    ResponseJson giayXNCL(ResponseWrapper responseWrapper);
+
+    ResponseJson thuHoiGiayXNCL(ResponseWrapper responseWrapper);
+
+    ResponseJson tiepNhanHD2D(ResponseWrapper responseWrapper);
 
 }

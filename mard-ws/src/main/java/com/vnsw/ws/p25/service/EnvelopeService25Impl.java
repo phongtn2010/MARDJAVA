@@ -35,7 +35,7 @@ import java.util.UUID;
  *
  * @author Linhdx
  */
-@Service("envelopeService06")
+@Service("envelopeService25")
 public class EnvelopeService25Impl implements EnvelopeService25 {
 
     private static final String CLASS_NAME = "EnvelopeServiceImpl";
@@ -44,7 +44,7 @@ public class EnvelopeService25Impl implements EnvelopeService25 {
     private static final String IDENTITY = "BNNPTNT";
     private static final String COUNTRY_CODE = "VN";
     private static final String MINISTRY_CODE = "BNNPTNT";
-    private static final String ORAGANIZATION_CODE = "06";
+    private static final String ORAGANIZATION_CODE = "25";
     private static final String UNIT_CODE = "BNNPTNT";
     
     @Autowired
@@ -412,7 +412,7 @@ public class EnvelopeService25Impl implements EnvelopeService25 {
         try {
             Body25 body = new Body25();
             body.setContent(content);
-            body.setSignature("");
+//            body.setSignature("");
             return body;
         } catch (Exception ex) {
             String errorInfo = Constants.APP_NAME + Constants.MESSAGE_SEPARATOR + CLASS_NAME

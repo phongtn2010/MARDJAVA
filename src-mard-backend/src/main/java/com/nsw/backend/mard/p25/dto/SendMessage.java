@@ -23,6 +23,7 @@ public class SendMessage {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Object data;
 
+    String dataRequest;
     public static SendMessage parse(TbdHoso25 regProfile){
         SendMessage message = new SendMessage();
         message.setFiNguoitao(regProfile.getFiTaxCode());

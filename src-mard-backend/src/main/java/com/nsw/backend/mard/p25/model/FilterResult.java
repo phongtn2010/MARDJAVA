@@ -5,7 +5,6 @@
  */
 package com.nsw.backend.mard.p25.model;
 
-import com.nsw.backend.mard.p06.model.TbdHoso06;
 import lombok.Data;
 
 import java.util.List;

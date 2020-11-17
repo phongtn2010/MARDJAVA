@@ -26,8 +26,8 @@ public class KetQuaXuLy {
     private String fiFileLink;
     @XmlElement(name = "NameOfStaff")
     private String fiNameOfStaff;
-
     @XmlJavaTypeAdapter(DateSerialization.class)
     @XmlElement(name = "ResponseDate")
     private Date fiResponseDate;
+
 }

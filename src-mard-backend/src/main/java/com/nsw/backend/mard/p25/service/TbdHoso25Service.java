@@ -1,11 +1,8 @@
 package com.nsw.backend.mard.p25.service;
 
 import com.google.common.cache.LoadingCache;
-import com.nsw.backend.mard.p25.model.FilterForm;
-import com.nsw.backend.mard.p25.model.FilterResult;
+import com.nsw.backend.mard.p25.model.*;
 import com.nsw.backend.mard.p25.exception.NSWException;
-import com.nsw.backend.mard.p25.model.TbdHoso25;
-import com.nsw.backend.mard.p25.model.TbdYcrut25;
 
 import java.util.List;
 
@@ -51,7 +48,7 @@ public interface TbdHoso25Service {
      *
      * @param fiIdHoso
      */
-    void delete(int fIdHoso);
+    void delete(int fiIdHoso);
     /**
      * Deletes an entity
      *
@@ -107,4 +104,6 @@ public interface TbdHoso25Service {
     void internalStatusUpdate(TbdHoso25 egProfile, int status);
 
     void rollbackFailedRequestUpdate(TbdHoso25  result);
+    List<TbdHoso25> findByFiHSStatus(String taxCode,Integer from, Integer to);
+
 }

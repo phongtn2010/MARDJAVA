@@ -26,8 +26,9 @@ public class SendMessage {
     public static SendMessage parse(TbdHoso26 regProfile){
         SendMessage message = new SendMessage();
         message.setFiNguoitao(regProfile.getFiCreatedBy());
-        message.setFiIdHoso(regProfile.getFiIdHS().longValue());
-        message.setFiMaHoso(regProfile.getFiNSWFileCode());
+        message.setFiIdHoso(regProfile.getFiIdHoSo26().longValue());
+        message.setFiMaHoso(regProfile.getFiMaHoso());
+        message.setFiMaHoso(regProfile.getFiMaHoso());
         return message;
     }
 }

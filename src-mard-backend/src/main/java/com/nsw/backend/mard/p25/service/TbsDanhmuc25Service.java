@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface TbsDanhmuc25Service {
     public List<TBSDANHMUC25> findByFiCatNoOrderByFiOrder(Long fiCatNo);
+    public List<TBSDANHMUC25> findByFiCatParentOrderByFiOrder(Long id);
 }

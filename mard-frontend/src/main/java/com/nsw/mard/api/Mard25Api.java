@@ -1,5 +1,6 @@
 package com.nsw.mard.api;
 
+import com.google.gson.Gson;
 import com.nsw.api.BaseApi;
 import com.nsw.common.model.SignData;
 import com.nsw.common.model.TokenInfo;
@@ -7,9 +8,9 @@ import com.nsw.common.model.json.ResponseJson;
 import com.nsw.constant.AppConstant;
 import com.nsw.helper.BackendRequestHelper;
 import com.nsw.helper.RabbitMQErrorHelper;
+import com.nsw.mard.constant.Mard06Constant;
 import com.nsw.mard.constant.Mard25Constant;
-import com.nsw.mard.p25.model.FilterForm;
-import com.nsw.mard.p25.model.TbdHoso25;
+import com.nsw.mard.p25.model.*;
 import com.nsw.mard.p6.model.SendMessage;
 import com.nsw.mard.service.DinhkemService;
 import com.nsw.util.Constants;
@@ -17,20 +18,79 @@ import com.nsw.util.LogUtil;
 import com.nsw.util.Utility;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.util.Date;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 
 @RestController
 @RequestMapping("/mard/25")
 public class Mard25Api extends BaseApi {
     static final String TAG = "mard25Api";
+
     @Autowired
     DinhkemService attachmentService;
+    @Autowired
+    Environment environment;
+
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public @ResponseBody ResponseJson uploadFileToBNN(@RequestParam("file") MultipartFile multipartfile,
+                                                      @RequestParam("mcode") String mcode,
+                                                      @RequestParam("pcode") String pcode){
+        ResponseJson json = new ResponseJson();
+        try {
+            String fileName = multipartfile.getOriginalFilename();
+            String folder = environment.getProperty("mard.folder.temp");
+            String api_upload_file = environment.getProperty("mard.api.uploadfile");
+
+            String filePath = folder + fileName;
+            Path path = Paths.get(filePath);
+            Files.write(path, multipartfile.getBytes());
+            File file = new File(filePath);
+
+            MultiValueMap<String, Object> body
+                    = new LinkedMultiValueMap<>();
+            body.add("file", new FileSystemResource(file));
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+            HttpEntity<MultiValueMap<String, Object>> requestEntity
+                    = new HttpEntity<>(body, headers);
+
+
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity<String> responseEntity = restTemplate.postForEntity(api_upload_file,requestEntity,String.class);
+            Gson g = new Gson();
+            ResponeUploadFile responeUploadFile=g.fromJson(responseEntity.getBody().substring(1,responseEntity.getBody().length()-1), ResponeUploadFile.class);
+            json.setSuccess(true);
+            json.setData(responeUploadFile);
+            json.setMessage("Upload file thành công");
+            if(file.exists()){
+                file.delete();
+            }
+            return json;
+        } catch (Exception ex) {
+            json.setData(null);
+            json.setSuccess(false);
+            json.setMessage(ex.getMessage());
+            return json;
+        }
+    }
 
     @RequestMapping(value = "/danhmuc/quocgia", method = RequestMethod.GET)
     public @ResponseBody
@@ -178,7 +238,23 @@ public class Mard25Api extends BaseApi {
             return json;
         }
     }
-
+    @RequestMapping(value = "/danhmuc/getby-catparent/{id}", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseJson getByCatParent(@PathVariable Long id) {
+        ResponseJson json = new ResponseJson();
+        try {
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_BY_CAT_PARENT)+id);
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            json.setData(null);
+            json.setSuccess(false);
+            json.setMessage(ex.getMessage());
+            return json;
+        }
+    }
     @RequestMapping(value = "/hoso/create", method = RequestMethod.POST, headers = {"content-type=application/json"})
     public @ResponseBody
     ResponseJson createHoso(
@@ -332,6 +408,276 @@ public class Mard25Api extends BaseApi {
             return json;
         }
     }
+
+    @RequestMapping(value = "/hanghoa/find/{idHoSo}", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseJson getHangHoaByIDHS(@PathVariable String idHoSo) {
+        ResponseJson json = new ResponseJson();
+        try {
+            if (!isOwner(idHoSo, null)) {
+                json.setSuccess(false);
+                json.setMessage("Không có quyền truy cập hồ sơ");
+                return json;
+            }
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_HANGHOA_BY_IDHS)  + idHoSo);
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            json.setData(null);
+            json.setSuccess(false);
+            json.setMessage(ex.getMessage());
+            return json;
+        }
+    }
+    @RequestMapping(value = "/danhmuc/dvxl/{fiPuType}", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseJson getListTCCD(@PathVariable String fiPuType) {
+        ResponseJson json = new ResponseJson();
+        try {
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_DANHMUC_TCCD)  + fiPuType);
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            json.setData(null);
+            json.setSuccess(false);
+            json.setMessage(ex.getMessage());
+            return json;
+        }
+    }
+    @RequestMapping(value = "/hoso/chuyenchitieu", method = RequestMethod.POST,headers = {"content-type=application/json"})
+    public @ResponseBody
+    ResponseJson chuyenChiTieu(@RequestBody TbdHoso25 tbdHoso25) {
+        ResponseJson json = new ResponseJson();
+        try {
+            if (!isOwner(tbdHoso25.getFiIdHS().toString(), null)) {
+                json.setSuccess(false);
+                json.setMessage("Không có quyền thao tác với hồ sơ này");
+                return json;
+            }
+            json =BackendRequestHelper.getInstance().doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.CHUYEN_CHI_TIEU), tbdHoso25);
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            json.setData(null);
+            json.setSuccess(false);
+            json.setMessage(ex.getMessage());
+            return json;
+        }
+    }
+
+    @RequestMapping(value = "/hoso/delete", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseJson deleteHoso(
+            @RequestParam String fiIdHS,
+            @RequestParam String fiTaxCode
+    ) {
+        ResponseJson returnJson = new ResponseJson();
+        if (!isOwner(fiIdHS, null)) {
+            returnJson.setSuccess(false);
+            returnJson.setMessage("Không có quyền truy cập hồ sơ");
+            return returnJson;
+        }
+        try {
+            ResponseJson json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.HOSO_DELETE) + "?fiIdHS=" + fiIdHS + "&fiTaxCode=" + fiTaxCode);
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            returnJson.setData(null);
+            returnJson.setSuccess(false);
+            returnJson.setMessage(ex.getMessage());
+            return returnJson;
+        }
+    }
+
+    @RequestMapping(value = "/lichsu", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseJson getLichsu(
+            @RequestParam(name = "fiHSCode") String fiNSWFileCode,
+            @RequestParam(required = false) Integer p,
+            @RequestParam(required = false) Integer s
+    ) {
+        ResponseJson json = new ResponseJson();
+        try {
+            if (!isOwner(null, fiNSWFileCode)) {
+                json.setSuccess(false);
+                json.setMessage("Không có quyền truy cập hồ sơ");
+                return json;
+            }
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.HISTORY_BY_HS_CODE) + "?fiNSWFileCode=" + fiNSWFileCode + "&p=" + p + "&s=" + s);
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            json.setData(null);
+            json.setSuccess(false);
+            json.setMessage(ex.getMessage());
+            return json;
+        }
+    }
+
+    @RequestMapping(value = "/lichsu/hanghoa", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseJson getLichsuHH(
+            @RequestParam(name = "fiIdProduct") Integer fiIdProduct,
+            @RequestParam(required = false) Integer p,
+            @RequestParam(required = false) Integer s
+    ) {
+        ResponseJson json = new ResponseJson();
+        try {
+//            if (!isOwner(null, fiIdProduct)) {
+//                json.setSuccess(false);
+//                json.setMessage("Không có quyền truy cập hồ sơ");
+//                return json;
+//            }
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.HISTORY_BY_FIPRODUCT_ID) + "?fiIdProduct=" + fiIdProduct + "&p=" + p + "&s=" + s);
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            json.setData(null);
+            json.setSuccess(false);
+            json.setMessage(ex.getMessage());
+            return json;
+        }
+    }
+
+    @RequestMapping(value = "/hoso/cancel", method = RequestMethod.POST, headers = {"content-type=application/json"})
+    public @ResponseBody
+    ResponseJson requestCancelHoso(
+            @RequestBody TbdYcrut25 tbdYcrut25
+    ) {
+        ResponseJson returnJson = new ResponseJson();
+        try {
+            if (!isOwner(tbdYcrut25.getFiIdHS().toString(), tbdYcrut25.getFiNSWFileCode())) {
+                returnJson.setSuccess(false);
+                returnJson.setMessage("Không có quyền truy cập hồ sơ");
+                return returnJson;
+            }
+            ResponseJson json = BackendRequestHelper.getInstance().doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.HOSO_CANCEL), tbdYcrut25);
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            returnJson.setData(null);
+            returnJson.setSuccess(false);
+            returnJson.setMessage(ex.getMessage());
+            return returnJson;
+        }
+    }
+
+    @RequestMapping(value = "/hoso/guikqxl", method = RequestMethod.POST,headers = {"content-type=application/json"})
+    public @ResponseBody
+    ResponseJson guiKQXL(@RequestBody TbdKQXL25 tbdKQXL25) {
+        ResponseJson json = new ResponseJson();
+        try {
+
+            json =BackendRequestHelper.getInstance().doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GUI_KQXL), tbdKQXL25);
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            json.setData(null);
+            json.setSuccess(false);
+            json.setMessage(ex.getMessage());
+            return json;
+        }
+    }
+
+    @RequestMapping(value = "/chitieu/{fiNSWFileCode}", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseJson getListChiTieuByNSWFileCode(@PathVariable String fiNSWFileCode) {
+        ResponseJson json = new ResponseJson();
+        try {
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_LIST_CHI_TIEU_BY_NSWFILECODE)  + fiNSWFileCode);
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            json.setData(null);
+            json.setSuccess(false);
+            json.setMessage(ex.getMessage());
+            return json;
+        }
+    }
+
+    @RequestMapping(value = "/hoso/find-by-status", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseJson getHoSoByStatus(
+            @RequestParam(name = "taxCode") String taxCode,
+            @RequestParam(name = "from") Integer from,
+            @RequestParam(name = "to") Integer to
+    ) {
+        ResponseJson json = new ResponseJson();
+        try {
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.FIND_HOSO_BY_STATUS) + "?taxCode="+taxCode +"&from="+ from+"&to="+to);
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            json.setData(null);
+            json.setSuccess(false);
+            json.setMessage(ex.getMessage());
+            return json;
+        }
+    }
+    @RequestMapping(value = "/filegcn/{idHangHoa}", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseJson getFileGCN(@PathVariable Integer idHangHoa) {
+        ResponseJson json = new ResponseJson();
+        try {
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.FIND_FILE_GCN)  + idHangHoa);
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            json.setData(null);
+            json.setSuccess(false);
+            json.setMessage(ex.getMessage());
+            return json;
+        }
+    }
+    @RequestMapping(value = "/filekqpt/{idHangHoa}", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseJson getListFileKQPT(@PathVariable Integer idHangHoa) {
+        ResponseJson json = new ResponseJson();
+        try {
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.FIND_FILE_KQPT)  + idHangHoa);
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            json.setData(null);
+            json.setSuccess(false);
+            json.setMessage(ex.getMessage());
+            return json;
+        }
+    }
+
+    @RequestMapping(value = "/hanghoa/timkiem", method = RequestMethod.POST, headers = {"content-type=application/json"})
+    public @ResponseBody
+    ResponseJson searchHangHoa(
+            @RequestBody FilterHangHoa filterHangHoa
+    ) {
+        ResponseJson json = BackendRequestHelper.getInstance().doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.HANGHOA_GET_BY_FILTER), filterHangHoa);
+        return json;
+    }
+
     private SignData getXMLForSign(SendMessage sendMessage) throws Exception {
         ResponseJson resultSignFlow = BackendRequestHelper.getInstance()
                 .doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_XML), sendMessage);

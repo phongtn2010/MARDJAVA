@@ -5,6 +5,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@include file="incLanguage.jsp" %>
 <%@include file="inc_script.jsp" %>
+<%@include file="inc_view_lichsuXuly.jsp" %>
 <div class="row" id="mard25">
     <div class="col-md-12">
         <div class="portlet light">
@@ -39,7 +40,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <input class="form-control"
-                                                           data-bind="value : fiHSCode, hasFocus: true"
+                                                           data-bind="value : fiCertNo, hasFocus: true"
                                                            type="text"/>
                                                 </div>
                                             </div>
@@ -51,7 +52,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <input class="form-control"
-                                                           data-bind="value : fiHSCode, hasFocus: true"
+                                                           data-bind="value : fiProName, hasFocus: true"
                                                            type="text"/>
                                                 </div>
                                                 <div class="col-md-2">
@@ -186,16 +187,16 @@
                         <tr>
                             <td class="text-center" data-bind="text: $index() + 1"></td>
                             <td class="text-center">
-                                <a href="javascript:void(0)" data-bind="click: $root.viewLichSu"><i
+                                <a href="javascript:void(0)" data-bind="click: $root.showLSXL"><i
                                         class="fa fa-lg fa-history tooltips"></i></a>
                             </td>
                             <td class="text-center">
-                                <a href="javascript:void(0)" data-bind="click: $root.viewCopy"><i
+                                <a href="javascript:void(0)" data-bind="click: $root.goCopyHoSo"><i
                                         class="fa fa-lg fa-file tooltips"></i></a>
                             </td>
                             <td class="text-center">
                                 <a href="javascript:void(0)"
-                                   data-bind="click: $root.goViewHoSo, text: fiNSWFileCode"></a>
+                                   data-bind="click: $root.viewHoSo, text: fiNSWFileCode"></a>
                             </td>
                             <td class="text-center" data-bind="datetime: fiCreatedDate"></td>
                             <td class="text-center">
@@ -205,47 +206,51 @@
                             <td class="text-left" data-bind="text: fiProductList.fiProMadeIn"></td>
                             <td class="text-left" data-bind="text: fiProductList.fiProCountryName"></td>
                             <td class="text-center" data-bind="text: $parent.getProfileStatus(fiHSStatus)"></td>
-                            <td class="text-center" data-bind="text: fiHSType"></td>
+                            <td class="text-center" data-bind="text: $parent.getHoSoType(fiHSType)"></td>
 
                             <td class="text-center">
                                 <div>
                                     <a href="javascript:void(0)" data-bind="click: $root.viewHoSo"><i
-                                            class="fa fa-eye"></i></a>
+                                            class="fa fa-file-word-o"></i></a>
                                 </div>
                             </td>
                             <td class="text-center">
-                                <div data-bind="visible: fiHSStatus == 0 || fiHSStatus == 1 || fiHSStatus ==7">
+                                <div data-bind="visible: fiHSStatus == 0 ||fiHSStatus == 1 || fiHSStatus == 2 ||fiHSStatus == 3 || fiHSStatus == 4 || fiHSStatus==9|| fiHSStatus==15">
                                     <a href="javascript:void(0)" data-bind="click: $root.goEditHoSo"><i
                                             class="fa fa-edit" src="" alt=""></i></a>
                                 </div>
                             </td>
                             <td class="text-center">
-                                <div data-bind="visible: fiHSStatus == 0 || fiHSStatus == 2">
+                                <div data-bind="visible: fiHSStatus == 0">
                                     <a href="javascript:void(0)" data-bind="click: $root.deleteHoso"><i
                                             class="fa fa-lg fa-close" style="color: red"></i></a>
                                 </div>
                             </td>
+
                             <td class="text-center">
-                                <div data-bind="visible: fiHSStatus == 14 || fiHSStatus == 15 || fiHSStatus == 16">
-                                    <a href="javascript:void(0)" data-bind="click: $root.viewGiayPhep"><i
+                                <div data-bind="visible: fiHSStatus != 0 && fiHSStatus <26">
+                                    <a  data-bind="click: $root.goYCRHoSo"><i
+                                            class="fa fa-caret-square-o-down"></i></a>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div data-bind="visible: $parent.getHoSoType(fiHSType)=='2c' && fiHSStatus ==26">
+                                    <a data-target="#modal_view_chuyen"
+                                       data-toggle="modal" data-bind="click: $parent.chuyenTCCD.bind($data,$data,$index())"><i
                                             class="fa fa-eye"></i></a>
                                 </div>
                             </td>
                             <td class="text-center">
-                                <div data-bind="visible: fiHSStatus == 3 || fiHSStatus == 10 || fiHSStatus == 12 || fiHSStatus == 13 || fiHSStatus == 9">
-                                    <a href="javascript:void(0)" data-bind="click: $root.goYCSHoSo"><i
-                                            class="fa fa-edit"></i></a>
+                                <div data-bind="visible: fiHSStatus ==26">
+                                    <a href="javascript:void(0)" data-bind="click: $root.viewHangHoaStatus"><i
+                                            class="fa fa-eye-slash"></i></a>
                                 </div>
                             </td>
                             <td class="text-center">
-                                <div data-bind="visible: fiHSStatus == 3 || fiHSStatus == 1 || fiHSStatus == 7 || fiHSStatus == 9 || fiHSStatus == 10 || fiHSStatus == 12 || fiHSStatus == 13">
-                                    <a href="javascript:void(0)" data-bind="click: $root.goYCRHoSo"><i
-                                            class="fa fa-download"></i></a>
-                                </div>
-                            </td><td class="text-center">
-                                <div data-bind="visible: fiHSStatus == 3 || fiHSStatus == 1 || fiHSStatus == 7 || fiHSStatus == 9 || fiHSStatus == 10 || fiHSStatus == 12 || fiHSStatus == 13">
-                                    <a href="javascript:void(0)" data-bind="click: $root.goYCRHoSo"><i
-                                            class="fa fa-download"></i></a>
+                                <div data-bind="visible:  $parent.getHoSoType(fiHSType)=='2d' ">
+                                    <a data-target="#modal_gui_bao_cao"
+                                       data-toggle="modal" href="javascript:void(0)" data-bind="click: $parent.guiBaoCaoHS2d"><i
+                                            class="fa fa-upload"></i></a>
                                 </div>
                             </td>
 
@@ -289,6 +294,208 @@
             </div>
         </div>
     </div>
+    <div id="modal_view_chuyen" class="modal container in modal-overflow"
+         tabindex="-1"
+         data-backdrop="static" data-keyboard="false">
+        <div class="modal-header" style="background: #337ab7; color: #fff;">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" data-bind="click: closeViewChuyen"></button>
+        </div>
+        <div class="modal-body">
+            <div class="panel panel-primary" id="model-congvan">
+                <ul class="nav nav-tabs ">
+                    <li class="active">
+                        <a href="#tab_tccd" data-toggle="tab"> <b><spring:message code="mard.25.tccd.panel_chuyen_title"/></b></a>
+                    </li>
+                    <li>
+                        <a href="#tab_chitieu" data-toggle="tab"> <b><spring:message code="mard.25.tccd.panel_xem_title"/></b></a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active"id="tab_tccd">
+                        <div class="row margin-bottom-15">
+                            <div class="col-md-2 nsw-text-right">
+                                <label><spring:message code="mard.25.tccd.panel_chuyen_ten_tccd"/><a class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-4">
+                               <select data-bind="options: lstDVXL,
+                                                    optionsText: 'fiPUName',
+                                                    optionsValue: 'fiPUCode',
+                                                    selectedText: fiNameTCCD,
+                                                    value: fiIdTCCD" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="row margin-bottom-15">
+                            <div class="form-group nsw-text-center">
+                                <button class="btn green"
+                                        data-bind="click: chuyenChiTieu"
+                                ><i class="fa fa-send"></i> <spring:message code="mard.25.tccd.panel_chuyen_btn"/>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab_chitieu">
+                        <table class="table table-striped table-bordered table-hover order-column">
+                            <thead>
+                            <tr class="nsw-tr tr-nsw1-bgcolor">
+                                <th style="width: 3%" class="text-center"><spring:message code="mard.25.tccd.panel_xem_grid_stt"/></th>
+                                <th class="text-center"><spring:message code="mard.25.tccd.panel_xem_grid_ten_tacn"/></th>
+                                <th class="text-center"><spring:message code="mard.25.tccd.panel_xem_grid_chi_tieu"/></th>
+                                <th class="text-center"><spring:message code="mard.25.tccd.panel_xem_grid_hinh_thuc"/></th>
+                                <th class="text-center"><spring:message code="mard.25.tccd.panel_xem_grid_ham_luong"/></th>
+                                <th class="text-center"><spring:message code="mard.25.tccd.panel_xem_grid_dvt"/></th>
+                                <th class="text-center"><spring:message code="mard.25.tccd.panel_xem_grid_ghi_chu"/></th>
+
+                            </tr>
+                            </thead>
+                            <tbody data-bind="foreach: filstChiTieu">
+                            <tr>
+                                <td class="text-center" data-bind="text: ($index() + 1)"></td>
+                                <td class="text-left" data-bind=""><label data-bind="text : fiTenHangHoa"/></td>
+                                <td class="text-left" data-bind=""><label data-bind="text : fiTenChiTieu"/></td>
+                                <td class="text-left" data-bind=""><label data-bind="text : fiHinhThucCB"/></td>
+                                <td class="text-left" data-bind=""><label data-bind="text : fiHamLuong"/></td>
+                                <td class="text-left" data-bind=""><label data-bind="text : fiTenDVT"/></td>
+                                <td class="text-left" data-bind=""><label data-bind="text : fiGhiChu"/></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal_gui_bao_cao" class="modal container in modal-overflow"
+         tabindex="-1"
+         data-backdrop="static" data-keyboard="false" data-bind="with: guiBaoCaoHS2dVM">
+        <div class="modal-header" style="background: #337ab7; color: #fff;">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <b class="modal-title"><spring:message code="mard.25.tccd.bao_cao_title"/></b>
+        </div>
+        <div class="modal-body">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label><spring:message code="mard.25.tccd.bao_cao_mahs"/><a  class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-4">
+                                <label data-bind="text: fiHSCode"></label>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label><spring:message code="mard.25.tccd.bao_cao_ten_file"/><a  class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-10">
+                                <input class="form-control"
+                                       data-bind="value: fiTenFile"
+                                       type="text"/>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label><spring:message code="mard.25.tccd.bao_cao_file"/><a  class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-10">
+                                <input class="form-control" id="file-baocao"  type="file" data-bind="value: fiFile"/>
+                            </div>
+                        </div>
+                        <div class="nsw-text-center form-group">
+                            <button class="btn green"
+                                    data-bind="click: themMoiFileBaoCao"
+                            ><i class="fa fa-plus"></i><spring:message code="mard.25.tccd.bao_cao_btn"/></button>
+                        </div>
+                        <div class="row form-group">
+                            <table class="table table-striped table-bordered table-hover order-column">
+                                <thead>
+                                <tr class="nsw-tr tr-nsw1-bgcolor">
+                                    <th class="text-center"> <spring:message code="mard.25.tccd.bao_cao_stt"/></th>
+                                    <th class="text-center"> <spring:message code="mard.25.tccd.bao_cao_ten_file"/>
+                                    <th class="text-center"> <spring:message code="mard.25.tccd.bao_cao_file"/>
+                                    <th class="text-center"> <spring:message code="mard.25.tccd.bao_cao_thao_tac"/></th>
+                                </tr>
+                                </thead>
+                                <tbody >
+                                <tr>
+
+                                </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="modal_xin_rut" class="modal container in modal-overflow"
+         tabindex="-1"
+         data-backdrop="static" data-keyboard="false" data-bind="with: xinRutHoSoVM">
+        <div class="modal-header" style="background: #337ab7; color: #fff;">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <b class="modal-title"><spring:message code="mard.25.form.xinrut.title"/></b>
+        </div>
+        <div class="modal-body">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label><spring:message code="mard.25.tccd.bao_cao_mahs"/><a  class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-4">
+                                <label data-bind="text: fiNSWFileCode"></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label><spring:message code="mard.25.form.xinrut.lydo"/><a  class="nsw-require-field">*</a></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <textarea class="form-control" type="text" data-bind="trimedValue: fiReason"  rows="5"></textarea>
+                            </div>
+                        </div>
+                    </div></div>
+                        <div class="panel-body">
+                        <div class="form-group">
+                            <div class="tile-body"><b><u><spring:message code="mard.25.form.xinrut.tt"/></u></b></div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label><spring:message code="mard.25.form.xinrut.nguoiky"/><a  class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control" type="text" data-bind="trimedValue: fiSigner"/>
+                            </div>
+                            <div class="col-md-2">
+                                <label><spring:message code="mard.25.form.xinrut.ngayky"/><a  class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-4">
+                                <label data-bind="date: fiRequestedDate"></label>
+                            </div>
+                        </div>
+
+                    </div>
+                            <div class="modal-footer">
+                                <div class="text-center">
+                                    <button class="btn green" data-bind="click: $root.requestCancelProfile">
+                                        <spring:message code="conmon.button.dong_y"/>
+                                    </button>
+                                    <button class="btn red" data-dismiss="modal">
+                                        <spring:message code="conmon.button.huy"/>
+                                    </button>
+                                </div>
+                            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%@include file="inc_view_hoso.jsp" %>
 </div>
 <style>
     .content {

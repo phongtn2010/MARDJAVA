@@ -147,7 +147,7 @@ ENCRYPT: false
 DEBUG_MODE: false
 DEBUG_FOLDER_MSG_OUTPUT: /home/TEMP
 # GATEWAY
-GATEWAY_LINK: http://192.168.0.99:8111/VNSWSendGateway/ws/gateway.wsdl?
+GATEWAY_LINK: http://localhost:8001/VNSWSendGateway/ws/gateway.wsdl?
 GATEWAY_NAMESPACE_KEY: gen
 GATEWAY_NAMESPACE: http://com/vnsw/send/gateway/generated
 GATEWAY_MOTHOD_TAG: receiveRequest

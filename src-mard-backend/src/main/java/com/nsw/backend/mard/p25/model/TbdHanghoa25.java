@@ -6,6 +6,7 @@
 package com.nsw.backend.mard.p25.model;
 
 import com.nsw.backend.dic.model.CmonBaseEntity;
+import com.nsw.backend.mard.p25.dto.Ananytical;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -41,40 +42,35 @@ public class TbdHanghoa25 extends CmonBaseEntity implements Serializable {
     //----------------------------------------------------------------------
     // ENTITY DATA FIELDS
     //----------------------------------------------------------------------
+
     @Column(name = "FI_HS_ID")
     private Integer fiIdHS;
 
-    @Column(name = "FI_ID")
-    private Integer fiId;
-
     @Column(name = "FI_PRO_NAME", nullable = false, length = 500)
     private String fiProName;
+    @Column(name = "FI_TRANGTHAI_HH")
+    private Integer fiTrangThaiHangHoa;
 
     @Column(name = "FI_PRO_ID_NHOM")
-    private Integer fiProIdNhom;
-
+    private String fiProIdNhom;
+    @Column(name = "FI_PRO_NAME_NHOM")
+    private String fiProNameNhom;
     @Column(name = "FI_PRO_ID_PHAN_NHOM")
-    private Integer fiProIdPhanNhom;
-
+    private String fiProIdPhanNhom;
     @Column(name = "FI_PRO_NAME_PHAN_NHOM")
     private String fiProNamePhanNhom;
-
     @Column(name = "FI_PRO_ID_LOAI")
-    private Integer fiProIdLoai;
-
+    private String fiProIdLoai;
     @Column(name = "FI_PRO_NAME_LOAI")
     private String fiProNameLoai;
-
     @Column(name = "FI_PRO_ID_PHAN_LOAI")
-    private Integer fiProIdPhanLoai;
-
+    private String fiProIdPhanLoai;
     @Column(name = "FI_PRO_NAME_PHAN_LOAI")
-    private Integer fiProNamePhanLoai;
-
-    @Column(name = "FI_PRO_CODE", nullable = false, length = 150)
+    private String fiProNamePhanLoai;
+    @Column(name = "FI_PRO_CODE", length = 150)
     private String fiProCode;
 
-    @Column(name = "FI_PRO_MADEIN", nullable = false, length = 250)
+    @Column(name = "FI_PRO_MADEIN",length = 250)
     private String fiProMadeIn;
 
     @Column(name = "FI_PRO_COUNTRY_CODE")
@@ -83,16 +79,16 @@ public class TbdHanghoa25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_PRO_COUNTRY_NAME")
     private String fiProCountryName;
 
-    @Column(name = "FI_PRO_THANHPHAN", nullable = false, length = 250)
+    @Column(name = "FI_PRO_THANHPHAN",  length = 250)
     private String fiProThanhPhan;
 
-    @Column(name = "FI_PRO_COLOR", nullable = false, length = 150)
+    @Column(name = "FI_PRO_COLOR", length = 150)
     private String fiProColor;
 
-    @Column(name = "FI_PRO_SOHIEU", nullable = false, length = 150)
+    @Column(name = "FI_PRO_SOHIEU", length = 150)
     private String fiProSoHieu;
 
-    @Column(name = "FI_PRO_QUYCHUAN", nullable = false, length = 150)
+    @Column(name = "FI_PRO_QUYCHUAN",  length = 150)
     private String fiProQuyChuan;
 
     @Column(name = "FI_PRO_VALUE_VN", precision = 15, scale = 6)
@@ -125,6 +121,14 @@ public class TbdHanghoa25 extends CmonBaseEntity implements Serializable {
     @Column(name="FI_PRO_SL")
     private String fiProductSL;
 
+    @Column(name="FI_KQDGSPH")
+    private Integer fiKqdgsph;
+
+    @Column(name = "FI_CER_NO")
+    private String fiSoGCN;
+
+    @Column(name = "FI_TAXCODE", length = 50)
+    private String fiTaxCode;
     //Danh sách chất lượng kèm theo
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "FI_PRO_ID")
@@ -140,6 +144,13 @@ public class TbdHanghoa25 extends CmonBaseEntity implements Serializable {
     @JoinColumn(name = "FI_PRO_ID")
     private List<TbdHanghoaSLKL25> fiProSLKLList;
 
+    //File kèm theo
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name = "FI_ID_HANGHOA")
+//    private List<TbdHangHoaFile25> fiHangHoaFileList;
+
+    @Transient
+    private List<TbdChiTieuDG25> fiListChiTieu;
     public TbdHanghoa25() {
         super();
         fiProCLList = new ArrayList<>();

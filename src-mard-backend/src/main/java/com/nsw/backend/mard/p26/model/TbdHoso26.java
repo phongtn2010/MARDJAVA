@@ -24,30 +24,30 @@ public class TbdHoso26 extends CmonBaseEntity implements Serializable {
     // ENTITY PRIMARY KEY ( BASED ON A SINGLE FIELD )
     //----------------------------------------------------------------------
     @Id
-    @Column(nullable = false)
+    @Column(nullable = false,name = "FI_HS_ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_NAME)
-    @SequenceGenerator(sequenceName = SEQUENCE_NAME, schema = "MARD", initialValue = 10000, allocationSize = 1, name = SEQUENCE_NAME)
-    private Integer fiIdHS;
+    @SequenceGenerator(sequenceName = SEQUENCE_NAME, schema = "MARD", initialValue = 1, allocationSize = 1, name = SEQUENCE_NAME)
+    private Integer fiIdHoSo26;
 
     //----------------------------------------------------------------------
     // ENTITY DATA FIELDS
     //----------------------------------------------------------------------
     //Thong tin ho so
     @Column(name = "FI_HS_CODE", length = 50)
-    private String fiNSWFileCode;
+    private String fiMaHoso;
 
     @Column(name = "FI_HS_TYPE", nullable = false)
     private Integer fiHSType = 1;
 
     @Column(name = "FI_HS_STATUS")
-    private Integer fiHSStatus;
+    private Integer fiTrangthai;
 
     @Column(name = "FI_ACTIVE_STATUS")
     private boolean fiActive = true;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "FI_HS_CREATED_DATE")
-    private Date fiHSCreatedDate;
+    private Date fiNgaytao;
 
     //Các field phục vụ yêu cầu sửa.
     @Column(name = "FI_MODIFY_REASON", length = 250)
@@ -60,34 +60,62 @@ public class TbdHoso26 extends CmonBaseEntity implements Serializable {
     private Integer fiIdHSParent;
 
     //Thông tin to chuc, ca nhan
-    @Column(name = "FI_BUS_NAME", nullable = false, length = 250)
-    private String fiBusName;
+    @Column(name = "FI_TAX_CODE", length = 25)
+    private String fiMasothue;
+    @Column(name = "FI_BUS_NAME", length = 250)
+    private String fiTenDn;
 
-    @Column(name = "FI_BUS_ADDRESS", nullable = false, length = 500)
-    private String fiBusAddress;
+    @Column(name = "FI_BUS_ADDRESS", length = 500)
+    private String fiDiachiDn;
 
-    @Column(name = "FI_BUS_TEL", nullable = false, length = 15)
-    private String fiBusTel;
+    @Column(name = "FI_BUS_TEL",length = 15)
+    private String fiSdtDn;
 
     @Column(name = "FI_BUS_FAX", length = 15)
-    private String fiBusFax;
+    private String fiFaxDn;
 
-    @Column(name = "FI_BUS_EMAIL", nullable = false, length = 250)
-    private String fiBusEmail;
+    @Column(name = "FI_BUS_EMAIL",  length = 250)
+    private String fiEmailDn;
 
-    //Thông tin hồ sơ Doanh Nghiệp
-    @Column(name = "FI_SIGN_PROVIN_CODE", nullable = false, length = 6)
+    //Thông tin hồ sơ ky don
+    @Column(name = "FI_SIGN_PROVIN_CODE", length = 6)
     private String fiSignProvinCode;
 
-    @Column(name = "FI_SIGN_PROVIN_NAME", nullable = false, length = 250)
+    @Column(name = "FI_SIGN_PROVIN_NAME", length = 250)
     private String fiSignProvinName;
 
-    @Column(name = "FI_SIGN_NAME", nullable = false, length = 250)
-    private String fiSignName;
+    @Column(name = "FI_SIGN_NAME", length = 250)
+    private String fiNguoiKy;
 
-    @Column(name = "FI_SIGN_POSITION", nullable = false, length = 250)
-    private String fiSignPosition;
+    @Column(name = "FI_SIGN_POSITION", length = 250)
+    private String fiDiadiemKy;
 
+    @Column(name = "FI_NGAYKY")
+    private Date fiNgayKy;
+
+    //Thông tin cv mien kiem
+    @Column(name = "FI_CONGVAN_MK", length = 250)
+    private String fiSoCVMienKiem;
+
+    @Column(name = "FI_NOIKYCV", length = 500)
+    private String fiNoiKyCV;
+
+    @Column(name = "FI_NGAYKY_CV")
+    private Date fiNgayKyCV;
+
+    @Column(name = "FI_HIEULUC_TUNGAY")
+    private Date fiHieuLucTuNgay;
+
+    @Column(name = "FI_HIEULUC_TOINGAY")
+    private Date fiHieuLucToiNgay;
+
+    @Column(name = "FI_TENNGUOIKY_CV", length = 200)
+    private String fiTenNguoiKyCV;
+    //thong tin hang hoa
+    @Column(name = "FI_NUOCSX", length = 250)
+    private String fiNuocSX;
+    @Column(name = "FI_HANGSX", length = 250)
+    private String fiHangSX;
     //Danh sách thông tin kèm theo
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "FI_HS_ID")

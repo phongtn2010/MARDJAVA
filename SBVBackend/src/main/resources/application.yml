@@ -1,0 +1,258 @@
+spring:
+  profiles:
+    active: hq_test
+---
+server:
+  port: 8081
+  contextPath: /SBVBackend
+---
+spring:
+  profiles: local, default, dev
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  data:
+      elasticsearch:
+            cluster-name: NSWSearch
+            cluster-nodes: 10.224.164.16:9300
+  http:
+      multipart:
+       max-file-size: 10MB
+       max-request-size: 10MB
+  jmx:
+    default-domain: SBVBackend
+datasource:
+  SBVBackend:
+    url: jdbc:oracle:thin:@10.224.83.16:1521/orcl
+    username: NSW
+    password: NSW
+    driverClassName: oracle.jdbc.OracleDriver
+    defaultSchema: SBV
+    maxPoolSize: 20
+    hibernate:
+      hbm2ddl.method: update
+      show_sql: false
+      format_sql: false
+      dialect: org.hibernate.dialect.Oracle10gDialect
+management:
+    security:
+        enabled: false
+PATH_TEMPLATE: C:/monre/template/
+EXPORT_FOLDER: C:/monre/export/
+PATH_UPLOAD: C:/temp/
+URL_DOWNLOAD: http://10.224.164.18:8001/FileServices/file/download
+URL_FILE_SERVICE: http://10.224.164.18:8001/FileServices
+FOLDER_TEMP_FILE_SERVICE: C:/upload/
+TIMEOUT: 900
+ACTIVE_PROFILE: dev
+# URL common backend de lay danh muc Quoc gia
+COMMON_BACKEND_DIC_STATE: http://10.224.164.18:8007/NSWBackendCommon/dic/state/
+# URL common backend de lay danh muc Don vi tinh
+COMMON_BACKEND_DIC_UNIT: http://10.224.164.18:8007/NSWBackendCommon/dic/unit/
+# URL SERVICE
+SEND_SERVICE_URL_01: http://localhost:8002/SBVWs/send/01/sendAll/
+# Service kiem tra chu ky so cua doanh nghiep
+CASERVICE_LINK: http://10.224.164.236/CAService/CAService.svc?wsdl
+CASERVICE_NAMESPACE_NAME: tem
+CASERVICE_NAMESPACE_LINK: http://tempuri.org/
+CASERVICE_METHOD: Verify
+CASERVICE_PARAMS: user,signature
+# Thong tin rabbitMQ
+activemq.host: 10.224.164.16
+activemq.port: 5672
+activemq.user: nswlog
+activemq.password: nswlog
+activemq.virtualHost: /
+activemq.exchangeName: logExchange
+activemq.queueName: Log_Error_Queue
+activemq.routingKey: error
+---
+spring:
+  profiles: vt_test
+  cache:
+    ehcache: 
+      config: classpath:ehcache.xml
+  data:
+      elasticsearch:
+            cluster-name: NSWSearch
+            cluster-nodes: 10.224.83.16:9300
+  http:
+      multipart:
+       max-file-size: 10MB
+       max-request-size: 10MB
+  jmx:
+    default-domain: SBVBackend
+datasource:
+  SBVBackend:
+    url: jdbc:oracle:thin:@10.224.83.16:1521/orcl
+    username: NSW
+    password: NSW
+    driverClassName: oracle.jdbc.OracleDriver
+    defaultSchema: SBV
+    maxPoolSize: 20
+    hibernate:
+      hbm2ddl.method: update
+      show_sql: false
+      format_sql: false
+      dialect: org.hibernate.dialect.Oracle10gDialect
+management:
+    security:
+        enabled: false
+PATH_TEMPLATE: /home/TEMP/TEMPLATE/
+EXPORT_FOLDER: /home/TEMP/EXPORT
+PATH_UPLOAD: /home/TEMP/UPLOAD/
+URL_DOWNLOAD: http://10.224.83.18:8001/FileServices/file/download
+URL_FILE_SERVICE: http://10.224.83.18:8001/FileServices
+FOLDER_TEMP_FILE_SERVICE: /home/TEMP/UPLOAD/
+TIMEOUT: 900
+ACTIVE_PROFILE: vt_test
+# URL common backend de lay danh muc Quoc gia
+COMMON_BACKEND_DIC_STATE: http://10.224.83.18:8007/NSWBackendCommon/dic/state/
+# URL common backend de lay danh muc Don vi tinh
+COMMON_BACKEND_DIC_UNIT: http://10.224.83.18:8007/NSWBackendCommon/dic/unit/
+# URL SERVICE
+SEND_SERVICE_URL_01: http://10.224.83.18:8002/SBVWs/send/01/sendAll/
+# URL To khai hai quan
+URI_ADDRESS_TOKHAI_SERVER: http://103.248.160.16/eMoitService/ServiceTCTKHQ.svc?wsdl
+# Service kiem tra chu ky so cua doanh nghiep
+CASERVICE_LINK: http://10.224.164.18/CAService/CAService.svc?wsdl
+CASERVICE_NAMESPACE_NAME: tem
+CASERVICE_NAMESPACE_LINK: http://tempuri.org/
+CASERVICE_METHOD: Verify
+CASERVICE_PARAMS: user,signature
+# Thong tin rabbitMQ
+activemq.host: 10.224.83.16
+activemq.port: 5672
+activemq.user: nswlog
+activemq.password: nswlog
+activemq.virtualHost: /
+activemq.exchangeName: logExchange
+activemq.queueName: Log_Error_Queue
+activemq.routingKey: error
+---
+spring:
+  profiles: hq_test
+  cache:
+    ehcache: 
+      config: classpath:ehcache.xml
+  data:
+      elasticsearch:
+            cluster-name: NSWSearch
+            cluster-nodes: 127.0.0.1:9300
+  http:
+      multipart:
+       max-file-size: 10MB
+       max-request-size: 10MB
+  jmx:
+    default-domain: SBVBackend
+datasource:
+  SBVBackend:
+#    url: jdbc:oracle:thin:@10.224.130.194:1521/nswstandby
+    url: jdbc:oracle:thin:@10.60.157.111:1521/dbpt
+    username: SBV
+    password: SBV
+    driverClassName: oracle.jdbc.OracleDriver
+    defaultSchema: SBV
+    maxPoolSize: 20
+    hibernate:
+      hbm2ddl.method: update
+      show_sql: false
+      format_sql: false
+      dialect: org.hibernate.dialect.Oracle10gDialect
+management:
+    security:
+        enabled: false
+PATH_TEMPLATE: /home/TEMP/TEMPLATE/
+EXPORT_FOLDER: /home/TEMP/EXPORT/
+PATH_UPLOAD: /home/TEMP/UPLOAD/
+URL_DOWNLOAD: http://10.224.128.132:8005/FileServices/file/download
+URL_FILE_SERVICE: http://10.224.128.132:8005/FileServices
+FOLDER_TEMP_FILE_SERVICE: /home/TEMP/UPLOAD/
+TIMEOUT: 900
+ACTIVE_PROFILE: hq_test
+# URL common backend de lay danh muc Quoc gia
+COMMON_BACKEND_DIC_STATE: http://10.224.128.132:8001/NSWBackendCommon/dic/state/
+# URL common backend de lay danh muc Don vi tinh
+COMMON_BACKEND_DIC_UNIT: http://10.224.128.132:8001/NSWBackendCommon/dic/unit/
+# URL SERVICE
+SEND_SERVICE_URL_01: http://10.224.128.132:8004/SBVWs/send/01/sendAll/
+# URL To khai hai quan
+URI_ADDRESS_TOKHAI_SERVER: http://10.224.138.56:8887/eMoitService/ServiceTCTKHQ.svc?wsdl
+# Service kiem tra chu ky so cua doanh nghiep
+CASERVICE_LINK: http://10.224.164.236/CAService/CAService.svc?wsdl
+CASERVICE_NAMESPACE_NAME: tem
+CASERVICE_NAMESPACE_LINK: http://tempuri.org/
+CASERVICE_METHOD: Verify
+CASERVICE_PARAMS: user,signature
+# Thong tin rabbitMQ
+activemq.host: 10.224.128.148
+activemq.port: 5672
+activemq.user: nswlog
+activemq.password: nswlog
+activemq.virtualHost: /
+activemq.exchangeName: logExchange
+activemq.queueName: Log_Error_Queue
+activemq.routingKey: error
+---
+spring:
+  profiles: hq_live
+  cache:
+    ehcache: 
+      config: classpath:ehcache.xml
+  data:
+      elasticsearch:
+            cluster-name: NSWSearch
+            cluster-nodes: 127.0.0.1:9300
+  http:
+      multipart:
+       max-file-size: 10MB
+       max-request-size: 10MB
+  jmx:
+    default-domain: SBVBackend
+datasource:
+  SBVBackend:
+    url: jdbc:oracle:thin:@10.224.130.231:1521/nswdb
+    username: NSW
+    password: 123456789
+    driverClassName: oracle.jdbc.OracleDriver
+    defaultSchema: SBV
+    maxPoolSize: 20
+    hibernate:
+      hbm2ddl.method: update
+      show_sql: false
+      format_sql: false
+      dialect: org.hibernate.dialect.Oracle10gDialect
+management:
+    security:
+        enabled: false
+PATH_TEMPLATE: /home/TEMP/TEMPLATE/
+EXPORT_FOLDER: /home/TEMP/EXPORT/
+PATH_UPLOAD: /home/TEMP/UPLOAD/
+URL_DOWNLOAD: http://10.224.144.58:8001/FileServices/file/download
+URL_FILE_SERVICE: http://10.224.144.58:8001/FileServices
+FOLDER_TEMP_FILE_SERVICE: /home/TEMP/UPLOAD/
+TIMEOUT: 900
+ACTIVE_PROFILE: hq_live
+# URL common backend de lay danh muc Quoc gia
+COMMON_BACKEND_DIC_STATE: http://10.224.128.193:8001/NSWBackendCommon/dic/state/
+# URL common backend de lay danh muc Don vi tinh
+COMMON_BACKEND_DIC_UNIT: http://10.224.128.193:8001/NSWBackendCommon/dic/unit/
+# URL SERVICE
+SEND_SERVICE_URL_01: http://10.224.128.194:8003/SBVWs/send/01/sendAll/
+# URL To khai hai quan
+URI_ADDRESS_TOKHAI_SERVER: http://10.224.128.161:8080/eMoitService/ServiceTCTKHQ.svc?wsdl
+# Service kiem tra chu ky so cua doanh nghiep
+CASERVICE_LINK: http://10.224.164.236/CAService/CAService.svc?wsdl
+CASERVICE_NAMESPACE_NAME: tem
+CASERVICE_NAMESPACE_LINK: http://tempuri.org/
+CASERVICE_METHOD: Verify
+CASERVICE_PARAMS: user,signature
+# Thong tin rabbitMQ
+activemq.host: 10.224.138.93
+activemq.port: 5672
+activemq.user: nswlog
+activemq.password: nswlog
+activemq.virtualHost: /
+activemq.exchangeName: logExchange
+activemq.queueName: Log_Error_Queue
+activemq.routingKey: error

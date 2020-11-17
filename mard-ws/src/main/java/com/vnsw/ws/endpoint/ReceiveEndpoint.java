@@ -30,6 +30,8 @@ import com.vnsw.ws.p15.constant.Mard15Constant;
 import com.vnsw.ws.p15.service.ReceiveService15;
 import com.vnsw.ws.p16.constant.Mard16Constant;
 import com.vnsw.ws.p16.service.ReceiveService16;
+import com.vnsw.ws.p25.service.ReceiveService25;
+import com.vnsw.ws.p26.service.ReceiveService26;
 import com.vnsw.ws.p6.envelop.Envelope06;
 import com.vnsw.ws.p6.service.ReceiveService06;
 import com.vnsw.ws.p7.evelope.Envelope07;
@@ -116,6 +118,11 @@ public class ReceiveEndpoint {
 
     @Autowired
     private ReceiveService04 receiveEndpoint04;
+    @Autowired
+    private ReceiveService25 receiveEndpoint25;
+
+    @Autowired
+    private ReceiveService26 receiveEndpoint26;
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "receiveRequest")
     @ResponsePayload
@@ -181,9 +188,19 @@ public class ReceiveEndpoint {
                         com.vnsw.ws.p16.envelop.Envelope envelope16 = receiveService16.receive(xml);
                         xmlReturn = convertXmlService.ObjectToXml(envelope16);
                          break;
-				  case Constants.BNNPTNT_PRO.BNNPTNT04:
+				    case Constants.BNNPTNT_PRO.BNNPTNT04:
                         com.vnsw.ws.p04.envelop.Envelope env2 = receiveEndpoint04.receive(xml);
                         xmlReturn = convertXmlService.ObjectToXml(env2);
+                        break;
+
+                    case Constants.MARD_PRO.MARD25:
+                        com.vnsw.ws.p25.envelop.Envelope25 env25 = receiveEndpoint25.receive(xml);
+                        xmlReturn = convertXmlService.ObjectToXml(env25);
+                        break;
+
+                    case Constants.MARD_PRO.MARD26:
+                        com.vnsw.ws.p26.envelop.Envelope26 env26 = receiveEndpoint26.receive(xml);
+                        xmlReturn = convertXmlService.ObjectToXml(env26);
                         break;
                     default:
                         error = envelopeService.createError(Constants.ERROR.ERR01_CODE, Constants.ERROR.ERR01);

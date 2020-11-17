@@ -17,22 +17,17 @@ public class DNYeucauHuyHoso {
 
     @XmlElement(name = "NSWFileCode")
     private String fiNSWFileCode;
-
-
     @XmlJavaTypeAdapter(DateSerialization.class)
     @XmlElement(name = "RequestDate")
-    private Date fiRequestDate;
-
-
+    private Date fiRequestedDate;
     @XmlElement(name = "Reason")
     private String fiReason;
-
     @XmlElement(name = "AttachmentId")
     private Long fiAttachmentId;
-
     @XmlElement(name = "FileName")
     private String fiFileName;
-    @XmlElement(name = "Reason")
+    @XmlElement(name = "FileLink")
     private String fiFileLink;
+
 
 }

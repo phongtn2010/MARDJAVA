@@ -20,18 +20,36 @@
                         <tbody data-bind="foreach: fiProCLList">
                         <tr>
                             <td class="text-center" data-bind="text: ($index() + 1)"></td>
-                            <td data-bind="text : fiProCLTarg"></td>
-                            <td class="text-left" data-bind="text : fiProCLCompare"></td>
-                            <td class="text-center" data-bind="text : fiProCLContent"></td>
-                            <td data-bind="text : fiProCLUnitName"></td>
+                            <td><input class="form-control" type="text" data-bind="value: fiProCLTarg,  enable: isEnable()"></td>
+                            <td><select class="form-control" data-bind="value: fiProCLCompare,  enable: isEnable()">
+                                <option value="0"> <spring:message code="mard.25.chitieu.khongco"/></option>
+                                <option value="1"> < </option>
+                                <option value="2"> > </option>
+                                <option value="3"> = </option>
+                                <option value="4"> <= </option>
+                                <option value="5"> >= </option>
+                                <option value="6">min-max</option>
+                            </select></td>
+                            <td><input class="form-control" type="text" data-bind="value: fiProCLContent, enable: isEnable()"></td>
+                            <td><select class="form-control" data-bind="options: lstChiTieuAT,
+                                                    optionsText: 'fiCatTypeName',
+                                                    optionsValue: 'fiCatNote',
+                                                    optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.chat_luong.dvt"/>',
+                                                    value: fiProCLUnitID, enable: isEnable() "></select></td>
                             <td class="text-center" data-bind="visible: $root.isEditable()">
-                                <a href="javascript:void(0)" data-bind="click: $parent.openUpdateProduct.bind($data, $data, $index(), 1)"
-                                >
-                                    <i class="fa fa-lg fa-edit"></i>
-                                </a>&nbsp;&nbsp;
-                                <a href="javascript:void(0)" data-bind="click: $parent.removeProduct.bind($data, $index())">
+                                <span data-bind="if: (isUpdate())">
+                                    <a data-bind="click: $parent.updateListCL"> <i class="fa fa-save" aria-hidden="true"></i>
+                                        </a>
+                                </span>
+
+                                <span data-bind="if: (!isUpdate())">
+						            &nbsp;&nbsp;&nbsp;
+						            <a data-bind="click: $parent.editHangHoa.bind($data, $data, $index())"> <i class="fa fa-edit" aria-hidden="true"></i> </a>
+						            &nbsp;&nbsp;&nbsp;
+						            <a href="javascript:void(0)" data-bind="click: $parent.removeListCL.bind($data, $index())">
                                     <i class="fa fa-lg fa-trash"></i>
                                 </a>
+					            </span>
                             </td>
                         </tr>
                         </tbody>
@@ -43,12 +61,13 @@
                             </td>
                             <td>
                                 <select class="form-control" data-bind="value: EfiProCLCompare">
-                                    <option value=">"> > </option>
-                                    <option value="<"> < </option>
-                                    <option value="="> = </option>
-                                    <option value=">="> >= </option>
-                                    <option value="<="> <= </option>
-                                    <option value="min-max">min-max</option>
+                                    <option value="0"> <spring:message code="mard.25.chitieu.khongco"/> </option>
+                                    <option value="1"> < </option>
+                                    <option value="2"> > </option>
+                                    <option value="3"> = </option>
+                                    <option value="4"> <= </option>
+                                    <option value="5"> >= </option>
+                                    <option value="6">min-max</option>
                                 </select>
                             </td>
                             <td>
@@ -56,10 +75,9 @@
                             </td>
                             <td>
                                 <select id="EfiProCLUnitIDCBB"
-                                        data-bind="options: lstUOMAnimal,
-                                                    optionsText: 'unitname',
-                                                    optionsValue: 'unitcode',
-                                                    optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.chat_luong.dvt"/>',
+                                        data-bind="options: lstChiTieuAT,
+                                                    optionsText: 'fiCatTypeName',
+                                                    optionsValue: 'fiCatNote',
                                                     value: EfiProCLUnitID" class="form-control"></select>
                             </td>
                             <td data-bind="visible: $root.isEditable" class="text-center">
@@ -95,18 +113,36 @@
                         <tbody data-bind="foreach: fiProATList">
                         <tr>
                             <td class="text-center" data-bind="text: ($index() + 1)"></td>
-                            <td data-bind="text : fiProATTarg"></td>
-                            <td class="text-left" data-bind="text : fiProATCompare"></td>
-                            <td class="text-center" data-bind="text : fiProATContent"></td>
-                            <td data-bind="text : fiProATUnitName"></td>
+                            <td><input class="form-control" type="text" data-bind="value: fiProATTarg,  enable: isEnable()"></td>
+                            <td><select class="form-control" data-bind="value: fiProATCompare,  enable: isEnable()">
+                                <option value="0"> <spring:message code="mard.25.chitieu.khongco"/> </option>
+                                <option value="1"> < </option>
+                                <option value="2"> > </option>
+                                <option value="3"> = </option>
+                                <option value="4"> <= </option>
+                                <option value="5"> >= </option>
+                                <option value="6">min-max</option>
+                            </select></td>
+                            <td><input class="form-control" type="text" data-bind="value: fiProATContent,  enable: isEnable()"></td>
+                            <td><select class="form-control" data-bind="options: lstChiTieuAT,
+                                                    optionsText: 'fiCatTypeName',
+                                                    optionsValue: 'fiCatNote',
+                                                    optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.chat_luong.dvt"/>',
+                                                    value: fiProATUnitID, enable: isEnable() "></select></td>
                             <td class="text-center" data-bind="visible: $root.isEditable()">
-                                <a href="javascript:void(0)"
-                                   data-bind="click: $parent.openUpdateProduct.bind($data, $data, $index(), 1)">
-                                    <i class="fa fa-lg fa-edit"></i>
-                                </a>&nbsp;&nbsp;
-                                <a href="javascript:void(0)" data-bind="click: $parent.removeProduct.bind($data, $index())">
+                                <span data-bind="if: (isUpdate())">
+                                    <a data-bind="click: $parent.updateListAT"> <i class="fa fa-save" aria-hidden="true"></i>
+                                        </a>
+                                </span>
+
+                                <span data-bind="if: (!isUpdate())">
+						            &nbsp;&nbsp;&nbsp;
+						            <a data-bind="click: $parent.editHangHoa.bind($data, $data, $index())"> <i class="fa fa-edit" aria-hidden="true"></i> </a>
+						            &nbsp;&nbsp;&nbsp;
+						            <a href="javascript:void(0)" data-bind="click: $parent.removeListAT.bind($data, $index())">
                                     <i class="fa fa-lg fa-trash"></i>
                                 </a>
+					            </span>
                             </td>
                         </tr>
                         </tbody>
@@ -118,12 +154,13 @@
                             </td>
                             <td>
                                 <select class="form-control" data-bind="value: EfiProATCompare">
-                                    <option value=">"> > </option>
-                                    <option value="<"> < </option>
-                                    <option value="="> = </option>
-                                    <option value=">="> >= </option>
-                                    <option value="<="> <= </option>
-                                    <option value="min-max">min-max</option>
+                                    <option value="0"> <spring:message code="mard.25.chitieu.khongco"/> </option>
+                                    <option value="1"> < </option>
+                                    <option value="2"> > </option>
+                                    <option value="3"> = </option>
+                                    <option value="4"> <= </option>
+                                    <option value="5"> >= </option>
+                                    <option value="6">min-max</option>
                                 </select>
                             </td>
                             <td>
@@ -131,9 +168,9 @@
                             </td>
                             <td>
                                 <select
-                                        data-bind="options: lstUOMAnimal,
-                                                    optionsText: 'unitname',
-                                                    optionsValue: 'unitcode',
+                                        data-bind="options: lstChiTieuAT,
+                                                    optionsText: 'fiCatTypeName',
+                                                    optionsValue: 'fiCatNote',
                                                     optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.an_toan.dvt"/>',
                                                     value: EfiProATUnitID" class="form-control"></select>
                             </td>
@@ -171,19 +208,31 @@
                         <tbody data-bind="foreach: fiProSLKLList">
                         <tr>
                             <td class="text-center" data-bind="text: ($index() + 1)"></td>
-                            <td data-bind="text : fiProSLKLMass"></td>
-                            <td class="text-left" data-bind="text : fiProSLKLMassUnitName"></td>
-                            <td class="text-center" data-bind="text : fiProSLKLMassTan"></td>
-                            <td class="text-center" data-bind="text : fiProSLKLAmount"></td>
-                            <td class="text-center" data-bind="text : fiProSLKLAmountUnitName"></td>
+                            <td><input class="form-control" type="text" data-bind="value: fiProSLKLMass, enable: isEnable()"></td>
+                            <td><select class="form-control" data-bind="options: lstDMDVT,
+                                                    optionsText: 'fiCatTypeName',
+                                                    optionsValue: 'fiCatNote',
+                                                    value: fiProSLKLMassUnitCode, enable: isEnable() "></select></td>
+                            <td><input class="form-control" type="text" data-bind="value: fiProSLKLMassTan,  enable: isEnable()"></td>
+                            <td><input class="form-control" type="text" data-bind="value: fiProSLKLAmount, enable: isEnable()"></td>
+                            <td><select class="form-control" data-bind="options: lstDMDVT,
+                                                    optionsText: 'fiCatTypeName',
+                                                    optionsValue: 'fiCatNote',
+                                                    value: fiProSLKLAmountUnitCode, enable: isEnable() "></select></td>
                             <td class="text-center" data-bind="visible: $root.isEditable()">
-                                <a href="javascript:void(0)"
-                                   data-bind="click: $parent.openUpdateProduct.bind($data, $data, $index(), 1)">
-                                    <i class="fa fa-lg fa-edit"></i>
-                                </a>&nbsp;&nbsp;
-                                <a href="javascript:void(0)" data-bind="click: $parent.removeProduct.bind($data, $index())">
+                               <span data-bind="if: (isUpdate())">
+                                    <a data-bind="click: $parent.updateListSLKT"> <i class="fa fa-save" aria-hidden="true"></i>
+                                        </a>
+                                </span>
+
+                                <span data-bind="if: (!isUpdate())">
+						            &nbsp;&nbsp;&nbsp;
+						            <a data-bind="click: $parent.editHangHoa.bind($data, $data, $index())"> <i class="fa fa-edit" aria-hidden="true"></i> </a>
+						            &nbsp;&nbsp;&nbsp;
+						            <a href="javascript:void(0)" data-bind="click: $parent.removeListSLKT.bind($data, $index())">
                                     <i class="fa fa-lg fa-trash"></i>
                                 </a>
+					            </span>
                             </td>
                         </tr>
                         </tbody>
@@ -195,9 +244,9 @@
                             </td>
                             <td>
                                 <select
-                                        data-bind="options: lstUOMAnimal,
-                                                    optionsText: 'unitname',
-                                                    optionsValue: 'unitcode',
+                                        data-bind="options: lstDMDVT,
+                                                    optionsText: 'fiCatTypeName',
+                                                    optionsValue: 'fiCatNote',
                                                     optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.dinh_luong.dvtkl"/>',
                                                     value: EfiProSLKLMassUnitCode" class="form-control"></select>
                             </td>
@@ -209,9 +258,9 @@
                             </td>
                             <td>
                                 <select
-                                        data-bind="options: lstUOMAnimal,
-                                                    optionsText: 'unitname',
-                                                    optionsValue: 'unitcode',
+                                        data-bind="options: lstDMDVT,
+                                                    optionsText: 'fiCatTypeName',
+                                                    optionsValue: 'fiCatNote',
                                                     optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.dinh_luong.dvtsl"/>',
                                                     value: EfiProSLKLAmountUnitCode" class="form-control"></select>
                             </td>

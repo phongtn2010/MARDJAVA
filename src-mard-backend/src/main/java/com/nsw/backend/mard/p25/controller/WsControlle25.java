@@ -2,7 +2,7 @@ package com.nsw.backend.mard.p25.controller;
 
 import com.nsw.backend.controller.BaseController;
 import com.nsw.backend.mard.p25.client.ResponseWrapper;
-import com.nsw.backend.mard.p25.dto.RegistrationProfile;
+import com.nsw.backend.mard.p25.dto.Hoso25;
 import com.nsw.backend.mard.p25.exception.NSWException;
 import com.nsw.backend.mard.p25.model.TbdHoso25;
 import com.nsw.backend.mard.p25.service.TbdHoso25Service;
@@ -26,10 +26,7 @@ public class WsControlle25 extends BaseController {
         this.wsService = wsService;
     }
 
-    @PostMapping("/updateTrangthaiHS")
-    public ResponseEntity<ResponseJson> updateTrangThaiHS(@RequestBody ResponseWrapper request) throws NSWException {
-        return new ResponseEntity<>(wsService.updateHSStatus(request), HttpStatus.OK);
-    }
+
 
     @GetMapping("/hoso/{idHS}")
     public ResponseEntity<ResponseJson> findHSById(@PathVariable int idHS) {
@@ -37,45 +34,53 @@ public class WsControlle25 extends BaseController {
         if (result == null) {
             return createErrorResponse("Thông tin hồ sơ không hợp lệ", HttpStatus.OK);
         } else {
-            return createSuccessResponse(RegistrationProfile.parse(result), HttpStatus.OK);
+            return createSuccessResponse(Hoso25.parseToWSEntity(result), HttpStatus.OK);
         }
     }
 
-    @PostMapping("/updateKetQuaThamDinh")
-    public ResponseEntity<ResponseJson> updateKetQuaThamDinh(@RequestBody ResponseWrapper request) throws NSWException {
-        ResponseJson response = wsService.processProfileRegisterResponse(request);
+    @PostMapping("/xacnhandon")
+    public ResponseEntity<ResponseJson> updateXacNhanDon(@RequestBody ResponseWrapper request) throws NSWException {
+        ResponseJson response = wsService.xacNhanDonDK(request);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/updateKQXinSuaHS")
-    public ResponseEntity<ResponseJson> updateKetQuaYCS(@RequestBody ResponseWrapper request) throws NSWException {
-        ResponseJson response = wsService.processRequestUpdateProfileResponse(request);
+    @PostMapping("/update-kqxl")
+    public ResponseEntity<ResponseJson> updateKetQuaXL(@RequestBody ResponseWrapper request) throws NSWException {
+        ResponseJson response = wsService.tiepNhanKetQuaXuLy(request);
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/updateKQXinRutHS")
-    public ResponseEntity<ResponseJson> updateKetQuaYCR(@RequestBody ResponseWrapper request) throws NSWException {
-        ResponseJson response = wsService.processRequestCancelProfileResponse(request);
+    @PostMapping("/thuhoigdk")
+    public ResponseEntity<ResponseJson> thuHoiGDK(@RequestBody ResponseWrapper request) throws NSWException {
+        ResponseJson response = wsService.thuHoiGDK(request);
         return ResponseEntity.ok(response);
     }
 
-    //CERT PROCESSING
-
-    @PostMapping("/updateVSTY")
-    public ResponseEntity<ResponseJson> xuLyVSTY(@RequestBody ResponseWrapper request) throws NSWException {
-        ResponseJson response = wsService.processVeterinaryHygieneResult(request);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    @PostMapping("/uploadkqkt")
+    public ResponseEntity<ResponseJson> tccdGuiKQKT(@RequestBody ResponseWrapper request) throws NSWException {
+        ResponseJson response = wsService.tccdGuiKQKT(request);
+        return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/updateKDNK")
-    public ResponseEntity<ResponseJson> xulyKDNK(@RequestBody ResponseWrapper request) throws NSWException {
-        ResponseJson response = wsService.processQuarantineResult(request);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    @PostMapping("/xulykq")
+    public ResponseEntity<ResponseJson> guiXuLyKQ(@RequestBody ResponseWrapper request) throws NSWException {
+        ResponseJson response = wsService.guiXuLyKQ(request);
+        return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/updateKQVSTY")
-    public ResponseEntity<ResponseJson> xlFailXNCL(@RequestBody ResponseWrapper request) throws NSWException {
-        ResponseJson response = wsService.processVeterinaryHygieneFail(request);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    @PostMapping("/giayxncl")
+    public ResponseEntity<ResponseJson> guiGiayXNCL(@RequestBody ResponseWrapper request) throws NSWException {
+        ResponseJson response = wsService.guiGiayXNCL(request);
+        return ResponseEntity.ok(response);
+    }
+    @PostMapping("/thuhoi-giayxncl")
+    public ResponseEntity<ResponseJson> thuHoiGiayXNCL(@RequestBody ResponseWrapper request) throws NSWException {
+        ResponseJson response = wsService.thuHoiGiayXNCL(request);
+        return ResponseEntity.ok(response);
+    }
+    @PostMapping("/tiepnhan-2d")
+    public ResponseEntity<ResponseJson> tiepNhanHS2D(@RequestBody ResponseWrapper request) throws NSWException {
+        ResponseJson response = wsService.tiepNhanHS2D(request);
+        return ResponseEntity.ok(response);
     }
 }

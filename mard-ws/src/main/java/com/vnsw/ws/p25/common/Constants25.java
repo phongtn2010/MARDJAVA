@@ -75,15 +75,16 @@ public class Constants25 {
     }
 
     public interface RES_URI {
-        public static final String URI_UPDATE_STATUS_HOSO = "/mard/06/ws/updateTrangthaiHS";
-        public static final String URI_UPDATE_LICHSU = "/mard/06/ws/updateLichsuHS";
-        public static final String URI_UPDATE_KQTD = "/mard/06/ws/updateKetQuaThamDinh";
-        public static final String URI_UPDATE_KETQUA_XIN_SUA_HS = "/mard/06/ws/updateKQXinSuaHS";
-        public static final String URI_UPDATE_KETQUA_XIN_RUT_HS = "/mard/06/ws/updateKQXinRutHS";
-        public static final String URI_UPDATE_GIAY_VSTY = "/mard/06/ws/updateVSTY";
-        public static final String URI_UPDATE_GIAY_KDNK = "/mard/06/ws/updateKDNK";
-        public static final String URI_UPDATE_KQ_VSTY = "/mard/06/ws/updateKQVSTY";
+        public static final String URI_XAC_NHAN_DON = "/mard/25/ws/xacnhandon";
+        public static final String URI_UPDATE_KETQUA_XIN_SUA_HS = "/mard/25/ws/updateKQXinSuaHS";
         public static final String URI_GET_HS_BY_ID = "/mard/25/ws/hoso/";
+        public static final String URI_KET_QUA_XU_LY = "/mard/25/ws/update-kqxl/";
+        public static final String URI_THU_HOI_GDK = "/mard/25/ws/thuhoigdk/";
+        public static final String URI_TCCD_GUI_KQKT = "/mard/25/ws/uploadkqkt/";
+        public static final String URI_TCCD_XU_LY_KQ = "/mard/25/ws/xulykq/";
+        public static final String URI_GIAY_XNCL = "/mard/25/ws/giayxncl/";
+        public static final String URI_THU_HOIGIAY_XNCL = "/mard/25/ws/thuhoi-giayxncl/";
+        public static final String URI_TIEP_NHAN_HS2D = "/mard/25/ws/tiepnhan-2d/";
     }
 
     public interface HosoStatus {

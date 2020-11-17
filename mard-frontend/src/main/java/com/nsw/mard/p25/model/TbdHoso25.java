@@ -13,17 +13,21 @@ public class TbdHoso25 implements Serializable {
 
     private Long fiIdHS;
     private Long fiHSStatus;
+    private String fiHSStatusName;
     private Date fiHSCreatedDate;
     private String fiNSWFileCode;
     private String fiNSWFileCodeReplace;
     private String fiGDK;
+    private String fiLinkGDK;
+    private String fiFileNameGDK;
+    private String fiFileIdGDK;
+    private String fiHSType;
 
     private String fiTaxCode;
     private String fiImporterName;
     private String fiImporterAddress;
     private String fiImporterTel;
     private String fiImporterFax;
-    private String fiImporterEmail;
 
     private String fiAddressGath;
     private String fiAddressRegSample;
@@ -48,24 +52,21 @@ public class TbdHoso25 implements Serializable {
     private String fiSellFax;
     private String fiSellExport;
 
-    private String fiPurchName;
-    private String fiPurchTel;
-    private String fiPurchAddress;
-    private String fiPurchFax;
+//    private String fiPurchName;
+//    private String fiPurchTel;
+//    private String fiPurchAddress;
+//    private String fiPurchFax;
     private String fiPurchReci;
-    private String fiPurchFromDate;
+    private Date fiPurchFromDate;
     private Date fiPurchToDate;
 
     private String fiReason;
-
+    private String fiProCVMienGiam;
+    private Date fiProCVMienGiamNgay;
+    private Integer fiIdDVXL;
+    private String fiNameDVXL;
 
     private List<TbdHanghoa25> fiProductList;
 
-    private List<Tbdattach25> fiListAttch;
-
-    private List<TbdattachHoadon25> fiListAttchHoaDon;
-
-    private List<TbdattachHd25> fiListAttchHD;
-
-    private List<TbdattachDg25> fiListAttchPhieu;
+    private List<TbdDinhkem25> fiAttachmentList;
 }

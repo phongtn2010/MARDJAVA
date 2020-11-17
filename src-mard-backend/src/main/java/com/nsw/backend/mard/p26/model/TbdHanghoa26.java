@@ -26,39 +26,50 @@ public class TbdHanghoa26 extends CmonBaseEntity implements Serializable {
     // ENTITY PRIMARY KEY ( BASED ON A SINGLE FIELD )
     //----------------------------------------------------------------------
     @Id
-    @Column(nullable = false)
+    @Column(nullable = false,name = "FI_ID_HH")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_NAME)
     @SequenceGenerator(sequenceName = SEQUENCE_NAME, schema = "MARD", initialValue = 10000, allocationSize = 1, name = SEQUENCE_NAME)
-    private Integer fiIdProduct;
+    private Integer fiIdHH26;
 
     //----------------------------------------------------------------------
     // ENTITY DATA FIELDS
     //----------------------------------------------------------------------
+    @Column(name = "FI_ID_HH_25")
+    private Integer fiIdProduct;
+
     @Column(name = "FI_HS_ID")
+    private Integer fiIdHoSo26;
+
+    @Column(name = "FI_HS_ID25")
     private Integer fiIdHS;
 
-    @Column(name = "FI_ID")
-    private Integer fiId;
-
-    @Column(name = "FI_PRO_NAME", nullable = false, length = 500)
+    @Column(name = "FI_HS_CODE")
+    private String fiNSWFileCode;
+    @Column(name = "FI_PRO_NAME")
     private String fiProName;
+    @Column(name = "FI_TRANGTHAI_HH")
+    private Integer fiTrangThaiHangHoa;
 
     @Column(name = "FI_PRO_ID_NHOM")
-    private Integer fiProIdNhom;
-
+    private String fiProIdNhom;
+    @Column(name = "FI_PRO_NAME_NHOM")
+    private String fiProNameNhom;
     @Column(name = "FI_PRO_ID_PHAN_NHOM")
-    private Integer fiProIdPhanNhom;
-
+    private String fiProIdPhanNhom;
+    @Column(name = "FI_PRO_NAME_PHAN_NHOM")
+    private String fiProNamePhanNhom;
     @Column(name = "FI_PRO_ID_LOAI")
-    private Integer fiProIdLoai;
-
+    private String fiProIdLoai;
+    @Column(name = "FI_PRO_NAME_LOAI")
+    private String fiProNameLoai;
     @Column(name = "FI_PRO_ID_PHAN_LOAI")
-    private Integer fiProIdPhanLoai;
-
-    @Column(name = "FI_PRO_CODE", nullable = false, length = 150)
+    private String fiProIdPhanLoai;
+    @Column(name = "FI_PRO_NAME_PHAN_LOAI")
+    private String fiProNamePhanLoai;
+    @Column(name = "FI_PRO_CODE", length = 150)
     private String fiProCode;
 
-    @Column(name = "FI_PRO_MADEIN", nullable = false, length = 250)
+    @Column(name = "FI_PRO_MADEIN",length = 250)
     private String fiProMadeIn;
 
     @Column(name = "FI_PRO_COUNTRY_CODE")
@@ -67,16 +78,16 @@ public class TbdHanghoa26 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_PRO_COUNTRY_NAME")
     private String fiProCountryName;
 
-    @Column(name = "FI_PRO_THANHPHAN", nullable = false, length = 250)
+    @Column(name = "FI_PRO_THANHPHAN",  length = 250)
     private String fiProThanhPhan;
 
-    @Column(name = "FI_PRO_COLOR", nullable = false, length = 150)
+    @Column(name = "FI_PRO_COLOR", length = 150)
     private String fiProColor;
 
-    @Column(name = "FI_PRO_SOHIEU", nullable = false, length = 150)
+    @Column(name = "FI_PRO_SOHIEU", length = 150)
     private String fiProSoHieu;
 
-    @Column(name = "FI_PRO_QUYCHUAN", nullable = false, length = 150)
+    @Column(name = "FI_PRO_QUYCHUAN",  length = 150)
     private String fiProQuyChuan;
 
     @Column(name = "FI_PRO_VALUE_VN", precision = 15, scale = 6)
@@ -103,20 +114,32 @@ public class TbdHanghoa26 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_PRO_HASH")
     private String fiProHash;
 
+    @Column(name="FI_PRO_KL")
+    private String fiProductKL;
+
+    @Column(name="FI_PRO_SL")
+    private String fiProductSL;
+
+    @Column(name = "FI_CER_NO")
+    private String fiSoGCN;
+
+    @Column(name="FI_KQDGSPH")
+    private Integer fiKqdgsph;
+
     //Danh sách chất lượng kèm theo
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "FI_PRO_ID")
-    private List<TbdHanghoaCL25> fiProCLList;
+    private List<TbdHanghoaCL26> fiProCLList;
 
     //Danh sách an toàn kèm theo
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "FI_PRO_ID")
-    private List<TbdHanghoaAT25> fiProATList;
+    private List<TbdHanghoaAT26> fiProATList;
 
-    //Danh sách an toàn kèm theo
+    //Danh sách số lượng khối lượng kèm theo
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "FI_PRO_ID")
-    private List<TbdHanghoaSLKL25> fiProSLKLList;
+    private List<TbdHanghoaSLKL26> fiProSLKLList;
 
     public TbdHanghoa26() {
         super();

@@ -14,7 +14,6 @@ function RegAnimalVM(options) {
         "Chế biến thực phẩm",
         "Khác"
     ])
-
     regAnimalVMSelf.fiTimeQuarantine = ko.observable(null)
         .extend({
             required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
@@ -130,6 +129,7 @@ function RegAnimalProductVM(options) {
 
 function HangHoaNhapKhauVM (options) {
     var kdnkVMSelf = this;
+
     kdnkVMSelf.fiIdHS = ko.observable((options && options.hasOwnProperty('fiIdHS')) ? options.fiIdHS : null);
     kdnkVMSelf.fiNSWFileCode = ko.observable((options && options.hasOwnProperty('fiNSWFileCode')) ? options.fiNSWFileCode : null);
     kdnkVMSelf.fiReason = ko.observable((options && options.hasOwnProperty('fiReason')) ? options.fiReason : null);
@@ -138,82 +138,60 @@ function HangHoaNhapKhauVM (options) {
             required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
         })
     }
-    kdnkVMSelf.fiHSType = ko.observable((options && options.hasOwnProperty('fiHSType')) ? options.fiHSType : null);
     kdnkVMSelf.thongtinChungVM = ko.observable(new ThongTinChungVM(options));
     kdnkVMSelf.kyHoSoVM = ko.observable(new KyHoSoVM(options));
-    kdnkVMSelf.lstProfileStatus = ko.observableArray((options && options.hasOwnProperty('lstProfileStatus')) ? options.lstProfileStatus : null);
-
+    kdnkVMSelf.lstProfileStatus = ko.observableArray((options && options.hasOwnProperty('lstProfileStatus')) ? options.lstProfileStatus : []);
+    kdnkVMSelf.lstNhom = ko.observableArray((options && options.hasOwnProperty('lstNhom')) ? options.lstNhom : []);
     kdnkVMSelf.regAnimalVM = ko.observable(new RegAnimalVM(options));
     kdnkVMSelf.regAnimalProductVM = ko.observable(new RegAnimalProductVM(options));
 
     kdnkVMSelf.fiProductList = ko.observableArray((options && options.hasOwnProperty('fiProductList')) ? options.fiProductList : null);
-    if (options.fiHSType == 1 || options.fiHSType == "1") {
-        kdnkVMSelf.regAnimalVM().applyState(options);
-    } else if (options.fiHSType == 2 || options.fiHSType == "2") {
-        kdnkVMSelf.regAnimalProductVM().applyState(options);
-    }
 
-    kdnkVMSelf.fiHSType.subscribe(function (item) {
-        if (item == 2 || item == '2') {
-            kdnkVMSelf.regAnimalProductVM().productVM().fiProductType(kdnkVMSelf.fiHSType());
-            kdnkVMSelf.regAnimalProductVM().productVM().fiPackageUnitCode("KG");
-        }
-    })
-    kdnkVMSelf.uploadFileVM = ko.observable(new UploadFileVM(options.fiAttachmentList ? options.fiAttachmentList: [], options.lstAtchType ? options.lstAtchType : []));
+
+    // kdnkVMSelf.uploadFileVM = ko.observable(new UploadFileVM(options.fiAttachmentList ? options.fiAttachmentList: [], options.lstAtchType ? options.lstAtchType : []));
+    kdnkVMSelf.uploadFileVM = ko.observable(new UploadFileVM(options));
 
     kdnkVMSelf.errorMsg = ko.observable(null);
 
     kdnkVMSelf.getProfileStatus = function (statuscode) {
         var lstProfileStatus = kdnkVMSelf.lstProfileStatus();
         var pos = lstProfileStatus.find(function (e) {
-            return e.id == Number(statuscode);
+            return e.fiCatType == Number(statuscode);
         })
         if (pos)
-            return pos.name;
+            return pos.fiCatTypeName;
         else return statuscode;
     }
 
     kdnkVMSelf.validateForm = function () {
-        var option = {
-            thongtinChungVM: kdnkVMSelf.thongtinChungVM,
-            kyHoSoVM: kdnkVMSelf.kyHoSoVM,
-            fiReason: kdnkVMSelf.fiReason
-        }
-        switch (kdnkVMSelf.fiHSType().toString()) {
-            case "1":
-                option = $.extend(option, {regAnimalVM: kdnkVMSelf.regAnimalVM().validateObject()});
-
-                kdnkVMSelf.errors = ko.validation.group(option, {deep: true});
-                break;
-            case "2":
-                option = $.extend(option, {regAnimalProductVM: kdnkVMSelf.regAnimalProductVM().validateObject()});
-
-                kdnkVMSelf.errors = ko.validation.group(option, {deep: true});
-                break;
-            default: return;
-        }
-        if (kdnkVMSelf.fiHSType() == "2" && 
-            kdnkVMSelf.regAnimalProductVM().fiPurpose() == 'Kinh doanh thực phẩm') {
-            var hasErrorKDTP = false;
-            var lstProcessing = kdnkVMSelf.regAnimalProductVM().productMfrVM().fiProcessingList();
-            lstProcessing.forEach(function (processing) {
-                if (!processing.fiProcessingApprovalNumber) {
-                    hasErrorKDTP = true;
-                }
-            });
-            if (hasErrorKDTP) {
-                kdnkVMSelf.errorMsg('Vui lòng nhập mã số của cơ sở nuôi, sản xuất giống, cơ sở sơ chế, chế biến sản phẩm động vật thủy sản tại nước xuất khẩu');
+        var ttc=kdnkVMSelf.thongtinChungVM();
+        var benBan = [ttc.fiSellName,ttc.fiSellAddress,ttc.fiSellCountryCode,ttc.fiSellExport];
+        var benMua = [ttc.fiImporterName,ttc.fiImporterAddress,ttc.fiPurchReci,ttc.fiImporterTel,ttc.fiPurchFromDate];
+        var diaDiemTapKet = [ttc.fiAddressGath,ttc.fiRegSamFromDate,ttc.fiAddressRegSample,ttc.fiProductList];
+        var thongTinLienHe = [ttc.fiContactName,ttc.fiContactAddress];
+        var thongTinKy = [ttc.fiSignName,ttc.fiSignAddress,ttc.fiSignPosition];
+        if(ttc.fiNSWFileCodeReplace()!=null){
+            if (ttc.fiFileNameGDK()==null){
+                app.Alert("Bạn chưa đính kèm file GDK");
                 return false;
-            } else {
-                kdnkVMSelf.errorMsg(null);
             }
         }
+        kdnkVMSelf.errors = ko.validation.group({benBan,benMua,thongTinKy,thongTinLienHe,diaDiemTapKet}, {deep: true, live: true, observable: true});
+        // kdnkVMSelf.errors = ko.validation.group(kdnkVMSelf.thongtinChungVM, {deep: true, live: true, observable: true});
         if (kdnkVMSelf.errors().length > 0) {
             kdnkVMSelf.errors.showAllMessages();
-            kdnkVMSelf.errorMsg(NSWLang["common_msg_formvalid_filled"]);
             return false;
         }
-        kdnkVMSelf.errorMsg('');
+        return true;
+    }
+    kdnkVMSelf.validateUploadFiles = function () {
+        var ttc=kdnkVMSelf.uploadFileVM();
+        var checkFiles= [ttc.lstHD,ttc.lstHoaDon,ttc.lstPhieu,ttc.lstKQ,ttc.lstTC,ttc.lstCNLH,ttc.lstCNPT,ttc.lstAtch];
+        kdnkVMSelf.errors = ko.validation.group({checkFiles}, {deep: true, live: true, observable: true});
+        if (kdnkVMSelf.errors().length > 0) {
+            kdnkVMSelf.errors.showAllMessages();
+            return false;
+        }
         return true;
     }
 
@@ -230,10 +208,10 @@ function HangHoaNhapKhauVM (options) {
     kdnkVMSelf.getData = function () {
         var body = {
             "fiIdHS": kdnkVMSelf.fiIdHS(),
-            "fiNSWFileCodefiNSWFileCode": kdnkVMSelf.fiNSWFileCode(),
+            "fiNSWFileCode": kdnkVMSelf.fiNSWFileCode(),
             "fiReason": kdnkVMSelf.fiReason(),
             "fiHSStatus": 0,
-            "fiHSType": kdnkVMSelf.fiHSType(),
+            "fiHSType": kdnkVMSelf.thongtinChungVM().fiHSType(),
             "fiHSCreatedDate": new Date(kdnkVMSelf.thongtinChungVM().fiHSCreatedDate()).getTime(),
             "fiNSWFileCodeReplace": kdnkVMSelf.thongtinChungVM().fiNSWFileCodeReplace(),
             "fiGDK": kdnkVMSelf.thongtinChungVM().fiGDK(),
@@ -247,10 +225,10 @@ function HangHoaNhapKhauVM (options) {
             "fiSellFax": kdnkVMSelf.thongtinChungVM().fiSellFax(),
             "fiSellExport": kdnkVMSelf.thongtinChungVM().fiSellExport(),
 
-            "fiPurchName": kdnkVMSelf.thongtinChungVM().fiPurchName(),
-            "fiPurchTel": kdnkVMSelf.thongtinChungVM().fiPurchTel(),
-            "fiPurchAddress": kdnkVMSelf.thongtinChungVM().fiPurchAddress(),
-            "fiPurchFax": kdnkVMSelf.thongtinChungVM().fiPurchFax(),
+            // "fiPurchName": kdnkVMSelf.thongtinChungVM().fiPurchName(),
+            // "fiPurchTel": kdnkVMSelf.thongtinChungVM().fiPurchTel(),
+            // "fiPurchAddress": kdnkVMSelf.thongtinChungVM().fiPurchAddress(),
+            // "fiPurchFax": kdnkVMSelf.thongtinChungVM().fiPurchFax(),
             "fiPurchReci": kdnkVMSelf.thongtinChungVM().fiPurchReci(),
             "fiPurchFromDate": new Date(kdnkVMSelf.thongtinChungVM().fiPurchFromDate()).getTime(),
             "fiPurchToDate": new Date(kdnkVMSelf.thongtinChungVM().fiPurchToDate()).getTime(),
@@ -278,7 +256,10 @@ function HangHoaNhapKhauVM (options) {
             "fiSignPosition": kdnkVMSelf.thongtinChungVM().fiSignPosition(),
             "fiSignAddress": kdnkVMSelf.thongtinChungVM().fiSignAddress(),
 
-            "fiAttachmentList": kdnkVMSelf.uploadFileVM().getLstAttachments()
+            "fiProCVMienGiam": kdnkVMSelf.thongtinChungVM().fiProCVMienGiam(),
+            "fiProCVMienGiamNgay": kdnkVMSelf.thongtinChungVM().fiProCVMienGiamNgay()?new Date(kdnkVMSelf.thongtinChungVM().fiProCVMienGiamNgay()).getTime():null,
+
+            "fiAttachmentList": kdnkVMSelf.uploadFileVM().fiAttachmentList()
         }
         return body;
     }

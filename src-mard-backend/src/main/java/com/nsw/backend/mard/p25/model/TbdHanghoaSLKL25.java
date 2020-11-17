@@ -42,7 +42,7 @@ public class TbdHanghoaSLKL25 extends CmonBaseEntity implements Serializable {
     private Integer fiIdProduct;
 
     @Column(name = "FI_PROSLKL_MASS", nullable = false)
-    private Integer fiProSLKLMass;
+    private Float fiProSLKLMass;
 
     @Column(name = "FI_PROSLKL_MASS_UNIT_CODE", nullable = false, length = 50)
     private String fiProSLKLMassUnitCode;
@@ -51,10 +51,10 @@ public class TbdHanghoaSLKL25 extends CmonBaseEntity implements Serializable {
     private String fiProSLKLMassUnitName;
 
     @Column(name = "FI_PROSLKL_MASS_TAN", nullable = false)
-    private Integer fiProSLKLMassTan;
+    private Float fiProSLKLMassTan;
 
     @Column(name = "FI_PROSLKL_AMOUNT", nullable = false)
-    private Integer fiProSLKLAmount;
+    private Float fiProSLKLAmount;
 
     @Column(name = "FI_PROSLKL_AMOUNT_UNIT_CODE", nullable = false, length = 50)
     private String fiProSLKLAmountUnitCode;

@@ -31,6 +31,7 @@
                         <th class="text-center" width="15%">Người xử lý</th>
                         <th class="text-center" width="15%">Ngày xử lý</th>
                         <th class="text-center" width="40%">Nội dung</th>
+                        <th class="text-center" width="15%">File đính kèm</th>
                         <th class="text-center" width="10%">Trạng thái</th>
                     </tr>
                     </thead>
@@ -41,7 +42,8 @@
                         <td data-bind="text: fiSenderName"></td>
                         <td data-bind="datetime: fiCreatedDate"></td>
                         <td data-bind="html: fiContent"></td>
-                        <td data-bind="text: fiStatus"></td>
+                        <td></td>
+                        <td data-bind="text: $root.getProfileStatus(fiStatus())"></td>
                     </tr>
                     </tbody>
                 </table>

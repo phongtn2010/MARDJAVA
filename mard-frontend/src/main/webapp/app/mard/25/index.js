@@ -2,7 +2,7 @@ var mapTrangthai = {}
 
 function Mard25VM() {
     var self = this;
-
+    self.fiCertNo = ko.observable(null);
     self.fiCompanyTaxCode = ko.observable(hosoUsername);
     self.fiHSCode = ko.observable(null);
     self.fiHSStatus = ko.observable(null);
@@ -10,6 +10,8 @@ function Mard25VM() {
     self.sentStartDate = ko.observable(null);
     self.sentEndDate = ko.observable(null);
     self.licenseNo = ko.observable(null);
+    self.fiProMadeIn = ko.observable(null);
+    self.fiProName = ko.observable(null);
     self.licenseStartDate = ko.observable(null);
     self.licenseEndDate = ko.observable(null);
     // self.page = ko.observable(DEFAULT_PAGE_NUM);
@@ -24,12 +26,21 @@ function Mard25VM() {
     self.lstPort = ko.observableArray([]);
     self.lstUOMAnimal = ko.observableArray([]);
     self.lstProfileStatus = ko.observableArray([]);
+    self.lstHoSoType = ko.observableArray([]);
+    self.lstDVXL = ko.observableArray([]);
     self.lstAtchType = ko.observableArray([]);
 
     self.giayPhepVM = ko.observable(new GiayPhepVM());
     self.xinRutHoSoVM = ko.observable(new XinRutHoSoVM());
     self.lichsuXuly = ko.observable(new HistoryPopupView());
 
+    self.fiIdTCCD=ko.observable(null);
+    self.fiNameTCCD=ko.observable(null);
+    self.filstChiTieu = ko.observableArray([]);
+    self.selectedHoSo=ko.observable(null);
+    self.lstNhom = ko.observableArray([]);
+    self.lstProvince = ko.observableArray([]);
+    self.guiBaoCaoHS2dVM = ko.observable(new GuiBaoCaoHS2D());
     self.pagination = ko.observable(new PagingVM({
         pageSize: MAX_PAGE_SIZE,
         totalCount: 0,
@@ -42,15 +53,49 @@ function Mard25VM() {
         self.currentPage(newCurrentPage);
         self.searchHoso(newCurrentPage);
     })
-
+    self.getTenNhom = function (idNhom) {
+        var lstNhomHangHoa = self.lstNhom();
+        var pos = lstNhomHangHoa.find(function (e) {
+            return e.fiCatType == Number(idNhom);
+        })
+        if (pos)
+            return pos.fiCatTypeName;
+        else return idNhom;
+    }
     self.getProfileStatus = function (statuscode) {
         var lstProfileStatus = self.lstProfileStatus();
         var pos = lstProfileStatus.find(function (e) {
-            return e.id == statuscode;
+            return e.fiCatType == Number(statuscode);
         })
         if (pos)
-            return pos.name;
+            return pos.fiCatTypeName;
         else return statuscode;
+    }
+    self.getNoiKy = function(provinceId){
+        var pos = self.lstProvince().find(function (e) {
+            return e.provinceId == Number(provinceId);
+        })
+        if (pos)
+            return pos.provinceName;
+        else return provinceId;
+    }
+    self.getHoSoType = function (hsType) {
+        var lstHoSoType = self.lstHoSoType();
+        var pos = lstHoSoType.find(function (e) {
+            return e.fiCatType == Number(hsType);
+        })
+        if (pos)
+            return pos.fiCatTypeName.substring(0,2);
+        else return hsType;
+    }
+    self.getHoSoTypeFull = function (hsType) {
+        var lstHoSoType = self.lstHoSoType();
+        var pos = lstHoSoType.find(function (e) {
+            return e.fiCatType == Number(hsType);
+        })
+        if (pos)
+            return pos.fiCatTypeName;
+        else return hsType;
     }
 
     self.getUnitName = function (unitcode) {
@@ -91,6 +136,26 @@ function Mard25VM() {
             app.sendGetRequest("/mard/25/danhmuc/unit?unitTypeId=4&systemId=6", function (res) {
                 options['lstUOMAnimal'] = res.data;
                 self.lstUOMAnimal(res.data);
+            }),
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/25", function (res) {
+                options['lstProfileStatus'] = res.data;
+                self.lstProfileStatus(res.data);
+            }),
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/2", function (res) {
+                options['lstHoSoType'] = res.data;
+                self.lstHoSoType(res.data);
+            }),
+            app.sendGetRequest("/mard/25/danhmuc/dvxl/1", function (res) {
+                options['lstDVXL'] = res.data;
+                self.lstDVXL(res.data);
+            }),
+            // Get profile status
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/1", function (res) {
+                self.lstNhom(res.data);
+            }),
+            // Get list province
+            app.sendGetRequest("/mard/25/danhmuc/tinhthanh", function (res) {
+                self.lstProvince(res.data);
             })
             // Get attach types
             // app.sendGetRequest("/mard/06/danhmuc/dinhkem?systemId=6", function (res) {
@@ -118,12 +183,16 @@ function Mard25VM() {
 
     self.searchHoso = function (page) {
         var filter = {
-            fiCompanyTaxCode: self.fiCompanyTaxCode(),
+            fiCertNo: self.fiCertNo(),
             fiHSCode: self.fiHSCode(),
+            fiTenHangHoa: self.fiProName(),
             fiHSStatus: self.fiHSStatus(),
-            fiCounttry: self.fiCounttry(),
+            fiCompanyTaxCode: hosoUsername,
+
             sentStartDate: self.sentStartDate(),
             sentEndDate: self.sentEndDate(),
+            fiProCountryName: self.fiCounttry(),
+            fiProMadeIn: self.fiProMadeIn(),
             licenseNo: self.licenseNo(),
             licenseStartDate: self.licenseStartDate(),
             licenseEndDate: self.licenseEndDate(),
@@ -164,66 +233,61 @@ function Mard25VM() {
             }
         });
     }
-
-    self.viewHoSo = function(item) {
+    self.setValueForIndexPage = function(item){
         item.lstCountry = self.lstCountry();
         item.lstPort = self.lstPort();
         item.lstProfileStatus = self.lstProfileStatus();
         item.lstUOMAnimal = self.lstUOMAnimal();
         item.lstAtchType = self.lstAtchType();
-        self.selectedHoSo(item);
-        $('#mard06ViewHSModal').modal('show');
-    }
+        item.lstHD = ko.observableArray([]);
+        item.lstHoaDon = ko.observableArray([]);
+        item.lstPhieu = ko.observableArray([]);
+        if(item.fiAttachmentList.length>0) {
+            item.lstHD=ko.computed(function () {
+                return ko.utils.arrayFilter(item.fiAttachmentList, function (re) {
+                    return re.fiFileTypeID == '1';
+                });
+            });
+            item.lstHoaDon=ko.computed(function () {
+                return ko.utils.arrayFilter(item.fiAttachmentList, function (re) {
+                    return re.fiFileTypeID == '2';
+                });
+            });
+            item.lstPhieu=ko.computed(function () {
+                return ko.utils.arrayFilter(item.fiAttachmentList, function (re) {
+                    return re.fiFileTypeID == '3';
+                });
+            });
+        }
+        item.ngayKy = ko.observable(null);
+        item.thangKy = ko.observable(null);
+        item.namKy = ko.observable(null);
 
-    self.viewGiayPhep = function(item) {
-        var code = item.fiNSWFileCode;
-        $.ajax({
-            async: true,
-            type: 'GET',
-            cache: false,
-            crossDomain: true,
-            url: app.appContext + "/mard/06/giayphep/view?code=" + code + "&type=all",
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader(CSRF_TOKEN_NAME, CSRF_TOKEN_VALUE);
-                $('#loading08').show();
-            },
-            success: function (res) {
-                $('#loading08').hide();
-                if (res.success) {
-                    self.giayPhepVM().update({
-                        vsty: res.data.vsty,
-                        cnkd: res.data.cnkd
-                    })
-                    if (res.data.vsty && res.data.cnkd) {
-                        $("#title_tab_vsty").show();
-                        $("#title_tab_kdnk").show();
-                        $("#title_tab_vsty").removeClass('active');
-                        $("#title_tab_vsty").addClass('active');
-                        $("#title_tab_kdnk").removeClass('active');
-                    } else if (res.data.vsty && !res.data.cnkd) {
-                        $("#title_tab_vsty").show();
-                        $("#title_tab_kdnk").hide();
-                        $("#tab_vsty").show();
-                        $("#tab_cnkd").hide();
-                        $("#title_tab_vsty").removeClass('active');
-                        $("#title_tab_vsty").addClass('active');
-                    } else if (!res.data.vsty && res.data.cnkd) {
-                        $("#title_tab_kdnk").show();
-                        $("#title_tab_vsty").hide();
-                        $("#tab_vsty").hide();
-                        $("#tab_cnkd").show();
-                        $("#title_tab_kdnk").removeClass('active');
-                        $("#title_tab_kdnk").addClass('active');
-                    }
-                    $('#modal_viewGiayPhep').modal('show');
-                }
-            },
-            error: function (err) {
-            },
-            complete: function (jqXHR, textStatus) {
-                $('#loading08').hide();
-            }
-        });
+        var ngayTao = new Date(item.fiHSCreatedDate);
+        var ngay=ngayTao.getDay();
+        var thang=ngayTao.getMonth();
+        var nam=ngayTao.getFullYear();
+
+        item.ngayKy(ngay);
+        item.thangKy(thang);
+        item.namKy(nam);
+        return item;
+    }
+    self.viewHoSo = function(item) {
+
+        self.selectedHoSo(value);
+        $('#mard25ViewHSModal').modal('show');
+    }
+    self.showLSXL = function (item) {
+        self.lichsuXuly().show(item.fiNSWFileCode);
+        return false;
+    };
+
+
+
+    self.viewHangHoaStatus = function(item) {
+        window.location.href= app.appContext + "/mard/25/hanghoa/" + item.fiIdHS;
+        return true;
     }
 
     self.deleteHoso = function (item) {
@@ -244,7 +308,7 @@ function Mard25VM() {
                             type: 'GET',
                             cache: false,
                             crossDomain: true,
-                            url: app.appContext + "/mard/06/hoso/delete?fiNSWFileCode=" + item.fiNSWFileCode + "&fiTaxCode=" + hosoUsername,
+                            url: app.appContext + "/mard/25/hoso/delete?fiIdHS=" + item.fiIdHS + "&fiTaxCode=" + hosoUsername,
                             beforeSend: function (xhr) {
                                 xhr.setRequestHeader(CSRF_TOKEN_NAME, CSRF_TOKEN_VALUE);
                                 $('#loading10').show();
@@ -279,18 +343,21 @@ function Mard25VM() {
     }
 
     self.requestCancelProfile = function () {
-        var body = {
-            fiNSWFileCode: self.xinRutHoSoVM().fiNSWFileCode(),
-            fiRequestedDate: self.xinRutHoSoVM().fiRequestedDate(),
-            fiReason: self.xinRutHoSoVM().fiReason(),
-            fiIdHS: self.xinRutHoSoVM().fiIdHS()
-        };
-
         if (self.xinRutHoSoVM().fiReason().length == 0) {
             app.Alert('Nhập lý do xin rút');
             return;
         }
-
+        if (self.xinRutHoSoVM().fiSigner().length == 0) {
+            app.Alert('Nhập người ký');
+            return;
+        }
+        var body = {
+            fiNSWFileCode: self.xinRutHoSoVM().fiNSWFileCode(),
+            fiRequestedDate: self.xinRutHoSoVM().fiRequestedDate(),
+            fiReason: self.xinRutHoSoVM().fiReason(),
+            fiIdHS: self.xinRutHoSoVM().fiIdHS(),
+            fiSigner: self.xinRutHoSoVM().fiSigner()
+        };
         self.pop = app.popup({
             title: 'Thông báo',
             html: '<b>Bạn chắc chắn muốn gửi yêu cầu xin rút?</b>',
@@ -303,14 +370,14 @@ function Mard25VM() {
                     action: function () {
                         app.popupRemove(self.pop.selector);
                         app.makePost({
-                            url: '/mard/06/hoso/cancel',
+                            url: '/mard/25/hoso/cancel',
                             data: JSON.stringify(body),
                             success: function (d) {
                                 if (d && d.success) {
                                     app.Alert('Gửi yêu cầu thành công');
                                     self.searchHoso(self.currentPage());
-                                    if ($('#modalXinRut').hasClass('in')) {
-                                        $('#modalXinRut').modal('hide');
+                                    if ($('#modal_xin_rut').hasClass('in')) {
+                                        $('#modal_xin_rut').modal('hide');
                                     }
                                 } else {
                                     app.Alert(d.message);
@@ -348,26 +415,90 @@ function Mard25VM() {
         window.location.href= app.appContext + "/mard/25/edit/" + item.fiIdHS;
         return true;
     }
+    self.goCopyHoSo = function(item) {
+        window.location.href= app.appContext + "/mard/25/copy/" + item.fiIdHS;
+        return true;
+    }
 
     self.goYCRHoSo = function(item) {
         self.xinRutHoSoVM().update(item);
-        $('#modalXinRut').modal('show');
+        $('#modal_xin_rut').modal('show');
     }
 
-    self.goYCSHoSo = function(item) {
-        window.location.href= app.appContext + "/mard/06/ycs/" + item.fiIdHS;
-        return true;
-    }
-
-    self.goViewHoSo = function(item) {
-        window.location.href= app.appContext + "/mard/06/view/" + item.fiIdHS;
-        return true;
+    self.guiBaoCaoHS2d = function(item){
+        self.guiBaoCaoHS2dVM().update(item);
     }
 
     self.viewLichSu = function (item, e) {
         self.lichsuXuly().show(item.fiNSWFileCode)
         return false;
     };
+
+    self.chuyenTCCD = function (data,type,index) {
+        var value = self.setValueForIndexPage(index);
+        self.selectedHoSo(value);
+        app.makeGet({
+            url: '/mard/25/chitieu/'+index.fiNSWFileCode,
+            success: function(res) {
+                self.filstChiTieu(res.data);
+            },
+            error: function (d) {
+
+            }
+        });
+    }
+    self.chuyenChiTieu =function(){
+        self.selectedHoSo().fiIdDVXL=self.fiIdTCCD();
+        self.selectedHoSo().fiNameDVXL=self.fiNameTCCD();
+        self.pop = app.popup({
+            title: 'Thông báo',
+            html: '<b>Bạn chắc chắn muốn chuyển hồ sơ cho tổ chức chỉ định?</b>',
+            width: 450,
+            buttons: [
+                {
+                    name: NSWLang["common_button_toi_chac_chan"],
+                    class: 'btn',
+                    icon: 'fa-save',
+                    action: function () {
+                        app.popupRemove(self.pop.selector);
+                        app.makePost({
+                            url: '/mard/25/hoso/chuyenchitieu',
+                            data: JSON.stringify(self.selectedHoSo()),
+                            contentType: "application/json; charset=utf-8",
+                            success: function (d) {
+                                if (d && d.success) {
+                                    app.Alert('Gửi yêu cầu thành công');
+                                    self.searchHoso(self.currentPage());
+                                    if ($('#modal_view_chuyen').hasClass('in')) {
+                                        $('#modal_view_chuyen').modal('hide');
+                                    }
+                                } else {
+                                    app.Alert(d.message);
+                                }
+                            },
+                            error: function (e) {
+                                app.Alert('Không gửi được yêu cầu');
+                            }
+                        });
+                    }
+                },
+                {
+                    name: 'Huỷ',
+                    class: 'btn',
+                    icon: 'fa-close',
+                    action: function () {
+                        app.popupRemove(self.pop.selector);
+                    }
+                }
+            ]
+        });
+    }
+    self.closeViewChuyen = function(){
+
+    }
+    self.thoatOnClick  = function () {
+        $("#modal_view_chuyen").hide();
+    }
 }
 
 function GiayPhepVM(options) {
@@ -424,6 +555,51 @@ function GiayPhepVM(options) {
             link.remove();
         }
     }
+
+}
+
+function GuiBaoCaoHS2D(){
+    var self =this;
+    self.fiHSCode = ko.observable(null);
+    self.fiFile = ko.observable(null);
+    self.fiTenFile = ko.observable(null);
+    self.fiListAttach = ko.observableArray([]);
+
+    self.update = function(data){
+        self.fiHSCode(data.fiNSWFileCode);
+    }
+    self.themMoiFileBaoCao =function () {
+        var files = $("#file-baocao")[0].files[0];
+        if (!files || files.length == 0) {
+            app.Alert("Bạn chưa đính kèm file");
+            return;
+        }
+        var fiFileName = self.fiFile().replace(/^.*[\\\/]/, '');
+        $('#loading08').show();
+        app.uploadFile({
+            file: files,
+            mcode: 'mard',
+            pcode: '25',
+            url: '/mard/25/upload',
+            success: function (d) {
+                var fileLink = d.data.urlFile;
+                var fileId = d.data.itemId;
+                var item ={
+                    fiLinkBNN: fileLink,
+                    fiGuidBNN: fileId,
+                    fiFileHD: fiFileName,
+                    fiFileTypeID: 9,
+                    fiFileTypeName: 'File báo cáo hồ sơ 2D'
+                }
+                $('#loading08').hide();
+            },
+            error: function (e) {
+                self.errorMsg('Có lỗi tải file lên' + e);
+                $('#loading08').hide();
+
+            }
+        });
+    }
 }
 
 function XinRutHoSoVM () {
@@ -434,7 +610,7 @@ function XinRutHoSoVM () {
     xinRutHoSoVMSelf.fiIdHS = ko.observable(null);
     xinRutHoSoVMSelf.errorMsg = ko.observable('');
     xinRutHoSoVMSelf.fiHSStatus = ko.observable(null);
-
+    xinRutHoSoVMSelf.fiSigner = ko.observable("");
     xinRutHoSoVMSelf.clearForm = function () {
         xinRutHoSoVMSelf.errorMsg('')
     }
@@ -444,9 +620,8 @@ function XinRutHoSoVM () {
         xinRutHoSoVMSelf.fiIdHS(data.fiIdHS);
         xinRutHoSoVMSelf.fiRequestedDate(new Date());
         xinRutHoSoVMSelf.fiHSStatus(data.fiHSStatus);
-        if (data.fiHSStatus == 1) {
-            xinRutHoSoVMSelf.fiReason(" ")
-        }
+        xinRutHoSoVMSelf.fiSigner = ko.observable('');
+        xinRutHoSoVMSelf.fiReason = ko.observable('');
     }
 }
 
@@ -458,12 +633,13 @@ $(document).ready(function () {
     var vm = new Mard25VM();
     ko.applyBindings(vm, document.getElementById('mard06'));
     vm.applyState();
-    $("#title_tab_vsty").click(function(e){
+    $("#title_tab_vsty").click(function (e) {
         $("#tab_vsty").show();
         $("#tab_cnkd").hide();
     });
-    $("#title_tab_kdnk").click(function(e){
+    $("#title_tab_kdnk").click(function (e) {
         $("#tab_cnkd").show();
         $("#tab_vsty").hide();
     })
 })
+

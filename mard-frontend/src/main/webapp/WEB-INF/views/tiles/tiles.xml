@@ -435,7 +435,14 @@
         <put-attribute name="title" value="Vietnam Single Window" />
         <put-attribute name="body" value="/WEB-INF/views/pages/mard/25/edit.jsp" />
     </definition>
-
+    <definition name="mard.25.view" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/25/view.jsp" />
+    </definition>
+    <definition name="mard.25.view.hanghoa" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/25/trangthaichitiet_hanghoa.jsp" />
+    </definition>
 
     <!--END THU TUC 25-->
 	
@@ -568,6 +575,20 @@
         <put-attribute name="body" value="/WEB-INF/views/pages/sbv/01/edit.jsp" />  
     </definition>
     <!--END THU TUC sbv.01-->
+
+    <!--THU TUC sbv.02-->
+    <!-- Home Page -->
+    <definition name="sbv.02.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/sbv/02/index.jsp" />
+    </definition>
+    <definition name="sbv.02.create" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/sbv/02/create.jsp" />
+    </definition>
+
+    <!--END THU TUC sbv.02-->
+
     <!--END OF SBV-->
     <!--  BO GT  -->
     <definition name="mt.00.home" extends="base-definition">  
@@ -1512,5 +1533,28 @@
         <put-attribute name="body" value="/WEB-INF/views/pages/mic/03/edit.jsp" />
     </definition>
 	 <!--END BO THONG TIN TRUYEN THONG-->
+    <!--THU TUC 26 -->
+    <definition name="mard.26.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/26/index.jsp" />
+    </definition>
 
+    <definition name="mard.26.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/26/edit.jsp" />
+    </definition>
+    <definition name="mard.26.create" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/26/edit.jsp" />
+    </definition>
+
+    <definition name="mard.26.view" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/26/view.jsp" />
+    </definition>
+    <!--END THU TUC 26-->
+    <definition name="mard.cssx.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/cssx.jsp" />
+    </definition>
 </tiles-definitions>

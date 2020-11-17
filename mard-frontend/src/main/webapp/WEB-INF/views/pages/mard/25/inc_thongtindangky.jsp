@@ -72,13 +72,13 @@
                                 class="nsw-require-field">*</a></label>
                     </div>
                     <div class="col-md-4">
-                        <input data-bind="value: fiPurchName" class="form-control"/>
+                        <input data-bind="value: fiImporterName" class="form-control"/>
                     </div>
                     <div class="col-md-2 nsw-text-right">
-                        <label><spring:message code="mard.25.tokhai.ben_mua_hang_item_004"/></label>
+                        <label><spring:message code="mard.25.tokhai.ben_mua_hang_item_004"/></label><a class="nsw-require-field">*</a>
                     </div>
                     <div class="col-md-4">
-                        <input data-bind="value: fiPurchTel" class="form-control"/>
+                        <input data-bind="value: fiImporterTel" class="form-control"/>
                     </div>
                 </div>
             </div>
@@ -88,13 +88,13 @@
                         <label><spring:message code="mard.25.tokhai.ben_mua_hang_item_003"/><a  class="nsw-require-field">*</a></label>
                     </div>
                     <div class="col-md-4">
-                        <input data-bind="value: fiPurchAddress" class="form-control"/>
+                        <input data-bind="value: fiImporterAddress" class="form-control"/>
                     </div>
                     <div class="col-md-2 nsw-text-right">
                         <label><spring:message code="mard.25.tokhai.ben_mua_hang_item_002"/></label>
                     </div>
                     <div class="col-md-4">
-                        <input data-bind="value: fiPurchFax" class="form-control"/>
+                        <input data-bind="value: fiImporterFax" class="form-control"/>
                     </div>
                 </div>
             </div>
@@ -116,7 +116,7 @@
                                         type="text"
                                         class="form-control form-control-inline date-picker"
                                         data-date-format="dd/mm/yyyy"
-                                        data-bind="datepicker2: fiPurchFromDate, datepickerOptions: { endDate: fiPurchToDate }"
+                                        data-bind="datepicker2: fiPurchFromDate"
                                 />
                             </div>
                             <div class="col-md-2 no-padding no-margin" style="text-align: center">-</div>
@@ -125,7 +125,7 @@
                                         type="text"
                                         class="form-control form-control-inline date-picker"
                                         data-date-format="dd/mm/yyyy"
-                                        data-bind="datepicker2: fiPurchToDate, datepickerOptions: { startDate: fiPurchFromDate }"
+                                        data-bind="datepicker2: fiPurchToDate"
                                 />
                             </div>
                         </div>

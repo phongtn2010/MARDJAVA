@@ -45,28 +45,21 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_HS_CODE", length = 50)
     private String fiNSWFileCode;
 
-    @Column(name = "FI_HS_Code_R", length = 50)
+    @Column(name = "FI_HS_CODE_R", length = 50)
     private String fiNSWFileCodeReplace;
 
-    @Column(name = "FI_GDK", length = 250)
-    private String fiGDK;
+    @Column(name = "FI_SO_GDK")
+    private String fiSoGDK;
+    @Column(name = "FI_LINK_GDK", length = 250)
+    private String fiLinkGDK;
+    @Column(name = "FI_FILE_NAME_GDK", length = 250)
+    private String fiFileNameGDK;
+    @Column(name = "FI_FILE_ID_GDK", length = 250)
+    private String fiFileIdGDK;
+//    @Column(name = "FI_IMPORTER_EMAIL", length = 500)
+//    private String fiImporterEmail;
 
-    @Column(name = "FI_IMPORTER_NAME", length = 2500)
-    private String fiImporterName;
-
-    @Column(name = "FI_IMPORTER_ADD", length = 2500)
-    private String fiImporterAddress;
-
-    @Column(name = "FI_IMPORTER_TEL", length = 50)
-    private String fiImporterTel;
-
-    @Column(name = "FI_IMPORTER_FAX", length = 50)
-    private String fiImporterFax;
-
-    @Column(name = "FI_IMPORTER_EMAIL", length = 500)
-    private String fiImporterEmail;
-
-    @Column(name = "FI_HS_TYPE", nullable = false)
+    @Column(name = "FI_HS_TYPE")
     private Integer fiHSType;
 
     @Column(name = "FI_HS_STATUS")
@@ -96,13 +89,13 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     private Integer fiIdHSParent;
 
     //Thông tin đăng ky bên Bán Hàng
-    @Column(name = "FI_SELL_NAME", nullable = false, length = 250)
+    @Column(name = "FI_SELL_NAME", length = 250)
     private String fiSellName;
 
-    @Column(name = "FI_SELL_ADDRESS", nullable = false, length = 500)
+    @Column(name = "FI_SELL_ADDRESS", length = 500)
     private String fiSellAddress;
 
-    @Column(name = "FI_SELL_TEL", nullable = false, length = 15)
+    @Column(name = "FI_SELL_TEL",  length = 15)
     private String fiSellTel;
 
     @Column(name = "FI_SELL_FAX", length = 15)
@@ -114,23 +107,23 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_SELL_COUNTRY_NAME")
     private String fiSellCountryName;
 
-    @Column(name = "FI_SELL_EXPORT", nullable = false, length = 500)
+    @Column(name = "FI_SELL_EXPORT", length = 500)
     private String fiSellExport;
 
     //Thông tin đăng ky Mua Hàng
-    @Column(name = "FI_PURCH_NAME", nullable = false, length = 250)
-    private String fiPurchName;
+    @Column(name = "FI_IMPORTER_NAME", length = 2500)
+    private String fiImporterName;
 
-    @Column(name = "FI_PURCH_ADDRESS", nullable = false, length = 500)
-    private String fiPurchAddress;
+    @Column(name = "FI_IMPORTER_ADD", length = 2500)
+    private String fiImporterAddress;
 
-    @Column(name = "FI_PURCH_TEL", nullable = false, length = 15)
-    private String fiPurchTel;
+    @Column(name = "FI_IMPORTER_TEL", length = 50)
+    private String fiImporterTel;
 
-    @Column(name = "FI_PURCH_FAX", length = 15)
-    private String fiPurchFax;
+    @Column(name = "FI_IMPORTER_FAX", length = 50)
+    private String fiImporterFax;
 
-    @Column(name = "FI_PURCH_RECI", nullable = false, length = 500)
+    @Column(name = "FI_PURCH_RECI", length = 500)
     private String fiPurchReci;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -168,47 +161,40 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_CONTACT_EMAIL", nullable = false, length = 250)
     private String fiContactEmail;
 
-//    //Thông tin hồ sơ Doanh Nghiệp
-//    @Column(name = "FI_SIGN_PROVIN_CODE", nullable = false, length = 6)
-//    private String fiSignProvinCode;
-//
-//    @Column(name = "FI_SIGN_PROVIN_NAME", nullable = false, length = 250)
-//    private String fiSignProvinName;
+    //Thông tin công văn
+    @Column(name = "FI_SO_CV_MIENGIAM")
+    private String fiProCVMienGiam;
 
-    @Column(name = "FI_SIGN_NAME", nullable = false, length = 250)
+    @Column(name = "FI_NGAY_CV_MIENGIAM")
+    private Date fiProCVMienGiamNgay;
+
+    @Column(name = "FI_SIGN_NAME", length = 250)
     private String fiSignName;
 
-    @Column(name = "FI_SIGN_POSITION", nullable = false, length = 250)
+    @Column(name = "FI_SIGN_POSITION", length = 250)
     private String fiSignPosition;
 
-    @Column(name = "FI_SIGN_ADD", nullable = false, length = 250)
+    @Column(name = "FI_SIGN_ADD",length = 250)
     private String fiSignAddress;
 
+    @Column(name = "FI_ID_DVXL")
+    private String fiIdDVXL;
+
+    @Column(name = "FI_NAME_DVXL", length = 500)
+    private String fiNameDVXL;
+
+    @Column(name = "FI_SO_GXN", length = 500)
+    private String fiSoGXN;
     //Danh sách thông tin kèm theo
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "FI_HS_ID")
     private List<TbdHanghoa25> fiProductList;
 
     // Dinh kem
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "FI_HS_ID")
-    private List<Tbdattach25> fiAttachmentList;
+    private List<TbdDinhkem25> fiAttachmentList;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "FI_HS_ID")
-    private List<Tbdattach25> fiListAttch;
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "FI_HS_ID")
-    private List<TbdattachHoadon25> fiListAttchHoaDon;
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "FI_HS_ID")
-    private List<TbdattachHd25> fiListAttchHD;
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "FI_HS_ID")
-    private List<TbdattachDg25> fiListAttchPhieu;
 
     @Transient
     private String fiCertNo;

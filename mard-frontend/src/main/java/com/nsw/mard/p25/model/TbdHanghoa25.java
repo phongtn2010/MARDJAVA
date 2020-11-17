@@ -7,26 +7,21 @@ import java.util.List;
 
 @Data
 public class TbdHanghoa25 implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    public static final String SEQUENCE_NAME = "TBDHANGHOA25_SEQ";
 
     private Long fiIdProduct;
 
     private Long fiIdHS;
 
-    private Long fiId;
-
     private String fiProName;
 
-    private Integer fiProIdNhom;
-
-    private Integer fiProIdPhanNhom;
-
-    private Integer fiProIdLoai;
-
-    private Integer fiProIdPhanLoai;
-
+    private String fiProIdNhom;
+    private String fiProNameNhom;
+    private String fiProIdPhanNhom;
+    private String fiProNamePhanNhom;
+    private String fiProIdLoai;
+    private String fiProNameLoai;
+    private String fiProIdPhanLoai;
+    private String fiProNamePhanLoai;
     private String fiProCode;
 
     private String fiProMadeIn;
@@ -60,10 +55,13 @@ public class TbdHanghoa25 implements Serializable {
     private String fiProductKL;
 
     private String fiProductSL;
+    private Long fiTrangThaiHangHoa;
 
     private List<TbdHanghoaCL25> fiProCLList;
 
     private List<TbdHanghoaAT25> fiProATList;
 
     private List<TbdHanghoaSLKL25> fiProSLKLList;
+
+    private List<Ananytical> fiListChiTieu;
 }

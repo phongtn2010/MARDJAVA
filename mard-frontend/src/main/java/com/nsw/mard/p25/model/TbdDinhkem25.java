@@ -8,9 +8,6 @@ import java.util.Date;
 
 @Data
 public class TbdDinhkem25 implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    public static final String SEQUENCE_NAME = "TBDDINHKEM25_SEQ";
 
     private Long fiIdDinhkem;
 
@@ -28,9 +25,9 @@ public class TbdDinhkem25 implements Serializable {
 
     private Long fiActive;
 
-    private String fiPath;
+    private String fiLinkBNN;
 
-    private String fiGuid;
+    private String fiGuidBNN;
 
     private Long fiIdHS;
 

@@ -9,6 +9,9 @@
     </div>
     <div class="modal-body container" style="display: flex">
         <div id="content-hoso" size="a4" class="a4 col-md-12">
+            <div class="text-right" style="padding-top: 10px">
+                <h5 class="text-border" style="font-weight: bold">Mẫu số 12.TACN</h5>
+            </div>
             <div class="text-center">
                 <h4 style="font-weight: bold;">
                     CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
@@ -18,106 +21,161 @@
                 </h5>
 
                 <div style="border-top: #000000 solid 1px; margin: auto; width: 160px"></div>
-                <div class="text-right" style="padding-top: 10px">
-                    <h5 class="text-border" style="font-weight: bold">Mẫu 02TS</h5>
-                </div>
+
             </div>
             <div class="text-center" style="padding-top: 15px;">
-                <h4 class="uppercase" style="font-weight: bold">ĐƠN <spring:message code="mard.06.ten_thu_tuc"></spring:message></h4>
+                <h4 class="uppercase" style="font-weight: bold">ĐƠN <spring:message code="mard.25.don_dk"></spring:message></h4>
                 <p class="code">
-                    <b>Số: <span data-bind="text: fiNSWFileCode"></span></b>
+                    <span class="text-border">Số: <span></span></span>
                 </p>
-                <p class="code">
-                    <b>Kính gửi: Cục Thú y</b>
+                <br/>
+                <br/>
+                <p>
+                    <b>Kính gửi: Cục Chăn nuôi</b>
                 </p>
             </div>
-            <p class="content">
-                <span>Tên tổ chức, cá nhân: </span><b data-bind="text: fiImporterName"></b>
-            </p>
-            <p class="content">
-                <span>Địa chỉ: </span><b data-bind="text: fiImporterAddress"></b>
-            </p>
-            <p class="content">
-                <span>Số điện thoại: </span><b data-bind="text: fiImporterTel"></b>
-            </p>
-            <p class="content">
-                <span>Fax: </span><b data-bind="text: fiImporterFax"></b>
-            </p>
-            <p class="content">
-                <span>Email: </span><b data-bind="text: fiImporterEmail"></b>
-            </p>
-            <p class="content">
-                Căn cứ nhu cầu sản xuất, kinh doanh của Công ty <b data-bind="text: fiImporterName"></b>, đề nghị Cục Thú y hướng dẫn Công ty kiểm dịch nhập khẩu lô hàng:
-            </p>
-            <table class="table table-striped table-bordered table-hover table-checkable order-column">
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <td>1. Bên bán hàng (hãng, nước): <span data-bind="text: fiSellName"/></td>
+                    </tr>
+                    <tr>
+                        <td>2. Địa chỉ, số điện thoại, số fax:<span data-bind="text: fiSellAddress"></span> <span data-bind="text: fiSellTel"></span> <span data-bind="text: fiSellFax"></span></td>
+                    </tr>
+                    <tr>
+                        <td>3. Nơi xuất hàng: <span data-bind="text: fiSellExport"></span></td>
+                    </tr>
+                    <tr>
+                        <td>4. Bên mua hàng: <span data-bind="text: fiImporterName"></span></td>
+                    </tr>
+                    <tr>
+                        <td>5. Địa chỉ, số điện thoại, số fax: <span data-bind="text: fiImporterAddress"></span> <span data-bind="text: fiImporterTel"></span> <span data-bind="text: fiImporterFax"></span></td>
+                    </tr>
+                    <tr>
+                        <td>6. Nơi nhận hàng: <span data-bind="text: fiImporterAddress"></span></td>
+                    </tr>
+                    <tr>
+                        <td>7. Thời gian nhập khẩu dự kiến: <span data-bind="date: fiPurchFromDate"></span>  - <span data-bind="date: fiPurchToDate"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><b>MÔ TẢ HÀNG HÓA</b></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-bordered">
                 <thead>
-                <tr >
-                    <th class="text-center"><spring:message code="common.tokhai.hanghoa.stt"/></th>
-                    <th class="text-center"><spring:message code="mard.06.table.ten_thuong_mai"/></th>
-                    <th class="text-center"><spring:message code="mard.06.table.ten_khoa_hoc"/></th>
-                    <th class="text-center"><spring:message code="mard.06.table.kich_co_ca_the"/></th>
-                    <th class="text-center"><spring:message code="mard.06.table.so_luong"/></th>
-                    <th class="text-center"><spring:message code="mard.06.table.don_vi_tinh"/></th>
-                    <th class="text-center"><spring:message code="mard.06.table.nuoc_xuat_xu"/></th>
-                </tr>
+                    <tr style="font-weight: bold">
+                        <td class="text-center">Số TT</td>
+                        <td class="text-center">Tên TACN</td>
+                        <td class="text-center">Mã số công nhận</td>
+                        <td class="text-center">Nhóm TACN</td>
+                        <td class="text-center">Loại TACN</td>
+                        <td class="text-center">Hãng sản xuất</td>
+                        <td class="text-center">Nước sản xuất</td>
+                        <td class="text-center">Khối lượng</td>
+                        <td class="text-center">Số lượng</td>
+                    </tr>
                 </thead>
-                <tbody
-                        data-bind="foreach: fiProductList">
+                <tbody data-bind="foreach: fiProductList">
+                    <tr>
+                        <td class="text-center" data-bind="text: ($index() + 1)"></td>
+                        <td data-bind="text : fiProName"></td>
+                        <td data-bind="text : fiProCode"></td>
+                        <td data-bind="text : $root.getTenNhom(fiProIdNhom)"></td>
+                        <td data-bind="text : $root.getTenNhom(fiProIdLoai)"></td>
+                        <td data-bind="text : fiProMadeIn"></td>
+                        <td data-bind="text : fiProCountryName"></td>
+                        <td data-bind="text : fiProductKL"></td>
+                        <td data-bind="text : fiProductSL"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-bordered">
+                <tbody>
                 <tr>
-                    <td data-bind="text: ($index() + 1)"></td>
-                    <td data-bind="text : fiProductBusinessName">
+                    <td>8. Địa điểm tập kết hàng: <span data-bind="text: fiAddressGath"></span></td>
+                </tr>
+                <tr>
+                    <td>9. Ngày đăng ký lấy mẫu đánh giá: Từ ngày <span data-bind="date: fiRegSamFromDate"></span> đến ngày <span data-bind="date: fiRegSamToDate"></span></td>
+                </tr>
+                <tr>
+                    <td>10. Địa điểm đăng ký lấy mẫu đánh giá: <span data-bind="text: fiAddressRegSample"></span></td>
+                </tr>
+                <tr>
+                    <td>11. Thông tin người liên hệ: <span data-bind="text: fiContactName"></span></td>
+                </tr>
+                <tr>
+                    <td>12. Hợp đồng mua bán: <span data-bind="foreach: lstHD">Số:<b style="text-decoration: none" data-bind="text: fiFileHD"></b> Ngày <b style="text-decoration: none" data-bind="date: fiFileHDDate"></b>  </span></td>
+                </tr>
+                <tr>
+                    <td>13. Hóa đơn mua bán: <span data-bind="foreach: lstHoaDon">Số:<b style="text-decoration: none" data-bind="text: fiFileHD"></b> Ngày <b style="text-decoration: none" data-bind="date: fiFileHDDate"></b>  </span></td>
+                </tr>
+                <tr>
+                    <td>14. Phiếu đóng gói số: <span data-bind="foreach: lstPhieu">Số:<b style="text-decoration: none" data-bind="text: fiFileHD"></b> Ngày <b style="text-decoration: none" data-bind="date: fiFileHDDate"></b>  </span></td>
+                </tr>
+                <tr>
+                    <td class="text-center"><b>DÀNH CHO CƠ QUAN KIỂM TRA</b></td>
+                </tr>
+                <tr>
+                    <td>15. Yêu cầu đánh giá chỉ tiêu(2): Xem chi tiết phụ lục kèm theo <br/>
+                        Biện pháp kiểm tra(3): <span data-bind="text: $root.getHoSoTypeFull(fiHSType)"></span>
                     </td>
-                    <td data-bind="text : fiProductScienceName">
-                    </td>
-                    <td data-bind="text : fiSizeOrType"></td>
-                    <td class="text-right" data-bind="text : fiQuantity"></td>
-                    <td data-bind="text: $root.getUnitName(fiPackageUnitCode)"></td>
-                    <td data-bind="text: $root.getCountryName(fiOriginCountryCode)"></td>
+                </tr>
+                <tr>
+                    <td>15. Đơn vị thực hiện đánh giá: </td>
+                </tr>
+                <tr>
+                    <td>Đối với hàng nhập khẩu, Giấy này có giá trị để làm thủ tục hải quan. Sau đó doanh nghiệp phải xuất trình toàn bộ hồ sơ và hàng hóa đã hoàn thành thủ tục hải quan cho cơ quan đánh giá để được đánh giá chất lượng theo quy định</td>
                 </tr>
                 </tbody>
             </table>
-            <p class="content">
-                Tên, địa chỉ công ty xuất khẩu: <span data-bind="foreach: fiExporterCountryList"><b data-bind="text: fiExporterCountryName"></b> (<b data-bind="text: fiExporterCountryAddress"></b>); </span>
-            </p>
-            <p class="content">
-                Tên, địa chỉ cơ sở nuôi/ sản xuất giống/ cơ sở sơ chế, chế biến sản phẩm động vật thủy sản tại nước xuất khẩu:
-                <span data-bind="foreach: fiProcessingList"><b data-bind="text: fiProcessingName"></b> -
-                    <b data-bind="text: fiProcessingAddress"></b>
-                    <b data-bind="visible: fiProcessingApprovalNumber, text: '(' + fiProcessingApprovalNumber + ')'"></b>; </span>
-            </p>
-            <div data-bind="visible: fiLocationQuarantineList.length > 0">
-            <p class="content">
-                Tên, địa chỉ nơi cách ly kiểm dịch động vật thủy sản/sản phẩm động vật thủy sản nhập khẩu:
-                <span data-bind="foreach: fiLocationQuarantineList"><b data-bind="text: fiLocationQuarantineName"></b> (<b data-bind="text: fiLocationQuarantineAddress"></b>); </span>
-            </p>
-            </div>
-            <p class="content">
-                Cửa khẩu nhập: <b data-bind="text: fiBordergateName"></b>
-            </p>
-            <p class="content">
-                Thời gian thực hiện: <b data-bind="text: fiTimeQuarantine"></b>
-            </p>
-            <p class="content">
-                Mục đích sử dụng: <b data-bind="text: fiPurpose"></b>
-            </p>
-            <p class="content">
-                Các giấy tờ có liên quan kèm theo: <b data-bind="text: fiRelatedDocuments"></b>
-            </p>
-            <p class="content">
-                Chúng tôi cam kết chấp hành nghiêm Pháp luật về Thú y.
-            </p>
+            <p>(1):Ghi tên loại thức ăn chăn nuôi nhập khẩu. Thức ăn truyền thống, thức ăn hỗn hợp hoàn chỉnh, thức ăn đậm đặc, nguyên liệu đơn, thức ăn dạng hỗn hợp, loại khác; trường hợp thức ăn truyền thống phải kèm theo bản mô tả chi tiết sản phẩm nhập khẩu (gồm: tên thương mại, bản chất sản phẩm).</p>
+            <p>(2):Tối thiêu 01 chỉ tiêu chất lương trong tiêu chuẩn công bố áp dụng và các chỉ tiêu an toàn theo quye định tại quy chuẩn kỹ thuật quốc gia tương ứng.</p>
+            <p>(3):Ghi "miễn kiểm tra" nếu lô hàng áp dụng chế độ miễn kiểm tra có thời hạn hoặc "kiểm tra theo điểm a khoản 2 Điều 18 của Nghị đinh này" hoặc "kiểm tra theo điểm b khoản 2 Điều 18 của Nghị định này".</p>
             <div class="row">
-                <div class="col-md-6"></div>
-                <div class="col-md-6 text-center">
-                    <h4 style="font-weight: bold" data-bind="text: fiSignPosition"></h4>
-                    <h5 style="font-weight: bold" data-bind="text: fiSignName"></h5>
+                <div class="col-md-6 text-center" style="">
+                    <span data-bind="text: $root.getNoiKy(fiSignAddress)"></span> ngày <span data-bind="text: ngayKy"></span>  tháng <span data-bind="text: thangKy"></span>  năm <span data-bind="text: namKy"></span> <br/>
+                    <b>TỔ CHỨC, CÁ NHÂN NHẬP KHẨU</b> <br/>
+                    <i>(ký tên, đóng dấu)</i><br/><br/><br/><br/>
+                    <span data-bind="text: fiSignName"></span>
+                </div>
+                <div class="col-md-6 text-center" style="">
+                    ngày tháng năm<br/>
+                    <b>TÊN CƠ QUAN KIỂM TRA</b> <br/>
+                    <i>(ký tên, đóng dấu)</i>
                 </div>
             </div>
+            <div id="phuluc-hoso" data-bind="visible: fiHSStatus >=26">
+                <div class="text-center">
+                    <h4 style="font-weight: bold;">
+                        PHỤ LỤC
+                    </h4>
+                    Kèm theo Giấy đăng ký kiểm tra xác nhận chất lượng số ngày (thay thế Giấy đăng ký kiểm tra xác nhận chất lượng số mã hồ sơ)
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr style="font-weight: bold">
+                        <td class="text-center">Tên TACN</td>
+                        <td class="text-center">Chỉ tiêu phân tích</td>
+                        <td class="text-center">Hình thức công bố</td>
+                        <td class="text-center">Hàm lượng</td>
+                        <td class="text-center">Đơn vị tính</td>
+                        <td class="text-center">Ghi chú</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr></tr>
+                    </tbody>
+                </table>
+                <p style="font-weight: bold" data-bind="visible: $root.getHoSoType(fiHSType)=='2a'">Lưu ý: Trong thời gian 15 ngày làm việc kể từ ngày thông quan hàng hóa, người nhập khẩu phải nộp kết quả tự đánh giá sự phù hợp theo quy định về Cục Chăn nuôi thông qua hệ thống Một cửa Quốc gia.</p>
+                <p style="font-weight: bold" data-bind="visible: $root.getHoSoType(fiHSType)=='2b'">Lưu ý: Trong thời hạn 15 ngày làm việc kể từ ngày thông quan hàng hóa, người nhập khẩu phải nộp bản sao ý bản chính (có ký tên và đóng dấu của người nhập khẩu) Giấy chứng nhận hợp quy lô hàng thức ăn chăn nuôi nhập khẩu theo quy định về Cục Chăn nuôi thông qua hệ thống Một cửa Quốc gia</p>
+            </div>
         </div>
+
     </div>
     <div class="modal-footer">
         <div class="text-center">
-            <a class="btn green" data-bind="click: function() { $root.taiMauHoSo($data) }">
+            <a class="btn green" data-bind="">
                 <spring:message code="common.button.tai_ve"/>
             </a>
             <a class="btn" href="javascript:void(0)" data-dismiss="modal">

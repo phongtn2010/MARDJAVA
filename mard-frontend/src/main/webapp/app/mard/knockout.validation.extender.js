@@ -13,4 +13,7 @@ ko.validation.rules['validationYear'] = {
     },
     message: 'Thông tin năm phải nhỏ hơn hoặc bằng năm hiện tại.'
 };
+
+
+
 ko.validation.registerExtenders();

@@ -2,14 +2,76 @@ function Mard25EditVM () {
     var editVMSefl = this;
     editVMSefl.kdnkVM = ko.observable(null);
     editVMSefl.isEditable = ko.observable(true)
-
     editVMSefl.applyState = function (options) {
-        options["fiHSType"] = "1";
+        options["isEditHS"]="1";
+        if (isCopy) {
+            options["fiIdHS"]=null;
+            options["fiNSWFileCode"]=null;
+            for (var i =0;i<options.fiProductList.length;i++){
+                options.fiProductList[i].fiIdHS=null;
+                options.fiProductList[i].fiIdProduct=null;
+                options.fiProductList[i].fiTrangThaiHangHoa=null;
+                var getLstCL = options.fiProductList[i].fiProCLList;
+                var getLstAT = options.fiProductList[i].fiProATList;
+                var getLstSLKL = options.fiProductList[i].fiProSLKLList;
+                for (var j =0;j<getLstCL.length;j++){
+                    getLstCL[j].fiIdProduct=null;
+                    getLstCL[j].fiIdProCL=null;
+                }
+                for (var j =0;j<getLstAT.length;j++){
+                    getLstAT[j].fiIdProduct=null;
+                    getLstAT[j].fiIdProAT=null;
+                }
+                for (var j =0;j<getLstSLKL.length;j++){
+                    getLstSLKL[j].fiIdProduct=null;
+                    getLstSLKL[j].fiIdProSLKL=null;
+                }
+            }
+            for (var i =0;i<options.fiAttachmentList.length;i++){
+
+                options.fiAttachmentList[i].fiIdHS=null;
+                options.fiAttachmentList[i].fiIdDinhkem=null;
+            }
+        }
         editVMSefl.kdnkVM(new HangHoaNhapKhauVM(options));
     }
-
     editVMSefl.saveRegProfile = function () {
-        // if (!editVMSefl.kdnkVM().validateForm()) return;
+        if (!editVMSefl.kdnkVM().validateForm()){
+            editVMSefl.pop = app.popup({
+                title: 'Thông báo',
+                html: '<b>Bạn cần nhập đẩy đủ các trường bắt buộc</b>',
+                width: 450,
+                buttons: [
+                    {
+                        name: 'OK',
+                        class: 'btn',
+                        icon: 'fa-close',
+                        action: function () {
+                            app.popupRemove(editVMSefl.pop.selector);
+                        }
+                    }
+                ]
+            });
+            return;
+        }
+        // if (!editVMSefl.kdnkVM().validateUploadFiles()){
+        //     editVMSefl.pop = app.popup({
+        //         title: 'Thông báo',
+        //         html: '<b>Bạn cần thêm đẩy đủ các tài liệu đính kèm</b>',
+        //         width: 450,
+        //         buttons: [
+        //             {
+        //                 name: 'OK',
+        //                 class: 'btn',
+        //                 icon: 'fa-close',
+        //                 action: function () {
+        //                     app.popupRemove(editVMSefl.pop.selector);
+        //                 }
+        //             }
+        //         ]
+        //     });
+        //     return;
+        // }
         var body = editVMSefl.kdnkVM().getData();
         // return;
         if (!body) return;
@@ -63,7 +125,42 @@ function Mard25EditVM () {
     }
 
     editVMSefl.sendRegProfile = function () {
-        // if (!editVMSefl.kdnkVM().validateForm() || !editVMSefl.kdnkVM().validateAttachment()) return;
+        if (!editVMSefl.kdnkVM().validateForm()){
+            editVMSefl.pop = app.popup({
+                title: 'Thông báo',
+                html: '<b>Bạn cần nhập đẩy đủ các trường bắt buộc</b>',
+                width: 450,
+                buttons: [
+                    {
+                        name: 'OK',
+                        class: 'btn',
+                        icon: 'fa-close',
+                        action: function () {
+                            app.popupRemove(editVMSefl.pop.selector);
+                        }
+                    }
+                ]
+            });
+            return;
+        }
+        // if (!editVMSefl.kdnkVM().validateUploadFiles()){
+        //     editVMSefl.pop = app.popup({
+        //         title: 'Thông báo',
+        //         html: '<b>Bạn cần thêm đẩy đủ các tài liệu đính kèm</b>',
+        //         width: 450,
+        //         buttons: [
+        //             {
+        //                 name: 'OK',
+        //                 class: 'btn',
+        //                 icon: 'fa-close',
+        //                 action: function () {
+        //                     app.popupRemove(editVMSefl.pop.selector);
+        //                 }
+        //             }
+        //         ]
+        //     });
+        //     return;
+        // }
         var body = editVMSefl.kdnkVM().getData();
         // return;
         if (!body) return;
@@ -123,32 +220,34 @@ function Mard25EditVM () {
                             url: '/mard/25/hoso/send',
                             data: JSON.stringify(body),
                             success: function (d) {
-                                if (!app.requireSigning) {
+                                // if (!app.requireSigning) {
                                     if (d && d.success) {
                                         app.Alert('Gửi hồ sơ thành công');
-                                        window.location.href = app.appContext + '/mard/25/';
+                                        setTimeout(function () {
+                                            window.location.href = app.appContext + '/mard/25/';
+                                        }, 1500);
                                     } else {
                                         app.Alert(d.message);
                                     }
-                                } else {
-                                    var result = d.sign;
-                                    var onSuccess = function (res) {
-                                        if (res.status == 'ok') {
-                                            editVMSefl.verifySignature(res.outputData, d);
-                                        } else {
-                                            app.Alert('Ký số không thành công, vui lòng thử lại.');
-                                        }
-                                    };
-                                    var onFailed = function (e) {
-                                        app.Alert('Ký số không thành công, vui lòng thử lại.');
-                                    };
-
-                                    RTVNSignClient.ping(function(res){
-                                        RTVNSignClient.create64("xml", result.fiHashEncode, onSuccess, onFailed);
-                                    }, function(e){
-                                        app.Alert('Bạn chưa cài hoặc chưa mở phần mềm ký số, vui lòng vào trang chủ để tải về và cài đặt theo hướng dẫn.');
-                                    });
-                                }
+                                // } else {
+                                //     var result = d.sign;
+                                //     var onSuccess = function (res) {
+                                //         if (res.status == 'ok') {
+                                //             editVMSefl.verifySignature(res.outputData, d);
+                                //         } else {
+                                //             app.Alert('Ký số không thành công, vui lòng thử lại.');
+                                //         }
+                                //     };
+                                //     var onFailed = function (e) {
+                                //         app.Alert('Ký số không thành công, vui lòng thử lại.');
+                                //     };
+                                //
+                                //     RTVNSignClient.ping(function(res){
+                                //         RTVNSignClient.create64("xml", result.fiHashEncode, onSuccess, onFailed);
+                                //     }, function(e){
+                                //         app.Alert('Bạn chưa cài hoặc chưa mở phần mềm ký số, vui lòng vào trang chủ để tải về và cài đặt theo hướng dẫn.');
+                                //     });
+                                // }
                             },
                             error: function (e) {
                                 if(e.hasOwnProperty('message')) {
@@ -214,7 +313,6 @@ $(document).ready(function () {
     var options = {};
     getThongTinHoSo(function (data) {
         options=data.data;
-        console.log(options);
         $('#loading10').show();
         $.when(
             // Get list country
@@ -240,10 +338,35 @@ $(document).ready(function () {
                 options['lstPhanLoai'] = res.data;
                 options['lstLoai'] = res.data;
             })
-            // // Get attach types
-            // app.sendGetRequest("/mard/25/danhmuc/dinhkem?systemId=6", function (res) {
-            //     options['lstAtchType'] = res.data;
-            // })
+            ,
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/11", function (res) {
+                options['lstAtchType'] = res.data;
+            })
+            ,
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/12", function (res) {
+                options['lstLoaiHoSoDangKy'] = res.data;
+            }),
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/25", function (res) {
+                options['lstProfileStatus'] = res.data;
+            }),
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/2", function (res) {
+                options['lstHoSoType'] = res.data;
+            }),
+            // Get danh muc tien te
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/26", function (res) {
+                options['lstLoaiTienTe'] = res.data;
+            }),//danh muc loai file dinh kem khac
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/12", function (res) {
+                options['lstLoaiFileDinhKemKhac'] = res.data;
+            }),
+            // Get danh muc dvt
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/10", function (res) {
+                options['lstDMDVT'] = res.data;
+            }),
+            // Get danh muc dvt
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/3", function (res) {
+                options['lstChiTieuAT'] = res.data;
+            })
         ).done(function (data) {
             $('#loading10').hide();
             init(options);

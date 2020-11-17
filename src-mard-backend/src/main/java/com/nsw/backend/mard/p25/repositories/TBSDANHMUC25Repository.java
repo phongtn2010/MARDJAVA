@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface TBSDANHMUC25Repository extends JpaRepository<TBSDANHMUC25, Long>, JpaSpecificationExecutor<TBSDANHMUC25> {
     public List<TBSDANHMUC25> findByFiCatNoOrderByFiOrder(Long fiCatNo);
+    public List<TBSDANHMUC25> findByFiCatParentOrderByFiOrder(Long id);
 }

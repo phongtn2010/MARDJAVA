@@ -1,7 +1,7 @@
 package com.vnsw.ws.p25.message.send;
 
 import com.vnsw.ws.annotations.DateSerialization;
-import com.vnsw.ws.p25.entity.*;
+import com.vnsw.ws.p25.entity.send.*;
 import lombok.Data;
 
 import javax.xml.bind.annotation.*;
@@ -9,8 +9,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Date;
 import java.util.List;
 
-@XmlType(name = "AniFeed")
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "AniFeed")
 @Data
 public class Hoso25 {
     @XmlElement(name = "NSWFileCode")
@@ -39,9 +39,9 @@ public class Hoso25 {
     @XmlElement(name = "Seller")
     String fiSellName;
     @XmlElement(name = "SellerState")
-    String fiSellCountryName;
-    @XmlElement(name = "NameSellerState")
     String fiSellCountryCode;
+    @XmlElement(name = "NameSellerState")
+    String fiSellCountryName;
     @XmlElement(name = "SellerAddress")
     String fiSellAddress;
     @XmlElement(name = "SellerPhone")
@@ -52,13 +52,13 @@ public class Hoso25 {
     String fiSellExport;
 
     @XmlElement(name = "Buyer")
-    String fiPurchName;
+    String fiImporterName;
     @XmlElement(name = "BuyerAddress")
-    String fiPurchAddress;
+    String fiImporterAddress;
     @XmlElement(name = "BuyerPhone")
-    String fiPurchTel;
+    String fiImporterTel;
     @XmlElement(name = "BuyerFax")
-    String fiPurchFax;
+    String fiImporterFax;
     @XmlElement(name = "PortOfDestinationName")
     String fiPurchReci;
     @XmlJavaTypeAdapter(DateSerialization.class)
@@ -79,19 +79,9 @@ public class Hoso25 {
     String fiTaxCode;
     @XmlElement(name = "TypeAniFeed")
     String fiHSType;
-//
-//    @XmlElement(name = "ImporterName")
-//    String fiImporterName;
-//    @XmlElement(name = "ImporterTel")
-//    String fiImporterTel;
-//    @XmlElement(name = "ImporterAddress")
-//    String fiImporterAddress;
-//    @XmlElement(name = "ImporterEmail")
-//    String fiImporterEmail;
-
 
     @XmlElementWrapper(name = "GoodsList")
-    @XmlElement(name = "Product")
+    @XmlElement(name = "Goods")
     List<Product> fiProductList;
 
     @XmlElement(name = "LocationOfStorage")
@@ -115,14 +105,15 @@ public class Hoso25 {
 
     @XmlElementWrapper(name = "ContractList")
     @XmlElement(name = "Contract")
-    private List<Tbdattach25> fiListAttch;
+    private List<TbdattachHd25> fiListAttchHD;
     @XmlElementWrapper(name = "InvoiceList")
     @XmlElement(name = "Invoice")
     private List<TbdattachHoadon25> fiListAttchHoaDon;
-    @XmlElementWrapper(name = "AttachmentList")
-    @XmlElement(name = "Attachment")
-    private List<TbdattachHd25> fiListAttchHD;
     @XmlElementWrapper(name = "PackingList")
     @XmlElement(name = "Packing")
     private List<TbdattachDg25> fiListAttchPhieu;
+    @XmlElementWrapper(name = "AttachmentList")
+    @XmlElement(name = "Attachment")
+    private List<Attachment> fiAttach;
+
 }

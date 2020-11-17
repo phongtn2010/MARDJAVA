@@ -3,6 +3,9 @@ package com.vnsw.ws.p25.controller;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializer;
 import com.vnsw.ws.common.entity.json.ResponseDownload;
 import com.vnsw.ws.common.entity.json.ResponseJson;
 import com.vnsw.ws.common.service.EncryptService;
@@ -12,17 +15,20 @@ import com.vnsw.ws.helper.RabbitMQErrorHelper;
 import com.vnsw.ws.helper.SoapHelper;
 import com.vnsw.ws.p25.common.Constants25;
 import com.vnsw.ws.p25.entity.json.SendMessage;
+import com.vnsw.ws.p25.entity.send.Product;
 import com.vnsw.ws.p25.envelop.*;
+import com.vnsw.ws.p25.message.send.DNNopKetQua;
 import com.vnsw.ws.p25.message.send.DNYeucauHuyHoso;
-import com.vnsw.ws.p25.message.send.DNYeucauSuaHoso;
+import com.vnsw.ws.p25.message.send.GuiHSTCCD;
 import com.vnsw.ws.p25.message.send.Hoso25;
 import com.vnsw.ws.p25.service.BackendService25;
 import com.vnsw.ws.p25.service.EnvelopeService25;
-import com.vnsw.ws.p8.message.send.DNHuyHS;
+import com.vnsw.ws.p9.message.receive.GiayXNCL;
 import com.vnsw.ws.util.Constants;
 import com.vnsw.ws.util.LogUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -48,6 +54,7 @@ import java.util.List;
 
 import static com.vnsw.ws.helper.JsonHelper.createResponse;
 
+@SuppressWarnings("ALL")
 @RestController
 @RequestMapping("/send/25")
 public class SendController25 {
@@ -72,13 +79,22 @@ public class SendController25 {
 
     @Autowired
     BackendService25 backendService;
-
+    private Gson gson=null;
+    private Gson getGson() {
+        if (gson == null) {
+            gson = new GsonBuilder()
+                    .registerTypeAdapter(Date.class, (JsonDeserializer<Date>) (jsonElement, type, context) -> new Date(jsonElement.getAsJsonPrimitive().getAsLong()))
+                    .create();
+        }
+        return gson;
+    }
     /**
      * Gui moi ho so; gui sua ho so; rut ho so; nop phi; xin sua Chung nhan
      *
      * @param sendMessage
      * @return
      */
+
     @RequestMapping(value = "/sendAll/", method = RequestMethod.POST)
     public ResponseEntity<ResponseJson> sendAll(@RequestBody SendMessage sendMessage) {
         HttpStatus httpStatus = null;
@@ -94,11 +110,12 @@ public class SendController25 {
             // Goi den backend theo IdHoso de dong goi ban tin gui di
             Long fiIdHoso = sendMessage.getFiIdHoso();
             String maHoso = sendMessage.getFiMaHoso();
-            String nowStr = formatterDateTime.format(new Date());
+            logger.info("SendAll");
             String url = environment.getRequiredProperty("URI_BACKEND_ADDRESS") + Constants25.RES_URI.URI_GET_HS_BY_ID + fiIdHoso;
             ResponseJson response = backendService.getDataFromRestUri(url);
 //            String isTest = environment.getRequiredProperty("IS_TEST");
             String isTest = "0";
+            boolean debugMode = Boolean.parseBoolean(environment.getProperty("DEBUG_MODE"));
             Long fileStatus;
             //RequestCancel requestCancel = null;
             if (response != null && response.isSuccess()) {
@@ -106,122 +123,95 @@ public class SendController25 {
                 mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
                 mapper.enable(SerializationFeature.INDENT_OUTPUT);
                 String jsonData = mapper.writeValueAsString(response.getData());
+                header = envelopeService.createSendHeader(
+                        maHoso,
+                        Constants.MARD_PRO.MARD25,
+                        sendMessage.getType(),
+                        sendMessage.getFunction(),
+                        "CCN");
                 Hoso25 hoso25 = mapper.readValue(jsonData, Hoso25.class);
-                if (hoso25 != null) {
-                    header = envelopeService.createSendHeader(
-                            maHoso,
-                            Constants.MARD_PRO.MARD25,
-                            sendMessage.getType(),
-                            sendMessage.getFunction(),
-                            "CTY");
-                    switch (sendMessage.getType()) {
-                        case Constants25.MARD25_TYPE.TYPE_10: // DN gui ho so
-                            content.setHoso25(hoso25);
-                            body = envelopeService.createBody(content);
-                            envelopeSend = envelopeService.createMessage(header, body);
-                            // Gui message
-                            if (Boolean.TRUE.equals(sendMessage.getXmlOnly())) {
-                                String xml = convertXmlService.ObjectToXml(envelopeSend);
-                                return createResponse(xml, true, errorMessage, httpStatus, null);
-                            }
-                            if (isTest.equals(Constants.STATUS.ACTIVE)) {
-                                isSuccess = true;
-                            } else {
-                                objReturn = send(envelopeSend, sendMessage.getSignedXml(), maHoso, sendMessage.getType());
-                                isSuccess = objReturn.isSuccess();
-                                errorMessage = objReturn.getMessage();
-                            }
+                switch (sendMessage.getType()) {
+                    case Constants25.MARD25_TYPE.TYPE_10: // DN gui ho so
+                        hoso25.setDepartmentCode("1");
+                        hoso25.setDepartmentName("1");
+//                        hoso25.getFiProductList().get(0).setFiBanChat("1");
+                        content.setHoso25(hoso25);
+                        body = envelopeService.createBody(content);
+                        envelopeSend = envelopeService.createMessage(header, body);
+                        // Gui message
+                        if (Boolean.TRUE.equals(sendMessage.getXmlOnly())) {
+                            String xml = convertXmlService.ObjectToXml(envelopeSend);
+                            return createResponse(xml, true, errorMessage, httpStatus, null);
+                        }
+                        if (isTest.equals(Constants.STATUS.ACTIVE)) {
+                            isSuccess = true;
+                        } else {
+                            objReturn = send(envelopeSend, sendMessage.getSignedXml(), maHoso, sendMessage.getType());
+                            isSuccess = objReturn.isSuccess();
+                            errorMessage = objReturn.getMessage();
+                        }
 
-                            if (isSuccess && objReturn == null) {
-                                objReturn = new ResponseJson();
-                                objReturn.setSuccess(true);
-                                objReturn.setMessage(errorMessage);
-                                objReturn.setData(hoso25);
-                            }
-                            logger.info("Sent something!");
-                            break;
+                        if (isSuccess && objReturn == null) {
+                            objReturn = new ResponseJson();
+                            objReturn.setSuccess(true);
+                            objReturn.setMessage(errorMessage);
+                            objReturn.setData(hoso25);
+                        }
 
-                        case Constants25.MARD25_TYPE.TYPE_12: //DN huy ho so
-                            DNHuyHS dnHuyHS = new DNHuyHS();
-                            dnHuyHS.setFiNSWFileCode(hoso25.getFiNSWFileCode());
-                            dnHuyHS.setFiRegistrationComfirmNo(hoso25.getFiNSWFileCode());
-                            dnHuyHS.setFiRequestDate(new Date());
-                            content.setDnHuyHS(dnHuyHS);
-                            body = envelopeService.createBody(content);
-                            envelopeSend = envelopeService.createMessage(header, body);
-
-                            if (isTest.equals(Constants.STATUS.ACTIVE)) {
-                                isSuccess = true;
-                            } else {
-                                objReturn = send(envelopeSend, sendMessage.getSignedXml(), maHoso, sendMessage.getType());
-                                isSuccess = objReturn.isSuccess();
-                                errorMessage = objReturn.getMessage();
-                            }
-
-                            if (isSuccess && objReturn == null) {
-                                objReturn = new ResponseJson();
-                                objReturn.setSuccess(true);
-                                objReturn.setMessage(errorMessage);
-                                objReturn.setData(hoso25);
-                            }
-                            break;
-
-                        case Constants25.MARD25_TYPE.TYPE_13://DN Yeu cau Huy ho so
-                            DNYeucauHuyHoso dnYeucauHuyHoso = new DNYeucauHuyHoso();
-                            dnYeucauHuyHoso.setFiRequestDate(new Date());
-                            dnYeucauHuyHoso.setFiReason(sendMessage.getReason());
-                            dnYeucauHuyHoso.setFiRegistrationComfirmNo(hoso25.getFiNSWFileCode());
-                            dnYeucauHuyHoso.setFiNSWFileCode(hoso25.getFiNSWFileCode());
-                            content.setDnYeucauHuyHoso(dnYeucauHuyHoso);
-                            body = envelopeService.createBody(content);
-                            envelopeSend = envelopeService.createMessage(header, body);
-
-                            if (isTest.equals(Constants.STATUS.ACTIVE)) {
-                                isSuccess = true;
-                            } else {
-                                objReturn = send(envelopeSend, sendMessage.getSignedXml(), maHoso, sendMessage.getType());
-                                isSuccess = objReturn.isSuccess();
-                                errorMessage = objReturn.getMessage();
-                            }
-
-                            if (isSuccess && objReturn == null) {
-                                objReturn = new ResponseJson();
-                                objReturn.setSuccess(true);
-                                objReturn.setMessage(errorMessage);
-                                objReturn.setData(hoso25);
-                            }
-                            break;
-
-                        case Constants25.MARD25_TYPE.TYPE_15://DN yeu cau sua ho so
-                            DNYeucauSuaHoso dnYeucauSuaHoso = new DNYeucauSuaHoso();
-                            dnYeucauSuaHoso.setFiReason(sendMessage.getReason());
-                            dnYeucauSuaHoso.setFiRegistrationProfile(hoso25);
-                            dnYeucauSuaHoso.setFiRequestDate(new Date());
-                            content.setDnYeucauSuaHoso(dnYeucauSuaHoso);
-                            body = envelopeService.createBody(content);
-                            envelopeSend = envelopeService.createMessage(header, body);
-
-                            if (Boolean.TRUE.equals(sendMessage.getXmlOnly())) {
-                                String xml = convertXmlService.ObjectToXml(envelopeSend);
-                                return createResponse(xml, true, errorMessage, httpStatus, null);
-                            }
-
-                            if (isTest.equals(Constants.STATUS.ACTIVE)) {
-                                isSuccess = true;
-                            } else {
-                                objReturn = send(envelopeSend, sendMessage.getSignedXml(), maHoso, sendMessage.getType());
-                                isSuccess = objReturn.isSuccess();
-                                errorMessage = objReturn.getMessage();
-                            }
-                            if (isSuccess && objReturn == null) {
-                                objReturn = new ResponseJson();
-                                objReturn.setSuccess(true);
-                                objReturn.setMessage(errorMessage);
-                                objReturn.setData(hoso25);
-                            }
-
-                            break;
-                    }
+                        break;
+                    case Constants25.MARD25_TYPE.TYPE_15:
+                        GuiHSTCCD guiHSTCCD = mapper.readValue(sendMessage.getDataRequest(),GuiHSTCCD.class);
+                        for(Product product: guiHSTCCD.getFiProductList()){
+                            product.setFiProATList(null);
+                            product.setFiProCLList(null);
+                            product.setFiProSLKLList(null);
+                        }
+                        content.setGuiHSTCCD(guiHSTCCD);
+                        body = envelopeService.createBody(content);
+                        envelopeSend = envelopeService.createMessage(header, body);
+                        if (debugMode) {
+                            isSuccess = true;
+                        } else {
+                            objReturn = send(envelopeSend, sendMessage.getSignedXml(), maHoso, sendMessage.getType());
+                            isSuccess = objReturn.isSuccess();
+                            errorMessage = objReturn.getMessage();
+                        }
+                        break;
+                    case Constants25.MARD25_TYPE.TYPE_11:
+                        DNYeucauHuyHoso ycrut =  mapper.readValue(sendMessage.getDataRequest(), DNYeucauHuyHoso.class);
+                        ycrut.setFiRequestedDate(new Date());
+                        content.setDNYeucauHuyHoso(ycrut);
+                        body = envelopeService.createBody(content);
+                        envelopeSend = envelopeService.createMessage(header, body);
+                        if (debugMode) {
+                            isSuccess = true;
+                            objReturn = new ResponseJson();
+                            objReturn.setSuccess(true);
+                            objReturn.setMessage(errorMessage);
+                            objReturn.setData(hoso25);
+                        } else {
+                            objReturn = send(envelopeSend, sendMessage.getSignedXml(), maHoso, sendMessage.getType());
+                            isSuccess = objReturn.isSuccess();
+                            errorMessage = objReturn.getMessage();
+                        }
+                        break;
+                    case Constants25.MARD25_TYPE.TYPE_17:
+                        DNNopKetQua dnNopKetQua =  new Gson().fromJson(sendMessage.getDataRequest(), DNNopKetQua.class);
+                        content.setNopKetQua(dnNopKetQua);
+                        body = envelopeService.createBody(content);
+                        envelopeSend = envelopeService.createMessage(header, body);
+                        if (debugMode) {
+                            isSuccess = true;
+                            objReturn = new ResponseJson();
+                            objReturn.setSuccess(true);
+                            objReturn.setMessage(errorMessage);
+                            objReturn.setData(hoso25);
+                        } else {
+                            objReturn = send(envelopeSend, sendMessage.getSignedXml(), maHoso, sendMessage.getType());
+                            isSuccess = objReturn.isSuccess();
+                            errorMessage = objReturn.getMessage();
+                        }
+                        break;
                 }
             }
         } catch (Exception ex) {
@@ -278,14 +268,14 @@ public class SendController25 {
             String requestOfficeCode = environment.getProperty("GATEWAY_PAYLOAD_TAG_OFFICECODE");
             String requestDocumentType = environment.getProperty("GATEWAY_PAYLOAD_TAG_DOCUMENTTYPE");
             String requestPayload = environment.getProperty("GATEWAY_PAYLOAD_TAG_DATA");
-            logger.debug("REQ" + xml);
+            logger.debug("REQ 25:" + xml);
             SOAPMessage soapMessage = SoapHelper.createSOAPRequest(xml, officeCode, documentType, nameSpace,
                     nameSpaceKey, methodTag, requestOfficeCode, requestDocumentType, requestPayload);
             //String sendMessage = SoapHelper.getSOAPResponse(soapMessage);
             SOAPMessage soapResponse = soapConnection.call(soapMessage, url);
             responseStr = SoapHelper.getSOAPResponse(soapResponse);
 
-            logger.debug("RES" + responseStr);
+            logger.debug("RES 25:" + responseStr);
             soapConnection.close();
         } catch (Exception ex) {
             LogUtil.addLog(ex);
