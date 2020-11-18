@@ -366,6 +366,10 @@ $(document).ready(function () {
             // Get danh muc dvt
             app.sendGetRequest("/mard/25/danhmuc/getby-catno/3", function (res) {
                 options['lstChiTieuAT'] = res.data;
+            }),
+            // Get danh muc dvt
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/7", function (res) {
+                options['lstDMDVTSL'] = res.data;
             })
         ).done(function (data) {
             $('#loading10').hide();

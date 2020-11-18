@@ -594,7 +594,23 @@ public class Mard25Api extends BaseApi {
             return json;
         }
     }
-
+    @RequestMapping(value = "/hoso/baocao2d", method = RequestMethod.POST)
+    public @ResponseBody
+    ResponseJson baoCaoHS2D(@RequestBody UploadBaoCao baoCao) {
+        ResponseJson json = new ResponseJson();
+        try {
+            json =BackendRequestHelper.getInstance().doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.BAO_CAO_HS_2D),baoCao);
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            json.setData(null);
+            json.setSuccess(false);
+            json.setMessage(ex.getMessage());
+            return json;
+        }
+    }
     @RequestMapping(value = "/chitieu/{fiNSWFileCode}", method = RequestMethod.GET)
     public @ResponseBody
     ResponseJson getListChiTieuByNSWFileCode(@PathVariable String fiNSWFileCode) {

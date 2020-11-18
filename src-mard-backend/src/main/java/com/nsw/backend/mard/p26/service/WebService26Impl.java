@@ -84,10 +84,10 @@ public class WebService26Impl implements WebService26{
             tbdHoso26Service.update(tbdHoso26);
             tbdLichsu26Service.save(createLichSuEntity(tbdHoso26,"BNN tiếp nhận đơn đăng ký",
                     phanHoiDonDK.getFiNguoiXL(),createHeaderFromTBDHoso26(tbdHoso26)));
+            return new ResponseJson(true, "","");
         }catch (Exception e){
             return new ResponseJson(false, "",e.getMessage());
         }
-        return null;
     }
 
     @Override

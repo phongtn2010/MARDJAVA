@@ -188,6 +188,7 @@ public class Mard25Constant {
         public static final String SAVE_BEFORE_UPDATE = "mard.25.hoso.save_before_update";
         public static final String CHUYEN_CHI_TIEU = "mard.25.hoso.chuyenchitieu";
         public static final String GUI_KQXL = "mard.25.hoso.guikqxl";
+        public static final String BAO_CAO_HS_2D = "mard.25.hoso.baocao2d";
         public static final String GET_XML = "mard.25.getXml";
         public static final String HANGHOA_GET_BY_FILTER = "mard.25.tbdhanghoa25.findfilter";
         //binhvv5

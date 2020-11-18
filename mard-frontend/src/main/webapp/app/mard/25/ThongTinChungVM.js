@@ -31,6 +31,7 @@ function ThongTinChungVM(data) {
     });
     ttcVMSelf.lstCountry = ko.observableArray((data && data.hasOwnProperty('lstCountry')) ? data.lstCountry : []);
     ttcVMSelf.lstDMDVT = ko.observableArray((data && data.hasOwnProperty('lstDMDVT')) ? data.lstDMDVT : []);
+    ttcVMSelf.lstDMDVTSL = ko.observableArray((data && data.hasOwnProperty('lstDMDVTSL')) ? data.lstDMDVTSL : []);
     ttcVMSelf.lstNhom = ko.observableArray((data && data.hasOwnProperty('lstNhom')) ? data.lstNhom : []);
     ttcVMSelf.lstPhanNhom = ko.observableArray([]);
     ttcVMSelf.lstLoai = ko.observableArray([]);
@@ -791,6 +792,7 @@ function ThongTinChungVM(data) {
             isEnable:ko.observable(false),
             isUpdate:ko.observable(false),
             lstDMDVT: ttcVMSelf.lstDMDVT,
+            lstDMDVTSL: ttcVMSelf.lstDMDVTSL,
             fiProSLKLAmountUnitName: amountName,
             fiProSLKLAmountUnitCode: ttcVMSelf.EfiProSLKLAmountUnitCode()
         }
@@ -842,6 +844,7 @@ function ThongTinChungVM(data) {
                 kl.isEnable=ko.observable(false);
                 kl.isUpdate=ko.observable(false);
                 kl.lstDMDVT = ttcVMSelf.lstDMDVT();
+                kl.lstDMDVTSL = ttcVMSelf.lstDMDVTSL();
             });
         }
         ko.mapping.fromJS(data, {}, ttcVMSelf);

@@ -68,17 +68,20 @@ public class BackendService26Impl implements BackendService26 {
 
     @Override
     public ResponseJson phanHoiDonDK(ResponseWrapper responseWrapper) {
-        return callServiceBackend(responseWrapper,Constants26.RES_URI.URI_PHAN_HOI_DON_DK);
+        String restUri = environment.getRequiredProperty(URI_BACKEND_ADDRESS) +Constants26.RES_URI.URI_PHAN_HOI_DON_DK;
+        return callServiceBackend(responseWrapper,restUri);
     }
 
     @Override
     public ResponseJson guiCVMienKiem(ResponseWrapper responseWrapper) {
-        return callServiceBackend(responseWrapper,Constants26.RES_URI.URI_GUI_CV_MIEN_KIEM);
+        String restUri = environment.getRequiredProperty(URI_BACKEND_ADDRESS) +Constants26.RES_URI.URI_GUI_CV_MIEN_KIEM;
+        return callServiceBackend(responseWrapper,restUri);
     }
 
     @Override
     public ResponseJson thuHoiCVMienKiem(ResponseWrapper responseWrapper) {
-        return callServiceBackend(responseWrapper,Constants26.RES_URI.URI_THU_HOI_CV_MIEN_KIEM);
+        String restUri = environment.getRequiredProperty(URI_BACKEND_ADDRESS) +Constants26.RES_URI.URI_THU_HOI_CV_MIEN_KIEM;
+        return callServiceBackend(responseWrapper,restUri);
     }
 
 

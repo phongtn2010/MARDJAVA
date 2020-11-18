@@ -247,7 +247,7 @@
                                 </div>
                             </td>
                             <td class="text-center">
-                                <div data-bind="visible:  $parent.getHoSoType(fiHSType)=='2d' ">
+                                <div data-bind="visible:  $parent.getHoSoType(fiHSType)=='2d' && fiHSStatus == 4 ">
                                     <a data-target="#modal_gui_bao_cao"
                                        data-toggle="modal" href="javascript:void(0)" data-bind="click: $parent.guiBaoCaoHS2d"><i
                                             class="fa fa-upload"></i></a>
@@ -369,7 +369,7 @@
          tabindex="-1"
          data-backdrop="static" data-keyboard="false" data-bind="with: guiBaoCaoHS2dVM">
         <div class="modal-header" style="background: #337ab7; color: #fff;">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+
             <b class="modal-title"><spring:message code="mard.25.tccd.bao_cao_title"/></b>
         </div>
         <div class="modal-body">
@@ -417,9 +417,14 @@
                                     <th class="text-center"> <spring:message code="mard.25.tccd.bao_cao_thao_tac"/></th>
                                 </tr>
                                 </thead>
-                                <tbody >
+                                <tbody data-bind="foreach: fiListAttach">
                                 <tr>
-
+									<td class="text-center" data-bind="text: $index()+1"></td>
+									<td class="text-center" data-bind="text: fiFileHD"></td>
+									<td class="text-center"> File </td>
+									<td class="text-center">
+										<a data-bind="click: $parent.onDeleteFile"><i class="fa fa-trash"></i></a>
+									</td>
                                 </tr>
                                 </tbody>
 
@@ -427,6 +432,12 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="modal-footer" style="">
+            <div class="text-center">
+                <button class="btn btn-primary" data-bind="click: guiBaoCao"><i class="fa fa-send"></i> <spring:message code="common.button.gui"/></button>
+                <button class="btn btn-danger" data-bind="click: thoatOnClick"><i class="fa fa-sign-out"></i><spring:message code="common.button.thoat"/></button>
             </div>
         </div>
     </div>

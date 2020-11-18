@@ -6,8 +6,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
 import com.nsw.backend.mard.p25.client.*;
 import com.nsw.backend.mard.p25.constant.Constant25;
-import com.nsw.backend.mard.p25.dto.Ananytical;
 import com.nsw.backend.mard.p25.dto.BNNThongBaoThuHoiGDK;
+import com.nsw.backend.mard.p25.dto.UploadBaoCao;
 import com.nsw.backend.mard.p25.model.*;
 import com.nsw.backend.mard.p25.dto.SendMessage;
 import com.nsw.backend.mard.p25.helper.WsServiceHelper;
@@ -15,7 +15,6 @@ import com.nsw.backend.mard.p25.exception.NSWException;
 import com.nsw.backend.util.ResponseJson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -40,12 +39,13 @@ public class WsServiceImpl implements WsService {
     private final TbdGiayXNCL25Service tbdGiayXNCL25Service;
     private final TbdHosoTccd25Service tbdHosoTccd25Service;
     private final TbdKQXL25Service tbdKQXL25Service;
+    private final TbdDinhkem25Service tbdDinhkem25Service;
     private Gson gson;
 
     private final Environment environment;
 
     @Autowired
-    public WsServiceImpl(TbdHoso25Service tbdHoso25Service, TbdLichsu25Service tbdLichsu25Service, Environment environment, TbdXacNhanDon25Service tbdXacNhanDon25Service, TbdHangHoa25Service tbdHangHoa25Service, TbdHangHoaFile25Service tbdHangHoaFile25Service, TbdLichSuHH25Service tbdLichSuHH25Service, TbdChiTieuDG25Service tbdChiTieuDG25Service, TbdGiayXNCL25Service tbdGiayXNCL25Service, TbdHosoTccd25Service tbdHosoTccd25Service, TbdKQXL25Service tbdKQXL25Service) {
+    public WsServiceImpl(TbdHoso25Service tbdHoso25Service, TbdLichsu25Service tbdLichsu25Service, Environment environment, TbdXacNhanDon25Service tbdXacNhanDon25Service, TbdHangHoa25Service tbdHangHoa25Service, TbdHangHoaFile25Service tbdHangHoaFile25Service, TbdLichSuHH25Service tbdLichSuHH25Service, TbdChiTieuDG25Service tbdChiTieuDG25Service, TbdGiayXNCL25Service tbdGiayXNCL25Service, TbdHosoTccd25Service tbdHosoTccd25Service, TbdKQXL25Service tbdKQXL25Service, TbdDinhkem25Service tbdDinhkem25Service) {
         this.tbdHoso25Service = tbdHoso25Service;
         this.tbdLichsu25Service = tbdLichsu25Service;
        // this.certService = certService;
@@ -58,6 +58,7 @@ public class WsServiceImpl implements WsService {
         this.tbdGiayXNCL25Service = tbdGiayXNCL25Service;
         this.tbdHosoTccd25Service = tbdHosoTccd25Service;
         this.tbdKQXL25Service = tbdKQXL25Service;
+        this.tbdDinhkem25Service = tbdDinhkem25Service;
     }
     private Gson getGson() {
         if (gson == null) {
@@ -476,6 +477,36 @@ public class WsServiceImpl implements WsService {
             response.setMessage("Có lỗi xảy ra khi rút hồ sơ");
         }
         return response;
+    }
+
+    @Override
+    public ResponseJson baoCaoHS2D(UploadBaoCao baoCao) {
+        ResponseJson response =new ResponseJson();
+        try{
+            TbdHoso25 tbdHoso25 = tbdHoso25Service.findByFiHSCode(baoCao.getFiNSWFileCode());
+            SendMessage message = new SendMessage();
+            message.setFiMaHoso(tbdHoso25.getFiNSWFileCode());
+            message.setFiIdHoso(Long.valueOf(tbdHoso25.getFiIdHS()));
+            message.setDataRequest(new Gson().toJson(baoCao));
+            message.setType(Constant25.MessageType.TYPE_21);
+            message.setFunction(Constant25.MessageFunction.FUNC_24);
+            response = WsServiceHelper.createSendRequest(Constant25.WebServiceURL.get(environment), message);
+            if(response.isSuccess()){
+                tbdHoso25.setFiHSStatus(Constant25.HosoStatus.DA_BAO_CAO_MIEN_GIAM.getId());
+                tbdHoso25Service.save(tbdHoso25);
+                baoCao.getFiAttachReport().forEach(bc->{
+                    bc.setFiIdHS(tbdHoso25.getFiIdHS());
+                });
+                tbdDinhkem25Service.saveAll(baoCao.getFiAttachReport());
+                tbdLichsu25Service.save(createHistory(tbdHoso25,"Gửi báo cáo hồ sơ 2d"));
+            }
+            return response;
+        }catch (Exception e){
+            response.setSuccess(false);
+            response.setMessage(e.getMessage());
+            return response;
+        }
+
     }
 
     @Override

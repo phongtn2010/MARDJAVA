@@ -17,10 +17,7 @@ import com.vnsw.ws.p25.common.Constants25;
 import com.vnsw.ws.p25.entity.json.SendMessage;
 import com.vnsw.ws.p25.entity.send.Product;
 import com.vnsw.ws.p25.envelop.*;
-import com.vnsw.ws.p25.message.send.DNNopKetQua;
-import com.vnsw.ws.p25.message.send.DNYeucauHuyHoso;
-import com.vnsw.ws.p25.message.send.GuiHSTCCD;
-import com.vnsw.ws.p25.message.send.Hoso25;
+import com.vnsw.ws.p25.message.send.*;
 import com.vnsw.ws.p25.service.BackendService25;
 import com.vnsw.ws.p25.service.EnvelopeService25;
 import com.vnsw.ws.p9.message.receive.GiayXNCL;
@@ -198,6 +195,23 @@ public class SendController25 {
                     case Constants25.MARD25_TYPE.TYPE_17:
                         DNNopKetQua dnNopKetQua =  new Gson().fromJson(sendMessage.getDataRequest(), DNNopKetQua.class);
                         content.setNopKetQua(dnNopKetQua);
+                        body = envelopeService.createBody(content);
+                        envelopeSend = envelopeService.createMessage(header, body);
+                        if (debugMode) {
+                            isSuccess = true;
+                            objReturn = new ResponseJson();
+                            objReturn.setSuccess(true);
+                            objReturn.setMessage(errorMessage);
+                            objReturn.setData(hoso25);
+                        } else {
+                            objReturn = send(envelopeSend, sendMessage.getSignedXml(), maHoso, sendMessage.getType());
+                            isSuccess = objReturn.isSuccess();
+                            errorMessage = objReturn.getMessage();
+                        }
+                        break;
+                    case Constants25.MARD25_TYPE.TYPE_21:
+                        UploadBaoCao baoCao =new Gson().fromJson(sendMessage.getDataRequest(),UploadBaoCao.class);
+                        content.setUploadBaoCao(baoCao);
                         body = envelopeService.createBody(content);
                         envelopeSend = envelopeService.createMessage(header, body);
                         if (debugMode) {

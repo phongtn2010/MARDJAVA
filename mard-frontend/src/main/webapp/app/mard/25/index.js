@@ -562,13 +562,18 @@ function GuiBaoCaoHS2D(){
     var self =this;
     self.fiHSCode = ko.observable(null);
     self.fiFile = ko.observable(null);
-    self.fiTenFile = ko.observable(null);
+    self.fiTenFile = ko.observable('');
     self.fiListAttach = ko.observableArray([]);
-
+    self.idHS=ko.observable(null);
     self.update = function(data){
         self.fiHSCode(data.fiNSWFileCode);
+        self.idHS(data.fiIdHS);
     }
     self.themMoiFileBaoCao =function () {
+		if(self.fiTenFile().length<=0){
+			app.Alert("Chưa điền tên file");
+			return;
+		}
         var files = $("#file-baocao")[0].files[0];
         if (!files || files.length == 0) {
             app.Alert("Bạn chưa đính kèm file");
@@ -587,10 +592,13 @@ function GuiBaoCaoHS2D(){
                 var item ={
                     fiLinkBNN: fileLink,
                     fiGuidBNN: fileId,
-                    fiFileHD: fiFileName,
+                    fiFileHD: self.fiTenFile(),
                     fiFileTypeID: 9,
                     fiFileTypeName: 'File báo cáo hồ sơ 2D'
                 }
+                self.fiListAttach.push(item);
+				self.fiTenFile('');
+				self.fiFile(null);
                 $('#loading08').hide();
             },
             error: function (e) {
@@ -599,6 +607,66 @@ function GuiBaoCaoHS2D(){
 
             }
         });
+    }
+    self.guiBaoCao =function(){
+        var data ={
+            "fiNSWFileCode":  self.fiHSCode(),
+            "fiAttachReport": self.fiListAttach()
+        };
+        self.pop = app.popup({
+            title: 'Thông báo',
+            html: '<b>Bạn chắc chắn muốn gửi báo cáo cho hồ sơ này?</b>',
+            width: 450,
+            buttons: [
+                {
+                    name: NSWLang["common_button_toi_chac_chan"],
+                    class: 'btn',
+                    icon: 'fa-save',
+                    action: function () {
+                        app.popupRemove(self.pop.selector);
+                        app.makePost({
+                            url: '/mard/25/hoso/baocao2d',
+                            data: JSON.stringify(data),
+                            contentType: "application/json; charset=utf-8",
+                            success: function (d) {
+                                if (d && d.success) {
+                                    app.Alert('Gửi yêu cầu thành công');
+                                    self.searchHoso(self.currentPage());
+                                    if ($('#modal_gui_bao_cao').hasClass('in')) {
+                                        $('#modal_gui_bao_cao').modal('hide');
+                                    }
+                                } else {
+                                    app.Alert(d.message);
+                                }
+                            },
+                            error: function (e) {
+                                app.Alert('Không gửi được yêu cầu');
+                            }
+                        });
+                    }
+                },
+                {
+                    name: 'Huỷ',
+                    class: 'btn',
+                    icon: 'fa-close',
+                    action: function () {
+                        app.popupRemove(self.pop.selector);
+                    }
+                }
+            ]
+        });
+    }
+
+    self.thoatOnClick =function () {
+		self.fiFile(null);
+        self.fiListAttach([]);
+        self.fiTenFile('');
+        if ($('#modal_gui_bao_cao').hasClass('in')) {
+            $('#modal_gui_bao_cao').modal('hide');
+        }
+    }
+    self.onDeleteFile =function(item){
+        self.fiListAttach.splice(item,1);
     }
 }
 
