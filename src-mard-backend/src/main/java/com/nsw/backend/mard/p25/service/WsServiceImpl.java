@@ -15,6 +15,7 @@ import com.nsw.backend.mard.p25.exception.NSWException;
 import com.nsw.backend.util.ResponseJson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -309,7 +310,7 @@ public class WsServiceImpl implements WsService {
             tbdHosoTccd25Service.save(tbdhosoTccd25);
             return new ResponseJson(true, "");
         }catch (Exception e){
-            return new ResponseJson(false, "LOI TRONG QUA TRINH XU LY BAN TIN");
+            return new ResponseJson(false, "",e.getMessage());
         }
 
     }
@@ -329,6 +330,10 @@ public class WsServiceImpl implements WsService {
                     status=Constant25.HosoStatus.DA_TIEP_NHAN_KQ_DANH_GIA_SPH.getId();
                     action=Constant25.HosoStatus.DA_TIEP_NHAN_KQ_DANH_GIA_SPH.getName();
                     break;
+                case Constant25.MessageFunction.FUNC_21:
+                    status=Constant25.HosoStatus.TACN_YCBS_KQ_DANH_GIA_SPH.getId();
+                    action=Constant25.HosoStatus.TACN_YCBS_KQ_DANH_GIA_SPH.getName();
+                    break;
                 default:
                     return new ResponseJson(false, "","MESSAGE 18 - "+function+" CHUA DUOC DINH NGHIA");
 
@@ -342,14 +347,14 @@ public class WsServiceImpl implements WsService {
                 return new ResponseJson(false, "","KHONG TIM THAY HO SO/HANG HOA");
             }
             tbdKQXL25.setFiLyDo(bnnXuLyKQ.getFiLyDo());
-            tbdKQXL25.setFiNgayPhanHoi(bnnXuLyKQ.getFiResponseDate());
+            tbdKQXL25.setFiNgayPhanHoi(bnnXuLyKQ.getFiResponseDate()==null?new Date():bnnXuLyKQ.getFiResponseDate());
             tbdKQXL25.setFiNguoiXL(bnnXuLyKQ.getFiNameOfStaff());
             tbdKQXL25Service.save(tbdKQXL25);
             tbdHanghoa25.setFiTrangThaiHangHoa(status);
             tbdHangHoa25Service.save(tbdHanghoa25);
-            tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,tbdHanghoa25,action,bnnXuLyKQ.getFiNameOfStaff(),action,2));
+            tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,tbdHanghoa25,action,bnnXuLyKQ.getFiNameOfStaff(),action,Constant25.BNN_SEND));
         }catch (Exception ex){
-            return new ResponseJson(false, "");
+            return new ResponseJson(false, "",ex.getMessage());
         }
         return new ResponseJson(true, "");
     }
@@ -384,7 +389,7 @@ public class WsServiceImpl implements WsService {
             hangHoaHoso.setFiSoGCN(tbdGiayXNCL25.getFiSoGCN());
             tbdGiayXNCL25Service.save(tbdGiayXNCL25);
             tbdHangHoa25Service.save(hangHoaHoso);
-            tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,tbdHanghoa25,action,tbdGiayXNCL25.getFiNguoiKy(),action,2));
+            tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,tbdHanghoa25,action,tbdGiayXNCL25.getFiNguoiKy(),action,Constant25.BNN_SEND));
         }catch (Exception e){
             log.info(e.getMessage());
             return new ResponseJson(false, "",e.getMessage());
@@ -438,7 +443,7 @@ public class WsServiceImpl implements WsService {
             List<TbdHanghoa25> lsHangHoa=tbdHoso25.getFiProductList();
             for (TbdHanghoa25 tbdHanghoa25: lsHangHoa){
                 tbdHanghoa25.setFiTrangThaiHangHoa(statusUpdate);
-                tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,tbdHanghoa25,action,tbdHoso25.getFiImporterName(),action,1));
+                tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,tbdHanghoa25,action,tbdHoso25.getFiImporterName(),action,Constant25.NSW_SEND));
             }
             tbdHangHoa25Service.saveAll(lsHangHoa);
         } else {
@@ -484,38 +489,46 @@ public class WsServiceImpl implements WsService {
         String action="";
         int status=tbdHoso25.getFiHSStatus();
         switch (tbdHoso25.getFiHSStatus()){
-            case 26:
+            case 29:
             case 28:
                 function=Constant25.MessageFunction.FUNC_15;
                 status=Constant25.HosoStatus.CHO_TIEP_NHAN_KQ_DANH_GIA_SPH.getId();
-                action=Constant25.HosoStatus.CHO_TIEP_NHAN_KQ_DANH_GIA_SPH.getName();
+                action="Gửi đánh giá sự phụ hợp cho lô hàng";
                 break;
-            case 32:
             case 33:
                 function=Constant25.MessageFunction.FUNC_17;
                 status=Constant25.HosoStatus.CHO_TIEP_NHAN_KQ_DANH_GIA_SPH_GUI_BS_BPMC.getId();
-                action=Constant25.HosoStatus.CHO_TIEP_NHAN_KQ_DANH_GIA_SPH_GUI_BS_BPMC.getName();
+                action="Gửi sửa đổi bổ sung theo yêu cầu của BPMC";
                 break;
             case 38:
                 function=Constant25.MessageFunction.FUNC_18;
                 status=Constant25.HosoStatus.CHO_TIEP_NHAN_KQ_DANH_GIA_SPH_GUI_BS_TACN.getId();
-                action=Constant25.HosoStatus.CHO_TIEP_NHAN_KQ_DANH_GIA_SPH_GUI_BS_TACN.getName();
+                action="Gửi sửa đổi bổ sung theo yêu cầu của Phòng TACN";
                 break;
         }
         message.setFunction(function);
         message.setType(type);
+
         ResponseJson response = WsServiceHelper.createSendRequest(Constant25.WebServiceURL.get(environment), message);
         if (response.isSuccess()){
+            TbdKQXL25 tbdKQXLHangHoaSent= tbdKQXL25Service.findByFiNSWFileCodeAndFiProId(tbdKQXL25.getFiNSWFileCode(),tbdKQXL25.getFiProId());
+            if (tbdKQXLHangHoaSent!=null){
+                tbdKQXL25.setFiId(tbdKQXLHangHoaSent.getFiId());
+            }
             tbdKQXL25Service.save(tbdKQXL25);
+
             TbdHanghoa25 tbdHanghoa25 = tbdHangHoa25Service.findByFiIdProduct(tbdKQXL25.getFiProId());
             tbdHanghoa25.setFiTrangThaiHangHoa(status);
+            tbdHanghoa25.setFiIDDVXL(tbdKQXL25.getFiDVXLCode());
+            tbdHanghoa25.setFiNameDVXL(tbdKQXL25.getFiDVXLName());
+
             if(tbdHoso25.getFiHSType()==3){
                 tbdHoso25.setFiIdDVXL(tbdKQXL25.getFiDVXLCode());
                 tbdHoso25.setFiNameDVXL(tbdKQXL25.getFiDVXLName());
                 tbdHoso25Service.save(tbdHoso25);
             }
             tbdHangHoa25Service.save(tbdHanghoa25);
-            tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,tbdHanghoa25,action,tbdHoso25.getFiImporterName(),action,1));
+            tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,tbdHanghoa25,action,tbdHoso25.getFiImporterName(),action,Constant25.NSW_SEND));
             response.setSuccess(true);
         }else{
             response.setSuccess(false);
@@ -565,7 +578,11 @@ public class WsServiceImpl implements WsService {
         }else{
             tbdLichSuHH25.setFiNguoiGui(nguoiGui);
         }
-        tbdLichSuHH25.setFiNguoiNhan(tbdHoso25.getFiImporterName());
+        if(send==1||send.equals(1)){
+            tbdLichSuHH25.setFiNguoiNhan(tbdHoso25.getFiImporterName());
+        }else{
+            tbdHoso25.getFiNameDVXL();
+        }
         tbdLichSuHH25.setFiNoiDung(hstContent);
         tbdLichSuHH25.setFiTrangThai(trangThai);
         tbdLichSuHH25.setFiNswSend(send);

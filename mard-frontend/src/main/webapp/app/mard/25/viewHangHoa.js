@@ -133,6 +133,7 @@ function Mard25ViewHangHoaVM (options) {
             url: '/mard/25/upload',
             success: function (d) {
                 if(d.success){
+                    console.log(d);
                     var item={
                         fiFileName:fiFileName,
                         fiFileLink:d.data.urlFile,
@@ -148,6 +149,7 @@ function Mard25ViewHangHoaVM (options) {
                 }
             },
             error: function (e) {
+                console.log(e);
                 self.errorMsg('Có lỗi tải file lên'+e);
             }
         });
@@ -199,6 +201,7 @@ function Mard25ViewHangHoaVM (options) {
             url: '/mard/25/upload',
             success: function (d) {
                 if(d.success){
+                    console.log(d);
                     self.fiFileGCNLink(d.data.urlFile);
                     self.fiFileGCNId(d.data.itemId);
                     self.fiFileGCNName(files[0].name);

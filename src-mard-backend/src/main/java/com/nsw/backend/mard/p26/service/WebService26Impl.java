@@ -56,6 +56,10 @@ public class WebService26Impl implements WebService26{
             statusUpdate=Constant26.HosoStatus.CHO_TIEP_NHAN.getId();
         }
         ResponseJson response = WsServiceHelper.createSendRequest(Constant26.WebServiceURL.get(environment), message);
+        if(response.isSuccess()){
+            tbdHoso26.setFiTrangthai(statusUpdate);
+        }
+        tbdLichsu26Service.save(createLichSuEntity(tbdHoso26,"Gửi mới hồ sơ",null,createHeaderFromTBDHoso26(tbdHoso26)));
         return response;
     }
 

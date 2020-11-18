@@ -103,7 +103,8 @@
                                         class="fa fa-lg fa-eye tooltips"></i></a>
                             </td>
                             <td class="text-center">
-                                <a href="javascript:void(0)" data-bind="click: $parent.guiSuaHangHoa.bind($data, $data, $index()),"><i
+                                <a href="javascript:void(0)" data-bind="click: $parent.guiSuaHangHoa.bind($data, $data, $index()),visible: fiTrangThaiHangHoa==28 ||
+                                 fiTrangThaiHangHoa==29 || fiTrangThaiHangHoa==33 || fiTrangThaiHangHoa==38"><i
                                         class="fa fa-lg fa-send tooltips"></i></a>
                             </td>
                             <td class="text-center">

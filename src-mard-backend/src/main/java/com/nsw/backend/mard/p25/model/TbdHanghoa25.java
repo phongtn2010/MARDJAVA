@@ -129,6 +129,13 @@ public class TbdHanghoa25 extends CmonBaseEntity implements Serializable {
 
     @Column(name = "FI_TAXCODE", length = 50)
     private String fiTaxCode;
+
+    @Column(name = "FI_ID_DVXL")
+    private String fiIDDVXL;
+
+    @Column(name = "FI_NAME_DVXL")
+    private String fiNameDVXL;
+
     //Danh sách chất lượng kèm theo
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "FI_PRO_ID")
