@@ -61,13 +61,13 @@ public class TbdHoso25RepositoryImpl implements TbdHoso25RepositoryCustom{
         if (filter.getFiHSType() != null) {
             listPredicate.add(cb.equal(root.get("fiHSType"), filter.getFiHSType()));
         }
-        if (filter.isValidForLicenseQuery()) {
-            if (filter.getFiLstNSWFileCode().isEmpty() == false) {
-                listPredicate.add(root.get("fiNSWFileCode").in(filter.getFiLstNSWFileCode()));
-            } else {
-                listPredicate.add(cb.disjunction());
-            }
-        }
+//        if (filter.isValidForLicenseQuery()) {
+//            if (filter.getFiLstNSWFileCode().isEmpty() == false) {
+//                listPredicate.add(root.get("fiNSWFileCode").in(filter.getFiLstNSWFileCode()));
+//            } else {
+//                listPredicate.add(cb.disjunction());
+//            }
+//        }
 
         Path<Object> sortBy = root.get(filter.getSortBy());
         Order order = (filter.getOrder().equals("asc")) ? cb.asc(sortBy) : cb.desc(sortBy);

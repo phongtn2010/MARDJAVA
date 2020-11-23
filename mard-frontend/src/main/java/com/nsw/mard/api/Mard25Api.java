@@ -14,6 +14,7 @@ import com.nsw.mard.p25.model.*;
 import com.nsw.mard.p6.model.SendMessage;
 import com.nsw.mard.service.DinhkemService;
 import com.nsw.util.Constants;
+import com.nsw.util.GsonUtils;
 import com.nsw.util.LogUtil;
 import com.nsw.util.Utility;
 import org.apache.commons.lang3.StringUtils;
@@ -29,6 +30,10 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
+import pl.jsolve.templ4docx.core.Docx;
+import pl.jsolve.templ4docx.core.VariablePattern;
+import pl.jsolve.templ4docx.variable.TextVariable;
+import pl.jsolve.templ4docx.variable.Variables;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,7 +41,10 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping("/mard/25")
@@ -693,6 +701,66 @@ public class Mard25Api extends BaseApi {
         ResponseJson json = BackendRequestHelper.getInstance().doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.HANGHOA_GET_BY_FILTER), filterHangHoa);
         return json;
     }
+    @RequestMapping(value = "/giayxn/{fiNSWFileCode}", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseJson getGiayXN(@PathVariable String fiNSWFileCode) {
+        ResponseJson json = new ResponseJson();
+        try {
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.FIND_GIAY_XAC_NHAN)+fiNSWFileCode);
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            json.setData(null);
+            json.setSuccess(false);
+            json.setMessage(ex.getMessage());
+            return json;
+        }
+    }
+
+
+    @RequestMapping(value = "/taidondk/{idHS}", method = RequestMethod.GET)
+    public @ResponseBody
+    void taiDonDK(HttpServletRequest request,HttpServletResponse response,@PathVariable Integer idHS) {
+        try {
+            if (!isOwner(idHS.toString(), null)) {
+                return;
+            }
+            ResponseJson hosoJson = getHoSoByID(idHS.toString());
+            DonDangKyDownload donDangKy= GsonUtils.getInstance().transform(hosoJson.getData(),DonDangKyDownload.class);
+            ResponseJson xacNhanDonJson = getGiayXN(donDangKy.getFiNSWFileCode());
+            TbdXacNhanDon25 tbdXacNhanDon25 = GsonUtils.getInstance().transform(xacNhanDonJson.getData(),TbdXacNhanDon25.class);
+            ResponseJson chiTieuJson = getListChiTieuByNSWFileCode(donDangKy.getFiNSWFileCode());
+//            ListChiTieu listChiTieu = new Gson().fromJson(new Gson().toJson(chiTieuJson.getData()),ListChiTieu.class);
+//            List<TbdChiTieuDG25> listCT= listChiTieu.getListChiTieu();
+//            donDangKy.setXacNhanDon(tbdXacNhanDon25);
+//            donDangKy.setListChiTieu(listCT);
+            String templatePath = null;
+            String tempFoleder = environment.getRequiredProperty(AppConstant.Folder.TemSaveFolder);
+
+            String fileName = new Date().getTime() + "_" +donDangKy.getFiNSWFileCode()+".docx";
+            File tempFile;
+            Docx docx;
+            // preparing variables
+            Variables variables = genVariablesDonDangKy(donDangKy);
+            templatePath = request.getRealPath("/WEB-INF/downloads/mard/25/don_dang_ky.docx");
+            tempFile = new File(tempFoleder + fileName);
+            docx = new Docx(templatePath);
+            docx.setVariablePattern(new VariablePattern("#{", "}"));
+            docx.fillTemplate(variables);
+            // save filled .docx file
+            docx.save(tempFile.getPath());
+//            fileName = congvan06.getFiDispatchNo() + "-kdnk.docx";
+            response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+            response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+            response.setHeader("Pragma", "no-cache");
+            response.setHeader("Cache-Control", "no-cache");
+            response.getOutputStream().write(loadFile(tempFile));
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+        }
+    }
 
     private SignData getXMLForSign(SendMessage sendMessage) throws Exception {
         ResponseJson resultSignFlow = BackendRequestHelper.getInstance()
@@ -727,5 +795,29 @@ public class Mard25Api extends BaseApi {
                         (StringUtils.isEmpty(nswFileCode)? "" : nswFileCode) + "&taxCode=" + getUsername());
 
         return json != null && json.getData() != null;
+    }
+    private Variables genVariablesDonDangKy(DonDangKyDownload donDangKy){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        Variables donDKVariables = new Variables();
+        donDKVariables.addTextVariable(new TextVariable("#{fiSoGXN}", donDangKy.getXacNhanDon().getFiSoGXN()==null?null:donDangKy.getXacNhanDon().getFiSoGXN()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiSellName}", donDangKy.getFiSellName()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiSellAddress}", donDangKy.getFiSellAddress()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiSellTel}", donDangKy.getFiSellTel()==null?null:"; "+donDangKy.getFiSellTel()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiSellFax}", donDangKy.getFiSellFax()==null?null:"; "+donDangKy.getFiSellFax()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiSellExport}", donDangKy.getFiSellExport()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiImporterName}", donDangKy.getFiImporterName()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiImporterAddress}", donDangKy.getFiImporterAddress()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiImporterTel}", donDangKy.getFiImporterTel()==null?null:"; "+donDangKy.getFiImporterTel()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiImporterFax}", donDangKy.getFiImporterTel()==null?null:"; "+donDangKy.getFiImporterTel()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiPurchReci}", donDangKy.getFiPurchReci()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiPurchFromDate}", simpleDateFormat.format(donDangKy.getFiPurchFromDate())));
+        donDKVariables.addTextVariable(new TextVariable("#{fiPurchToDate}", simpleDateFormat.format(donDangKy.getFiPurchToDate())));
+        donDKVariables.addTextVariable(new TextVariable("#{fiAddressGath}", donDangKy.getFiAddressGath()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiRegSamFromDate}", simpleDateFormat.format(donDangKy.getFiRegSamFromDate())));
+        donDKVariables.addTextVariable(new TextVariable("#{fiRegSamToDate}", simpleDateFormat.format(donDangKy.getFiRegSamToDate())));
+        donDKVariables.addTextVariable(new TextVariable("#{fiAddressGath}", donDangKy.getFiAddressGath()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiContactName}", donDangKy.getFiContactName()));
+        return donDKVariables;
     }
 }

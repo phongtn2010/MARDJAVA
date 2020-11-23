@@ -130,6 +130,7 @@ function RegAnimalProductVM(options) {
 function HangHoaNhapKhauVM (options) {
     var kdnkVMSelf = this;
 
+    kdnkVMSelf.fiHSStatus = ko.observable((options && options.hasOwnProperty('fiHSStatus')) ? options.fiHSStatus : null);
     kdnkVMSelf.fiIdHS = ko.observable((options && options.hasOwnProperty('fiIdHS')) ? options.fiIdHS : null);
     kdnkVMSelf.fiNSWFileCode = ko.observable((options && options.hasOwnProperty('fiNSWFileCode')) ? options.fiNSWFileCode : null);
     kdnkVMSelf.fiReason = ko.observable((options && options.hasOwnProperty('fiReason')) ? options.fiReason : null);
@@ -210,7 +211,7 @@ function HangHoaNhapKhauVM (options) {
             "fiIdHS": kdnkVMSelf.fiIdHS(),
             "fiNSWFileCode": kdnkVMSelf.fiNSWFileCode(),
             "fiReason": kdnkVMSelf.fiReason(),
-            "fiHSStatus": 0,
+            "fiHSStatus": kdnkVMSelf.fiHSStatus(),
             "fiHSType": kdnkVMSelf.thongtinChungVM().fiHSType(),
             "fiHSCreatedDate": new Date(kdnkVMSelf.thongtinChungVM().fiHSCreatedDate()).getTime(),
             "fiNSWFileCodeReplace": kdnkVMSelf.thongtinChungVM().fiNSWFileCodeReplace(),

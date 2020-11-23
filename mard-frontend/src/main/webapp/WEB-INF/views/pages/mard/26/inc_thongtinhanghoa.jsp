@@ -29,7 +29,7 @@
                     <td data-bind="text: ($index() + 1)"></td>
                     <td data-bind="text: fiProName"></td>
                     <td data-bind="text: fiNSWFileCode"></td>
-                    <td data-bind="text: fiSoGCN"></td>
+                    <td data-bind="text: fiProCode"></td>
                     <td data-bind="text: fiProMadeIn"></td>
                     <td data-bind="text: fiProCountryName"></td>
                     <td data-bind="text: fiProThanhPhan"></td>

@@ -13,22 +13,22 @@ public class XacNhanDon {
 
     String fiNSWFileCode;
 
-    String fiAniFeedConfirmNo;
+    String fiSoGXN;
 
-    String DepartmentCode;
+    String fiIdCqxl;
 
-    String DepartmentName;
-    String fiAssignID;
+    String fiNameCqxl;
+    String fiIdCqcd;
 
-    String fiAssignName;
+    String fiNameCqcd;
 
-    String fiAssignNameOther;
+    String fiDvdg;
 
-    Date fiSignConfirmDate;
+    Date fiNgayXN;
 
-    String fiSignConfirmPlace;
+    String fiNoiXN;
 
-    String fiSignName;
+    String fiNguoiXN;
 
     String fiNSWFileCodeOld;
 
@@ -36,5 +36,5 @@ public class XacNhanDon {
 
     List<TbdHanghoa25> fiProductList;
 
-    String fiNoteGoods;
+    String fiGhiChu;
 }

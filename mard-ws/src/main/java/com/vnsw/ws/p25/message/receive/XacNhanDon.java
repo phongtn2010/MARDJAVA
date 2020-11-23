@@ -18,26 +18,26 @@ public class XacNhanDon {
     @XmlElement(name = "NSWFileCode")
     String fiNSWFileCode;
     @XmlElement(name = "AniFeedConfirmNo")
-    String fiAniFeedConfirmNo;
+    String fiSoGXN;
     @XmlElement(name = "DepartmentCode")
-    String DepartmentCode;
+    String fiIdCqxl;
     @XmlElement(name = "DepartmentName")
-    String DepartmentName;
+    String fiNameCqxl;
 
     @XmlElement(name = "AssignID")
-    String fiAssignID;
+    String fiIdCqcd;
     @XmlElement(name = "AssignName")
-    String fiAssignName;
+    String fiNameCqcd;
     @XmlElement(name = "AssignNameOther")
-    String fiAssignNameOther;
+    String fiDvdg;
 
     @XmlJavaTypeAdapter(DateSerialization.class)
     @XmlElement(name = "SignConfirmDate")
-    Date fiSignConfirmDate;
+    Date fiNgayXN;
     @XmlElement(name = "SignConfirmPlace")
-    String fiSignConfirmPlace;
+    String fiNoiXN;
     @XmlElement(name = "SignConfirmName")
-    String fiSignName;
+    String fiNguoiXN;
     @XmlElement(name = "NSWFileCodeOld")
     String fiNSWFileCodeOld;
     @XmlElement(name = "AniFeedConfirmOldNo")
@@ -48,5 +48,5 @@ public class XacNhanDon {
     List<Product> fiProductList;
 
     @XmlElement(name = "NoteGoods")
-    String fiNoteGoods;
+    String fiGhiChu;
 }
