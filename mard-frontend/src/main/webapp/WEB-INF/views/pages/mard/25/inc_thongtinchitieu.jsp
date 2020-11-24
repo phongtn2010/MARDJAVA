@@ -215,7 +215,7 @@
                                                     value: fiProSLKLMassUnitCode, enable: isEnable() "></select></td>
                             <td><input class="form-control" type="text" data-bind="value: fiProSLKLMassTan,  enable: isEnable()"></td>
                             <td><input class="form-control" type="text" data-bind="value: fiProSLKLAmount, enable: isEnable()"></td>
-                            <td><select class="form-control" data-bind="options: lstDMDVT,
+                            <td><select class="form-control" data-bind="options: lstDMDVTSL,
                                                     optionsText: 'fiCatTypeName',
                                                     optionsValue: 'fiCatNote',
                                                     value: fiProSLKLAmountUnitCode, enable: isEnable() "></select></td>
@@ -258,7 +258,7 @@
                             </td>
                             <td>
                                 <select
-                                        data-bind="options: lstDMDVT,
+                                        data-bind="options: lstDMDVTSL,
                                                     optionsText: 'fiCatTypeName',
                                                     optionsValue: 'fiCatNote',
                                                     optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.dinh_luong.dvtsl"/>',

@@ -20,7 +20,7 @@ management:
 #Service cua Bo Khoa Hoc cong nghe
 BKHCN: http://10.224.164.18:8002/MOSTWs/ws/most.wsdl
 BYT: http://10.224.164.252:8006/MOHWs/ws/moh.wsdl
-BNN: http://10.224.164.18:8002/MARDWs/ws/mard.wsdl
+BNN: http://10.224.83.125:8082/MARDWs/ws/mard.wsdl
 BTNMT: http://10.224.164.18:8002/MONREWs/ws/monre.wsdl
 # Thong tin rabbitMQ 
 activemq.host: 10.224.164.16
@@ -81,7 +81,7 @@ management:
 #Service cua Bo Khoa Hoc cong nghe
 BKHCN: http://10.224.128.132:8004/MOSTWs/ws/most.wsdl
 BYT: http://10.224.128.132:8004/MOHWs/ws/moh.wsdl
-BNN: http://10.224.128.132:8004/MARDWs/ws/mard.wsdl
+BNN: http://10.224.83.125:8082/MARDWs/ws/mard.wsdl
 BTNMT: http://10.224.128.132:8004/MONREWs/ws/monre.wsdl
 BTTTT: http://10.224.83.125:8003/MICWs/ws/mic.wsdl
 BPDT: http://10.224.128.132:8004/MODWs/ws/mod.wsdl

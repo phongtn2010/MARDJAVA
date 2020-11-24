@@ -201,7 +201,7 @@ public class SendController26 {
         Envelope26 envl;
         Error26 error;
 
-        String documentType = Constants.MARD_PRO.MARD25;
+        String documentType = Constants.MARD_PRO.MARD26;
         String officeCode = Constants.BNN;
 
         try {

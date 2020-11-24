@@ -30,7 +30,7 @@ function Mard25VM() {
     self.lstDVXL = ko.observableArray([]);
     self.lstAtchType = ko.observableArray([]);
 
-    self.giayPhepVM = ko.observable(new GiayPhepVM());
+
     self.xinRutHoSoVM = ko.observable(new XinRutHoSoVM());
     self.lichsuXuly = ko.observable(new HistoryPopupView());
 
@@ -233,51 +233,135 @@ function Mard25VM() {
             }
         });
     }
-    self.setValueForIndexPage = function(item){
-        item.lstCountry = self.lstCountry();
-        item.lstPort = self.lstPort();
-        item.lstProfileStatus = self.lstProfileStatus();
-        item.lstUOMAnimal = self.lstUOMAnimal();
-        item.lstAtchType = self.lstAtchType();
-        item.lstHD = ko.observableArray([]);
-        item.lstHoaDon = ko.observableArray([]);
-        item.lstPhieu = ko.observableArray([]);
-        if(item.fiAttachmentList.length>0) {
-            item.lstHD=ko.computed(function () {
-                return ko.utils.arrayFilter(item.fiAttachmentList, function (re) {
-                    return re.fiFileTypeID == '1';
-                });
-            });
-            item.lstHoaDon=ko.computed(function () {
-                return ko.utils.arrayFilter(item.fiAttachmentList, function (re) {
-                    return re.fiFileTypeID == '2';
-                });
-            });
-            item.lstPhieu=ko.computed(function () {
-                return ko.utils.arrayFilter(item.fiAttachmentList, function (re) {
-                    return re.fiFileTypeID == '3';
-                });
-            });
-        }
-        item.ngayKy = ko.observable(null);
-        item.thangKy = ko.observable(null);
-        item.namKy = ko.observable(null);
+    // self.setValueForIndexPage = function(item){
+    //     item.lstCountry = self.lstCountry();
+    //     item.lstPort = self.lstPort();
+    //     item.lstProfileStatus = self.lstProfileStatus();
+    //
+    //     item.lstAtchType = self.lstAtchType();
+    //     item.lstHD = ko.observableArray([]);
+    //     item.lstHoaDon = ko.observableArray([]);
+    //     item.lstPhieu = ko.observableArray([]);
+    //     if(item.fiAttachmentList.length>0) {
+    //         item.lstHD=ko.computed(function () {
+    //             return ko.utils.arrayFilter(item.fiAttachmentList, function (re) {
+    //                 return re.fiFileTypeID == '1';
+    //             });
+    //         });
+    //         item.lstHoaDon=ko.computed(function () {
+    //             return ko.utils.arrayFilter(item.fiAttachmentList, function (re) {
+    //                 return re.fiFileTypeID == '2';
+    //             });
+    //         });
+    //         item.lstPhieu=ko.computed(function () {
+    //             return ko.utils.arrayFilter(item.fiAttachmentList, function (re) {
+    //                 return re.fiFileTypeID == '3';
+    //             });
+    //         });
+    //     }
+    //
+    //
+    //     item.ngayKy = ko.observable(null);
+    //     item.ngayKy(new Date(item.fiHSCreatedDate).toDateString());
+    //     return item;
+    // }
+    self.getXacNhanDon =function (fiNswFileCode, callback) {
+        app.makeGet({
+            async: true,
+            type: 'GET',
+            cache: false,
+            crossDomain: true,
+            url: app.appContext + "/mard/25/xacnhandon/"+fiNswFileCode,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(CSRF_TOKEN_NAME, CSRF_TOKEN_VALUE);
+                $('#loading10').show();
+            },
+            success: function (res) {
+                $('#loading10').hide();
+                if (res.success) {
+                    callback(res.data);
 
-        var ngayTao = new Date(item.fiHSCreatedDate);
-        var ngay=ngayTao.getDay();
-        var thang=ngayTao.getMonth();
-        var nam=ngayTao.getFullYear();
-
-        item.ngayKy(ngay);
-        item.thangKy(thang);
-        item.namKy(nam);
-        return item;
+                } else {
+                    app.Alert("Có lỗi xảy ra");
+                }
+            },
+            error: function (err) {
+                $('#loading10').hide();
+                app.Alert("Có lỗi xảy ra");
+            },
+            complete: function (jqXHR, textStatus) {
+                $('#loading10').hide();
+            }
+        });
     }
+    self.getChiTieuDG =function (fiNswFileCode,callback) {
+        $.ajax({
+            async: true,
+            type: 'GET',
+            cache: false,
+            crossDomain: true,
+            url: app.appContext + "/mard/25/chitieu/"+fiNswFileCode,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(CSRF_TOKEN_NAME, CSRF_TOKEN_VALUE);
+                $('#loading10').show();
+            },
+            success: function (res) {
+                $('#loading10').hide();
+                if (res.success) {
+                    callback(res.data);
+                } else {
+                    app.Alert("Có lỗi xảy ra");
+                }
+            },
+            error: function (err) {
+                $('#loading10').hide();
+                app.Alert("Có lỗi xảy ra");
+            },
+            complete: function (jqXHR, textStatus) {
+                $('#loading10').hide();
+            }
+        });
+    }
+    self.donDangKyDownload = ko.observable(null);
     self.viewHoSo = function(item) {
+        item.nguoixn=ko.observable(null);
+        item.ngayXN=ko.observable(null);
+        item.ngayky=ko.observable(new Date(item.fiCreatedDate).toDateString());
+        item.noixn=ko.observable(null);
+        item.soXND=ko.observable(null);
+        item.xacNhanDon=ko.observable(null);
+        item.listChiTieuHS=ko.observableArray([]);
 
-        self.selectedHoSo(value);
+        self.getXacNhanDon(item.fiNSWFileCode,function (res) {
+            if(res!=null){
+                item.xacNhanDon=res;
+                item.soXND(res.fiSoGXN);
+                item.nguoixn(res.fiNguoiXN);
+                item.noixn(res.fiNoiXN);
+                item.ngayXN(res.fiNgayXN==null? null:new Date(res.fiNgayXN).toDateString());
+            }
+        });
+        self.getChiTieuDG(item.fiNSWFileCode,function (res) {
+            if(res!=null){
+                item.listChiTieuHS(res);
+                item.listChiTieu=res;
+            }
+        });
+        // self.donDangKyDownload(item);
+        console.log(item);
+        self.selectedHoSo(item);
         $('#mard25ViewHSModal').modal('show');
     }
+    self.taiDonDK =function(item){
+        // console.log(self.selectedHoSo());
+        var link = document.createElement('a');
+        link.href = '/mard/25/taidondk/' + item.fiIdHS;
+        link.target = '_blank';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+    }
+
     self.showLSXL = function (item) {
         self.lichsuXuly().show(item.fiNSWFileCode);
         return false;
@@ -325,7 +409,7 @@ function Mard25VM() {
                             error: function (err) {
                             },
                             complete: function (jqXHR, textStatus) {
-                                $('#loading08').hide();
+                                $('#loading10').hide();
                             }
                         });
                     }
@@ -435,8 +519,8 @@ function Mard25VM() {
     };
 
     self.chuyenTCCD = function (data,type,index) {
-        var value = self.setValueForIndexPage(index);
-        self.selectedHoSo(value);
+        // var value = self.setValueForIndexPage(index);
+        self.selectedHoSo(index);
         app.makeGet({
             url: '/mard/25/chitieu/'+index.fiNSWFileCode,
             success: function(res) {
@@ -499,76 +583,26 @@ function Mard25VM() {
     self.thoatOnClick  = function () {
         $("#modal_view_chuyen").hide();
     }
-}
-
-function GiayPhepVM(options) {
-    var gpVMSelf = this;
-    gpVMSelf.companyName = hosoCompanyName;
-    gpVMSelf.vsty = ko.observable((options && options.hasOwnProperty('vsty')) ?  options.vsty: null);
-    gpVMSelf.cnkd = ko.observable((options && options.hasOwnProperty('cnkd')) ?  options.cnkd: null);
-
-    gpVMSelf.update = function (data) {
-        var re = new RegExp('\n', 'g');
-        if (data.vsty) {
-            var fiRecipient = data.vsty.fiRecipient ? data.vsty.fiRecipient : "";
-            var fiResponseContent = data.vsty.fiResponseContent ? data.vsty.fiResponseContent : "";
-            fiRecipient = fiRecipient.replace(',', '<br>');
-            fiResponseContent = fiResponseContent.replace(re, '<br>');
-            data.vsty.fiRecipient = fiRecipient;
-            data.vsty.fiResponseContent = fiResponseContent;
-        }
-        if (data.cnkd) {
-            var fiRecipient = data.cnkd.fiRecipient ? data.cnkd.fiRecipient : "";
-            var fiResponseContent = data.cnkd.fiResponseContent ? data.cnkd.fiResponseContent : "";
-            fiRecipient = fiRecipient.replace(',', '<br>');
-            fiResponseContent = fiResponseContent.replace(re, '<br>');
-            data.cnkd.fiRecipient = fiRecipient;
-            data.cnkd.fiResponseContent = fiResponseContent;
-        }
-        gpVMSelf.vsty(data.vsty ? data.vsty : null);
-        gpVMSelf.cnkd(data.cnkd ? data.cnkd : null);
-    }
-
-    gpVMSelf.convertHTML = function (content) {
-        if (content) {
-            var re = new RegExp('\n', 'g');
-            return content.replace(re, '<br>');
-        } else {
-            return '';
-        }
-    }
-
-    gpVMSelf.taiGiayPhep = function (data, type) {
-        if (type == 'vsty') {
-            var link = document.createElement('a');
-            link.href = '/mard/06/gcn/download/vsty/' + gpVMSelf.vsty().fiNSWFileCode;
-            link.target = '_blank';
-            document.body.appendChild(link);
-            link.click();
-            link.remove();
-        } else if (type == 'kdnk') {
-            var link = document.createElement('a');
-            link.href = '/mard/06/gcn/download/kdnk/' + gpVMSelf.cnkd().fiNSWFileCode;
-            link.target = '_blank';
-            document.body.appendChild(link);
-            link.click();
-            link.remove();
-        }
-    }
 
 }
+
 
 function GuiBaoCaoHS2D(){
     var self =this;
     self.fiHSCode = ko.observable(null);
     self.fiFile = ko.observable(null);
-    self.fiTenFile = ko.observable(null);
+    self.fiTenFile = ko.observable('');
     self.fiListAttach = ko.observableArray([]);
-
+    self.idHS=ko.observable(null);
     self.update = function(data){
         self.fiHSCode(data.fiNSWFileCode);
+        self.idHS(data.fiIdHS);
     }
     self.themMoiFileBaoCao =function () {
+		if(self.fiTenFile().length<=0){
+			app.Alert("Chưa điền tên file");
+			return;
+		}
         var files = $("#file-baocao")[0].files[0];
         if (!files || files.length == 0) {
             app.Alert("Bạn chưa đính kèm file");
@@ -587,10 +621,13 @@ function GuiBaoCaoHS2D(){
                 var item ={
                     fiLinkBNN: fileLink,
                     fiGuidBNN: fileId,
-                    fiFileHD: fiFileName,
+                    fiFileHD: self.fiTenFile(),
                     fiFileTypeID: 9,
                     fiFileTypeName: 'File báo cáo hồ sơ 2D'
                 }
+                self.fiListAttach.push(item);
+				self.fiTenFile('');
+				self.fiFile(null);
                 $('#loading08').hide();
             },
             error: function (e) {
@@ -600,6 +637,71 @@ function GuiBaoCaoHS2D(){
             }
         });
     }
+    self.guiBaoCao =function(){
+        var data ={
+            "fiNSWFileCode":  self.fiHSCode(),
+            "fiAttachReport": self.fiListAttach()
+        };
+        self.pop = app.popup({
+            title: 'Thông báo',
+            html: '<b>Bạn chắc chắn muốn gửi báo cáo cho hồ sơ này?</b>',
+            width: 450,
+            buttons: [
+                {
+                    name: NSWLang["common_button_toi_chac_chan"],
+                    class: 'btn',
+                    icon: 'fa-save',
+                    action: function () {
+                        app.popupRemove(self.pop.selector);
+                        app.makePost({
+                            url: '/mard/25/hoso/baocao2d',
+                            data: JSON.stringify(data),
+                            contentType: "application/json; charset=utf-8",
+                            success: function (d) {
+                                if (d && d.success) {
+                                    app.Alert('Gửi yêu cầu thành công');
+                                    self.searchHoso(self.currentPage());
+                                    if ($('#modal_gui_bao_cao').hasClass('in')) {
+                                        $('#modal_gui_bao_cao').modal('hide');
+                                    }
+                                } else {
+                                    app.Alert(d.message);
+                                }
+                            },
+                            error: function (e) {
+                                app.Alert('Không gửi được yêu cầu');
+                            }
+                        });
+                    }
+                },
+                {
+                    name: 'Huỷ',
+                    class: 'btn',
+                    icon: 'fa-close',
+                    action: function () {
+                        app.popupRemove(self.pop.selector);
+                    }
+                }
+            ]
+        });
+    }
+
+    self.thoatOnClick =function () {
+		self.fiFile(null);
+        self.fiListAttach([]);
+        self.fiTenFile('');
+        if ($('#modal_gui_bao_cao').hasClass('in')) {
+            $('#modal_gui_bao_cao').modal('hide');
+        }
+    }
+    self.onDeleteFile =function(item){
+        self.fiListAttach.splice(item,1);
+    }
+
+}
+
+function ViewHosoVM(){
+
 }
 
 function XinRutHoSoVM () {

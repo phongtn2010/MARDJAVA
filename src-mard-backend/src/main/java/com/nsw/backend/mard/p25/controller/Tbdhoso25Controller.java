@@ -9,6 +9,7 @@ import com.nsw.backend.controller.BaseController;
 import com.nsw.backend.helper.RabbitMQErrorHelper;
 import com.nsw.backend.mard.p25.constant.Constant25;
 import com.nsw.backend.mard.p25.dto.SendMessage;
+import com.nsw.backend.mard.p25.dto.UploadBaoCao;
 import com.nsw.backend.mard.p25.model.*;
 import com.nsw.backend.mard.p25.service.TbdHoso25Service;
 import com.nsw.backend.mard.p25.service.TbdLichsu25Service;
@@ -292,5 +293,12 @@ public class Tbdhoso25Controller extends BaseController {
         profileHst.setFiContent(historyContent);
         tbdLichsu25Service.create(profileHst);
         return profile;
+    }
+
+    @PostMapping("/baocao2d")
+    public ResponseEntity<ResponseJson> baoCaoHS2D(@RequestBody UploadBaoCao baoCao) {
+
+        ResponseJson response = wsService.baoCaoHS2D(baoCao);
+        return ResponseEntity.ok(response);
     }
 }

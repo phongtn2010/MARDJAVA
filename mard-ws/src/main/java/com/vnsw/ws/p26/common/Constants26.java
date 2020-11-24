@@ -76,9 +76,9 @@ public class Constants26 {
 
     public interface RES_URI {
         public static final String URI_GET_HS_BY_ID = "/mard/26/ws/hoso/";
-        public static final String URI_PHAN_HOI_DON_DK = "/mard/26/ws/phanhoidondk/";
-        public static final String URI_GUI_CV_MIEN_KIEM = "/mard/26/ws/guicv/";
-        public static final String URI_THU_HOI_CV_MIEN_KIEM = "/mard/26/ws/thuhoicv/";
+        public static final String URI_PHAN_HOI_DON_DK = "/mard/26/ws/phanhoidondk";
+        public static final String URI_GUI_CV_MIEN_KIEM = "/mard/26/ws/guicv";
+        public static final String URI_THU_HOI_CV_MIEN_KIEM = "/mard/26/ws/thuhoicv";
     }
 
     public interface HosoStatus {

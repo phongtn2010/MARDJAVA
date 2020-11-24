@@ -59,7 +59,7 @@ public class ReceiveService26Impl implements ReceiveService26 {
             error = new Error26();
             error.setErrorCode(Constants.ERROR.ERR00_CODE);
             error.setErrorName(Constants.ERROR.ERR00);
-            envelopReturn = envelopeService.createEnvelopeError(maHoso, Constants.MARD_PRO.MARD25, type, error);
+            envelopReturn = envelopeService.createEnvelopeError(maHoso, Constants.MARD_PRO.MARD26, type, error);
         } else {
             try {
                 Envelope26 envelop = (Envelope26) convertXmlService.xmlToEnvelope(xml);
@@ -68,7 +68,7 @@ public class ReceiveService26Impl implements ReceiveService26 {
                 ResponseJson json;
                 type = getType(envelop);
                 maHoso = envelop.getHeader().getSubject().getReference();
-                header = envelopeService.createReceiveHeader(maHoso, Constants.MARD_PRO.MARD25, type,
+                header = envelopeService.createReceiveHeader(maHoso, Constants.MARD_PRO.MARD26, type,
                         Constants.FUNCTION.FUNC_SUCCESS);
                 ct = envelop.getBody().getContent();
 
@@ -107,25 +107,25 @@ public class ReceiveService26Impl implements ReceiveService26 {
                             error = new Error26();
                             error.setErrorCode(Constants.ERROR.ERR04_CODE);
                             error.setErrorName(Constants.ERROR.ERR04);
-                            envelopReturn = envelopeService.createEnvelopeError(maHoso, Constants.MARD_PRO.MARD06, type, error);
+                            envelopReturn = envelopeService.createEnvelopeError(maHoso, Constants.MARD_PRO.MARD26, type, error);
                             break;
                     }
                 } else {
                     error = new Error26();
                     error.setErrorCode(Constants.ERROR.ERR02_CODE);
                     error.setErrorName(errorMsg);
-                    envelopReturn = envelopeService.createEnvelopeError(maHoso, Constants.MARD_PRO.MARD06, type, error);
+                    envelopReturn = envelopeService.createEnvelopeError(maHoso, Constants.MARD_PRO.MARD26, type, error);
                 }
             } catch (Exception ex) {
                 error = new Error26();
                 error.setErrorCode(Constants.ERROR.ERR02_CODE);
                 error.setErrorName(Constants.ERROR.ERR02);
-                envelopReturn = envelopeService.createEnvelopeError(maHoso, Constants.MARD_PRO.MARD25, type, error);
+                envelopReturn = envelopeService.createEnvelopeError(maHoso, Constants.MARD_PRO.MARD26, type, error);
 
-                String errorInfo = Constants.APP_NAME + Constants.MESSAGE_SEPARATOR + CLASS_NAME
-                        + Constants.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName()
-                        + Constants.MESSAGE_SEPARATOR + ex.toString();
-                RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, rabbitMQService.getRabbitMQInfo());
+//                String errorInfo = Constants.APP_NAME + Constants.MESSAGE_SEPARATOR + CLASS_NAME
+//                        + Constants.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName()
+//                        + Constants.MESSAGE_SEPARATOR + ex.toString();
+//                RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, rabbitMQService.getRabbitMQInfo());
             }
         }
         return envelopReturn;
@@ -164,7 +164,7 @@ public class ReceiveService26Impl implements ReceiveService26 {
             String errorInfo = Constants.APP_NAME + Constants.MESSAGE_SEPARATOR + CLASS_NAME
                     + Constants.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName()
                     + Constants.MESSAGE_SEPARATOR + ex.toString();
-            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, rabbitMQService.getRabbitMQInfo());
+//            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, rabbitMQService.getRabbitMQInfo());
         }
         return null;
     }
@@ -193,7 +193,7 @@ public class ReceiveService26Impl implements ReceiveService26 {
                 erroInfo += ": " + json.getMessage();
             }
             error.setErrorName(erroInfo);
-            envelop = envelopeService.createEnvelopeError(fiMaHoSo, Constants.MARD_PRO.MARD06, msgType, error);
+            envelop = envelopeService.createEnvelopeError(fiMaHoSo, Constants.MARD_PRO.MARD26, msgType, error);
         }
         return envelop;
     }

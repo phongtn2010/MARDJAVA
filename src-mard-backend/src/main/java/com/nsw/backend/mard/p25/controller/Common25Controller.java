@@ -20,12 +20,14 @@ public class Common25Controller extends BaseController {
 
     private final TbdHosoTccd25Service tbdHosoTccd25Service;
     private final TbdHangHoaFile25Service tbdHangHoaFile25Service;
+    private final TbdXacNhanDon25Service tbdXacNhanDon25Service;
 
-    public Common25Controller(TbsDonViXuLy25Service tbsDonViXuLy25Service, TbdChiTieuDG25Service tbdChiTieuDG25Service, TbdHosoTccd25Service tbdHosoTccd25Service, TbdHangHoaFile25Service tbdHangHoaFile25Service) {
+    public Common25Controller(TbsDonViXuLy25Service tbsDonViXuLy25Service, TbdChiTieuDG25Service tbdChiTieuDG25Service, TbdHosoTccd25Service tbdHosoTccd25Service, TbdHangHoaFile25Service tbdHangHoaFile25Service, TbdXacNhanDon25Service tbdXacNhanDon25Service) {
         this.tbsDonViXuLy25Service = tbsDonViXuLy25Service;
         this.tbdChiTieuDG25Service = tbdChiTieuDG25Service;
         this.tbdHosoTccd25Service = tbdHosoTccd25Service;
         this.tbdHangHoaFile25Service = tbdHangHoaFile25Service;
+        this.tbdXacNhanDon25Service = tbdXacNhanDon25Service;
     }
 
     @GetMapping("/chitieu/{fiNSWFileCode}")
@@ -41,5 +43,9 @@ public class Common25Controller extends BaseController {
     @GetMapping("/filegcn/{fiIdHangHoa}")
     public ResponseEntity<ResponseJson> getFileGCN(@PathVariable Integer fiIdHangHoa) {
         return createSuccessResponse(tbdHosoTccd25Service.findByFiIdHangHoa(fiIdHangHoa), HttpStatus.OK);
+    }
+    @GetMapping("/xacnhandon/{fiNSWFileCode}")
+    public ResponseEntity<ResponseJson> getXacNhanDonByNSWFileCode(@PathVariable String fiNSWFileCode) {
+        return createSuccessResponse(tbdXacNhanDon25Service.findByFiNSWFileCode(fiNSWFileCode), HttpStatus.OK);
     }
 }

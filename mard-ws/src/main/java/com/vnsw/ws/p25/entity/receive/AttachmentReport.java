@@ -12,14 +12,13 @@ import javax.xml.bind.annotation.XmlType;
 @Data
 public class AttachmentReport {
 
-
     @XmlElement(name = "FileCode")
-    private Long fiLoaifile;
+    private Long fiFileTypeID;
     @XmlElement(name = "AttachmentId")
-    private Long fiFileId;
+    private Long fiGuidBNN;
     @XmlElement(name = "FileName")
-    private String fiFileName;
+    private String fiFileHD;
     @XmlElement(name = "FileLink")
-    private String fiFileLink;
+    private String fiLinkBNN;
 
 }

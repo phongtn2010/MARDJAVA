@@ -26,7 +26,7 @@
             <div class="text-center" style="padding-top: 15px;">
                 <h4 class="uppercase" style="font-weight: bold">ĐƠN <spring:message code="mard.25.don_dk"></spring:message></h4>
                 <p class="code">
-                    <span class="text-border">Số: <span></span></span>
+                    <span class="text-border">Số: <span data-bind="text: soXND"></span></span>
                 </p>
                 <br/>
                 <br/>
@@ -52,7 +52,7 @@
                         <td>5. Địa chỉ, số điện thoại, số fax: <span data-bind="text: fiImporterAddress"></span> <span data-bind="text: fiImporterTel"></span> <span data-bind="text: fiImporterFax"></span></td>
                     </tr>
                     <tr>
-                        <td>6. Nơi nhận hàng: <span data-bind="text: fiImporterAddress"></span></td>
+                        <td>6. Nơi nhận hàng: <span data-bind="text: fiPurchReci"></span></td>
                     </tr>
                     <tr>
                         <td>7. Thời gian nhập khẩu dự kiến: <span data-bind="date: fiPurchFromDate"></span>  - <span data-bind="date: fiPurchToDate"></span></td>
@@ -105,13 +105,13 @@
                     <td>11. Thông tin người liên hệ: <span data-bind="text: fiContactName"></span></td>
                 </tr>
                 <tr>
-                    <td>12. Hợp đồng mua bán: <span data-bind="foreach: lstHD">Số:<b style="text-decoration: none" data-bind="text: fiFileHD"></b> Ngày <b style="text-decoration: none" data-bind="date: fiFileHDDate"></b>  </span></td>
+<%--                    <td>12. Hợp đồng mua bán: <span data-bind="foreach: lstHD">Số:<b style="text-decoration: none" data-bind="text: fiFileHD"></b> Ngày <b style="text-decoration: none" data-bind="date: fiFileHDDate"></b>  </span></td>--%>
                 </tr>
                 <tr>
-                    <td>13. Hóa đơn mua bán: <span data-bind="foreach: lstHoaDon">Số:<b style="text-decoration: none" data-bind="text: fiFileHD"></b> Ngày <b style="text-decoration: none" data-bind="date: fiFileHDDate"></b>  </span></td>
+<%--                    <td>13. Hóa đơn mua bán: <span data-bind="foreach: lstHoaDon">Số:<b style="text-decoration: none" data-bind="text: fiFileHD"></b> Ngày <b style="text-decoration: none" data-bind="date: fiFileHDDate"></b>  </span></td>--%>
                 </tr>
                 <tr>
-                    <td>14. Phiếu đóng gói số: <span data-bind="foreach: lstPhieu">Số:<b style="text-decoration: none" data-bind="text: fiFileHD"></b> Ngày <b style="text-decoration: none" data-bind="date: fiFileHDDate"></b>  </span></td>
+<%--                    <td>14. Phiếu đóng gói số: <span data-bind="foreach: lstPhieu">Số:<b style="text-decoration: none" data-bind="text: fiFileHD"></b> Ngày <b style="text-decoration: none" data-bind="date: fiFileHDDate"></b>  </span></td>--%>
                 </tr>
                 <tr>
                     <td class="text-center"><b>DÀNH CHO CƠ QUAN KIỂM TRA</b></td>
@@ -134,15 +134,16 @@
             <p>(3):Ghi "miễn kiểm tra" nếu lô hàng áp dụng chế độ miễn kiểm tra có thời hạn hoặc "kiểm tra theo điểm a khoản 2 Điều 18 của Nghị đinh này" hoặc "kiểm tra theo điểm b khoản 2 Điều 18 của Nghị định này".</p>
             <div class="row">
                 <div class="col-md-6 text-center" style="">
-                    <span data-bind="text: $root.getNoiKy(fiSignAddress)"></span> ngày <span data-bind="text: ngayKy"></span>  tháng <span data-bind="text: thangKy"></span>  năm <span data-bind="text: namKy"></span> <br/>
+                    <span data-bind="text: $root.getNoiKy(fiSignAddress)"></span> <span data-bind="text: ngayky"></span><br/>
                     <b>TỔ CHỨC, CÁ NHÂN NHẬP KHẨU</b> <br/>
                     <i>(ký tên, đóng dấu)</i><br/><br/><br/><br/>
                     <span data-bind="text: fiSignName"></span>
                 </div>
                 <div class="col-md-6 text-center" style="">
-                    ngày tháng năm<br/>
+                    <span data-bind="text: noixn"></span> <span data-bind="text: ngayXN"></span><br/>
                     <b>TÊN CƠ QUAN KIỂM TRA</b> <br/>
-                    <i>(ký tên, đóng dấu)</i>
+                    <i>(ký tên, đóng dấu)</i><br/><br/><br/><br/>
+                    <span data-bind="text: nguoixn"></span>
                 </div>
             </div>
             <div id="phuluc-hoso" data-bind="visible: fiHSStatus >=26">
@@ -163,8 +164,15 @@
                         <td class="text-center">Ghi chú</td>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr></tr>
+                    <tbody data-bind="foreach: listChiTieuHS">
+                        <tr>
+                            <td class="text-center" data-bind="text: fiTenHangHoa"></td>
+                            <td class="text-center" data-bind="text: fiTenChiTieu"></td>
+                            <td class="text-center" data-bind="text: fiHinhThucCB"></td>
+                            <td class="text-center" data-bind="text: fiHamLuong"></td>
+                            <td class="text-center" data-bind="text: fiMaDVT"></td>
+                            <td class="text-center" data-bind="text: fiGhiChu"></td>
+                        </tr>
                     </tbody>
                 </table>
                 <p style="font-weight: bold" data-bind="visible: $root.getHoSoType(fiHSType)=='2a'">Lưu ý: Trong thời gian 15 ngày làm việc kể từ ngày thông quan hàng hóa, người nhập khẩu phải nộp kết quả tự đánh giá sự phù hợp theo quy định về Cục Chăn nuôi thông qua hệ thống Một cửa Quốc gia.</p>
@@ -175,7 +183,7 @@
     </div>
     <div class="modal-footer">
         <div class="text-center">
-            <a class="btn green" data-bind="">
+            <a class="btn green" data-bind="click: $root.taiDonDK">
                 <spring:message code="common.button.tai_ve"/>
             </a>
             <a class="btn" href="javascript:void(0)" data-dismiss="modal">

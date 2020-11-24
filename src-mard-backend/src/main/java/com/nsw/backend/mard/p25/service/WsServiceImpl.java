@@ -6,8 +6,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
 import com.nsw.backend.mard.p25.client.*;
 import com.nsw.backend.mard.p25.constant.Constant25;
-import com.nsw.backend.mard.p25.dto.Ananytical;
 import com.nsw.backend.mard.p25.dto.BNNThongBaoThuHoiGDK;
+import com.nsw.backend.mard.p25.dto.UploadBaoCao;
 import com.nsw.backend.mard.p25.model.*;
 import com.nsw.backend.mard.p25.dto.SendMessage;
 import com.nsw.backend.mard.p25.helper.WsServiceHelper;
@@ -15,6 +15,7 @@ import com.nsw.backend.mard.p25.exception.NSWException;
 import com.nsw.backend.util.ResponseJson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -39,12 +40,13 @@ public class WsServiceImpl implements WsService {
     private final TbdGiayXNCL25Service tbdGiayXNCL25Service;
     private final TbdHosoTccd25Service tbdHosoTccd25Service;
     private final TbdKQXL25Service tbdKQXL25Service;
+    private final TbdDinhkem25Service tbdDinhkem25Service;
     private Gson gson;
 
     private final Environment environment;
 
     @Autowired
-    public WsServiceImpl(TbdHoso25Service tbdHoso25Service, TbdLichsu25Service tbdLichsu25Service, Environment environment, TbdXacNhanDon25Service tbdXacNhanDon25Service, TbdHangHoa25Service tbdHangHoa25Service, TbdHangHoaFile25Service tbdHangHoaFile25Service, TbdLichSuHH25Service tbdLichSuHH25Service, TbdChiTieuDG25Service tbdChiTieuDG25Service, TbdGiayXNCL25Service tbdGiayXNCL25Service, TbdHosoTccd25Service tbdHosoTccd25Service, TbdKQXL25Service tbdKQXL25Service) {
+    public WsServiceImpl(TbdHoso25Service tbdHoso25Service, TbdLichsu25Service tbdLichsu25Service, Environment environment, TbdXacNhanDon25Service tbdXacNhanDon25Service, TbdHangHoa25Service tbdHangHoa25Service, TbdHangHoaFile25Service tbdHangHoaFile25Service, TbdLichSuHH25Service tbdLichSuHH25Service, TbdChiTieuDG25Service tbdChiTieuDG25Service, TbdGiayXNCL25Service tbdGiayXNCL25Service, TbdHosoTccd25Service tbdHosoTccd25Service, TbdKQXL25Service tbdKQXL25Service, TbdDinhkem25Service tbdDinhkem25Service) {
         this.tbdHoso25Service = tbdHoso25Service;
         this.tbdLichsu25Service = tbdLichsu25Service;
        // this.certService = certService;
@@ -57,6 +59,7 @@ public class WsServiceImpl implements WsService {
         this.tbdGiayXNCL25Service = tbdGiayXNCL25Service;
         this.tbdHosoTccd25Service = tbdHosoTccd25Service;
         this.tbdKQXL25Service = tbdKQXL25Service;
+        this.tbdDinhkem25Service = tbdDinhkem25Service;
     }
     private Gson getGson() {
         if (gson == null) {
@@ -70,7 +73,7 @@ public class WsServiceImpl implements WsService {
     public ResponseJson sendProfile(TbdHoso25 tbdHoso25) throws NSWException {
         SendMessage message = SendMessage.parse(tbdHoso25);
         message.setType(Constant25.MessageType.TYPE_10);
-        int statusUpdate=0;
+        int statusUpdate=tbdHoso25.getFiHSStatus();
         if (tbdHoso25.getFiHSStatus() == Constant25.HosoStatus.TAO_MOI.getId()) {
             message.setFunction(Constant25.MessageFunction.FUNC_01);
             statusUpdate=Constant25.HosoStatus.CHO_TIEP_NHAN.getId();
@@ -78,11 +81,17 @@ public class WsServiceImpl implements WsService {
             message.setFunction(Constant25.MessageFunction.FUNC_02);
             statusUpdate=Constant25.HosoStatus.CHO_TIEP_NHAN.getId();
         } else if (tbdHoso25.getFiHSStatus() == Constant25.HosoStatus.CHO_TIEP_NHAN_HS_GUI_BS_TACN.getId()) {
-            message.setFunction(Constant25.MessageFunction.FUNC_04);
+            message.setFunction(Constant25.MessageFunction.FUNC_03);
             statusUpdate=Constant25.HosoStatus.CHO_TIEP_NHAN_HS_GUI_BS_TACN.getId();
         }else if (tbdHoso25.getFiHSStatus() == Constant25.HosoStatus.CHO_TIEP_NHAN_HS_GUI_BS_BPMC.getId()) {
             message.setFunction(Constant25.MessageFunction.FUNC_03);
             statusUpdate=Constant25.HosoStatus.CHO_TIEP_NHAN_HS_GUI_BS_BPMC.getId();
+        }else if (tbdHoso25.getFiHSStatus() == Constant25.HosoStatus.BPMC_YCBS_HO_SO.getId()) {
+            message.setFunction(Constant25.MessageFunction.FUNC_04);
+            statusUpdate=Constant25.HosoStatus.CHO_TIEP_NHAN_HS_GUI_BS_BPMC.getId();
+        }else if (tbdHoso25.getFiHSStatus() == Constant25.HosoStatus.TACN_YCBS_HO_SO.getId()) {
+            message.setFunction(Constant25.MessageFunction.FUNC_04);
+            statusUpdate=Constant25.HosoStatus.CHO_TIEP_NHAN_HS_GUI_BS_TACN.getId();
         } else {
             throw new NSWException("Hồ sơ không hợp lệ");
         }
@@ -141,7 +150,7 @@ public class WsServiceImpl implements WsService {
         }
         tbdHangHoa25Service.saveAll(tbdHanghoa25s);
         tbdHoso25Service.save(tbdHoso25);
-        tbdLichsu25Service.save(createHistory(tbdHoso25,action,request.getHeader(),xnd.getDepartmentName()));
+        tbdLichsu25Service.save(createHistory(tbdHoso25,action,request.getHeader(),xnd.getFiNameCqxl()));
         return new ResponseJson(true, "");
     }
 
@@ -309,7 +318,7 @@ public class WsServiceImpl implements WsService {
             tbdHosoTccd25Service.save(tbdhosoTccd25);
             return new ResponseJson(true, "");
         }catch (Exception e){
-            return new ResponseJson(false, "LOI TRONG QUA TRINH XU LY BAN TIN");
+            return new ResponseJson(false, "",e.getMessage());
         }
 
     }
@@ -329,6 +338,10 @@ public class WsServiceImpl implements WsService {
                     status=Constant25.HosoStatus.DA_TIEP_NHAN_KQ_DANH_GIA_SPH.getId();
                     action=Constant25.HosoStatus.DA_TIEP_NHAN_KQ_DANH_GIA_SPH.getName();
                     break;
+                case Constant25.MessageFunction.FUNC_21:
+                    status=Constant25.HosoStatus.TACN_YCBS_KQ_DANH_GIA_SPH.getId();
+                    action=Constant25.HosoStatus.TACN_YCBS_KQ_DANH_GIA_SPH.getName();
+                    break;
                 default:
                     return new ResponseJson(false, "","MESSAGE 18 - "+function+" CHUA DUOC DINH NGHIA");
 
@@ -342,14 +355,14 @@ public class WsServiceImpl implements WsService {
                 return new ResponseJson(false, "","KHONG TIM THAY HO SO/HANG HOA");
             }
             tbdKQXL25.setFiLyDo(bnnXuLyKQ.getFiLyDo());
-            tbdKQXL25.setFiNgayPhanHoi(bnnXuLyKQ.getFiResponseDate());
+            tbdKQXL25.setFiNgayPhanHoi(bnnXuLyKQ.getFiResponseDate()==null?new Date():bnnXuLyKQ.getFiResponseDate());
             tbdKQXL25.setFiNguoiXL(bnnXuLyKQ.getFiNameOfStaff());
             tbdKQXL25Service.save(tbdKQXL25);
             tbdHanghoa25.setFiTrangThaiHangHoa(status);
             tbdHangHoa25Service.save(tbdHanghoa25);
-            tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,tbdHanghoa25,action,bnnXuLyKQ.getFiNameOfStaff(),action,2));
+            tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,tbdHanghoa25,action,bnnXuLyKQ.getFiNameOfStaff(),action,Constant25.BNN_SEND));
         }catch (Exception ex){
-            return new ResponseJson(false, "");
+            return new ResponseJson(false, "",ex.getMessage());
         }
         return new ResponseJson(true, "");
     }
@@ -384,7 +397,7 @@ public class WsServiceImpl implements WsService {
             hangHoaHoso.setFiSoGCN(tbdGiayXNCL25.getFiSoGCN());
             tbdGiayXNCL25Service.save(tbdGiayXNCL25);
             tbdHangHoa25Service.save(hangHoaHoso);
-            tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,tbdHanghoa25,action,tbdGiayXNCL25.getFiNguoiKy(),action,2));
+            tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,tbdHanghoa25,action,tbdGiayXNCL25.getFiNguoiKy(),action,Constant25.BNN_SEND));
         }catch (Exception e){
             log.info(e.getMessage());
             return new ResponseJson(false, "",e.getMessage());
@@ -438,7 +451,7 @@ public class WsServiceImpl implements WsService {
             List<TbdHanghoa25> lsHangHoa=tbdHoso25.getFiProductList();
             for (TbdHanghoa25 tbdHanghoa25: lsHangHoa){
                 tbdHanghoa25.setFiTrangThaiHangHoa(statusUpdate);
-                tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,tbdHanghoa25,action,tbdHoso25.getFiImporterName(),action,1));
+                tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,tbdHanghoa25,action,tbdHoso25.getFiImporterName(),action,Constant25.NSW_SEND));
             }
             tbdHangHoa25Service.saveAll(lsHangHoa);
         } else {
@@ -474,6 +487,36 @@ public class WsServiceImpl implements WsService {
     }
 
     @Override
+    public ResponseJson baoCaoHS2D(UploadBaoCao baoCao) {
+        ResponseJson response =new ResponseJson();
+        try{
+            TbdHoso25 tbdHoso25 = tbdHoso25Service.findByFiHSCode(baoCao.getFiNSWFileCode());
+            SendMessage message = new SendMessage();
+            message.setFiMaHoso(tbdHoso25.getFiNSWFileCode());
+            message.setFiIdHoso(Long.valueOf(tbdHoso25.getFiIdHS()));
+            message.setDataRequest(new Gson().toJson(baoCao));
+            message.setType(Constant25.MessageType.TYPE_21);
+            message.setFunction(Constant25.MessageFunction.FUNC_24);
+            response = WsServiceHelper.createSendRequest(Constant25.WebServiceURL.get(environment), message);
+            if(response.isSuccess()){
+                tbdHoso25.setFiHSStatus(Constant25.HosoStatus.DA_BAO_CAO_MIEN_GIAM.getId());
+                tbdHoso25Service.save(tbdHoso25);
+                baoCao.getFiAttachReport().forEach(bc->{
+                    bc.setFiIdHS(tbdHoso25.getFiIdHS());
+                });
+                tbdDinhkem25Service.saveAll(baoCao.getFiAttachReport());
+                tbdLichsu25Service.save(createHistory(tbdHoso25,"Gửi báo cáo hồ sơ 2d"));
+            }
+            return response;
+        }catch (Exception e){
+            response.setSuccess(false);
+            response.setMessage(e.getMessage());
+            return response;
+        }
+
+    }
+
+    @Override
     public ResponseJson dnNopKQ(TbdKQXL25 tbdKQXL25, TbdHoso25 tbdHoso25) throws NSWException {
         SendMessage message = new SendMessage();
         message.setFiMaHoso(tbdKQXL25.getFiNSWFileCode());
@@ -484,38 +527,46 @@ public class WsServiceImpl implements WsService {
         String action="";
         int status=tbdHoso25.getFiHSStatus();
         switch (tbdHoso25.getFiHSStatus()){
-            case 26:
+            case 29:
             case 28:
                 function=Constant25.MessageFunction.FUNC_15;
                 status=Constant25.HosoStatus.CHO_TIEP_NHAN_KQ_DANH_GIA_SPH.getId();
-                action=Constant25.HosoStatus.CHO_TIEP_NHAN_KQ_DANH_GIA_SPH.getName();
+                action="Gửi đánh giá sự phụ hợp cho lô hàng";
                 break;
-            case 32:
             case 33:
                 function=Constant25.MessageFunction.FUNC_17;
                 status=Constant25.HosoStatus.CHO_TIEP_NHAN_KQ_DANH_GIA_SPH_GUI_BS_BPMC.getId();
-                action=Constant25.HosoStatus.CHO_TIEP_NHAN_KQ_DANH_GIA_SPH_GUI_BS_BPMC.getName();
+                action="Gửi sửa đổi bổ sung theo yêu cầu của BPMC";
                 break;
             case 38:
                 function=Constant25.MessageFunction.FUNC_18;
                 status=Constant25.HosoStatus.CHO_TIEP_NHAN_KQ_DANH_GIA_SPH_GUI_BS_TACN.getId();
-                action=Constant25.HosoStatus.CHO_TIEP_NHAN_KQ_DANH_GIA_SPH_GUI_BS_TACN.getName();
+                action="Gửi sửa đổi bổ sung theo yêu cầu của Phòng TACN";
                 break;
         }
         message.setFunction(function);
         message.setType(type);
+
         ResponseJson response = WsServiceHelper.createSendRequest(Constant25.WebServiceURL.get(environment), message);
         if (response.isSuccess()){
+            TbdKQXL25 tbdKQXLHangHoaSent= tbdKQXL25Service.findByFiNSWFileCodeAndFiProId(tbdKQXL25.getFiNSWFileCode(),tbdKQXL25.getFiProId());
+            if (tbdKQXLHangHoaSent!=null){
+                tbdKQXL25.setFiId(tbdKQXLHangHoaSent.getFiId());
+            }
             tbdKQXL25Service.save(tbdKQXL25);
+
             TbdHanghoa25 tbdHanghoa25 = tbdHangHoa25Service.findByFiIdProduct(tbdKQXL25.getFiProId());
             tbdHanghoa25.setFiTrangThaiHangHoa(status);
+            tbdHanghoa25.setFiIDDVXL(tbdKQXL25.getFiDVXLCode());
+            tbdHanghoa25.setFiNameDVXL(tbdKQXL25.getFiDVXLName());
+
             if(tbdHoso25.getFiHSType()==3){
                 tbdHoso25.setFiIdDVXL(tbdKQXL25.getFiDVXLCode());
                 tbdHoso25.setFiNameDVXL(tbdKQXL25.getFiDVXLName());
                 tbdHoso25Service.save(tbdHoso25);
             }
             tbdHangHoa25Service.save(tbdHanghoa25);
-            tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,tbdHanghoa25,action,tbdHoso25.getFiImporterName(),action,1));
+            tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25,tbdHanghoa25,action,tbdHoso25.getFiImporterName(),action,Constant25.NSW_SEND));
             response.setSuccess(true);
         }else{
             response.setSuccess(false);
@@ -565,7 +616,11 @@ public class WsServiceImpl implements WsService {
         }else{
             tbdLichSuHH25.setFiNguoiGui(nguoiGui);
         }
-        tbdLichSuHH25.setFiNguoiNhan(tbdHoso25.getFiImporterName());
+        if(send==1||send.equals(1)){
+            tbdLichSuHH25.setFiNguoiNhan(tbdHoso25.getFiImporterName());
+        }else{
+            tbdHoso25.getFiNameDVXL();
+        }
         tbdLichSuHH25.setFiNoiDung(hstContent);
         tbdLichSuHH25.setFiTrangThai(trangThai);
         tbdLichSuHH25.setFiNswSend(send);
@@ -592,17 +647,11 @@ public class WsServiceImpl implements WsService {
     }
     private void mappingXacNhanDon(XacNhanDon xnd){
         TbdXacNhanDon25 tbdXacNhanDon25 = new TbdXacNhanDon25();
-        tbdXacNhanDon25.setFiNSWFileCode(xnd.getFiNSWFileCode());
-        tbdXacNhanDon25.setFiSoGXN(xnd.getFiAniFeedConfirmNo());
-        tbdXacNhanDon25.setFiIdCqcd(xnd.getFiAssignID());
-        tbdXacNhanDon25.setFiNameCqcd(xnd.getFiAssignName());
-        tbdXacNhanDon25.setFiIdCqxl(xnd.getDepartmentCode());
-        tbdXacNhanDon25.setFiNameCqxl(xnd.getDepartmentName());
-        tbdXacNhanDon25.setFiNgayXN(xnd.getFiSignConfirmDate());
-        tbdXacNhanDon25.setFiNoiXN(xnd.getFiSignConfirmPlace());
-        tbdXacNhanDon25.setFiNguoiXN(xnd.getFiSignName());
-        tbdXacNhanDon25.setFiDvdg(xnd.getFiAssignNameOther());
-        tbdXacNhanDon25.setFiGhiChu(xnd.getFiNoteGoods());
+
+        BeanUtils.copyProperties(xnd,tbdXacNhanDon25);
+        if(xnd.getFiNgayXN()==null){
+            tbdXacNhanDon25.setFiNgayXN(new Date());
+        }
         for(TbdHanghoa25 hangHoa:xnd.getFiProductList()){
             for (TbdChiTieuDG25 tbdChiTieuDG25 : hangHoa.getFiListChiTieu()) {
                 tbdChiTieuDG25.setFiIdProduct(hangHoa.getFiIdProduct());

@@ -154,14 +154,14 @@ public class ReceiveService25Impl implements ReceiveService25 {
                             error = new Error25();
                             error.setErrorCode(Constants.ERROR.ERR04_CODE);
                             error.setErrorName(Constants.ERROR.ERR04);
-                            envelopReturn = envelopeService.createEnvelopeError(maHoso, Constants.MARD_PRO.MARD06, type, error);
+                            envelopReturn = envelopeService.createEnvelopeError(maHoso, Constants.MARD_PRO.MARD25, type, error);
                             break;
                     }
                 } else {
                     error = new Error25();
                     error.setErrorCode(Constants.ERROR.ERR02_CODE);
                     error.setErrorName(errorMsg);
-                    envelopReturn = envelopeService.createEnvelopeError(maHoso, Constants.MARD_PRO.MARD06, type, error);
+                    envelopReturn = envelopeService.createEnvelopeError(maHoso, Constants.MARD_PRO.MARD25, type, error);
                 }
             } catch (Exception ex) {
                 error = new Error25();
@@ -169,10 +169,11 @@ public class ReceiveService25Impl implements ReceiveService25 {
                 error.setErrorName(Constants.ERROR.ERR02);
                 envelopReturn = envelopeService.createEnvelopeError(maHoso, Constants.MARD_PRO.MARD25, type, error);
 
-                String errorInfo = Constants.APP_NAME + Constants.MESSAGE_SEPARATOR + CLASS_NAME
-                        + Constants.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName()
-                        + Constants.MESSAGE_SEPARATOR + ex.toString();
-                RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, rabbitMQService.getRabbitMQInfo());
+//                String errorInfo = Constants.APP_NAME + Constants.MESSAGE_SEPARATOR + CLASS_NAME
+//                        + Constants.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName()
+//                        + Constants.MESSAGE_SEPARATOR + ex.toString();
+//                RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, rabbitMQService.getRabbitMQInfo());
+                logger.error(ex.getMessage());
             }
         }
         return envelopReturn;
@@ -208,10 +209,11 @@ public class ReceiveService25Impl implements ReceiveService25 {
                 return (ResponseJson) responseEntity.getBody();
             }
         } catch (Exception ex) {
-            String errorInfo = Constants.APP_NAME + Constants.MESSAGE_SEPARATOR + CLASS_NAME
-                    + Constants.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName()
-                    + Constants.MESSAGE_SEPARATOR + ex.toString();
-            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, rabbitMQService.getRabbitMQInfo());
+//            String errorInfo = Constants.APP_NAME + Constants.MESSAGE_SEPARATOR + CLASS_NAME
+//                    + Constants.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName()
+//                    + Constants.MESSAGE_SEPARATOR + ex.toString();
+//            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, rabbitMQService.getRabbitMQInfo());
+            logger.error(ex.getMessage());
         }
         return null;
     }

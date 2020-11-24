@@ -164,46 +164,46 @@ function Mard25EditVM () {
         var body = editVMSefl.kdnkVM().getData();
         // return;
         if (!body) return;
-        editVMSefl.verifySignature = function (signature, doc) {
-
-            var data = {
-                'signatureXml': signature,
-                'messageXml': doc.sign.fiXml,
-                'msgFunc': doc.sign.fiFunc,
-                'msgType': doc.sign.fiMsgType,
-                'documentCode': doc.data.fiMaHoso,
-                'ministryCode': 'MARD',
-                'proceduceCode': '25'
-            };
-            app.makePost({
-                    url: '/mard/25/verify',
-                    data: JSON.stringify(data),
-                    success: function (d) {
-                    app.makePost({
-                        url: '/mard/25/hoso/guihoso',
-                        data: JSON.stringify(doc.data),
-                        success: function (d) {
-                            app.Alert('Gửi hồ sơ thành công');
-                            setTimeout(function () {
-                                History.go(-1);
-                            }, 1500);
-                        },
-                        error: function (e) {
-                            if(e.hasOwnProperty('message')) {
-                                app.Alert(e.message);
-                            } else {
-                                if (e.status === 403 || (e.hasOwnProperty('responseText') && e.responseText.includes('<meta charset="utf-8" />'))) {
-                                    app.Alert('Phiên làm việc hết hạn, vui lòng đăng nhập lại!');
-                                } else {
-                                    app.Alert('Không gửi được hồ sơ');
-                                }
-
-                            }
-                        }
-                    });
-                }
-            });
-        };
+        // editVMSefl.verifySignature = function (signature, doc) {
+        //
+        //     var data = {
+        //         'signatureXml': signature,
+        //         'messageXml': doc.sign.fiXml,
+        //         'msgFunc': doc.sign.fiFunc,
+        //         'msgType': doc.sign.fiMsgType,
+        //         'documentCode': doc.data.fiMaHoso,
+        //         'ministryCode': 'MARD',
+        //         'proceduceCode': '25'
+        //     };
+        //     app.makePost({
+        //             url: '/mard/25/verify',
+        //             data: JSON.stringify(data),
+        //             success: function (d) {
+        //             app.makePost({
+        //                 url: '/mard/25/hoso/guihoso',
+        //                 data: JSON.stringify(doc.data),
+        //                 success: function (d) {
+        //                     app.Alert('Gửi hồ sơ thành công');
+        //                     setTimeout(function () {
+        //                         History.go(-1);
+        //                     }, 1500);
+        //                 },
+        //                 error: function (e) {
+        //                     if(e.hasOwnProperty('message')) {
+        //                         app.Alert(e.message);
+        //                     } else {
+        //                         if (e.status === 403 || (e.hasOwnProperty('responseText') && e.responseText.includes('<meta charset="utf-8" />'))) {
+        //                             app.Alert('Phiên làm việc hết hạn, vui lòng đăng nhập lại!');
+        //                         } else {
+        //                             app.Alert('Không gửi được hồ sơ');
+        //                         }
+        //
+        //                     }
+        //                 }
+        //             });
+        //         }
+        //     });
+        // };
 
         editVMSefl.pop = app.popup({
             title: 'Thông báo',
@@ -366,6 +366,10 @@ $(document).ready(function () {
             // Get danh muc dvt
             app.sendGetRequest("/mard/25/danhmuc/getby-catno/3", function (res) {
                 options['lstChiTieuAT'] = res.data;
+            }),
+            // Get danh muc dvt
+            app.sendGetRequest("/mard/25/danhmuc/getby-catno/7", function (res) {
+                options['lstDMDVTSL'] = res.data;
             })
         ).done(function (data) {
             $('#loading10').hide();
