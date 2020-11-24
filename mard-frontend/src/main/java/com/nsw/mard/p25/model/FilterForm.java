@@ -21,5 +21,7 @@ public class FilterForm {
     private Integer size = 20;
     private String sortBy = "fiHSCode";
     private String order = "asc";
+    private Integer fiHSType;
+    private String fiSoXacNhanDon;
 }
 

@@ -1,6 +1,7 @@
 package com.nsw.mard.api;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.nsw.api.BaseApi;
 import com.nsw.common.model.SignData;
 import com.nsw.common.model.TokenInfo;
@@ -11,6 +12,7 @@ import com.nsw.helper.RabbitMQErrorHelper;
 import com.nsw.mard.constant.Mard06Constant;
 import com.nsw.mard.constant.Mard25Constant;
 import com.nsw.mard.p25.model.*;
+import com.nsw.mard.p25.util.Mard25Hepler;
 import com.nsw.mard.p6.model.SendMessage;
 import com.nsw.mard.service.DinhkemService;
 import com.nsw.util.Constants;
@@ -32,7 +34,9 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import pl.jsolve.templ4docx.core.Docx;
 import pl.jsolve.templ4docx.core.VariablePattern;
+import pl.jsolve.templ4docx.variable.TableVariable;
 import pl.jsolve.templ4docx.variable.TextVariable;
+import pl.jsolve.templ4docx.variable.Variable;
 import pl.jsolve.templ4docx.variable.Variables;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,6 +46,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -701,7 +706,7 @@ public class Mard25Api extends BaseApi {
         ResponseJson json = BackendRequestHelper.getInstance().doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.HANGHOA_GET_BY_FILTER), filterHangHoa);
         return json;
     }
-    @RequestMapping(value = "/giayxn/{fiNSWFileCode}", method = RequestMethod.GET)
+    @RequestMapping(value = "/xacnhandon/{fiNSWFileCode}", method = RequestMethod.GET)
     public @ResponseBody
     ResponseJson getGiayXN(@PathVariable String fiNSWFileCode) {
         ResponseJson json = new ResponseJson();
@@ -732,10 +737,12 @@ public class Mard25Api extends BaseApi {
             ResponseJson xacNhanDonJson = getGiayXN(donDangKy.getFiNSWFileCode());
             TbdXacNhanDon25 tbdXacNhanDon25 = GsonUtils.getInstance().transform(xacNhanDonJson.getData(),TbdXacNhanDon25.class);
             ResponseJson chiTieuJson = getListChiTieuByNSWFileCode(donDangKy.getFiNSWFileCode());
-//            ListChiTieu listChiTieu = new Gson().fromJson(new Gson().toJson(chiTieuJson.getData()),ListChiTieu.class);
-//            List<TbdChiTieuDG25> listCT= listChiTieu.getListChiTieu();
-//            donDangKy.setXacNhanDon(tbdXacNhanDon25);
-//            donDangKy.setListChiTieu(listCT);
+            List<TbdChiTieuDG25> listChiTieu = null;
+            if(null!=chiTieuJson.getData()){
+                listChiTieu=new Gson().fromJson(new Gson().toJson(chiTieuJson.getData()),new TypeToken<List<TbdChiTieuDG25>>(){}.getType());
+            }
+            donDangKy.setXacNhanDon(tbdXacNhanDon25);
+            donDangKy.setListChiTieu(listChiTieu);
             String templatePath = null;
             String tempFoleder = environment.getRequiredProperty(AppConstant.Folder.TemSaveFolder);
 
@@ -744,7 +751,12 @@ public class Mard25Api extends BaseApi {
             Docx docx;
             // preparing variables
             Variables variables = genVariablesDonDangKy(donDangKy);
-            templatePath = request.getRealPath("/WEB-INF/downloads/mard/25/don_dang_ky.docx");
+            if(null!=donDangKy.getListChiTieu()&&!donDangKy.getListChiTieu().isEmpty()){
+                templatePath = request.getRealPath("/WEB-INF/downloads/mard/25/don_dang_ky_phuluc.docx");
+            }else{
+                templatePath = request.getRealPath("/WEB-INF/downloads/mard/25/don_dang_ky.docx");
+            }
+
             tempFile = new File(tempFoleder + fileName);
             docx = new Docx(templatePath);
             docx.setVariablePattern(new VariablePattern("#{", "}"));
@@ -797,27 +809,105 @@ public class Mard25Api extends BaseApi {
         return json != null && json.getData() != null;
     }
     private Variables genVariablesDonDangKy(DonDangKyDownload donDangKy){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
         Variables donDKVariables = new Variables();
-        donDKVariables.addTextVariable(new TextVariable("#{fiSoGXN}", donDangKy.getXacNhanDon().getFiSoGXN()==null?null:donDangKy.getXacNhanDon().getFiSoGXN()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiSellName}", donDangKy.getFiSellName()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiSellAddress}", donDangKy.getFiSellAddress()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiSellTel}", donDangKy.getFiSellTel()==null?null:"; "+donDangKy.getFiSellTel()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiSellFax}", donDangKy.getFiSellFax()==null?null:"; "+donDangKy.getFiSellFax()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiSellExport}", donDangKy.getFiSellExport()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiImporterName}", donDangKy.getFiImporterName()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiImporterAddress}", donDangKy.getFiImporterAddress()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiImporterTel}", donDangKy.getFiImporterTel()==null?null:"; "+donDangKy.getFiImporterTel()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiImporterFax}", donDangKy.getFiImporterTel()==null?null:"; "+donDangKy.getFiImporterTel()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiPurchReci}", donDangKy.getFiPurchReci()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiPurchFromDate}", simpleDateFormat.format(donDangKy.getFiPurchFromDate())));
-        donDKVariables.addTextVariable(new TextVariable("#{fiPurchToDate}", simpleDateFormat.format(donDangKy.getFiPurchToDate())));
-        donDKVariables.addTextVariable(new TextVariable("#{fiAddressGath}", donDangKy.getFiAddressGath()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiRegSamFromDate}", simpleDateFormat.format(donDangKy.getFiRegSamFromDate())));
-        donDKVariables.addTextVariable(new TextVariable("#{fiRegSamToDate}", simpleDateFormat.format(donDangKy.getFiRegSamToDate())));
-        donDKVariables.addTextVariable(new TextVariable("#{fiAddressGath}", donDangKy.getFiAddressGath()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiContactName}", donDangKy.getFiContactName()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiSellName}", donDangKy.getFiSellName()==null?"":donDangKy.getFiSellName()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiSellAddress}", donDangKy.getFiSellAddress()==null?"":donDangKy.getFiSellAddress()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiSellTel}", donDangKy.getFiSellTel()==null?"":"; "+donDangKy.getFiSellTel()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiSellFax}", donDangKy.getFiSellFax()==null?"":"; "+donDangKy.getFiSellFax()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiSellExport}", donDangKy.getFiSellExport()==null?"":donDangKy.getFiSellExport()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiImporterName}", donDangKy.getFiImporterName()==null?"":donDangKy.getFiImporterName()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiImporterAddress}", donDangKy.getFiImporterAddress()==null?"":donDangKy.getFiImporterAddress()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiImporterTel}", donDangKy.getFiImporterTel()==null?"":"; "+donDangKy.getFiImporterTel()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiImporterFax}", donDangKy.getFiImporterFax()==null?"":"; "+donDangKy.getFiImporterFax()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiPurchReci}", donDangKy.getFiPurchReci()==null?"":donDangKy.getFiPurchReci()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiPurchFromDate}", Mard25Hepler.toShortStringDate(donDangKy.getFiPurchFromDate())));
+        donDKVariables.addTextVariable(new TextVariable("#{fiPurchToDate}",Mard25Hepler.toShortStringDate(donDangKy.getFiPurchToDate())));
+        donDKVariables.addTextVariable(new TextVariable("#{fiAddressGath}", donDangKy.getFiAddressGath()==null?"":donDangKy.getFiAddressGath()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiRegSamFromDate}", Mard25Hepler.toShortStringDate(donDangKy.getFiRegSamFromDate())));
+        donDKVariables.addTextVariable(new TextVariable("#{fiRegSamToDate}", Mard25Hepler.toShortStringDate(donDangKy.getFiRegSamToDate())));
+        donDKVariables.addTextVariable(new TextVariable("#{fiAddressRegSample}", donDangKy.getFiAddressRegSample()==null?"":donDangKy.getFiAddressRegSample()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiAddressGath}", donDangKy.getFiAddressGath()==null?"":donDangKy.getFiAddressGath()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiContactName}", donDangKy.getFiContactName()==null?"":donDangKy.getFiContactName()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiLoaiHS}", Mard25Hepler.getLoaiHoSo(donDangKy.getFiHSType())));
+
+        donDKVariables.addTextVariable(new TextVariable("#{fiSignAddressName}", donDangKy.getFiSignAddressName()==null?"":donDangKy.getFiSignAddressName()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiCreatedDate}", Mard25Hepler.toVNStringDate(donDangKy.getFiHSCreatedDate())));
+        donDKVariables.addTextVariable(new TextVariable("#{fiSignName}", donDangKy.getFiSignName()));
+        if(donDangKy.getXacNhanDon()!=null){
+            donDKVariables.addTextVariable(new TextVariable("#{fiSoGXN}", donDangKy.getXacNhanDon().getFiSoGXN()==null?"":donDangKy.getXacNhanDon().getFiSoGXN()));
+            donDKVariables.addTextVariable(new TextVariable("#{fiNoiXN}", donDangKy.getXacNhanDon().getFiNoiXN()));
+            donDKVariables.addTextVariable(new TextVariable("#{fiNgayXN}", Mard25Hepler.toShortStringDate(donDangKy.getXacNhanDon().getFiNgayXN())));
+            donDKVariables.addTextVariable(new TextVariable("#{fiNguoiKy}", donDangKy.getXacNhanDon().getFiNguoiXN()==null?"":donDangKy.getXacNhanDon().getFiNguoiXN()));
+        }else{
+            donDKVariables.addTextVariable(new TextVariable("#{fiSoGXN}", ""));
+            donDKVariables.addTextVariable(new TextVariable("#{fiNoiXN}", ""));
+            donDKVariables.addTextVariable(new TextVariable("#{fiNgayXN}", ""));
+            donDKVariables.addTextVariable(new TextVariable("#{fiNguoiKy}", ""));
+        }
+
+        TableVariable productTableVariable = new TableVariable();
+        List<Variable> sttVars = new ArrayList<>();
+        List<Variable> proNameVars = new ArrayList<>();
+        List<Variable> proCodeVars = new ArrayList<>();
+        List<Variable> proNameNhomVars = new ArrayList<>();
+        List<Variable> proNameLoaiVars = new ArrayList<>();
+        List<Variable> proMadeInVars = new ArrayList<>();
+        List<Variable> proCountryNameVars = new ArrayList<>();
+        List<Variable> proSLVars = new ArrayList<>();
+        List<Variable> proKLVars = new ArrayList<>();
+        if(null!=donDangKy.getFiProductList()&&!donDangKy.getFiProductList().isEmpty()){
+            int index=0;
+            for (TbdHanghoa25 tbdHanghoa25:donDangKy.getFiProductList()){
+                index++;
+                sttVars.add(new TextVariable("#{fiSTT}", Integer.toString(index)));
+                proNameVars.add(new TextVariable("#{fiProName}",tbdHanghoa25.getFiProName()==null?"":tbdHanghoa25.getFiProName()));
+                proCodeVars.add(new TextVariable("#{fiProCode}",tbdHanghoa25.getFiProCode()==null?"":tbdHanghoa25.getFiProCode()));
+                proNameNhomVars.add(new TextVariable("#{fiProNameNhom}",tbdHanghoa25.getFiProNameNhom()==null?"":tbdHanghoa25.getFiProNameNhom()));
+                proNameLoaiVars.add(new TextVariable("#{fiProNameLoai}",tbdHanghoa25.getFiProNameLoai()==null?"":tbdHanghoa25.getFiProNameLoai()));
+                proMadeInVars.add(new TextVariable("#{fiProMadeIn}",tbdHanghoa25.getFiProMadeIn()==null?"":tbdHanghoa25.getFiProMadeIn()));
+                proCountryNameVars.add(new TextVariable("#{fiProCountryName}",tbdHanghoa25.getFiProCountryName()==null?"":tbdHanghoa25.getFiProCountryName()));
+                proKLVars.add(new TextVariable("#{fiProductKL}",tbdHanghoa25.getFiProductKL()==null?"":tbdHanghoa25.getFiProductKL()));
+                proSLVars.add(new TextVariable("#{fiProductSL}",tbdHanghoa25.getFiProductSL()==null?"":tbdHanghoa25.getFiProductSL()));
+
+            }
+        }
+        productTableVariable.addVariable(sttVars);
+        productTableVariable.addVariable(proNameVars);
+        productTableVariable.addVariable(proCodeVars);
+        productTableVariable.addVariable(proNameNhomVars);
+        productTableVariable.addVariable(proNameLoaiVars);
+        productTableVariable.addVariable(proMadeInVars);
+        productTableVariable.addVariable(proCountryNameVars);
+        productTableVariable.addVariable(proKLVars);
+        productTableVariable.addVariable(proSLVars);
+
+        TableVariable chiTieuTableVariable = new TableVariable();
+        List<Variable> fiTenHangHoaVars = new ArrayList<>();
+        List<Variable> fiTenChiTieuVars = new ArrayList<>();
+        List<Variable> fiHinhThucCBVars = new ArrayList<>();
+        List<Variable> fiHamLuongVars = new ArrayList<>();
+        List<Variable> fiTenDVTVars = new ArrayList<>();
+        List<Variable> fiGhiChuVars = new ArrayList<>();
+        if(null!=donDangKy.getListChiTieu()&&!donDangKy.getListChiTieu().isEmpty()){
+            for (TbdChiTieuDG25 tbdChiTieuDG25: donDangKy.getListChiTieu()){
+                fiTenHangHoaVars.add(new TextVariable("#{fiTenHangHoa}",tbdChiTieuDG25.getFiTenHangHoa()==null?"":tbdChiTieuDG25.getFiTenHangHoa()));
+                fiTenChiTieuVars.add(new TextVariable("#{fiTenChiTieu}",tbdChiTieuDG25.getFiTenChiTieu()==null?"":tbdChiTieuDG25.getFiTenChiTieu()));
+                fiHinhThucCBVars.add(new TextVariable("#{fiHinhThucCB}",Mard25Hepler.getHinhThucCB(tbdChiTieuDG25.getFiHinhThucCB())));
+                fiHamLuongVars.add(new TextVariable("#{fiHamLuong}",tbdChiTieuDG25.getFiHamLuong()==null?"":tbdChiTieuDG25.getFiHamLuong()));
+                fiTenDVTVars.add(new TextVariable("#{fiTenDVT}",tbdChiTieuDG25.getFiTenDVT()==null?"":tbdChiTieuDG25.getFiTenDVT()));
+                fiGhiChuVars.add(new TextVariable("#{fiGhiChu}",tbdChiTieuDG25.getFiGhiChu()==null?"":tbdChiTieuDG25.getFiGhiChu()));
+            }
+        }
+        chiTieuTableVariable.addVariable(fiTenHangHoaVars);
+        chiTieuTableVariable.addVariable(fiTenChiTieuVars);
+        chiTieuTableVariable.addVariable(fiHinhThucCBVars);
+        chiTieuTableVariable.addVariable(fiHamLuongVars);
+        chiTieuTableVariable.addVariable(fiTenDVTVars);
+        chiTieuTableVariable.addVariable(fiGhiChuVars);
+
+        donDKVariables.addTableVariable(productTableVariable);
+        donDKVariables.addTableVariable(chiTieuTableVariable);
         return donDKVariables;
     }
 }

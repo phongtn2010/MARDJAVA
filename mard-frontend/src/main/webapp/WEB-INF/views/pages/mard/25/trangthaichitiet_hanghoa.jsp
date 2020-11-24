@@ -93,7 +93,7 @@
                             <td class="text-center" data-bind="text: $parent.getTenNhom(fiProIdNhom)"></td>
                             <td class="text-center" data-bind="text: fiProCode"></td>
                             <td class="text-center" data-bind="text: fiProMadeIn"></td>
-                            <td class="text-center" data-bind="text: fiProCountryCode"></td>
+                            <td class="text-center" data-bind="text: fiProCountryName"></td>
                             <td class="text-center" data-bind="text: fiProductKL"></td>
                             <td class="text-center" data-bind="text: fiProValueUSD"></td>
                             <td class="text-center" data-bind="text: $parent.getTrangThaiHangHoa(fiTrangThaiHangHoa)"></td>
@@ -103,8 +103,9 @@
                                         class="fa fa-lg fa-eye tooltips"></i></a>
                             </td>
                             <td class="text-center">
-                                <a href="javascript:void(0)" data-bind="click: $parent.guiSuaHangHoa.bind($data, $data, $index()),visible: fiTrangThaiHangHoa==28 ||
-                                 fiTrangThaiHangHoa==29 || fiTrangThaiHangHoa==33 || fiTrangThaiHangHoa==38"><i
+                                <a href="javascript:void(0)" data-bind="click: $parent.guiSuaHangHoa.bind($data, $data, $index()),visible:($root.fiHSType()==3 &&(
+                                 fiTrangThaiHangHoa==28 ||
+                                 fiTrangThaiHangHoa==29 || fiTrangThaiHangHoa==33 || fiTrangThaiHangHoa==38)||($root.fiHSType()==1 || fiTrangThaiHangHoa==26)"><i
                                         class="fa fa-lg fa-send tooltips"></i></a>
                             </td>
                             <td class="text-center">

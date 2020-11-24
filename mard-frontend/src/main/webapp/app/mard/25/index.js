@@ -5,6 +5,8 @@ function Mard25VM() {
     self.fiCertNo = ko.observable(null);
     self.fiCompanyTaxCode = ko.observable(hosoUsername);
     self.fiHSCode = ko.observable(null);
+    self.fiHSType = ko.observable(null);
+    self.fiSoXacNhanDon = ko.observable(null);
     self.fiHSStatus = ko.observable(null);
     self.fiCounttry = ko.observable(null);
     self.sentStartDate = ko.observable(null);
@@ -199,8 +201,11 @@ function Mard25VM() {
             page: page,
             size: self.size(),
             sortBy: self.sortBy(),
-            order: self.order()
+            order: self.order(),
+            fiHSType: self.fiHSType(),
+            fiSoXacNhanDon:self.fiSoXacNhanDon()
         }
+        console.log(filter);
         $.ajax({
             async: true,
             type: 'POST',
@@ -583,7 +588,24 @@ function Mard25VM() {
     self.thoatOnClick  = function () {
         $("#modal_view_chuyen").hide();
     }
-
+    self.getHinhThucCB =function (id) {
+        switch (id) {
+            case 0:
+                return "Không có";
+            case 1:
+                return "<";
+            case 2:
+                return ">";
+            case 3:
+                return "=";
+            case 4:
+                return "<=";
+            case 5:
+                return ">=";
+            case 6:
+                return "min-max";
+        }
+    }
 }
 
 

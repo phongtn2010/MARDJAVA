@@ -81,13 +81,13 @@ public class WsServiceImpl implements WsService {
             message.setFunction(Constant25.MessageFunction.FUNC_02);
             statusUpdate=Constant25.HosoStatus.CHO_TIEP_NHAN.getId();
         } else if (tbdHoso25.getFiHSStatus() == Constant25.HosoStatus.CHO_TIEP_NHAN_HS_GUI_BS_TACN.getId()) {
-            message.setFunction(Constant25.MessageFunction.FUNC_03);
+            message.setFunction(Constant25.MessageFunction.FUNC_04);
             statusUpdate=Constant25.HosoStatus.CHO_TIEP_NHAN_HS_GUI_BS_TACN.getId();
         }else if (tbdHoso25.getFiHSStatus() == Constant25.HosoStatus.CHO_TIEP_NHAN_HS_GUI_BS_BPMC.getId()) {
             message.setFunction(Constant25.MessageFunction.FUNC_03);
             statusUpdate=Constant25.HosoStatus.CHO_TIEP_NHAN_HS_GUI_BS_BPMC.getId();
         }else if (tbdHoso25.getFiHSStatus() == Constant25.HosoStatus.BPMC_YCBS_HO_SO.getId()) {
-            message.setFunction(Constant25.MessageFunction.FUNC_04);
+            message.setFunction(Constant25.MessageFunction.FUNC_03);
             statusUpdate=Constant25.HosoStatus.CHO_TIEP_NHAN_HS_GUI_BS_BPMC.getId();
         }else if (tbdHoso25.getFiHSStatus() == Constant25.HosoStatus.TACN_YCBS_HO_SO.getId()) {
             message.setFunction(Constant25.MessageFunction.FUNC_04);
@@ -144,6 +144,7 @@ public class WsServiceImpl implements WsService {
 
         mappingXacNhanDon(xnd);
         tbdHoso25.setFiHSStatus(status);
+        tbdHoso25.setFiSoXacNhanDon(xnd.getFiSoGXN());
         List<TbdHanghoa25> tbdHanghoa25s = tbdHangHoa25Service.findByFiIdHS(tbdHoso25.getFiIdHS());
         for (TbdHanghoa25 hanghoa25: tbdHanghoa25s){
             hanghoa25.setFiTrangThaiHangHoa(status);

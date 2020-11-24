@@ -33,7 +33,7 @@
                                         optionsValue: 'provinceId',
                                         optionsText: 'provinceName',
                                         optionsCaption: '<spring:message code="mard.select.noi_ky"/>',
-                                        value: fiSignAddress, enable: $root.isEditable()"
+                                        value: fiSignAddressCode,selectedText:fiSignAddressName, enable: $root.isEditable()"
                                     class="form-control">
                             </select>
                         </div>

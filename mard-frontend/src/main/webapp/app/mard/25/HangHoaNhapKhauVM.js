@@ -255,13 +255,15 @@ function HangHoaNhapKhauVM (options) {
 
             "fiSignName": kdnkVMSelf.thongtinChungVM().fiSignName(),
             "fiSignPosition": kdnkVMSelf.thongtinChungVM().fiSignPosition(),
-            "fiSignAddress": kdnkVMSelf.thongtinChungVM().fiSignAddress(),
+            "fiSignAddressCode": kdnkVMSelf.thongtinChungVM().fiSignAddressCode(),
+            "fiSignAddressName": kdnkVMSelf.thongtinChungVM().fiSignAddressName(),
 
             "fiProCVMienGiam": kdnkVMSelf.thongtinChungVM().fiProCVMienGiam(),
             "fiProCVMienGiamNgay": kdnkVMSelf.thongtinChungVM().fiProCVMienGiamNgay()?new Date(kdnkVMSelf.thongtinChungVM().fiProCVMienGiamNgay()).getTime():null,
 
             "fiAttachmentList": kdnkVMSelf.uploadFileVM().fiAttachmentList()
         }
+        console.log(body);
         return body;
     }
 }

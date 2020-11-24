@@ -72,7 +72,7 @@ public class Hoso25 {
     @XmlElement(name = "CreateDate")
     Date fiHSCreatedDate;
     @XmlElement(name = "SignPlace")
-    String fiSignAddress;
+    String fiSignAddressName;
     @XmlElement(name = "SignName")
     String fiSignName;
     @XmlElement(name = "TaxCode")
