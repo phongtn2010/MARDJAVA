@@ -105,5 +105,5 @@ public interface TbdHoso25Service {
 
     void rollbackFailedRequestUpdate(TbdHoso25  result);
     List<TbdHoso25> findByFiHSStatus(String taxCode,Integer from, Integer to);
-
+    List<TbdHoso25> findByFiTaxCodeAndFiActiveAndFiHSStatusAndFiHSType(String taxcode, boolean active, Integer fiHSStatus, Integer fiHSType);
 }

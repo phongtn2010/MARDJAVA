@@ -16,6 +16,7 @@ public class Constant26 {
     public static final String MARD_PROC_CODE = "26";
 
     public static final Long ACTIVE = 1L;
+    public static final boolean _ACTIVE = true;
     public static final Long IN_ACTIVE = 0L;
 
     @JsonFormat(shape = JsonFormat.Shape.OBJECT)

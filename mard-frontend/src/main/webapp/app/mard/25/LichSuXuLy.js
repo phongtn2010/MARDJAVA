@@ -125,7 +125,7 @@ function HistoryPopupView() {
     self.searchingAfterShow = function() {
         pageable.number = self.historyPageingVM.currentPage() - 1;
         app.makeGet({
-            url: '/mard/06/lichsu?fiHSCode=' + self.idHoSo + '&p=' + pageable.number + '&s=5',
+            url: '/mard/25/lichsu?fiHSCode=' + self.idHoSo + '&p=' + pageable.number + '&s=5',
             success: function(res) {
                 self.historyPageingVM.totalCount(res.total);
                 self.historyItems(ko.utils.arrayMap(res.data, function (item) {
