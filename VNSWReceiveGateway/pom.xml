@@ -79,13 +79,13 @@
             <artifactId>xmlsec</artifactId>
             <version>1.4.3</version>
         </dependency>-->
-        <dependency>
-            <groupId>org.apache.xml</groupId>
-            <artifactId>xmlsec</artifactId>
-            <version>1.4.3</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/xmlsec-1.4.3.jar</systemPath>
-        </dependency>
+        <!-- <dependency> -->
+            <!-- <groupId>org.apache.xml</groupId> -->
+            <!-- <artifactId>xmlsec</artifactId> -->
+            <!-- <version>1.4.3</version> -->
+            <!-- <scope>system</scope> -->
+            <!-- <systemPath>${project.basedir}/lib/xmlsec-1.4.3.jar</systemPath> -->
+        <!-- </dependency> -->
 
         <dependency>
             <groupId>commons-codec</groupId>

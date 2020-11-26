@@ -175,7 +175,9 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     private String fiSignPosition;
 
     @Column(name = "FI_SIGN_ADD",length = 250)
-    private String fiSignAddress;
+    private String fiSignAddressCode;
+    @Column(name = "FI_SIGN_ADD_NAME",length = 250)
+    private String fiSignAddressName;
 
     @Column(name = "FI_ID_DVXL")
     private String fiIdDVXL;
@@ -184,7 +186,7 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
     private String fiNameDVXL;
 
     @Column(name = "FI_SO_GXN", length = 500)
-    private String fiSoGXN;
+    private String fiSoXacNhanDon;
     //Danh sách thông tin kèm theo
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "FI_HS_ID")

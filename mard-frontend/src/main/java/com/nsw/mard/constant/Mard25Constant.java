@@ -1,7 +1,11 @@
 package com.nsw.mard.constant;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+
+import java.util.Arrays;
 
 public class Mard25Constant {
     static Mard25Constant instance;
@@ -209,5 +213,49 @@ public class Mard25Constant {
         return environment.getRequiredProperty(API.BACKEND) + environment.getRequiredProperty(key);
     }
 
-    
+    @JsonFormat(shape = JsonFormat.Shape.OBJECT)
+    @Getter
+    public enum HinhThucCB {
+        NONE(0,"Không có"),
+        IS_LESS_THAN(1,"<"),
+        IS_GREATER_THAN(2,">"),
+        EQUAL(3,"="),
+        IS_LESS_THAN_OR_EQUAL_TO(4,"<="),
+        IS_GREATER_THAN_OR_EQUAL_TO(5,">="),
+        MIN_MAX(6,"min-max");
+
+        private int id;
+        private String name;
+
+        HinhThucCB(int id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        public static HinhThucCB findById(int i) {
+            return Arrays.stream(HinhThucCB.values()).filter(st -> st.getId() == i)
+                    .findFirst().orElse(null);
+        }
+    }
+    @JsonFormat(shape = JsonFormat.Shape.OBJECT)
+    @Getter
+    public enum LoaiHS {
+        _2A(0,"2a - Dựa trên kết quả tự đánh giá sự phù hợp của tổ chức, cá nhân"),
+        _2B(1,"2b -  Dựa trên kết quả chứng nhận của tổ chức chứng nhận đã đăng ký"),
+        _2C(2,"2c - Dựa trên kết quả chứng nhận của tổ chức chứng nhận được chỉ định"),
+        _2D(3,"2d - Miễn giảm kiểm tra");
+
+        private int id;
+        private String name;
+
+        LoaiHS(int id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        public static LoaiHS findById(int i) {
+            return Arrays.stream(LoaiHS.values()).filter(st -> st.getId() == i)
+                    .findFirst().orElse(null);
+        }
+    }
 }

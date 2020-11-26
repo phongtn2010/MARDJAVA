@@ -40,7 +40,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <input class="form-control"
-                                                           data-bind="value : fiCertNo, hasFocus: true"
+                                                           data-bind="value : fiSoXacNhanDon, hasFocus: true"
                                                            type="text"/>
                                                 </div>
                                             </div>
@@ -48,19 +48,24 @@
                                         <div class="form-group" style="...">
                                             <div class="col-md-12">
                                                 <div class="col-md-2">
-                                                    <label>Tên hàng hóa</label>
+                                                    <label>Loại hồ sơ</label>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input class="form-control"
-                                                           data-bind="value : fiProName, hasFocus: true"
-                                                           type="text"/>
+<%--                                                    <input class="form-control"--%>
+<%--                                                           data-bind="value : fiProName, hasFocus: true"--%>
+<%--                                                           type="text"/>--%>
+                                                    <select id="fiTrangthai" name="fiTrangthai" class="form-control select2"
+                                                            data-bind="value : fiHSType, options : lstHoSoType, optionsValue : 'fiCatType',
+                                                                                                             optionsCaption: 'Tất cả...', optionsText : 'fiCatTypeName'">
+                                                    </select>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <label>Trạng thái hồ sơ</label>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <select id="fiTrangthai" name="fiTrangthai" class="form-control select2"
-                                                            data-bind="value : fiHSStatus, options : lstProfileStatus, optionsValue : 'id', optionsCaption: 'Tất cả...', optionsText : 'name'">
+                                                            data-bind="value : fiHSStatus, options : lstProfileStatus, optionsValue : 'fiCatType',
+                                                             optionsCaption: 'Tất cả...', optionsText : 'fiCatTypeName'">
                                                     </select>
                                                 </div>
                                             </div>
@@ -92,28 +97,28 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-2">
-                                                    <label>Nước sản xuất</label>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <select id="fiCountry" name="fiCountry" class="form-control select2"
-                                                            data-bind="value : fiCounttry, options : lstCountry, optionsValue : 'countryid', optionsCaption: 'Tất cả...', optionsText : 'countryname'">
-                                                    </select>
-                                                </div>
+<%--                                                <div class="col-md-2">--%>
+<%--                                                    <label>Nước sản xuất</label>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="col-md-4">--%>
+<%--                                                    <select id="fiCountry" name="fiCountry" class="form-control select2"--%>
+<%--                                                            data-bind="value : fiCounttry, options : lstCountry, optionsValue : 'countryid', optionsCaption: 'Tất cả...', optionsText : 'countryname'">--%>
+<%--                                                    </select>--%>
+<%--                                                </div>--%>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="col-md-12">
-                                                <div class="col-md-2">
-                                                    <label>Hãng sản xuất</label>
-                                                </div>
-                                                <div class="col-md-10">
-                                                    <input class="form-control"
-                                                           data-bind="value : fiHSCode, hasFocus: true"
-                                                           type="text"/>
-                                                </div>
-                                            </div>
-                                        </div>
+<%--                                        <div class="form-group">--%>
+<%--                                            <div class="col-md-12">--%>
+<%--                                                <div class="col-md-2">--%>
+<%--                                                    <label>Hãng sản xuất</label>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="col-md-10">--%>
+<%--                                                    <input class="form-control"--%>
+<%--                                                           data-bind="value : fiHSCode, hasFocus: true"--%>
+<%--                                                           type="text"/>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
                                         <div class="form-group nsw-text-center">
                                             <button class="btn green" id="searchHoSo"
                                                     data-bind="click: btnSearch"
@@ -170,8 +175,8 @@
                             <th class="text-center"> Ngày tạo</th>
                             <th class="text-center"> Số giấy đăng ký</th>
                             <th class="text-center"> Tên doanh nghiệp</th>
-                            <th class="text-center"> Hãng sản xuất</th>
-                            <th class="text-center"> Nước sản xuất</th>
+<%--                            <th class="text-center"> Hãng sản xuất</th>--%>
+<%--                            <th class="text-center"> Nước sản xuất</th>--%>
                             <th class="text-center"> Trạng thái hồ sơ</th>
                             <th class="text-center"> Loại hình thức kiểm tra</th>
                             <th class="text-center"> Xem giấy đăng ký</th>
@@ -200,11 +205,11 @@
                             </td>
                             <td class="text-center" data-bind="datetime: fiCreatedDate"></td>
                             <td class="text-center">
-                                <span data-bind="text: fiCertNo"></span>
+                                <span data-bind="text: fiSoXacNhanDon"></span>
                             </td>
                             <td class="text-center" data-bind="text: fiImporterName"></td>
-                            <td class="text-left" data-bind="text: fiProductList.fiProMadeIn"></td>
-                            <td class="text-left" data-bind="text: fiProductList.fiProCountryName"></td>
+<%--                            <td class="text-left" data-bind="text: fiProductList.fiProMadeIn"></td>--%>
+<%--                            <td class="text-left" data-bind="text: fiProductList.fiProCountryName"></td>--%>
                             <td class="text-center" data-bind="text: $parent.getProfileStatus(fiHSStatus)"></td>
                             <td class="text-center" data-bind="text: $parent.getHoSoType(fiHSType)"></td>
 

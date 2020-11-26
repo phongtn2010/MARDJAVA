@@ -230,7 +230,7 @@ function ThongTinChungVM(data) {
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
-    ttcVMSelf.fiSignAddress = ko.observable((data && data.hasOwnProperty('fiSignAddress')) ? data.fiSignAddress : null).
+    ttcVMSelf.fiSignAddressCode = ko.observable((data && data.hasOwnProperty('fiSignAddressCode')) ? data.fiSignAddressCode : null).
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });

@@ -80,9 +80,9 @@ public class ReceiveEndpoint {
             // Process the SOAP Response
             returnPayLoad = SoapHelper.getSOAPResponse(soapResponse, mqErrInfo);
             // Day du lieu vao RabbitMQ
-            RabbitMQLogHelper.pushLogToRabbitMQ(xml + Constants.MESSAGE_SEPARATOR + returnPayLoad.replace(Constants.TAG_ENCODE.OPEN_TAG, Constants.TAG_NO_ENCODE.OPEN_TAG)
-                    .replace(Constants.TAG_ENCODE.CLOSE_TAG, Constants.TAG_NO_ENCODE.CLOSE_TAG), mqLogInfo);
-            soapConnection.close();
+//            RabbitMQLogHelper.pushLogToRabbitMQ(xml + Constants.MESSAGE_SEPARATOR + returnPayLoad.replace(Constants.TAG_ENCODE.OPEN_TAG, Constants.TAG_NO_ENCODE.OPEN_TAG)
+//                    .replace(Constants.TAG_ENCODE.CLOSE_TAG, Constants.TAG_NO_ENCODE.CLOSE_TAG), mqLogInfo);
+//            soapConnection.close();
         } catch (Exception ex) {
             //LogUtils.addLog(ex);
             error = envelopeService.createError(
@@ -90,9 +90,10 @@ public class ReceiveEndpoint {
             envl = envelopeService.createResponseError(xml,
                     documentType, Constants.RESPONSETYPE.ERROR, error);
             returnPayLoad = xmlService.ObjectToXml(envl);
-            String errorInfo = Constants.APP_NAME + Constants.MESSAGE_SEPARATOR + CLASS_NAME
-                    + Constants.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + Constants.MESSAGE_SEPARATOR + ex.toString();
-            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, mqErrInfo);
+//            String errorInfo = Constants.APP_NAME + Constants.MESSAGE_SEPARATOR + CLASS_NAME
+//                    + Constants.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + Constants.MESSAGE_SEPARATOR + ex.toString();
+//            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, mqErrInfo);
+            logger.error(ex.getMessage());
         }
         logger.info("Message phan hoi: " + returnPayLoad);
         res.setResponsePayload(returnPayLoad);

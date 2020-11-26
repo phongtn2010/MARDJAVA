@@ -134,7 +134,7 @@
             <p>(3):Ghi "miễn kiểm tra" nếu lô hàng áp dụng chế độ miễn kiểm tra có thời hạn hoặc "kiểm tra theo điểm a khoản 2 Điều 18 của Nghị đinh này" hoặc "kiểm tra theo điểm b khoản 2 Điều 18 của Nghị định này".</p>
             <div class="row">
                 <div class="col-md-6 text-center" style="">
-                    <span data-bind="text: $root.getNoiKy(fiSignAddress)"></span> <span data-bind="text: ngayky"></span><br/>
+                    <span data-bind="text: $root.getNoiKy(fiSignAddressCode)"></span> <span data-bind="text: ngayky"></span><br/>
                     <b>TỔ CHỨC, CÁ NHÂN NHẬP KHẨU</b> <br/>
                     <i>(ký tên, đóng dấu)</i><br/><br/><br/><br/>
                     <span data-bind="text: fiSignName"></span>
@@ -168,9 +168,9 @@
                         <tr>
                             <td class="text-center" data-bind="text: fiTenHangHoa"></td>
                             <td class="text-center" data-bind="text: fiTenChiTieu"></td>
-                            <td class="text-center" data-bind="text: fiHinhThucCB"></td>
+                            <td class="text-center" data-bind="text: $root.getHinhThucCB(fiHinhThucCB)"></td>
                             <td class="text-center" data-bind="text: fiHamLuong"></td>
-                            <td class="text-center" data-bind="text: fiMaDVT"></td>
+                            <td class="text-center" data-bind="text: fiTenDVT"></td>
                             <td class="text-center" data-bind="text: fiGhiChu"></td>
                         </tr>
                     </tbody>
