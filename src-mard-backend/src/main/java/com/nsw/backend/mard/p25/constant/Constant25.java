@@ -51,8 +51,10 @@ public class Constant25 {
     @JsonFormat(shape = JsonFormat.Shape.OBJECT)
     @Getter
     public enum HosoType {
-        DKKD_DONG_VAT(1, "Đăng ký kiểm dịch đông vật thủy sản"),
-        DKKD_SP_DONGVAT(2, "Đăng ký kiểm dịch sản phẩm động vật thủy sản");
+        _2A(1, "2a"),
+        _2B(2, "2b"),
+        _2C(3, "2c"),
+        _2D(4, "2d");
         private int id;
         private String name;
 

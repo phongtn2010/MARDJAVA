@@ -63,34 +63,67 @@
         <div class="row">
             <div class="col-md-12">
                 <form role="form" class="form-horizontal" id="thongtinhanghoa-form">
-                    <div class="row">
-                        <div class="col col-md-6">
-                            <spring:message code="common.tong"/> <b><a data-bind="text: totalCount"
-                                                                       href="javascript:void(0);"></a>
-                        </b><spring:message code="common.pager.ban_ghi"/>
-                        </div>
-                        <div class="col col-md-6 nsw-text-right">
-                            <div class="nsw-flr">
-                                <ul data-bind="visible: true" class="flip pull-left pagination pagination-sm">
-                                    <li data-bind="css: { disabled: !firstPageActive() }">
-                                        <a data-bind="click: goToFirst">Trang đầu</a>
-                                    </li>
-                                    <li data-bind="css: { disabled: !previousPageActive() }">
-                                        <a data-bind="click: goToPrevious">Trang trước</a>
-                                    </li>
-                                    <li data-bind="css: { active: $parent.currentPage === $data }">
-                                        <a data-bind="click: $parent.goToPage, text: $data"></a>
-                                    </li>
-                                    <li data-bind="css: { disabled: !nextPageActive() }">
-                                        <a data-bind="click: goToNext">Trang sau</a>
-                                    </li>
-                                    <li data-bind="css: { disabled: !lastPageActive() }">
-                                        <a data-bind="click: goToLast">Trang cuối</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+<%--                    <div class="row">--%>
+<%--                        <div class="col col-md-6">--%>
+<%--                            <spring:message code="common.tong"/> <b><a data-bind="text: totalCount"--%>
+<%--                                                                       href="javascript:void(0);"></a>--%>
+<%--                        </b><spring:message code="common.pager.ban_ghi"/>--%>
+<%--                        </div>--%>
+<%--                        <div class="col col-md-6 nsw-text-right">--%>
+<%--                            <div class="nsw-flr">--%>
+<%--                                <ul data-bind="visible: true" class="flip pull-left pagination pagination-sm">--%>
+<%--                                    <li data-bind="css: { disabled: !firstPageActive() }">--%>
+<%--                                        <a data-bind="click: goToFirst">Trang đầu</a>--%>
+<%--                                    </li>--%>
+<%--                                    <li data-bind="css: { disabled: !previousPageActive() }">--%>
+<%--                                        <a data-bind="click: goToPrevious">Trang trước</a>--%>
+<%--                                    </li>--%>
+<%--                                    <li data-bind="css: { active: $parent.currentPage === $data }">--%>
+<%--                                        <a data-bind="click: $parent.goToPage, text: $data"></a>--%>
+<%--                                    </li>--%>
+<%--                                    <li data-bind="css: { disabled: !nextPageActive() }">--%>
+<%--                                        <a data-bind="click: goToNext">Trang sau</a>--%>
+<%--                                    </li>--%>
+<%--                                    <li data-bind="css: { disabled: !lastPageActive() }">--%>
+<%--                                        <a data-bind="click: goToLast">Trang cuối</a>--%>
+<%--                                    </li>--%>
+<%--                                </ul>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="row">--%>
+<%--                        <div class="col col-md-6">--%>
+<%--                            <!-- ko with: pagination -->--%>
+<%--                            <spring:message code="common.tong"/> <b data-bind="text: totalCount()"></b> <spring:message--%>
+<%--                                code="common.pager.ban_ghi"/>--%>
+<%--                            <!-- /ko -->--%>
+<%--                        </div>--%>
+<%--                        <div class="col col-md-6 nsw-text-right">--%>
+<%--                            <div class="nsw-flr">--%>
+<%--                                <!-- ko with: pagination -->--%>
+<%--                                <ul data-bind="visible: true" class="flip pull-left pagination pagination-sm">--%>
+<%--                                    <li data-bind="css: { disabled: !firstPageActive() }">--%>
+<%--                                        <a data-bind="click: goToFirst">Trang đầu</a>--%>
+<%--                                    </li>--%>
+<%--                                    <li data-bind="css: { disabled: !previousPageActive() }">--%>
+<%--                                        <a data-bind="click: goToPrevious">Trang trước</a>--%>
+<%--                                    </li>--%>
+<%--                                    <!-- ko foreach: getPages() -->--%>
+<%--                                    <li data-bind="css: { active: $parent.currentPage() === $data }">--%>
+<%--                                        <a data-bind="click: $parent.goToPage, text: $data"></a>--%>
+<%--                                    </li>--%>
+<%--                                    <!-- /ko -->--%>
+<%--                                    <li data-bind="css: { disabled: !nextPageActive() }">--%>
+<%--                                        <a data-bind="click: goToNext">Trang sau</a>--%>
+<%--                                    </li>--%>
+<%--                                    <li data-bind="css: { disabled: !lastPageActive() }">--%>
+<%--                                        <a data-bind="click: goToLast">Trang cuối</a>--%>
+<%--                                    </li>--%>
+<%--                                </ul>--%>
+<%--                                <!-- /ko -->--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
                     <label>Được phép chọn 1 hàng hóa trong danh sách hàng hóa được tính miễn giảm kiểm tra</label>
                     <table class="table table-striped table-bordered table-hover table-checkable order-column">
                         <thead>

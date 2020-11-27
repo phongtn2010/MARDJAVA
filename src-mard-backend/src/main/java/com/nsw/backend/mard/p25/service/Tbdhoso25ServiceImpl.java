@@ -266,4 +266,8 @@ public class Tbdhoso25ServiceImpl implements TbdHoso25Service {
         return regProfileRepository.findByFiHSStatus(taxCode,from, to);
     }
 
+    @Override
+    public List<TbdHoso25> findByFiTaxCodeAndFiActiveAndFiHSStatusAndFiHSType(String taxcode, boolean active, Integer fiHSStatus,Integer fiHSType) {
+        return regProfileRepository.findByFiTaxCodeAndFiActiveAndFiHSStatusAndFiHSType(taxcode,active,fiHSStatus,fiHSType);
+    }
 }
