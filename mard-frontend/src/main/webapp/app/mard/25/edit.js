@@ -7,6 +7,7 @@ function Mard25EditVM () {
         if (isCopy) {
             options["fiIdHS"]=null;
             options["fiNSWFileCode"]=null;
+            options["fiSoXacNhanDon"]=null;
             for (var i =0;i<options.fiProductList.length;i++){
                 options.fiProductList[i].fiIdHS=null;
                 options.fiProductList[i].fiIdProduct=null;
@@ -28,7 +29,6 @@ function Mard25EditVM () {
                 }
             }
             for (var i =0;i<options.fiAttachmentList.length;i++){
-
                 options.fiAttachmentList[i].fiIdHS=null;
                 options.fiAttachmentList[i].fiIdDinhkem=null;
             }

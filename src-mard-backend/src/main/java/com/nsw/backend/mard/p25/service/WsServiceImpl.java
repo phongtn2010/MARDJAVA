@@ -74,6 +74,7 @@ public class WsServiceImpl implements WsService {
         SendMessage message = SendMessage.parse(tbdHoso25);
         message.setType(Constant25.MessageType.TYPE_10);
         int statusUpdate=tbdHoso25.getFiHSStatus();
+
         if (tbdHoso25.getFiHSStatus() == Constant25.HosoStatus.TAO_MOI.getId()) {
             message.setFunction(Constant25.MessageFunction.FUNC_01);
             statusUpdate=Constant25.HosoStatus.CHO_TIEP_NHAN.getId();
@@ -95,7 +96,9 @@ public class WsServiceImpl implements WsService {
         } else {
             throw new NSWException("Hồ sơ không hợp lệ");
         }
-
+        if(tbdHoso25.getFiHSType()==Constant25.HosoType._2D.getId()){
+            statusUpdate=Constant25.HosoStatus.DA_CAP_NHAP_MIEN_GIAM.getId();
+        }
         ResponseJson response = WsServiceHelper.createSendRequest(Constant25.WebServiceURL.get(environment), message);
         log.debug("Response: {}", response);
         if (response.isSuccess()) {
@@ -526,8 +529,10 @@ public class WsServiceImpl implements WsService {
         String type=Constant25.MessageType.TYPE_17;
         String function="";
         String action="";
+        TbdHanghoa25 tbdHanghoa25 = tbdHangHoa25Service.findByFiIdProduct(tbdKQXL25.getFiProId());
         int status=tbdHoso25.getFiHSStatus();
-        switch (tbdHoso25.getFiHSStatus()){
+        switch (tbdHanghoa25.getFiTrangThaiHangHoa()){
+            case 26:
             case 29:
             case 28:
                 function=Constant25.MessageFunction.FUNC_15;
@@ -535,11 +540,13 @@ public class WsServiceImpl implements WsService {
                 action="Gửi đánh giá sự phụ hợp cho lô hàng";
                 break;
             case 33:
+            case 30:
                 function=Constant25.MessageFunction.FUNC_17;
                 status=Constant25.HosoStatus.CHO_TIEP_NHAN_KQ_DANH_GIA_SPH_GUI_BS_BPMC.getId();
                 action="Gửi sửa đổi bổ sung theo yêu cầu của BPMC";
                 break;
             case 38:
+            case 31:
                 function=Constant25.MessageFunction.FUNC_18;
                 status=Constant25.HosoStatus.CHO_TIEP_NHAN_KQ_DANH_GIA_SPH_GUI_BS_TACN.getId();
                 action="Gửi sửa đổi bổ sung theo yêu cầu của Phòng TACN";
@@ -556,7 +563,7 @@ public class WsServiceImpl implements WsService {
             }
             tbdKQXL25Service.save(tbdKQXL25);
 
-            TbdHanghoa25 tbdHanghoa25 = tbdHangHoa25Service.findByFiIdProduct(tbdKQXL25.getFiProId());
+
             tbdHanghoa25.setFiTrangThaiHangHoa(status);
             tbdHanghoa25.setFiIDDVXL(tbdKQXL25.getFiDVXLCode());
             tbdHanghoa25.setFiNameDVXL(tbdKQXL25.getFiDVXLName());

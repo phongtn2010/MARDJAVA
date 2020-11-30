@@ -93,9 +93,9 @@ public class Mard25Api extends BaseApi {
             json.setSuccess(true);
             json.setData(responeUploadFile);
             json.setMessage("Upload file thành công");
-            if(file.exists()){
-                file.delete();
-            }
+//            if(file.exists()){
+//                file.delete();
+//            }
             return json;
         } catch (Exception ex) {
             json.setData(null);

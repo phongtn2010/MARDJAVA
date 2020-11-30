@@ -10,11 +10,11 @@ import java.util.List;
 @Data
 public class FilterHangHoa {
     private String fiProName;
-    private Integer fiHSStatus;
+    private Integer fiTrangThaiHangHoa;
     private Integer fiIdHS;
     private Integer page = 1;
     private Integer size = 20;
-    private String sortBy = "fiNSWFileCode";
+    private String sortBy = "fiProName";
     private String order = "asc";
 
     @JsonIgnore

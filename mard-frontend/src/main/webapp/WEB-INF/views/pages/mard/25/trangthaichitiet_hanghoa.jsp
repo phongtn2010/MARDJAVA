@@ -43,10 +43,10 @@
                                                     <label>Trạng thái hồ sơ</label>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control"  data-bind="options : lstProfileStatus, optionsValue : 'fiCatType',
+                                                    <select class="form-control"  data-bind="options : lstTrangThaiHangHoa, optionsValue : 'fiCatType',
                                                                      selectedText:fiHSTypeName,
-                                                                     optionsText : 'fiCatTypeName',
-                                                    value: fiHSStatus, enable: $root.isEditable(), event: {change: changeHoSoType(fiHSType())}">
+                                                                     optionsText : 'fiCatTypeName',optionsCaption: 'Tất cả...',
+                                                    value: fiTrangThaiHangHoa, enable: $root.isEditable(), event: {change: changeHoSoType(fiHSType())}">
                                                     </select>
                                                 </div>
 
@@ -103,13 +103,11 @@
                                         class="fa fa-lg fa-eye tooltips"></i></a>
                             </td>
                             <td class="text-center">
-                                <a href="javascript:void(0)" data-bind="click: $parent.guiSuaHangHoa.bind($data, $data, $index()),visible:($root.fiHSType()==3 &&(
-                                 fiTrangThaiHangHoa==28 ||
-                                 fiTrangThaiHangHoa==29 || fiTrangThaiHangHoa==33 || fiTrangThaiHangHoa==38)||($root.fiHSType()==1 || fiTrangThaiHangHoa==26)"><i
+                                <a href="javascript:void(0)" data-bind="click: $parent.guiSuaHangHoa.bind($data, $data, $index()),visible:$root.permissionViewSendFunction($data, $data, $index())"><i
                                         class="fa fa-lg fa-send tooltips"></i></a>
                             </td>
                             <td class="text-center">
-                                <a href="javascript:void(0)" data-bind="click: $parent.xemThongBao.bind($data, $data, $index()),visible: $root.fiHSType()==3&&fiTrangThaiHangHoa==44"><i
+                                <a href="javascript:void(0)" data-bind="click: $parent.xemThongBao.bind($data, $data, $index()),visible: $root.permissionViewWordFunction($data, $data, $index())"><i
                                         class="fa fa-lg fa-file-word-o tooltips"></i></a>
                             </td>
                             <td class="text-center">

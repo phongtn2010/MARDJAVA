@@ -2,14 +2,23 @@ function Mard25ViewHangHoaVM (options) {
     var self=this;
     self.fiMaCqkt = ko.observable(null);
     self.fiHSCode = ko.observable(null);
-    self.fiHSStatus = ko.observable(null);
+    self.fiTrangThaiHangHoa = ko.observable(null);
     self.errorMsg  = ko.observable('');
     self.lstFilePT  = ko.observableArray();
     self.lstFileGCN  = ko.observableArray();
 	self.lstCountry  = ko.observableArray((options && options.hasOwnProperty('lstCountry')) ? options.lstCountry :[]);
 	self.sortBy = ko.observable("fiCreatedDate");
-    self.order = ko.observable("desc");    self.mard25HangHoaItems  = ko.observableArray((options && options.hasOwnProperty('mard25HangHoaItems')) ? options.mard25HangHoaItems :[]);
+    self.order = ko.observable("desc");
+    self.mard25HangHoaItems  = ko.observableArray((options && options.hasOwnProperty('mard25HangHoaItems')) ? options.mard25HangHoaItems :[]);
     self.lstProfileStatus  = ko.observableArray((options && options.hasOwnProperty('lstProfileStatus')) ? options.lstProfileStatus :[]);
+    self.lstTrangThaiHangHoa =ko.observableArray([]);
+    if(self.lstProfileStatus().length>0){
+        ko.utils.arrayForEach(self.lstProfileStatus(),function (statusEntity) {
+            if(statusEntity.fiCatType>=26){
+                self.lstTrangThaiHangHoa.push(statusEntity);
+            }
+        });
+    }
     self.lstToChucDanhGia  = ko.observableArray((options && options.hasOwnProperty('lstToChucDanhGia')) ? options.lstToChucDanhGia :[]);
     self.lstKetQuaPhanTich  = ko.observableArray((options && options.hasOwnProperty('lstKetQuaPhanTich')) ? options.lstKetQuaPhanTich :[]);
     self.lstNhom  = ko.observableArray((options && options.hasOwnProperty('lstNhom')) ? options.lstNhom :[]);
@@ -66,7 +75,7 @@ function Mard25ViewHangHoaVM (options) {
     self.getHangHoa = function (page) {
         var filter = {
             fiProName: self.fiProName(),
-            fiHSStatus: self.fiHSStatus(),
+            fiTrangThaiHangHoa: self.fiTrangThaiHangHoa(),
             fiIdHS: idHoSo,
             page: page,
             size: self.size(),
@@ -144,11 +153,16 @@ function Mard25ViewHangHoaVM (options) {
                         fiTenFile:fiFileName
                     };
                     self.lstKetQuaPhanTich.push(item);
+                    self.fiFileKQ(null);
+                    self.errorMsg(null);
                 }else{
                     self.errorMsg('Có lỗi tải file lên');
+                    self.fiFileKQ(null);
+                    console.log(d);
                 }
             },
             error: function (e) {
+                self.fiFileKQ(null);
                 console.log(e);
                 self.errorMsg('Có lỗi tải file lên'+e);
             }
@@ -205,15 +219,18 @@ function Mard25ViewHangHoaVM (options) {
                     self.fiFileGCNLink(d.data.urlFile);
                     self.fiFileGCNId(d.data.itemId);
                     self.fiFileGCNName(files[0].name);
+                    self.errorMsg(null);
                 }else{
-                    self.errorMsg('Có lỗi tải file lên');
+                    self.errorMsg('Có lỗi tải file lên: '+d.message);
                 }
                 $('#loading08').hide();
+                // self.fiFileGCN(null);
+
             },
             error: function (e) {
-                self.errorMsg('Có lỗi tải file lên'+e);
+                self.errorMsg('Có lỗi tải file lên: '+e);
                 $('#loading08').hide();
-
+                self.fiFileGCN(null);
             }
         });
     }
@@ -221,6 +238,7 @@ function Mard25ViewHangHoaVM (options) {
         self.fiProName(index.fiProName);
         self.hangHoaSelected(index);
         self.fiNSWFileCode(self.fiHS().fiNSWFileCode);
+        self.clearForm();
         $("#modal_guiSua").show();
     }
 
@@ -247,9 +265,8 @@ function Mard25ViewHangHoaVM (options) {
                             success: function (d) {
                                 if (d && d.success) {
                                     app.Alert('Gửi yêu cầu thành công');
-                                    if ($('#modal_guiSua').hasClass('in')) {
-                                        $('#modal_guiSua').modal('hide');
-                                    }
+                                    $('#modal_guiSua').modal('hide');
+                                    self.searchProduct();
                                 } else {
                                     app.Alert(d.message);
                                 }
@@ -351,6 +368,36 @@ function Mard25ViewHangHoaVM (options) {
                 }
             }
         });
+    }
+    self.permissionViewSendFunction= function (item) {
+        if(self.fiHSType()==3){
+            if(item.fiTrangThaiHangHoa==28 ||
+                item.fiTrangThaiHangHoa==29 || item.fiTrangThaiHangHoa==30 || item.fiTrangThaiHangHoa==31 ||
+                item.fiTrangThaiHangHoa==33 || item.fiTrangThaiHangHoa==38){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            if (item.fiTrangThaiHangHoa==26 ||
+                item.fiTrangThaiHangHoa==29 || item.fiTrangThaiHangHoa==30 || item.fiTrangThaiHangHoa==31 ||
+                item.fiTrangThaiHangHoa==33 || item.fiTrangThaiHangHoa==38){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+    self.permissionViewWordFunction= function (item) {
+        if(self.fiHSType()==3){
+            if(item.fiTrangThaiHangHoa==44){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
     }
 }
 

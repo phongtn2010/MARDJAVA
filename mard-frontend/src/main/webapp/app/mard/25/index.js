@@ -682,12 +682,12 @@ function GuiBaoCaoHS2D(){
                             success: function (d) {
                                 if (d && d.success) {
                                     app.Alert('Gửi yêu cầu thành công');
+                                    $('#modal_gui_bao_cao').modal('hide');
                                     self.searchHoso(self.currentPage());
-                                    if ($('#modal_gui_bao_cao').hasClass('in')) {
-                                        $('#modal_gui_bao_cao').modal('hide');
-                                    }
                                 } else {
-                                    app.Alert(d.message);
+                                    app.Alert("Gửi yêu cầu thất bại: "+d.message);
+                                    $('#modal_gui_bao_cao').modal('hide');
+                                    self.searchHoso(self.currentPage());
                                 }
                             },
                             error: function (e) {

@@ -17,6 +17,8 @@ public class Hoso26 {
     String fiMaHoso;
     @XmlElement(name = "Organization")
     private String fiTenDn;
+    @XmlElement(name = "TaxCode")
+    private String fiMasothue;
     @XmlJavaTypeAdapter(DateSerialization.class)
     @XmlElement(name = "SignDate")
     private Date fiNgayKy;
