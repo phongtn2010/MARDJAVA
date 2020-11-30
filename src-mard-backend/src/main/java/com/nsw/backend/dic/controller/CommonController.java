@@ -18,6 +18,7 @@ import com.nsw.backend.util.ResponseJson;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,6 +49,8 @@ public class CommonController extends BaseController {
     @Autowired
     CmonProvinceService cmonProvinceService;
 
+    @Autowired
+    CmonSeafoodprocessorsService cmonSeafoodprocessorsService;
     //------------------- Danh mục quốc gia ------------------------------------
     @GetMapping("/quocgia")
     public ResponseEntity<ResponseJson> getCountry() {
@@ -153,6 +156,48 @@ public class CommonController extends BaseController {
                 return createSuccessResponse(Constant09.Hoso09Status.values(), HttpStatus.OK);
             default:
                 return createErrorResponse("Mã thủ tục không hợp lệ", HttpStatus.OK);
+        }
+    }
+
+    @PostMapping("/cssx")
+    public ResponseEntity<ResponseJson> searchCSXX(@RequestBody FilterFormCmonSF filterFormCmonSF) {
+        try {
+            return createSuccessResponse(cmonSeafoodprocessorsService.searchCmonSeaFood(filterFormCmonSF),HttpStatus.OK);
+        } catch (Exception ex) {
+            LOG.error(TAG + ex.getMessage(), ex);
+            RabbitMQErrorHelper.pushLogToRabbitMQ(getErrorInfo(TAG, ex), rabbitMQService.getRabbitMQInfo());
+            return createErrorResponse(ex.getMessage(), HttpStatus.OK);
+        }
+    }
+    @PostMapping("/cssx/update")
+    public ResponseEntity<ResponseJson> updateCSXX(@RequestBody CmonSeafoodprocessors cmonSeafoodprocessors) {
+        try {
+            if (cmonSeafoodprocessors.getSeafoodprocessorsid()==null||cmonSeafoodprocessors.getSeafoodprocessorsid().equals(0L)){
+                Long id=cmonSeafoodprocessorsService.maxId();
+                cmonSeafoodprocessors.setSeafoodprocessorsid(id+1);
+                return createSuccessResponse(cmonSeafoodprocessorsService.save(cmonSeafoodprocessors),HttpStatus.OK);
+            }else{
+                CmonSeafoodprocessors seafood = new CmonSeafoodprocessors();
+                CmonSeafoodprocessors seafoodprocessors = cmonSeafoodprocessorsService.findById(cmonSeafoodprocessors.getSeafoodprocessorsid());
+                BeanUtils.copyProperties(cmonSeafoodprocessors,seafood);
+                seafood.setSeafoodprocessorsid(seafoodprocessors.getSeafoodprocessorsid());
+                return createSuccessResponse(cmonSeafoodprocessorsService.save(seafood),HttpStatus.OK);
+            }
+        } catch (Exception ex) {
+            LOG.error(TAG + ex.getMessage(), ex);
+            RabbitMQErrorHelper.pushLogToRabbitMQ(getErrorInfo(TAG, ex), rabbitMQService.getRabbitMQInfo());
+            return createErrorResponse(ex.getMessage(), HttpStatus.OK);
+        }
+    }
+    @PostMapping("/cssx/delete")
+    public ResponseEntity<ResponseJson> deleteCSXX(@RequestBody CmonSeafoodprocessors cmonSeafoodprocessors) {
+        try {
+            cmonSeafoodprocessorsService.delete(cmonSeafoodprocessors.getSeafoodprocessorsid());
+            return createSuccessResponse(null,HttpStatus.OK);
+        } catch (Exception ex) {
+            LOG.error(TAG + ex.getMessage(), ex);
+            RabbitMQErrorHelper.pushLogToRabbitMQ(getErrorInfo(TAG, ex), rabbitMQService.getRabbitMQInfo());
+            return createErrorResponse(ex.getMessage(), HttpStatus.OK);
         }
     }
 }

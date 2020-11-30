@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: hq_test
+    active: vt_test
 ---
 server:
   port: 8081
@@ -94,9 +94,9 @@ spring:
     default-domain: MARDBackend
 datasource:
   MARDBackend:
-    url: jdbc:oracle:thin:@10.224.164.16:1521/orcl
+    url: jdbc:oracle:thin:@10.60.157.111:1521/dbpt
     username: NSW
-    password: NSW
+    password: 123456789
     driverClassName: oracle.jdbc.OracleDriver
     defaultSchema: MARD
     maxPoolSize: 20

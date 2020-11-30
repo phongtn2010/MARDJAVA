@@ -78,7 +78,7 @@
             <div class="portlet-title">
                 <div class="caption font-dark">
                     <%--                    <i class="icon-settings font-dark"></i>--%>
-                    <span class="caption-subject bold uppercase">Thêm mới</span>
+                    <span class="caption-subject bold uppercase">QUẢN LÝ DANH MỤC CƠ SỞ SẢN XUẤT</span>
                 </div>
             </div>
             <div class="portlet-body">
@@ -113,8 +113,8 @@
                                 </div>
                                 <div class="form-group nsw-text-center">
                                     <a href="javascript:;" class="btn green"
-                                       data-bind="click: searchCSSX"><i class="fa fa-search"></i> Tìm kiếm</a>
-                                    <a  class="btn green" id="btnAddNew"><i
+                                       data-bind="click: searchCSSXClick"><i class="fa fa-search"></i> Tìm kiếm</a>
+                                    <a  class="btn green" data-bind="click: btnAddNewClick" id="btnAddNew"><i
                                             class="fa fa-edit"></i> Thêm mới</a>
                                 </div>
                             </form>
@@ -177,6 +177,7 @@
                                 <td class="text-center" data-bind="text: seafoodprocessorsadressen"></td>
                                 <td class="text-center" >
                                     <a data-bind="click: $parent.updateProcessors"><i class="fa fa-edit"></i></a>
+                                    <a data-bind="click: $parent.deleteProcessors"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                             </tbody>
@@ -220,6 +221,142 @@
         </div>
 
     </div>
+    <div id="modal_cssx" class="modal container in modal-overflow"
+         tabindex="-1"
+         data-backdrop="static" data-keyboard="false">
+        <div class="modal-header" style="background: #337ab7; color: #fff;">
+            Cập nhập cơ sở sản xuất
+        </div>
+        <div class="modal-body">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Mã cơ sở sản xuất<a  class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control" type="text" data-bind="value: fiMaCSSX"></input>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Tên cơ sở sản xuất <a  class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-10">
+                                <input class="form-control" type="text" data-bind="value: fiTenCSSX"></input>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Địa chỉ cơ sở sản xuất <a  class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-10">
+                                <input class="form-control" type="text" data-bind="value: fiDiaChiCSSX"></input>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Tên cơ sở sản xuất (Tiếng Anh) <a  class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-10">
+                                <input class="form-control" type="text" data-bind="value: fiTenCSSXEn"></input>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Địa chỉ cơ sở sản xuất (Tiếng Anh)<a  class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-10">
+                                <input class="form-control" type="text" data-bind="value: fiDiaChiCSSXEn"></input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="text-center">
+                <button class="btn green" data-bind="click: updateCssx">
+                    <spring:message code="conmon.button.dong_y"/>
+                </button>
+                <button class="btn red" data-bind="click: closePopupCssx" data-dismiss="modal">
+                    <spring:message code="conmon.button.huy"/>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal_cssx" class="modal container in modal-overflow"
+         tabindex="-1"
+         data-backdrop="static" data-keyboard="false">
+        <div class="modal-header" style="background: #337ab7; color: #fff;">
+            Cập nhập cơ sở sản xuất
+        </div>
+        <div class="modal-body">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Mã cơ sở sản xuất<a  class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control" type="text" data-bind="value: fiMaCSSX"></input>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Tên cơ sở sản xuất <a  class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-10">
+                                <input class="form-control" type="text" data-bind="value: fiTenCSSX"></input>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Địa chỉ cơ sở sản xuất <a  class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-10">
+                                <input class="form-control" type="text" data-bind="value: fiDiaChiCSSX"></input>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Tên cơ sở sản xuất (Tiếng Anh) <a  class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-10">
+                                <input class="form-control" type="text" data-bind="value: fiTenCSSXEn"></input>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Địa chỉ cơ sở sản xuất (Tiếng Anh)<a  class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-10">
+                                <input class="form-control" type="text" data-bind="value: fiDiaChiCSSXEn"></input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="text-center">
+                <button class="btn green" data-bind="click: updateCssx">
+                    <spring:message code="conmon.button.dong_y"/>
+                </button>
+                <button class="btn red" data-bind="click: closePopupCssx" data-dismiss="modal">
+                    <spring:message code="conmon.button.huy"/>
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
+
 
 <script src="<c:url value='/app/mard/cssx.js?v=${version}'/>" type="text/javascript" charset="utf-8"></script>

@@ -5,6 +5,9 @@
 package com.nsw.backend.dic.service;
 
 import com.nsw.backend.dic.model.CmonSeafoodprocessors;
+import com.nsw.backend.dic.model.FilterFormCmonSF;
+import com.nsw.backend.dic.model.FilterResult_CmonSeafood;
+
 import java.util.List;
 
 /**
@@ -57,4 +60,7 @@ public interface CmonSeafoodprocessorsService {
      */
     void delete(Long id);
 
+    FilterResult_CmonSeafood searchCmonSeaFood (FilterFormCmonSF filter);
+
+    public Long maxId();
 }
