@@ -396,9 +396,9 @@
                         <td>
                             <span data-bind="text : fiFileTypeName"></span>
                         </td>
-<%--                        <td data-bind="visible: $root.isEditable" class="text-center">--%>
-<%--                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-eye"></i></a>--%>
-<%--                        </td>--%>
+                        <td class="text-center">
+                            <a href="#" data-bind="click: $parent.viewFile, visible: $root.isEditable()"><i class="fa fa-lg fa-eye"></i></a>
+                        </td>
                         <td data-bind="visible: $root.isEditable" class="text-center">
                             <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-download"></i></a>
                         </td>

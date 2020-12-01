@@ -19,7 +19,7 @@ public class KetQuaXuLy {
     @XmlElement(name = "Reason")
     private String fiReason;
     @XmlElement(name = "AttachmentId")
-    private Long fiAttachmentId;
+    private String fiAttachmentId;
     @XmlElement(name = "FileName")
     private String fiFileName;
     @XmlElement(name = "FileLink")

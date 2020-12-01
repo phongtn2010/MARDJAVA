@@ -54,4 +54,13 @@ public class TbdLichSuHH25  implements Serializable {
 
     @Column(name = "FI_NSWSEND")
     private Integer fiNswSend;
+
+    @Column(name = "FI_MA_FILE", length = 10)
+    private String fiMaFile;
+
+    @Column(name = "FI_TEN_FILE", length = 250)
+    private String fiTenFile;
+
+    @Column(name = "FI_LINK_FILE", length = 1000)
+    private String fiLinkFile;
 }

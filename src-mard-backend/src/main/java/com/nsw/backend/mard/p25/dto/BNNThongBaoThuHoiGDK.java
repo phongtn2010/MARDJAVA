@@ -12,7 +12,7 @@ public class BNNThongBaoThuHoiGDK {
     Date fiSignConfirmDate;
     String fiSignConfirmName;
     String fiAniFeedConfirmNo;
-    Long fiAttachmentId;
+    String fiAttachmentId;
     String fiFileName;
     String fiFileLink;
 }

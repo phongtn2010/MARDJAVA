@@ -86,6 +86,14 @@ public class TbdLichsu25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_HS_CODE", length = 50)
     private String fiHSCode;
 
+    @Column(name = "FI_MA_FILE", length = 10)
+    private String fiMaFile;
+
+    @Column(name = "FI_TEN_FILE", length = 250)
+    private String fiTenFile;
+
+    @Column(name = "FI_LINK_FILE", length = 1000)
+    private String fiLinkFile;
     //----------------------------------------------------------------------
     // ENTITY LINKS ( RELATIONSHIP )
     //----------------------------------------------------------------------

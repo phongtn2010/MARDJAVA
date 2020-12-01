@@ -1380,7 +1380,7 @@ function UploadFileVM(options) {
             return false;
         }
         return true;
-    }
+    };
 
     ufVMSelf.validate = function () {
         var lstAttachment = ufVMSelf.lstAtch();
@@ -1392,6 +1392,15 @@ function UploadFileVM(options) {
             }
         }
         return !isMissingFile;
+    };
+
+    ufVMSelf.viewFile = function (item) {
+        var link = document.createElement('a');
+        link.href = item.fiLinkBNN;
+        link.target = '_blank';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
     }
 }
 

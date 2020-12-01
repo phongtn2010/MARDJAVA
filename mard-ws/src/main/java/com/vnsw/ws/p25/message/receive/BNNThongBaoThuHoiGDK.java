@@ -29,7 +29,7 @@ public class BNNThongBaoThuHoiGDK {
     @XmlElement(name = "AniFeedConfirmNo")
     String fiAniFeedConfirmNo;
     @XmlElement(name = "AttachmentId")
-    Long fiAttachmentId;
+    String fiAttachmentId;
     @XmlElement(name = "FileName")
     String fiFileName;
     @XmlElement(name = "FileLink")

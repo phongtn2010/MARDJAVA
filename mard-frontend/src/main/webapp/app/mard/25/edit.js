@@ -143,22 +143,7 @@ function Mard25EditVM () {
             });
             return;
         }
-        // if (!editVMSefl.kdnkVM().validateUploadFiles()){
-        //     editVMSefl.pop = app.popup({
-        //         title: 'Thông báo',
-        //         html: '<b>Bạn cần thêm đẩy đủ các tài liệu đính kèm</b>',
-        //         width: 450,
-        //         buttons: [
-        //             {
-        //                 name: 'OK',
-        //                 class: 'btn',
-        //                 icon: 'fa-close',
-        //                 action: function () {
-        //                     app.popupRemove(editVMSefl.pop.selector);
-        //                 }
-        //             }
-        //         ]
-        //     });
+        // if (!editVMSefl.kdnkVM().validateAttachment()){
         //     return;
         // }
         var body = editVMSefl.kdnkVM().getData();

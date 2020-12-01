@@ -88,6 +88,7 @@ public class Mard25Api extends BaseApi {
 
             RestTemplate restTemplate = new RestTemplate();
             Long from = Calendar.getInstance().getTimeInMillis();
+            logger.info("upload : {}"+filePath);
             ResponseEntity<String> responseEntity = restTemplate.postForEntity(api_upload_file,requestEntity,String.class);
             Long to = Calendar.getInstance().getTimeInMillis();
             logger.info("Thời gian upload: "+(to-from)/1000 +" giây");

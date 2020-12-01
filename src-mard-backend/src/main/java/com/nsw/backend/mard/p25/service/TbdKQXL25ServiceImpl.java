@@ -20,4 +20,9 @@ public class TbdKQXL25ServiceImpl implements TbdKQXL25Service {
     public TbdKQXL25 findByFiNSWFileCodeAndFiProId(String nswFileCode, Integer proId) {
         return repository.findByFiNSWFileCodeAndFiProId(nswFileCode,proId);
     }
+
+    @Override
+    public TbdKQXL25 findByFiNSWFileCodeAndFiSoGCN(String nswFileCode, String soGCN) {
+        return repository.findByFiNSWFileCodeAndFiSoGCN(nswFileCode,soGCN);
+    }
 }

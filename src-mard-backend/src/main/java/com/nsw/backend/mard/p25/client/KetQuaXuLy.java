@@ -12,7 +12,7 @@ public class KetQuaXuLy {
 
     private String fiReason;
 
-    private Long fiAttachmentId;
+    private String fiAttachmentId;
 
     private String fiFileName;
 
