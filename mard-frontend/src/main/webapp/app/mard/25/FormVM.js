@@ -1082,6 +1082,7 @@ function UploadFileVM(options) {
         ufVMSelf.errors = ko.validation.group(checkFiles, {deep: true, live: true, observable: true});
         if (!ufVMSelf.validateForm()) return;
         var fileName = '';
+        var fiFileTypeBNN;
         var files;
         ko.utils.arrayForEach(ufVMSelf.lstAtchType(), function (attachType) {
             if (attachType.fiCatType == data) {
@@ -1100,19 +1101,26 @@ function UploadFileVM(options) {
                 break;
             case "4":
                 files = $("#file-KQ")[0].files[0];
+                fiFileTypeBNN=1; //1. Phiếu kết quả phân tích chất lượng của nước xuất khẩu cấp cho lô hàng (Certificate of Analysis); (Bắt buộc)
                 break;
             case "5":
                 files = $("#file-TC")[0].files[0];
+                fiFileTypeBNN=3; //3. Bản tiêu chuẩn công bố áp dụng của tổ chức, cá nhân nhập khẩu; (Bắt buộc)
                 break;
             case "6":
                 files = $("#file-CNLH")[0].files[0];
+                fiFileTypeBNN=5; //5. Giấy chứng nhận lưu hành tự do hoặc văn bản có giá trị tương đương do
+                // cơ quan có thẩm quyền của nước xuất xứ cấp đối với nguyên liệu đơn, thức ăn truyền thống; (Bắt buộc đối với GroupFoodOfGoods = 1,4)
                 break;
             case "7":
-                files = $("#file-CNPT")[0].files[0];
+                files = $("#file-CNPT")[0].files[0]; //6. Giấy chứng nhận phân tích nguy cơ và kiểm soát điểm tới hạn (HACCP)
+                // hoặc giấy chứng nhận tương đương của cơ sở sản xuất đối với nguyên liệu đơn. (bắt buộc đối với GroupFoodOfGoods =4)
+                fiFileTypeBNN=6;
                 break;
             default:
                 files = $("#file-Khac")[0].files[0];
                 fileName = ufVMSelf.fiFileKhacName();
+                fiFileTypeBNN=ufVMSelf.fiFileKhacID()
                 break;
         }
 
@@ -1136,7 +1144,7 @@ function UploadFileVM(options) {
                 success: function (d) {
                     var fileLink = d.data.urlFile;
                     var fileId = d.data.itemId;
-                    ufVMSelf.switchFileType(data, fileName, fileLink, fileId);
+                    ufVMSelf.switchFileType(data, fileName, fileLink, fileId,fiFileTypeBNN);
                     $('#loading08').hide();
                 },
                 error: function (e) {
@@ -1157,7 +1165,7 @@ function UploadFileVM(options) {
             // });
         }
     }
-    ufVMSelf.switchFileType = function (fileType, fileName, fiPath, fiGuid) {
+    ufVMSelf.switchFileType = function (fileType, fileName, fiPath, fiGuid,fiFileTypeBNN) {
         switch (fileType) {
             case "1":
                 var fiFileName = ufVMSelf.fiFileHDPath().replace(/^.*[\\\/]/, '');
@@ -1168,7 +1176,8 @@ function UploadFileVM(options) {
                     fiFileTypeID: fileType,
                     fiFileTypeName: fileName,
                     fiLinkBNN: fiPath,
-                    fiGuidBNN: fiGuid
+                    fiGuidBNN: fiGuid,
+                    fiFileTypeBNN:fiFileTypeBNN
                 }
                 ufVMSelf.lstHD.push(item);
                 break;
@@ -1181,7 +1190,8 @@ function UploadFileVM(options) {
                     fiGuidBNN: fiGuid,
                     fiFileName: fiFileName,
                     fiFileTypeID: fileType,
-                    fiFileTypeName: fileName
+                    fiFileTypeName: fileName,
+                    fiFileTypeBNN:fiFileTypeBNN
                 }
                 ufVMSelf.lstHoaDon.push(item);
                 break;
@@ -1194,7 +1204,8 @@ function UploadFileVM(options) {
                     fiGuidBNN: fiGuid,
                     fiFileName: fiFileName,
                     fiFileTypeID: fileType,
-                    fiFileTypeName: fileName
+                    fiFileTypeName: fileName,
+                    fiFileTypeBNN:fiFileTypeBNN
                 }
                 ufVMSelf.lstPhieu.push(item);
                 break;
@@ -1207,7 +1218,8 @@ function UploadFileVM(options) {
                     fiGuidBNN: fiGuid,
                     fiFileName: fiFileName,
                     fiFileTypeID: fileType,
-                    fiFileTypeName: fileName
+                    fiFileTypeName: fileName,
+                    fiFileTypeBNN:fiFileTypeBNN
                 }
                 ufVMSelf.lstKQ.push(item);
                 break;
@@ -1219,7 +1231,8 @@ function UploadFileVM(options) {
                     fiGuidBNN: fiGuid,
                     fiFileName: fiFileName,
                     fiFileTypeID: fileType,
-                    fiFileTypeName: fileName
+                    fiFileTypeName: fileName,
+                    fiFileTypeBNN:fiFileTypeBNN
                 }
                 ufVMSelf.lstTC.push(item);
                 break;
@@ -1231,7 +1244,8 @@ function UploadFileVM(options) {
                     fiGuidBNN: fiGuid,
                     fiFileName: fiFileName,
                     fiFileTypeID: fileType,
-                    fiFileTypeName: fileName
+                    fiFileTypeName: fileName,
+                    fiFileTypeBNN:fiFileTypeBNN
                 }
                 ufVMSelf.lstCNLH.push(item);
                 break;
@@ -1243,7 +1257,8 @@ function UploadFileVM(options) {
                     fiGuidBNN: fiGuid,
                     fiFileName: fiFileName,
                     fiFileTypeID: fileType,
-                    fiFileTypeName: fileName
+                    fiFileTypeName: fileName,
+                    fiFileTypeBNN:fiFileTypeBNN
                 }
                 ufVMSelf.lstCNPT.push(item);
                 break;
@@ -1253,7 +1268,8 @@ function UploadFileVM(options) {
                     fiGuidBNN: fiGuid,
                     fiFileHD: fileName,
                     fiFileTypeID: fileType,
-                    fiFileTypeName: fileName
+                    fiFileTypeName: fileName,
+                    fiFileTypeBNN:fiFileTypeBNN
                 }
                 ufVMSelf.lstAtch.push(item);
                 break;

@@ -197,12 +197,49 @@ function HangHoaNhapKhauVM (options) {
     }
 
     kdnkVMSelf.validateAttachment = function () {
-        if (!kdnkVMSelf.uploadFileVM().validate()) {
-            kdnkVMSelf.errorMsg(NSWLang["file_msg_chua_chon_file"]);
+        var uploadFileVM=kdnkVMSelf.uploadFileVM();
+        if(uploadFileVM.lstHD().length<1){
+            app.Alert("Chưa đính kèm file thông tin hợp đồng");
             return false;
-        } else {
-            kdnkVMSelf.errorMsg(null);
-            return true;
+        }
+        if(uploadFileVM.lstHoaDon().length<1){
+            app.Alert("Chưa đính kèm file thông tin hóa đơn");
+            return false;
+        }
+        if(uploadFileVM.lstPhieu().length<1){
+            app.Alert("Chưa đính kèm file thông tin phiếu đóng gói");
+            return false;
+        }
+        if(uploadFileVM.lstKQ().length<1){
+            app.Alert("Chưa đính kèm file Phiếu kết quả phân tích chất lượng của nước xuất khẩu cấp cho lô hàng");
+            return false;
+        }
+        if(uploadFileVM.lstTC().length<1){
+            app.Alert("Chưa đính kèm file Bản tiêu chuẩn công bố áp dụng của tổ chức, cá nhân nhập khẩu");
+            return false;
+        }
+        var checkGroupFood=false;
+        ko.utils.arrayForEach(kdnkVMSelf.thongtinChungVM().fiProductList(),function (product) {
+            if (product.fiProIdNhom()==1||product.fiProIdNhom()==4){
+                checkGroupFood=true;
+            }
+        });
+        if(checkGroupFood){
+            if(uploadFileVM.lstCNLH().length<1){
+                app.Alert("Chưa đính kèm file Giấy chứng nhận lưu hành tự do (đối với nguyên liệu đơn, thức ăn truyền thống)");
+                return false;
+            }
+        }
+        ko.utils.arrayForEach(kdnkVMSelf.thongtinChungVM().fiProductList(),function (product) {
+            if (product.fiProIdNhom()==1){
+                checkGroupFood=true;
+            }
+        });
+        if(checkGroupFood){
+            if(uploadFileVM.lstCNPT().length<1){
+                app.Alert("Chưa đính kèm file Giấy chứng nhận phân tích nguy cơ và kiểm soát điểm tới hạn (đối với nguyên liệu đơn)");
+                return false;
+            }
         }
     }
 

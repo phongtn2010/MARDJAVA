@@ -116,6 +116,11 @@
                 </form>
             </div>
         </div>
+
+        <div class="text-left">
+            <span class="nsw-require-field">(**) </span><span><spring:message code="mard.25.guixncl.item1"/></span><br/>
+            <span class="nsw-require-field"><span><spring:message code="mard.25.guixncl.item2"/></span></span>
+        </div>
         <div class="text-center">
             <span class="nsw-require-field" style="font-size: large" data-bind="text: errorMsg"></span>
         </div>

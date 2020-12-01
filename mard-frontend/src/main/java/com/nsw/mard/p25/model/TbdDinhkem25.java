@@ -3,6 +3,7 @@ package com.nsw.mard.p25.model;
 import com.google.common.base.Objects;
 import lombok.Data;
 
+import javax.persistence.Column;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -32,6 +33,8 @@ public class TbdDinhkem25 implements Serializable {
     private Long fiIdHS;
 
     private Long fiIdProduct;
+
+    private Integer fiFileTypeBNN;
 
     public TbdDinhkem25() {
         super();

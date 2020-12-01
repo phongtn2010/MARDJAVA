@@ -15,7 +15,8 @@ public class Attachment {
 
 
     @XmlElement(name = "FileCode")
-    private Long fiLoaifile;
+//    private Long fiLoaifile;
+    private Integer fiFileTypeBNN;
     @XmlElement(name = "AttachmentId")
     private Long fiFileId;
     @XmlElement(name = "FileName")

@@ -20,6 +20,8 @@ import com.nsw.util.GsonUtils;
 import com.nsw.util.LogUtil;
 import com.nsw.util.Utility;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.FileSystemResource;
@@ -46,10 +48,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/mard/25")
@@ -60,12 +59,13 @@ public class Mard25Api extends BaseApi {
     DinhkemService attachmentService;
     @Autowired
     Environment environment;
-
+    private final Logger logger = LoggerFactory.getLogger(Mard25Api.class);
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public @ResponseBody ResponseJson uploadFileToBNN(@RequestParam("file") MultipartFile multipartfile,
                                                       @RequestParam("mcode") String mcode,
                                                       @RequestParam("pcode") String pcode){
         ResponseJson json = new ResponseJson();
+        logger.info("Bat dau upload file: ");
         try {
             String fileName = multipartfile.getOriginalFilename();
             String folder = environment.getProperty("mard.folder.temp");
@@ -87,17 +87,22 @@ public class Mard25Api extends BaseApi {
 
 
             RestTemplate restTemplate = new RestTemplate();
+            Long from = Calendar.getInstance().getTimeInMillis();
             ResponseEntity<String> responseEntity = restTemplate.postForEntity(api_upload_file,requestEntity,String.class);
+            Long to = Calendar.getInstance().getTimeInMillis();
+            logger.info("Thời gian upload: "+(to-from)/1000 +" giây");
             Gson g = new Gson();
             ResponeUploadFile responeUploadFile=g.fromJson(responseEntity.getBody().substring(1,responseEntity.getBody().length()-1), ResponeUploadFile.class);
             json.setSuccess(true);
             json.setData(responeUploadFile);
             json.setMessage("Upload file thành công");
-//            if(file.exists()){
-//                file.delete();
-//            }
+            logger.info("Upload file thành công");
+            if(file.exists()){
+                file.delete();
+            }
             return json;
         } catch (Exception ex) {
+            logger.error(ex.getMessage());
             json.setData(null);
             json.setSuccess(false);
             json.setMessage(ex.getMessage());

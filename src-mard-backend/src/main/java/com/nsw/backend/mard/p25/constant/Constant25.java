@@ -69,6 +69,28 @@ public class Constant25 {
         }
     }
 
+    @JsonFormat(shape = JsonFormat.Shape.OBJECT)
+    @Getter
+    public enum LoaiFileDinhKem {
+        TYPE_1(1, "Phiếu kết quả phân tích chất lượng của nước xuất khẩu cấp cho lô hàng (Certificate of Analysis)"),
+        TYPE_2(2, "Nhãn sản phẩm của cơ sở sản xuất;"),
+        TYPE_3(3, "Bản tiêu chuẩn công bố áp dụng của tổ chức, cá nhân nhập khẩu"),
+        TYPE_4(4, "Bản thông tin sản phẩm in từ cổng thông tin điện tử"),
+        TYPE_5(5, "Giấy chứng nhận lưu hành tự do hoặc văn bản có giá trị tương đương do cơ quan có thẩm quyền của nước xuất xứ cấp đối với nguyên liệu đơn, thức ăn truyền thống;"),
+        TYPE_6(6, "Khác");
+        private int id;
+        private String name;
+
+        LoaiFileDinhKem(int id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        public static LoaiFileDinhKem findById(int i) {
+            return Arrays.stream(LoaiFileDinhKem.values()).filter(st -> st.getId() == i)
+                    .findFirst().orElse(null);
+        }
+    }
 
     @JsonFormat(shape = JsonFormat.Shape.OBJECT)
     @Getter

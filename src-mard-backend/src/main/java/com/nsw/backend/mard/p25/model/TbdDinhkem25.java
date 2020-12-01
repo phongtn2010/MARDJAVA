@@ -75,6 +75,9 @@ public class TbdDinhkem25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_PRO_ID")
     private Integer fiIdProduct;
 
+    @Column(name = "FI_TYPE_BNN")
+    private Integer fiFileTypeBNN;
+
     //----------------------------------------------------------------------
     // ENTITY LINKS ( RELATIONSHIP )
     //----------------------------------------------------------------------

@@ -372,7 +372,6 @@ function Mard25ViewHangHoaVM (options) {
     self.permissionViewSendFunction= function (item) {
         if(self.fiHSType()==3){
             if(item.fiTrangThaiHangHoa==28 ||
-                item.fiTrangThaiHangHoa==29 || item.fiTrangThaiHangHoa==30 || item.fiTrangThaiHangHoa==31 ||
                 item.fiTrangThaiHangHoa==33 || item.fiTrangThaiHangHoa==38){
                 return true;
             }else{
@@ -380,7 +379,6 @@ function Mard25ViewHangHoaVM (options) {
             }
         }else{
             if (item.fiTrangThaiHangHoa==26 ||
-                item.fiTrangThaiHangHoa==29 || item.fiTrangThaiHangHoa==30 || item.fiTrangThaiHangHoa==31 ||
                 item.fiTrangThaiHangHoa==33 || item.fiTrangThaiHangHoa==38){
                 return true;
             }else{
