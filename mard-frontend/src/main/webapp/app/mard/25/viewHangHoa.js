@@ -239,7 +239,7 @@ function Mard25ViewHangHoaVM (options) {
         self.hangHoaSelected(index);
         self.fiNSWFileCode(self.fiHS().fiNSWFileCode);
         self.clearForm();
-        $("#modal_guiSua").show();
+        $("#modal_guiSua").modal("show");
     }
 
     self.guiKiemDinhHangHoa =function(){
@@ -265,8 +265,8 @@ function Mard25ViewHangHoaVM (options) {
                             success: function (d) {
                                 if (d && d.success) {
                                     app.Alert('Gửi yêu cầu thành công');
-                                    $('#modal_guiSua').modal('hide');
                                     self.searchProduct();
+                                    $('#modal_guiSua').modal('hide');
                                 } else {
                                     app.Alert(d.message);
                                 }
@@ -326,10 +326,10 @@ function Mard25ViewHangHoaVM (options) {
         }
         return true;
     }
-    self.thoatOnClick = function(index){
+    self.thoatOnClick = function(){
         self.clearForm();
         $("#modal_view").hide();
-        $("#modal_guiSua").hide();
+        $("#modal_guiSua").modal("hide");
     }
     self.clearForm =function () {
         self.fiLoaiDanhGia(null);

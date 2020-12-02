@@ -757,7 +757,7 @@ public class Mard25Api extends BaseApi {
             Docx docx;
             // preparing variables
             Variables variables = genVariablesDonDangKy(donDangKy);
-            if(null!=donDangKy.getListChiTieu()&&!donDangKy.getListChiTieu().isEmpty()){
+            if(null!=donDangKy.getXacNhanDon()){
                 templatePath = request.getRealPath("/WEB-INF/downloads/mard/25/don_dang_ky_phuluc.docx");
             }else{
                 templatePath = request.getRealPath("/WEB-INF/downloads/mard/25/don_dang_ky.docx");
@@ -837,13 +837,23 @@ public class Mard25Api extends BaseApi {
         donDKVariables.addTextVariable(new TextVariable("#{fiContactName}", donDangKy.getFiContactName()==null?"":donDangKy.getFiContactName()));
         donDKVariables.addTextVariable(new TextVariable("#{fiLoaiHS}", Mard25Hepler.getLoaiHoSo(donDangKy.getFiHSType())));
 
-        donDKVariables.addTextVariable(new TextVariable("#{fiSignAddressName}", donDangKy.getFiSignAddressName()==null?"":donDangKy.getFiSignAddressName()));
+        StringBuffer soHD = new StringBuffer();
+        String ngayHD;
+        donDangKy.getFiAttachmentList().forEach(att->{
+            if (att.getFiFileTypeID()==1L){
+                att.getFiFileHD();
+            }
+        });
+
+        donDKVariables.addTextVariable(new TextVariable("#{fiNameDVXL}", donDangKy.getFiNameDVXL()==null?"":donDangKy.getFiNameDVXL()));
+
+        donDKVariables.addTextVariable(new TextVariable("#{fiSignAddressName}", donDangKy.getFiSignAddressName()==null?"":donDangKy.getFiSignAddressName()+", "));
         donDKVariables.addTextVariable(new TextVariable("#{fiCreatedDate}", Mard25Hepler.toVNStringDate(donDangKy.getFiHSCreatedDate())));
         donDKVariables.addTextVariable(new TextVariable("#{fiSignName}", donDangKy.getFiSignName()));
         if(donDangKy.getXacNhanDon()!=null){
             donDKVariables.addTextVariable(new TextVariable("#{fiSoGXN}", donDangKy.getXacNhanDon().getFiSoGXN()==null?"":donDangKy.getXacNhanDon().getFiSoGXN()));
-            donDKVariables.addTextVariable(new TextVariable("#{fiNoiXN}", donDangKy.getXacNhanDon().getFiNoiXN()));
-            donDKVariables.addTextVariable(new TextVariable("#{fiNgayXN}", Mard25Hepler.toShortStringDate(donDangKy.getXacNhanDon().getFiNgayXN())));
+            donDKVariables.addTextVariable(new TextVariable("#{fiNoiXN}", donDangKy.getXacNhanDon().getFiNoiXN()==null?"":donDangKy.getXacNhanDon().getFiNoiXN()+", "));
+            donDKVariables.addTextVariable(new TextVariable("#{fiNgayXN}", Mard25Hepler.toVNStringDate(donDangKy.getXacNhanDon().getFiNgayXN())));
             donDKVariables.addTextVariable(new TextVariable("#{fiNguoiKy}", donDangKy.getXacNhanDon().getFiNguoiXN()==null?"":donDangKy.getXacNhanDon().getFiNguoiXN()));
         }else{
             donDKVariables.addTextVariable(new TextVariable("#{fiSoGXN}", ""));
@@ -904,6 +914,13 @@ public class Mard25Api extends BaseApi {
                 fiTenDVTVars.add(new TextVariable("#{fiTenDVT}",tbdChiTieuDG25.getFiTenDVT()==null?"":tbdChiTieuDG25.getFiTenDVT()));
                 fiGhiChuVars.add(new TextVariable("#{fiGhiChu}",tbdChiTieuDG25.getFiGhiChu()==null?"":tbdChiTieuDG25.getFiGhiChu()));
             }
+        }else{
+            fiTenHangHoaVars.add(new TextVariable("#{fiTenHangHoa}",""));
+            fiTenChiTieuVars.add(new TextVariable("#{fiTenChiTieu}",""));
+            fiHinhThucCBVars.add(new TextVariable("#{fiHinhThucCB}",""));
+            fiHamLuongVars.add(new TextVariable("#{fiHamLuong}",""));
+            fiTenDVTVars.add(new TextVariable("#{fiTenDVT}",""));
+            fiGhiChuVars.add(new TextVariable("#{fiGhiChu}",""));
         }
         chiTieuTableVariable.addVariable(fiTenHangHoaVars);
         chiTieuTableVariable.addVariable(fiTenChiTieuVars);

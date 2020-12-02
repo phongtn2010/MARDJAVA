@@ -7,6 +7,7 @@ import com.nsw.backend.mard.p25.model.TbdHoso25;
 import com.nsw.backend.mard.p25.service.TbdHangHoa25Service;
 import com.nsw.backend.mard.p25.service.TbdHoso25Service;
 import com.nsw.backend.mard.p26.constant.Constant26;
+import com.nsw.backend.mard.p26.model.FilterResultHH;
 import com.nsw.backend.mard.p26.model.TbdHanghoa26;
 import com.nsw.backend.util.ResponseJson;
 import org.slf4j.Logger;
@@ -35,6 +36,11 @@ public class TbdHangHoa26Controller extends BaseController {
     @RequestMapping(value = "/getlist", method = RequestMethod.GET)
     public ResponseEntity<ResponseJson> getListByFilter(@RequestParam(name = "taxCode") String taxcode) {
         try {
+            List<TbdHanghoa26> tbdHanghoa26List = getListHangHoaMienKiem(taxcode);
+            FilterResultHH filterResultHH = new FilterResultHH();
+            filterResultHH.setData(tbdHanghoa26List);
+            filterResultHH.setTotal(tbdHanghoa26List.size());
+
             return createSuccessResponse(getListHangHoaMienKiem(taxcode),HttpStatus.OK);
         }catch (Exception e){
             LOG.error(e.getMessage());

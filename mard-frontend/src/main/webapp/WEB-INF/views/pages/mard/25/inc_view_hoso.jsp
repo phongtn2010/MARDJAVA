@@ -105,13 +105,22 @@
                     <td>11. Thông tin người liên hệ: <span data-bind="text: fiContactName"></span></td>
                 </tr>
                 <tr>
-<%--                    <td>12. Hợp đồng mua bán: <span data-bind="foreach: lstHD">Số:<b style="text-decoration: none" data-bind="text: fiFileHD"></b> Ngày <b style="text-decoration: none" data-bind="date: fiFileHDDate"></b>  </span></td>--%>
+                    <td>12. Hợp đồng mua bán:
+                        <span data-bind="foreach: lstHD">
+                            Số:<span data-bind="text: fiFileHD"></span>
+                            Ngày <span data-bind="date: fiFileHDDate"></span>;  </span></td>
                 </tr>
                 <tr>
-<%--                    <td>13. Hóa đơn mua bán: <span data-bind="foreach: lstHoaDon">Số:<b style="text-decoration: none" data-bind="text: fiFileHD"></b> Ngày <b style="text-decoration: none" data-bind="date: fiFileHDDate"></b>  </span></td>--%>
+                    <td>13. Hóa đơn mua bán:
+                        <span data-bind="foreach: lstHoaDon">
+                            Số:<span data-bind="text: fiFileHD"></span>
+                            Ngày <span data-bind="date: fiFileHDDate"></span>;  </span></td>
                 </tr>
                 <tr>
-<%--                    <td>14. Phiếu đóng gói số: <span data-bind="foreach: lstPhieu">Số:<b style="text-decoration: none" data-bind="text: fiFileHD"></b> Ngày <b style="text-decoration: none" data-bind="date: fiFileHDDate"></b>  </span></td>--%>
+                    <td>14. Phiếu đóng gói số:
+                        <span data-bind="foreach: lstPhieu">
+                            Số:<span data-bind="text: fiFileHD"></span>
+                            Ngày <span data-bind="date: fiFileHDDate"></span>;  </span></td>
                 </tr>
                 <tr>
                     <td class="text-center"><b>DÀNH CHO CƠ QUAN KIỂM TRA</b></td>
@@ -122,7 +131,10 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>15. Đơn vị thực hiện đánh giá: </td>
+                    <td>16. Thời gian đánh giá: Để trống</td>
+                </tr>
+                <tr>
+                    <td>17. Đơn vị thực hiện đánh giá: <span data-bind="text: fiNameDVXL"></span></td>
                 </tr>
                 <tr>
                     <td>Đối với hàng nhập khẩu, Giấy này có giá trị để làm thủ tục hải quan. Sau đó doanh nghiệp phải xuất trình toàn bộ hồ sơ và hàng hóa đã hoàn thành thủ tục hải quan cho cơ quan đánh giá để được đánh giá chất lượng theo quy định</td>

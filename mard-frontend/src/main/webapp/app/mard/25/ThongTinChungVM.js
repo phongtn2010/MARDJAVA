@@ -433,6 +433,8 @@ function ThongTinChungVM(data) {
         ttcVMSelf.listCL([]);
         ttcVMSelf.listAT([]);
         ttcVMSelf.listSLKL([]);
+        ttcVMSelf.fiProValueVN(null);
+        ttcVMSelf.fiProValueUSD(null);
     }
     ttcVMSelf.addProduct=function(data){
         var getAllForm = [ttcVMSelf.fiProSLKLList, ttcVMSelf.fiProATList,ttcVMSelf.fiProCLList];

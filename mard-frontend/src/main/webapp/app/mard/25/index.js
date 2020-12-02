@@ -352,7 +352,23 @@ function Mard25VM() {
                 item.listChiTieu=res;
             }
         });
-        // self.donDangKyDownload(item);
+        if(item.fiAttachmentList.length>0) {
+            item.lstHD=ko.computed(function () {
+                return ko.utils.arrayFilter(item.fiAttachmentList, function (re) {
+                    return re.fiFileTypeID == '1';
+                });
+            });
+            item.lstHoaDon=ko.computed(function () {
+                return ko.utils.arrayFilter(item.fiAttachmentList, function (re) {
+                    return re.fiFileTypeID == '2';
+                });
+            });
+            item.lstPhieu=ko.computed(function () {
+                return ko.utils.arrayFilter(item.fiAttachmentList, function (re) {
+                    return re.fiFileTypeID == '3';
+                });
+            });
+        }
         console.log(item);
         self.selectedHoSo(item);
         $('#mard25ViewHSModal').modal('show');

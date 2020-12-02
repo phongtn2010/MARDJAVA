@@ -69,6 +69,8 @@ public class TbdGiayXNCL25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_SIGN_CER_NAME", length = 100)
     private String fiNguoiKy;
 
+    @Column(name = "FI_THUHOI")
+    private Boolean isThuHoi;
     @Transient
     private List<TbdHanghoa25> fiProductList;
 }

@@ -73,8 +73,8 @@ public class TbdKQXL25 implements Serializable {
     private String fiNguoiXL;
 
 
-    @Column(name = "FI_THUHOI")
-    private boolean isThuHoi;
+    @Column(name = "FI_THUHOI", nullable = false)
+    private Boolean isThuHoi;
     @Transient
     private List<TbdHangHoaFile25> fiListHangHoaFile;
 }

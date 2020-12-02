@@ -18,4 +18,9 @@ public class TbhGiayXNCL25ServiceImpl implements TbdGiayXNCL25Service {
         return repository.save(tbdGiayXNCL25);
     }
 
+    @Override
+    public TbdGiayXNCL25 findByFiNSWFileCodeAndFiSoGCN(String fiNSWFileCode, String fiSoGXN) {
+        return repository.findByFiNSWFileCodeAndFiSoGCN(fiNSWFileCode,fiSoGXN);
+    }
+
 }

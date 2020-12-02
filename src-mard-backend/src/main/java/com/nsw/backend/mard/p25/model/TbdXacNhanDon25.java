@@ -48,6 +48,9 @@ public class TbdXacNhanDon25 implements Serializable {
     @Column(name = "FI_NOTEGOODS", length = 1000)
     private String fiGhiChu;
 
+    @Column(name = "FI_THUHOI")
+    private Boolean isThuHoi;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "FI_NGAYTHUHOI")
     private Date fiNgayThuHoi;

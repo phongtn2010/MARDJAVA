@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TbdGiayXNCL25Repository extends JpaRepository<TbdGiayXNCL25, Integer>, JpaSpecificationExecutor<TbdGiayXNCL25> {
-
+    TbdGiayXNCL25 findByFiNSWFileCodeAndFiSoGCN(String fiNSWFileCode, String fiSoGXN);
 }

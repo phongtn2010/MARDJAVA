@@ -26,8 +26,8 @@ public class BNNThuHoiGiayXNCL {
     private Date fiNgayKy;
     @XmlElement(name = "SignConfirmName")
     private String fiNguoiKy;
-    @XmlElement(name = "AniFeedConfirmNo")
-    private Long fiSoGDKCuaBNN;
+    @XmlElement(name = "AniFeedResultNo")
+    private String fiSoGXN;
     @XmlElement(name = "AttachmentId")
     private String fiFileID;
     @XmlElement(name = "FileName")
