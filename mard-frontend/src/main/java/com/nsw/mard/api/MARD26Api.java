@@ -16,6 +16,7 @@ import com.nsw.mard.constant.MARD26Constant;
 import com.nsw.mard.constant.Mard25Constant;
 import com.nsw.mard.p25.model.TbdHoso25;
 import com.nsw.mard.p26.model.FilterForm;
+import com.nsw.mard.p26.model.FilterFormHangHoa26;
 import com.nsw.mard.p26.model.TbdHoso26;
 import com.nsw.mard.p6.model.SendMessage;
 import com.nsw.util.Constants;
@@ -38,13 +39,12 @@ public class MARD26Api extends BaseApi {
     @Autowired
     Environment environment;
 
-    @RequestMapping(value = "/hanghoa/getlist", method = RequestMethod.GET)
+    @RequestMapping(value = "/hanghoa/getlist", method = RequestMethod.POST)
     public @ResponseBody
-    ResponseJson getHoSoByStatus(
-            @RequestParam(name = "taxCode") String taxCode) {
+    ResponseJson getHoSoByStatus(@RequestBody FilterFormHangHoa26 filterFormHangHoa26) {
         ResponseJson json = new ResponseJson();
         try {
-            json = BackendRequestHelper.getInstance().doGetRequest(MARD26Constant.getInstance().getApiUrl(environment, MARD26Constant.TbdHoso26API.SEARCH_PRODUCT_FROM_TACN) + "?taxCode=" + taxCode);
+            json = BackendRequestHelper.getInstance().doPostRequest(MARD26Constant.getInstance().getApiUrl(environment, MARD26Constant.TbdHoso26API.SEARCH_PRODUCT_FROM_TACN),filterFormHangHoa26);
             return json;
         } catch (Exception ex) {
             LogUtil.addLog(ex);

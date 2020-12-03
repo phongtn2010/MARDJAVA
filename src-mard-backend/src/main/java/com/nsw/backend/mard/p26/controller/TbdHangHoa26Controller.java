@@ -2,6 +2,7 @@ package com.nsw.backend.mard.p26.controller;
 
 import com.nsw.backend.controller.BaseController;
 import com.nsw.backend.mard.p25.constant.Constant25;
+import com.nsw.backend.mard.p25.dto.FilterFormHangHoa26;
 import com.nsw.backend.mard.p25.model.TbdHanghoa25;
 import com.nsw.backend.mard.p25.model.TbdHoso25;
 import com.nsw.backend.mard.p25.service.TbdHangHoa25Service;
@@ -33,15 +34,23 @@ public class TbdHangHoa26Controller extends BaseController {
         this.tbdHoso25Service = tbdHoso25Service;
     }
 
-    @RequestMapping(value = "/getlist", method = RequestMethod.GET)
-    public ResponseEntity<ResponseJson> getListByFilter(@RequestParam(name = "taxCode") String taxcode) {
+    @RequestMapping(value = "/getlist", method = RequestMethod.POST)
+    public ResponseEntity<ResponseJson> getListByFilter(@RequestBody FilterFormHangHoa26 filterFormHangHoa26) {
         try {
-            List<TbdHanghoa26> tbdHanghoa26List = getListHangHoaMienKiem(taxcode);
+            List<TbdHanghoa26> tbdHanghoa26List = getListHangHoaMienKiem(filterFormHangHoa26.getTaxCode());
             FilterResultHH filterResultHH = new FilterResultHH();
-            filterResultHH.setData(tbdHanghoa26List);
+            filterResultHH.setPage(filterFormHangHoa26.getPage() == 0 ? 0 : filterFormHangHoa26.getPage() - 1);
+            filterResultHH.setSize(filterFormHangHoa26.getSize());
+            if (!tbdHanghoa26List.isEmpty()&&null!=tbdHanghoa26List){
+                Integer from=filterResultHH.getPage() * filterResultHH.getSize();
+                Integer to=filterResultHH.getPage() * filterResultHH.getSize()+filterResultHH.getSize();
+                filterResultHH.setData(
+                        tbdHanghoa26List.subList(from,to));
+            }else {
+                filterResultHH.setData(new ArrayList<>());
+            }
             filterResultHH.setTotal(tbdHanghoa26List.size());
-
-            return createSuccessResponse(getListHangHoaMienKiem(taxcode),HttpStatus.OK);
+            return createSuccessResponse(filterResultHH,HttpStatus.OK);
         }catch (Exception e){
             LOG.error(e.getMessage());
             return createErrorResponse(e.getMessage(),HttpStatus.OK);

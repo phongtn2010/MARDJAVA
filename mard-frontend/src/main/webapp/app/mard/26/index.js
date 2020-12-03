@@ -124,6 +124,9 @@ function IndexVM(data) {
             return pos.fiCatTypeName;
         else return id;
     }
+    index26Self.goCopyHS = function (item) {
+        document.location = app.appContext + '/mard/26/copy/'+item.fiIdHoSo26;
+    }
 }
 function init(data) {
     var index26VM = new IndexVM(data);

@@ -356,7 +356,7 @@
                 <div class="form-group">
                     <div class="col-md-12">
                         <div class="col-md-2 nsw-text-right">
-                            <label><spring:message code="mard.25.tokhai.file.khac_type"/><a class="nsw-require-field">*</a></label>
+                            <label><spring:message code="mard.25.tokhai.file.khac_type"/></label>
                         </div>
                             <div class="col-md-4">
                                 <select class="form-control select2"

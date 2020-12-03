@@ -19,7 +19,7 @@ function EditVM(options) {
     edit26VMSefl.form26VM = ko.observable(null);
     edit26VMSefl.applyState =function () {
         edit26VMSefl.form26VM(new FormVM(options));
-        edit26VMSefl.form26VM().applyStates();
+        // edit26VMSefl.form26VM().applyStates();
     }
 
     edit26VMSefl.btnLuuClick= function () {
@@ -162,6 +162,9 @@ function getThongTinHoSo(callback) {
 $(document).ready(function () {
     var options={};
     getThongTinHoSo(function (response) {
+        if(isCopy){
+            console.log(response);
+        }
         options['fiTbdHoso26'] = response.data;
         $.when(
             app.sendGetRequest('/mard/26/danhmuc/getby-catno/1', function (res) {

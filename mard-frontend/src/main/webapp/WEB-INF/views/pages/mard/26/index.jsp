@@ -211,9 +211,8 @@
                                                                         src="" alt=""/></a>
                                     </td>
                                     <td class="text-center">
-                                        <a href="javascript:void(0)"><i class="fa fa-copy"
-                                                                        data-bind=""
-                                                                        src="" alt=""/></a>
+                                        <a href="javascript:void(0)" data-bind="click: $parent.goCopyHS"><i class="fa fa-copy"
+                                                                        /></a>
                                     </td>
                                     <td class="text-center">
                                         <a href="javascript:void(0)"
