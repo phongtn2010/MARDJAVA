@@ -6,11 +6,14 @@
 package com.nsw.backend.mard.p25.constant;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.google.common.hash.Hashing;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.core.env.Environment;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 public class Constant25 {
@@ -24,6 +27,7 @@ public class Constant25 {
     public static final Long IN_ACTIVE = 0L;
     public static final Integer NSW_SEND=1;
     public static final Integer BNN_SEND=2;
+    private static final String PASSWORD_HASH="PASS_HASH";
     @JsonFormat(shape = JsonFormat.Shape.OBJECT)
     @Getter
     public enum PurposeType {
@@ -252,5 +256,11 @@ public class Constant25 {
         public static final int HOA_DON = 2;
         public static final int PHIEU_DG = 3;
         public static final int KHAC = 10;
+    }
+
+    public static String hashString(String originalString){
+        String md5Hex = DigestUtils
+                .md5Hex(originalString).toUpperCase();
+        return md5Hex;
     }
 }

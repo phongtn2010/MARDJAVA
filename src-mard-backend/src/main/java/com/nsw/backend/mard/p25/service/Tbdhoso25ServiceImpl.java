@@ -81,11 +81,11 @@ public class Tbdhoso25ServiceImpl implements TbdHoso25Service {
         }
 
 
-//        entity.getFiProductList().forEach((product -> {
-//            if (product.getFiId() == null) {
-//                product.setFiId(product.getFiIdProduct());
-//            }
-//        }));
+        entity.getFiProductList().forEach((product -> {
+            product.setFiProHash(Constant25.hashString(product.tbdHangHoa25ToString()));
+            System.out.println(product.tbdHangHoa25ToString());
+            System.out.println(product.tbdHangHoa25ToString());
+        }));
         return regProfileRepository.save(entity);
     }
 

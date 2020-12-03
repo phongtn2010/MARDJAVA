@@ -55,4 +55,10 @@ public class TbdHanghoaAT25 extends CmonBaseEntity implements Serializable {
 
     @Column(name = "FI_PROAT_UNIT_NAME")
     private String fiProATUnitName;
+
+    public String tbdHanghoaAT25ToString(){
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append(fiProATTarg).append("|").append(fiProATCompare).append("|").append(fiProATContent).append("|").append(fiProATUnitID);
+        return stringBuffer.toString();
+    }
 }

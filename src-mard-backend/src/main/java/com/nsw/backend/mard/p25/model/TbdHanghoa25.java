@@ -164,4 +164,23 @@ public class TbdHanghoa25 extends CmonBaseEntity implements Serializable {
         fiProATList = new ArrayList<>();
         fiProSLKLList = new ArrayList<>();
     }
+
+
+    public String tbdHangHoa25ToString(){
+        StringBuffer sbHangHoa = new StringBuffer();
+        sbHangHoa.append(fiProName).append("|").append(fiProIdNhom).append("|").append(fiProIdPhanNhom).append("|").append(fiProIdLoai)
+                .append("|").append(fiProIdPhanLoai).append("|").append(fiProCode).append("|").append(fiProMadeIn)
+                .append("|").append(fiProCountryCode).append("|").append(fiProThanhPhan).append("|").append(fiProColor).append("|").append(fiProSoHieu).append("|").append(fiProQuyChuan);
+        StringBuffer sbAT = new StringBuffer();
+        for (TbdHanghoaAT25 tbdHanghoaAT25: fiProATList){
+            sbAT.append(tbdHanghoaAT25.tbdHanghoaAT25ToString());
+        }
+        StringBuffer sbCL = new StringBuffer();
+        for (TbdHanghoaCL25 tbdHanghoaCL25: fiProCLList){
+            sbCL.append(tbdHanghoaCL25.tbdHanghoaCL25ToString());
+        }
+        sbHangHoa.append(sbAT);
+        sbHangHoa.append(sbCL);
+        return sbHangHoa.toString();
+    }
 }
