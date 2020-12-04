@@ -1,9 +1,14 @@
 package com.nsw.backend.mard.p25.helper;
 
+import com.nsw.backend.mard.p25.constant.Constant25;
 import com.nsw.backend.mard.p25.dto.SendMessage;
+import com.nsw.backend.mard.p25.model.TbdHanghoa25;
+import com.nsw.backend.mard.p25.model.TbdHanghoaMK25;
+import com.nsw.backend.mard.p25.model.TbdHoso25;
 import com.nsw.backend.util.ResponseJson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

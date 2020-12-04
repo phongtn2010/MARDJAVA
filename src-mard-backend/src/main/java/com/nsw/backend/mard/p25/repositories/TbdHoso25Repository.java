@@ -12,8 +12,8 @@ import java.util.Optional;
 public interface TbdHoso25Repository extends JpaRepository<TbdHoso25, Integer>, TbdHoso25RepositoryCustom {
     Optional<TbdHoso25> findFirstByFiNSWFileCodeAndFiActive(String fileCode, boolean active);
     List<TbdHoso25> findAllByFiHSStatusAndFiActive(int fiHSStatus, boolean active);
-    @Query("select hs from TbdHoso25 hs where hs.fiTaxCode=?1 and hs.fiHSStatus>=?2 and hs.fiHSStatus<=?3")
-    List<TbdHoso25> findByFiHSStatus(String taxCode,Integer from, Integer to);
+    @Query("select hs from TbdHoso25 hs where hs.fiTaxCode=?1 and hs.fiHSStatus=?2")
+    List<TbdHoso25> findByFiHSStatus(String taxCode,Integer from);
     @Query("select hs from TbdHoso25 hs where hs.fiTaxCode=?1 and hs.fiActive=?2 " +
             "and hs.fiHSStatus>=?3 and hs.fiHSType=?4")
     List<TbdHoso25> findByFiTaxCodeAndFiActiveAndFiHSStatusAndFiHSType(String taxcode, boolean active, Integer fiHSStatus, Integer fiHSType);

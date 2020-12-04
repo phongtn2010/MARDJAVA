@@ -261,9 +261,8 @@ public class Tbdhoso25Controller extends BaseController {
     @GetMapping("/find-by-status")
     public ResponseEntity<ResponseJson> findByStatus(
             @RequestParam(name = "taxCode") String taxCode,
-            @RequestParam(name = "from") Integer from,
-            @RequestParam(name = "to") Integer to) {
-        return createSuccessResponse(tbdHoso25Service.findByFiHSStatus(taxCode,from, to), HttpStatus.OK);
+            @RequestParam(name = "from") Integer from) {
+        return createSuccessResponse(tbdHoso25Service.findByFiHSStatus(taxCode,from), HttpStatus.OK);
     }
     @PostMapping("/find")
     public ResponseEntity<ResponseJson> getListByFilter(@RequestBody FilterForm filterForm) {

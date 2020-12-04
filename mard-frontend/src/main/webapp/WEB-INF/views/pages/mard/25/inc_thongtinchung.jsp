@@ -134,7 +134,7 @@
                         <div class="col-md-4">
                             <select class="form-control"  data-bind="options:lstMaHoSoThayThe,optionsCaption: 'Chọn...',
                                                                      optionsValue : 'fiNSWFileCodeR',
-                                                                     optionsText : 'fiNSWFileCodeR',
+                                                                     optionsText : 'fiNSWFileCodeR', event: {change: changeMaHSThayThe},
                                                                      value: fiNSWFileCodeReplace, enable: $root.isEditable()">
                             </select>
                         </div>

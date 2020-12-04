@@ -104,6 +104,6 @@ public interface TbdHoso25Service {
     void internalStatusUpdate(TbdHoso25 egProfile, int status);
 
     void rollbackFailedRequestUpdate(TbdHoso25  result);
-    List<TbdHoso25> findByFiHSStatus(String taxCode,Integer from, Integer to);
+    List<TbdHoso25> findByFiHSStatus(String taxCode,Integer from);
     List<TbdHoso25> findByFiTaxCodeAndFiActiveAndFiHSStatusAndFiHSType(String taxcode, boolean active, Integer fiHSStatus, Integer fiHSType);
 }

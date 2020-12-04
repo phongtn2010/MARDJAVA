@@ -652,12 +652,12 @@ public class Mard25Api extends BaseApi {
     public @ResponseBody
     ResponseJson getHoSoByStatus(
             @RequestParam(name = "taxCode") String taxCode,
-            @RequestParam(name = "from") Integer from,
-            @RequestParam(name = "to") Integer to
+            @RequestParam(name = "from") Integer from
+//            @RequestParam(name = "to") Integer to
     ) {
         ResponseJson json = new ResponseJson();
         try {
-            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.FIND_HOSO_BY_STATUS) + "?taxCode="+taxCode +"&from="+ from+"&to="+to);
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.FIND_HOSO_BY_STATUS) + "?taxCode="+taxCode +"&from="+ from);
             return json;
         } catch (Exception ex) {
             LogUtil.addLog(ex);

@@ -190,15 +190,8 @@ function Mard25ViewHangHoaVM (options) {
     }
     self.thongBaoKQVM = ko.observable(new ThongBaoKQVM());
     self.xemThongBao = function(data,type,index){
-        self.thongBaoKQVM().listHangHoa(index);
-        self.thongBaoKQVM().thoiGianNhap("Từ ngày: "+  new Date(self.fiHS().fiPurchFromDate).toShortDateString() + " tới ngày " + new Date(self.fiHS().fiPurchToDate).toShortDateString());
-
-        self.thongBaoKQVM().tenCongTyNK(self.fiHS().fiImporterName);
-        self.thongBaoKQVM().diaChiCongTyNK(self.fiHS().fiImporterAddress);
-        self.thongBaoKQVM().quyChuanKT(index.fiProQuyChuan);
-        self.thongBaoKQVM().tieuChuanApDung(index.fiProSoHieu);
-        self.thongBaoKQVM().giayCN(index.fiSoGCN);
-            $("#mard25KQKT").show();
+        self.thongBaoKQVM().update(index);
+        $("#mard25KQKT").show();
     }
 
     self.lichsuXuly = ko.observable(new HistoryPopupView());
@@ -446,7 +439,7 @@ $(document).ready(function () {
             }),
             app.sendGetRequest("/mard/25/danhmuc/quocgia", function (res) {
                 options['lstCountry'] = res.data;
-            }),
+            })
         ).done(function (data) {
             $('#loading10').hide();
 
@@ -467,8 +460,35 @@ function ThongBaoKQVM() {
     thongBaoVMSefl.tieuChuanApDung=ko.observable(null);
     thongBaoVMSefl.quyChuanKT=ko.observable(null);
     thongBaoVMSefl.giayCN=ko.observable(null);
-    thongBaoVMSefl.closeThongBao = function(data,type,index){
+    thongBaoVMSefl.ngayKy=ko.observable(null);
+    thongBaoVMSefl.soGDK=ko.observable(null);
+    thongBaoVMSefl.lstHD=ko.observableArray([]);
+    thongBaoVMSefl.lstHoaDon=ko.observableArray([]);
+    thongBaoVMSefl.update=function(index){
+        thongBaoVMSefl.listHangHoa(index);
+        thongBaoVMSefl.thoiGianNhap("Từ ngày: "+  new Date(self.fiHS().fiPurchFromDate).toShortDateString() + " tới ngày " + new Date(self.fiHS().fiPurchToDate).toShortDateString());
+        thongBaoVMSefl.tenCongTyNK(self.fiHS().fiImporterName);
+        thongBaoVMSefl.diaChiCongTyNK(self.fiHS().fiImporterAddress);
+        thongBaoVMSefl.quyChuanKT(index.fiProQuyChuan);
+        thongBaoVMSefl.tieuChuanApDung(index.fiProSoHieu);
+        thongBaoVMSefl.giayCN(index.fiSoGCN);
+        thongBaoVMSefl.ngayKy(index.ngayKy==null?null:new Date(index.ngayKy).toDateString());
+        thongBaoVMSefl.soGDK(self.fiHS().fiSoXacNhanDon);
 
-        $("#mard25KQKT").hide();
+        if(self.fiHS().fiAttachmentList.length>0) {
+            thongBaoVMSefl.lstHD=ko.computed(function () {
+                return ko.utils.arrayFilter(item.fiAttachmentList, function (re) {
+                    return re.fiFileTypeID == '1';
+                });
+            });
+            thongBaoVMSefl.lstHoaDon=ko.computed(function () {
+                return ko.utils.arrayFilter(item.fiAttachmentList, function (re) {
+                    return re.fiFileTypeID == '2';
+                });
+            });
+        }
+    }
+    thongBaoVMSefl.closeThongBao = function(data,type,index){
+        $("#mard25KQKT").modal("hide");
     }
 }

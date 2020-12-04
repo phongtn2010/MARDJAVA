@@ -19,7 +19,7 @@
                         CỤC CHĂN NUÔI
                     </h5>
                     <div style="border-top: #000000 solid 1px; margin: auto; width: 160px"></div>
-                    Số:
+                    Số: <span data-bind="text: giayCN"></span>
                 </div>
                 <div class="col-md-6 text-center">
                     <h4 style="font-weight: bold;">
@@ -78,9 +78,13 @@
             </div>
             <div class="row">
                 - Thuộc lô hàng có các chứng từ sau: <br/>
-                + Hợp đồng số:<br/>
-                + Hóa đơn số:<br/>
-                + Giấy đăng ký kiểm tra xác nhận chất lượng số:<br/>
+                + Hợp đồng số:<br/> <span data-bind="foreach: lstHD">
+                            Số:<span data-bind="text: fiFileHD"></span>
+                            Ngày <span data-bind="date: fiFileHDDate"></span>;  </span>
+                + Hóa đơn số:<br/> <span data-bind="foreach: lstHoaDon">
+                            Số:<span data-bind="text: fiFileHD"></span>
+                            Ngày <span data-bind="date: fiFileHDDate"></span>;  </span>
+                + Giấy đăng ký kiểm tra xác nhận chất lượng số:<br/> <span data-bind="text: soGDK"></span>
                 - Tên tổ chức nhập khẩu: <span data-bind="text: tenCongTyNK"></span><br/>
                 Địa chỉ: <span data-bind="text: diaChiCongTyNK"></span><br/>
             </div>

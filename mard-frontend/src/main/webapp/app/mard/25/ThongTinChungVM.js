@@ -334,14 +334,15 @@ function ThongTinChungVM(data) {
     ttcVMSelf.fiFileIdGDK  = ko.observable(null);
 
     app.makeGet({
-        url: '/mard/25/hoso/find-by-status?taxCode=' + ttcVMSelf.fiTaxCode() + '&from=26&to=29',
+        url: '/mard/25/hoso/find-by-status?taxCode=' + ttcVMSelf.fiTaxCode() + '&from=26',
         success: function(res) {
             if (res.data){
                 var arr=res.data;
                 for (var i=0;i<arr.length;i++){
                     var item = {
                         fiNSWFileCodeR:arr[i].fiNSWFileCode,
-                        fiIdHSR:arr[i].fiIdHS
+                        fiIdHSR:arr[i].fiIdHS,
+                        fiGDKR:arr[i].fiSoXacNhanDon
                     };
                     ttcVMSelf.lstMaHoSoThayThe.push(item);
                 }
@@ -351,6 +352,15 @@ function ThongTinChungVM(data) {
 
         }
     });
+    ttcVMSelf.changeMaHSThayThe =function(){
+        var lstHoso = ttcVMSelf.lstMaHoSoThayThe();
+        var pos = lstHoso.find(function (e) {
+            return e.fiIdHSR == ttcVMSelf.fiNSWFileCodeReplace();
+        })
+        if (pos)
+            ttcVMSelf.fiGDK(pos.fiGDKR);
+
+    }
     ttcVMSelf.eventChangeNhom =function(){
         var id =ttcVMSelf.fiProIdNhom();
         if(id !== 'undefined'){

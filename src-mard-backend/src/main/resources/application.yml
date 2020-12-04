@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: hq_test
+    active: dev
 ---
 server:
   port: 8081
@@ -45,7 +45,7 @@ URL_DOWNLOAD: http://10.224.128.132:8005/FileServices/file/download
 URL_FILE_SERVICE: http://10.224.128.132:8005/FileServices
 FOLDER_TEMP_FILE_SERVICE: /home/TEMP/UPLOAD/
 TIMEOUT: 900
-ACTIVE_PROFILE: hq_test
+ACTIVE_PROFILE: dev
 # URL common backend de lay danh muc Quoc gia
 COMMON_BACKEND_DIC_STATE: http://10.224.128.132:8001/NSWBackendCommon/dic/state/
 # URL common backend de lay danh muc Don vi tinh
