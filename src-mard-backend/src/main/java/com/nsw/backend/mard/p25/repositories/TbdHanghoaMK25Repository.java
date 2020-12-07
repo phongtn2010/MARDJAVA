@@ -7,8 +7,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TbdHanghoaMK25Repository extends JpaRepository<TbdHanghoaMK25, Integer>{
+public interface TbdHanghoaMK25Repository extends JpaRepository<TbdHanghoaMK25, Integer>,TbdHanghoaMK25RepositoryCustom{
 
     List<TbdHanghoaMK25> findByFiTaxCode(String taxCode);
     List<TbdHanghoaMK25> findByFiProHash(String hash);
+
+    TbdHanghoaMK25 findByFiIdProduct(Integer fiIdProduct);
 }

@@ -24,7 +24,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Table(name = "TBDHANGHOAMK25", schema = "MARD")
-public class TbdHanghoaMK25 extends CmonBaseEntity implements Serializable {
+public class TbdHanghoaMK25 implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public static final String SEQUENCE_NAME = "TBDHANGHOAMK25_SEQ";
@@ -49,6 +49,10 @@ public class TbdHanghoaMK25 extends CmonBaseEntity implements Serializable {
 
     @Column(name = "FI_TAXCODE", length = 50)
     private String fiTaxCode;
+
+    @Column(name = "FI_HS_TYPE")
+    private Integer fiHsType;
+
 
     @Column(name = "FI_PRO_NAME", nullable = false, length = 500)
     private String fiProName;
@@ -140,6 +144,17 @@ public class TbdHanghoaMK25 extends CmonBaseEntity implements Serializable {
 
     @Column(name = "FI_ORDER")
     private Integer fiOrder;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "FI_NGAYCAP")
+    private Date fiNgayCap;
+
+    @Column(name = "FI_ACTIVE")
+    private Boolean fiActive;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "FI_NGAYTHUHOI")
+    private Date fiNgayThuHoi;
 
 
     //Danh sách chất lượng kèm theo

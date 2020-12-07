@@ -21,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/mard/26/hoso")
@@ -124,16 +125,29 @@ public class TbdHoso26Controller extends BaseController {
             profileHst.setFiStatus(profile.getFiTrangthai());
             tbdHoso26Service.update(profile);
             tbdLichsu26Service.save(profileHst);
-            ResponseJson response = webService26.sendHoso26(result);
 
-            return createResponse(null, response.isSuccess(),
-                    response.isSuccess() ?
-                            "Hồ sơ đã gửi thành công!" :
-                            "Có lỗi trong quá trình gửi! " + response.getMessage(), HttpStatus.OK);
+            List<TbdHoso26> tbdHoso26List = checkTonTaiCongVanMienKiem(profile);
+            if (null==tbdHoso26List||tbdHoso26List.isEmpty()){
+                ResponseJson response = webService26.sendHoso26(result);
+                return createResponse(null, response.isSuccess(),
+                        response.isSuccess() ?
+                                "Hồ sơ đã gửi thành công!" :
+                                "Có lỗi trong quá trình gửi! " + response.getMessage(), HttpStatus.OK);
+            }
+            else{
+                return createResponse(null,true, "Bạn đã được cấp công văn số: "+tbdHoso26List.get(0).getFiSoCVMienKiem()
+                        +" vào năm nay, bạn không thể thực hiện yêu cầu xin cấp tiếp", HttpStatus.OK);
+            }
+
+
         } catch (Exception ex) {
             LOG.error(TAG + ex.getMessage(), ex);
             RabbitMQErrorHelper.pushLogToRabbitMQ(getErrorInfo(TAG, ex), rabbitMQService.getRabbitMQInfo());
             return createErrorResponse(ex.getMessage(), HttpStatus.OK);
         }
+    }
+    private List<TbdHoso26> checkTonTaiCongVanMienKiem(TbdHoso26 tbdHoso26){
+        List<TbdHoso26> tbdHoso26List=tbdHoso26Service.findCongVanMienKiem(new Date(),tbdHoso26.getFiMasothue());
+        return tbdHoso26List;
     }
 }

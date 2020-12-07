@@ -4,6 +4,7 @@ import com.nsw.backend.mard.p26.model.FilterForm;
 import com.nsw.backend.mard.p26.model.FilterResult;
 import com.nsw.backend.mard.p26.model.TbdHoso26;
 
+import java.util.Date;
 import java.util.List;
 
 public interface TbdHoso26Service {
@@ -15,4 +16,5 @@ public interface TbdHoso26Service {
     TbdHoso26 findById(int parseInt);
 
     TbdHoso26 findByFiHSCode(String nswFileCode);
+    List<TbdHoso26> findCongVanMienKiem(Date now,String taxcode);
 }

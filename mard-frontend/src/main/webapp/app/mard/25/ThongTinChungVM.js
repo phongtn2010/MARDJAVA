@@ -2,6 +2,8 @@ function ThongTinChungVM(data) {
     var ttcVMSelf = this;
 
 
+    ttcVMSelf.lstDSHosoMK = ko.observableArray((data && data.hasOwnProperty('lstDSHosoMK')) ? data.lstDSHosoMK : []);
+    ttcVMSelf.fiMaHoso = ko.observable(null);
     ttcVMSelf.lstChiTieuAT = ko.observableArray((data && data.hasOwnProperty('lstChiTieuAT')) ? data.lstChiTieuAT : []);
     ttcVMSelf.listCL = ko.observableArray((data && data.hasOwnProperty('listCL')) ? data.listCL : []);
     ttcVMSelf.listAT = ko.observableArray((data && data.hasOwnProperty('listAT')) ? data.listAT : []);
@@ -274,10 +276,10 @@ function ThongTinChungVM(data) {
         .extend({
             required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
         });
-    ttcVMSelf.fiImporterTel = ko.observable((data && data.hasOwnProperty('fiImporterTel')) ? data.fiImporterTel : null)
-        .extend({
-            required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-        });
+    ttcVMSelf.fiImporterTel = ko.observable((data && data.hasOwnProperty('fiImporterTel')) ? data.fiImporterTel : null);
+        // .extend({
+        //     required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+        // });
     ttcVMSelf.fiImporterFax = ko.observable((data && data.hasOwnProperty('fiImporterFax')) ? data.fiImporterFax : null).
     extend({
         number: {params: true}
@@ -290,22 +292,22 @@ function ThongTinChungVM(data) {
 
 
     //inc_thongtinkhac.jsp
-    ttcVMSelf.fiAddressGath = ko.observable((data && data.hasOwnProperty('fiAddressGath')) ? data.fiAddressGath : null).
-    extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-    });
-    ttcVMSelf.fiRegSamFromDate = ko.observable((data && data.hasOwnProperty('fiRegSamFromDate')) ? new Date(data.fiRegSamFromDate) : new Date()).
-    extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-    });
-    ttcVMSelf.fiRegSamToDate = ko.observable((data && data.hasOwnProperty('fiRegSamToDate')) ? new Date(data.fiRegSamToDate) : new Date()).
-    extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-    });
-    ttcVMSelf.fiAddressRegSample = ko.observable((data && data.hasOwnProperty('fiAddressRegSample')) ? data.fiAddressRegSample : null).
-    extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-    });
+    ttcVMSelf.fiAddressGath = ko.observable((data && data.hasOwnProperty('fiAddressGath')) ? data.fiAddressGath : null);
+    // extend({
+    //     required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    // });
+    ttcVMSelf.fiRegSamFromDate = ko.observable((data && data.hasOwnProperty('fiRegSamFromDate')&&data.fiRegSamFromDate) ? new Date(data.fiRegSamFromDate) : null);
+    // extend({
+    //     required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    // });
+    ttcVMSelf.fiRegSamToDate = ko.observable((data && data.hasOwnProperty('fiRegSamToDate')&&data.fiRegSamToDate!=null) ? new Date(data.fiRegSamToDate) : null);
+    // extend({
+    //     required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    // });
+    ttcVMSelf.fiAddressRegSample = ko.observable((data && data.hasOwnProperty('fiAddressRegSample')) ? data.fiAddressRegSample : null);
+    // extend({
+    //     required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    // });
 
     ttcVMSelf.fiContactName = ko.observable((data && data.hasOwnProperty('fiContactName')) ? data.fiContactName : null).
     extend({
@@ -317,10 +319,10 @@ function ThongTinChungVM(data) {
         //     params: '^0[1-9][0-9]{8,9}$',
         //     message: "Số điện thoại không hợp lệ."}
     // });
-    ttcVMSelf.fiContactAddress = ko.observable((data && data.hasOwnProperty('fiContactAddress')) ? data.fiContactAddress : null).
-    extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-    });
+    ttcVMSelf.fiContactAddress = ko.observable((data && data.hasOwnProperty('fiContactAddress')) ? data.fiContactAddress : null);
+    // extend({
+    //     required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    // });
     ttcVMSelf.fiContactEmail = ko.observable((data && data.hasOwnProperty('fiContactEmail')) ? data.fiContactEmail : null).extend({
         email: {params: true, message: NSWLang["common_msg_invalid_email"]}
     });
@@ -408,6 +410,35 @@ function ThongTinChungVM(data) {
         return ttcVMSelf.findCodeName(ttcVMSelf.lstNhom(),idNhom);
     }
 
+    ttcVMSelf.eventChangeHangHoa =function(){
+        var lst = ttcVMSelf.lstDSHosoMK();
+        var res = lst.find(function (e) {
+            return e.fiMaHoso == self.fiMaHoso();
+        });
+        if (res){
+            var pos = res.fiProductList[0];
+            ttcVMSelf.fiProIdNhom(pos.fiProIdNhom);
+            ttcVMSelf.fiProIdPhanNhom(pos.fiProIdNhom);
+            ttcVMSelf.fiProIdLoai(pos.fiProIdLoai);
+            ttcVMSelf.fiProIdPhanLoai(pos.fiProIdPhanLoai);
+            ttcVMSelf.fiProCode(pos.fiProCode);
+            ttcVMSelf.fiProMadeIn(pos.fiProMadeIn);
+            ttcVMSelf.fiProCountryCode(pos.fiProCountryCode);
+            ttcVMSelf.fiProCountryName(pos.fiProCountryName);
+            ttcVMSelf.fiProThanhPhan(pos.fiProThanhPhan);
+            ttcVMSelf.fiProColor(pos.fiProColor);
+            ttcVMSelf.fiProSoHieu(pos.fiProSoHieu);
+            ttcVMSelf.fiProQuyChuan(pos.fiProQuyChuan);
+            ttcVMSelf.fiProCVMienGiam(pos.fiProCVMienGiam);
+            ttcVMSelf.fiProCVMienGiamNgay(pos.fiProCVMienGiamNgay);
+            ttcVMSelf.fiProValueVN(pos.fiProValueVN);
+            ttcVMSelf.fiProValueUSD(pos.fiProValueUSD);
+            ttcVMSelf.fiPackageUnitName(pos.fiPackageUnitName);
+            ttcVMSelf.fiPackageUnitCode(pos.fiPackageUnitCode);
+            ttcVMSelf.fiProCLList(pos.fiProCLList);
+            ttcVMSelf.fiProATList(pos.fiProATList);
+        }
+    }
 
     ttcVMSelf.clearForm = function () {
         $("#fiProName").val('');

@@ -78,27 +78,7 @@
             <b class="modal-title"><spring:message code="mard.25.tokhai.hang_hoa"/></b>
         </div>
         <div class="modal-body">
-            <div class="panel panel-primary" id="model-congvan" data-bind="visible: fiHSType()==4">
-                <div class="panel-heading" style="font-weight: bold;"><spring:message code="mard.25.tokhai.hang_hoa.congvan.title"/></div>
-                <div class="panel-body">
-                    <form role="form" class="form-horizontal">
-                        <div class="form-group">
-                            <div class="col-md-2 nsw-text-right">
-                                <label><spring:message code="mard.25.tokhai.hang_hoa.congvan.so"/><a class="nsw-require-field">*</a></label>
-                            </div>
-                            <div class="col-md-4">
-                                <input data-bind="trimedValue: fiProCVMienGiam" class="form-control" value=""/>
-                            </div>
-                            <div class="col-md-2 nsw-text-right">
-                                <label><spring:message code="mard.25.tokhai.hang_hoa.congvan.ngay"/><a class="nsw-require-field">*</a></label>
-                            </div>
-                            <div class="col-md-4">
-                                <input data-bind="trimedValue: fiProCVMienGiamNgay" class="form-control" value=""/>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+
             <div class="panel panel-primary">
                 <div class="panel-heading" style="font-weight: bold;"><spring:message code="mard.25.tokhai.hang_hoa.title"/></div>
                 <div class="panel-body">
@@ -107,15 +87,18 @@
                             <div class="col-md-2 nsw-text-right">
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.name"/><a class="nsw-require-field">*</a></label>
                             </div>
-                            <div class="col-md-4">
-                                <input data-bind="trimedValue: fiProName" class="form-control" value=""/>
+                            <div class="col-md-4" >
+                                <input data-bind="trimedValue: fiProName, visible: fiHSType()!=4" class="form-control" value=""/>
+                                <select data-bind="options : lstDSHosoMK, optionsValue : 'fiMaHoso',
+                                optionsText : 'fiMaHoso', event : {change : eventChangeHangHoa},selectedText:fiMaHoso
+                                                    value: fiProName, visible: fiHSType()==4" class="form-control"></select>
                             </div>
                             <div class="col-md-2 nsw-text-right">
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.nhom"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
                                 <select data-bind="options : lstNhom, optionsValue : 'fiidcat',  optionsText : 'fiCatTypeName',
-                                                    value: fiProIdNhom, event : {change : eventChangeNhom()}" class="form-control"></select>
+                                                    value: fiProIdNhom, event : {change : eventChangeNhom()}, enable: fiHSType()!=4" class="form-control"></select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -124,7 +107,7 @@
                             </div>
                             <div class="col-md-4">
                                 <select data-bind="options : lstPhanNhom, optionsValue : 'fiidcat',  optionsText : 'fiCatTypeName',
-                                                    value: fiProIdPhanNhom ,event : {change : eventChangePhanNhom}" class="form-control"></select>
+                                                    value: fiProIdPhanNhom ,event : {change : eventChangePhanNhom}, enable: fiHSType()!=4" class="form-control"></select>
                             </div>
                             <div class="col-md-2 nsw-text-right">
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.loai"/><a class="nsw-require-field">*</a></label>
@@ -133,7 +116,7 @@
                                 <select data-bind="options: lstLoai,
                                                     optionsText: 'fiCatTypeName',
                                                     optionsValue: 'fiidcat',
-                                                    value: fiProIdLoai,event : {change : eventChangeLoai}" class="form-control"></select>
+                                                    value: fiProIdLoai,event : {change : eventChangeLoai}, enable: fiHSType()!=4" class="form-control"></select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -145,13 +128,13 @@
                                         data-bind="options: lstPhanLoai,
                                                     optionsText: 'fiCatTypeName',
                                                     optionsValue: 'fiidcat',
-                                                    value: fiProIdPhanLoai" class="form-control"></select>
+                                                    value: fiProIdPhanLoai, enable: fiHSType()!=4" class="form-control"></select>
                             </div>
                             <div class="col-md-2 nsw-text-right">
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.ma_so_cong_nhan"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <input data-bind="trimedValue: fiProCode" class="form-control" value=""/>
+                                <input data-bind="trimedValue: fiProCode, enable: fiHSType()!=4" class="form-control" value=""/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -159,7 +142,7 @@
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.hang_san_xuat"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <input data-bind="trimedValue: fiProMadeIn" class="form-control" value=""/>
+                                <input data-bind="trimedValue: fiProMadeIn, enable: fiHSType()!=4" class="form-control" value=""/>
                             </div>
                             <div class="col-md-2 nsw-text-right">
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.nuoc_san_xuat"/><a class="nsw-require-field">*</a></label>
@@ -170,7 +153,7 @@
                                                     optionsText: 'countryname',
                                                     selectedText : fiProCountryName,
                                                     optionsValue: 'countryid',
-                                                    value: fiProCountryCode" class="form-control"></select>
+                                                    value: fiProCountryCode, enable: fiHSType()!=4" class="form-control"></select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -178,13 +161,13 @@
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.thanh_phan"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <input data-bind="trimedValue: fiProThanhPhan" class="form-control" value=""/>
+                                <input data-bind="trimedValue: fiProThanhPhan, enable: fiHSType()!=4" class="form-control" value=""/>
                             </div>
                             <div class="col-md-2 nsw-text-right">
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.mau"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <input data-bind="trimedValue: fiProColor" class="form-control" value=""/>
+                                <input data-bind="trimedValue: fiProColor, enable: fiHSType()!=4" class="form-control" value=""/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -192,13 +175,13 @@
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.so_hieu"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <input data-bind="trimedValue: fiProSoHieu" class="form-control" value=""/>
+                                <input data-bind="trimedValue: fiProSoHieu, enable: fiHSType()!=4" class="form-control" value=""/>
                             </div>
                             <div class="col-md-2 nsw-text-right">
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.quy_chuan"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <select class="form-control" data-bind="value: fiProQuyChuan">
+                                <select class="form-control" data-bind="value: fiProQuyChuan, enable: fiHSType()!=4">
                                     <option value="1">
                                         <spring:message code="mard.25.tokhai.hang_hoa.quy_chuan_item01"/>
                                     </option>
@@ -206,6 +189,27 @@
                                         <spring:message code="mard.25.tokhai.hang_hoa.quy_chuan_item02"/>
                                     </option>
                                 </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="panel panel-primary" id="model-congvan" data-bind="visible: fiHSType()==4">
+                <div class="panel-heading" style="font-weight: bold;"><spring:message code="mard.25.tokhai.hang_hoa.congvan.title"/></div>
+                <div class="panel-body">
+                    <form role="form" class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-2 nsw-text-right">
+                                <label><spring:message code="mard.25.tokhai.hang_hoa.congvan.so"/><a class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-4">
+                                <input data-bind="trimedValue: fiProCVMienGiam" class="form-control" disabled/>
+                            </div>
+                            <div class="col-md-2 nsw-text-right">
+                                <label><spring:message code="mard.25.tokhai.hang_hoa.congvan.ngay"/><a class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-4">
+                                <input data-bind="trimedValue: fiProCVMienGiamNgay" class="form-control" disabled/>
                             </div>
                         </div>
                     </form>
@@ -265,27 +269,6 @@
             <b class="modal-title"><spring:message code="mard.25.tokhai.hang_hoa"/></b>
         </div>
         <div class="modal-body">
-            <div class="panel panel-primary" id="model-congvan" data-bind="visible: fiHSType()==4">
-                <div class="panel-heading" style="font-weight: bold;"><spring:message code="mard.25.tokhai.hang_hoa.congvan.title"/></div>
-                <div class="panel-body">
-                    <form role="form" class="form-horizontal">
-                        <div class="form-group">
-                            <div class="col-md-2 nsw-text-right">
-                                <label><spring:message code="mard.25.tokhai.hang_hoa.congvan.so"/><a class="nsw-require-field">*</a></label>
-                            </div>
-                            <div class="col-md-4">
-                                <input data-bind="trimedValue: fiProCVMienGiam" class="form-control" value=""/>
-                            </div>
-                            <div class="col-md-2 nsw-text-right">
-                                <label><spring:message code="mard.25.tokhai.hang_hoa.congvan.ngay"/><a class="nsw-require-field">*</a></label>
-                            </div>
-                            <div class="col-md-4">
-                                <input data-bind="trimedValue: fiProCVMienGiamNgay" class="form-control" value=""/>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
             <div class="panel panel-primary">
                 <div class="panel-heading" style="font-weight: bold;"><spring:message code="mard.25.tokhai.hang_hoa.title"/></div>
                 <div class="panel-body">
@@ -294,15 +277,18 @@
                             <div class="col-md-2 nsw-text-right">
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.name"/><a class="nsw-require-field">*</a></label>
                             </div>
-                            <div class="col-md-4">
-                                <input data-bind="trimedValue: fiProName" class="form-control" value=""/>
+                            <div class="col-md-4" >
+                                <input data-bind="trimedValue: fiProName, visible: fiHSType()!=4" class="form-control" value=""/>
+                                <select data-bind="options : lstDSHosoMK, optionsValue : 'fiMaHoso',
+                                optionsText : 'fiMaHoso', event : {change : eventChangeNhom},
+                                                    value: fiProName, visible: fiHSType()==4" class="form-control"></select>
                             </div>
                             <div class="col-md-2 nsw-text-right">
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.nhom"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
                                 <select data-bind="options : lstNhom, optionsValue : 'fiidcat',  optionsText : 'fiCatTypeName', event : {change : eventChangeNhom},
-                                                    value: fiProIdNhom" class="form-control"></select>
+                                                    value: fiProIdNhom, enable: fiHSType()!=4" class="form-control"></select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -311,7 +297,7 @@
                             </div>
                             <div class="col-md-4">
                                 <select data-bind="options : lstPhanNhom, optionsValue : 'fiidcat',  optionsText : 'fiCatTypeName', event : {change : eventChangePhanNhom},
-                                                    value: fiProIdPhanNhom" class="form-control"></select>
+                                                    value: fiProIdPhanNhom, enable: fiHSType()!=4" class="form-control"></select>
                             </div>
                             <div class="col-md-2 nsw-text-right">
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.loai"/><a class="nsw-require-field">*</a></label>
@@ -320,7 +306,7 @@
                                 <select data-bind="options: lstLoai,
                                                     optionsText: 'fiCatTypeName',
                                                     optionsValue: 'fiidcat', event : {change : eventChangeLoai},
-                                                    value: fiProIdLoai" class="form-control"></select>
+                                                    value: fiProIdLoai, enable: fiHSType()!=4" class="form-control"></select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -332,13 +318,13 @@
                                         data-bind="options: lstPhanLoai,
                                                     optionsText: 'fiCatTypeName',
                                                     optionsValue: 'fiidcat',
-                                                    value: fiProIdPhanLoai" class="form-control"></select>
+                                                    value: fiProIdPhanLoai, enable: fiHSType()!=4" class="form-control"></select>
                             </div>
                             <div class="col-md-2 nsw-text-right">
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.ma_so_cong_nhan"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <input data-bind="trimedValue: fiProCode" class="form-control" value=""/>
+                                <input data-bind="trimedValue: fiProCode, enable: fiHSType()!=4" class="form-control" value=""/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -346,7 +332,7 @@
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.hang_san_xuat"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <input data-bind="trimedValue: fiProMadeIn" class="form-control" value=""/>
+                                <input data-bind="trimedValue: fiProMadeIn, enable: fiHSType()!=4" class="form-control" value=""/>
                             </div>
                             <div class="col-md-2 nsw-text-right">
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.nuoc_san_xuat"/><a class="nsw-require-field">*</a></label>
@@ -357,7 +343,7 @@
                                                     optionsText: 'countryname',
                                                     selectedText2 : fiProCountryName,
                                                     optionsValue: 'countryid',
-                                                    value: fiProCountryCode" class="form-control"></select>
+                                                    value: fiProCountryCode, enable: fiHSType()!=4" class="form-control"></select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -365,13 +351,13 @@
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.thanh_phan"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <input data-bind="trimedValue: fiProThanhPhan" class="form-control" value=""/>
+                                <input data-bind="trimedValue: fiProThanhPhan, enable: fiHSType()!=4" class="form-control" value=""/>
                             </div>
                             <div class="col-md-2 nsw-text-right">
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.mau"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <input data-bind="trimedValue: fiProColor" class="form-control" value=""/>
+                                <input data-bind="trimedValue: fiProColor, enable: fiHSType()!=4" class="form-control" value=""/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -379,13 +365,13 @@
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.so_hieu"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <input data-bind="trimedValue: fiProSoHieu" class="form-control" value=""/>
+                                <input data-bind="trimedValue: fiProSoHieu, enable: fiHSType()!=4" class="form-control" value=""/>
                             </div>
                             <div class="col-md-2 nsw-text-right">
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.quy_chuan"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <select class="form-control" data-bind="value: fiProQuyChuan">
+                                <select class="form-control" data-bind="value: fiProQuyChuan, enable: fiHSType()!=4">
                                     <option value="1">
                                         <spring:message code="mard.25.tokhai.hang_hoa.quy_chuan_item01"/>
                                     </option>
@@ -393,6 +379,27 @@
                                         <spring:message code="mard.25.tokhai.hang_hoa.quy_chuan_item02"/>
                                     </option>
                                 </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="panel panel-primary" id="model-congvan" data-bind="visible: fiHSType()==4">
+                <div class="panel-heading" style="font-weight: bold;"><spring:message code="mard.25.tokhai.hang_hoa.congvan.title"/></div>
+                <div class="panel-body">
+                    <form role="form" class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-2 nsw-text-right">
+                                <label><spring:message code="mard.25.tokhai.hang_hoa.congvan.so"/><a class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-4">
+                                <input data-bind="trimedValue: fiProCVMienGiam" class="form-control" disabled/>
+                            </div>
+                            <div class="col-md-2 nsw-text-right">
+                                <label><spring:message code="mard.25.tokhai.hang_hoa.congvan.ngay"/><a class="nsw-require-field">*</a></label>
+                            </div>
+                            <div class="col-md-4">
+                                <input data-bind="trimedValue: fiProCVMienGiamNgay" class="form-control" disabled/>
                             </div>
                         </div>
                     </form>
@@ -481,7 +488,10 @@
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.name"/><a class="nsw-require-field">*</a></label>
                             </div>
                             <div class="col-md-4">
-                                <input data-bind="trimedValue: fiProName" class="form-control" value="" disabled/>
+                                <input data-bind="trimedValue: fiProName, visible: fiHSType()!=4" class="form-control" value="" disabled />
+                                <select data-bind="options : lstDSHosoMK, optionsValue : 'fiMaHoso',
+                                optionsText : 'fiMaHoso', event : {change : eventChangeNhom},
+                                                    value: fiProName, visible: fiHSType()==4" class="form-control"></select>
                             </div>
                             <div class="col-md-2 nsw-text-right">
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.nhom"/><a class="nsw-require-field">*</a></label>

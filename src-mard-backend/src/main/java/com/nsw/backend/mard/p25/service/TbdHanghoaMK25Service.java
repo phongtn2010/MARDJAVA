@@ -8,4 +8,5 @@ public interface TbdHanghoaMK25Service {
     List<TbdHanghoaMK25> findByFiTaxCode(String taxCode);
     List<TbdHanghoaMK25> findByFiProHash(String hash);
     void save(TbdHanghoaMK25 tbdHanghoaMK25);
+    TbdHanghoaMK25 findByFiIdProduct(Integer fiIdProduct);
 }

@@ -57,10 +57,10 @@
                         <tr>
                             <td></td>
                             <td>
-                                <input id="EfiProCLTargTx" class="form-control" data-bind="value: EfiProCLTarg"/>
+                                <input id="EfiProCLTargTx" class="form-control" data-bind="value: EfiProCLTarg, enable: fiHSType()!=4"/>
                             </td>
                             <td>
-                                <select class="form-control" data-bind="value: EfiProCLCompare">
+                                <select class="form-control" data-bind="value: EfiProCLCompare, enable: fiHSType()!=4">
                                     <option value="0"> <spring:message code="mard.25.chitieu.khongco"/> </option>
                                     <option value="1"> < </option>
                                     <option value="2"> > </option>
@@ -71,17 +71,17 @@
                                 </select>
                             </td>
                             <td>
-                                <input id="EfiProCLContentTx" class="form-control" data-bind="value: EfiProCLContent"/>
+                                <input id="EfiProCLContentTx" class="form-control" data-bind="value: EfiProCLContent, enable: fiHSType()!=4"/>
                             </td>
                             <td>
                                 <select id="EfiProCLUnitIDCBB"
                                         data-bind="options: lstChiTieuAT,
                                                     optionsText: 'fiCatTypeName',
                                                     optionsValue: 'fiCatNote',
-                                                    value: EfiProCLUnitID" class="form-control"></select>
+                                                    value: EfiProCLUnitID, enable: fiHSType()!=4" class="form-control"></select>
                             </td>
                             <td data-bind="visible: $root.isEditable" class="text-center">
-                                <a href="" data-bind="click: addThongTinChiTieuChatLuong, visible: $root.isEditable()"><i class="fa fa-lg fa-plus"></i></a>
+                                <a href="" data-bind="click: addThongTinChiTieuChatLuong, visible: fiHSType()!=4, enable: fiHSType()!=4"><i class="fa fa-lg fa-plus"></i></a>
                             </td>
                         </tr>
                         </tfoot>
@@ -150,10 +150,10 @@
                         <tr>
                             <td></td>
                             <td>
-                                <input id="EfiProATTargTx" class="form-control" data-bind="value: EfiProATTarg"/>
+                                <input id="EfiProATTargTx" class="form-control" data-bind="value: EfiProATTarg, enable: fiHSType()!=4"/>
                             </td>
                             <td>
-                                <select class="form-control" data-bind="value: EfiProATCompare">
+                                <select class="form-control" data-bind="value: EfiProATCompare, enable: fiHSType()!=4">
                                     <option value="0"> <spring:message code="mard.25.chitieu.khongco"/> </option>
                                     <option value="1"> < </option>
                                     <option value="2"> > </option>
@@ -164,7 +164,7 @@
                                 </select>
                             </td>
                             <td>
-                                <input id="EfiProATContentTx" class="form-control" data-bind="value: EfiProATContent"/>
+                                <input id="EfiProATContentTx" class="form-control" data-bind="value: EfiProATContent, enable: fiHSType()!=4"/>
                             </td>
                             <td>
                                 <select
@@ -172,10 +172,10 @@
                                                     optionsText: 'fiCatTypeName',
                                                     optionsValue: 'fiCatNote',
                                                     optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.an_toan.dvt"/>',
-                                                    value: EfiProATUnitID" class="form-control"></select>
+                                                    value: EfiProATUnitID, enable: fiHSType()!=4" class="form-control"></select>
                             </td>
                             <td data-bind="visible: $root.isEditable" class="text-center">
-                                <a href="#" data-bind="click: addThongTinChiTieuAT, visible: $root.isEditable()"><i class="fa fa-lg fa-plus"></i></a>
+                                <a href="#" data-bind="click: addThongTinChiTieuAT, visible: fiHSType()!=4, enable: fiHSType()!=4"><i class="fa fa-lg fa-plus"></i></a>
                             </td>
                         </tr>
                         </tfoot>

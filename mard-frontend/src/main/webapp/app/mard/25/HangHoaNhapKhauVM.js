@@ -185,6 +185,46 @@ function HangHoaNhapKhauVM (options) {
         }
         return true;
     }
+    kdnkVMSelf.validateFormDangKy = function () {
+        var ttc=kdnkVMSelf.thongtinChungVM();
+        var benBan = [ttc.fiSellName,ttc.fiSellAddress,ttc.fiSellCountryCode,ttc.fiSellExport];
+        var benMua = [ttc.fiImporterName,ttc.fiImporterAddress,ttc.fiPurchReci,ttc.fiImporterTel,ttc.fiPurchFromDate];
+        // var diaDiemTapKet = [ttc.fiAddressGath,ttc.fiRegSamFromDate,ttc.fiAddressRegSample,ttc.fiProductList];
+        var thongTinLienHe = [ttc.fiContactName,ttc.fiContactAddress];
+        var thongTinKy = [ttc.fiSignName,ttc.fiSignAddress,ttc.fiSignPosition];
+        if(ttc.fiNSWFileCodeReplace()!=null){
+            if (ttc.fiFileNameGDK()==null){
+                app.Alert("Bạn chưa đính kèm file GDK");
+                return false;
+            }
+        }
+        kdnkVMSelf.errors = ko.validation.group({benBan,benMua,thongTinKy,thongTinLienHe}, {deep: true, live: true, observable: true});
+        // kdnkVMSelf.errors = ko.validation.group(kdnkVMSelf.thongtinChungVM, {deep: true, live: true, observable: true});
+        if (kdnkVMSelf.errors().length > 0) {
+            kdnkVMSelf.errors.showAllMessages();
+            app.Alert("Bạn cần nhập đầy đủ các trường bắt buộc");
+            return false;
+        }
+        if (ttc.fiHSType()==2||ttc.fiHSType()==3) {
+            if (ttc.fiAddressGath()==null||ttc.fiAddressGath()==''){
+                app.Alert("Đối với hồ sơ 2b hoặc 2c bạn cần nhập thông tin địa điểm tập kết hàng");
+                return false;
+            }
+            if (ttc.fiRegSamFromDate()==null||ttc.fiRegSamFromDate()=='undefined'){
+                app.Alert("Đối với hồ sơ 2b hoặc 2c bạn cần nhập thông tin ngày đăng ký lấy mẫu (từ ngày)");
+                return false;
+            }
+            if (ttc.fiRegSamToDate()==null||ttc.fiRegSamToDate()=='undefined'){
+                app.Alert("Đối với hồ sơ 2b hoặc 2c bạn cần nhập thông tin ngày đăng ký lấy mẫu (tới ngày)");
+                return false;
+            }
+            if (ttc.fiAddressRegSample()==null||ttc.fiAddressRegSample()==''){
+                app.Alert("Đối với hồ sơ 2b hoặc 2c bạn cần nhập thông tin địa điểm đăng ký lấy mẫu kiểm tra");
+                return false;
+            }
+        }
+        return true;
+    }
     kdnkVMSelf.validateUploadFiles = function () {
         var ttc=kdnkVMSelf.uploadFileVM();
         var checkFiles= [ttc.lstHD,ttc.lstHoaDon,ttc.lstPhieu,ttc.lstKQ,ttc.lstTC,ttc.lstCNLH,ttc.lstCNPT,ttc.lstAtch];
@@ -220,7 +260,7 @@ function HangHoaNhapKhauVM (options) {
         }
         var checkGroupFood=false;
         ko.utils.arrayForEach(kdnkVMSelf.thongtinChungVM().fiProductList(),function (product) {
-            if (product.fiProIdNhom()==1||product.fiProIdNhom()==4){
+            if (product.fiProIdNhom==1||product.fiProIdNhom==4){
                 checkGroupFood=true;
             }
         });
@@ -231,7 +271,7 @@ function HangHoaNhapKhauVM (options) {
             }
         }
         ko.utils.arrayForEach(kdnkVMSelf.thongtinChungVM().fiProductList(),function (product) {
-            if (product.fiProIdNhom()==1){
+            if (product.fiProIdNhom==1){
                 checkGroupFood=true;
             }
         });
@@ -241,6 +281,7 @@ function HangHoaNhapKhauVM (options) {
                 return false;
             }
         }
+        return true;
     }
 
     kdnkVMSelf.getData = function () {
@@ -281,8 +322,8 @@ function HangHoaNhapKhauVM (options) {
             "fiProductList": kdnkVMSelf.thongtinChungVM().fiProductList(),
 
             "fiAddressGath": kdnkVMSelf.thongtinChungVM().fiAddressGath(),
-            "fiRegSamFromDate": new Date(kdnkVMSelf.thongtinChungVM().fiRegSamFromDate()).getTime(),
-            "fiRegSamToDate": new Date(kdnkVMSelf.thongtinChungVM().fiRegSamToDate()).getTime(),
+            "fiRegSamFromDate": kdnkVMSelf.thongtinChungVM().fiRegSamFromDate()==null?null:new Date(kdnkVMSelf.thongtinChungVM().fiRegSamFromDate()).getTime(),
+            "fiRegSamToDate": kdnkVMSelf.thongtinChungVM().fiRegSamToDate()==null?null:new Date(kdnkVMSelf.thongtinChungVM().fiRegSamToDate()).getTime(),
             "fiAddressRegSample": kdnkVMSelf.thongtinChungVM().fiAddressRegSample(),
 
             "fiContactName": kdnkVMSelf.thongtinChungVM().fiContactName(),

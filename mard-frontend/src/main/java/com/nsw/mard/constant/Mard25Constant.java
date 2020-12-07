@@ -206,7 +206,7 @@ public class Mard25Constant {
         public static final String FIND_FILE_KQPT = "mard.25.filekqpt.find";
         public static final String FIND_GIAY_XAC_NHAN = "mard.25.xacnhandon.find";
 
-
+        public static final String FIND_DS_HOSO_MIEN_KIEM = "ma";
     }
 
     public String getApiUrl(Environment environment, String key) {

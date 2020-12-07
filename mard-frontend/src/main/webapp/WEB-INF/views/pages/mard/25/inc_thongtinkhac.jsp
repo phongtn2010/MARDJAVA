@@ -7,7 +7,7 @@
                 <div class="form-group" style="margin-top: 15px">
                     <div class="col-md-12">
                         <div class="col-md-2 nsw-text-right">
-                            <label><spring:message code="mard.25.tokhai.khac.mau_ktra_item_01"/><a class="nsw-require-field">*</a></label>
+                            <label><spring:message code="mard.25.tokhai.khac.mau_ktra_item_01"/></label>
                         </div>
                         <div class="col-md-10">
                             <input class="form-control" data-bind="value : fiAddressGath" />
@@ -17,7 +17,7 @@
                 <div class="form-group">
                     <div class="col-md-12">
                         <div class="col-md-2 nsw-text-right">
-                            <label><spring:message code="mard.25.tokhai.khac.mau_ktra_item_02"/><a class="nsw-require-field">*</a></label>
+                            <label><spring:message code="mard.25.tokhai.khac.mau_ktra_item_02"/></label>
                         </div>
                         <div class="col-md-10">
                             <div class="row">
@@ -45,7 +45,7 @@
                 <div class="form-group">
                     <div class="col-md-12">
                         <div class="col-md-2 nsw-text-right">
-                            <label><spring:message code="mard.25.tokhai.khac.mau_ktra_item_03"/><a class="nsw-require-field">*</a></label>
+                            <label><spring:message code="mard.25.tokhai.khac.mau_ktra_item_03"/></label>
                         </div>
                         <div class="col-md-10">
                             <input class="form-control" data-bind="value : fiAddressRegSample"/>
@@ -80,7 +80,7 @@
                 <div class="form-group">
                     <div class="col-md-12">
                         <div class="col-md-2 nsw-text-right">
-                            <label><spring:message code="mard.25.tokhai.khac.lien_he_item_address"/></label><a class="nsw-require-field">*</a>
+                            <label><spring:message code="mard.25.tokhai.khac.lien_he_item_address"/></label>
                         </div>
                         <div class="col-md-4">
                             <input data-bind="value: fiContactAddress" class="form-control"/>

@@ -15,6 +15,7 @@ import com.nsw.backend.mard.p25.service.TbdHoso25Service;
 import com.nsw.backend.mard.p25.service.TbdLichsu25Service;
 import com.nsw.backend.mard.p25.service.TbdYcrut25Service;
 import com.nsw.backend.mard.p25.service.WsService;
+import com.nsw.backend.mard.p26.service.TbdHoso26Service;
 import com.nsw.backend.service.RabbitMQService;
 import com.nsw.backend.util.ResponseJson;
 import org.apache.commons.lang3.StringUtils;
@@ -42,15 +43,18 @@ public class Tbdhoso25Controller extends BaseController {
 
     private final TbdYcrut25Service tbdYcrut25Service;
 
+    private final TbdHoso26Service tbdHoso26Service;
+
     private final WsService wsService;
 
     @Autowired
-    public Tbdhoso25Controller(RabbitMQService rabbitMQService, TbdHoso25Service tbdHoso25Service, TbdLichsu25Service tbdLichsu25Service, WsService wsService, TbdYcrut25Service tbdYcrut25Service) {
+    public Tbdhoso25Controller(RabbitMQService rabbitMQService, TbdHoso25Service tbdHoso25Service, TbdLichsu25Service tbdLichsu25Service, WsService wsService, TbdYcrut25Service tbdYcrut25Service, TbdHoso26Service tbdHoso26Service) {
         this.rabbitMQService = rabbitMQService;
         this.tbdHoso25Service = tbdHoso25Service;
         this.tbdLichsu25Service = tbdLichsu25Service;
         this.wsService = wsService;
         this.tbdYcrut25Service=tbdYcrut25Service;
+        this.tbdHoso26Service = tbdHoso26Service;
     }
 
     //------------------- Create a Tbdhoso06 --------
@@ -299,5 +303,10 @@ public class Tbdhoso25Controller extends BaseController {
 
         ResponseJson response = wsService.baoCaoHS2D(baoCao);
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/dshosomienkiem/{taxCode}")
+    public ResponseEntity<ResponseJson> getDanhSachHosoMK(@PathVariable String taxCode) {
+        return createSuccessResponse(tbdHoso26Service.findCongVanMienKiem(new Date(),taxCode), HttpStatus.OK);
     }
 }

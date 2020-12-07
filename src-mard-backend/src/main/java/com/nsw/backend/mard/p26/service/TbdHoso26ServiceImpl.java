@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -57,5 +58,10 @@ public class TbdHoso26ServiceImpl implements TbdHoso26Service{
     @Override
     public TbdHoso26 findByFiHSCode(String nswFileCode) {
         return repository.findByFiMaHoso(nswFileCode);
+    }
+
+    @Override
+    public List<TbdHoso26> findCongVanMienKiem(Date now, String taxcode) {
+        return repository.findCongVanMienKiem(now,taxcode);
     }
 }

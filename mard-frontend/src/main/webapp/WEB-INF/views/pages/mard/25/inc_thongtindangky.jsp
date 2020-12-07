@@ -75,7 +75,7 @@
                         <input data-bind="value: fiImporterName" class="form-control"/>
                     </div>
                     <div class="col-md-2 nsw-text-right">
-                        <label><spring:message code="mard.25.tokhai.ben_mua_hang_item_004"/></label><a class="nsw-require-field">*</a>
+                        <label><spring:message code="mard.25.tokhai.ben_mua_hang_item_004"/></label>
                     </div>
                     <div class="col-md-4">
                         <input data-bind="value: fiImporterTel" class="form-control"/>
@@ -116,7 +116,7 @@
                                         type="text"
                                         class="form-control form-control-inline date-picker"
                                         data-date-format="dd/mm/yyyy"
-                                        data-bind="datepicker2: fiPurchFromDate"
+                                        data-bind="datepicker2: fiPurchFromDate, datepickerOptions: { endDate: fiPurchToDate }"
                                 />
                             </div>
                             <div class="col-md-2 no-padding no-margin" style="text-align: center">-</div>
@@ -125,7 +125,7 @@
                                         type="text"
                                         class="form-control form-control-inline date-picker"
                                         data-date-format="dd/mm/yyyy"
-                                        data-bind="datepicker2: fiPurchToDate"
+                                        data-bind="datepicker2: fiPurchToDate , datepickerOptions: { startDate: fiPurchFromDate }"
                                 />
                             </div>
                         </div>

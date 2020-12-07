@@ -477,6 +477,7 @@ public class WsServiceImpl implements WsService {
                 tbdHanghoa25.setFiTrangThaiHangHoa(status);
                 tbdHangHoa25Service.save(tbdHanghoa25);
                 TbdHoso25 tbdHoso25 = tbdHoso25Service.findByFiHSCode(tbdThuHoiGXNCL25.getFiNSWFileCode());
+                thuHoiHangHoaMK(tbdHanghoa25);
                 tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25, tbdHanghoa25, "Bộ Nông nghiệp thu hồi giấy xác nhận chất lượng", tbdThuHoiGXNCL25.getFiNguoiKy(), action, Constant25.BNN_SEND, fileBNNDto));
                 return new ResponseJson(true, "");
             }
@@ -774,8 +775,18 @@ public class WsServiceImpl implements WsService {
         BeanUtils.copyProperties(tbdHanghoa25, tbdHanghoaMK25);
         tbdHanghoaMK25.setFiTaxCode(tbdHoso25.getFiTaxCode());
         tbdHanghoaMK25.setFiProHash(Constant25.hashString(tbdHanghoa25.tbdHangHoa25ToString()));
+        tbdHanghoaMK25.setFiHsType(tbdHoso25.getFiHSType());
+        tbdHanghoaMK25.setFiNgayCap(new Date());
+        tbdHanghoaMK25.setFiActive(Boolean.TRUE);
+
         List<TbdHanghoaMK25> mk25List = tbdHanghoaMK25Service.findByFiProHash(tbdHanghoaMK25.getFiProHash());
         tbdHanghoaMK25.setFiOrder(mk25List.size() + 1);
+        tbdHanghoaMK25Service.save(tbdHanghoaMK25);
+    }
+
+    private void thuHoiHangHoaMK(TbdHanghoa25 tbdHanghoa25) {
+        TbdHanghoaMK25 tbdHanghoaMK25 = tbdHanghoaMK25Service.findByFiIdProduct(tbdHanghoa25.getFiIdProduct());
+        tbdHanghoaMK25.setFiActive(Boolean.FALSE);
         tbdHanghoaMK25Service.save(tbdHanghoaMK25);
     }
 }

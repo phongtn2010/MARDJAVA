@@ -60,10 +60,12 @@ public class Mard25Api extends BaseApi {
     @Autowired
     Environment environment;
     private final Logger logger = LoggerFactory.getLogger(Mard25Api.class);
+
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public @ResponseBody ResponseJson uploadFileToBNN(@RequestParam("file") MultipartFile multipartfile,
-                                                      @RequestParam("mcode") String mcode,
-                                                      @RequestParam("pcode") String pcode){
+    public @ResponseBody
+    ResponseJson uploadFileToBNN(@RequestParam("file") MultipartFile multipartfile,
+                                 @RequestParam("mcode") String mcode,
+                                 @RequestParam("pcode") String pcode) {
         ResponseJson json = new ResponseJson();
         logger.info("Bat dau upload file: ");
         try {
@@ -88,17 +90,17 @@ public class Mard25Api extends BaseApi {
 
             RestTemplate restTemplate = new RestTemplate();
             Long from = Calendar.getInstance().getTimeInMillis();
-            logger.info("upload : {}"+filePath);
-            ResponseEntity<String> responseEntity = restTemplate.postForEntity(api_upload_file,requestEntity,String.class);
+            logger.info("upload : {}" + filePath);
+            ResponseEntity<String> responseEntity = restTemplate.postForEntity(api_upload_file, requestEntity, String.class);
             Long to = Calendar.getInstance().getTimeInMillis();
-            logger.info("Thời gian upload: "+(to-from)/1000 +" giây");
+            logger.info("Thời gian upload: " + (to - from) / 1000 + " giây");
             Gson g = new Gson();
-            ResponeUploadFile responeUploadFile=g.fromJson(responseEntity.getBody().substring(1,responseEntity.getBody().length()-1), ResponeUploadFile.class);
+            ResponeUploadFile responeUploadFile = g.fromJson(responseEntity.getBody().substring(1, responseEntity.getBody().length() - 1), ResponeUploadFile.class);
             json.setSuccess(true);
             json.setData(responeUploadFile);
             json.setMessage("Upload file thành công");
             logger.info("Upload file thành công");
-            if(file.exists()){
+            if (file.exists()) {
                 file.delete();
             }
             return json;
@@ -245,7 +247,7 @@ public class Mard25Api extends BaseApi {
     ResponseJson getByCatNo(@PathVariable Long catNo) {
         ResponseJson json = new ResponseJson();
         try {
-            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_BY_CAT_NO)+catNo);
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_BY_CAT_NO) + catNo);
             return json;
         } catch (Exception ex) {
             LogUtil.addLog(ex);
@@ -257,12 +259,13 @@ public class Mard25Api extends BaseApi {
             return json;
         }
     }
+
     @RequestMapping(value = "/danhmuc/getby-catparent/{id}", method = RequestMethod.GET)
     public @ResponseBody
     ResponseJson getByCatParent(@PathVariable Long id) {
         ResponseJson json = new ResponseJson();
         try {
-            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_BY_CAT_PARENT)+id);
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_BY_CAT_PARENT) + id);
             return json;
         } catch (Exception ex) {
             LogUtil.addLog(ex);
@@ -274,6 +277,7 @@ public class Mard25Api extends BaseApi {
             return json;
         }
     }
+
     @RequestMapping(value = "/hoso/create", method = RequestMethod.POST, headers = {"content-type=application/json"})
     public @ResponseBody
     ResponseJson createHoso(
@@ -286,7 +290,7 @@ public class Mard25Api extends BaseApi {
     public void getHDSD(
             HttpServletResponse response,
             HttpServletRequest request
-    ){
+    ) {
         try {
             String templatePath = request.getSession().getServletContext().getRealPath("/WEB-INF/downloads/mard/25/hdsd.docx");
             String fileName = "hdsd.docx";
@@ -329,6 +333,7 @@ public class Mard25Api extends BaseApi {
     ) {
         return send(tbdhoso25);
     }
+
     private ResponseJson send(TbdHoso25 tbdHoso25) {
         ResponseJson returnJson = new ResponseJson();
         tbdHoso25.setFiTaxCode(getUsername());
@@ -344,6 +349,7 @@ public class Mard25Api extends BaseApi {
             return returnJson;
         }
     }
+
     @RequestMapping(value = {"/verify"}, method = RequestMethod.POST)
     public @ResponseBody
     ResponseJson verify(@RequestBody TokenInfo token) {
@@ -368,7 +374,7 @@ public class Mard25Api extends BaseApi {
             } else {
                 tbdHoso25.setFiTaxCode(getUsername());
                 ResponseJson tmpJson = save(tbdHoso25);
-                if(tmpJson.isSuccess() == false) {
+                if (tmpJson.isSuccess() == false) {
                     return tmpJson;
                 }
                 HashMap<String, Object> tmpData = (HashMap<String, Object>) tmpJson.getData();
@@ -403,6 +409,7 @@ public class Mard25Api extends BaseApi {
             return returnJson;
         }
     }
+
     @RequestMapping(value = "/hoso/find", method = RequestMethod.GET)
     public @ResponseBody
     ResponseJson getHoSoByID(
@@ -438,7 +445,7 @@ public class Mard25Api extends BaseApi {
                 json.setMessage("Không có quyền truy cập hồ sơ");
                 return json;
             }
-            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_HANGHOA_BY_IDHS)  + idHoSo);
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_HANGHOA_BY_IDHS) + idHoSo);
             return json;
         } catch (Exception ex) {
             LogUtil.addLog(ex);
@@ -450,12 +457,13 @@ public class Mard25Api extends BaseApi {
             return json;
         }
     }
+
     @RequestMapping(value = "/danhmuc/dvxl/{fiPuType}", method = RequestMethod.GET)
     public @ResponseBody
     ResponseJson getListTCCD(@PathVariable String fiPuType) {
         ResponseJson json = new ResponseJson();
         try {
-            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_DANHMUC_TCCD)  + fiPuType);
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_DANHMUC_TCCD) + fiPuType);
             return json;
         } catch (Exception ex) {
             LogUtil.addLog(ex);
@@ -467,7 +475,8 @@ public class Mard25Api extends BaseApi {
             return json;
         }
     }
-    @RequestMapping(value = "/hoso/chuyenchitieu", method = RequestMethod.POST,headers = {"content-type=application/json"})
+
+    @RequestMapping(value = "/hoso/chuyenchitieu", method = RequestMethod.POST, headers = {"content-type=application/json"})
     public @ResponseBody
     ResponseJson chuyenChiTieu(@RequestBody TbdHoso25 tbdHoso25) {
         ResponseJson json = new ResponseJson();
@@ -477,7 +486,7 @@ public class Mard25Api extends BaseApi {
                 json.setMessage("Không có quyền thao tác với hồ sơ này");
                 return json;
             }
-            json =BackendRequestHelper.getInstance().doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.CHUYEN_CHI_TIEU), tbdHoso25);
+            json = BackendRequestHelper.getInstance().doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.CHUYEN_CHI_TIEU), tbdHoso25);
             return json;
         } catch (Exception ex) {
             LogUtil.addLog(ex);
@@ -595,13 +604,13 @@ public class Mard25Api extends BaseApi {
         }
     }
 
-    @RequestMapping(value = "/hoso/guikqxl", method = RequestMethod.POST,headers = {"content-type=application/json"})
+    @RequestMapping(value = "/hoso/guikqxl", method = RequestMethod.POST, headers = {"content-type=application/json"})
     public @ResponseBody
     ResponseJson guiKQXL(@RequestBody TbdKQXL25 tbdKQXL25) {
         ResponseJson json = new ResponseJson();
         try {
 
-            json =BackendRequestHelper.getInstance().doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GUI_KQXL), tbdKQXL25);
+            json = BackendRequestHelper.getInstance().doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GUI_KQXL), tbdKQXL25);
             return json;
         } catch (Exception ex) {
             LogUtil.addLog(ex);
@@ -613,12 +622,13 @@ public class Mard25Api extends BaseApi {
             return json;
         }
     }
+
     @RequestMapping(value = "/hoso/baocao2d", method = RequestMethod.POST)
     public @ResponseBody
     ResponseJson baoCaoHS2D(@RequestBody UploadBaoCao baoCao) {
         ResponseJson json = new ResponseJson();
         try {
-            json =BackendRequestHelper.getInstance().doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.BAO_CAO_HS_2D),baoCao);
+            json = BackendRequestHelper.getInstance().doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.BAO_CAO_HS_2D), baoCao);
             return json;
         } catch (Exception ex) {
             LogUtil.addLog(ex);
@@ -630,12 +640,13 @@ public class Mard25Api extends BaseApi {
             return json;
         }
     }
+
     @RequestMapping(value = "/chitieu/{fiNSWFileCode}", method = RequestMethod.GET)
     public @ResponseBody
     ResponseJson getListChiTieuByNSWFileCode(@PathVariable String fiNSWFileCode) {
         ResponseJson json = new ResponseJson();
         try {
-            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_LIST_CHI_TIEU_BY_NSWFILECODE)  + fiNSWFileCode);
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_LIST_CHI_TIEU_BY_NSWFILECODE) + fiNSWFileCode);
             return json;
         } catch (Exception ex) {
             LogUtil.addLog(ex);
@@ -657,7 +668,7 @@ public class Mard25Api extends BaseApi {
     ) {
         ResponseJson json = new ResponseJson();
         try {
-            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.FIND_HOSO_BY_STATUS) + "?taxCode="+taxCode +"&from="+ from);
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.FIND_HOSO_BY_STATUS) + "?taxCode=" + taxCode + "&from=" + from);
             return json;
         } catch (Exception ex) {
             LogUtil.addLog(ex);
@@ -669,12 +680,13 @@ public class Mard25Api extends BaseApi {
             return json;
         }
     }
+
     @RequestMapping(value = "/filegcn/{idHangHoa}", method = RequestMethod.GET)
     public @ResponseBody
     ResponseJson getFileGCN(@PathVariable Integer idHangHoa) {
         ResponseJson json = new ResponseJson();
         try {
-            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.FIND_FILE_GCN)  + idHangHoa);
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.FIND_FILE_GCN) + idHangHoa);
             return json;
         } catch (Exception ex) {
             LogUtil.addLog(ex);
@@ -686,12 +698,13 @@ public class Mard25Api extends BaseApi {
             return json;
         }
     }
+
     @RequestMapping(value = "/filekqpt/{idHangHoa}", method = RequestMethod.GET)
     public @ResponseBody
     ResponseJson getListFileKQPT(@PathVariable Integer idHangHoa) {
         ResponseJson json = new ResponseJson();
         try {
-            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.FIND_FILE_KQPT)  + idHangHoa);
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.FIND_FILE_KQPT) + idHangHoa);
             return json;
         } catch (Exception ex) {
             LogUtil.addLog(ex);
@@ -712,12 +725,13 @@ public class Mard25Api extends BaseApi {
         ResponseJson json = BackendRequestHelper.getInstance().doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.HANGHOA_GET_BY_FILTER), filterHangHoa);
         return json;
     }
+
     @RequestMapping(value = "/xacnhandon/{fiNSWFileCode}", method = RequestMethod.GET)
     public @ResponseBody
     ResponseJson getGiayXN(@PathVariable String fiNSWFileCode) {
         ResponseJson json = new ResponseJson();
         try {
-            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.FIND_GIAY_XAC_NHAN)+fiNSWFileCode);
+            json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.FIND_GIAY_XAC_NHAN) + fiNSWFileCode);
             return json;
         } catch (Exception ex) {
             LogUtil.addLog(ex);
@@ -733,33 +747,34 @@ public class Mard25Api extends BaseApi {
 
     @RequestMapping(value = "/taidondk/{idHS}", method = RequestMethod.GET)
     public @ResponseBody
-    void taiDonDK(HttpServletRequest request,HttpServletResponse response,@PathVariable Integer idHS) {
+    void taiDonDK(HttpServletRequest request, HttpServletResponse response, @PathVariable Integer idHS) {
         try {
             if (!isOwner(idHS.toString(), null)) {
                 return;
             }
             ResponseJson hosoJson = getHoSoByID(idHS.toString());
-            DonDangKyDownload donDangKy= GsonUtils.getInstance().transform(hosoJson.getData(),DonDangKyDownload.class);
+            DonDangKyDownload donDangKy = GsonUtils.getInstance().transform(hosoJson.getData(), DonDangKyDownload.class);
             ResponseJson xacNhanDonJson = getGiayXN(donDangKy.getFiNSWFileCode());
-            TbdXacNhanDon25 tbdXacNhanDon25 = GsonUtils.getInstance().transform(xacNhanDonJson.getData(),TbdXacNhanDon25.class);
+            TbdXacNhanDon25 tbdXacNhanDon25 = GsonUtils.getInstance().transform(xacNhanDonJson.getData(), TbdXacNhanDon25.class);
             ResponseJson chiTieuJson = getListChiTieuByNSWFileCode(donDangKy.getFiNSWFileCode());
             List<TbdChiTieuDG25> listChiTieu = null;
-            if(null!=chiTieuJson.getData()){
-                listChiTieu=new Gson().fromJson(new Gson().toJson(chiTieuJson.getData()),new TypeToken<List<TbdChiTieuDG25>>(){}.getType());
+            if (null != chiTieuJson.getData()) {
+                listChiTieu = new Gson().fromJson(new Gson().toJson(chiTieuJson.getData()), new TypeToken<List<TbdChiTieuDG25>>() {
+                }.getType());
             }
             donDangKy.setXacNhanDon(tbdXacNhanDon25);
             donDangKy.setListChiTieu(listChiTieu);
             String templatePath = null;
             String tempFoleder = environment.getRequiredProperty(AppConstant.Folder.TemSaveFolder);
 
-            String fileName = new Date().getTime() + "_" +donDangKy.getFiNSWFileCode()+".docx";
+            String fileName = new Date().getTime() + "_" + donDangKy.getFiNSWFileCode() + ".docx";
             File tempFile;
             Docx docx;
             // preparing variables
             Variables variables = genVariablesDonDangKy(donDangKy);
-            if(null!=donDangKy.getXacNhanDon()){
+            if (null != donDangKy.getXacNhanDon()) {
                 templatePath = request.getRealPath("/WEB-INF/downloads/mard/25/don_dang_ky_phuluc.docx");
-            }else{
+            } else {
                 templatePath = request.getRealPath("/WEB-INF/downloads/mard/25/don_dang_ky.docx");
             }
 
@@ -778,6 +793,16 @@ public class Mard25Api extends BaseApi {
         } catch (Exception ex) {
             LogUtil.addLog(ex);
         }
+    }
+
+
+    @RequestMapping(value = "/hoso/dshosomienkiem/{taxCode}", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseJson getDSHosoMK(
+            @PathVariable String taxCode
+    ) {
+        ResponseJson json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.FIND_DS_HOSO_MIEN_KIEM)+ taxCode);
+        return json;
     }
 
     private SignData getXMLForSign(SendMessage sendMessage) throws Exception {
@@ -803,59 +828,61 @@ public class Mard25Api extends BaseApi {
             throw new Exception(resultSignFlow.getMessage());
         }
     }
+
     private boolean isOwner(String idHS, String nswFileCode) {
         ResponseJson json = BackendRequestHelper.getInstance().doGetRequest(
                 Mard25Constant.getInstance().getApiUrl(
                         environment,
                         Mard25Constant.API.HOSO_GET_BY_FILTER
                 ) + "?id=" +
-                        (StringUtils.isEmpty(idHS)? "" : idHS) + "&nswFileCode=" +
-                        (StringUtils.isEmpty(nswFileCode)? "" : nswFileCode) + "&taxCode=" + getUsername());
+                        (StringUtils.isEmpty(idHS) ? "" : idHS) + "&nswFileCode=" +
+                        (StringUtils.isEmpty(nswFileCode) ? "" : nswFileCode) + "&taxCode=" + getUsername());
 
         return json != null && json.getData() != null;
     }
-    private Variables genVariablesDonDangKy(DonDangKyDownload donDangKy){
+
+    private Variables genVariablesDonDangKy(DonDangKyDownload donDangKy) {
 
         Variables donDKVariables = new Variables();
-        donDKVariables.addTextVariable(new TextVariable("#{fiSellName}", donDangKy.getFiSellName()==null?"":donDangKy.getFiSellName()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiSellAddress}", donDangKy.getFiSellAddress()==null?"":donDangKy.getFiSellAddress()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiSellTel}", donDangKy.getFiSellTel()==null?"":"; "+donDangKy.getFiSellTel()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiSellFax}", donDangKy.getFiSellFax()==null?"":"; "+donDangKy.getFiSellFax()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiSellExport}", donDangKy.getFiSellExport()==null?"":donDangKy.getFiSellExport()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiImporterName}", donDangKy.getFiImporterName()==null?"":donDangKy.getFiImporterName()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiImporterAddress}", donDangKy.getFiImporterAddress()==null?"":donDangKy.getFiImporterAddress()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiImporterTel}", donDangKy.getFiImporterTel()==null?"":"; "+donDangKy.getFiImporterTel()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiImporterFax}", donDangKy.getFiImporterFax()==null?"":"; "+donDangKy.getFiImporterFax()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiPurchReci}", donDangKy.getFiPurchReci()==null?"":donDangKy.getFiPurchReci()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiSellName}", donDangKy.getFiSellName() == null ? "" : donDangKy.getFiSellName()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiSellAddress}", donDangKy.getFiSellAddress() == null ? "" : donDangKy.getFiSellAddress()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiSellTel}", donDangKy.getFiSellTel() == null ? "" : "; " + donDangKy.getFiSellTel()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiSellFax}", donDangKy.getFiSellFax() == null ? "" : "; " + donDangKy.getFiSellFax()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiSellExport}", donDangKy.getFiSellExport() == null ? "" : donDangKy.getFiSellExport()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiImporterName}", donDangKy.getFiImporterName() == null ? "" : donDangKy.getFiImporterName()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiImporterAddress}", donDangKy.getFiImporterAddress() == null ? "" : donDangKy.getFiImporterAddress()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiImporterTel}", donDangKy.getFiImporterTel() == null ? "" : "; " + donDangKy.getFiImporterTel()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiImporterFax}", donDangKy.getFiImporterFax() == null ? "" : "; " + donDangKy.getFiImporterFax()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiPurchReci}", donDangKy.getFiPurchReci() == null ? "" : donDangKy.getFiPurchReci()));
         donDKVariables.addTextVariable(new TextVariable("#{fiPurchFromDate}", Mard25Hepler.toShortStringDate(donDangKy.getFiPurchFromDate())));
-        donDKVariables.addTextVariable(new TextVariable("#{fiPurchToDate}",Mard25Hepler.toShortStringDate(donDangKy.getFiPurchToDate())));
-        donDKVariables.addTextVariable(new TextVariable("#{fiAddressGath}", donDangKy.getFiAddressGath()==null?"":donDangKy.getFiAddressGath()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiPurchToDate}", Mard25Hepler.toShortStringDate(donDangKy.getFiPurchToDate())));
+        donDKVariables.addTextVariable(new TextVariable("#{fiAddressGath}", donDangKy.getFiAddressGath() == null ? "" : donDangKy.getFiAddressGath()));
         donDKVariables.addTextVariable(new TextVariable("#{fiRegSamFromDate}", Mard25Hepler.toShortStringDate(donDangKy.getFiRegSamFromDate())));
         donDKVariables.addTextVariable(new TextVariable("#{fiRegSamToDate}", Mard25Hepler.toShortStringDate(donDangKy.getFiRegSamToDate())));
-        donDKVariables.addTextVariable(new TextVariable("#{fiAddressRegSample}", donDangKy.getFiAddressRegSample()==null?"":donDangKy.getFiAddressRegSample()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiAddressGath}", donDangKy.getFiAddressGath()==null?"":donDangKy.getFiAddressGath()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiContactName}", donDangKy.getFiContactName()==null?"":donDangKy.getFiContactName()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiAddressRegSample}", donDangKy.getFiAddressRegSample() == null ? "" : donDangKy.getFiAddressRegSample()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiAddressGath}", donDangKy.getFiAddressGath() == null ? "" : donDangKy.getFiAddressGath()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiContactName}", donDangKy.getFiContactName() == null ? "" : donDangKy.getFiContactName()));
         donDKVariables.addTextVariable(new TextVariable("#{fiLoaiHS}", Mard25Hepler.getLoaiHoSo(donDangKy.getFiHSType())));
 
         StringBuffer soHD = new StringBuffer();
         String ngayHD;
-        donDangKy.getFiAttachmentList().forEach(att->{
-            if (att.getFiFileTypeID()==1L){
+        donDangKy.getFiAttachmentList().forEach(att -> {
+            if (att.getFiFileTypeID() == 1L) {
                 att.getFiFileHD();
             }
         });
 
-        donDKVariables.addTextVariable(new TextVariable("#{fiNameDVXL}", donDangKy.getFiNameDVXL()==null?"":donDangKy.getFiNameDVXL()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiNameDVXL}", donDangKy.getFiNameDVXL() == null ? "" : donDangKy.getFiNameDVXL()));
 
-        donDKVariables.addTextVariable(new TextVariable("#{fiSignAddressName}", donDangKy.getFiSignAddressName()==null?"":donDangKy.getFiSignAddressName()+", "));
+        donDKVariables.addTextVariable(new TextVariable("#{fiSignAddressName}", donDangKy.getFiSignAddressName() == null ? "" : donDangKy.getFiSignAddressName() + ", "));
         donDKVariables.addTextVariable(new TextVariable("#{fiCreatedDate}", Mard25Hepler.toVNStringDate(donDangKy.getFiHSCreatedDate())));
         donDKVariables.addTextVariable(new TextVariable("#{fiSignName}", donDangKy.getFiSignName()));
-        if(donDangKy.getXacNhanDon()!=null){
-            donDKVariables.addTextVariable(new TextVariable("#{fiSoGXN}", donDangKy.getXacNhanDon().getFiSoGXN()==null?"":donDangKy.getXacNhanDon().getFiSoGXN()));
-            donDKVariables.addTextVariable(new TextVariable("#{fiNoiXN}", donDangKy.getXacNhanDon().getFiNoiXN()==null?"":donDangKy.getXacNhanDon().getFiNoiXN()+", "));
+        if (donDangKy.getXacNhanDon() != null) {
+            donDKVariables.addTextVariable(new TextVariable("#{fiSoGXN}", donDangKy.getXacNhanDon().getFiSoGXN() == null ? "" : donDangKy.getXacNhanDon().getFiSoGXN()));
+            donDKVariables.addTextVariable(new TextVariable("#{fiNoiXN}", donDangKy.getXacNhanDon().getFiNoiXN() == null ? "" : donDangKy.getXacNhanDon().getFiNoiXN() + ", "));
             donDKVariables.addTextVariable(new TextVariable("#{fiNgayXN}", Mard25Hepler.toVNStringDate(donDangKy.getXacNhanDon().getFiNgayXN())));
-            donDKVariables.addTextVariable(new TextVariable("#{fiNguoiKy}", donDangKy.getXacNhanDon().getFiNguoiXN()==null?"":donDangKy.getXacNhanDon().getFiNguoiXN()));
-        }else{
+            donDKVariables.addTextVariable(new TextVariable("#{fiNguoiKy}", donDangKy.getXacNhanDon().getFiNguoiXN() == null ? "" : donDangKy.getXacNhanDon().getFiNguoiXN()));
+        } else {
             donDKVariables.addTextVariable(new TextVariable("#{fiSoGXN}", ""));
             donDKVariables.addTextVariable(new TextVariable("#{fiNoiXN}", ""));
             donDKVariables.addTextVariable(new TextVariable("#{fiNgayXN}", ""));
@@ -872,19 +899,19 @@ public class Mard25Api extends BaseApi {
         List<Variable> proCountryNameVars = new ArrayList<>();
         List<Variable> proSLVars = new ArrayList<>();
         List<Variable> proKLVars = new ArrayList<>();
-        if(null!=donDangKy.getFiProductList()&&!donDangKy.getFiProductList().isEmpty()){
-            int index=0;
-            for (TbdHanghoa25 tbdHanghoa25:donDangKy.getFiProductList()){
+        if (null != donDangKy.getFiProductList() && !donDangKy.getFiProductList().isEmpty()) {
+            int index = 0;
+            for (TbdHanghoa25 tbdHanghoa25 : donDangKy.getFiProductList()) {
                 index++;
                 sttVars.add(new TextVariable("#{fiSTT}", Integer.toString(index)));
-                proNameVars.add(new TextVariable("#{fiProName}",tbdHanghoa25.getFiProName()==null?"":tbdHanghoa25.getFiProName()));
-                proCodeVars.add(new TextVariable("#{fiProCode}",tbdHanghoa25.getFiProCode()==null?"":tbdHanghoa25.getFiProCode()));
-                proNameNhomVars.add(new TextVariable("#{fiProNameNhom}",tbdHanghoa25.getFiProNameNhom()==null?"":tbdHanghoa25.getFiProNameNhom()));
-                proNameLoaiVars.add(new TextVariable("#{fiProNameLoai}",tbdHanghoa25.getFiProNameLoai()==null?"":tbdHanghoa25.getFiProNameLoai()));
-                proMadeInVars.add(new TextVariable("#{fiProMadeIn}",tbdHanghoa25.getFiProMadeIn()==null?"":tbdHanghoa25.getFiProMadeIn()));
-                proCountryNameVars.add(new TextVariable("#{fiProCountryName}",tbdHanghoa25.getFiProCountryName()==null?"":tbdHanghoa25.getFiProCountryName()));
-                proKLVars.add(new TextVariable("#{fiProductKL}",tbdHanghoa25.getFiProductKL()==null?"":tbdHanghoa25.getFiProductKL()));
-                proSLVars.add(new TextVariable("#{fiProductSL}",tbdHanghoa25.getFiProductSL()==null?"":tbdHanghoa25.getFiProductSL()));
+                proNameVars.add(new TextVariable("#{fiProName}", tbdHanghoa25.getFiProName() == null ? "" : tbdHanghoa25.getFiProName()));
+                proCodeVars.add(new TextVariable("#{fiProCode}", tbdHanghoa25.getFiProCode() == null ? "" : tbdHanghoa25.getFiProCode()));
+                proNameNhomVars.add(new TextVariable("#{fiProNameNhom}", tbdHanghoa25.getFiProNameNhom() == null ? "" : tbdHanghoa25.getFiProNameNhom()));
+                proNameLoaiVars.add(new TextVariable("#{fiProNameLoai}", tbdHanghoa25.getFiProNameLoai() == null ? "" : tbdHanghoa25.getFiProNameLoai()));
+                proMadeInVars.add(new TextVariable("#{fiProMadeIn}", tbdHanghoa25.getFiProMadeIn() == null ? "" : tbdHanghoa25.getFiProMadeIn()));
+                proCountryNameVars.add(new TextVariable("#{fiProCountryName}", tbdHanghoa25.getFiProCountryName() == null ? "" : tbdHanghoa25.getFiProCountryName()));
+                proKLVars.add(new TextVariable("#{fiProductKL}", tbdHanghoa25.getFiProductKL() == null ? "" : tbdHanghoa25.getFiProductKL()));
+                proSLVars.add(new TextVariable("#{fiProductSL}", tbdHanghoa25.getFiProductSL() == null ? "" : tbdHanghoa25.getFiProductSL()));
 
             }
         }
@@ -905,22 +932,22 @@ public class Mard25Api extends BaseApi {
         List<Variable> fiHamLuongVars = new ArrayList<>();
         List<Variable> fiTenDVTVars = new ArrayList<>();
         List<Variable> fiGhiChuVars = new ArrayList<>();
-        if(null!=donDangKy.getListChiTieu()&&!donDangKy.getListChiTieu().isEmpty()){
-            for (TbdChiTieuDG25 tbdChiTieuDG25: donDangKy.getListChiTieu()){
-                fiTenHangHoaVars.add(new TextVariable("#{fiTenHangHoa}",tbdChiTieuDG25.getFiTenHangHoa()==null?"":tbdChiTieuDG25.getFiTenHangHoa()));
-                fiTenChiTieuVars.add(new TextVariable("#{fiTenChiTieu}",tbdChiTieuDG25.getFiTenChiTieu()==null?"":tbdChiTieuDG25.getFiTenChiTieu()));
-                fiHinhThucCBVars.add(new TextVariable("#{fiHinhThucCB}",Mard25Hepler.getHinhThucCB(tbdChiTieuDG25.getFiHinhThucCB())));
-                fiHamLuongVars.add(new TextVariable("#{fiHamLuong}",tbdChiTieuDG25.getFiHamLuong()==null?"":tbdChiTieuDG25.getFiHamLuong()));
-                fiTenDVTVars.add(new TextVariable("#{fiTenDVT}",tbdChiTieuDG25.getFiTenDVT()==null?"":tbdChiTieuDG25.getFiTenDVT()));
-                fiGhiChuVars.add(new TextVariable("#{fiGhiChu}",tbdChiTieuDG25.getFiGhiChu()==null?"":tbdChiTieuDG25.getFiGhiChu()));
+        if (null != donDangKy.getListChiTieu() && !donDangKy.getListChiTieu().isEmpty()) {
+            for (TbdChiTieuDG25 tbdChiTieuDG25 : donDangKy.getListChiTieu()) {
+                fiTenHangHoaVars.add(new TextVariable("#{fiTenHangHoa}", tbdChiTieuDG25.getFiTenHangHoa() == null ? "" : tbdChiTieuDG25.getFiTenHangHoa()));
+                fiTenChiTieuVars.add(new TextVariable("#{fiTenChiTieu}", tbdChiTieuDG25.getFiTenChiTieu() == null ? "" : tbdChiTieuDG25.getFiTenChiTieu()));
+                fiHinhThucCBVars.add(new TextVariable("#{fiHinhThucCB}", Mard25Hepler.getHinhThucCB(tbdChiTieuDG25.getFiHinhThucCB())));
+                fiHamLuongVars.add(new TextVariable("#{fiHamLuong}", tbdChiTieuDG25.getFiHamLuong() == null ? "" : tbdChiTieuDG25.getFiHamLuong()));
+                fiTenDVTVars.add(new TextVariable("#{fiTenDVT}", tbdChiTieuDG25.getFiTenDVT() == null ? "" : tbdChiTieuDG25.getFiTenDVT()));
+                fiGhiChuVars.add(new TextVariable("#{fiGhiChu}", tbdChiTieuDG25.getFiGhiChu() == null ? "" : tbdChiTieuDG25.getFiGhiChu()));
             }
-        }else{
-            fiTenHangHoaVars.add(new TextVariable("#{fiTenHangHoa}",""));
-            fiTenChiTieuVars.add(new TextVariable("#{fiTenChiTieu}",""));
-            fiHinhThucCBVars.add(new TextVariable("#{fiHinhThucCB}",""));
-            fiHamLuongVars.add(new TextVariable("#{fiHamLuong}",""));
-            fiTenDVTVars.add(new TextVariable("#{fiTenDVT}",""));
-            fiGhiChuVars.add(new TextVariable("#{fiGhiChu}",""));
+        } else {
+            fiTenHangHoaVars.add(new TextVariable("#{fiTenHangHoa}", ""));
+            fiTenChiTieuVars.add(new TextVariable("#{fiTenChiTieu}", ""));
+            fiHinhThucCBVars.add(new TextVariable("#{fiHinhThucCB}", ""));
+            fiHamLuongVars.add(new TextVariable("#{fiHamLuong}", ""));
+            fiTenDVTVars.add(new TextVariable("#{fiTenDVT}", ""));
+            fiGhiChuVars.add(new TextVariable("#{fiGhiChu}", ""));
         }
         chiTieuTableVariable.addVariable(fiTenHangHoaVars);
         chiTieuTableVariable.addVariable(fiTenChiTieuVars);
