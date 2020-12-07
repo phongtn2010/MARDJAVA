@@ -259,8 +259,8 @@ public class Constant25 {
     }
 
     public static String hashString(String originalString){
-        String md5Hex = DigestUtils
-                .md5Hex(originalString).toUpperCase();
-        return md5Hex;
+        String sha256Hex = DigestUtils
+                .sha256Hex(originalString).toUpperCase();
+        return sha256Hex;
     }
 }

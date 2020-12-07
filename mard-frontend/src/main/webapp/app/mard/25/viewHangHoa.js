@@ -190,8 +190,8 @@ function Mard25ViewHangHoaVM (options) {
     }
     self.thongBaoKQVM = ko.observable(new ThongBaoKQVM());
     self.xemThongBao = function(data,type,index){
-        self.thongBaoKQVM().update(index);
-        $("#mard25KQKT").show();
+        self.thongBaoKQVM().update(index,self.fiHS());
+        $("#mard25KQKT").modal("show");
     }
 
     self.lichsuXuly = ko.observable(new HistoryPopupView());
@@ -236,9 +236,9 @@ function Mard25ViewHangHoaVM (options) {
     }
 
     self.guiKiemDinhHangHoa =function(){
-        // if(!self.validateForm()){
-        //     return;
-        // }
+        if(!self.validateForm()){
+            return;
+        }
         var jsonData=self.getBodyGuiKQ();
         self.pop = app.popup({
             title: 'Thông báo',
@@ -464,25 +464,25 @@ function ThongBaoKQVM() {
     thongBaoVMSefl.soGDK=ko.observable(null);
     thongBaoVMSefl.lstHD=ko.observableArray([]);
     thongBaoVMSefl.lstHoaDon=ko.observableArray([]);
-    thongBaoVMSefl.update=function(index){
+    thongBaoVMSefl.update=function(index,hoso){
         thongBaoVMSefl.listHangHoa(index);
-        thongBaoVMSefl.thoiGianNhap("Từ ngày: "+  new Date(self.fiHS().fiPurchFromDate).toShortDateString() + " tới ngày " + new Date(self.fiHS().fiPurchToDate).toShortDateString());
-        thongBaoVMSefl.tenCongTyNK(self.fiHS().fiImporterName);
-        thongBaoVMSefl.diaChiCongTyNK(self.fiHS().fiImporterAddress);
+        thongBaoVMSefl.thoiGianNhap("Từ ngày: "+  new Date(hoso.fiPurchFromDate).toShortDateString() + " tới ngày " + new Date(hoso.fiPurchToDate).toShortDateString());
+        thongBaoVMSefl.tenCongTyNK(hoso.fiImporterName);
+        thongBaoVMSefl.diaChiCongTyNK(hoso.fiImporterAddress);
         thongBaoVMSefl.quyChuanKT(index.fiProQuyChuan);
         thongBaoVMSefl.tieuChuanApDung(index.fiProSoHieu);
         thongBaoVMSefl.giayCN(index.fiSoGCN);
         thongBaoVMSefl.ngayKy(index.ngayKy==null?null:new Date(index.ngayKy).toDateString());
-        thongBaoVMSefl.soGDK(self.fiHS().fiSoXacNhanDon);
+        thongBaoVMSefl.soGDK(hoso.fiSoXacNhanDon);
 
-        if(self.fiHS().fiAttachmentList.length>0) {
+        if(hoso.fiAttachmentList.length>0) {
             thongBaoVMSefl.lstHD=ko.computed(function () {
-                return ko.utils.arrayFilter(item.fiAttachmentList, function (re) {
+                return ko.utils.arrayFilter(hoso.fiAttachmentList, function (re) {
                     return re.fiFileTypeID == '1';
                 });
             });
             thongBaoVMSefl.lstHoaDon=ko.computed(function () {
-                return ko.utils.arrayFilter(item.fiAttachmentList, function (re) {
+                return ko.utils.arrayFilter(hoso.fiAttachmentList, function (re) {
                     return re.fiFileTypeID == '2';
                 });
             });

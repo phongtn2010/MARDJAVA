@@ -68,7 +68,7 @@ public class Mard25Api extends BaseApi {
         logger.info("Bat dau upload file: ");
         try {
             String fileName = multipartfile.getOriginalFilename();
-            String folder = environment.getProperty("mard.folder.temp");
+            String folder = environment.getProperty("nsw.fontend.tempfolder");
             String api_upload_file = environment.getProperty("mard.api.uploadfile");
 
             String filePath = folder + fileName;

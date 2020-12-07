@@ -84,7 +84,7 @@
                 + Hóa đơn số:<br/> <span data-bind="foreach: lstHoaDon">
                             Số:<span data-bind="text: fiFileHD"></span>
                             Ngày <span data-bind="date: fiFileHDDate"></span>;  </span>
-                + Giấy đăng ký kiểm tra xác nhận chất lượng số:<br/> <span data-bind="text: soGDK"></span>
+                + Giấy đăng ký kiểm tra xác nhận chất lượng số:<span data-bind="text: soGDK"></span><br/>
                 - Tên tổ chức nhập khẩu: <span data-bind="text: tenCongTyNK"></span><br/>
                 Địa chỉ: <span data-bind="text: diaChiCongTyNK"></span><br/>
             </div>
@@ -115,7 +115,7 @@
             <a class="btn green" data-bind="">
                 <spring:message code="common.button.tai_ve"/>
             </a>
-            <a class="btn" href="javascript:void(0)" data-dismiss="modal" data-bind="click: closeThongBao">
+            <a class="btn" data-dismiss="modal" data-bind="click: closeThongBao">
                 <spring:message code="conmon.button.dong"/>
             </a>
         </div>
