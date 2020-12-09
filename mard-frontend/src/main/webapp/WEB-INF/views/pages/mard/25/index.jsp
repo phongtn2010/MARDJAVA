@@ -239,9 +239,9 @@
                                 </div>
                             </td>
                             <td class="text-center">
-                                <div data-bind="visible: $parent.getHoSoType(fiHSType)=='2c' && fiHSStatus ==26">
-                                    <a data-target="#modal_view_chuyen"
-                                       data-toggle="modal" data-bind="click: $parent.chuyenTCCD.bind($data,$data,$index())"><i
+                                <div data-bind="visible: $parent.getHoSoType(fiHSType)=='2c' && fiHSStatus ==26 &&
+                                $parent.permissionViewChuyen($data, $data, $index())">
+                                    <a data-bind="click: $parent.chuyenTCCD.bind($data,$data,$index())"><i
                                             class="fa fa-eye"></i></a>
                                 </div>
                             </td>

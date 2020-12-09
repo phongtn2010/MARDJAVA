@@ -268,11 +268,11 @@ $(document).ready(function () {
         app.sendGetRequest("/mard/25/danhmuc/getby-catno/7", function (res) {
             options['lstDMDVTSL'] = res.data;
         })
-        ,
-        // Get danh muc dvt
-        app.sendGetRequest("/mard/25/dshosomienkiem/"+hosoUsername, function (res) {
-            options['lstDSHosoMK'] = res.data;
-        })
+        // ,
+        // // Get danh muc dvt
+        // app.sendGetRequest("/mard/25/hoso/dshosomienkiem/"+hosoUsername, function (res) {
+        //     options['lstDSHosoMK'] = res.data;
+        // })
         // // Get attach types
         // app.sendGetRequest("/mard/25/danhmuc/dinhkem?systemId=6", function (res) {
         //     options['lstAtchType'] = res.data;

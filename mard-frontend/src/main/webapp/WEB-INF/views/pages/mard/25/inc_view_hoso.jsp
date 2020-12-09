@@ -145,17 +145,19 @@
             <p>(2):Tối thiêu 01 chỉ tiêu chất lương trong tiêu chuẩn công bố áp dụng và các chỉ tiêu an toàn theo quye định tại quy chuẩn kỹ thuật quốc gia tương ứng.</p>
             <p>(3):Ghi "miễn kiểm tra" nếu lô hàng áp dụng chế độ miễn kiểm tra có thời hạn hoặc "kiểm tra theo điểm a khoản 2 Điều 18 của Nghị đinh này" hoặc "kiểm tra theo điểm b khoản 2 Điều 18 của Nghị định này".</p>
             <div class="row">
-                <div class="col-md-6 text-center" style="">
-                    <span data-bind="text: $root.getNoiKy(fiSignAddressCode)"></span> <span data-bind="text: ngayky"></span><br/>
-                    <b>TỔ CHỨC, CÁ NHÂN NHẬP KHẨU</b> <br/>
-                    <i>(ký tên, đóng dấu)</i><br/><br/><br/><br/>
-                    <span data-bind="text: fiSignName"></span>
-                </div>
+
                 <div class="col-md-6 text-center" style="">
                     <span data-bind="text: noixn"></span> <span data-bind="text: ngayXN"></span><br/>
                     <b>TÊN CƠ QUAN KIỂM TRA</b> <br/>
                     <i>(ký tên, đóng dấu)</i><br/><br/><br/><br/>
                     <span data-bind="text: nguoixn"></span>
+                </div>
+
+                <div class="col-md-6 text-center" style="">
+                    <span data-bind="text: $root.getNoiKy(fiSignAddressCode)"></span> <span data-bind="text: ngayky"></span><br/>
+                    <b>TỔ CHỨC, CÁ NHÂN NHẬP KHẨU</b> <br/>
+                    <i>(ký tên, đóng dấu)</i><br/><br/><br/><br/>
+                    <span data-bind="text: fiSignName"></span>
                 </div>
             </div>
             <div id="phuluc-hoso" data-bind="visible: fiHSStatus >=26">

@@ -23,4 +23,8 @@ public class TbhGiayXNCL25ServiceImpl implements TbdGiayXNCL25Service {
         return repository.findByFiNSWFileCodeAndFiSoGCN(fiNSWFileCode,fiSoGXN);
     }
 
+    @Override
+    public TbdGiayXNCL25 findByFiIdHangHoa(Integer fiIdHangHoa) {
+        return repository.findByFiIdHangHoa(fiIdHangHoa);
+    }
 }

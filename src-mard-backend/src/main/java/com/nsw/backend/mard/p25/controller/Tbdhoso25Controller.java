@@ -11,10 +11,7 @@ import com.nsw.backend.mard.p25.constant.Constant25;
 import com.nsw.backend.mard.p25.dto.SendMessage;
 import com.nsw.backend.mard.p25.dto.UploadBaoCao;
 import com.nsw.backend.mard.p25.model.*;
-import com.nsw.backend.mard.p25.service.TbdHoso25Service;
-import com.nsw.backend.mard.p25.service.TbdLichsu25Service;
-import com.nsw.backend.mard.p25.service.TbdYcrut25Service;
-import com.nsw.backend.mard.p25.service.WsService;
+import com.nsw.backend.mard.p25.service.*;
 import com.nsw.backend.mard.p26.service.TbdHoso26Service;
 import com.nsw.backend.service.RabbitMQService;
 import com.nsw.backend.util.ResponseJson;
@@ -45,16 +42,19 @@ public class Tbdhoso25Controller extends BaseController {
 
     private final TbdHoso26Service tbdHoso26Service;
 
+    private final TbdGiayXNCL25Service tbdGiayXNCL25Service;
+
     private final WsService wsService;
 
     @Autowired
-    public Tbdhoso25Controller(RabbitMQService rabbitMQService, TbdHoso25Service tbdHoso25Service, TbdLichsu25Service tbdLichsu25Service, WsService wsService, TbdYcrut25Service tbdYcrut25Service, TbdHoso26Service tbdHoso26Service) {
+    public Tbdhoso25Controller(RabbitMQService rabbitMQService, TbdHoso25Service tbdHoso25Service, TbdLichsu25Service tbdLichsu25Service, WsService wsService, TbdYcrut25Service tbdYcrut25Service, TbdHoso26Service tbdHoso26Service, TbdGiayXNCL25Service tbdGiayXNCL25Service) {
         this.rabbitMQService = rabbitMQService;
         this.tbdHoso25Service = tbdHoso25Service;
         this.tbdLichsu25Service = tbdLichsu25Service;
         this.wsService = wsService;
         this.tbdYcrut25Service=tbdYcrut25Service;
         this.tbdHoso26Service = tbdHoso26Service;
+        this.tbdGiayXNCL25Service = tbdGiayXNCL25Service;
     }
 
     //------------------- Create a Tbdhoso06 --------
@@ -308,5 +308,9 @@ public class Tbdhoso25Controller extends BaseController {
     @GetMapping("/dshosomienkiem/{taxCode}")
     public ResponseEntity<ResponseJson> getDanhSachHosoMK(@PathVariable String taxCode) {
         return createSuccessResponse(tbdHoso26Service.findCongVanMienKiem(new Date(),taxCode), HttpStatus.OK);
+    }
+    @GetMapping("/findgiayxncl/{idHangHoa}")
+    public ResponseEntity<ResponseJson> findGiayXacNhanChatLuong(@PathVariable Integer idHangHoa) {
+        return createSuccessResponse(tbdGiayXNCL25Service.findByFiIdHangHoa(idHangHoa), HttpStatus.OK);
     }
 }

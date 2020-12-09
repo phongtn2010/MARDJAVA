@@ -464,6 +464,10 @@ function ThongBaoKQVM() {
     thongBaoVMSefl.soGDK=ko.observable(null);
     thongBaoVMSefl.lstHD=ko.observableArray([]);
     thongBaoVMSefl.lstHoaDon=ko.observableArray([]);
+    thongBaoVMSefl.hopDong=ko.observable('');
+    thongBaoVMSefl.hoaDon=ko.observable('');
+    thongBaoVMSefl.soGXNCL=ko.observable(null);
+    thongBaoVMSefl.ngayKyXNCL=ko.observable('');
     thongBaoVMSefl.update=function(index,hoso){
         thongBaoVMSefl.listHangHoa(index);
         thongBaoVMSefl.thoiGianNhap("Từ ngày: "+  new Date(hoso.fiPurchFromDate).toShortDateString() + " tới ngày " + new Date(hoso.fiPurchToDate).toShortDateString());
@@ -471,7 +475,7 @@ function ThongBaoKQVM() {
         thongBaoVMSefl.diaChiCongTyNK(hoso.fiImporterAddress);
         thongBaoVMSefl.quyChuanKT(index.fiProQuyChuan);
         thongBaoVMSefl.tieuChuanApDung(index.fiProSoHieu);
-        thongBaoVMSefl.giayCN(index.fiSoGCN);
+        thongBaoVMSefl.giayCN(hoso.fiSoXacNhanDon);
         thongBaoVMSefl.ngayKy(index.ngayKy==null?null:new Date(index.ngayKy).toDateString());
         thongBaoVMSefl.soGDK(hoso.fiSoXacNhanDon);
 
@@ -481,14 +485,41 @@ function ThongBaoKQVM() {
                     return re.fiFileTypeID == '1';
                 });
             });
+
             thongBaoVMSefl.lstHoaDon=ko.computed(function () {
                 return ko.utils.arrayFilter(hoso.fiAttachmentList, function (re) {
                     return re.fiFileTypeID == '2';
                 });
             });
         }
+        var hopDong='';
+        var hoaDon='';
+        ko.utils.arrayForEach(thongBaoVMSefl.lstHD(),function (re) {
+            hopDong+='Số: '+re.fiFileHD+', ';
+            hopDong+='Ngày '+new Date(re.fiFileHDDate).toShortDateString()+'; ';
+        });
+        ko.utils.arrayForEach(thongBaoVMSefl.lstHoaDon(),function (re) {
+            hoaDon+='Số: '+re.fiFileHD+', ';
+            hoaDon+='Ngày '+new Date(re.fiFileHDDate).toShortDateString()+'; ';
+        });
+        thongBaoVMSefl.hopDong(hopDong);
+        thongBaoVMSefl.hoaDon(hoaDon);
+        findGiayxncl(index.fiIdProduct,function (res) {
+            thongBaoVMSefl.soGXNCL(res.data.fiSoGCN);
+            thongBaoVMSefl.ngayKyXNCL(res.data.fiNgayKy==null?new Date(res.data.fiCreatedDate).toDateString():new Date(res.data.fiNgayKy).toDateString());
+        });
     }
     thongBaoVMSefl.closeThongBao = function(data,type,index){
         $("#mard25KQKT").modal("hide");
     }
+}
+function findGiayxncl(idHangHoa,callback) {
+    app.makeGet({
+        url: '/mard/25/hoso/findgiayxncl/'+idHangHoa,
+        success: function (d) {
+            if (d.success) {
+                callback(d);
+            }
+        }
+    });
 }

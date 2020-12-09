@@ -19,7 +19,7 @@
                         CỤC CHĂN NUÔI
                     </h5>
                     <div style="border-top: #000000 solid 1px; margin: auto; width: 160px"></div>
-                    Số: <span data-bind="text: giayCN"></span>
+                    Số: <span data-bind="text: soGXNCL"></span>
                 </div>
                 <div class="col-md-6 text-center">
                     <h4 style="font-weight: bold;">
@@ -29,7 +29,7 @@
                         Độc lập - Tự do - Hạnh phúc
                     </h5>
                     <div style="border-top: #000000 solid 1px; margin: auto; width: 160px"></div>
-                    ngày tháng năm
+                    <span data-bind="text: ngayKyXNCL"></span>
                 </div>
             </div>
             <div class="row text-center">
@@ -78,12 +78,8 @@
             </div>
             <div class="row">
                 - Thuộc lô hàng có các chứng từ sau: <br/>
-                + Hợp đồng số:<br/> <span data-bind="foreach: lstHD">
-                            Số:<span data-bind="text: fiFileHD"></span>
-                            Ngày <span data-bind="date: fiFileHDDate"></span>;  </span>
-                + Hóa đơn số:<br/> <span data-bind="foreach: lstHoaDon">
-                            Số:<span data-bind="text: fiFileHD"></span>
-                            Ngày <span data-bind="date: fiFileHDDate"></span>;  </span>
+                + Hợp đồng số: <span data-bind="text: hopDong"></span><br/>
+                + Hóa đơn số: <span data-bind="text: hoaDon"></span><br/>
                 + Giấy đăng ký kiểm tra xác nhận chất lượng số:<span data-bind="text: soGDK"></span><br/>
                 - Tên tổ chức nhập khẩu: <span data-bind="text: tenCongTyNK"></span><br/>
                 Địa chỉ: <span data-bind="text: diaChiCongTyNK"></span><br/>
@@ -93,7 +89,7 @@
                 + Tiêu chuẩn công bố áp dụng (số hiệu TCCS): <span data-bind="text: tieuChuanApDung"></span><br/>
                 + Quy chuẩn kỹ thuật (nhóm, loại hàng hóa tại QCVN 01-190/BNNPTNT): <span data-bind="text: quyChuanKT"></span><br/>
                 <b>3. Kết quả đánh giá sự phù hợp</b><br/>
-                Giấy chứng nhận hợp quy lô TACN nhập khẩu số: <span data-bind="text: giayCN"></span><br/>
+                Giấy chứng nhận hợp quy lô TACN nhập khẩu số: <span data-bind="text: soGXNCL"></span><br/>
                 <b>3. Kết quả kiểm tra nhà nước:</b><br/>
                 Lô hàng đáp ứng yêu cầu chất lượng hàng hóa nhập khẩu./.<br/>
 

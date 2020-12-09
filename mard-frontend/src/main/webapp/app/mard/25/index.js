@@ -540,7 +540,30 @@ function Mard25VM() {
     };
 
     self.chuyenTCCD = function (data,type,index) {
-        // var value = self.setValueForIndexPage(index);
+        index.nguoixn=ko.observable(null);
+        index.ngayXN=ko.observable(null);
+        index.ngayky=ko.observable(new Date(index.fiCreatedDate).toDateString());
+        index.noixn=ko.observable(null);
+        index.soXND=ko.observable(null);
+        index.xacNhanDon=ko.observable(null);
+        index.listChiTieuHS=ko.observableArray([]);
+        if(index.fiAttachmentList.length>0) {
+            index.lstHD=ko.computed(function () {
+                return ko.utils.arrayFilter(index.fiAttachmentList, function (re) {
+                    return re.fiFileTypeID == '1';
+                });
+            });
+            index.lstHoaDon=ko.computed(function () {
+                return ko.utils.arrayFilter(index.fiAttachmentList, function (re) {
+                    return re.fiFileTypeID == '2';
+                });
+            });
+            index.lstPhieu=ko.computed(function () {
+                return ko.utils.arrayFilter(index.fiAttachmentList, function (re) {
+                    return re.fiFileTypeID == '3';
+                });
+            });
+        }
         self.selectedHoSo(index);
         app.makeGet({
             url: '/mard/25/chitieu/'+index.fiNSWFileCode,
@@ -551,10 +574,14 @@ function Mard25VM() {
 
             }
         });
+        $("#modal_view_chuyen").modal("show");
+
     }
     self.chuyenChiTieu =function(){
         self.selectedHoSo().fiIdDVXL=self.fiIdTCCD();
         self.selectedHoSo().fiNameDVXL=self.fiNameTCCD();
+        console.log(self.fiIdTCCD());
+        console.log(self.fiNameTCCD());
         self.pop = app.popup({
             title: 'Thông báo',
             html: '<b>Bạn chắc chắn muốn chuyển hồ sơ cho tổ chức chỉ định?</b>',
@@ -598,11 +625,23 @@ function Mard25VM() {
             ]
         });
     }
-    self.closeViewChuyen = function(){
-
+    self.permissionViewChuyen = function(item){
+        console.log(item);
+        console.log(item.fiProductList[0].fiTrangThaiHangHoa);
+        if (item.fiProductList[0].fiTrangThaiHangHoa>26){
+            return false;
+        }else{
+            return true;
+        }
+        // return true;
     }
+
+    self.closeViewChuyen = function(){
+        $("#modal_view_chuyen").modal("hide");
+    }
+
     self.thoatOnClick  = function () {
-        $("#modal_view_chuyen").hide();
+        $("#modal_view_chuyen").modal("hide");
     }
     self.getHinhThucCB =function (id) {
         switch (id) {

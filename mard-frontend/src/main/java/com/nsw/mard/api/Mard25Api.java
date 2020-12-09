@@ -804,7 +804,14 @@ public class Mard25Api extends BaseApi {
         ResponseJson json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.FIND_DS_HOSO_MIEN_KIEM)+ taxCode);
         return json;
     }
-
+    @RequestMapping(value = "/hoso/findgiayxncl/{fiIdHangHoa}", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseJson getDSHosoMK(
+            @PathVariable Integer fiIdHangHoa
+    ) {
+        ResponseJson json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.FIND_GIAYXNCL)+ fiIdHangHoa);
+        return json;
+    }
     private SignData getXMLForSign(SendMessage sendMessage) throws Exception {
         ResponseJson resultSignFlow = BackendRequestHelper.getInstance()
                 .doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_XML), sendMessage);

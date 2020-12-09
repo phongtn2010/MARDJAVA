@@ -310,11 +310,12 @@ $(document).ready(function () {
             // Get danh muc dvt
             app.sendGetRequest("/mard/25/danhmuc/getby-catno/7", function (res) {
                 options['lstDMDVTSL'] = res.data;
-            }),
-            // Get danh muc dvt
-            app.sendGetRequest("/mard/25/dshosomienkiem/"+hosoUsername, function (res) {
-                options['lstDSHosoMK'] = res.data;
             })
+            // ,
+            // Get danh muc dvt
+            // app.sendGetRequest("/mard/25/hoso/dshosomienkiem/"+hosoUsername, function (res) {
+            //     options['lstDSHosoMK'] = res.data;
+            // })
         ).done(function (data) {
             $('#loading10').hide();
             init(options);
