@@ -4,6 +4,7 @@ function ThongTinChungVM(data) {
 
     ttcVMSelf.lstDSHosoMK = ko.observableArray((data && data.hasOwnProperty('lstDSHosoMK')) ? data.lstDSHosoMK : []);
     ttcVMSelf.fiMaHoso = ko.observable(null);
+    ttcVMSelf.fiProNameSelect = ko.observable(null);
     ttcVMSelf.lstChiTieuAT = ko.observableArray((data && data.hasOwnProperty('lstChiTieuAT')) ? data.lstChiTieuAT : []);
     ttcVMSelf.listCL = ko.observableArray((data && data.hasOwnProperty('listCL')) ? data.listCL : []);
     ttcVMSelf.listAT = ko.observableArray((data && data.hasOwnProperty('listAT')) ? data.listAT : []);
@@ -12,6 +13,7 @@ function ThongTinChungVM(data) {
     ttcVMSelf.isEditHS = ko.observable((data && data.hasOwnProperty('isEditHS')) ? data.isEditHS : null);
     ttcVMSelf.errors = ko.validation.group(ttcVMSelf);
     ttcVMSelf.selectedIndex = ko.observable(null);
+    ttcVMSelf.selectedHangHoa = ko.observable(null);
     ttcVMSelf.lstProfileStatus = ko.observableArray((data && data.hasOwnProperty('lstProfileStatus')) ? data.lstProfileStatus : []);
     ttcVMSelf.fiHSStatus = ko.observable((data && data.hasOwnProperty('fiHSStatus')) ? data.fiHSStatus : null);
     ttcVMSelf.fiTaxCode = ko.observable((data && data.hasOwnProperty('fiTaxCode')) ? data.fiTaxCode : null);
@@ -417,26 +419,27 @@ function ThongTinChungVM(data) {
         });
         if (res){
             var pos = res.fiProductList[0];
-            ttcVMSelf.fiProIdNhom(pos.fiProIdNhom);
-            ttcVMSelf.fiProIdPhanNhom(pos.fiProIdNhom);
-            ttcVMSelf.fiProIdLoai(pos.fiProIdLoai);
-            ttcVMSelf.fiProIdPhanLoai(pos.fiProIdPhanLoai);
-            ttcVMSelf.fiProCode(pos.fiProCode);
-            ttcVMSelf.fiProMadeIn(pos.fiProMadeIn);
-            ttcVMSelf.fiProCountryCode(pos.fiProCountryCode);
-            ttcVMSelf.fiProCountryName(pos.fiProCountryName);
-            ttcVMSelf.fiProThanhPhan(pos.fiProThanhPhan);
-            ttcVMSelf.fiProColor(pos.fiProColor);
-            ttcVMSelf.fiProSoHieu(pos.fiProSoHieu);
-            ttcVMSelf.fiProQuyChuan(pos.fiProQuyChuan);
-            ttcVMSelf.fiProCVMienGiam(pos.fiProCVMienGiam);
-            ttcVMSelf.fiProCVMienGiamNgay(pos.fiProCVMienGiamNgay);
-            ttcVMSelf.fiProValueVN(pos.fiProValueVN);
-            ttcVMSelf.fiProValueUSD(pos.fiProValueUSD);
-            ttcVMSelf.fiPackageUnitName(pos.fiPackageUnitName);
-            ttcVMSelf.fiPackageUnitCode(pos.fiPackageUnitCode);
-            ttcVMSelf.fiProCLList(pos.fiProCLList);
-            ttcVMSelf.fiProATList(pos.fiProATList);
+            ko.mapping.fromJS(pos, {}, ttcVMSelf);
+            // ttcVMSelf.fiProIdNhom(pos.fiProIdNhom);
+            // ttcVMSelf.fiProIdPhanNhom(pos.fiProIdNhom);
+            // ttcVMSelf.fiProIdLoai(pos.fiProIdLoai);
+            // ttcVMSelf.fiProIdPhanLoai(pos.fiProIdPhanLoai);
+            // ttcVMSelf.fiProCode(pos.fiProCode);
+            // ttcVMSelf.fiProMadeIn(pos.fiProMadeIn);
+            // ttcVMSelf.fiProCountryCode(pos.fiProCountryCode);
+            // ttcVMSelf.fiProCountryName(pos.fiProCountryName);
+            // ttcVMSelf.fiProThanhPhan(pos.fiProThanhPhan);
+            // ttcVMSelf.fiProColor(pos.fiProColor);
+            // ttcVMSelf.fiProSoHieu(pos.fiProSoHieu);
+            // ttcVMSelf.fiProQuyChuan(pos.fiProQuyChuan);
+            // ttcVMSelf.fiProCVMienGiam(pos.fiProCVMienGiam);
+            // ttcVMSelf.fiProCVMienGiamNgay(pos.fiProCVMienGiamNgay);
+            // ttcVMSelf.fiProValueVN(pos.fiProValueVN);
+            // ttcVMSelf.fiProValueUSD(pos.fiProValueUSD);
+            // ttcVMSelf.fiPackageUnitName(pos.fiPackageUnitName);
+            // ttcVMSelf.fiPackageUnitCode(pos.fiPackageUnitCode);
+            // ttcVMSelf.fiProCLList(pos.fiProCLList);
+            // ttcVMSelf.fiProATList(pos.fiProATList);
         }
     }
 
@@ -476,6 +479,8 @@ function ThongTinChungVM(data) {
         ttcVMSelf.listSLKL([]);
         ttcVMSelf.fiProValueVN(null);
         ttcVMSelf.fiProValueUSD(null);
+        ttcVMSelf.selectedHangHoa(null);
+        ttcVMSelf.selectedIndex(null);
     }
     ttcVMSelf.addProduct=function(data){
         var getAllForm = [ttcVMSelf.fiProSLKLList, ttcVMSelf.fiProATList,ttcVMSelf.fiProCLList];
@@ -519,7 +524,8 @@ function ThongTinChungVM(data) {
                 fiProSLKLMassUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode(),
                 fiProSLKLAmount: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmount(),
                 fiProSLKLAmountUnitName: amountName,
-                lstDMDVT: ttcVMSelf.lstDMDVT,
+                lstDMDVT: ttcVMSelf.lstDMDVT(),
+                lstDMDVTSL: ttcVMSelf.lstDMDVTSL(),
                 isEnable: ttcVMSelf.fiProSLKLList()[i].isEnable(),
                 isUpdate: ttcVMSelf.fiProSLKLList()[i].isUpdate(),
                 fiProSLKLAmountUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode()
@@ -541,7 +547,7 @@ function ThongTinChungVM(data) {
         var loai=ttcVMSelf.findCatNoteById(ttcVMSelf.lstLoai(),ttcVMSelf.fiProIdLoai());
         var phanLoai=ttcVMSelf.findCatNoteById(ttcVMSelf.lstPhanLoai(),ttcVMSelf.fiProIdPhanLoai());
         var item ={
-            fiProName: ttcVMSelf.fiProName(),
+            fiProName: ttcVMSelf.fiProName()==null?ttcVMSelf.fiProNameSelect():ttcVMSelf.fiProName(),
             fiTrangThaiHangHoa: ttcVMSelf.fiTrangThaiHangHoa(),
             fiProductKL: kl,
             fiProductSL: sl,
@@ -570,7 +576,12 @@ function ThongTinChungVM(data) {
             fiProATList: ttcVMSelf.listAT(),
             fiTaxCode: ttcVMSelf.fiTaxCode()
         }
-        ttcVMSelf.fiProductList.push(item);
+        if(ttcVMSelf.selectedHangHoa()!=null&&ttcVMSelf.selectedIndex()!=null){
+            ttcVMSelf.fiProductList.splice(ttcVMSelf.selectedIndex(), 1);
+            ttcVMSelf.fiProductList.splice(ttcVMSelf.selectedIndex(), 0, item);
+        }else{
+            ttcVMSelf.fiProductList.push(item);
+        }
         ttcVMSelf.clearForm();
         $("#modal_addAnimal").modal('hide');
 
@@ -834,8 +845,8 @@ function ThongTinChungVM(data) {
             fiProSLKLAmount: ttcVMSelf.EfiProSLKLAmount(),
             isEnable:ko.observable(false),
             isUpdate:ko.observable(false),
-            lstDMDVT: ttcVMSelf.lstDMDVT,
-            lstDMDVTSL: ttcVMSelf.lstDMDVTSL,
+            lstDMDVT: ttcVMSelf.lstDMDVT(),
+            lstDMDVTSL: ttcVMSelf.lstDMDVTSL(),
             fiProSLKLAmountUnitName: amountName,
             fiProSLKLAmountUnitCode: ttcVMSelf.EfiProSLKLAmountUnitCode()
         }
@@ -870,7 +881,12 @@ function ThongTinChungVM(data) {
         }
         return true;
     }
-
+    ttcVMSelf.openAddHangHoa=function(){
+        $("#modal_addAnimal").modal("show");
+    }
+    ttcVMSelf.closeHangHoa =function(){
+        ttcVMSelf.clearForm();
+    }
     ttcVMSelf.openUpdateProduct = function (data, index, type) {
         if(ttcVMSelf.isEditHS()=='1'||ttcVMSelf.isEditHS()==1){
             ko.utils.arrayForEach(data.fiProATList, function(at) {
@@ -892,10 +908,11 @@ function ThongTinChungVM(data) {
         }
         ko.mapping.fromJS(data, {}, ttcVMSelf);
         ttcVMSelf.selectedIndex(index);
+        ttcVMSelf.selectedHangHoa(data);
         if (type == '1' || type == 1) {
-            $('#modal_updateAnimal').modal('show');
+            $("#modal_addAnimal").modal("show");
         } else {
-            $('#modal_showAnimal').modal('show');
+            $("#modal_addAnimal").modal("show");
         }
     }
 
