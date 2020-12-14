@@ -1,0 +1,799 @@
+spring:
+  profiles:
+    active: hq_test
+---
+server:
+  port: 8001
+  contextPath: /VNSWSendGateway
+--- 
+spring:
+  profiles: local, default, dev
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  jmx:
+    default-domain: VNSWSendGateway
+management:
+    security:
+        enabled: false
+#Danh sach cac dia chi service noi bo cua tung bo nganh
+#Service cua Bo Khoa Hoc cong nghe
+#BKHCN_LINK: http://10.224.164.16:8008/KHCN/ImportDocumentService?wsdl
+#BKHCN_NAMESPACE_KEY: ws
+#BKHCN_NAMESPACE_KEY_METHOD_TAG: ws
+#BKHCN_NAMESPACE_KEY_PAYLOAD_TAG: 
+#BKHCN_NAMESPACE: http://ws.viettel.com/
+#BKHCN_MOTHOD_TAG: ImportDocument
+#BKHCN_PAYLOAD_TAG: data
+BKHCN_LINK: http://servicevarans.vietesoft.com/WebService.asmx?wsdl
+BKHCN_NAMESPACE_KEY: tem
+BKHCN_NAMESPACE_KEY_METHOD_TAG: tem
+BKHCN_NAMESPACE_KEY_PAYLOAD_TAG: tem
+BKHCN_NAMESPACE: http://tempuri.org/
+BKHCN_MOTHOD_TAG: request
+BKHCN_PAYLOAD_TAG: requestPayload
+#Service cua Bo Y te
+BYT_LINK: http://117.6.176.19:8080/MOHReceiveGateway/ws/gateway?wsdl
+BYT_NAMESPACE_KEY: gen
+BYT_NAMESPACE_KEY_METHOD_TAG: gen
+BYT_NAMESPACE_KEY_PAYLOAD_TAG: gen
+BYT_NAMESPACE: http://com/moh/gateway/generated
+BYT_MOTHOD_TAG: receiveRequest
+BYT_PAYLOAD_TAG: requestPayload
+#Service cua Bo CA
+#BCA_LINK: http://27.72.63.46/MPSReceiveGateway/ws/gateway?wsdl
+BCA_LINK: http://27.72.63.46/MPSReceiveGateway/ws/gateway.wsdl?
+BCA_NAMESPACE_KEY: gen
+BCA_NAMESPACE_KEY_METHOD_TAG: gen
+BCA_NAMESPACE_KEY_PAYLOAD_TAG: gen
+BCA_NAMESPACE: http://com/mps/receive/gateway/generated
+BCA_MOTHOD_TAG: receiveRequest
+BCA_PAYLOAD_TAG: requestPayload
+#Service cua BNN
+#Thu tuc 10. tam nhap tai xuat
+BNN_BNN&PTNT0600003_LINK: http://203.190.173.76:8082/AnimalCertReceipt.svc?wsdl
+BNN_BNN&PTNT0600003_ACTION: http://tempuri.org/IAnimalCertReceipt/Receive
+BNN_BNN&PTNT0600003_NAMESPACE_KEY: tem
+BNN_BNN&PTNT0600003_NAMESPACE_KEY_METHOD_TAG: tem
+BNN_BNN&PTNT0600003_NAMESPACE_KEY_PAYLOAD_TAG: tem
+BNN_BNN&PTNT0600003_NAMESPACE: http://tempuri.org/
+BNN_BNN&PTNT0600003_MOTHOD_TAG: Receive
+BNN_BNN&PTNT0600003_PAYLOAD_TAG: inputXml
+#Service cua Bo Khoa TNMT
+BTNMT_BTNMT0600001_LINK: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc?wsdl
+BTNMT_BTNMT0600001_ACTION: BTNMT0600001
+BTNMT_BTNMT0600001_NAMESPACE_KEY: 
+BTNMT_BTNMT0600001_NAMESPACE_KEY_METHOD_TAG: 
+BTNMT_BTNMT0600001_NAMESPACE_KEY_PAYLOAD_TAG: 
+BTNMT_BTNMT0600001_NAMESPACE: http://www.monre.gov.vn
+BTNMT_BTNMT0600001_MOTHOD_TAG: Request
+BTNMT_BTNMT0600001_PAYLOAD_TAG: requestPayload
+BTNMT_BTNMT0600001_HEADER_TO: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc
+
+BTNMT_BTNMT0600006_LINK: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc?wsdl
+BTNMT_BTNMT0600006_ACTION: BTNMT0600006
+BTNMT_BTNMT0600006_NAMESPACE_KEY: 
+BTNMT_BTNMT0600006_NAMESPACE_KEY_METHOD_TAG: 
+BTNMT_BTNMT0600006_NAMESPACE_KEY_PAYLOAD_TAG: 
+BTNMT_BTNMT0600006_NAMESPACE: http://www.monre.gov.vn
+BTNMT_BTNMT0600006_MOTHOD_TAG: Request
+BTNMT_BTNMT0600006_PAYLOAD_TAG: requestPayload
+BTNMT_BTNMT0600006_HEADER_TO: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc
+
+BTNMT_BTNMT0600005_LINK: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc?wsdl
+BTNMT_BTNMT0600005_ACTION: BTNMT0600005
+BTNMT_BTNMT0600005_NAMESPACE_KEY: 
+BTNMT_BTNMT0600005_NAMESPACE_KEY_METHOD_TAG: 
+BTNMT_BTNMT0600005_NAMESPACE_KEY_PAYLOAD_TAG: 
+BTNMT_BTNMT0600005_NAMESPACE: http://www.monre.gov.vn
+BTNMT_BTNMT0600005_MOTHOD_TAG: Request
+BTNMT_BTNMT0600005_PAYLOAD_TAG: requestPayload
+BTNMT_BTNMT0600005_HEADER_TO: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc
+
+BTNMT_BTNMT0600007_LINK: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc?wsdl
+BTNMT_BTNMT0600007_ACTION: BTNMT0600007
+BTNMT_BTNMT0600007_NAMESPACE_KEY: 
+BTNMT_BTNMT0600007_NAMESPACE_KEY_METHOD_TAG: 
+BTNMT_BTNMT0600007_NAMESPACE_KEY_PAYLOAD_TAG: 
+BTNMT_BTNMT0600007_NAMESPACE: http://www.monre.gov.vn
+BTNMT_BTNMT0600007_MOTHOD_TAG: Request
+BTNMT_BTNMT0600007_PAYLOAD_TAG: requestPayload
+BTNMT_BTNMT0600007_HEADER_TO: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc
+
+#NHNN
+NHNN_LINK: http://ws.sbv.gov.vn:8600/NSWandPUSproxy
+SBV_ACTION: /Services/Global/System/CustomsEgov/NSWandPUSproxy/OperationImpl/NSWandPUSproxy-service0.serviceagent/NSWandPUSproxyPortTypeEndpoint0/Proxy
+SBV_NAMESPACE_KEY: sch
+SBV_NAMESPACE_KEY_METHOD_TAG: sch
+SBV_NAMESPACE_KEY_PAYLOAD_TAG: sch
+SBV_NAMESPACE: http://www.tibco.com/schemas/SG31ESBProject_phuong_17042018/SharedResource/Schema/Global/System/CustomsEgov/NSWandPUSproxy/Schema.xsd
+SBV_MOTHOD_TAG: NSWtoPUS
+SBV_PAYLOAD_TAG: RequestXMLString
+SBV_HEADER_TO:
+    
+#Service cua Bo Giao Thong
+#BGTVT_LINK: http://119.17.200.66:1580/o/soap/OpenCPSSoap?wsdl
+BGTVT_LINK: http://119.15.167.19/o/soap/OpenCPSSoap?wsdl
+BGTVT_ACTION: 
+BGTVT_NAMESPACE_KEY: v2
+BGTVT_NAMESPACE_KEY_METHOD_TAG: v2
+BGTVT_NAMESPACE_KEY_PAYLOAD_TAG: 
+BGTVT_NAMESPACE: http://v2.opencps.vn
+BGTVT_MOTHOD_TAG: receiveFromNSW
+BGTVT_PAYLOAD_TAG: requestPayload
+BGTVT_HEADER_TO:
+
+# Thong tin rabbitMQ 
+activemq.host: 10.224.164.16
+activemq.port: 5672
+activemq.user: nswlog
+activemq.password: nswlog
+activemq.virtualHost: /
+activemq.exchangeName: logExchange
+# Loi
+activemq.queueErrName: Log_Error_Queue
+activemq.routingErrKey: error
+# Log
+activemq.queueLogName: Log_SendGateway_Queue
+activemq.routingLogKey: sendGateway
+--- 
+spring:
+  profiles: vt_test
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  jmx:
+    default-domain: VNSWSendGateway
+management:
+    security:
+        enabled: false
+#Danh sach cac dia chi service noi bo cua tung bo nganh
+#Service cua Bo Khoa Hoc cong nghe
+BKHCN_LINK: http://10.224.164.16:8008/KHCN/ImportDocumentService?wsdl
+BKHCN_NAMESPACE_KEY: ws
+BKHCN_NAMESPACE_KEY_METHOD_TAG: ws
+BKHCN_NAMESPACE_KEY_PAYLOAD_TAG: 
+BKHCN_NAMESPACE: http://ws.viettel.com/
+BKHCN_MOTHOD_TAG: ImportDocument
+BKHCN_PAYLOAD_TAG: data
+#Service cua Bo Y te
+BYT_LINK: http://117.6.176.19:8080/MOHReceiveGateway/ws/gateway?wsdl
+BYT_NAMESPACE_KEY: gen
+BYT_NAMESPACE_KEY_METHOD_TAG: gen
+BYT_NAMESPACE_KEY_PAYLOAD_TAG: gen
+BYT_NAMESPACE: http://com/moh/gateway/generated
+BYT_MOTHOD_TAG: receiveRequest
+BYT_PAYLOAD_TAG: requestPayload
+#Service cua Bo CA
+#BCA_LINK: http://27.72.63.46/MPSReceiveGateway/ws/gateway?wsdl
+BCA_LINK: http://27.72.63.46/MPSReceiveGateway/ws/gateway.wsdl?
+BCA_NAMESPACE_KEY: gen
+BCA_NAMESPACE_KEY_METHOD_TAG: gen
+BCA_NAMESPACE_KEY_PAYLOAD_TAG: gen
+BCA_NAMESPACE: http://com/mps/receive/gateway/generated
+BCA_MOTHOD_TAG: receiveRequest
+BCA_PAYLOAD_TAG: requestPayload
+#Service cua BNN
+#Thu tuc 10. tam nhap tai xuat
+BNN_BNN&PTNT0600003_LINK: http://203.190.173.76:8082/AnimalCertReceipt.svc?wsdl
+BNN_BNN&PTNT0600003_ACTION: http://tempuri.org/IAnimalCertReceipt/Receive
+BNN_BNN&PTNT0600003_NAMESPACE_KEY: tem
+BNN_BNN&PTNT0600003_NAMESPACE_KEY_METHOD_TAG: tem
+BNN_BNN&PTNT0600003_NAMESPACE_KEY_PAYLOAD_TAG: tem
+BNN_BNN&PTNT0600003_NAMESPACE: http://tempuri.org/
+BNN_BNN&PTNT0600003_MOTHOD_TAG: Receive
+BNN_BNN&PTNT0600003_PAYLOAD_TAG: inputXml
+#Service cua Bo Khoa TNMT
+BTNMT_BTNMT0600001_LINK: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc?wsdl
+BTNMT_BTNMT0600001_ACTION: BTNMT0600002
+BTNMT_BTNMT0600001_NAMESPACE_KEY: 
+BTNMT_BTNMT0600001_NAMESPACE_KEY_METHOD_TAG: 
+BTNMT_BTNMT0600001_NAMESPACE_KEY_PAYLOAD_TAG: 
+BTNMT_BTNMT0600001_NAMESPACE: http://www.monre.gov.vn
+BTNMT_BTNMT0600001_MOTHOD_TAG: Request
+BTNMT_BTNMT0600001_PAYLOAD_TAG: requestPayload
+BTNMT_BTNMT0600001_HEADER_TO: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc
+
+BTNMT_BTNMT0600006_LINK: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc?wsdl
+BTNMT_BTNMT0600006_ACTION: BTNMT0600006
+BTNMT_BTNMT0600006_NAMESPACE_KEY: 
+BTNMT_BTNMT0600006_NAMESPACE_KEY_METHOD_TAG: 
+BTNMT_BTNMT0600006_NAMESPACE_KEY_PAYLOAD_TAG: 
+BTNMT_BTNMT0600006_NAMESPACE: http://www.monre.gov.vn
+BTNMT_BTNMT0600006_MOTHOD_TAG: Request
+BTNMT_BTNMT0600006_PAYLOAD_TAG: requestPayload
+BTNMT_BTNMT0600006_HEADER_TO: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc
+
+BTNMT_BTNMT0600005_LINK: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc?wsdl
+BTNMT_BTNMT0600005_ACTION: BTNMT0600005
+BTNMT_BTNMT0600005_NAMESPACE_KEY: 
+BTNMT_BTNMT0600005_NAMESPACE_KEY_METHOD_TAG: 
+BTNMT_BTNMT0600005_NAMESPACE_KEY_PAYLOAD_TAG: 
+BTNMT_BTNMT0600005_NAMESPACE: http://www.monre.gov.vn
+BTNMT_BTNMT0600005_MOTHOD_TAG: Request
+BTNMT_BTNMT0600005_PAYLOAD_TAG: requestPayload
+BTNMT_BTNMT0600005_HEADER_TO: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc
+
+BTNMT_BTNMT0600007_LINK: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc?wsdl
+BTNMT_BTNMT0600007_ACTION: BTNMT0600007
+BTNMT_BTNMT0600007_NAMESPACE_KEY: 
+BTNMT_BTNMT0600007_NAMESPACE_KEY_METHOD_TAG: 
+BTNMT_BTNMT0600007_NAMESPACE_KEY_PAYLOAD_TAG: 
+BTNMT_BTNMT0600007_NAMESPACE: http://www.monre.gov.vn
+BTNMT_BTNMT0600007_MOTHOD_TAG: Request
+BTNMT_BTNMT0600007_PAYLOAD_TAG: requestPayload
+BTNMT_BTNMT0600007_HEADER_TO: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc
+
+#Service cua Bo Giao Thong
+#BGTVT_LINK: http://119.17.200.66:1580/o/soap/OpenCPSSoap?wsdl
+BGTVT_LINK: http://119.15.167.214/o/soap/OpenCPSSoap?wsdl
+BGTVT_ACTION: 
+BGTVT_NAMESPACE_KEY: v2
+BGTVT_NAMESPACE_KEY_METHOD_TAG: v2
+BGTVT_NAMESPACE_KEY_PAYLOAD_TAG: 
+BGTVT_NAMESPACE: http://v2.opencps.vn
+BGTVT_MOTHOD_TAG: receiveFromNSW
+BGTVT_PAYLOAD_TAG: requestPayload
+BGTVT_HEADER_TO:
+    
+#SBV
+SBV_LINK: http://ws.sbv.gov.vn:8600/NSWandPUSproxy
+SBV_ACTION: /Services/Global/System/CustomsEgov/NSWandPUSproxy/OperationImpl/NSWandPUSproxy-service0.serviceagent/NSWandPUSproxyPortTypeEndpoint0/Proxy
+SBV_NAMESPACE_KEY: sch
+SBV_NAMESPACE_KEY_METHOD_TAG: sch
+SBV_NAMESPACE_KEY_PAYLOAD_TAG: sch
+SBV_NAMESPACE: http://www.tibco.com/schemas/SG31ESBProject_phuong_17042018/SharedResource/Schema/Global/System/CustomsEgov/NSWandPUSproxy/Schema.xsd
+SBV_MOTHOD_TAG: NSWtoPUS
+SBV_PAYLOAD_TAG: RequestXMLString
+SBV_HEADER_TO:
+
+# Thong tin rabbitMQ 
+activemq.host: 10.224.164.16
+activemq.port: 5672
+activemq.user: nswlog
+activemq.password: nswlog
+activemq.virtualHost: /
+activemq.exchangeName: logExchange
+# Loi
+activemq.queueErrName: Log_Error_Queue
+activemq.routingErrKey: error
+# Log
+activemq.queueLogName: Log_SendGateway_Queue
+activemq.routingLogKey: sendGateway
+---
+spring:
+  profiles: hq_test
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  jmx:
+    default-domain: VNSWSendGateway
+management:
+    security:
+        enabled: false
+#Danh sach cac dia chi service noi bo cua tung bo nganh
+
+#Service cua BTTTT
+BTTTT_LINK: http://103.16.1.85/_layouts/15/CongTTDT_Webservices/NSWv2.asmx?wsdl
+BTTTT_NAMESPACE_KEY: tem
+BTTTT_NAMESPACE_KEY_METHOD_TAG: tem
+BTTTT_NAMESPACE_KEY_PAYLOAD_TAG: tem
+BTTTT_NAMESPACE: http://tempuri.org/
+BTTTT_MOTHOD_TAG: send_from_NSW
+BTTTT_PAYLOAD_TAG: requestPayload
+#Service cua BTTTT
+MIC_LINK: http://103.16.1.85/_layouts/15/CongTTDT_Webservices/NSWv2.asmx?wsdl
+MIC_NAMESPACE_KEY: tem
+MIC_NAMESPACE_KEY_METHOD_TAG: tem
+MIC_NAMESPACE_KEY_PAYLOAD_TAG: tem
+MIC_NAMESPACE: http://tempuri.org/
+MIC_MOTHOD_TAG: send_from_NSW
+MIC_PAYLOAD_TAG: requestPayload
+
+#Service cua Bo Khoa Hoc cong nghe
+
+#BKHCN_LINK: http://27.72.63.46/MOSTReceiveGateway/ws/gateway.wsdl
+#BKHCN_NAMESPACE_KEY: gen
+#BKHCN_NAMESPACE_KEY_METHOD_TAG: gen
+#BKHCN_NAMESPACE_KEY_PAYLOAD_TAG: gen
+#BKHCN_NAMESPACE: http://com/most/receive/gateway/generated
+#BKHCN_MOTHOD_TAG: receiveRequest
+#BKHCN_PAYLOAD_TAG: requestPayload
+
+BKHCN_LINK: http://171.244.0.17:8888/KHCN_SERVICE/ImportDocumentService?wsdl
+BKHCN_NAMESPACE_KEY: ws
+BKHCN_NAMESPACE_KEY_METHOD_TAG: ws
+BKHCN_NAMESPACE_KEY_PAYLOAD_TAG: 
+BKHCN_NAMESPACE: http://ws.viettel.com/
+BKHCN_MOTHOD_TAG: ImportDocument
+BKHCN_PAYLOAD_TAG: data
+
+#Thu tuc 05-06(Cuc BXHN)
+# BKHCN_LINK: http://servicevarans.vietesoft.com/WebService.asmx?wsdl
+# BKHCN_NAMESPACE_KEY: tem
+# BKHCN_NAMESPACE_KEY_NSW_TAG: tem
+# BKHCN_NAMESPACE_KEY_METHOD_TAG: tem
+# BKHCN_NAMESPACE_KEY_PAYLOAD_TAG: tem
+# BKHCN_NAMESPACE: http://tempuri.org/
+# BKHCN_NSW_TAG: nsw
+# BKHCN_MOTHOD_TAG: ImportDocument
+# BKHCN_PAYLOAD_TAG: data
+
+#Service cua Bo Y te
+BYT_LINK: http://103.124.60.80:8080/MOHReceiveGateway/ws/gateway.wsdl
+BYT_NAMESPACE_KEY: gen
+BYT_NAMESPACE_KEY_METHOD_TAG: gen
+BYT_NAMESPACE_KEY_PAYLOAD_TAG: gen
+BYT_NAMESPACE: http://com/moh/receive/gateway/generated
+BYT_MOTHOD_TAG: receiveRequest
+BYT_PAYLOAD_TAG: requestPayload
+#Service cua Bo CA
+#Service cua Bo CA
+#BCA_LINK: http://27.72.63.46/MPSReceiveGateway/ws/gateway?wsdl
+BCA_LINK: http://27.72.63.46/MPSReceiveGateway/ws/gateway.wsdl?
+BCA_NAMESPACE_KEY: gen
+BCA_NAMESPACE_KEY_METHOD_TAG: gen
+BCA_NAMESPACE_KEY_PAYLOAD_TAG: gen
+BCA_NAMESPACE: http://com/mps/receive/gateway/generated
+BCA_MOTHOD_TAG: receiveRequest
+BCA_PAYLOAD_TAG: requestPayload
+#Service cua BNN
+#Thu tuc 10. tam nhap tai xuat
+#BNN_BNN&PTNT0600003_LINK: http://203.190.173.76:8082/AnimalCertReceipt.svc?wsdl
+BNN_BNN&PTNT0600003_LINK: http://14.162.145.33:4444/MardGateway/GatewayService.svc?wsdl
+BNN_BNN&PTNT0600003_ACTION: http://mard.gov.vn/nsw/services/IGatewayService/receive
+BNN_BNN&PTNT0600003_NAMESPACE_KEY: ser
+BNN_BNN&PTNT0600003_NAMESPACE_KEY_METHOD_TAG: ser
+BNN_BNN&PTNT0600003_NAMESPACE_KEY_PAYLOAD_TAG: ser
+BNN_BNN&PTNT0600003_NAMESPACE: http://mard.gov.vn/nsw/services
+BNN_BNN&PTNT0600003_MOTHOD_TAG: receive
+BNN_BNN&PTNT0600003_PAYLOAD_TAG: requestPayload
+
+#Thu tuc 12_1. tam nhap tai xuat
+#BNN_BNN&PTNT0200003_LINK: http://27.72.63.46:8082/MardWebService.svc?wsdl
+BNN_BNN&PTNT0200003_LINK: http://14.162.145.33:4444/MardGateway/GatewayService.svc?wsdl
+BNN_BNN&PTNT0200003_ACTION: http://tempuri.org/IMardWebService/Receive
+BNN_BNN&PTNT0200003_NAMESPACE_KEY: tem
+BNN_BNN&PTNT0200003_NAMESPACE_KEY_METHOD_TAG: tem
+BNN_BNN&PTNT0200003_NAMESPACE_KEY_PAYLOAD_TAG: tem
+BNN_BNN&PTNT0200003_NAMESPACE: http://tempuri.org/
+BNN_BNN&PTNT0200003_MOTHOD_TAG: Receive
+BNN_BNN&PTNT0200003_PAYLOAD_TAG: inputXml
+#Thu tuc 12_2. tam nhap tai xuat
+#BNN_BNN&PTNT0200002_LINK: http://27.72.63.46:8082/MardWebService.svc?wsdl
+BNN_BNN&PTNT0200002_LINK: http://14.162.145.33:4444/MardGateway/GatewayService.svc?wsdl
+BNN_BNN&PTNT0200002_ACTION: http://tempuri.org/IMardWebService/Receive
+BNN_BNN&PTNT0200002_NAMESPACE_KEY: tem
+BNN_BNN&PTNT0200002_NAMESPACE_KEY_METHOD_TAG: tem
+BNN_BNN&PTNT0200002_NAMESPACE_KEY_PAYLOAD_TAG: tem
+BNN_BNN&PTNT0200002_NAMESPACE: http://tempuri.org/
+BNN_BNN&PTNT0200002_MOTHOD_TAG: Receive
+BNN_BNN&PTNT0200002_PAYLOAD_TAG: inputXml
+#QuangNV 2BS
+
+#MARD_LINK: http://192.168.100.251:4444/MardGateway/GatewayService.svc?wsdl
+#MARD_LINK: http://demo.blameo.com/ws/GatewayCucTrongTrot.asmx?wsdl
+#MARD_NAMESPACE: http://tempuri.org/
+#MARD_NAMESPACE_KEY: tem
+#MARD_NAMESPACE_KEY_METHOD_TAG: tem
+#MARD_NAMESPACE_KEY_PAYLOAD_TAG: tem
+#MARD_MOTHOD_TAG: receive
+#MARD_PAYLOAD_TAG: requestPayload
+#MARD_ACTION: http://tempuri.org/GatewayData
+
+#QuangNV Gateway 2BS
+#http://14.162.145.33:4444/MardGateway/GatewayService.svc?wsdl
+BNN_BNN0300003_LINK: http://203.190.173.76:8084/GatewayService.svc?wsdl
+BNN_BNN0300003_NAMESPACE_KEY: ser
+BNN_BNN0300003_NAMESPACE_KEY_METHOD_TAG: ser
+BNN_BNN0300003_NAMESPACE_KEY_PAYLOAD_TAG: ser
+BNN_BNN0300003_NAMESPACE: http://mard.gov.vn/nsw/services
+BNN_BNN0300003_MOTHOD_TAG: receive
+BNN_BNN0300003_PAYLOAD_TAG: requestPayload
+BNN_BNN0300003_ACTION: http://mard.gov.vn/nsw/services/IGatewayService/receive
+
+BNN_BNN0500003_LINK: http://203.190.173.76:8084/GatewayService.svc?wsdl
+BNN_BNN0500003_NAMESPACE_KEY: ser
+BNN_BNN0500003_NAMESPACE_KEY_METHOD_TAG: ser
+BNN_BNN0500003_NAMESPACE_KEY_PAYLOAD_TAG: ser
+BNN_BNN0500003_NAMESPACE: http://mard.gov.vn/nsw/services
+BNN_BNN0500003_MOTHOD_TAG: receive
+BNN_BNN0500003_PAYLOAD_TAG: requestPayload
+BNN_BNN0500003_ACTION: http://mard.gov.vn/nsw/services/IGatewayService/receive
+
+# BNN_BNN0300003_LINK: http://203.190.173.76:8084/GatewayService.svc?wsdl
+# BNN_BNN0300003_NAMESPACE_KEY: ser
+# BNN_BNN0300003_NAMESPACE_KEY_METHOD_TAG: ser
+# BNN_BNN0300003_NAMESPACE_KEY_PAYLOAD_TAG: ser
+# BNN_BNN0300003_NAMESPACE: http://mard.gov.vn/nsw/services
+# BNN_BNN0300003_MOTHOD_TAG: receive
+# BNN_BNN0300003_PAYLOAD_TAG: requestPayload
+# BNN_BNN0300003_ACTION: http://mard.gov.vn/nsw/services/IGatewayService/receive
+
+#TAMDT Gateway Antsoft
+#BNN_BNNPTNT0300004_LINK: http://demo.blameo.com/ws/GatewayBVTV.asmx?wsdl
+#BNN_BNNPTNT0300004_ACTION: http://tempuri.org/GatewayData
+#BNN_BNNPTNT0300004_NAMESPACE_KEY: tem
+#BNN_BNNPTNT0300004_NAMESPACE_KEY_METHOD_TAG: tem
+#BNN_BNNPTNT0300004_NAMESPACE_KEY_PAYLOAD_TAG: tem
+#BNN_BNNPTNT0300004_NAMESPACE: http://tempuri.org/
+#BNN_BNNPTNT0300004_MOTHOD_TAG: GatewayData
+#BNN_BNNPTNT0300004_PAYLOAD_TAG: requestPayload
+BNN_BNNPTNT0300004_LINK: http://203.190.173.76:8084/GatewayService.svc?singleWsdl
+BNN_BNNPTNT0300004_ACTION: http://mard.gov.vn/nsw/services/IGatewayService/receive
+BNN_BNNPTNT0300004_NAMESPACE_KEY: ser
+BNN_BNNPTNT0300004_NAMESPACE_KEY_METHOD_TAG: ser
+BNN_BNNPTNT0300004_NAMESPACE_KEY_PAYLOAD_TAG: ser
+BNN_BNNPTNT0300004_NAMESPACE: http://mard.gov.vn/nsw/services
+BNN_BNNPTNT0300004_MOTHOD_TAG: receive
+BNN_BNNPTNT0300004_PAYLOAD_TAG: requestPayload
+
+#thu tuc 03
+# BNN_BNNPTNT0600006_LINK: http://27.72.96.51:9595/WS0600006/Gateway0600006.asmx?wsdl
+#BNN_BNNPTNT0600006_ACTION: http://tempuri.org/GatewayData
+#BNN_BNNPTNT0600006_NAMESPACE_KEY: tem
+#BNN_BNNPTNT0600006_NAMESPACE_KEY_METHOD_TAG: tem
+#BNN_BNNPTNT0600006_NAMESPACE_KEY_PAYLOAD_TAG: tem
+#BNN_BNNPTNT0600006_NAMESPACE: http://tempuri.org/
+#BNN_BNNPTNT0600006_MOTHOD_TAG: GatewayData
+#BNN_BNNPTNT0600006_PAYLOAD_TAG: requestPayload
+
+BNN_BNNPTNT0600006_LINK: http://203.190.173.76:8084/GatewayService.svc?singleWsdl
+BNN_BNNPTNT0600006_ACTION: http://mard.gov.vn/nsw/services/IGatewayService/receive
+BNN_BNNPTNT0600006_NAMESPACE_KEY: ser
+BNN_BNNPTNT0600006_NAMESPACE_KEY_METHOD_TAG: ser
+BNN_BNNPTNT0600006_NAMESPACE_KEY_PAYLOAD_TAG: ser
+BNN_BNNPTNT0600006_NAMESPACE: http://mard.gov.vn/nsw/services
+BNN_BNNPTNT0600006_MOTHOD_TAG: receive
+BNN_BNNPTNT0600006_PAYLOAD_TAG: requestPayload
+
+#thu tuc 02
+BNN_BNNPTNT0600005_LINK: http://203.190.173.76:8084/GatewayService.svc?singleWsdl
+BNN_BNNPTNT0600005_ACTION: http://mard.gov.vn/nsw/services/IGatewayService/receive
+BNN_BNNPTNT0600005_NAMESPACE_KEY: ser
+BNN_BNNPTNT0600005_NAMESPACE_KEY_METHOD_TAG: ser
+BNN_BNNPTNT0600005_NAMESPACE_KEY_PAYLOAD_TAG: ser
+BNN_BNNPTNT0600005_NAMESPACE: http://mard.gov.vn/nsw/services
+BNN_BNNPTNT0600005_MOTHOD_TAG: receive
+BNN_BNNPTNT0600005_PAYLOAD_TAG: requestPayload
+
+#end antsoft
+
+
+#thu tuc 5 - GD3: cap giay phep nhap khau thuoc thu y 2BS
+BNN_BNNPTNT0600008_LINK: http://14.162.145.33:8085/MardGateway/GatewayService.svc?wsdl
+BNN_BNNPTNT0600008_NAMESPACE_KEY: ser
+BNN_BNNPTNT0600008_NAMESPACE_KEY_METHOD_TAG: ser
+BNN_BNNPTNT0600008_NAMESPACE_KEY_PAYLOAD_TAG: ser
+BNN_BNNPTNT0600008_NAMESPACE: http://mard.gov.vn/nsw/services
+BNN_BNNPTNT0600008_MOTHOD_TAG: receive
+BNN_BNNPTNT0600008_PAYLOAD_TAG: requestPayload
+BNN_BNNPTNT0600008_ACTION: http://mard.gov.vn/nsw/services/IGatewayService/receive
+#thu tuc 4 - GD3: dang ky kiem tra nha nuoc ve chat luong thuoc thu y nhap khau 2BS
+BNN_BNNPTNT0600007_LINK: http://14.162.145.33:8085/MardGateway/GatewayService.svc?wsdl
+BNN_BNNPTNT0600007_NAMESPACE_KEY: ser
+BNN_BNNPTNT0600007_NAMESPACE_KEY_METHOD_TAG: ser
+BNN_BNNPTNT0600007_NAMESPACE_KEY_PAYLOAD_TAG: ser
+BNN_BNNPTNT0600007_NAMESPACE: http://mard.gov.vn/nsw/services
+BNN_BNNPTNT0600007_MOTHOD_TAG: receive
+BNN_BNNPTNT0600007_PAYLOAD_TAG: requestPayload
+BNN_BNNPTNT0600007_ACTION: http://mard.gov.vn/nsw/services/IGatewayService/receive
+
+#Nhom thu tuc Blameo
+#TT1
+BNN_BNNPTNT0600004_LINK: http://203.190.173.76:8084/MardGateway.svc?wsdl
+BNN_BNNPTNT0600004_NAMESPACE_KEY: ser
+BNN_BNNPTNT0600004_NAMESPACE_KEY_METHOD_TAG: ser
+BNN_BNNPTNT0600004_NAMESPACE_KEY_PAYLOAD_TAG: ser
+BNN_BNNPTNT0600004_NAMESPACE: http://mard.gov.vn/nsw/services
+BNN_BNNPTNT0600004_MOTHOD_TAG: receive
+BNN_BNNPTNT0600004_PAYLOAD_TAG: requestPayload
+BNN_BNNPTNT0600004_ACTION: http://mard.gov.vn/nsw/services/IMardGateway/receive
+
+#TT6
+BNN_BNNPTNT0600009_LINK: http://203.190.173.76:8084/MardGateway.svc?wsdl
+BNN_BNNPTNT0600009_NAMESPACE_KEY: ser
+BNN_BNNPTNT0600009_NAMESPACE_KEY_METHOD_TAG: ser
+BNN_BNNPTNT0600009_NAMESPACE_KEY_PAYLOAD_TAG: ser
+BNN_BNNPTNT0600009_NAMESPACE: http://mard.gov.vn/nsw/services
+BNN_BNNPTNT0600009_MOTHOD_TAG: receive
+BNN_BNNPTNT0600009_PAYLOAD_TAG: requestPayload
+BNN_BNNPTNT0600009_ACTION: http://mard.gov.vn/nsw/services/IMardGateway/receive
+
+#TT7
+BNN_BNNPTNT0600010_LINK: http://203.190.173.76:8084/MardGateway.svc?wsdl
+BNN_BNNPTNT0600010_NAMESPACE_KEY: ser
+BNN_BNNPTNT0600010_NAMESPACE_KEY_METHOD_TAG: ser
+BNN_BNNPTNT0600010_NAMESPACE_KEY_PAYLOAD_TAG: ser
+BNN_BNNPTNT0600010_NAMESPACE: http://mard.gov.vn/nsw/services
+BNN_BNNPTNT0600010_MOTHOD_TAG: receive
+BNN_BNNPTNT0600010_PAYLOAD_TAG: requestPayload
+BNN_BNNPTNT0600010_ACTION: http://mard.gov.vn/nsw/services/IMardGateway/receive
+
+#TT8
+BNN_BNNPTNT0600011_LINK: http://203.190.173.76:8084/MardGateway.svc?wsdl
+BNN_BNNPTNT0600011_NAMESPACE_KEY: ser
+BNN_BNNPTNT0600011_NAMESPACE_KEY_METHOD_TAG: ser
+BNN_BNNPTNT0600011_NAMESPACE_KEY_PAYLOAD_TAG: ser
+BNN_BNNPTNT0600011_NAMESPACE: http://mard.gov.vn/nsw/services
+BNN_BNNPTNT0600011_MOTHOD_TAG: receive
+BNN_BNNPTNT0600011_PAYLOAD_TAG: payload
+BNN_BNNPTNT0600011_ACTION: http://mard.gov.vn/nsw/services/IMardGateway/receive
+
+#TT9
+
+#
+BNN_BNNPTNT0200025_LINK: http://mard.adp-p.com/WebServices/MardService.asmx?wsdl
+BNN_BNNPTNT0200025_NAMESPACE_KEY: tem
+BNN_BNNPTNT0200025_NAMESPACE_KEY_METHOD_TAG: tem
+BNN_BNNPTNT0200025_NAMESPACE_KEY_PAYLOAD_TAG: tem
+BNN_BNNPTNT0200025_NAMESPACE: http://tempuri.org/
+BNN_BNNPTNT0200025_MOTHOD_TAG: Request
+BNN_BNNPTNT0200025_PAYLOAD_TAG: payload
+BNN_BNNPTNT0200025_ACTION: http://tempuri.org/Request
+#Service cua Bo Khoa TNMT
+#BTNMT_BTNMT0600001_LINK: http://services.monre.gov.vn/HQConnect/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc?wsdl
+BTNMT_BTNMT0600001_LINK: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc?wsdl
+BTNMT_BTNMT0600001_ACTION: BTNMT0600001
+BTNMT_BTNMT0600001_NAMESPACE_KEY: 
+BTNMT_BTNMT0600001_NAMESPACE_KEY_METHOD_TAG: 
+BTNMT_BTNMT0600001_NAMESPACE_KEY_PAYLOAD_TAG: 
+BTNMT_BTNMT0600001_NAMESPACE: http://www.monre.gov.vn
+BTNMT_BTNMT0600001_MOTHOD_TAG: Request
+BTNMT_BTNMT0600001_PAYLOAD_TAG: Request
+BTNMT_BTNMT0600001_HEADER_TO: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc
+
+BTNMT_BTNMT0600002_LINK: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc?wsdl
+BTNMT_BTNMT0600002_ACTION: BTNMT0600002
+BTNMT_BTNMT0600002_NAMESPACE_KEY: 
+BTNMT_BTNMT0600002_NAMESPACE_KEY_METHOD_TAG: 
+BTNMT_BTNMT0600002_NAMESPACE_KEY_PAYLOAD_TAG: 
+BTNMT_BTNMT0600002_NAMESPACE: http://www.monre.gov.vn
+BTNMT_BTNMT0600002_MOTHOD_TAG: Request
+BTNMT_BTNMT0600002_PAYLOAD_TAG: requestPayload
+BTNMT_BTNMT0600002_HEADER_TO: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc
+
+BTNMT_BTNMT0600003_LINK: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc?wsdl
+BTNMT_BTNMT0600003_ACTION: BTNMT0600003
+BTNMT_BTNMT0600003_NAMESPACE_KEY: 
+BTNMT_BTNMT0600003_NAMESPACE_KEY_METHOD_TAG: 
+BTNMT_BTNMT0600003_NAMESPACE_KEY_PAYLOAD_TAG: 
+BTNMT_BTNMT0600003_NAMESPACE: http://www.monre.gov.vn
+BTNMT_BTNMT0600003_MOTHOD_TAG: Request
+BTNMT_BTNMT0600003_PAYLOAD_TAG: requestPayload
+BTNMT_BTNMT0600003_HEADER_TO: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc
+
+BTNMT_BTNMT0600004_LINK: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc?wsdl
+BTNMT_BTNMT0600004_ACTION: BTNMT0600003
+BTNMT_BTNMT0600004_NAMESPACE_KEY: 
+BTNMT_BTNMT0600004_NAMESPACE_KEY_METHOD_TAG: 
+BTNMT_BTNMT0600004_NAMESPACE_KEY_PAYLOAD_TAG: 
+BTNMT_BTNMT0600004_NAMESPACE: http://www.monre.gov.vn
+BTNMT_BTNMT0600004_MOTHOD_TAG: Request
+BTNMT_BTNMT0600004_PAYLOAD_TAG: requestPayload
+BTNMT_BTNMT0600004_HEADER_TO: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc
+
+BTNMT_BTNMT0600006_LINK: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc?wsdl
+BTNMT_BTNMT0600006_ACTION: BTNMT0600006
+BTNMT_BTNMT0600006_NAMESPACE_KEY: 
+BTNMT_BTNMT0600006_NAMESPACE_KEY_METHOD_TAG: 
+BTNMT_BTNMT0600006_NAMESPACE_KEY_PAYLOAD_TAG: 
+BTNMT_BTNMT0600006_NAMESPACE: http://www.monre.gov.vn
+BTNMT_BTNMT0600006_MOTHOD_TAG: Request
+BTNMT_BTNMT0600006_PAYLOAD_TAG: requestPayload
+BTNMT_BTNMT0600006_HEADER_TO: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc
+
+BTNMT_BTNMT0600005_LINK: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc?wsdl
+BTNMT_BTNMT0600005_ACTION: BTNMT0600005
+BTNMT_BTNMT0600005_NAMESPACE_KEY: 
+BTNMT_BTNMT0600005_NAMESPACE_KEY_METHOD_TAG: 
+BTNMT_BTNMT0600005_NAMESPACE_KEY_PAYLOAD_TAG: 
+BTNMT_BTNMT0600005_NAMESPACE: http://www.monre.gov.vn
+BTNMT_BTNMT0600005_MOTHOD_TAG: Request
+BTNMT_BTNMT0600005_PAYLOAD_TAG: requestPayload
+BTNMT_BTNMT0600005_HEADER_TO: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc
+
+BTNMT_BTNMT0600007_LINK: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc?wsdl
+BTNMT_BTNMT0600007_ACTION: BTNMT0600007
+BTNMT_BTNMT0600007_NAMESPACE_KEY: 
+BTNMT_BTNMT0600007_NAMESPACE_KEY_METHOD_TAG: 
+BTNMT_BTNMT0600007_NAMESPACE_KEY_PAYLOAD_TAG: 
+BTNMT_BTNMT0600007_NAMESPACE: http://www.monre.gov.vn
+BTNMT_BTNMT0600007_MOTHOD_TAG: Request
+BTNMT_BTNMT0600007_PAYLOAD_TAG: requestPayload
+BTNMT_BTNMT0600007_HEADER_TO: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc
+
+BTNMT_BTNMT0600008_LINK: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc?wsdl
+BTNMT_BTNMT0600008_ACTION: BTNMT0600008
+BTNMT_BTNMT0600008_NAMESPACE_KEY: 
+BTNMT_BTNMT0600008_NAMESPACE_KEY_METHOD_TAG: 
+BTNMT_BTNMT0600008_NAMESPACE_KEY_PAYLOAD_TAG: 
+BTNMT_BTNMT0600008_NAMESPACE: http://www.monre.gov.vn
+BTNMT_BTNMT0600008_MOTHOD_TAG: Request
+BTNMT_BTNMT0600008_PAYLOAD_TAG: requestPayload
+BTNMT_BTNMT0600008_HEADER_TO: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc
+
+BTNMT_BTNMT0600009_LINK: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc?wsdl
+BTNMT_BTNMT0600009_ACTION: BTNMT0600009
+BTNMT_BTNMT0600009_NAMESPACE_KEY: 
+BTNMT_BTNMT0600009_NAMESPACE_KEY_METHOD_TAG: 
+BTNMT_BTNMT0600009_NAMESPACE_KEY_PAYLOAD_TAG: 
+BTNMT_BTNMT0600009_NAMESPACE: http://www.monre.gov.vn
+BTNMT_BTNMT0600009_MOTHOD_TAG: Request
+BTNMT_BTNMT0600009_PAYLOAD_TAG: requestPayload
+BTNMT_BTNMT0600009_HEADER_TO: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc
+#SBV
+SBV_LINK: http://ws.sbv.gov.vn:8600/NSWandPUSproxy
+SBV_ACTION: /Services/Global/System/CustomsEgov/NSWandPUSproxy/OperationImpl/NSWandPUSproxy-service0.serviceagent/NSWandPUSproxyPortTypeEndpoint0/Proxy
+SBV_NAMESPACE_KEY: sch
+SBV_NAMESPACE_KEY_METHOD_TAG: sch
+SBV_NAMESPACE_KEY_PAYLOAD_TAG: sch
+SBV_NAMESPACE: http://www.tibco.com/schemas/SG31ESBProject_phuong_17042018/SharedResource/Schema/Global/System/CustomsEgov/NSWandPUSproxy/Schema.xsd
+SBV_MOTHOD_TAG: NSWtoPUS
+SBV_PAYLOAD_TAG: RequestXMLString
+SBV_HEADER_TO:
+
+#Service cua Bo Giao Thong
+#BGTVT_LINK: http://119.17.200.66:1580/o/soap/OpenCPSSoap?wsdl
+# BGTVT_LINK: http://kiemthuduongbo.mt.gov.vn/o/soap/OpenCPSSoap?wsdl
+BGTVT_LINK: http://kiemthu.mt.gov.vn:7001/o/soap/OpenCPSSoap?wsdl
+BGTVT_ACTION: 
+BGTVT_NAMESPACE_KEY: v2
+BGTVT_NAMESPACE_KEY_METHOD_TAG: v2
+BGTVT_NAMESPACE_KEY_PAYLOAD_TAG: 
+BGTVT_NAMESPACE: http://v2.opencps.vn
+BGTVT_MOTHOD_TAG: receiveFromNSW
+BGTVT_PAYLOAD_TAG: requestPayload
+BGTVT_HEADER_TO:
+
+#Service cua Bo Cong Thuong
+BCT_LINK: http://42.118.107.4:7070/DVC_BCT_XuatNhapKhauTienChat-portlet/DataVNSW?clientkey=9jw3XLa&documenttype=BCT0600004
+BCT_ACTION: 
+BCT_NAMESPACE_KEY: tem
+BCT_NAMESPACE_KEY_METHOD_TAG: tem
+BCT_NAMESPACE_KEY_PAYLOAD_TAG: tem 
+BCT_NAMESPACE: http://tempuri.org/
+BCT_MOTHOD_TAG: Receive
+BCT_PAYLOAD_TAG: receiveRequest
+BCT_HEADER_TO:
+
+# Thong tin rabbitMQ 
+activemq.host: 10.224.128.148
+activemq.port: 5672
+activemq.user: nswlog
+activemq.password: nswlog
+activemq.virtualHost: /
+activemq.exchangeName: logExchange
+# Loi
+activemq.queueErrName: Log_Error_Queue
+activemq.routingErrKey: error
+# Log
+activemq.queueLogName: Log_SendGateway_Queue
+activemq.routingLogKey: sendGateway 
+---
+spring:
+  profiles: hq_live
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  jmx:
+    default-domain: VNSWSendGateway
+management:
+    security:
+        enabled: false
+#Danh sach cac dia chi service noi bo cua tung bo nganh
+#Service cua Bo Khoa Hoc cong nghe
+BKHCN_LINK: http://171.244.0.20:8080/KHCN/ImportDocumentService?wsdl
+BKHCN_NAMESPACE_KEY: ws
+BKHCN_NAMESPACE_KEY_METHOD_TAG: ws
+BKHCN_NAMESPACE_KEY_PAYLOAD_TAG: 
+BKHCN_NAMESPACE: http://ws.viettel.com/
+BKHCN_MOTHOD_TAG: ImportDocument
+BKHCN_PAYLOAD_TAG: data
+#Service cua Bo Y te
+BYT_LINK: http://117.6.176.19:8080/MOHReceiveGateway/ws/gateway?wsdl
+BYT_NAMESPACE_KEY: gen
+BYT_NAMESPACE_KEY_METHOD_TAG: gen
+BYT_NAMESPACE_KEY_PAYLOAD_TAG: gen
+BYT_NAMESPACE: http://com/moh/gateway/generated
+BYT_MOTHOD_TAG: receiveRequest
+BYT_PAYLOAD_TAG: requestPayload
+#Service cua Bo CA
+#BCA_LINK: http://27.72.63.46/MPSReceiveGateway/ws/gateway?wsdl
+BCA_LINK: http://27.72.63.46/MPSReceiveGateway/ws/gateway.wsdl?
+BCA_NAMESPACE_KEY: gen
+BCA_NAMESPACE_KEY_METHOD_TAG: gen
+BCA_NAMESPACE_KEY_PAYLOAD_TAG: gen
+BCA_NAMESPACE: http://com/mps/receive/gateway/generated
+BCA_MOTHOD_TAG: receiveRequest
+BCA_PAYLOAD_TAG: requestPayload
+#Service cua BNN
+#Thu tuc 10. tam nhap tai xuat
+BNN_BNN&PTNT0600003_LINK: http://203.190.173.76:8082/AnimalCertReceipt.svc?wsdl
+BNN_BNN&PTNT0600003_ACTION: http://tempuri.org/IAnimalCertReceipt/Receive
+BNN_BNN&PTNT0600003_NAMESPACE_KEY: tem
+BNN_BNN&PTNT0600003_NAMESPACE_KEY_METHOD_TAG: tem
+BNN_BNN&PTNT0600003_NAMESPACE_KEY_PAYLOAD_TAG: tem
+BNN_BNN&PTNT0600003_NAMESPACE: http://tempuri.org/
+BNN_BNN&PTNT0600003_MOTHOD_TAG: Receive
+BNN_BNN&PTNT0600003_PAYLOAD_TAG: inputXml
+#Service cua Bo Khoa TNMT
+BTNMT_BTNMT0600001_LINK: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc?wsdl
+BTNMT_BTNMT0600001_ACTION: BTNMT0600001
+BTNMT_BTNMT0600001_NAMESPACE_KEY: 
+BTNMT_BTNMT0600001_NAMESPACE_KEY_METHOD_TAG: 
+BTNMT_BTNMT0600001_NAMESPACE_KEY_PAYLOAD_TAG: 
+BTNMT_BTNMT0600001_NAMESPACE: http://www.monre.gov.vn
+BTNMT_BTNMT0600001_MOTHOD_TAG: Request
+BTNMT_BTNMT0600001_PAYLOAD_TAG: requestPayload
+BTNMT_BTNMT0600001_HEADER_TO: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc
+
+BTNMT_BTNMT0600006_LINK: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc?wsdl
+BTNMT_BTNMT0600006_ACTION: BTNMT0600006
+BTNMT_BTNMT0600006_NAMESPACE_KEY: 
+BTNMT_BTNMT0600006_NAMESPACE_KEY_METHOD_TAG: 
+BTNMT_BTNMT0600006_NAMESPACE_KEY_PAYLOAD_TAG: 
+BTNMT_BTNMT0600006_NAMESPACE: http://www.monre.gov.vn
+BTNMT_BTNMT0600006_MOTHOD_TAG: Request
+BTNMT_BTNMT0600006_PAYLOAD_TAG: requestPayload
+BTNMT_BTNMT0600006_HEADER_TO: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc
+
+BTNMT_BTNMT0600005_LINK: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc?wsdl
+BTNMT_BTNMT0600005_ACTION: BTNMT0600005
+BTNMT_BTNMT0600005_NAMESPACE_KEY: 
+BTNMT_BTNMT0600005_NAMESPACE_KEY_METHOD_TAG: 
+BTNMT_BTNMT0600005_NAMESPACE_KEY_PAYLOAD_TAG: 
+BTNMT_BTNMT0600005_NAMESPACE: http://www.monre.gov.vn
+BTNMT_BTNMT0600005_MOTHOD_TAG: Request
+BTNMT_BTNMT0600005_PAYLOAD_TAG: requestPayload
+BTNMT_BTNMT0600005_HEADER_TO: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc
+
+BTNMT_BTNMT0600007_LINK: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc?wsdl
+BTNMT_BTNMT0600007_ACTION: BTNMT0600007
+BTNMT_BTNMT0600007_NAMESPACE_KEY: 
+BTNMT_BTNMT0600007_NAMESPACE_KEY_METHOD_TAG: 
+BTNMT_BTNMT0600007_NAMESPACE_KEY_PAYLOAD_TAG: 
+BTNMT_BTNMT0600007_NAMESPACE: http://www.monre.gov.vn
+BTNMT_BTNMT0600007_MOTHOD_TAG: Request
+BTNMT_BTNMT0600007_PAYLOAD_TAG: requestPayload
+BTNMT_BTNMT0600007_HEADER_TO: http://biztalk.hmisp.com.vn/HQDVCTNMT/HMI_MONRE_BIZ_MainProcess_FirstProcess_ReceiveHQRequest.svc
+
+#SBV
+SBV_LINK: http://ws.sbv.gov.vn:8600/NSWandPUSproxy
+SBV_ACTION: /Services/Global/System/CustomsEgov/NSWandPUSproxy/OperationImpl/NSWandPUSproxy-service0.serviceagent/NSWandPUSproxyPortTypeEndpoint0/Proxy
+SBV_NAMESPACE_KEY: sch
+SBV_NAMESPACE_KEY_METHOD_TAG: sch
+SBV_NAMESPACE_KEY_PAYLOAD_TAG: sch
+SBV_NAMESPACE: http://www.tibco.com/schemas/SG31ESBProject_phuong_17042018/SharedResource/Schema/Global/System/CustomsEgov/NSWandPUSproxy/Schema.xsd
+SBV_MOTHOD_TAG: NSWtoPUS
+SBV_PAYLOAD_TAG: RequestXMLString
+SBV_HEADER_TO:
+
+#Service cua Bo Giao Thong
+#BGTVT_LINK: http://119.17.200.66:1580/o/soap/OpenCPSSoap?wsdl
+BGTVT_LINK: http://119.15.167.214/o/soap/OpenCPSSoap?wsdl
+BGTVT_ACTION: 
+BGTVT_NAMESPACE_KEY: v2
+BGTVT_NAMESPACE_KEY_METHOD_TAG: v2
+BGTVT_NAMESPACE_KEY_PAYLOAD_TAG: 
+BGTVT_NAMESPACE: http://v2.opencps.vn
+BGTVT_MOTHOD_TAG: receiveFromNSW
+BGTVT_PAYLOAD_TAG: requestPayload
+BGTVT_HEADER_TO:
+    
+# Thong tin rabbitMQ 
+activemq.host: 10.224.138.93
+activemq.port: 5672
+activemq.user: nswlog
+activemq.password: nswlog
+activemq.virtualHost: /
+activemq.exchangeName: logExchange
+# Loi
+activemq.queueErrName: Log_Error_Queue
+activemq.routingErrKey: error
+# Log
+activemq.queueLogName: Log_SendGateway_Queue
+activemq.routingLogKey: sendGateway 
+---
+
+      
