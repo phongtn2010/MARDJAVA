@@ -1,0 +1,173 @@
+{{#data}}
+<p><b class="nsw-text-underline">{{ _lang "common_tokhai_thongtinchung" }}</b></p>
+<div class="panel-body"> 
+    <div class="row">
+        <div class="col-md-3">
+            <label>{{_lang "common_tokhai_sotokhai"}}</label>
+        </div>
+        <div class="col-md-3">
+            <b>{{fiSoTk}}</b>
+        </div>
+        <div class="col-md-3">
+            <label>{{_lang "common_tokhai_mahaiquan"}}</label>
+        </div>
+        <div class="col-md-3">
+            <b>{{fiMaHq}}</b>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <label>{{_lang "common_tokhai_ngaydangky"}}</label>
+        </div>
+        <div class="col-md-3">
+            <b>{{fiNgayDk}}</b>
+        </div>        
+    </div>
+</div>
+<p><b class="nsw-text-underline">{{ _lang "common_tokhai_nnk" }}</b></p>
+<div class="panel-body">
+    <div class="row">
+        <div class="col-md-3">
+            <label>{{_lang "common_tokhai_nnk_tencongty"}}</label>
+        </div>
+        <div class="col-md-3">
+            <b>{{fiNguoiNk}}</b>
+        </div>
+        <div class="col-md-3">
+            <label>{{_lang "common_tokhai_nnk_diachi"}}</label>
+        </div>
+        <div class="col-md-3">
+            <b>{{fiDiachiNnk}}</b>
+        </div>        
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <label>{{_lang "common_tokhai_nnk_dienthoai"}}</label>
+        </div>
+        <div class="col-md-3">
+            <b>{{fiDtNnk}}</b>
+        </div>        
+    </div>
+</div>
+<p><b class="nsw-text-underline">{{ _lang "common_tokhai_nxk" }}</b></p>
+<div class="panel-body">
+    <div class="row">
+        <div class="col-md-3">
+            <label>{{_lang "common_tokhai_nxk_tencongty"}}</label>
+        </div>
+        <div class="col-md-3">
+            <b>{{fiNguoiXk}}</b>
+        </div>
+
+        <div class="col-md-3">
+            <label>{{_lang "common_tokhai_nxk_nuoc"}}</label>
+        </div>
+        <div class="col-md-3">
+            <b>{{fiNuocXk}}</b>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <label>{{_lang "common_tokhai_nxk_diachi"}}</label>
+        </div>
+        <div class="col-md-3">
+            <b>{{fiDiachiNxk}}</b>
+        </div>        
+    </div>
+</div>
+<p><b class="nsw-text-underline">{{ _lang "common_tokhai_hanghoa" }}</b></p>
+<table class="table table-striped table-bordered table-hover table-checkable order-column">
+    <thead>
+        <tr>
+            <th><b>{{_lang "common_tokhai_hanghoa_stt"}}</b></th>
+            <th><b>{{_lang "common_tokhai_hanghoa_mahs"}}</b></th>
+            <th><b>{{_lang "common_tokhai_hanghoa_tenhanghoa"}}</b></th>
+            <th><b>{{_lang "common_tokhai_hanghoa_klsl"}}</b></th>
+            <th><b>{{_lang "common_tokhai_hanghoa_donvitinh"}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each toKhaiHQD1}}
+        <tr>
+        <td>{{inc @index}}</td>    
+        <td>
+            {{fiMaHs}}
+        </td>
+        <td>
+            {{fiTenHh}}
+        </td>
+        <td>
+            {{fiKlSl}}
+        </td>
+        <td>
+            {{fiTenDv}}
+        </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<div class="panel-body">
+    <div class="row">
+        <div class="col-md-4">
+            <label>{{_lang "common_tokhai_diadiemluukho"}}</label>
+        </div>
+        <div class="col-md-8">
+            <b></b>
+        </div>
+    </div>
+
+    <div class="row">        
+        <div class="col-md-4">
+            <label>{{_lang "common_tokhai_diadiemdohang"}}</label>
+        </div>
+        <div class="col-md-8">
+            <b></b>
+        </div>
+    </div>    
+
+    <div class="row">
+        <div class="col-md-4">
+            <label>{{_lang "common_tokhai_soluong"}}</label>
+        </div>
+        <div class="col-md-8">
+            <b>{{fiSoluong}}</b>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <label>{{_lang "common_tokhai_tongtrongluong"}}</label>
+        </div>
+        <div class="col-md-8">
+            <b>{{fiTong}}</b>
+        </div>
+    </div>
+</div>
+<p><b class="nsw-text-underline">{{ _lang "common_tokhai_vdhd" }}</b></p>
+<div class="panel-body">
+    <div class="row">
+        <div class="col-md-4">
+            <label>{{_lang "common_tokhai_vdhd_sohoadon"}}</label>
+        </div>
+        <div class="col-md-8">
+            <b>{{fiSoHoadon}}</b>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <label>{{_lang "common_tokhai_vdhd_vandonso"}}</label>
+        </div>
+        <div class="col-md-8">
+            <b>{{fiSoVandon}}</b>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <label>{{_lang "common_tokhai_vdhd_ngaycaphoadon"}}</label>
+        </div>
+        <div class="col-md-8">
+            <b>{{fiNgayCapHd}}</b>
+        </div>
+    </div>    
+</div>
+{{/data}}

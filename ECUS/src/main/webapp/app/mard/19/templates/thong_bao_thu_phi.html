@@ -1,0 +1,158 @@
+
+<ul class="nav nav-tabs">
+	<li class="active"><a data-toggle="tab" href="#home">{{_lang "mard.19.index.table.thongBaoPhi"}}</a></li>
+	<li><a data-toggle="tab" href="#menu1">{{_lang "mard.19.index.table.thongBaoChuyenKhoan"}}</a></li>
+</ul>
+
+<div class="tab-content" id="pageView">
+	<div id="home" class="tab-pane fade in active">
+		<fieldset class="fieldset">
+			<div style="margin-top: 16px;">
+				<div class="table-responsive">
+					<table
+							class="table table-striped table-bordered table-hover table-checkable order-column">
+						<thead class="">
+						<th width="50px" class="text-center">{{_lang "mard.19.table.thongBaoPhi.col.stt"}}</th>
+						<th   class="text-center">{{_lang "mard.19.table.thongBaoPhi.col.fiAccountNo"}}</th>
+						<th class="text-center">{{_lang "mard.19.table.thongBaoPhi.col.fiAccountName"}}</th>
+						<th class="text-center">{{_lang "mard.19.table.thongBaoPhi.col.fiTotalFee"}}</th>
+						<th class="text-center" width="30%">{{_lang "mard.19.table.thongBaoPhi.col.fiTotalFeeChar"}}</th>
+						<th  class="text-center">{{_lang "mard.19.table.thongBaoPhi.col.fiNote"}}</th>
+						<th class="text-center">{{_lang "mard.19.table.thongBaoPhi.col.fiCreateDate"}}</th>
+						</thead>
+						<tbody data-bind="foreach: { data: danhSachThongBaoPhi, as: 'item'}">
+						<tr>
+							<td class="text-center" data-bind="text: $index() + 1"></td>
+							<td class="text-center" data-bind="text: item.fiAccountNo"></td>
+							<td class="text-center" data-bind="text: item.fiAccountName"></td>
+							<td class="text-center" data-bind="text: item.fiTotalFee"></td>
+							<td class="text-center" data-bind="text: item.fiTotalFeeChar"></td>
+							<td class="text-center" data-bind="text: item.fiNote"></td>
+							<td class="text-center" data-bind="text: item.fiCreateDate"></td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+	<div id="menu1" class="tab-pane fade">
+
+		<fieldset class="fieldset">
+			<div class="col-md-12" data-bind="if: showButtonSend()">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group">
+							<label for="fiAttachedDocName">{{_lang "mard.19.table.thongBaoChuyenKhoan.col.fiAccountNo"}}</label>
+							<input autocomplete="off" type="text" class="form-control" id="fiAttachedDocName" data-bind="value: tbdThanhToan19.fiAttachedDocName">
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label for="fiPaymentName">{{_lang "mard.19.table.thongBaoChuyenKhoan.col.fiAccountName"}}<span class="nsw-require-field">*</span></label>
+							<input autocomplete="off" type="text" class="form-control" id="fiPaymentName" data-bind="value: tbdThanhToan19.fiPaymentName">
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label for="fiPaymentDate">{{_lang "mard.19.table.thongBaoChuyenKhoan.col.fiCreateDate"}}</label>
+							<input autocomplete="off" type="text" class="form-control date-picker" data-date-format="dd/mm/yyyy" size="16"  id="fiPaymentDate" data-bind="value: tbdThanhToan19.fiPaymentDate, dateInput">
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label for="fiTotalFee">{{_lang "mard.19.table.thongBaoChuyenKhoan.col.fiTotalFee"}}<span class="nsw-require-field">*</span></label>
+							<input autocomplete="off" type="text" class="form-control" id="fiTotalFee" data-bind="value: tbdThanhToan19.fiTotalFee, , valueUpdate: 'afterkeydown', numberFormatDecimalInput: function(){return '15.3';},  event: { keyup: $root.numberInputKeyUpEvent.bind($data, tbdThanhToan19.fiTotalFee()) }">
+							<!--<label><i><b data-bind="text: soLuongTien()"></b></i></label>-->
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="fiTotalFeeChar">{{_lang "mard.19.table.thongBaoChuyenKhoan.col.fiTotalFeeChar"}}<span class="nsw-require-field">*</span></label>
+							<textarea autocomplete="off" type="text" class="form-control" id="fiTotalFeeChar" data-bind="value: tbdThanhToan19.fiTotalFeeChar"></textarea>
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="fiNote">{{_lang "mard.19.table.thongBaoChuyenKhoan.col.fiNote"}}</label>
+							<textarea autocomplete="off" type="text" class="form-control" id="fiNote" data-bind="value: tbdThanhToan19.fiNote"></textarea>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="fiFileName">{{_lang "mard.19.tepDinhKemThanhToanPhi"}}<span class="nsw-require-field">*</span></label>
+									<input id="fiFileName" type="file" class="form-group form-control" data-bind=" event:{ change: $root.uploadFileChangeEvent }">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<a style="font-style: italic;" href="" data-bind="attr: {'href': tbdThanhToan19.fiLink}, text: tbdThanhToan19.fiFileName" target="_blank"></a>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-group">
+							<div class=" alert alert-danger" role="alert" style="    padding: 7px;">
+								<i>{{_lang "mard.19.uploadInfo3"}}</i>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12" >
+						<div class="form-group" data-bind="if: $root.isSaving()" >
+							<button style="display: block;    margin: auto;" class="btn btn-primary" data-bind="click: $root.save"><i class="fa fa-save"></i>&nbsp;{{ _lang 'common_button_luu' }}</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12" style="margin-top: 16px;">
+				<div class="table-responsive">
+					<table
+							class="table table-striped table-bordered table-hover table-checkable order-column">
+						<thead class="">
+						<th width="50px" class="text-center">{{_lang "mard.19.table.thongBaoChuyenKhoan.col.stt"}}</th>
+						<th   class="text-center">{{_lang "mard.19.table.thongBaoChuyenKhoan.col.fiAccountNo"}}</th>
+						<th class="text-center">{{_lang "mard.19.table.thongBaoChuyenKhoan.col.fiAccountName"}}</th>
+						<th class="text-center">{{_lang "mard.19.table.thongBaoChuyenKhoan.col.fiTotalFee"}}<br><i>(VNĐ)</i></th>
+						<th class="text-center" width="30%">{{_lang "mard.19.table.thongBaoChuyenKhoan.col.fiTotalFeeChar"}}</th>
+						<th class="text-center">{{_lang "mard.19.table.thongBaoChuyenKhoan.col.fiCreateDate"}}</th>
+						<th  class="text-center">{{_lang "mard.19.table.thongBaoChuyenKhoan.col.fiNote"}}</th>
+						<th class="text-center" width="110">{{_lang "mard.19.TbdThuoc3.chucnang"}}</th>
+						</thead>
+						<tbody data-bind="foreach: { data: danhSachThanhToanPhi, as: 'item'}">
+						<tr>
+							<td  data-bind="text: $index() + 1"></td>
+							<td  data-bind="text: item.fiAttachedDocName"></td>
+							<td  data-bind="text: item.fiPaymentName"></td>
+							<td  data-bind="text: $root.formatCurrency(item.fiTotalFee())"></td>
+							<td  data-bind="text: item.fiTotalFeeChar"></td>
+							<td  data-bind="text: item.fiPaymentDate"></td>
+							<td  data-bind="text: item.fiNote"></td>
+							<td class="text-center" align="center" >
+								<span data-bind="if: item.fiSended() == 0 && $root.showButtonSend()">
+									<a title="{{ _lang 'mard.19.guiThanhToanPhi' }}" data-bind="click: $root.send"><i class="fa fa-paper-plane" aria-hidden="true"></i></a>
+								</span>
+								&nbsp;&nbsp;&nbsp;
+								<span data-bind="if: item.fiSended() == 0 && $root.showButtonSend()">
+									<a  title="{{ _lang 'mard.19.TbdThuoc3.buttonSua'}}"
+									   data-bind="click: $root.edit">
+										<i  class="fa fa-lg fa-edit" aria-hidden="true"></i>
+									</a>
+								</span>
+								&nbsp;&nbsp;&nbsp;
+								<span data-bind="if: item.fiSended() == 0">
+									<a style="color: red; font-weight: bold;" title="{{ _lang 'mard.19.TbdThuoc3.buttonXoa'}}"
+									   data-bind="click: $root.delete">
+										<i  class="fa fa-lg fa-close tooltips" aria-hidden="true"></i>
+									</a>
+								</span>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+
+</div>

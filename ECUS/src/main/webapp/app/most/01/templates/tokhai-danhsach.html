@@ -1,0 +1,28 @@
+{{#data}}
+<tr class="odd gradeX">
+    <td class="nsw-text-center"> 
+        {{inc @index}}
+    </td>
+    <td> 
+        {{fiSoTk}}
+    </td>
+    <td>
+        {{convertToDateFromTimeStamp fiNgayDk false}}
+    </td>
+    <td>
+        {{fiMaHq}}
+    </td>
+    <td style="display: {{IsView}}">
+        <a><i class="fa fa-lg fa-search tooltips" data-placement="top" 
+              data-original-title="{{getCommandName 'most_01_tokhai_command_xem'}}" data-container="body" item="{{fiIdTk}}"></i></a>
+    </td>
+    <td style="display: {{IsView}}">
+        <a><i class="fa fa-lg fa-edit tooltips" data-placement="top" 
+              data-original-title="{{getCommandName 'most_01_tokhai_command_sua'}}" data-container="body" item="{{fiIdTk}}"></i></a>
+    </td>
+    <td style="display: {{IsView}}">
+        <a><i class="fa fa-lg fa-remove tooltips" data-placement="top" 
+              data-original-title="{{getCommandName 'most_01_tokhai_command_xoa'}}" data-container="body" item="{{fiIdTk}}" code="{{fiSoTk}}"></i></a>
+    </td>
+</tr>
+{{/data}}

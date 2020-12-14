@@ -1,0 +1,23 @@
+{{#each data}}
+<tr>
+    <td>{{inc @index}}</td>    
+    <td>
+        {{safeString fiTenDvgui}}
+    </td>
+    <td>
+        {{safeString fiTenNggui}}
+    </td>
+    <td>
+        {{convertToDateFromTimeStamp fiNgaytao}}
+    </td>
+    <td>
+        {{safeString fiNoidung}}
+    </td>
+    <td>
+        {{convertToDateFromTimeStamp fiThoihan false}}
+    </td>
+    <td>
+        {{safeString fiTenTt}}
+    </td>
+</tr>
+{{/each}}

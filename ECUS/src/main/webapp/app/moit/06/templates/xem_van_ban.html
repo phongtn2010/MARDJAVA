@@ -1,0 +1,189 @@
+<style>
+.a4 {
+	width: 100%;
+	display: block;
+	border: 2px solid;
+	margin: 20px auto;
+	padding: 30px 20px;
+	float: left;
+}
+
+.h4 {
+	font-weight: bold;
+	padding: 0 50px;
+	font-size: 15px;
+	text-align: center;
+	float: left;
+	width: 100%;
+	margin-bottom: 5px;
+	margin-top: 0;
+}
+
+.h5 {
+	font-weight: bold;
+	padding: 0 50px;
+	font-size: 13px;
+	text-align: center;
+}
+
+.hr {
+	border-color: #000;
+	width: 30%;
+	margin: auto;
+	margin-bottom: 20px;
+}
+
+.text-i {
+	width: 45px;
+	margin-left: 10px;
+}
+
+.w100 {
+	width: 100%;
+}
+
+.a4 .form-control {
+	margin-bottom: 7px;
+}
+
+.p0 {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.p50 {
+	padding-left: 50px;
+	font-weight: bold;
+	font-size: 13px;
+	font-style: italic;
+}
+
+.inputrow {
+	border-bottom: 2px dotted #000;
+	display: block;
+	float: left;
+	padding-right: 15px;
+	font-weight: bold;
+}
+
+.fl {
+	float: left;
+}
+
+.w50 {
+	width: 50px;
+}
+
+.inputrow-block-c {
+	text-align: center;
+	display: block;
+}
+
+.wd1 {
+	width: 80%;
+}
+</style>
+{{#data}}
+<form id="form-xuat-bieu-mau-popup" class="form-xuat-bieu-mau-popup">
+	<div class="a4">
+		<h4 class="h4" style="padding-top: 30px;">VĂN BẢN ĐỀ NGHỊ CHẤP THUẬN</h4>
+		<h4 class="h4" style="text-align: center; padding-left: 0;padding-bottom: 20px;">XUẤT KHẨU/NHẬP KHẨU NGOẠI TỆ TIỀN MẶT</h4>
+		<div class="col-md-12">
+			<div class="row">
+				<p align="center" style="padding-bottom: 20px;">
+					<span><b>Kính gửi:&nbsp;{{kinhGui}}</b></span>
+				</p>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="row">
+				<span class="fl">1. Tên Ngân hàng:&nbsp;</span>
+				<p class="inputrow  inputrow-block-c">{{tenNganHang}}</p>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="row">
+				<span class="fl">2. Địa chỉ: &nbsp;</span>
+				<p class="inputrow  inputrow-block-c">{{diaChi}}</p>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="row">
+						<span class="fl">3. Số điện thoại: &nbsp;</span>
+						<p class="inputrow  inputrow-block-c">{{dienThoai}}</p>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="row">
+						<span class="fl">Fax: &nbsp;</span>
+						<p class="inputrow  inputrow-block-c">{{fax}}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="row">4. Nội dung xin chấp thuận: Xuất khẩu/nhập khẩu ngoại tệ tiền mặt</div>
+		</div>
+		<div class="col-md-12">
+			<div class="row p50">
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered table-hover table-checkable order-column">
+						<thead class="">
+							<th width="50px" class="text-center">{{_lang "sbv_01_gxn_table_tiente_01"}}</th>
+							<th width="300px" class="text-center">{{_lang "sbv_01_gxn_table_tiente_02"}}</th>
+							<th class="text-center">{{_lang "sbv_01_gxn_table_tiente_03"}}</th>
+							<th class="text-center">{{_lang "sbv_01_gxn_table_tiente_04"}}</th>
+						</thead>
+						<tbody>
+							{{#each tienTes}}
+							<tr>
+								<td class="text-center">{{inc @index}}</td>
+								<td class="text-center">{{soLuongNgoaiTeBangSo}}</td>
+								<td class="text-center">{{soLuongNgoaiTeBangChu}}</td>
+								<td class="text-center">{{maLoaiTienTe}}</td>
+							</tr>
+							{{/each}}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="row">
+				<span class="fl">Qua cửa khẩu: &nbsp;</span>
+				<p class="inputrow  inputrow-block-c">{{tenCuaKhau}}</p>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="row">
+				<span class="fl">Đối tác xuất/nhập khẩu: &nbsp;</span>
+				<p class="inputrow  inputrow-block-c">{{doiTacXuatNhapKhau}}</p>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="row">
+				<span class="fl">5. Đề nghị Ngân hàng Nhà nước chi nhánh: &nbsp;</span> <span class="inputrow  inputrow-block-c">{{tenChiNhanh}}</span> <span>xem xét và cấp Quyết định chấp thuận xuất khẩu/nhập khẩu ngoại tệ tiền mặt cho Ngân hàng theo nội dung trên.</span>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="row">
+				<span class="fl">6. Ngân hàng: &nbsp;</span> <span class="inputrow  inputrow-block-c">{{tenNganHang}}</span> <span>xin cam kết thực hiện hoạt động xuất khẩu, nhập khẩu ngoại tệ tiền mặt đúng quy định quản lý ngoại hối và sử dụng đúng mục đích được phép.</span>
+			</div>
+		</div>
+		<div class="col-md-12" style="padding-top: 50px;">
+			<div class="col-md-7"></div>
+			<div class="col-md-5">
+				<h5 align="center">
+					<b>NGƯỜI ĐẠI DIỆN HỢP PHÁP CỦA NGÂN HÀNG ĐƯỢC PHÉP</b>
+				</h5>
+				<p align="center">(ký tên, đóng dấu)</p>
+				<p>
+					<span class="inputrow  inputrow-block-c" style="width: 100%;">{{nguoiKy}}</span>
+				</p>
+			</div>
+		</div>
+	</div>
+</form>
+{{/data}}

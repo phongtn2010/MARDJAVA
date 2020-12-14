@@ -1,0 +1,1549 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">  
+
+<tiles-definitions>  
+ 
+    <!-- Base Definition -->
+    <definition name="base-definition" 
+                template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">  
+        <put-attribute name="title" value="" />  
+        <put-attribute name="casigner" value="/WEB-INF/views/tiles/template/ca.jsp" />  
+        <put-attribute name="header" value="/WEB-INF/views/tiles/template/defaultHeader.jsp" />  
+        <put-attribute name="menu" value="/WEB-INF/views/tiles/template/defaultMenu.jsp" />  
+        <put-attribute name="body" value="" />  
+        <put-attribute name="footer" value="/WEB-INF/views/tiles/template/defaultFooter.jsp" />  
+        <put-attribute name="language" value="/WEB-INF/views/tiles/template/incLanguages.jsp" />  
+        <put-attribute name="breadcrumb" value="/WEB-INF/views/tiles/template/breadcrumb.jsp" /> 
+    </definition>  
+ 
+    <!-- Default Page -->
+    <!-- Home Page -->
+    <definition name="nsw.page.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/index.jsp" />  
+    </definition>
+   
+    <!-- Login Page -->
+    <definition name="nsw.page.login" extends="base-definition">  
+        <put-attribute name="title" value="Đăng nhập" />  
+        <put-attribute name="body" value="/WEB-INF/views/login.jsp" />  
+    </definition>
+   
+    <!-- Errors Pages -->
+    <definition name="nsw.page.notfound" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/errors/notFound.jsp" />  
+    </definition>
+   
+    <definition name="nsw.page.error" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/errors/serverError.jsp" />  
+    </definition>
+   
+    <definition name="nsw.page.accessdenied" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/accessDenied.jsp" />  
+    </definition>
+   
+    <!-- End Default Page -->
+   
+    <!-- Test Page -->
+    <definition name="nsw.page.testca" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/ca.jsp" />  
+    </definition>
+   
+    <!-- BO KHOA HOC CONG NGHE -->
+    <!-- THU TUC 01 -->
+    <definition name="most.01.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/most/01/index.jsp" />  
+    </definition>
+   
+    <definition name="most.01.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/most/01/edit.jsp" />  
+    </definition>
+    <!--END THU TUC 01 -->
+   
+    <!-- THU TUC 02 -->
+    <definition name="most.02.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/most/02/home.jsp" />  
+    </definition>
+   
+    <definition name="most.02.hoso" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/most/02/hoso.jsp" />  
+    </definition>
+   
+    <definition name="most.02.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/most/02/viewHoso.jsp" />  
+    </definition>
+    <!--END THU TUC 02 -->
+    <!-- THU TUC 03 -->
+    <definition name="most.03.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/most/03/index.jsp" />  
+    </definition>   
+    <definition name="most.03.create" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/most/03/EditDocument.jsp" />  
+    </definition>
+    <definition name="most.03.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/most/03/ViewDocument.jsp" />  
+    </definition>
+    <definition name="most.03.result" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/most/03/ViewResult.jsp" />  
+    </definition>
+    <!--END THU TUC 03 -->
+    <!-- THU TUC 04 -->
+    <definition name="most.04.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/most/04/index.jsp" />  
+    </definition>   
+    <definition name="most.04.create" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/most/04/EditDocument.jsp" />  
+    </definition>
+    <definition name="most.04.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/most/04/ViewDocument.jsp" />  
+    </definition>
+    <definition name="most.04.result" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/most/04/ViewResult.jsp" />  
+    </definition>
+    <!--END THU TUC 04 -->
+     <!-- THU TUC 05 -->
+    <definition name="most.05.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/most/p05/index.jsp" />  
+    </definition>
+
+    <definition name="most.05.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/most/p05/view.jsp" />  
+    </definition> 
+    <!--END THU TUC 05 --> 
+    <!-- THU TUC 06 -->
+    <definition name="most.06.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/most/p06/index.jsp" />  
+    </definition>
+
+    <definition name="most.06.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/most/p06/view.jsp" />  
+    </definition>
+    
+    <!--END THU TUC 06 -->
+    <!-- END BO KHOA HOC CONG NGHE -->
+   
+    <!--  BO Y TE  -->
+    <!--THU TUC LOAI A-->
+    <definition name="moh.06.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/06/index.jsp" />  
+    </definition>
+   
+    <definition name="moh.06.create" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/06/themmoi.jsp" />  
+    </definition>
+    
+    <definition name="moh.06.tiepnhan" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/06/phieutiepnhan.jsp" />  
+    </definition>
+    <!--  END BO Y TE  -->
+    <!--  BO NONG NGHIEP  -->
+    <!--THU TUC 01-->
+    <definition name="mard.01.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/01/index.jsp" />
+    </definition>
+
+    <definition name="mard.01.view" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/01/view.jsp" />
+    </definition>
+
+    <!--END THU TUC 1-->
+
+    <!--THU TUC 06-->
+    <definition name="mard.06.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/06/index.jsp" />
+    </definition>
+
+    <definition name="mard.06.view" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/06/view.jsp" />
+    </definition>
+
+    <!--END THU TUC-->
+    <!--THU TUC 07-->
+    <definition name="mard.07.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/07/index.jsp" />
+    </definition>
+
+    <definition name="mard.07.view" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/07/view.jsp" />
+    </definition>
+    <!--END THU TUC-->
+
+    <!--THU TUC 08-->
+    <definition name="mard.08.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/08/index.jsp" />
+    </definition>
+
+    <definition name="mard.08.view" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/08/view.jsp" />
+    </definition>
+    <!--END THU TUC 08-->
+
+    <!--    THU TUC MARD 09-->
+    <!-- Home Page -->
+    <definition name="mard.09.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/09/index.jsp" />
+    </definition>
+
+    <!-- Khai hồ sơ -->
+    <definition name="mard.09.xem" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/09/xem_hs.jsp" />
+    </definition>
+    <!--    END THU TUC MARD 09-->
+
+    <!--THU TUC LOAI A-->
+    <definition name="mard.10.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/10/index.jsp" />  
+    </definition>
+   
+    <definition name="mard.10.create" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/10/create.jsp" />  
+    </definition>
+   
+    <definition name="mard.10.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/10/view.jsp" />  
+    </definition>
+    <!--THU TUC 11-->
+    <definition name="mard.11.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/11/index.jsp" />  
+    </definition>
+   
+    <definition name="mard.11.create" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/11/create.jsp" />  
+    </definition>
+   
+    <definition name="mard.11.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/11/view.jsp" />  
+    </definition>
+   
+    <definition name="mard.11.cert" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/11/thongtinGCN.jsp" />  
+    </definition>
+    <!--END THU TUC 11-->
+    <!--  END NONG NGHIEP  -->
+    
+    <!--BO CONG THUONG-->
+    <!--THU TUC 07-->
+    <definition name="moit.07.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moit/07/index.jsp" />  
+    </definition>
+    <definition name="moit.07.create" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moit/07/EditDocument.jsp" />  
+    </definition>
+    <!--END THU TUC 07-->
+    <!--END BO CONG THUONG-->
+    
+    <!--  =================================BO TAI NGUYEN MOI TRUONG ================================ -->
+    <!-- Home Page -->
+    <definition name="nsw.monre.page.01.index" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/monre/01/index.jsp" />  
+    </definition>
+    
+    <!-- Khai hồ sơ -->
+    <definition name="nsw.monre.page.01.khai_ho_so" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/monre/01/khai_ho_so.jsp" />  
+    </definition>
+    
+    <!-- Home Page -->
+    <definition name="nsw.monre.page.05.index" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/monre/05/index.jsp" />  
+    </definition>
+    
+    <!-- Khai hồ sơ -->
+    <definition name="nsw.monre.page.05.khai_ho_so" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/monre/05/khai_ho_so.jsp" />  
+    </definition>
+    <!--THU TUC 06-->
+    <definition name="monre.06.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/monre/06/index.jsp" />  
+    </definition>
+       
+    <definition name="monre.06.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/monre/06/view.jsp" />  
+    </definition>
+   
+    <definition name="monre.06.cert" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/monre/06/thongtinGCN.jsp" />  
+    </definition>
+    <!--END THU TUC 06-->
+    <!--THU TUC 07-->
+    <definition name="monre.07.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/monre/07/index.jsp" />  
+    </definition>
+       
+    <definition name="monre.07.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/monre/07/view.jsp" />  
+    </definition>  
+    <!--END THU TUC 07-->
+    
+    <!--THU TUC 08-->
+    <definition name="monre.08.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/monre/08/index.jsp" />  
+    </definition>
+   
+    <definition name="monre.08.create" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/monre/08/create.jsp" />  
+    </definition>
+   
+    <definition name="monre.08.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/monre/08/view.jsp" />  
+    </definition>  
+    <!--END THU TUC 08-->
+    <!--THU TUC 09-->
+    <definition name="monre.09.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/monre/09/index.jsp" />  
+    </definition>
+   
+    <definition name="monre.09.create" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/monre/09/create.jsp" />  
+    </definition>
+   
+    <definition name="monre.09.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/monre/09/inc_view.jsp" />  
+    </definition>  
+    <!--END THU TUC 09-->
+	<!--  END TNMT  -->
+	
+    <!--  BO GT  -->
+    <!--THU TUC 13-->
+    <definition name="mt.13.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vl/13/index.jsp" />  
+    </definition>   
+     
+    <definition name="mt.13.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vl/13/view.jsp" />  
+    </definition>   
+    <!--END THU TUC 13-->
+    <!--THU TUC 14-->
+    <definition name="mt.14.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vl/14/index.jsp" />  
+    </definition>   
+       
+    <definition name="mt.14.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vl/14/view.jsp" />  
+    </definition>   
+    <!--END THU TUC 14-->
+    <!--THU TUC 15-->
+    <definition name="mt.15.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vl/15/index.jsp" />  
+    </definition>   
+      
+    <definition name="mt.15.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vl/15/view.jsp" />  
+    </definition>   
+    <!--END THU TUC 15-->
+    <!--THU TUC 16-->
+    <definition name="mt.16.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vl/16/index.jsp" />  
+    </definition>   
+    
+    <definition name="mt.16.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vl/16/view.jsp" />  
+    </definition>   
+    <!--END THU TUC 16-->
+    <!--THU TUC 17-->
+    <definition name="mt.17.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vl/17/index.jsp" />  
+    </definition>   
+      
+    <definition name="mt.17.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vl/17/view.jsp" />  
+    </definition>   
+    <!--END THU TUC 13-->
+    <definition name="mt.30.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vc/30/index.jsp" />  
+    </definition>   
+    
+    <definition name="mt.30.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vc/30/view.jsp" />  
+    </definition>
+    <definition name="mt.31.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vc/31/index.jsp" />  
+    </definition>   
+      
+    <definition name="mt.31.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vc/31/view.jsp" />  
+    </definition>
+    <definition name="mt.32.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vc/32/index.jsp" />  
+    </definition>   
+     
+    <definition name="mt.32.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vc/32/view.jsp" />  
+    </definition>
+    <definition name="mt.33.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vc/33/index.jsp" />  
+    </definition>   
+      
+    <definition name="mt.33.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vc/33/view.jsp" />  
+    </definition>
+    <definition name="mt.34.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vc/34/index.jsp" />  
+    </definition>   
+      
+    <definition name="mt.34.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vc/34/view.jsp" />          
+    </definition>
+    <definition name="mt.36.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vt/36/index.jsp" />  
+    </definition>   
+       
+    <definition name="mt.36.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vt/36/view.jsp" />          
+    </definition>
+    
+    <definition name="mt.37.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vt/37/index.jsp" />  
+    </definition>   
+      
+    <definition name="mt.37.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vt/37/view.jsp" />          
+    </definition>
+    
+    <definition name="mt.38.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vt/38/index.jsp" />  
+    </definition>   
+      
+    <definition name="mt.38.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vt/38/view.jsp" />          
+    </definition>
+    
+    <definition name="mt.39.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vt/39/index.jsp" />  
+    </definition>   
+    
+    <definition name="mt.39.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vt/39/view.jsp" />          
+    </definition>
+    
+    <definition name="mt.40.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vt/40/index.jsp" />  
+    </definition>   
+    <definition name="mt.40.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vt/40/view.jsp" />          
+    </definition>
+    
+    <definition name="mt.44.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vt/44/index.jsp" />  
+    </definition>   
+    <definition name="mt.44.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vt/44/view.jsp" />         
+    </definition>    
+    
+    <definition name="mt.41.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vt/41/index.jsp" />  
+    </definition>   
+    <definition name="mt.41.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vt/41/view.jsp" />          
+    </definition>
+    
+    <definition name="mt.42.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vt/42/index.jsp" />  
+    </definition>   
+    <definition name="mt.42.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vt/42/view.jsp" />          
+    </definition>
+    
+    <definition name="mt.43.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vt/43/index.jsp" />  
+    </definition>   
+    <definition name="mt.43.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/vt/43/view.jsp" />          
+    </definition>
+    <definition name="mt.58.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/gms/58/index.jsp" />  
+    </definition>	
+    <definition name="mt.58.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/gms/58/view.jsp" />          
+    </definition>
+    
+    <definition name="mt.61.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/gms/61/index.jsp" />  
+    </definition>   
+    <definition name="mt.61.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/gms/61/view.jsp" />          
+    </definition>
+    
+    <definition name="mt.qlpt.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/tienich/qlpt/index.jsp" />  
+    </definition> 
+    <definition name="mt.qlpt.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/tienich/qlpt/view.jsp" />          
+    </definition>
+    <!-- van tai viet cam -->
+    <definition name="nsw.mt.qlgp.page.19.index" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p19/index.jsp"/>
+    </definition>
+    <definition name="nsw.mt.qlgp.page.19.detail" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p19/edit.jsp"/>
+    </definition>
+    <definition name="nsw.mt.qlgp.page.19.view.license" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p19/xem_giay_phep.jsp"/>
+    </definition>
+
+    <!-- lien vam viet cam -->
+    <definition name="nsw.mt.qlgp.page.23.index" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p23/index.jsp"/>
+    </definition>
+    <definition name="nsw.mt.qlgp.page.23.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p23/edit.jsp"/>
+    </definition>
+    <definition name="nsw.mt.qlgp.page.23.view.license" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p23/xem_giay_phep.jsp"/>
+    </definition>
+	
+    <definition name="nsw.mt.qlgp.page.27.index" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p27/index.jsp"/>
+    </definition>
+    <definition name="nsw.mt.qlgp.page.p27.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p27/edit.jsp"/>
+    </definition>
+    <definition name="nsw.mt.qlgp.page.27.view.license" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p27/xem_giay_phep.jsp"/>
+    </definition>
+	
+    <!--VL-->
+    <definition name="nsw.mt.qlgp.page.1.index" extends="base-definition">
+        <put-attribute name="title" value="THỦ TỤC CẤP GIẤY PHÉP VẬN TẢI QUỐC TẾ VIỆT - LÀO"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p01/index.jsp"/>
+    </definition>
+    <definition name="nsw.mt.qlgp.page.1.detail" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p01/edit.jsp"/>
+    </definition>
+    <definition name="nsw.mt.qlgp.page.1.view.license" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p01/xem_giay_phep.jsp"/>
+    </definition>
+
+    <!-- lien vam viet cam -->
+    <definition name="nsw.mt.qlgp.page.5.index" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p05/index.jsp"/>
+    </definition>
+    <definition name="nsw.mt.qlgp.page.5.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p05/edit.jsp"/>
+    </definition>
+    <definition name="nsw.mt.qlgp.page.5.view.license" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p05/xem_giay_phep.jsp"/>
+    </definition>
+	
+    <definition name="nsw.mt.qlgp.page.9.index" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p09/index.jsp"/>
+    </definition>
+    <definition name="nsw.mt.qlgp.page.9.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p09/edit.jsp"/>
+    </definition>
+    <definition name="nsw.mt.qlgp.page.9.view.license" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p09/xem_giay_phep.jsp"/>
+    </definition>
+    <!-- gia han lien van -->
+    <definition name="nsw.mt.page.18.index" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/p18/index.jsp"/>
+    </definition>
+    <definition name="nsw.mt.page.18.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/p18/edit.jsp"/>
+    </definition>
+    <definition name="nsw.mt.page.18.view.license" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/p18/list_license.jsp"/>
+    </definition>
+    <!--thủ tục 47-->
+    <definition name="nsw.mt.page.47.index" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/p47/index.jsp"/>
+    </definition>
+    <definition name="nsw.mt.page.47.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/p47/edit.jsp"/>
+    </definition>
+    <definition name="nsw.mt.page.47.view.license" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/p47/list_license.jsp"/>
+    </definition>
+    <!--Phi Thuong Mai Viet Cam Lao-->
+
+    <definition name="nsw.mt.qlgp.page.48.index" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p48/index.jsp"/>
+    </definition>
+    <definition name="nsw.mt.qlgp.page.48.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p48/edit.jsp"/>
+    </definition>
+    <definition name="nsw.mt.qlgp.page.48.view.license" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p48/xem_giay_phep.jsp"/>
+    </definition>
+
+
+    <definition name="nsw.mt.qlgp.page.52.index" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p52/index.jsp"/>
+    </definition>
+    <definition name="nsw.mt.qlgp.page.52.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p52/edit.jsp"/>
+    </definition>
+    <definition name="nsw.mt.qlgp.page.52.view.license" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p52/xem_giay_phep.jsp"/>
+    </definition>
+	
+    <!-- Default Page -->
+    <!--  ================================SBV ================================ -->  
+    <!-- Home Page -->
+    <definition name="nsw.sbv.page.01.index" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/sbv/01/index.jsp" />  
+    </definition>
+    
+    <!-- Khai hồ sơ -->
+    <definition name="nsw.sbv.page.01.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/sbv/01/edit.jsp" />  
+    </definition>
+    <definition name="nsw.mt.qlgp.page.56.index" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p56/index.jsp"/>
+    </definition>
+    <definition name="nsw.mt.qlgp.page.56.detail" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p56/edit.jsp"/>
+    </definition>
+    <definition name="nsw.mt.qlgp.page.56.view.license" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/qlgp/p56/xem_giay_phep.jsp"/>
+    </definition>
+	
+    <!--  ================================MOIT ================================ -->
+    <definition name="moit.01.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moit/01/index.jsp" />  
+    </definition>   
+   
+    <definition name="moit.01.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moit/01/view.jsp" />          
+    </definition>
+    
+    <definition name="moit.04.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moit/04/index.jsp" />  
+    </definition>   
+      
+    <definition name="moit.04.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moit/04/view.jsp" />          
+    </definition>
+    
+    <definition name="moit.05.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moit/05/index.jsp" />  
+    </definition>   
+      
+    <definition name="moit.05.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moit/05/view.jsp" /> 
+    </definition>         
+    <!--  ================================MOIT 06 ================================ -->
+    <!-- Home -->
+    <definition name="nsw.moit.page.06.index" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moit/06/index.jsp" />  
+    </definition>
+    
+    <!-- Edit -->
+    <definition name="nsw.moit.page.06.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moit/06/edit.jsp" />  
+    </definition>
+    <!--  ================================MOIT 07 ================================ -->
+    <!-- Home -->
+    <definition name="nsw.moit.page.07.index" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moit/07/index.jsp" />  
+    </definition>
+    
+    <!-- Edit -->
+    <definition name="nsw.moit.page.07.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moit/07/edit.jsp" />  
+    </definition>
+	
+	
+	
+	
+    <!--THU TUC 38-->
+    <definition name="moh.38.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/38/index.jsp" />  
+    </definition>   
+    <definition name="moh.38.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/38/edit.jsp" />  
+    </definition>   
+    <definition name="moh.38.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/38/view.jsp" />  
+    </definition> 
+    <!--THU TUC 39-->
+    <definition name="moh.39.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/39/index.jsp" />  
+    </definition>   
+    <definition name="moh.39.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/39/edit.jsp" />  
+    </definition>   
+    <definition name="moh.39.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/39/view.jsp" />  
+    </definition> 
+    <!--END BO Y TE-->
+    <!--THU TUC 40-->
+    <definition name="moh.40.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/40/index.jsp" />  
+    </definition>   
+    <definition name="moh.40.12.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/40/edit_12.jsp" />  
+    </definition>
+    <definition name="moh.40.34.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/40/edit_34.jsp" />  
+    </definition>   
+    <definition name="moh.40.12.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/40/view_12.jsp" />  
+    </definition>
+    <definition name="moh.40.34.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/40/view_34.jsp" />  
+    </definition> 
+    <!--THU TUC 41-->
+    <definition name="moh.41.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/41/index.jsp" />  
+    </definition>   
+    <definition name="moh.41.12.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/41/edit_12.jsp" />  
+    </definition>
+    <definition name="moh.41.34.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/41/edit_34.jsp" />  
+    </definition>   
+    <definition name="moh.41.12.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/41/view_12.jsp" />  
+    </definition>
+    <definition name="moh.41.34.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/41/view_34.jsp" />  
+    </definition> 
+    <!--THU TUC 42-->
+    <definition name="moh.42.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/42/index.jsp" />  
+    </definition>   
+    <definition name="moh.42.12.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/42/edit_12.jsp" />  
+    </definition>
+    <definition name="moh.42.34.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/42/edit_34.jsp" />  
+    </definition>   
+    <definition name="moh.42.12.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/42/view_12.jsp" />  
+    </definition>
+    <definition name="moh.42.34.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/42/view_34.jsp" />  
+    </definition> 
+    <!--THU TUC 42-->
+    <definition name="moh.43.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/43/index.jsp" />  
+    </definition>   
+    <definition name="moh.43.12.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/43/edit_12.jsp" />  
+    </definition>
+    <definition name="moh.43.34.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/43/edit_34.jsp" />  
+    </definition>   
+    <definition name="moh.43.12.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/43/view_12.jsp" />  
+    </definition>
+    <definition name="moh.43.34.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/43/view_34.jsp" />  
+    </definition>  
+    <!--END BO Y TE-->
+	
+
+    <!--BCA-->
+    <definition name="bca.01.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/bca/01/index.jsp" />  
+    </definition>   
+   
+    <definition name="bca.01.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/bca/01/view.jsp" />    
+    </definition> 
+
+    
+    <definition name="bca.02.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/bca/02/index.jsp" />  
+    </definition>   
+   
+    <definition name="bca.02.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/bca/02/view.jsp" />    
+    </definition> 
+    <!--  END BCA  -->
+	
+	<!--THU TUC 19-->
+    <definition name="moh.19.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/19/index.jsp" />  
+    </definition>   
+    <definition name="moh.19.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/19/edit.jsp" />  
+    </definition>
+    <definition name="moh.19.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/19/view.jsp" />  
+    </definition>
+    <!--THU TUC 25-->
+    <definition name="moh.25.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/19/index.jsp" />  
+    </definition>   
+    <definition name="moh.25.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/19/edit.jsp" />  
+    </definition>
+    <definition name="moh.25.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/19/view.jsp" />  
+    </definition>
+    <!--THU TUC 44-->
+    <definition name="moh.44.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/19/index.jsp" />  
+    </definition>   
+    <definition name="moh.44.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/44/edit.jsp" />  
+    </definition>
+    <definition name="moh.44.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/44/view.jsp" />  
+    </definition>
+    <!--THU TUC 21-->
+    <definition name="moh.21.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/19/index.jsp" />  
+    </definition>   
+    <definition name="moh.21.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/21/edit.jsp" />  
+    </definition>
+    <definition name="moh.21.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/21/view.jsp" />  
+    </definition>
+    <!--THU TUC 21-->
+    <definition name="moh.22.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/19/index.jsp" />  
+    </definition>   
+    <definition name="moh.22.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/21/edit.jsp" />  
+    </definition>
+    <definition name="moh.22.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/21/view.jsp" />  
+    </definition>
+    <!--THU TUC 21-->
+    <definition name="moh.23.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/19/index.jsp" />  
+    </definition>   
+    <definition name="moh.23.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/21/edit.jsp" />  
+    </definition>
+    <definition name="moh.23.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/21/view.jsp" />  
+    </definition>
+    <!--THU TUC 21-->
+    <definition name="moh.36.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/36/index.jsp" />  
+    </definition>   
+    <definition name="moh.36.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/36/edit.jsp" />  
+    </definition>
+    <definition name="moh.36.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/36/view.jsp" />  
+    </definition>
+	
+	<!-- Home Page -->
+    <definition name="mard.14.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/14/index.jsp" />
+    </definition>
+    
+    <!-- Khai hồ sơ -->
+     <definition name="mard.14.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/14/edit.jsp" />
+    </definition>
+  
+    <!-- Home Page -->
+    <definition name="mard.15.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/15/index.jsp" />
+    </definition>
+    
+    <!-- Khai hồ sơ -->
+     <definition name="mard.15.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/15/edit.jsp" />
+    </definition>
+    
+     <!-- Home Page -->
+    <definition name="mard.16.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/16/index.jsp" />
+    </definition>
+    
+    <!-- Khai hồ sơ -->
+     <definition name="mard.16.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/16/edit.jsp" />
+    </definition>
+      <!--Phi Thuong Mai Viet Cam Lao-->
+    <definition name="nsw.mt.page.52.index" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/p52/index.jsp"/>
+    </definition>
+    <definition name="nsw.mt.page.52.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/p52/edit.jsp"/>
+    </definition>
+    <definition name="nsw.mt.page.52.view.license" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/p52/list_license.jsp"/>
+    </definition>
+    
+    <!-- Thuong Mai Viet Cam Lao-->
+    <definition name="nsw.mt.page.48.index" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/p48/index.jsp"/>
+    </definition>
+    <definition name="nsw.mt.page.48.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/p48/edit.jsp"/>
+    </definition>
+    <definition name="nsw.mt.page.48.view.license" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/p48/list_license.jsp"/>
+    </definition>
+    <!-- Vạn Tai Viet Cam Lao-->
+    <definition name="nsw.mt.page.56.index" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/p56/index.jsp"/>
+    </definition>
+    <definition name="nsw.mt.page.56.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/p56/edit.jsp"/>
+    </definition>
+
+    <definition name="nsw.mt.page.56.vanban" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/p56/view_license.jsp"/>
+    </definition>
+     <definition name="nsw.mt.page.56.view.license" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/mt/p56/view_license.jsp"/>
+    </definition>
+	  <!-- BO THONG TIN TRUYEN THONG-->
+        <!--THU TUC 02-->
+        <definition name="mic.02.home" extends="base-definition">  
+            <put-attribute name="title" value="Vietnam Single Window" />  
+            <put-attribute name="body" value="/WEB-INF/views/pages/mic/02/index.jsp" />  
+        </definition>
+
+        <definition name="mic.02.edit" extends="base-definition">  
+            <put-attribute name="title" value="Vietnam Single Window" />  
+            <put-attribute name="body" value="/WEB-INF/views/pages/mic/02/edit.jsp" />  
+        </definition> 
+
+        <definition name="mic.02.view" extends="base-definition">  
+            <put-attribute name="title" value="Vietnam Single Window" />  
+            <put-attribute name="body" value="/WEB-INF/views/pages/mic/02/view.jsp" />  
+        </definition> 
+        <definition name="mic.02.view.gp" extends="base-definition">  
+            <put-attribute name="title" value="Vietnam Single Window" />  
+            <put-attribute name="body" value="/WEB-INF/views/pages/mic/02/view_giay_phep.jsp" />  
+        </definition> 
+        <!--END THU TUC 02-->
+    <!-- Home Page -->
+    <definition name="mic.04.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mic/04/index.jsp" />
+    </definition>
+    
+    <!-- Khai hồ sơ -->
+     <definition name="mic.04.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mic/04/edit.jsp" />
+    </definition>
+  
+    <!-- Home Page -->
+    <definition name="mic.03.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mic/03/index.jsp" />
+    </definition>
+    
+    <!-- Khai hồ sơ -->
+     <definition name="mic.03.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/mic/03/edit.jsp" />
+    </definition>
+	
+	
+	<!--THU TUC 07-->
+    <definition name="moh.07.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/07/index.jsp" />  
+    </definition>   
+    <definition name="moh.07.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/07/edit.jsp" />  
+    </definition>
+    <definition name="moh.07.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/07/view.jsp" />  
+    </definition>
+    <definition name="moh.07.result" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/07/result.jsp" />  
+    </definition>
+    <!--END BO Y TE-->
+    <!--THU TUC 08-->
+    <definition name="moh.08.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/08/index.jsp" />  
+    </definition>   
+    <definition name="moh.08.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/07/edit.jsp" />  
+    </definition>
+    <definition name="moh.08.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/07/view.jsp" />  
+    </definition>
+    <definition name="moh.08.result" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/08/result.jsp" />  
+    </definition>
+    <!--END BO Y TE-->
+    
+    <!--THU TUC 01-->
+    <definition name="moh.01.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/01/index.jsp" />  
+    </definition>   
+    <definition name="moh.01.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/01/edit.jsp" />  
+    </definition>
+    <definition name="moh.01.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/01/view.jsp" />  
+    </definition>
+    <definition name="moh.01.result" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/01/result.jsp" />  
+    </definition>
+	<!--THU TUC 11-->
+    <definition name="moh.11.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/11/index.jsp" />  
+    </definition>   
+    <definition name="moh.11.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/11/edit.jsp" />  
+    </definition>
+    <definition name="moh.11.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/11/view.jsp" />  
+    </definition>
+    <definition name="moh.11.result" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/11/result.jsp" />  
+    </definition>
+	<!--THU TUC 10-->
+    <definition name="moh.10.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/10/index.jsp" />  
+    </definition>   
+    <definition name="moh.10.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/10/edit.jsp" />  
+    </definition>
+    <definition name="moh.10.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/10/view.jsp" />  
+    </definition>
+    <definition name="moh.10.result" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/10/result.jsp" />  
+    </definition>
+    
+    <!--THU TUC 09-->
+    <definition name="moh.09.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/09/index.jsp" />  
+    </definition>   
+    <definition name="moh.09.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/09/edit.jsp" />  
+    </definition>
+    <definition name="moh.09.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/09/view.jsp" />  
+    </definition>
+    <definition name="moh.09.result" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/09/result.jsp" />  
+    </definition>
+	 <!-- Home Page -->
+    <definition name="mard.17.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/17/index.jsp" />
+    </definition>
+
+    <!-- Khai hồ sơ -->
+    <definition name="mard.17.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/17/edit.jsp" />
+    </definition>
+
+    <!-- Home Page -->
+    <definition name="mard.18.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/18/index.jsp" />
+    </definition>
+   
+    <!-- Khai hồ sơ -->
+    <definition name="mard.18.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/18/edit.jsp" />
+    </definition>
+	 <!-- Home Page -->
+    <definition name="mard.19.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/19/index.jsp" />
+    </definition>
+
+    <!-- Khai hồ sơ -->
+    <definition name="mard.19.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/19/edit.jsp" />
+    </definition>
+    <!-- Home Page -->
+    <definition name="mard.20.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/20/index.jsp" />
+    </definition>
+
+    <!-- Khai hồ sơ -->
+    <definition name="mard.20.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/20/edit.jsp" />
+    </definition>
+	
+	<!--MARD 03-->
+    <definition name="mard.03.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/03/index.jsp" />
+    </definition>
+    <definition name="mard.03.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/03/edit.jsp" />
+    </definition>
+    <definition name="mard.03.view" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/03/view.jsp" />
+    </definition>
+    <definition name="mard.03.giaycn" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/03/cert.jsp" />
+    </definition>
+    <definition name="mard.03.giaycnmaub" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/03/cert_b.jsp" />
+    </definition>
+    <definition name="mard.03.donkiemdich" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/03/donkhaibao.jsp" />
+    </definition>
+    <definition name="mard.03.xinchuyenck" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/03/cert_tranferGate.jsp" />
+    </definition>
+    <definition name="mard.03.convanck" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/03/cert_cv_ck.jsp" />
+    </definition>
+    <!--END-->
+    <!--MARD 02-->
+    <definition name="mard.02.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/02/index.jsp" />
+    </definition>
+    <definition name="mard.02.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/02/edit.jsp" />
+    </definition>
+    <definition name="mard.02.view" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/02/view.jsp" />
+    </definition>
+    <definition name="mard.02.view.gp" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/02/cert.jsp" />
+    </definition>
+    <!--END-->
+	<!--    thu tuc 02 - nhap khau mau benh pham-->
+    <definition name="moh.02.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/02/index.jsp"/>
+    </definition>
+
+    <definition name="moh.02.view" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/02/view.jsp"/>
+    </definition>
+
+    <definition name="moh.02.view.gp" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/02/cert.jsp"/>
+    </definition>
+
+    <!--    thu tuc 03 nhap khau duoc lieu-->
+    <definition name="moh.03.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/03/index.jsp"/>
+    </definition>
+
+    <definition name="moh.03.view" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/03/view.jsp"/>
+    </definition>
+
+    <definition name="moh.03.view.gp" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/03/cert.jsp"/>
+    </definition>
+    <!--  END BO Y TE  -->
+	
+	<!--THU TUC 18-->
+    <definition name="moh.18.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/18/index.jsp" />  
+    </definition>   
+    <definition name="moh.18.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/18/edit.jsp" />  
+    </definition>
+    <definition name="moh.18.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/18/view.jsp" />  
+    </definition>
+     <definition name="moh.24.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/24/index.jsp" />  
+    </definition>   
+    <definition name="moh.24.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/24/edit.jsp" />  
+    </definition>
+    <definition name="moh.24.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/24/view.jsp" />  
+    </definition>
+    
+    <definition name="moh.29.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/29/index.jsp" />  
+    </definition>   
+    <definition name="moh.29.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/29/edit.jsp" />  
+    </definition>
+    <definition name="moh.29.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/29/view.jsp" />  
+    </definition>
+    <definition name="moh.31.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/31/index.jsp" />  
+    </definition>   
+    <definition name="moh.31.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/31/edit.jsp" />  
+    </definition>
+    <definition name="moh.31.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/31/view.jsp" />  
+    </definition>
+    <definition name="moh.33.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/33/index.jsp" />  
+    </definition>   
+    <definition name="moh.33.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/33/edit.jsp" />  
+    </definition>
+    <definition name="moh.33.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/33/view.jsp" />  
+    </definition>
+    <definition name="moh.35.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/35/index.jsp" />  
+    </definition>   
+    <definition name="moh.35.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/35/edit.jsp" />  
+    </definition>
+    <definition name="moh.35.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/35/view.jsp" />  
+    </definition>
+    <definition name="moh.37.home" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/37/index.jsp" />  
+    </definition>   
+    <definition name="moh.37.edit" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/37/edit.jsp" />  
+    </definition>
+    <definition name="moh.37.view" extends="base-definition">  
+        <put-attribute name="title" value="Vietnam Single Window" />  
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/37/view.jsp" />  
+    </definition>
+    <definition name="moh.13.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/13/index.jsp" />
+    </definition>
+    <definition name="moh.13.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/13/edit.jsp" />
+    </definition>
+    <definition name="moh.13.view" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/13/view.jsp" />
+    </definition>
+    <definition name="moh.27.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/27/index.jsp" />
+    </definition>
+    <definition name="moh.27.edit" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/27/edit.jsp" />
+    </definition>
+    <definition name="moh.27.view" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/moh/27/view.jsp" />
+    </definition>
+	
+	<!--    thu tuc 04-->
+    <definition name="mard.04.home" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/04/index.jsp" />
+    </definition>
+    <definition name="mard.04.xnd" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/04/view_xac_nhan_don.jsp" />
+    </definition>
+    <definition name="mard.04.PhytosanitaryDetain" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/04/view_giay_giulai_xuly.jsp" />
+    </definition>
+    <definition name="mard.04.PhytosanitaryResult" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/04/view_giay_cnkd.jsp" />
+    </definition>
+    <definition name="mard.04.QuanlityResult" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/04/view_giay_xncl.jsp" />
+    </definition>
+    <definition name="mard.04.PhytosanitaryFoodSafetyResult" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/04/view_giay_cntp.jsp" />
+    </definition>
+    <definition name="mard.04.FoodSafetyResult" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/04/view_giay_attp.jsp" />
+    </definition>
+    <definition name="mard.04.TemporaryPhytosanitary" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/04/view_giay_tamcap.jsp" />
+    </definition>
+    <definition name="mard.04.charge" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/04/charge.jsp" />
+    </definition>
+    <definition name="mard.04.chargeBS" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/04/chargeBS.jsp" />
+    </definition>
+    <definition name="mard.04.FeeResponse" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/04/view_xac_nhan_phi.jsp" />
+    </definition>
+    <definition name="mard.04.view" extends="base-definition">
+        <put-attribute name="title" value="Vietnam Single Window" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mard/04/view.jsp" />
+    </definition>
+    <!--END-->
+
+</tiles-definitions>

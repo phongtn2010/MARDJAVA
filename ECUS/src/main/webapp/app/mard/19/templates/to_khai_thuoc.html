@@ -1,0 +1,270 @@
+<style>
+    .btrow {
+        width: 650px;
+        display: block;
+        margin: auto;
+    }
+
+    .btwidth {
+        width: 200px;
+        display: block;
+        float: left;
+        margin-right: 17px;
+    }
+    .small-text span, .small-text b,.small-text label  {
+        font-size: 13px !important;
+    }
+    .form-group {
+        padding: 15px;
+    }
+
+    #fiLicenseFileNo {
+        margin-left: -419px;
+    }
+
+    @supports (-ms-ime-align: auto) {
+        #fiLicenseFileNo {
+            margin-left: 0px;
+            margin-top: -8%;
+        }
+    }
+    _:-ms-lang(x), .selector { #fiLicenseFileNo {
+                                   margin-left: 0px;
+                                   margin-top: -8%;
+                               } }
+</style>
+<form class="form-sin-rut-ho-so-popup small-text" id="form-sin-rut-ho-so-popup">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.19.TbdThuoc19.fiProductType"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <select id="fiProductType" name="fiProductType" class="form-control select5 input-medium form-control-inline"
+                                data-bind="options: $root.moduleParent.fiProductTypes,  optionsText: 'fiName',  optionsValue: 'fiCode' ,value: tbdThuoc19.fiProductType"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.19.TbdThuoc19.fiNameOfGoods"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <input id="fiNameOfGoods" class="form-control" data-bind="value: tbdThuoc19.fiNameOfGoods">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.19.TbdThuoc19.fiWeight"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <input  id="fiWeight" class="form-control" data-bind="value: tbdThuoc19.fiWeight, numberFormatDecimalInput: function(){return '15.3';}"></input>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.19.TbdThuoc19.fiWeightUnitName"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <select id="fiWeightUnitCode" class="form-control select5"
+                                data-bind="options: $root.moduleParent.fiWeightUnits,  optionsText: 'fiUnitName',  optionsValue: 'fiUnitCode', value: tbdThuoc19.fiWeightUnitCode"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.19.TbdThuoc19.fiWeightML"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <textarea rows="2"  id="fiWeightML" class="form-control" data-bind="value: tbdThuoc19.fiWeightML, numberFormatDecimalInput: function(){return '15.3';}"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.19.TbdThuoc19.fiWeightKG"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <textarea rows="2"  id="fiWeightKG" class="form-control" data-bind="value: tbdThuoc19.fiWeightKG, numberFormatDecimalInput: function(){return '15.3';}"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.19.TbdThuoc19.fiManufacturerName"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <input rows="1" id="fiManufacturerName" class="form-control"
+                               data-bind="value: tbdThuoc19.fiManufacturerName"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.19.TbdThuoc19.fiCountryName"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <select id="fiCountryCode" class="form-control select5"
+                                data-bind="options: $root.moduleParent.countries,  optionsText: 'fiCountryName',  optionsValue: 'fiCountryCode', value: tbdThuoc19.fiCountryCode"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.19.TbdThuoc19.fiSerialNo"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <input rows="1" id="fiSerialNo" class="form-control"
+                               data-bind="value: tbdThuoc19.fiSerialNo"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.19.TbdThuoc19.fiTypeOfPackage"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <input id="fiTypeOfPackage" class="form-control"
+                               data-bind="value: tbdThuoc19.fiTypeOfPackage"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.19.TbdThuoc19.fiActiveIngredient"}}</b></label>
+                    <div class="col-md-12">
+                        <input id="fiActiveIngredient" class="form-control"
+                               data-bind="value: tbdThuoc19.fiActiveIngredient"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.19.TbdThuoc19.fiGate"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <input rows="1" id="fiGate" class="form-control"
+                               data-bind="value: tbdThuoc19.fiGate"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.19.TbdThuoc19.fiImportTimeFrom"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <input onpaste="return false;"  id="fiImportTimeFrom" class="form-control date-picker"
+                               data-date-format="dd/mm/yyyy" size="16"
+                               data-bind="value: tbdThuoc19.fiImportTimeFrom, dateInput"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.19.TbdThuoc19.fiImportTimeTo"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <input onpaste="return false;"  id="fiImportTimeTo" class="form-control date-picker"
+                               data-date-format="dd/mm/yyyy" size="16"
+                               data-bind="value: tbdThuoc19.fiImportTimeTo, dateInput"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.19.TbdThuoc19.fiCirculationNo"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <input rows="1" id="fiCirculationNo" class="form-control"
+                               data-bind="value: tbdThuoc19.fiCirculationNo"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.19.TbdThuoc19.fiDocumentNo"}}</b></label>
+                    <div class="col-md-12">
+                        <input rows="1" id="fiDocumentNo" class="form-control"
+                               data-bind="value: tbdThuoc19.fiDocumentNo"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.19.TbdThuoc19.fiLicenseFileNo"}}</b><span class="nsw-require-field">*</span></label>
+                    <div class="col-md-12">
+                        <select id="ddlView" data-bind="options: $root.testVM, value: $root.SelectedValueOption" style="width: 419px;height: 34px;" ></select>
+                        <input id="fiLicenseFileNo" data-bind="value: tbdThuoc19.fiLicenseFileNo" style="margin-left: 10px;margin-top: -33px;width: 380px;height: 32px;border: none" onclick="this.select()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="col-md-6">
+         <div class="row" >
+             <div class="form-group">
+                 <label class="col-md-12"><b>{{ _lang "mard.20.TbdThuoc20.fiCountryName"}}<span class="nsw-require-field">*</span></b></label>
+                 <div class="control">
+                     <select data-bind="options: $root.testVM, value: $root.SelectedValueOption" style="width: 150px;" ></select>
+                    &lt;!&ndash; <input data-bind="value: $root.SelectedValue" style="margin-left:149px;width: 130px;border:none;" onclick="this.select()" />&ndash;&gt;
+                   <input data-bind="value: tbdThuoc18.fiLicenseFileNo" style="margin-left:149px;width: 130px;border:none;" onclick="this.select()" />
+                 </div>
+             </div>
+         </div>
+     </div>-->
+    <div class="row">
+        <div class="col-md-6">
+            <a title="{{ _lang 'common_button_luu' }}" style="float: right;  margin: 15px auto;" class="btn btn-primary" data-bind="click: $root.save"><i class="fa fa-save"></i>&nbsp;{{ _lang 'common_button_luu' }}</a>
+        </div>
+        <div class="col-md-6">
+            <a title="{{ _lang 'common_button_dong' }}" style="float: left; margin: 15px auto;display: block;" class="btn btn-default" data-bind="click: $root.close"><i class="fa fa-close"></i>&nbsp;{{ _lang 'common_button_dong' }}</a>
+        </div>
+    </div>
+
+</form>
+<script type="text/javascript" >
+    $('.date-picker').datepicker({rtl: false, orientation: "left", autoclose: true});
+    $(".date-picker").datepicker({
+        altFormat: "dd/mm/yy"
+    });
+    function onchangeSelectOption() {
+        var e = document.getElementById("ddlView");
+        var selectedValue = e.options[e.selectedIndex].value;
+        console.log(selectedValue);
+        if(selectedValue !== null && selectedValue !== undefined){
+            $('#fiLicenseFileNo').val(selectedValue);
+        }
+
+    }
+    function calledOnClick(){
+        document.getElementById("fiLicenseFileNo").select();
+    }
+</script>

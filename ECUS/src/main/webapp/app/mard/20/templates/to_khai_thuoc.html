@@ -1,0 +1,104 @@
+<style>
+    .btrow {
+        width: 650px;
+        display: block;
+        margin: auto;
+    }
+
+    .btwidth {
+        width: 200px;
+        display: block;
+        float: left;
+        margin-right: 17px;
+    }
+    .small-text span, .small-text b,.small-text label  {
+        font-size: 13px !important;
+    }
+    .form-group {
+        padding: 15px;
+    }
+</style>
+<form class="form-sin-rut-ho-so-popup small-text" id="form-sin-rut-ho-so-popup">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.20.TbdThuoc20.fiNameOfGoods"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <input id="fiNameOfGoods" class="form-control" data-bind="value: tbdThuoc20.fiNameOfGoods">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.20.TbdThuoc20.fiDosageType"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <input  id="fiDosageType" class="form-control" data-bind="value: tbdThuoc20.fiDosageType"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.20.TbdThuoc20.fiCirculationNo"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <textarea rows="2"  id="fiCirculationNo" class="form-control" data-bind="value: tbdThuoc20.fiCirculationNo"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.20.TbdThuoc20.fiImporterName"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <textarea rows="2"  id="fiImportTerName" class="form-control" data-bind="value: tbdThuoc20.fiImporterName"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="col-md-6">
+                 <div class="row" >
+                    <div class="form-group">
+                        <label class="col-md-12"><b>{{ _lang "mard.20.TbdThuoc20.fiManufacturerName"}}<span class="nsw-require-field">*</span></b></label>
+                        <div class="col-md-12">
+                            <input rows="1" id="fiManufacturerName" class="form-control"
+                                   data-bind="value: tbdThuoc20.fiManufacturerName"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.20.TbdThuoc20.fiTestResult"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <input rows="1" id="fiTestResult" class="form-control"
+                               data-bind="value: tbdThuoc20.fiTestResult"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <a title="{{ _lang 'common_button_luu' }}" style="float: right;  margin: 15px auto;" class="btn btn-primary" data-bind="click: $root.save"><i class="fa fa-save"></i>&nbsp;{{ _lang 'common_button_luu' }}</a>
+        </div>
+        <div class="col-md-6">
+            <a title="{{ _lang 'common_button_dong' }}" style="float: left; margin: 15px auto;display: block;" class="btn btn-default" data-bind="click: $root.close"><i class="fa fa-close"></i>&nbsp;{{ _lang 'common_button_dong' }}</a>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+</form>
+<script type="text/javascript" >
+    $('.date-picker').datepicker({rtl: false, orientation: "left", autoclose: true});
+    $(".date-picker").datepicker({
+        altFormat: "dd/mm/yy"
+    });
+</script>

@@ -1,0 +1,27 @@
+<p>{{_lang "common_history_mahoso"}}: {{data.mahoso}} </p>
+<p>{{_lang "ten_co_so"}}: {{data.tendn}}</p>
+<p>{{_lang "moh_typea_mst"}}: {{data.mst}}</p>
+<table class="table table-striped table-bordered table-hover table-checkable order-column">
+    <thead>
+        <tr>
+            <th><b>{{_lang "common_history_stt"}}</b></th>
+            <th><b>{{_lang "common_history_donvixuly"}}</b></th>
+            <th><b>{{_lang "common_history_nguoixuly"}}</b></th>
+            <th><b>{{_lang "common_history_thoigian"}}</b></th>
+            <th><b>{{_lang "common_history_noidung"}}</b></th>
+            <th><b>{{_lang "common_history_trangthaihoso"}}</b></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#data.data}}
+        <tr>
+            <td>{{inc @index}}</td>
+            <td>{{fiTenDvgui}}</td>
+            <td>{{fiTenNggui}}</td>
+            <td>{{convertToDateFromTimeStamp fiNgaytao}}</td>
+            <td>{{fiNoidung}}</td>
+            <td>{{fiTenTt}}</td>
+        </tr>
+         {{/data.data}}
+    </tbody>
+</table>

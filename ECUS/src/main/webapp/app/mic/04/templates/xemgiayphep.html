@@ -1,0 +1,241 @@
+<style>
+    .a4 {
+        width: 100%;
+        display: block;
+        border: 2px solid;
+        margin: 20px auto;
+        padding: 30px 20px;
+        float: left;
+    }
+
+    .a4 p {
+        margin-bottom: 0;
+    }
+
+    .h4 {
+        font-weight: bold;
+        padding: 0 50px;
+        font-size: 16px;
+        text-align: center;
+        float: left;
+        width: 100%;
+        margin-bottom: 5px;
+        margin-top: 0;
+        font-size: 13px;
+    }
+
+    .dot {
+        float: left;
+        text-decoration-line: underline;
+        text-decoration-style: dotted;
+        padding: 0 20px;
+        font-weight: bold;
+    }
+
+    .lbl {
+        float: left;
+    }
+
+    .a4 label, .a4 p, .a4 span, .a4 table th, .a4 table td, .a4 i, .a4 h5, .a4 h1, .a4 h3, .a4 h2 {
+        color: #000 !important;
+        font-size: 13px !important;
+    }
+
+    .a4 table td, .a4 table th {
+        text-align: center;
+    }
+
+    .hr {
+        display: block;
+        width: 100px;
+        margin: auto;
+        border-width: 0px;
+        margin-bottom: 7px;
+        border-bottom: 1px solid;
+    }
+
+    .row-content {
+        padding-bottom: 8px;
+    }
+
+    .heading {
+    }
+</style>
+<form id="popupView" class="form-xuat-bieu-mau-popup">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home">GIẤY PHÉP</a></li>
+
+    </ul>
+
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active a4">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="">
+                            <h4 class="h4" style="text-transform: uppercase"><b>BỘ THÔNG TIN VÀ TRUYỀN THÔNG</b></h4>
+                            <h4 class="h4" style="text-transform: uppercase"><b>CỤC XUẤT BẢN, IN VÀ PHÁT HÀNH </b></h4>
+                            <hr class="hr"/>
+                            <p align="center" style="padding-bottom: 20px;">
+                            <span><span class="lbl" style="float: none">Số:&nbsp;</span><b class="dot"
+                                                                                           style="float: none"
+                                                                                           data-bind="text: $root.formData.hoSo.tbdGiayPhep04DTOS[0].fiSoGiayPhep"></b></span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <h4 class="h4">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</h4>
+                        <h4 class="h4">Độc lập - Tự do - Hạnh phúc</h4>
+                        <hr class="hr"/>
+                        <div class="row" style="float: right;margin-top: 30px;margin-right: 30px;">
+                            <i><span class="dot"
+                                     data-bind="text: $root.formData.hoSo.tbdGiayPhep04DTOS[0].fiNoiCapGP"></span></i>
+                            <i><span class="lbl">ngày&nbsp;</span>
+                                <!-- ko if: $root.formData.hoSo.tbdGiayPhep04DTOS[0].fiNgayCapGP != null-->
+                                <span class="dot"
+                                      data-bind="text: $root.formData.hoSo.tbdGiayPhep04DTOS[0].fiNgayCapGP.split('/')[0]"></span>
+                                <!-- /ko -->
+                            </i>
+                            <i><span class="lbl">tháng&nbsp;</span>
+                                <!-- ko if: $root.formData.hoSo.tbdGiayPhep04DTOS[0].fiNgayCapGP != null-->
+                                <span class="dot"
+                                      data-bind="text: $root.formData.hoSo.tbdGiayPhep04DTOS[0].fiNgayCapGP.split('/')[1]"></span>
+                                <!-- /ko -->
+                            </i>
+                            <i><span class="lbl">năm&nbsp;</span>
+                                <!-- ko if: $root.formData.hoSo.tbdGiayPhep04DTOS[0].fiNgayCapGP != null-->
+                                <span class="dot"
+                                      data-bind="text: $root.formData.hoSo.tbdGiayPhep04DTOS[0].fiNgayCapGP.split('/')[2]"></span>
+                                <!-- /ko -->
+                            </i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="">
+                    <h4 class="h4" style="padding-top: 30px;"><b>GIẤY PHÉP</b>
+                    </h4>
+                    <h4 class="h4" style="padding-bottom: 30px;"><b>Hoạt động kinh doanh nhập khẩu xuất bản phẩm</b>
+                    </h4>
+                    <h4 class="h4" style="padding-bottom: 30px;"><b>CỤC TRƯỞNG CỤC XUẤT BẢN, IN VÀ PHÁT HÀNH</b>
+                    </h4>
+                </div>
+            </div>
+
+
+            <div class="col-md-12 row-content">
+                <div class="form-group">
+                    <span class="lbl heading">Căn cứ Luật Xuất bản ngày 20 tháng 11 năm 2012;</span>
+                </div>
+            </div>
+
+            <div class="col-md-12 row-content">
+                <div class="form-group">
+                <span class="lbl heading"><span class="lbl heading">Căn cứ Nghị định số 195/2043/NĐ-CP ngày 21 tháng 11 năm 2043 của Chính phủ quy định chi tiết một số điều và biện pháp thi hành Luật Xuất bản và các quy định của pháp luật khác có liên quan;</span>
+</span>
+                </div>
+            </div>
+            <div class="col-md-12 row-content">
+                <div class="form-group">
+                    Căn cứ Thông tư số 23/2014/TT-BTTTT ngày 29 tháng 12 năm 2014 của Bộ trưởng Bộ Thông tin và Truyền thông
+                    quy định chi tiết và hướng dẫn thi hành một số điều của Luật Xuất bản và Nghị định số 195/2013/NĐ-CP
+                    ngày 21 tháng 11 năm 2013 của Chính phủ quy định chi tiết một số điều và biện pháp thi hành Luật Xuất
+                    bản;
+                </div>
+            </div>
+            <div class="col-md-12 row-content">
+                <div class="form-group">
+                    <span class="lbl heading">Xét đơn đề nghị cấp giấy phép hoạt động kinh doanh nhập khẩu xuất bản của</span>
+                    <i><span class="dot" data-bind="text: $root.formData.hoSo.fiTenTCCaNhan"></span></i>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="">
+                    <h4 class="h4" style="padding-top: 30px;"><b>CHO PHÉP:</b>
+                    </h4>
+                </div>
+            </div>
+            <div class="col-md-12 row-content">
+                <div class="form-group">
+                    <span class="lbl heading"></span>
+                </div>
+            </div>
+
+            <div class="col-md-12 row-content">
+                <div class="col-md-12 form-group">
+                    <span class="lbl heading">1. Cơ sở:</span>
+                    <span class="dot" data-bind="text: $root.formData.hoSo.fiTenTCCaNhan"></span>
+                </div>
+                <div class="col-md-12 form-group">
+                    <span class="lbl">- Địa chỉ tại:</span>
+                    <p><span class="dot"
+                             data-bind="text: $root.formData.hoSo.fiDiaChi"></span>
+                    </p>
+                </div>
+                <div class="col-md-12 form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <span class="lbl heading">-Số điện thoại:</span>
+                            <span class="dot" data-bind="text: $root.formData.hoSo.fiSoDienThoai"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="lbl heading">Fax:</span>
+                            <span class="dot" data-bind="text: $root.formData.hoSo.fiFax"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="lbl heading">Website:</span>
+                            <span class="dot" data-bind="text: $root.formData.hoSo.fiWebsite"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="lbl heading">Email:</span>
+                            <span class="dot" data-bind="text: $root.formData.hoSo.fiEmail"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 form-group">
+                    <span class="lbl">2. Hoạt động kinh doanh nhập khẩu xuất bản phẩm của	phải tuân thủ quy định tại các Điều 38, Điều 39, Điều 40 Luật Xuất bản và Điều 14 Nghị định số 195/2013/NĐ-CP ngày 21 tháng 11 năm 2013 của Chính phủ quy định chi tiết một số điều và biện pháp thi hành Luật Xuất bản và các quy định pháp luật có liên quan.</span>
+                </div>
+                <div class="col-md-12 form-group">
+                    <span class="lbl">Giấy phép này có hiệu lực kể từ ngày ký./.</span>
+                </div>
+                <div class="col-md-12 form-group">
+
+                    <span class="lbl">Link giấy phép: </span>
+                    <a target="_blank" data-bind="attr: { href: $root.formData.hoSo.tbdGiayPhep04DTOS[0].fiLinkGP, title: $root.formData.hoSo.tbdGiayPhep04DTOS[0].fiLinkGP}">
+                        <b ><i style="color: blue !important;padding-left: 5px;font-weight: bold;" class="fa fa-download">&nbsp;Tải xuống</i></b>
+                    </a>
+                </div>
+                <div class="col-md-12 form-group">
+
+                    <div class="col-md-12" style="padding-top: 50px;">
+                        <div class="col-md-7"></div>
+                        <div class="col-md-5">
+                            <h5 align="center">
+                                CỤC TRƯỞNG
+                            </h5>
+                            <p align="center">
+                                <i>(Ký tên, ghi rõ họ và tên, đóng dấu)</i>
+                            </p>
+                            <p align="center"><b class="dot" style="float:none;"
+                                                 data-bind="text: $root.formData.hoSo.tbdGiayPhep04DTOS[0].fiTenNguoiKy"></b>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-12 form-group">
+                </div>
+            </div>
+        </div>
+        <!--<div id="menu1" class="tab-pane fade">
+            &lt;!&ndash; ko if: $root.formData.hoSo.tbdGiayPhep04DTOS[0].fiLinkGP != null &ndash;&gt;
+            <a target="_blank" data-bind="attr: { href: $root.formData.hoSo.tbdGiayPhep04DTOS[0].fiLinkGP, title: $root.formData.hoSo.tbdGiayPhep04DTOS[0].fiLinkGP}">
+                <i class="fa fa-download">&nbsp;Tải xuống</i>
+            </a>
+            &lt;!&ndash; /ko &ndash;&gt;
+        </div>-->
+    </div>
+
+</form>
+

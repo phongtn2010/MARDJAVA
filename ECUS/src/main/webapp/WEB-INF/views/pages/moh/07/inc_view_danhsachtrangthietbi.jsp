@@ -1,0 +1,471 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fieldset>
+    <legend><b><spring:message code="moh.07.trangthietbi" /></b></legend> 
+    <div class="form-group">
+        <div class="col-md-12">
+            <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                <thead>
+                    <tr class="nsw-tr tr-nsw1-bgcolor">
+                        <th class="text-center"><spring:message code="moh.07.trangthietbi.stt" /></th>
+                        <th class="text-center"><spring:message code="moh.07.trangthietbi.tenttb" /></th>
+                        <th class="text-center"><spring:message code="moh.07.trangthietbi.phannhom" /></th>
+                        <th class="text-center"><spring:message code="moh.07.trangthietbi.loaittb" /></th>
+                        <th class="text-center"><spring:message code="moh.07.trangthietbi.chungloai" /></th>
+                        <th class="text-center"><spring:message code="moh.07.trangthietbi.tenchusohuu" /></th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: hangHoa">
+                    <tr>
+                        <td data-bind="text : fiStt">1</td>  
+                        <td data-bind="text : fiTenTtb"></td>  
+                        <td data-bind="text : fiTenPhannhom"></td>  
+                        <td data-bind="text : fiTenLoaiTtb"></td>  
+                        <td style="text-align: center;">
+                            <a class="btn green bt-center" data-bind="click: $parent.onXemTrangThietBi.bind($parent)"><i class="fa fa-search"></i> Xem</a>
+                        </td>  
+                        <td data-bind="text : fiTenCsh"></td>  
+                    </tr>
+                </tbody>
+            </table>                       
+        </div>
+    </div>
+</fieldset>
+<template id="trangthietbi-template">
+    <div class="row">
+        <div class="col-md-12">
+            <form role="form" class="form-horizontal" id="trangthietbi-form">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="col-md-2 nsw-text-right">
+                            <label><spring:message code="moh.07.trangthietbi.tenttb" /></label>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" readonly="true" type="text" id="fiTenTtb" name="fiTenTtb" data-bind="value : fiTenTtb" maxlength="255" />
+                        </div> 
+                        <div class="col-md-2 nsw-text-right">
+                            <label><spring:message code="moh.07.trangthietbi.loaittb" /> </label>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-control select2 fiLoaiTtb" disabled id="fiLoaiTtb" name="fiLoaiTtb"  
+                                    data-bind="value: fiLoaiTtb, 
+                                            optionsCaption: 'Chọn...', 
+                                            optionsValue : 'id',
+                                            options : lstLoaiTtb, 
+                                            optionsText : 'name'"></select>
+                        </div> 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="col-md-2 nsw-text-right">
+                            <label><spring:message code="moh.07.trangthietbi.phannhom" /></label>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-control select2 fiPhannhom" disabled id="fiPhannhom" name="fiPhannhom"  
+                                    data-bind="value: fiPhannhom, 
+                                            optionsCaption: 'Chọn...', 
+                                            optionsValue : 'id',
+                                            options : lstPhanNhomTtb, 
+                                            optionsText : 'name'"></select>
+                        </div>
+                        <div class="col-md-2 nsw-text-right">
+                            <label><spring:message code="moh.07.trangthietbi.nhom" /></label>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-control select2 fiNhomTtb" disabled id="fiNhomTtb" name="fiNhomTtb"  
+                                    data-bind="value: fiNhomTtb, 
+                                            optionsCaption: 'Chọn...', 
+                                            optionsValue : 'id',
+                                            options : lstNhomTtb, 
+                                            optionsText : 'name'"></select>
+                        </div>
+                    </div>   
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="col-md-2 nsw-text-right">
+                            <label><spring:message code="moh.07.trangthietbi.quycachdonggoi" /></label>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" readonly="true" id="fiDongGoi" name="fiDongGoi" data-bind="value : fiDongGoi" maxlength="255" />
+                        </div> 
+                        <div class="col-md-2 nsw-text-right">
+                            <label><spring:message code="moh.07.trangthietbi.cososanxuat" /> </label>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-control select2 fiNhieuCssx" disabled id="fiNhieuCssx" name="fiNhieuCssx"  
+                                    data-bind="value: fiNhieuCssx, 
+                                            optionsCaption: 'Chọn...', 
+                                            optionsValue : 'id',
+                                            options : lstCoSoSanXuatTtb, 
+                                            optionsText : 'name'"></select>
+                        </div> 
+                    </div>
+                </div>
+                <div class="form-group">  
+                    <div class="col-md-12">
+                        <div class="col-md-2 nsw-text-right">
+                            <label><spring:message code="moh.07.trangthietbi.tenchusohuu" /></label>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" readonly="true" id="fiTenCsh" name="fiTenCsh" data-bind="value : fiTenCsh" maxlength="255" />
+                        </div> 
+                        <div class="col-md-2 nsw-text-right">
+                            <label><spring:message code="moh.07.trangthietbi.nuocchusohuu" /> </label>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-control select2 fiMaQaCsh" disabled id="fiMaQaCsh" name="fiMaQaCsh"  
+                                    data-bind="value: fiMaQaCsh, 
+                                            optionsCaption: 'Chọn...', 
+                                            optionsValue : 'id',
+                                            options : lstQuocGia, 
+                                            optionsText : 'name'"></select>
+                        </div> 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="col-md-2 nsw-text-right">
+                            <label><spring:message code="moh.07.trangthietbi.diachi" /></label>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" readonly="true" id="fiDiachiCsh" name="fiDiachiCsh" data-bind="value : fiDiachiCsh" maxlength="255" />
+                        </div> 
+
+                        <div class="col-md-2 nsw-text-right">
+                            <label><spring:message code="moh.07.trangthietbi.tieuchuan" /></label>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" readonly="true" id="fiTieuchuan" name="fiTieuchuan" data-bind="value : fiTieuchuan" maxlength="255" />
+                        </div> 
+                    </div>
+                </div>
+                <div class="form-group" data-bind="visible: isShowSoDKLH">
+                    <div class="col-md-12">
+                        <div class="col-md-2 nsw-text-right">
+                            <label>Số phiếu tiếp nhận công bố </label>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" id="fiSoPtnCb" name="fiSoPtnCb" data-bind="value : fiSoPtnCb" maxlength="50" />
+                        </div> 
+
+                        <div class="col-md-2 nsw-text-right">
+                            <label>Nước nhập khẩu </label>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-control select2 fiMaQgNk" id="fiMaQgNk" name="fiMaQgNk"  
+                                    data-bind="value: fiMaQgNk, 
+                                            optionsCaption: 'Chọn...', 
+                                            optionsValue : 'id',
+                                            options : lstQuocGia, 
+                                            optionsText : 'name'"></select>
+                        </div> 
+                    </div>
+                </div>
+                <div class="form-group" data-bind="visible: isShowSoDKLH">
+                    <div class="col-md-12">
+                        <div class="col-md-2 nsw-text-right">
+                            <label>Số đăng ký lưu hành BCD/ Số công bố tiêu chuẩn TTBYT Loại</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" readonly="true" id="fiSoDklh" name="fiSoDklh" data-bind="value : fiSoDklh" maxlength="255" />
+                        </div> 
+                        <div class="col-md-2 nsw-text-right"></div>
+                        <div class="col-md-4">
+                            <input type="checkbox" id="fibDaCoDklh" name="fibDaCoDklh" data-bind="checked : fibDaCoDklh" />
+                            <label>Đã có số đăng ký trên 1 cửa</label>
+                        </div>                        
+                    </div>
+                </div>
+                <b><spring:message code="moh.07.danhsachchungloai" /></b>
+                <div class="form-group">
+                    <div class="col-md-12">                        
+                        <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                            <thead>
+                                <tr class="nsw-tr tr-nsw1-bgcolor">
+                                    <th class="text-center" style="width: 50px"><spring:message code="moh.07.chungloai.stt" /></th>
+                                    <th class="text-center"><spring:message code="moh.07.chungloai.masanpham" /></th>
+                                    <th class="text-center"><spring:message code="moh.07.chungloai.quycachdonggoi" /></th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach: lstLoaiHangHoas">
+                                <tr>
+                                    <td class="text-center" data-bind="text : fiStt"></td>  
+                                    <td class="text-center" data-bind="text : fiMaSpCl"></td>  
+                                    <td class="text-center" data-bind="text : fiDongGoiCl"></td>                                      
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <b data-bind="visible: isShowCSBH"><spring:message code="moh.07.cosobaohanh" /></b> 
+                <div class="form-group" data-bind="visible: isShowCSBH">
+                    <div class="col-md-12">
+                        
+                        <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                            <thead>
+                                <tr class="nsw-tr tr-nsw1-bgcolor">
+                                    <th class="text-center" style="width: 50px"><spring:message code="moh.07.cosobaohanh.stt" /></th>
+                                    <th class="text-center"><spring:message code="moh.07.cosobaohanh.tencoso" /></th>
+                                    <th class="text-center"><spring:message code="moh.07.cosobaohanh.diachi" /></th>
+                                    <th class="text-center"><spring:message code="moh.07.cosobaohanh.dienthoaicodinh" /></th>
+                                    <th class="text-center"><spring:message code="moh.07.cosobaohanh.didong" /></th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach: lstBaoHanhHangHoas">
+                                <tr>
+                                    <td data-bind="text : fiStt"></td>  
+                                    <td data-bind="text : fiTenCsbh"></td>  
+                                    <td data-bind="text : fiDiachiCsbh"></td>  
+                                    <td data-bind="text : fiSdtCdCsbh"></td>  
+                                    <td data-bind="text : fiSdtDdCsbh"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <div class="col-md-12">
+                        </br>
+                        </br>
+                        </br>
+                        </br>
+                        </br>
+                    </div>
+                </div> 
+            </form>
+        </div>
+    </div>
+</template>
+
+<template id="chungloai-template">
+    <div class="row">
+        <div class="col-md-12">
+            <form role="form" class="form-horizontal" id="chungloai-form">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="col-md-3 nsw-text-right">
+                            <label>Tên trang thiết bị y tế </label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="text" id="fiTenTtbYt" name="fiTenTtbYt" data-bind="value : fiTenTtbYt" maxlength="250" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="col-md-3 nsw-text-right">
+                            <label>Chủng loại </label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="text" id="fiMaSpCl" name="fiMaSpCl" data-bind="value : fiMaSpCl" maxlength="250" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="col-md-3 nsw-text-right">
+                            <label>Mã sản phẩm</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="text" id="fiMaSp" name="fiMaSp" data-bind="value : fiMaSp" maxlength="250" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="col-md-3 nsw-text-right">
+                            <label><spring:message code="moh.07.chungloai.quycachdonggoi" /></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="text" id="fiDongGoiCl" name="fiDongGoiCl" data-bind="value : fiDongGoiCl" maxlength="250" />
+                        </div>
+                    </div>
+                </div>
+                <b>Thông tin cơ sở sản xuất</b>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <a class="btn green bt-center" data-bind="click: onThemMoiCSSX"><i class="fa fa-plus"></i></a>
+                        <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                            <thead>
+                                <tr class="nsw-tr tr-nsw1-bgcolor">
+                                    <th class="text-center" style="width: 50px"><spring:message code="moh.07.tepdinhkem.stt" /></th>
+                                    <th class="text-center">Tên cơ sở sản xuất</th>
+                                    <th class="text-center">Địa chỉ cơ sở sản xuất</th>
+                                    <th class="text-center" style="width: 140px">Nước sản xuất</th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach: lstCssxHangHoas">
+                                <tr>
+                                    <td data-bind="text : fiStt"></td>  
+                                    <td>
+                                        <input class="form-control" name="fiTenCssx" data-bind="value : fiTenCssx" maxlength="250"/>
+                                    </td>  
+                                    <td>
+                                        <input class="form-control" name="fiDiachiCssx" data-bind="value : fiDiachiCssx" maxlength="250"/>
+                                    </td>
+                                    <td style="width: 120px">
+                                        <select class="form-control select2 fiMaQgSx" disabled id="fiMaQgSx" name="fiMaQgSx"  
+                                            data-bind="value: fiMaQgSx, 
+                                            optionsCaption: 'Chọn...', 
+                                            optionsValue : 'id',
+                                            options : $parent.lstQuocGia, 
+                                            optionsText : 'name'"></select>                                       
+                                    </td>
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>        
+                <b><spring:message code="moh.07.tepdinhkem" /></b>
+                <div class="form-group">
+                    <div class="col-md-12">
+
+                        <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                            <thead>
+                                <tr class="nsw-tr tr-nsw1-bgcolor">
+                                    <th class="text-center" style="width: 50px"><spring:message code="moh.07.tepdinhkem.stt" /></th>
+                                    <th class="text-center"><spring:message code="moh.07.tepdinhkem.tentep" /></th>
+                                    <th class="text-center" style="width: 150px"><spring:message code="moh.07.tepdinhkem.tailen" /></th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach: lstDinhKemHangHoas">
+                                <tr>
+                                    <td class="text-center" data-bind="text: $index + 1"></td>
+                                    <td data-bind="text : fiTenLoaiTep"></td>  
+                                    <td class="text-center">
+                                        <a class="btn btn-info btn-xs" data-bind="visible: canUpload, click: doUpload">Đính kèm</a>
+                                        <a target="_blank" data-bind="text: fiTenTep, attr: { href: fiDuongDan}"></a>
+                                    </td>                                   
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</template>
+<template id="cosobaohanh-template">
+    <div class="row">
+        <div class="col-md-12">
+            <form role="form" class="form-horizontal" id="cosobaohanh-form">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="col-md-2 nsw-text-right">
+                            <label><spring:message code="moh.07.cosobaohanh.masothue" /></label>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" readonly="true" id="fiMst" name="fiMst" readonly data-bind="value : fiMst" maxlength="50" />
+                        </div>
+                    </div>                    
+                </div>
+                        
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="col-md-2 nsw-text-right">
+                            <label><spring:message code="moh.07.cosobaohanh.tencoso" /></label>
+                        </div>
+                        <div class="col-md-10">
+                            <input class="form-control" type="text" readonly="true" id="fiTenCsbh" name="fiTenCsbh" data-bind="value : fiTenCsbh" maxlength="255" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="col-md-2 nsw-text-right">
+                            <label><spring:message code="moh.07.cosobaohanh.diachi" /></label>
+                        </div>
+                        <div class="col-md-10">
+                            <input class="form-control" type="text" readonly="true" id="fiDiachiCsbh" name="fiDiachiCsbh" data-bind="value : fiDiachiCsbh" maxlength="255" />
+                        </div> 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="col-md-2 nsw-text-right">
+                            <label><spring:message code="moh.07.cosobaohanh.dienthoaicodinh" /></label>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" readonly="true" id="fiSdtCdCsbh" name="fiSdtCdCsbh" data-bind="value : fiSdtCdCsbh" maxlength="255" />
+                        </div> 
+                        <div class="col-md-2 nsw-text-right">
+                            <label><spring:message code="moh.07.cosobaohanh.didong" /></label>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" readonly="true" id="fiSdtDdCsbh" name="fiSdtDdCsbh" data-bind="value : fiSdtDdCsbh" maxlength="255" />
+                        </div>
+                    </div>
+                </div>
+                       
+                <b>Danh sách cơ sở bảo hành</b>
+                <div class="form-group">
+                    <div class="col-md-12">
+
+                        <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                            <thead>
+                                <tr class="nsw-tr tr-nsw1-bgcolor">
+                                    <th class="text-center" style="width: 50px"><spring:message code="moh.07.tepdinhkem.stt" /></th>
+                                    <th class="text-center" style="width: 50px">#</th>
+                                    <th class="text-center"><spring:message code="moh.07.cosobaohanh.tencoso" /></th>
+                                    <th class="text-center"><spring:message code="moh.07.cosobaohanh.diachi" /></th>
+                                    <th class="text-center" style="width: 150px"><spring:message code="moh.07.cosobaohanh.dienthoaicodinh" /></th>
+                                    <th class="text-center" style="width: 150px"><spring:message code="moh.07.cosobaohanh.didong" /></th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach: lstBaoHanh">
+                                <tr>
+                                    <td data-bind="text : fiStt"></td>  
+                                    <td style="text-align: center">
+                                        <input type="checkbox" data-bind="checked: fiDaChon, click: $parent.onChecked"/>
+                                    </td>  
+                                    <td data-bind="text : fiTenCsbh"></td>  
+                                    <td data-bind="text : fiDiachiCsbh"></td>  
+                                    <td data-bind="text : fiSdtCdCsbh"></td>  
+                                    <td data-bind="text : fiSdtDdCsbh"></td>  
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row">                            
+                            <div class="col col-md-6">
+                            </div>
+                            <div class="col col-md-6 nsw-text-right">
+                                <div id="list-pager" class="nsw-flr"> 
+                                    <!-- ko with:paging-->
+                                    <ul data-bind="visible: true" class="flip pull-left pagination pagination-sm">
+                                        <li data-bind="css: { disabled: !firstPageActive }">
+                                            <a data-bind="click: goToFirst">Trang đầu</a>
+                                        </li>
+                                        <li data-bind="css: { disabled: !previousPageActive }">
+                                            <a data-bind="click: goToPrevious">Trang trước</a>
+                                        </li>
+                                        <!-- ko foreach: getPages -->
+                                        <li data-bind="css: { active: $parent.currentPage === $data }">
+                                            <a data-bind="click: $parent.goToPage, text: $data"></a>
+                                        </li>
+                                        <!-- /ko -->
+                                        <li data-bind="css: { disabled: !nextPageActive }">
+                                            <a data-bind="click: goToNext">Trang sau</a>
+                                        </li>
+                                        <li data-bind="css: { disabled: !lastPageActive }">
+                                            <a data-bind="click: goToLast">Trang cuối</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</template>

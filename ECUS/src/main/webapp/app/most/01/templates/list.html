@@ -1,0 +1,41 @@
+{{#data}}
+<tr class="odd gradeX">
+    <td class="nsw-text-center"> 
+        {{inc @index}} 
+    </td>
+    <td class="nsw-text-center"> 
+        <a><i class="fa fa-lg fa-history tooltips" data-placement="top" 
+              data-original-title="{{getCommandName 'common_table_cmd_lichsu'}}" data-container="body" doc="{{fiIdHoso}}" dept="{{fiIdCqxl}}" code="{{fiMaHoSo}}"></i></a>
+    </td>
+    <td class="nsw-text-center">       
+        <a href="{{getContext}}/most/01/view/{{fiIdCqxl}}">
+            {{safeString fiMaHoSo}}                
+        </a>
+    </td>
+    <td>
+        {{safeString fiTenloai}}
+    </td>
+    <td> {{ convertToDateFromTimeStamp fiNgaytao true}} </td>
+    <td>        
+        {{fiTenCqkt}}
+    </td>   
+    <td>
+        {{ convertToDateFromTimeStamp fiNgayGui true}}
+    </td>
+    <td>
+        {{ safeString fiTenTt }}
+    </td>
+    <td class="nsw-text-center">
+        {{#viewPaper fiTrangthai fiLoai '[13,14]'}}
+        <a><i class="fa fa-lg fa-search tooltips" data-placement="top" 
+              data-original-title="{{getCommandName 'most_01_table_col_xem_gcn_phuhop'}}" data-container="body" doc="{{fiIdHoso}}" dept="{{fiIdCqxl}}" code="{{fiMaHoSo}}"></i></a>
+        {{/viewPaper}}
+    </td>
+    <td class="nsw-text-center">
+        {{#viewResult fiTrangthai fiLoai '[13,14]' }}
+        <a><i class="fa fa-lg fa-search-plus tooltips" data-placement="top" 
+              data-original-title="{{getCommandName 'most_01_table_col_xem_kq_kiem_tra_chat_luong'}}" data-container="body" doc="{{fiIdHoso}}" dept="{{fiIdCqxl}}" code="{{fiMaHoSo}}"></i></a>
+        {{/viewResult}}
+    </td>
+</tr>
+{{/data}}

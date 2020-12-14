@@ -1,0 +1,284 @@
+<style>
+    .a4 {
+        width: 100%;
+        display: block;
+        border: 2px solid;
+        margin: 20px auto;
+        padding: 30px 20px;
+        float: left;
+    }
+
+    .h4 {
+        font-weight: bold;
+        padding: 0 50px;
+        font-size: 15px;
+        text-align: center;
+        float: left;
+        width: 100%;
+        margin-bottom: 5px;
+        margin-top: 0;
+    }
+
+    .h5 {
+        font-weight: bold;
+        padding: 0 50px;
+        font-size: 13px;
+        text-align: center;
+    }
+
+    .hr {
+        border-color: #000;
+        width: 30%;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+
+    .text-i {
+        width: 45px;
+        margin-left: 10px;
+    }
+
+    .w100 {
+        width: 100%;
+    }
+
+    .a4 .form-control {
+        margin-bottom: 7px;
+    }
+
+    .p0 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .p50 {
+        padding-left: 50px;
+        font-weight: bold;
+        font-size: 13px;
+        font-style: italic;
+    }
+
+    .inputrow {
+        text-decoration-line: underline;
+        text-decoration-style: dotted;
+        display: block;
+        float: left;
+        font-weight: bold;
+    }
+
+    .fl {
+        float: left;
+    }
+
+    .w50 {
+        min-width: 50px;
+    }
+
+    .inputrow-block-c {
+        text-align: center;
+        display: block;
+        margin-right: 15px;
+        margin-left: 15px;
+        white-space: nowrap;
+    }
+
+    .btrow {
+        width: 650px;
+        display: block;
+        margin: auto;
+    }
+
+    .btwidth {
+        width: 200px;
+        display: block;
+        float: left;
+        margin-right: 15px;
+    }
+    .row-center{
+        text-align: center;
+    }
+</style>
+{{#data}}
+<form id="form" class="form-xuat-bieu-mau-popup">
+    <div class="a4">
+        <h4 class="h4" style="padding-top: 10px;">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</h4></br>
+        <h5 class="h4" style="padding-top: 10px;"><u>Độc lập - Tự do - Hạnh phúc</u></h5>
+
+        <h4 class="h4" style="padding-top: 10px;">ĐĂNG KÝ KIỂM TRA NHÀ NƯỚC VỀ CHẤT LƯỢNG THUỐC THÚ Y NHẬP KHẨU
+        </h4>
+        <div class="col-md-12">
+            <div class="row">
+                <p align="center" style="padding-bottom: 20px;">
+                    </br><span><b>Kính gửi:&nbsp; Cục Thú y</b></span>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <p >Địa chỉ: &nbsp; &nbsp;
+                    <b data-bind="text: $root.formData.hoSo.fiAddressOfRegistration"></b></p>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <span class="fl">Tên tổ chức, cá nhân:&nbsp;</span>
+                <b data-bind="text: $root.formData.hoSo.fiNameOfRegistration"></b>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <span class="fl">Số điện thoại: &nbsp;</span>
+                        <b data-bind="text: $root.formData.hoSo.fiPhone"></b>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <span class="fl">Fax: &nbsp;</span>
+                        <b data-bind="text: $root.formData.hoSo.fiFax"></b>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <span class="fl">Email: &nbsp;</span>
+                        <b data-bind="text: $root.formData.hoSo.fiEmail"></b>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <p>Địa chỉ tập kết thuốc thú y:<b data-bind="text: $root.formData.hoSo.fiGates" ></b></p>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <p>Hồ sơ nhập khẩu gồm có:</p>
+                <p>Hợp đồng (Contract) số: &nbsp; <b data-bind="text: $root.formData.hoSo.fiContractNo" ></b></p>
+                <p>Danh mục thuốc thú y (Packing list): <b data-bind="text: $root.formData.hoSo.fiGoodListNo" ></b></p>
+                <p>Giấy chứng nhận hợp quy hoặc Giấy chứng nhận chất lượng lô thuốc thú y nhập khẩu hoặc Chứng thư giám định chất lượng lô thuốc thú y nhập khẩu: số&nbsp;<b data-bind="text: $root.formData.hoSo.fiCQNo"></b>&nbsp;do&nbsp;<b data-bind="text: $root.formData.hoSo.fiCQOrganization" ></b>&nbsp;
+                    cấp ngày&nbsp;<b data-bind="text: $root.formData.hoSo.fiCQDate"></b>&nbsp;tại&nbsp;<b data-bind="text: $root.formData.hoSo.fiCQIssueBy"></b></p>
+                <p>Giấy chứng nhận Hệ thống quản lý (nếu có) số:&nbsp;<b data-bind="text: $root.formData.hoSo.fiCMSNo"></b>&nbsp;do&nbsp;&nbsp;<b data-bind="text: $root.formData.hoSo.fiCMSOrganization" ></b>&nbsp;
+                    cấp ngày&nbsp;<b data-bind="text: $root.formData.hoSo.fiCMSDate"></b>&nbsp;tại<b data-bind="text: $root.formData.hoSo.fiCMSIssueBy"></b></p>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <p>Hóa đơn( Invoice) số: <b data-bind="text: $root.formData.hoSo.fiInvoiceNo"></b></p>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <p>Vận đơn (Bill of Lading) số: <b data-bind="text: $root.formData.hoSo.fiBillNo"></b></p>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="row">
+                <p>Tờ khai hàng hóa nhập khẩu số: <b data-bind="text: $root.formData.hoSo.fiDeclarationNo"></b></p>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <p>Giấy chứng nhận xuất xứ C/O (nếu có) số:<b data-bind="text: $root.formData.hoSo.fiCONo"></b> </p>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <p>Giấy chứng nhận xuất xứ C/O (nếu có) số:<b data-bind="text: $root.formData.hoSo.fiCONo"></b> </p>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <p>Giấy Chứng nhận lưu hành tự do CFS (nếu có):<b data-bind="text: $root.formData.hoSo.fiCFSNo"></b></p>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <p>Ảnh hoặc bản mô tả hàng hóa, mẫu nhãn thuốc thú y nhập khẩu, nhãn phụ (nếu nhãn chính chưa đủ nội dung theo quy định).</p>
+            </div>
+        </div>
+
+
+        <div class="col-md-12">
+            <div class="row">
+                <p>Chúng tôi xin cam đoan và chịu trách nhiệm về tính hợp lệ, hợp pháp của các nội dung đã khai báo nêu trên về hồ sơ của lô thuốc thú y nhập khẩu, đồng thời cam kết chất lượng lô thuốc thú y nhập khẩu phù hợp với quy chuẩn kỹ thuật
+                    <b data-bind="text: $root.formData.hoSo.fiTechRegul"></b>&nbsp;và tiêu chuẩn công bố áp dụng&nbsp;&nbsp;<b data-bind="text: $root.formData.hoSo.fiApplyRegul"></b></p>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="row">
+                <div class="row" style="float: right;margin-top: 30px;margin-right: 60px;">
+
+                    <i><span class="lbl">Hà Nội,&nbsp;</span><span class="lbl">ngày&nbsp;</span><span class="dot"
+                                                                                                      data-bind="text: $root.formData.hoSo.fiCreateDate.split('/')[0]"></span></i>
+                    <i><span class="lbl">tháng&nbsp;</span><span class="dot"
+                                                                 data-bind="text: $root.formData.hoSo.fiCreateDate.split('/')[1]"></span></i>
+                    <i><span class="lbl">năm&nbsp;</span><span class="dot"
+                                                               data-bind="text: $root.formData.hoSo.fiCreateDate.split('/')[2]"></span></i>
+                </div>
+                <span class="fl" style="float: right;margin-top: 60px;margin-right: -200px;"><b><h4>(Đơn vị nhập khẩu)</h4>&nbsp;</b></span></br>
+                <b style="float: right;margin-right: -200px;margin-top: 100px" data-bind="text: $root.formData.hoSo.fiNameOfRegistration"></b>
+            </div>
+        </div>
+
+
+
+    </div>
+    <div class="col-md-12">
+        <div class="row row-center">
+            <h4><b>DANH MỤC THUỐC THÚ Y ĐĂNG KÝ KIỂM TRA CHẤT LƯỢNG</b></h4>
+            <p>(Kèm theo đơn đăng ký <span class="lbl" data-bind="text: $root.formData.hoSo.fiApplicationNo"></span>&nbsp;ngày&nbsp;<span class="dot"
+                                                                                                                                          data-bind="text: $root.formData.hoSo.fiCreateDate.split('/')[0]"></span></i>
+                <i><span class="lbl">tháng&nbsp;</span><span class="dot"
+                                                             data-bind="text: $root.formData.hoSo.fiCreateDate.split('/')[1]"></span></i>
+                <i><span class="lbl">năm&nbsp;</span><span class="dot"
+                                                           data-bind="text: $root.formData.hoSo.fiCreateDate.split('/')[2]"></span></i> &nbsp;) </p>
+
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                <thead class="nsw-tr tr-nsw1-bgcolor">
+                <th class="text-center" width="5%">STT</th>
+                <th class="text-center" width="10%">Tên thuốc thú y</th>
+                <th class="text-center" width="15%">Số ĐKLH</th>
+                <th class="text-center" width="15%">Số hiệu văn bản đồng ý nhập khẩu</th>
+                <th class="text-center" width="10%">Số lô sản xuất</th>
+                <th class="text-center" width="10%">Quy cách đóng gói</th>
+                <th class="text-center" width="20%">Khối lượng/số lượng</th>
+                <th class="text-center" width="10%">Xuất xứ, Nhà sản xuất</th>
+                <th class="text-center" width="10%">Cửa nhập khẩu</th>
+                <th class="text-center" width="10%">Thời gian nhập khẩu</th>
+
+                </thead>
+                <tbody>
+                <!-- ko foreach: $root.formData.thuocs -->
+                <tr>
+                    <td data-bind="text: $index() + 1"></td>
+                    <td data-bind="text: fiNameOfGoods"></td>
+                    <td data-bind="text: fiCirculationNo"></td>
+                    <td data-bind="text: fiDocumentNo"></td>
+                    <td data-bind="text: fiSerialNo"></td>
+                    <td data-bind="text: fiTypeOfPackage"></td>
+                    <td data-bind="text: fiWeight"></td>
+                    <td data-bind="text: fiManufacturerName"></td>
+                    <td data-bind="text: fiGate"></td>
+                    <td><span  data-bind="text: fiImportTimeFrom"></span>&nbsp;-&nbsp;<span  data-bind="text: fiImportTimeTo"></span></td>
+
+                </tr>
+                <!-- /ko -->
+                </tbody>
+            </table>
+
+        </div>
+        <!-- start ------------------------------------------------------------------------->
+        <a data-bind="attr : { href : $root.formData.downloadFileHoSoUrl } ">In hồ sơ</a>
+        <!-- end --------------------------------------------------------------------------->
+    </div>
+
+</form>
+{{/data}}

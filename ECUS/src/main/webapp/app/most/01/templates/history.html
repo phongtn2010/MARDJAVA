@@ -1,0 +1,45 @@
+<p>{{_lang "common_history_mahoso"}}: <b id="history-nswcode"></b></p>
+<table class="table table-striped table-bordered table-hover table-checkable order-column">
+    <thead>
+        <tr>
+            <th><b>{{_lang "common_history_stt"}}</b></th>
+            <th><b>{{_lang "common_history_donvixuly"}}</b></th>
+            <th><b>{{_lang "common_history_nguoixuly"}}</b></th>
+            <th><b>{{_lang "common_history_thoigian"}}</b></th>
+            <th><b>{{_lang "common_history_noidung"}}</b></th>
+            <th><b>{{_lang "common_history_hanxuly"}}</b></th>
+            <th><b>{{_lang "common_history_trangthaihoso"}}</b></th>
+        </tr>
+    </thead>
+    <tbody id="history-container">
+        {{#each data}}
+        <tr>
+            <td>{{inc @index}}</td>    
+            <td>
+                {{safeString fiTenDvgui}}
+            </td>
+            <td>
+                {{safeString fiTenNggui}}
+            </td>
+            <td>
+                {{convertToDateFromTimeStamp fiNgaytao}}
+            </td>
+            <td>
+                {{safeString fiNoidung}}
+            </td>
+            <td>
+                {{convertToDateFromTimeStamp fiThoihan}}
+            </td>
+            <td>
+                {{safeString fiTenTt}}
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<div class="row">                            
+    <div class="col col-md-6"></div>
+    <div class="col col-md-6 nsw-text-right">
+        <div id="history-pager"> </div>
+    </div>
+</div>

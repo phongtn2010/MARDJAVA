@@ -1,0 +1,21 @@
+{{#each data}}
+	<tr>
+		<td class="text-center">{{inc @index}}</td>
+		<td>{{donVi}}</td>
+		<td>{{nguoiXuLy}}</td>
+		<td>
+			<p>{{noiDung}}</p>
+					{{#if contentChanges.length}}
+						{{#each contentChanges}}
+								<div>
+									<b>&#9679;&nbsp;{{name}}&nbsp;:&nbsp;</b>
+									<span>{{fromValue}}</span>&nbsp;->&nbsp;
+									<b style="color:red;">{{toValue}}</b>
+								</div>
+								{{/each}}
+						{{/if}}	
+		</td>
+		<td class="text-center">{{ngayXyLy}}</td>
+		<td class="text-center">{{tenTrangThai}}</td>
+	</tr>
+{{/each}}

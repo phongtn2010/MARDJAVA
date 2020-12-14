@@ -1,0 +1,195 @@
+<style>
+	.a4 {
+		width: 100%;
+		display: block;
+		border: 2px solid;
+		margin: 20px auto;
+		padding: 30px 20px;
+		float: left;
+	}
+
+	.h4 {
+		font-weight: bold;
+		padding: 0 50px;
+		font-size: 15px;
+		text-align: center;
+		float: left;
+		width: 100%;
+		margin-bottom: 5px;
+		margin-top: 0;
+	}
+
+	.dot {
+		float: left;
+		text-decoration-line: underline;
+		text-decoration-style: dotted;
+		padding: 0 20px;
+	}
+	.lbl {
+		float: left;
+	}
+	.a4 label, .a4 b, .a4 p, .a4 span, .a4 table th, .a4 table td {
+		color: #000;
+		font-size: 13px !important;
+	}
+	.a4 table td, .a4 table th {
+		text-align: center;
+	}
+	.hr {
+		border-color: #000;
+		width: 30%;
+		margin: auto;
+		margin-bottom: 7px;
+	}
+</style>
+<form id="form" class="form-xuat-bieu-mau-popup">
+	<div class="a4">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="">
+						<h4 class="h4">BỘ NÔNG NGHIỆP VÀ PHÁT TRIỂN NÔNG THÔN</h4>
+						<hr class="hr" />
+						<p align="center" style="padding-bottom: 20px;">
+							<span><b class="lbl" style="float: none">Số:&nbsp;</b><b class="dot" style="float: none" data-bind="text: $root.formData.hoSo.fiDispatchNo"></b></span>
+						</p>
+					</div>
+				</div>
+				<div class="col-md-8">
+					<h4 class="h4">CỘNG HOÀ XÃ HỘI CHỦ NGHĨA VIỆT NAM</h4>
+					<h4 class="h4">Độc lập – Tự do – Hạnh phúc</h4>
+					<hr class="hr" />
+					 	<div class="row" style="float: right;margin-top: 30px;margin-right: 30px;">
+                                <i><span class="dot" data-bind="text: $root.formData.hoSo.fiSignConfirmAddress"></span></i>
+								<i><span class="lbl">ngày&nbsp;</span><span class="dot" data-bind="text: $root.formData.hoSo.fiSignConfirmDate.split('/')[0]"></span></i>
+								<i><span class="lbl">tháng&nbsp;</span><span class="dot" data-bind="text: $root.formData.hoSo.fiSignConfirmDate.split('/')[1]"></span></i>
+								<i><span class="lbl">năm&nbsp;</span><span class="dot" data-bind="text: $root.formData.hoSo.fiSignConfirmDate.split('/')[2]"></span></i>
+                        </div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="">
+				<p align="center" style="padding-bottom: 20px;">
+				<p align="center"><span><b>CẤP GIẤY PHÉP</b></span></p>
+				<p align="center"><span><b>NHẬP KHẨU NGUỒN GEN GIỐNG CÂY TRỒNG</b></span></p>
+				</p>
+			</div>
+		</div>
+
+		<div class="col-md-12">
+			<div class="form-group">
+				<span class="lbl">{{ _lang "mard.15.TbdHoSo15.fiNameOfRegistration"}}:&nbsp;</span>
+				<p><b class="dot" data-bind="text: $root.formData.hoSo.fiOrganization"></b></p>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="form-group">
+				<span class="lbl">{{ _lang "mard.15.TbdHoSo15.fiAddressOfRegistration"}}: &nbsp;</span>
+				<p><b class="dot" data-bind="text: $root.formData.hoSo.fiAddress"></b></p>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="">
+				<span class="lbl">{{ _lang "mard.15.TbdHoSo15.fiApplicationNo"}}:&nbsp;</span>
+				<p><b class="dot" data-bind="text: $root.formData.hoSo.fiApplicationNo"></b></p>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="">
+				<p> Danh  mục nhập khẩu nguồn  gen  giống  cây trồng như sau:</p>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered table-hover table-checkable order-column">
+					<thead class="nsw-tr tr-nsw1-bgcolor">
+					<th  >{{ _lang "mard.15.TbdThuoc3.stt"}}</th>
+					<th  >{{ _lang "mard.15.TbdThuoc15.fiNameOfGoods"}}</th>
+					<th  >{{ _lang "mard.15.TbdThuoc15.fiNameSicenceOfGoods"}}</th>
+					<th  >{{ _lang "mard.15.TbdThuoc15.fiSpecies"}}</th>
+					<th  >{{ _lang "mard.15.TbdThuoc15.fiOriginal"}}</th>
+					<th  >{{ _lang "mard.15.TbdThuoc15.fiDateCollect"}}</th>
+					<th  >{{ _lang "mard.15.TbdThuoc15.fiOrganization"}}</th>
+					<th  >{{ _lang "mard.15.TbdThuoc15.fiType"}}</th>
+					<th  >{{ _lang "mard.15.TbdThuoc15.fiQuantity"}}</th>
+					<th  >{{ _lang "mard.15.TbdThuoc15.fiQuantityUnitName"}}</th>
+					<th  >{{ _lang "mard.15.TbdThuoc15.fiGateOfImportationName"}}</th>
+					</thead>
+					<tbody>
+					<!-- ko foreach: $root.formData.thuocs -->
+					<tr>
+						<td   data-bind="text: $index() + 1"></td>
+						<td   data-bind="text: fiNameOfGoods"></td>
+						<td   data-bind="text: fiNameSicenceOfGoods"></td>
+						<td   data-bind="text: fiSpecies"></td>
+						<td   data-bind="text: fiOriginal"></td>
+						<td   data-bind="text: fiDateCollect"></td>
+						<td   data-bind="text: fiOrganization"></td>
+						<td   data-bind="text: fiType"></td>
+						<td   data-bind="text: fiQuantity"></td>
+						<td   data-bind="text: fiQuantityUnitName"></td>
+						<td   data-bind="text: fiGateOfImportationName"></td>
+					</tr>
+					<!-- /ko -->
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+			<div class="col-md-12 form-group">
+				<label class="lbl">{{ _lang "mard.15.TbdHoSo15.fiTotalQuantity"}}<span
+						class="nsw-require-field"></span></label>
+				<p class="dot"><b data-bind="text: $root.formData.hoSo.fiTotalQuantity"></b></p>
+			</div>
+
+			<div class="col-md-12 form-group">
+				<label class="lbl">Nội dung khác trên giấy phép<span
+						class="nsw-require-field"></span></label>
+			</div>
+		<div class="col-md-12">
+			<!-- ko foreach: $root.formData.hoSo.fiOtherContent.split(';') -->
+			<p style="padding:  0 30px;"><b data-bind="text: $data"></b></p>
+			<!-- /ko -->
+		</div>
+			<div class="col-md-12 form-group">
+				<label class="lbl">Thời hạn nhập khẩu<span
+						class="nsw-require-field"></span></label>
+				<p class="dot"><b data-bind="text: $root.formData.hoSo.fiDealineImport"></b></p>
+			</div>
+			<div class="col-md-12">
+				<label class="lbl">Nơi nhận<span
+						class="nsw-require-field"></span></label>
+			</div>
+		<div class="col-md-12">
+			<!-- ko foreach: $root.formData.hoSo.fiRecipients.split(';') -->
+			<p style="padding:  0 30px;"><b data-bind="text: $data"></b></p>
+			<!-- /ko -->
+		</div>
+		<div class="col-md-12" style="padding-top: 50px;">
+			<div class="col-md-7"></div>
+			<div class="col-md-5">
+				<h5 align="center">
+					<b>BỘ NÔNG NGHIỆP VÀ PHÁT TRIỂN NÔNG THÔN</b></br>
+					<b><i>(Ký tên, đóng dấu)</i></b>
+				</h5>
+				<p>
+                <span  style="width: 100%;display: block;text-align: center;">
+                   <span class="dot" style="float: none">
+					    <!-- ko if: $root.formData.hoSo.fiSignConfirmPosition != null -->
+                    <b data-bind="text: $root.formData.hoSo.fiSignConfirmPosition"></b>.
+					   <!-- /ko -->
+                    <b data-bind="text: $root.formData.hoSo.fiSignConfirmName"></b></span>
+				   </span>
+				</p>
+			</div>
+		</div>
+	</div>
+
+
+
+	</div>
+
+
+
+</form>

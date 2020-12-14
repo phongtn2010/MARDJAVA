@@ -1,0 +1,31 @@
+
+<form class="form-tep_dinh_kem_thuoc" id="form-tep_dinh_kem_thuoc">
+
+    <!--------------------------------------------------------------------->
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
+            <thead>
+            <tr class="nsw-tr tr-nsw1-bgcolor">
+                <th class="text-center" style="width: 40%">Nội dung</th>
+                <th class="text-center">Xem chi tiết tệp</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>GMP, CFS, CoA...</td>
+                <td>
+                    <div data-bind="foreach: { data:  $root.teps(), as: 'itemFile' }">
+                        <p>
+                            <a data-bind="text: itemFile.fiFileName, attr: { 'href':  itemFile.fiPath}" target="_blank"></a>
+                        </p>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</form>
+

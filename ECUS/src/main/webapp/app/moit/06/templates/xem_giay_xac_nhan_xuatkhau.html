@@ -1,0 +1,229 @@
+<style>
+.a4 {
+	width: 100%;
+	display: block;
+	border: 2px solid;
+	margin: 20px auto;
+	padding: 30px 20px;
+	float: left;
+}
+
+.h4 {
+	font-weight: bold;
+	padding: 0 50px;
+	font-size: 15px;
+	text-align: center;
+	float: left;
+	width: 100%;
+	margin-bottom: 5px;
+	margin-top: 0;
+}
+
+.h5 {
+	font-weight: bold;
+	padding: 0 50px;
+	font-size: 13px;
+	text-align: center;
+}
+
+.hr {
+	border-color: #000;
+	width: 30%;
+	margin: auto;
+	margin-bottom: 20px;
+}
+
+.text-i {
+	width: 45px;
+	margin-left: 10px;
+}
+
+.w100 {
+	width: 100%;
+}
+
+.a4 .form-control {
+	margin-bottom: 7px;
+}
+
+.p0 {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.p50 {
+	padding-left: 50px;
+	font-weight: bold;
+	font-size: 13px;
+	font-style: italic;
+}
+
+.inputrow {
+	border-bottom: 2px dotted #000;
+	display: block;
+	float: left;
+	font-weight: bold;
+}
+
+.fl {
+	float: left;
+}
+.span-control {
+	float:left;
+	font-size:13px;
+}
+.p-control{
+	float:left;
+	font-size:13px;
+}
+.p-custom{
+	font-size:12px;
+}
+.font-custom{
+	font-size:14px;
+}
+.dot{
+	border-bottom:1px dotted #000;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.w50 {
+	min-width: 50px;
+}
+
+.inputrow-block-c {
+	text-align: center;
+	display: block;
+	margin-right: 15px;
+	margin-left: 15px;
+	white-space: nowrap;
+}
+</style>
+{{#data}}
+<form id="form-xuat-bieu-mau-popup" class="form-xuat-bieu-mau-popup">
+	<div class="a4">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="">
+						<h4 class="h4 p0">BỘ CÔNG THƯƠNG</h4>
+						<hr class="hr" />
+						<h5 class="h5">
+							<span class="fl">Số: </span><span class="dot">{{maSoGP}} &nbsp; &nbsp;</span>/GP-BCT
+						</h5>
+						<p></p>
+					</div>
+				</div>
+				<div class="col-md-8">
+					<h4 class="h4">CỘNG HOÀ XÃ HỘI CHỦ NGHĨA VIỆT NAM</h4>
+					<h5 class="h5">Độc lập – Tự do – Hạnh phúc</h5>
+					<hr class="hr" />
+					<div class="col-md-8 col-md-push-3">
+							<i style="float:left;"><span class="dot">Hà Nội,</span></i>
+							<i class="fl"><span class="fl">ngày&nbsp;</span><span class="dot">{{ngayKy_Ngay}}</span></i>
+							<i class="fl"><span class="fl">tháng&nbsp;</span><span class="dot">{{ngayKy_Thang}}</span></i>
+							<i class="fl"><span class="fl">năm&nbsp;</span><span class="dot">{{ngayKy_Nam}}</span></i>
+					</div>
+				</div>
+			</div>
+		</div>
+		<h4 class="h4" style="padding-top: 20px;">GIẤY PHÉP XUẤT KHẨU TIỀN CHẤT THUỐC NỔ</h4>
+		<h4 class="h4" style="text-align: center; padding-left: 0px;padding-bottom: 15px;">BỘ CÔNG THƯƠNG</h4>
+		<div class="col-md-12">
+			<div class="row">
+				<span class="span-control">Căn cứ Nghị định số 95/2012/NĐ-CP ngày 12 tháng 11 năm 2012 của Chính phủ quy định chức năng, nhiệm vụ, quyền hạn và cơ cấu tổ chức của Bộ</br> Công Thương;</span>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="row">
+				<span class="span-control">Căn cứ Nghị định số 76/2014/NĐ-CP ngày 29 tháng 7 năm 2014 của Chính phủ quy định chi tiết một số điều của Pháp lệnh sửa đổi, bổ sung một số</br> điều của Pháp lệnh quản lý, sử dụng vũ khí, vật liệu nổ và công cụ hỗ trợ; </span>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="row">
+				<span class="span-control">Căn cứ Thông tư số 61/2014/TT-BCT ngày 29 tháng 12 năm 2014 của Bộ trưởng Bộ Công Thương hướng dẫn thực hiện và quy định cụ thể
+				 một số điều</br> của Nghị định số 76/2014/NĐ-CP ngày 29 tháng 7 năm 2014 của Chính phủ quy định chi tiết một số điều của Pháp lệnh sửa đổi, bổ sung một số điều</br> của Pháp lệnh quản lý, sử dụng vũ khí, vật liệu nổ và công cụ hỗ trợ;</span>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="row">
+				<span class="span-control">Theo Giấy phép kinh doanh tiền chất thuốc nổ số <span class="dot">{{soGiayPhepTCTN}}</span>/GP-BCT ngày <span class="dot">{{ngayKy_Ngay}}</span> tháng <span class="dot">{{ngayKy_Thang}}</span> năm <span class="dot">{{ngayKy_Nam}}</span> của Bộ trưởng Bộ Công Thương cấp cho <span class="dot">{{tenDoanhNghiep}}</span>,</br> 
+				Xét đề nghị của <span class="dot">{{tenDoanhNghiep}}</span> tại Đơn đề nghị số <span class="dot">{{maHoSo}}</span>, ngày <span class="dot">{{ngayNop_Ngay}}</span> tháng <span class="dot">{{ngayNop_Thang}}</span> năm <span class="dot">{{ngayNop_Nam}}</span> về việc cấp Giấy phép xuất khẩu tiền chất thuốc nổ.</span>
+			</div>
+		</div>
+		
+		<h4 class="h4" style="padding-top: 20px;">QUYẾT ĐỊNH:</h4>
+		
+		<p style="font-size:13px"><span style="float:left;"><b>Điều 1.</b> Cho phép </span><span class="dot">{{tenDoanhNghiep}}</span> được xuất khẩu tiền chất thuốc nổ với nội dung sau:</p>
+		
+		<div class="col-md-12">
+			<div class="row p50">
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered table-hover table-checkable order-column">
+						<thead class="">
+							<th width="50px" class="text-center">{{_lang "moit_06_gxn_table_hanghoa_01"}}</th>
+							<th width="300px" class="text-center">{{_lang "moit_06_gxn_table_hanghoa_02"}}</th>
+							<th class="text-center">{{_lang "moit_06_gxn_table_hanghoa_03"}}</th>
+							<th class="text-center">{{_lang "moit_06_gxn_table_hanghoa_04"}}</th>
+						</thead>
+						<tbody>
+							{{#each hangHoas}}
+							<tr>
+								<td class="text-center">{{inc @index}}</td>
+								<td class="text-center">{{tenHangHoa}}</td>
+								<td class="text-center">{{soLuong}}</td>
+								<td class="text-center">{{trangThai}}</td>
+							</tr>
+							{{/each}}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<p style="font-size:13px"><span style="float:left;">4. Mục đích: </span><span class="dot">{{mucDich}}</span></p>
+		<p style="font-size:13px"><span style="float:left;">5. Cửa khẩu xuất: </span>
+		{{#each cuaKhaus}}
+			<span class="dot">{{tenCuaKhau}},</span>;
+		{{/each}}
+		</p>
+		
+		<p style="font-size:13px"><span style="float:left;">6. Phương tiện vận chuyển: </span>
+		{{#each phuongTiens}}
+			<span class="dot">{{tenPhuongTien}},</span>;
+		{{/each}}
+		</p></br>
+		
+		
+		<div class="col-md-12">
+			<div class="row">
+				<p style="font-size:13px"><span style="float:left;"><b>Điều 2.</b> </span><span class="dot"> {{tenDoanhNghiep}}</span> phải thực hiện quy định tại Nghị định số 76/2014/NĐ-CP; Thông tư số 61/2014/TT-BCT và các văn bản quy phạm pháp luật có liên quan.</p>
+				<p style="font-size:13px"><span style="float:left;"><b>Điều 3.</b> Giấy phép này có giá trị đến hết ngày </span><span class="dot">{{ngayHetHan_Ngay}}</span>. tháng <span class="dot">{{ngayHetHan_Thang}}</span> năm <span class="dot">{{ngayHetHan_Nam}}</span></p>
+			</div>
+		</div>
+
+		<div class="col-md-12">
+			<div class="col-md-7">
+				 <p class="p-custom">Nơi nhận:</p>
+				 <p class="p-custom">- Như Điều 2;</p>
+				 <p class="p-custom">- Hải quan cửa khẩu 
+				 {{#each cuaKhaus}}
+				 	<span class="dot">{{tenCuaKhau}},</span>;
+				{{/each}}
+				 </p>
+				 <p class="p-custom">- Lưu: VT, HC. </p>
+			</div>
+			<div class="col-md-5" style="margin-top:30px">
+				<h5 align="center">
+					<b>TUQ. BỘ TRƯỞNG</br>
+					CỤC TRƯỞNG CỤC HOÁ CHẤT</b>
+				</h5>
+				<p>
+					<span class="inputrow  inputrow-block-c" style="width: 100%;">{{nguoiKy}}</span>
+				</p>
+			</div>
+		</div>
+	</div>
+</form>
+{{/data}}

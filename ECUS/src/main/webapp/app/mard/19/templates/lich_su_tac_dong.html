@@ -1,0 +1,45 @@
+<fieldset class="fieldset" id="lich_su_tac_dong">
+	<div class="col-md-12">
+		<table class=" table table-striped table-bordered table-hover table-checkable order-column" style="border: 1px solid #c9cdd2;">
+			<thead>
+			<thead class="">
+			<th width="50px" class="text-center">{{_lang "mard.19.msg.table.history.stt"}}</th>
+			<th   class="text-center">{{_lang "mard.19.msg.table.history.donViXuLy"}}</th>
+			<th class="text-center">{{_lang "mard.19.msg.table.history.chuyenVien"}}</th>
+			<th class="text-center">{{_lang "mard.19.msg.table.history.ngayXuLy"}}</th>
+			<th class="text-center" width="30%">{{_lang "mard.19.msg.table.history.noiDung"}}</th>
+			<th  class="text-center">{{_lang "mard.19.msg.table.history.trangThai"}}</th>
+			</thead>
+			</thead>
+			<tbody id="tbodyDanhSachCoSo" data-bind="foreach: { data: pageContents, as: 'item'}">
+			<tr>
+				<td data-bind="text: ($root.historyPageingVM.currentPage() - 1)* $root.historyPageingVM.pageSize() + $index() + 1"></td>
+				<td data-bind="text: item.fiNameOfRegistration"></td>
+				<td data-bind="text: item.fiProcessor"></td>
+				<td data-bind="text: item.fiProcessDate"></td>
+				<td data-bind="text: item.fiContent"></td>
+				<td data-bind="text: item.fiStatusName"></td>
+			</tr>
+			</tbody>
+		</table>
+		<div class="row">
+			<div class="col-md-12 nsw-text-right">
+				<div class="nsw-flr" data-bind="if: historyPageingVM.totalCount() > $root.historyPageingVM.pageSize()">
+					<ul class="flip pull-left pagination pagination-sm">
+						<li data-bind="css: { disabled: !historyPageingVM.firstPageActive() }" class="previous disabled"><a href="#" aria-label="First" data-bind="click: goToFirst"> {{ _lang "mard.19.trang-dau-tien" }}
+						</a></li>
+						<li data-bind="css: { disabled: !historyPageingVM.previousPageActive()  }" class="previous disabled"><a href="#" aria-label="Previous" data-bind="click: goToPrevious">{{ _lang "mard.19.trang-truoc" }}
+						</a></li>
+						<!-- ko foreach: $root.historyPageingVM.getPages() -->
+						<li data-bind="css: { active: $data == $root.historyPageingVM.currentPage() }"><a href="#" data-bind="text: $data, click: $root.goToPage.bind($data)"></a></li>
+						<!-- /ko -->
+						<li data-bind="css: { disabled: !historyPageingVM.nextPageActive() }" class="next"><a href="#" aria-label="Next" data-bind="click: goToNext"> {{ _lang "mard.19.trang-sau" }}
+						</a></li>
+						<li data-bind="css: { disabled: !historyPageingVM.lastPageActive() }" class="next"><a href="#" aria-label="Last" data-bind="click: goToLast"> {{ _lang "mard.19.trang-cuoi" }}
+						</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</fieldset>

@@ -1,0 +1,280 @@
+<style>
+    .a4 {
+        width: 100%;
+        display: block;
+        border: 2px solid;
+        margin: 20px auto;
+        padding: 30px 20px;
+        float: left;
+    }
+
+    .h4 {
+        font-weight: bold;
+        padding: 0 50px;
+        font-size: 15px;
+        text-align: center;
+        float: left;
+        width: 100%;
+        margin-bottom: 5px;
+        margin-top: 0;
+    }
+
+    .h5 {
+        font-weight: bold;
+        padding: 0 50px;
+        font-size: 13px;
+        text-align: center;
+    }
+
+    .hr {
+        border-color: #000;
+        width: 30%;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+
+    .text-i {
+        width: 45px;
+        margin-left: 10px;
+    }
+
+    .w100 {
+        width: 100%;
+    }
+
+    .a4 .form-control {
+        margin-bottom: 7px;
+    }
+
+    .p0 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .p50 {
+        padding-left: 50px;
+        font-weight: bold;
+        font-size: 13px;
+        font-style: italic;
+    }
+
+    .inputrow {
+        text-decoration-line: underline;
+        text-decoration-style: dotted;
+        display: block;
+        float: left;
+        font-weight: bold;
+    }
+
+    .fl {
+        float: left;
+    }
+
+    .w50 {
+        min-width: 50px;
+    }
+
+    .inputrow-block-c {
+        text-align: center;
+        display: block;
+        margin-right: 15px;
+        margin-left: 15px;
+        white-space: nowrap;
+    }
+
+    .btrow {
+        width: 650px;
+        display: block;
+        margin: auto;
+    }
+
+    .btwidth {
+        width: 200px;
+        display: block;
+        float: left;
+        margin-right: 15px;
+    }
+</style>
+{{#data}}
+<form id="form" class="form-xuat-bieu-mau-popup">
+    <div class="a4">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <div style="margin-top: -15px">
+                        <h4 style="margin-bottom: 40px" class="h4"><u>TỔ CHỨC CÁ NHÂN ĐĂNG KÝ</u></h4>
+                        <h5 class="h5">
+                            <p class="lbl">Số:&nbsp;<b
+                                    data-bind="text: $root.formData.hoSo.fiApplicationNo"></b>/TY-QLT</p>
+                        </h5>
+                        <p></p>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <h4 class="h4" style="margin-left: 80px;">CỘNG HOÀ XÃ HỘI CHỦ NGHĨA VIỆT NAM</h4>
+                    <h5 class="h5" style="margin-left: 180px;"><u>Độc lập – Tự do – Hạnh phúc</u></h5>
+                    <div class="row" style="float: right;margin-top: 30px;margin-right: 80px;">
+
+                        <i><span class="lbl">Hà Nội,&nbsp;</span><span class="lbl">ngày&nbsp;</span><span class="dot"
+                                                                                                          data-bind="text: $root.formData.hoSo.fiCreateDate.split('/')[0]"></span></i>
+                        <i><span class="lbl">tháng&nbsp;</span><span class="dot"
+                                                                     data-bind="text: $root.formData.hoSo.fiCreateDate.split('/')[1]"></span></i>
+                        <i><span class="lbl">năm&nbsp;</span><span class="dot"
+                                                                   data-bind="text: $root.formData.hoSo.fiCreateDate.split('/')[2]"></span></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h4 class="h4" style="padding-top: 10px;">ĐƠN ĐĂNG KÝ NHẬP KHẨU THUỐC THÚ Y </h4>
+        <div class="col-md-12">
+            <div class="row">
+                <p align="center" style="padding-bottom: 20px;">
+                    </br><span><b>Kính gửi:&nbsp; Cục Thú y</b></span>
+
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="row">
+                <span class="fl">Tên tổ chức, cá nhân:&nbsp;</span>
+                <b data-bind="text: $root.formData.hoSo.fiNameOfRegistration"></b>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <span class="fl">Địa chỉ: &nbsp;</span>
+                <b data-bind="text: $root.formData.hoSo.fiAddressOfRegistration"></b>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <span class="fl">Số điện thoại: &nbsp;</span>
+                        <b data-bind="text: $root.formData.hoSo.fiPhone"></b>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <span class="fl">Fax: &nbsp;</span>
+                        <b data-bind="text: $root.formData.hoSo.fiFax"></b>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <span class="fl">Email: &nbsp;</span>
+                        <b data-bind="text: $root.formData.hoSo.fiEmail"></b>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <p>Căn cứ nhu cầu nhập khẩu thuốc thú y, nguyên liệu làm thuốc thú y, vắc xin, chế phẩm sinh học, vi sinh vật, hóa chất dùng trong thú y ngoài Danh Mục thuốc thú y được phép lưu hành tại Việt Nam, Mục đích:</p>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="">
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <div class="row form-group" style="padding:  0 30px;">
+                            <!-- ko foreach: $root.formData.danhMucMucDichs -->
+                            <div class="col-md-12 row">
+                               <span class="lbl">
+                                    <input disabled="disabled" type="checkbox"
+                                           data-bind="checked: $root.formData.hoSo.fiPurposes.toString().split(';').includes(fiCode)"/>
+                                   <!-- ko if: fiNameEN == null -->
+                                        <label data-bind="text: fiName "></label>
+                                   <!-- /ko -->
+                                   <!-- ko if: fiNameEN != null -->
+                                        <label data-bind="text: fiName + ' (' + fiNameEN + ')' "></label>
+                                   <!-- /ko -->
+                               </span>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <p>Chúng tôi đề nghị nhập khẩu các loại thuốc, nguyên liệu làm thuốc thú y sau đây:</p>
+        </div>
+
+        <div class="col-md-12">
+
+            <div class="row table-responsive">
+                <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                    <thead class="nsw-tr tr-nsw1-bgcolor">
+                    <th class="text-center" width="5%">STT</th>
+                    <th class="text-center" width="15%">Loại thuốc thú y</th>
+                    <th class="text-center" width="10%">Tên thuốc thú y</spring:message></th>
+                    <th class="text-center" width="10%">Khối lượng</th>
+                    <th class="text-center" width="10%">Tên đơn vị tính khối lượng</spring:message></th>
+                    <th class="text-center" width="20%">Số lô sản xuất hoặc số đăng ký lưu hành </th>
+                    <th class="text-center" width="10%">Xuất xứ</th>
+                    <th class="text-center" width="10%">Thành tiền</th>
+                    <th class="text-center" width="10%">Đơn vị tiền tệ</th>
+
+                    </thead>
+                    <tbody>
+                    <!-- ko foreach: $root.formData.thuocs -->
+                    <tr>
+                        <td data-bind="text: $index() + 1"></td>
+                        <td data-bind="text: fiProductType"></td>
+                        <td data-bind="text: fiNameOfProduct"></td>
+                        <td data-bind="text: fiWeight"></td>
+                        <td data-bind="text: fiWeightUnitName"></td>
+                        <td data-bind="text: fiSerialNo"></td>
+                        <td data-bind="text: fiCountryName"></td>
+                        <td data-bind="text: fiTotal"></td>
+                        <td data-bind="text: fiMoneyUnitCode"></td>
+                    </tr>
+                    <!-- /ko -->
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <div class="col-md-12">
+            <p><b style="text-align: center">Tổng số tiền:&nbsp;</b>
+                <!-- ko if: $root.formData.TotalMoneyUSD !== 0 -->
+                <b data-bind="text: $root.formData.TotalMoneyUSD"  ></b>&nbsp;USD
+                <!-- /ko -->
+                <!-- ko if: $root.formData.TotalMoneyUSD !== 0 && $root.formData.TotalMoneyEUR !== 0 -->
+                &nbsp;&nbsp;và&nbsp;
+                <!-- /ko -->
+                <!-- ko if: $root.formData.TotalMoneyEUR !== 0 -->
+                <b data-bind="text: $root.formData.TotalMoneyEUR"  ></b>&nbsp;EUR
+                <!-- /ko -->
+            </p>
+            <p><b style="text-align: center">Tổng số tiền bằng chữ:&nbsp;</b>
+                <!-- ko if: $root.formData.TotalMoneyUSD !== 0 -->
+                <b data-bind="text: $root.capitalizeFirstLetter(docSoThapPhan($root.formData.TotalMoneyUSD))"></b>&nbsp;Dollar Mỹ
+                <!-- /ko -->
+                <!-- ko if: $root.formData.TotalMoneyEUR !== 0 && $root.formData.TotalMoneyUSD !== 0 -->
+                &nbsp;và&nbsp;
+                <!-- /ko -->
+                <!-- ko if: $root.formData.TotalMoneyEUR !== 0 -->
+                <b  data-bind="text: $root.capitalizeFirstLetter(docSoThapPhan($root.formData.TotalMoneyEUR))" ></b>&nbsp;Euro
+                <!-- /ko -->
+            </p>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <span class="fl">Địa điểm nhập khẩu:&nbsp;  </span>
+                <b data-bind="text: $root.formData.hoSo.fiImportGate"></b>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <span class="fl">Thời gian nhập khẩu: &nbsp; </span>
+                từ ngày <b data-bind="text: $root.formData.hoSo.fiImportTimeFrom"></b> đến ngày <b data-bind="text: $root.formData.hoSo.fiImportTimeTo"></b>
+            </div>
+        </div>
+
+    </div>
+
+</form>
+{{/data}}

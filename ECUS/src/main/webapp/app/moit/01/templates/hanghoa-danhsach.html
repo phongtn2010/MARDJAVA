@@ -1,0 +1,54 @@
+{{#data}}
+<tr class="odd gradeX">
+    <td class="nsw-text-center"> 
+        {{inc @index}}
+    </td>
+    <td> 
+        {{safeString fiNhomHh}}
+    </td>
+    <td>
+        {{safeString fiTenHh}}
+    </td>
+    <td>
+        {{safeString fiKyhieu}}
+    </td>
+    <td>
+        {{safeString fiNhanHh}}
+    </td>
+    <td>
+        {{safeString fiTenNsx}}
+    </td>
+    <td>
+        {{safeString fiTenQg}}
+    </td>
+    <td class="nsw-text-right">
+        {{fiKlSl}}
+    </td>
+    <td>
+        {{safeString fiTenDv}}
+    </td>
+    <td>
+        {{safeString fiThongsoKt}}
+    </td>
+    <td>
+        {{safeString fiMaHs}}
+    </td>
+    <td>
+        {{yesno fiCoGcn}}
+    </td>
+    <td>
+        {{fiLoaiMk}}
+    </td>
+    <td>
+        {{fiGhiChu}}
+    </td>
+    <td style="display: {{IsView}}">
+        <a><i class="fa fa-lg fa-edit tooltips" data-placement="top" 
+              data-original-title="{{getCommandName 'most_01_hanghoa_command_sua'}}" data-container="body" item="{{fiIdHh}}"></i></a>
+    </td>
+    <td style="display: {{IsView}}">
+        <a><i class="fa fa-lg fa-remove tooltips" data-placement="top" 
+              data-original-title="{{getCommandName 'most_01_hanghoa_command_xoa'}}" data-container="body" item="{{fiIdHh}}" code="{{fiTenHh}}"></i></a>
+    </td>
+</tr>
+{{/data}}

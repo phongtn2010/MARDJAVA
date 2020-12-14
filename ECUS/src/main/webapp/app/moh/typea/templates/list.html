@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+{{#data}}
+<tr data-tendn="{{fiTendn}}" data-mst="{{fiMst}}">
+    <td  >{{inc @index}} </td>
+    <td class="nsw-text-center"><a><i class="fa fa-lg fa-history" doc="{{fiIdHoso}}" code="{{fiMaHoso}}"></i></a></td>
+    <td><a class="view" doc="{{fiIdHoso}}">{{fiMaHoso}}</a></td>
+    <td>{{fiSovanban}}</td>
+    <td><a class="lsXuly" doc="{{fiIdHoso}}" code="{{fiMaHoso}}">{{fiTentrangthai}}</a></td>
+    <td>{{convertToDateFromTimeStamp fiNgaytao true}}</td>
+    <td class="nsw-text-center">{{#checkIfCanEdit fiTrangthai}}<a><i class="fa fa-pencil fa-lg" doc="{{fiIdHoso}}" code="{{fiMaHoSo}}"></i></a>{{/checkIfCanEdit}}</td>
+    <td class="nsw-text-center">{{#checkIfCanDelete fiTrangthai}}<a><i class="fa fa-remove fa-lg" doc="{{fiIdHoso}}" code="{{fiMaHoSo}}"></i></a>{{/checkIfCanDelete}}</td>
+    <td class="nsw-text-center">{{#checkIfCanSend fiTrangthai}}<a><i class="fa fa-send fa-lg" doc="{{fiIdHoso}}"></i></a>{{/checkIfCanSend}}</td>
+    <td class="nsw-text-center">{{#checkViewPhieuTiepNhan fiTrangthai}}<a><i class="fa fa-book fa-lg" doc="{{fiIdHoso}}"></i></a>{{/checkViewPhieuTiepNhan}}</td>
+</tr>
+{{/data}}

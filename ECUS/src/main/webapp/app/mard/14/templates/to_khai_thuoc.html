@@ -1,0 +1,103 @@
+<style>
+    .btrow {
+        width: 650px;
+        display: block;
+        margin: auto;
+    }
+
+    .btwidth {
+        width: 200px;
+        display: block;
+        float: left;
+        margin-right: 14px;
+    }
+    .small-text span, .small-text b,.small-text label  {
+        font-size: 13px !important;
+    }
+    .form-group {
+        padding: 15px;
+    }
+</style>
+<form class="form-sin-rut-ho-so-popup small-text" id="form-sin-rut-ho-so-popup">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.14.TbdThuoc14.fiTypeGood"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <select id="fiTypeGood" name="fiTypeGood" class="form-control select5 input-medium form-control-inline"
+                                data-bind="options: $root.moduleParent.fiTypeGoods,  optionsText: 'fiName',  optionsValue: 'fiCode' ,value: tbdThuoc14.fiTypeGood"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.14.TbdThuoc14.fiNameOfGoods"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <input id="fiNameOfGoods" class="form-control" data-bind="value: tbdThuoc14.fiNameOfGoods">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.14.TbdThuoc14.fiWeight"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <input  id="fiWeight" class="form-control" data-bind="value: tbdThuoc14.fiWeight, numberFormatDecimalInput: function(){return '15.3';}"></input>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.14.TbdThuoc14.fiWeightUnitName"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <select id="fiWeightUnitCode" class="form-control select5"
+                                data-bind="options: $root.moduleParent.fiWeightUnits,  optionsText: 'fiUnitName',  optionsValue: 'fiUnitCode', value: tbdThuoc14.fiWeightUnitCode"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.14.TbdThuoc14.fiMainUse"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <textarea rows="2"  id="fiMainUse" class="form-control" data-bind="value: tbdThuoc14.fiMainUse"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" >
+                <div class="form-group">
+                    <label class="col-md-12"><b>{{ _lang "mard.14.TbdThuoc14.fiOrigin"}}<span class="nsw-require-field">*</span></b></label>
+                    <div class="col-md-12">
+                        <textarea rows="2" id="fiOrigin" class="form-control" data-bind="value: tbdThuoc14.fiOrigin"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <a title="{{ _lang 'common_button_luu' }}" style="float: right;  margin: 15px auto;" class="btn btn-primary" data-bind="click: $root.save"><i class="fa fa-save"></i>&nbsp;{{ _lang 'common_button_luu' }}</a>
+        </div>
+        <div class="col-md-6">
+            <a title="{{ _lang 'common_button_dong' }}" style="float: left; margin: 15px auto;display: block;" class="btn btn-default" data-bind="click: $root.close"><i class="fa fa-close"></i>&nbsp;{{ _lang 'common_button_dong' }}</a>
+        </div>
+    </div>
+</form>

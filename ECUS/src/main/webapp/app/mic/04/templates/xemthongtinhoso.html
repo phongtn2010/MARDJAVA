@@ -1,0 +1,399 @@
+<style>
+  .a4 {
+    width: 100%;
+    display: block;
+    border: 2px solid;
+    margin: 20px auto;
+    padding: 30px 20px;
+    float: left;
+  }
+
+  .a4 p {
+    margin-bottom: 0;
+  }
+
+  .h4 {
+    font-weight: bold;
+    padding: 0 50px;
+    font-size: 16px;
+    text-align: center;
+    float: left;
+    width: 100%;
+    margin-bottom: 5px;
+    margin-top: 0;
+    font-size: 13px;
+  }
+
+  .dot {
+    float: left;
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    padding: 0 20px;
+    font-weight: bold;
+  }
+
+  .lbl {
+    float: left;
+  }
+
+  .a4 label, .a4 p, .a4 span, .a4 table th, .a4 table td, .a4 i, .a4 h5, .a4 h1, .a4 h3, .a4 h2 {
+    color: #000 !important;
+    font-size: 13px !important;
+  }
+
+  .a4 table td, .a4 table th {
+    text-align: center;
+  }
+
+  .hr {
+    display: block;
+    width: 100px;
+    margin: auto;
+    border-width: 0px;
+    margin-bottom: 7px;
+    border-bottom: 1px solid;
+  }
+
+  .row-content {
+    padding-bottom: 8px;
+  }
+
+  .heading {
+  }
+</style>
+<form id="popupView" class="form-xuat-bieu-mau-popup">
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">ĐƠN ĐỀ NGHỊ</a></li>
+    <li><a data-toggle="tab" href="#menu1">NHÂN VIÊN THẨM ĐỊNH NỘI DUNG SÁCH NHẬP KHẨU</a></li>
+  </ul>
+
+  <div class="tab-content" id="pageView">
+    <div id="home" class="tab-pane fade in active">
+      <fieldset class="fieldset">
+        <div class="a4">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="">
+                  <h4 class="h4" style="text-transform: uppercase"><span
+                      data-bind="text: $root.formData.hoSo.fiTenCQChuQuan"></span></h4>
+                  <h4 class="h4" style="text-transform: uppercase"><span
+                      data-bind="text: $root.formData.hoSo.fiTenTCCaNhan"></span></h4>
+                  <hr class="hr"/>
+                  <p align="center" style="padding-bottom: 20px;">
+                            <span><b class="lbl" style="float: none">Số:&nbsp;</b><b class="dot"
+                                                                                     style="float: none"
+                                                                                     data-bind="text: $root.formData.hoSo.fiSoDonDeNghi"></b></span>
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <h4 class="h4">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</h4>
+                <h4 class="h4">Độc lập - Tự do - Hạnh phúc</h4>
+                <hr class="hr"/>
+                <div class="row" style="float: right;margin-top: 30px;margin-right: 30px;">
+                  <i><span class="dot" data-bind="text: $root.formData.hoSo.fiDiaDiemKy"></span></i>
+                  <i><span class="lbl">ngày&nbsp;</span>
+                    <!-- ko if: $root.formData.hoSo.fiCreateDate != null-->
+                    <span class="dot"
+                          data-bind="text: $root.formData.hoSo.fiCreateDate.split('/')[0]"></span>
+                    <!-- /ko -->
+                  </i>
+                  <i><span class="lbl">tháng&nbsp;</span>
+                    <!-- ko if: $root.formData.hoSo.fiCreateDate != null-->
+                    <span class="dot"
+                          data-bind="text: $root.formData.hoSo.fiCreateDate.split('/')[1]"></span>
+                    <!-- /ko -->
+                  </i>
+                  <i><span class="lbl">năm&nbsp;</span>
+                    <!-- ko if: $root.formData.hoSo.fiCreateDate != null-->
+                    <span class="dot"
+                          data-bind="text: $root.formData.hoSo.fiCreateDate.split('/')[2]"></span>
+                    <!-- /ko -->
+                  </i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="">
+              <h4 class="h4" style="padding-top: 30px;"><b>ĐƠN ĐỀ NGHỊ</b>
+              </h4>
+              <h4 class="h4" style="padding-bottom: 30px;"><b>Cấp giấy phép hoạt động kinh doanh nhập khẩu xuất bản phẩm</b>
+              </h4>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="">
+              <p align="center" style=" padding-bottom: 30px;">Kính gửi: Cục Xuất bản, In và Phát hành</p>
+            </div>
+          </div>
+
+          <div class="col-md-12 row-content">
+            <div class="form-group">
+              <span class="lbl heading">Tên cơ sở (doanh nghiệp) đề nghị cấp giấy phép:&nbsp;</span>
+              <p><b class="dot" data-bind="text: $root.formData.hoSo.fiTenTCCaNhan"></b></p>
+            </div>
+          </div>
+          <div class="col-md-12 row-content">
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <span class="lbl heading">Trụ sở: &nbsp;</span>
+                <p><b class="dot" data-bind="text: $root.formData.hoSo.fiDiaChi"></b></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12 row-content">
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <span class="lbl heading">Điện thoại: &nbsp;</span>
+                <p><b class="dot" data-bind="text: $root.formData.hoSo.fiSoDienThoai"></b></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 row-content">
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <span class="lbl heading">Fax: &nbsp;</span>
+                <p><b class="dot" data-bind="text: $root.formData.hoSo.fiFax"></b></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 row-content">
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <span class="lbl heading">Email: &nbsp;</span>
+                <p><b class="dot" data-bind="text: $root.formData.hoSo.fiEmail"></b></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 row-content">
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <span class="lbl heading">Website (nếu có): &nbsp;</span>
+                <p><b class="dot" data-bind="text: $root.formData.hoSo.fiWebsite"></b></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12 row-content">
+            <div class="form-group">
+              <span class="lbl">Sau khi tìm hiểu các quy định của pháp luật và điều ước quốc tế có liên quan về hoạt động kinh doanh nhập khẩu xuất bản phẩm, doanh nghiệp chúng tôi đề nghị được cấp giấy phép hoạt động kinh doanh nhập khẩu xuất bản phẩm trực tiếp của nước ngoài.</span>
+            </div>
+          </div>
+          <div class="col-md-12 row-content">
+            <div class="form-group">
+              <span class="lbl">Doanh nghiệp chúng tôi cam kết đảm bảo đầy đủ các điều kiện và thực hiện đúng các quy định của pháp luật về hoạt động kinh doanh nhập khẩu xuất bản phẩm sau khi được cấp giấy phép.</span>
+            </div>
+          </div>
+
+          <div class="col-md-12 row-content">
+            <div class="form-group">
+              <span class="lbl heading">Kèm theo đơn này các tài liệu theo quy định:</span>
+              <p><b class="dot"
+                    data-bind="text: $root.formData.hoSo.fiSoDonDeNghi"></b>
+                (1)
+              </p>
+            </div>
+
+          </div>
+          <div class="col-md-12 row-content">
+            <div class="form-group">
+              <span class="lbl">Đề nghị Cục Xuất bản, In và Phát hành xem xét, cấp giấy phép hoạt động kinh doanh nhập khẩu xuất bản phẩm./.</span>
+            </div>
+          </div>
+
+          <div class="col-md-12" style="padding-top: 50px;">
+            <div class="col-md-7"></div>
+            <div class="col-md-5">
+              <h5 align="center">
+                NGƯỜI ĐẠI DIỆN THEO PHÁP LUẬT
+              </h5>
+              <p align="center">
+                <i>(ký tên, ghi rõ họ và tên, đóng dấu nếu là tổ chức)</i>
+              </p>
+              <p align="center"><b class="dot" style="float:none;"
+                                   data-bind="text: $root.formData.hoSo.fiTenNguoiKy"></b>
+              </p>
+            </div>
+          </div>
+          <div class="col-md-12 row-content">
+            <div class="form-group">
+              <label  class="lbl"><i><b>Chú thích:&nbsp;</b></i></label>
+            </div>
+          </div>
+          <div class="col-md-12 row-content">
+            <div class="form-group">
+              <p><i>(1) Các tài liệu kèm theo đơn gồm:</i></p>
+            </div>
+          </div>
+          <div class="col-md-12 row-content">
+            <div class="form-group">
+              <label  class="lbl"><i>- Bản sao có chứng thực hoặc bản sao (xuất trình bản chính để đối chiếu) một trong các loại giấy chứng nhận đăng ký kinh doanh, giấy chứng nhận đăng ký doanh nghiệp, giấy chứng nhận đầu tư theo quy định của pháp luật;</i></label>
+            </div>
+          </div>
+          <div class="col-md-12 row-content">
+            <div class="form-group">
+              <label  class="lbl"><i>- Sơ yếu lý lịch và bản sao có chứng thực hoặc bản sao (xuất trình bản chính để đối chiếu) sổ hộ khẩu hoặc giấy tờ do cơ quan có thẩm quyền của Việt Nam cho phép người đứng đầu cơ sở nhập khẩu thường trú tại Việt Nam;</i></label>
+            </div>
+          </div>
+          <div class="col-md-12 row-content">
+            <div class="form-group">
+              <label  class="lbl"><i>- Bản sao có chứng thực bằng tốt nghiệp đại học trở lên về chuyên ngành phát hành xuất bản phẩm hoặc giấy chứng nhận bồi dưỡng kiến thức nghiệp vụ phát hành do Bộ Thông tin và Truyền thông (Cục Xuất bản, In và Phát hành) cấp;</i></label>
+            </div>
+          </div>
+          <div class="col-md-12 row-content">
+            <div class="form-group">
+              <label  class="lbl"><i>- Danh sách nhân viên thẩm định nội dung sách.</i></label>
+            </div>
+          </div>
+
+        </div>
+      </fieldset>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <fieldset class="fieldset">
+      <div class="a4">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="">
+                <h4 class="h4" style="text-transform: uppercase"><span
+                    data-bind="text: $root.formData.hoSo.fiTenCQChuQuan"></span></h4>
+                <h4 class="h4" style="text-transform: uppercase"><span
+                    data-bind="text: $root.formData.hoSo.fiTenTCCaNhan"></span></h4>
+                <hr class="hr"/>
+                </p>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <h4 class="h4">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</h4>
+              <h4 class="h4">Độc lập - Tự do - Hạnh phúc</h4>
+              <hr class="hr"/>
+              <div class="row" style="float: right;margin-top: 30px;margin-right: 30px;">
+                <i><span class="dot" data-bind="text: $root.formData.hoSo.fiDiaDiemKy"></span></i>
+                <i><span class="lbl">ngày&nbsp;</span>
+                  <!-- ko if: $root.formData.hoSo.fiCreateDate != null-->
+                  <span class="dot"
+                        data-bind="text: $root.formData.hoSo.fiCreateDate.split('/')[0]"></span>
+                  <!-- /ko -->
+                </i>
+                <i><span class="lbl">tháng&nbsp;</span>
+                  <!-- ko if: $root.formData.hoSo.fiCreateDate != null-->
+                  <span class="dot"
+                        data-bind="text: $root.formData.hoSo.fiCreateDate.split('/')[1]"></span>
+                  <!-- /ko -->
+                </i>
+                <i><span class="lbl">năm&nbsp;</span>
+                  <!-- ko if: $root.formData.hoSo.fiCreateDate != null-->
+                  <span class="dot"
+                        data-bind="text: $root.formData.hoSo.fiCreateDate.split('/')[2]"></span>
+                  <!-- /ko -->
+                </i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="">
+            <h4 class="h4" style="padding-top: 30px;"><b>DANH SÁCH</b></h4>
+            <h4 class="h4" >Nhân viên thẩm định nội dung sách nhập khẩu</h4>
+            <h4 class="h4" style="padding-bottom: 30px;"><i>(Kèm theo đơn đề nghị cấp giấy phép hoạt động kinh doanh nhập khẩu xuất bản phẩm)</i></h4>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="">
+            <p ><b>I- PHẦN GHI CỦA CƠ QUAN, TỔ CHỨC, CÁ NHÂN ĐỀ NGHỊ CẤP GIẤY PHÉP NHẬP KHẨU</b></p>
+          </div>
+        </div>
+        <div class="col-md-12 table-responsive">
+          <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
+            <thead>
+            <tr>
+              <th class="text-center" >STT</th>
+              <th class="text-center" >Họ và tên</th>
+              <th class="text-center" >Ngày sinh</th>
+              <th class="text-center" >Trình độ nghiệp vụ</th>
+              <th class="text-center" >Trình độ chuyên môn</th>
+              <th class="text-center" >Trình độ ngoại ngữ</th>
+              <th class="text-center" >Thâm niên công tác hoạt động xuất bản tại Việt Nam</th>
+            </tr>
+            </thead>
+            <tbody data-bind="foreach: { data: dataTable, as: 'rowItem' }">
+              <tr>
+                <td align="center" data-bind="text: $index() + 1"></td>
+                <td data-bind="text: rowItem.fiHoTen"></td>
+                <td data-bind="text: moment(rowItem.fiNgaySinh).format('DD/MM/YYYY')"></td>
+                <td data-bind="text: rowItem.fiTrinhDoNghiepVu"></td>
+                <td data-bind="text: rowItem.fiTrinhDoChuyenMon"></td>
+                <td data-bind="text: rowItem.fiTrinhDoNgoaiNgu"></td>
+                <td data-bind="text: rowItem.fiTrinhDoNgoaiNgu"></td>
+              </tr>
+            <tr>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-12">
+          <div class="">
+            <p >Chúng tôi cam kết các thông tin về nhân viên thẩm định nội dung sách nhập khẩu trong danh sách trên là đúng sự thật và chịu trách nhiệm về sự chính xác của các thông tin này./.</p>
+          </div>
+        </div>
+        <div class="col-md-12" style="padding-top: 50px;">
+          <div class="col-md-7"></div>
+          <div class="col-md-5">
+            <h5 align="center">
+              NGƯỜI ĐẠI DIỆN THEO PHÁP LUẬT CỦA TỔ CHỨC/CÁ NHÂN
+            </h5>
+            <p align="center">
+              <i>(Ký tên, ghi rõ họ và tên, đóng dấu nếu là tổ chức)</i>
+            </p>
+            <p align="center"><b class="dot" style="float:none;"
+                                 data-bind="text: $root.formData.hoSo.fiTenNguoiKy"></b>
+            </p>
+          </div>
+        </div>
+
+
+        <div class="col-md-12 row-content">
+          <div class="form-group">
+            <label  class="lbl"><i><b>Chú thích:&nbsp;</b></i></label>
+            <i> </i>
+          </div>
+        </div>
+        <div class="col-md-12 row-content">
+          <div class="form-group">
+            <label  class="lbl"><i>(4): Ghi thông tin về số hiệu của giấy chứng nhận và ngày, tháng, năm được Bộ Thông tin và Truyền thông cấp giấy chứng nhận bồi dưỡng kiến thức nghiệp vụ phát hành xuất bản phẩm;></i></label>
+            <i> </i>
+          </div>
+        </div>
+        <div class="col-md-12 row-content">
+          <div class="form-group">
+            <label  class="lbl"><i>(5): Ghi cụ thể chuyên ngành đào tạo trên văn bằng, số hiệu, ngày, tháng, năm được cấp và tên cơ quan, cơ sở đào tạo cấp bằng tốt nghiệp đại học trở lên</i></label>
+            <i> </i>
+          </div>
+        </div>
+        <div class="col-md-12 row-content">
+          <div class="form-group">
+            <label  class="lbl"><i>(6): Ghi cụ thể chuyên ngành ngoại ngữ được đào tạo (tiếng Anh, Nga, Pháp, Đức, Trung Quốc,v.v...), số hiệu, ngày, tháng, năm được cấp và tên cơ quan, cơ sở đào tạo cấp bằng tốt nghiệp đại học trở lên;</i></label>
+            <i> </i>
+          </div>
+        </div>
+        <div class="col-md-12 row-content">
+          <div class="form-group">
+            <label  class="lbl"><i>(7): Ghi số năm công tác, tên cơ quan, đơn vị nơi đã công tác, số và ngày, tháng, năm được cấp sổ bảo hiểm xã hội hoặc giấy tờ có giá trị tương đương.</i></label>
+            <i> </i>
+          </div>
+        </div>
+      </div>
+
+      </fieldset>
+    </div>
+
+  </div>
+
+</form>
+

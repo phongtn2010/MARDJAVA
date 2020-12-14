@@ -1,0 +1,130 @@
+<div class="row" id="thongtinxe-vm">
+    <div class="col-md-12">
+        <form role="form" class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="col-md-2 nsw-text-right">
+                        <label>Biển số xe <a class="nsw-require-field">*</a></label>
+                    </div>
+                    <div class="col-md-4">
+                        <select class="form-control select2 fiBksXe" id="fiBksXe-New" name="fiBksXe" data-bind="optionsCaption: 'Chọn...',
+                                    optionsValue : 'id',
+                                    options : lstBKS,
+                                    optionsText : 'name',
+                                    value: fiBksXe ,
+                                    event: {change: getDetailXe}">
+
+                        </select>
+                    </div>
+
+                    <div class="col-md-2 nsw-text-right">
+                        <label>Trọng tải<a class="nsw-require-field">*</a></label>
+                    </div>
+                    <div class="col-md-4">
+                        <input class="form-control" id="fiSoGhe" name="fiSoGhe" maxlength="255"
+                               type="text" data-bind="value : fiSoGhe" readonly="readonly"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="col-md-2 nsw-text-right">
+                        <label>Nhãn hiệu <a class="nsw-require-field">*</a></label>
+                    </div>
+                    <div class="col-md-4">
+                        <input class="form-control" id="fiTenChuxe" name="fiTenChuxe" maxlength="255"
+                               type="text" data-bind="value : fiTenNhanHieu" readonly="readonly"/>
+                    </div>
+                    <div class="col-md-2 nsw-text-right">
+                        <label>Năm sản xuất <a class="nsw-require-field">*</a></label>
+                    </div>
+                    <div class="col-md-4">
+                        <input class="form-control" id="fiNamSx" name="fiNamSx" maxlength="255"
+                               type="text" data-bind="value : fiNamSx" readonly="readonly"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="col-md-2 nsw-text-right">
+                        <label>Số khung <a class="nsw-require-field">*</a></label>
+                    </div>
+                    <div class="col-md-4">
+                        <input class="form-control" id="fiSoKhung" name="fiTenChuxe" maxlength="255"
+                               type="text" data-bind="value : fiSoKhung" readonly="readonly"/>
+                    </div>
+                    <div class="col-md-2 nsw-text-right">
+                        <label>Số máy <a class="nsw-require-field">*</a></label>
+                    </div>
+                    <div class="col-md-4">
+                        <input class="form-control" id="fiSoMay" name="fiNamSx" maxlength="255"
+                               type="text" data-bind="value : fiSoMay" readonly="readonly"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="col-md-2 nsw-text-right">
+                        <label>Màu sơn <a class="nsw-require-field">*</a></label>
+                    </div>
+                    <div class="col-md-4">
+                        <input class="form-control" id="fiMauSon" name="fiTenChuxe" maxlength="255"
+                               type="text" data-bind="value : fiMauSon" readonly="readonly"/>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="col-md-2 nsw-text-right">
+                        <label>Thời gian đề nghị từ ngày <a class="nsw-require-field">*</a></label>
+                    </div>
+                    <div class="col-md-4">
+                        <input id="example2" class="form-control example form-control-inline date-picker"
+                               data-date-format="dd/mm/yyyy" size="16" type="text"
+                               style=""
+                               data-bind="datepicker:fiTuNgay"
+                               placeholder="dd/mm/yyyy"/>
+                    </div>
+                    <div class="col-md-2 nsw-text-right">
+                        <label>Thời gian đề nghị đến ngày <a class="nsw-require-field">*</a></label>
+                    </div>
+                    <div class="col-md-4" data-bind="validationElement: fiDenNgay">
+                        <input class="form-control example form-control-inline date-picker"
+                               data-date-format="dd/mm/yyyy" size="16" type="text"
+                               style=""
+                               data-bind="datepicker:fiDenNgay"
+                               placeholder="dd/mm/yyyy"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="col-md-2 nsw-text-right">
+                        <label>Hình thức hoạt động <a class="nsw-require-field">*</a></label>
+                    </div>
+                    <div class="col-md-4" data-bind="validationElement: fiHinhThucHD ">
+                        <select id="fiHTHD-New" style="" class="form-control"
+                                data-bind="value: fiHinhThucHD,valueAllowUnset: true">
+                            <option value="">---Chọn---</option>
+                            <option value="1">Vận chuyển hàng hoá</option>
+                            <option value="2">Vận chuyển hành khách</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 nsw-text-right">
+                        <label>Cửa khẩu xuất nhập <a class="nsw-require-field">*</a></label>
+                    </div>
+                    <div class="col-md-4" data-bind="validationElement: fiMaCuaKhau ">
+                        <select class="form-control select2 fiBksXe" id="fiCuaKhau-New" name="fiBksXe" data-bind="optionsCaption: 'Chọn...',
+                                    optionsValue : 'fiMaCuakhau',
+                                    options : lstCuaKhau,
+                                    optionsText : 'fiTenCuakhau',
+                                    value: fiMaCuaKhau ">
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

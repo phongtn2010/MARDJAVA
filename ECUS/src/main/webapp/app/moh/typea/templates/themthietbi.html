@@ -1,0 +1,284 @@
+<legend>{{_lang "moh_typea_thong_tin_chung"}}</legend>
+<div class="portlet-body">
+    <div class="table-toolbar">                    
+        <div class="row">
+            <div class="col-md-12">
+
+                <form role="form" class="form-horizontal" id="form-draftTB">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="col-md-2"> 
+                                <label>{{_lang "moh_typea_tenthietbi"}}</label>
+                                <a class="nsw-require-field">*</a>
+                            </div>
+                            <div class="col-md-4">                                        
+                                <input class="form-control" id="fiTentrangtb" name="fiTentrangtb" maxlength="250" require="true" value="{{#data.thietbi.[0]}}{{fiTentrangtb}}{{/data.thietbi.[0]}}" 
+                                       field="moh_typea_tenthietbi"  type="text">
+                            </div>
+                            <div class="col-md-2">  
+                                <label>{{_lang "moh_typea_themthietbi_loai_thiet_bi"}}</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input name="fiLoaitb" id="fiLoaitb"  field="moh_typea_themthietbi_loai_thiet_bi" maxlength="250" 
+                                       class="form-control" value="{{_lang "common_typea"}}" type="text" readonly/>
+                            </div>
+                        </div>  
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="col-md-2"> 
+                                <label>{{_lang "moh_typea_chusohuu"}}</label>
+                                <a class="nsw-require-field">*</a>
+                            </div>
+                            <div class="col-md-4">                                        
+                               <input class="form-control" id="fiChusohuu" name="fiChusohuu" maxlength="250" require="true" 
+                                       field="moh_typea_chusohuu" value="{{#data.thietbi.[0]}}{{fiChusohuu}}{{/data.thietbi.[0]}}" type="text">
+                            </div>
+                            <div class="col-md-2">  
+                                <label>{{_lang "moh_typea_dc_chu_so_huu"}}</label>
+                                 <a class="nsw-require-field">*</a>
+                            </div>
+                            <div class="col-md-4">
+                                <input name="fiDiachicsh" id="fiDiachicsh" require="true" field="fiDiaChiCsh" maxlength="250" field="moh_typea_dc_chu_so_huu"
+                                       class="form-control" type="text" value="{{#data.thietbi.[0]}}{{fiDiachicsh}}{{/data.thietbi.[0]}}"/>
+                            </div>
+                        </div>  
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="col-md-2"> 
+                                <label>{{_lang "moh_typea_qg_chu_so_huu"}}</label>
+                                <a class="nsw-require-field">*</a>
+                            </div>
+                            <div class="col-md-4">                                        
+                                <select class="form-control select2" id="fiMaqgsch" name="fiMaqgsch" data="{{#data.thietbi.[0]}}{{fiMaqgsch}}{{/data.thietbi.[0]}}" field="moh_typea_qg_chu_so_huu" require="true">
+                                   <option value="-1">{{_lang "chon"}}</option>
+                                   {{#data.countries}}
+                                   <option value="{{statecode}}">{{name}}</option>
+                                   {{/data.countries}}
+                               </select>
+                            </div>
+                            <div class="col-md-2">  
+                                <label>{{_lang "moh_typea_thietbi_tieuchuanapdung"}}</label>
+                                 <a class="nsw-require-field">*</a>
+                            </div>
+                            <div class="col-md-4">
+                                <input name="fiTieuchuan" id="fiTieuchuan" require="true" field="moh_typea_thietbi_tieuchuanapdung" 
+                                       maxlength="250" class="form-control" type="text" value="{{#data.thietbi.[0]}}{{fiTieuchuan}}{{/data.thietbi.[0]}}"/>
+                            </div>
+                        </div>  
+                    </div>        
+                        
+                    <fieldset>
+                        <legend>{{_lang "moh_typea_themtb_chitiettb"}}</legend>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="col-md-2">
+                                    <label>{{_lang "moh_typea_phan_nhom"}}</label>
+                                    <a class="nsw-require-field">*</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-control select2 chon-phuluc" id="fiPhannhom" name="fiPhannhom" data="{{#data.thietbi.[0]}}{{fiPhannhom}}{{/data.thietbi.[0]}}" field="moh_typea_phan_nhom" require="true">
+                                        <option value="-1">{{_lang "chon"}}</option>
+                                        <option value="0"> {{_lang "moh_typea_phannhom_donle"}}</option>
+                                        <option value="1"> {{_lang "moh_typea_phannhom_vitro"}}</option>
+                                        <option value="2"> {{_lang "moh_typea_phannhom_ivd"}}</option>
+                                        <option value="3"> {{_lang "moh_typea_phannhom_cumttbytkhac"}}</option>
+                                        <option value="4"> {{_lang "moh_typea_phannhom_hethongttbyt"}}</option>
+                                        <option value="5">{{_lang "moh_typea_phannhom_hottbyt"}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label>{{_lang "moh_typea_nhom_tb"}}</label>
+                                    <a class="nsw-require-field">*</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-control select2" id="fiNhomtb" name="fiNhomtb" data="{{#data.thietbi.[0]}}{{fiNhomtb}}{{/data.thietbi.[0]}}" field="moh_typea_nhomtb" require="true">
+                                        <option value="-1">{{_lang "chon"}}</option>
+                                        <option value="0">{{_lang "moh_06_nhomtb_sd1lan"}}</option>
+                                        <option value="1">{{_lang "moh_06_nhomtb_tbkhac"}}</option>
+                                    </select>
+                                </div>
+                            </div>  
+                        </div> 
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="col-md-2">
+                                    <label>{{_lang "moh_typea_nhieu_cssx"}}</label>
+                                    <a class="nsw-require-field">*</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-control select2 chon-phuluc phuluc" id="fiNhieucssx" name="fiNhieucssx" data="{{#data.thietbi.[0]}}{{fiNhieucssx}}{{/data.thietbi.[0]}}" field="moh_typea_nhieu_cssx" require="true">
+                                        <option value="-1">{{_lang "chon"}}</option>
+                                        <option value="0">{{_lang "moh_06_nhieucssx_mot"}}</option>
+                                        <option value="1">{{_lang "moh_06_nhieucssx_nhieu"}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label>{{_lang "moh_typea_thietbi_ma_san_pham"}}</label>
+                                    <a class="nsw-require-field">*</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-control phuluc" id="fiLoaihang" name="fiLoai" field="moh_typea_thietbi_ma_san_pham" maxlength="250" type="text" value="{{#data.thietbi.[0]}}{{fiLoai}}{{/data.thietbi.[0]}}" require="true">
+                                </div>
+                            </div>  
+                        </div> 
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="col-md-2"> 
+                                    <label>{{_lang "moh_typea_ten_chi_tiet"}}</label>
+                                    <a class="nsw-require-field">*</a>
+                                </div>
+                                <div class="col-md-10">                                        
+                                    <input class="form-control phuluc" id="fiTen" name="fiTen" maxlength="250" require="true" value="{{#data.thietbi.[0]}}{{fiTen}}{{/data.thietbi.[0]}}" 
+                                           field="moh_typea_tenthietbi"  type="text">
+                                </div>
+                            </div>    
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="col-md-2">
+                                    <label>{{_lang "moh_typea_chitiettb_dong_goi"}}</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-control phuluc" id="fiQuycach" name="fiQuycach" field="moh_typea_chitiettb_dong_goi" maxlength="250"  type="text"  value="{{#data.thietbi.[0]}}{{fiQuycach}}{{/data.thietbi.[0]}}">
+                                </div>
+                                 <div class="col-md-2">
+                                    <label>{{_lang "moh_typea_hangsx"}}</label>
+                                    <a class="nsw-require-field">*</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-control phuluc" id="fiHangsx" name="fiHangsx" field="moh_typea_hangsx" maxlength="250"  type="text" require="true" value="{{#data.thietbi.[0]}}{{fiHangsx}}{{/data.thietbi.[0]}}">
+
+                                </div>   
+                            </div> 
+                        </div>
+                        <div style="clear:both"></div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="col-md-2">
+                                    <label>{{_lang "moh_typea_dia_chi_sx"}}</label>
+                                    <a class="nsw-require-field">*</a>
+                                </div>
+                                <div class="col-md-4">                                        
+                                    <input name="fiDiachisx" id="fiDiachisx" field="moh_typea_dia_chi_sx" maxlength="250"
+                                           class="form-control form-control-inline phuluc" require type="text" value="{{#data.thietbi.[0]}}{{fiDiachisx}}{{/data.thietbi.[0]}}" require="true"/>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label>{{_lang "moh_typea_nuoc_sx"}}</label>
+                                    <a class="nsw-require-field">*</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-control select2 phuluc" id="fiMaqgsx" name="fiMaqgsx" data="{{#data.thietbi.[0]}}{{fiMaqgsx}}{{/data.thietbi.[0]}}" field="moh_typea_nuoc_sx" require="true">
+                                        <option value="-1">{{_lang "chon"}}</option>
+                                        {{#data.countries}}
+                                        <option value="{{statecode}}">{{name}}</option>
+                                        {{/data.countries}}
+                                    </select>
+                                </div>
+                            </div>  
+                        </div>
+                        <div class="form-group condition">
+                            <div class="col-md-12">
+                            {{_lang "moh_typea_phu_luc"}} <span class="nsw-require-field">{{_lang "moh_typea_phu_luc_giaithich"}} </span>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="col-md-12" id="giaithich">
+                                    <p>1.{{_lang "moh_typea_phu_luc_giaithich_1"}}</p>
+                                    <p>2.{{_lang "moh_typea_phu_luc_giaithich_2"}}</p>
+                                    <p>3.{{_lang "moh_typea_phu_luc_giaithich_3"}}</p>    
+                                </div>
+                            <div class="col-md-12">
+                                <div class="col-md-9">
+                                    <div class="col-md-7">
+                                        <button type='button' id="buttonPL" class="btn btn-file buttonPL action">{{_lang "chon_file" }}</button>
+                                        <label id='fileIdLabelframe2'>{{#data.thietbi.[0].phuluc}}<a href="{{fiUrltaptin}}">{{fiTentaptin}} <i class="fa fa-lg fa-download"></i> {{_lang "moh_typea_tep_tai_ve"}}</a>{{/data.thietbi.[0].phuluc}}</label>
+                                    </div>
+                                </div>
+                            </div>  
+                        </div> 
+                        <hr>
+                    </fieldset>
+                </form>
+
+                <div id ="baohanhlist">
+                    <fieldset>
+                    <legend>{{_lang "moh_typea_co_so_bao_hanh"}}</legend>
+                    <br>
+                    <form role="form" class="form-horizontal" id="form-bh">
+                        <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
+                            <thead>
+                                <tr>
+                                    <th class="text-center"> {{_lang "stt"}}</th>
+                                    <th class="text-center"> {{_lang "moh_typea_mst_co_so_bao_hanh"}}</th>
+                                    <th class="text-center"> {{_lang "moh_typea_co_so_bao_hanh"}}</th>
+                                    <th class="text-center"> {{_lang "moh_typea_co_so_bao_hanh_diachi"}} </th>
+                                    <th class="text-center"> {{_lang "most_01_nopphi_dien_thoai"}}</th>
+                                    <th class="text-center"> {{_lang "moh_typea_didong"}}</th>
+                                    <th class="text-center action"> {{_lang "moh_typea_hanhdong"}}</th>
+                                </tr>
+                            </thead>
+                            <tbody id="list-container" class="listWarranty">
+                                {{#data.baohanh}}
+                                <tr>
+                                    <td>{{inc @index}}</td>
+                                    <td>{{fiMstCsbh}}</td>
+                                    <td>{{fiTencoso}}</td>
+                                    <td>{{fiDiachics}}</td>
+                                    <td>{{fiDienthoai}}</td>
+                                    <td>{{fiDidong}}</td>
+                                    <td class="action">
+                                        <a><i class='fa fa-pencil fa-lg'></i></a>&nbsp;&nbsp;
+                                        <a><i class='fa fa-close fa-lg'></i></a>
+                                    </td>                                                
+                                </tr>
+                                {{/data.baohanh}}
+                                <tfoot class="action">
+                                    <tr id = "bhForm">
+                                        <td></td>
+                                       <td><input name ="fiMstCsbh" id = "fiMstCsbh" type = "text" maxlength="20"
+                                                   class="form-control" field="moh_typea_ten_co_so_bao_hanh" require=true>
+                                           <label class="input-invaild-text" id="message-fiMstCsbh"></label>
+                                        </td>
+                                        
+                                        <td><input name ="fiTencoso" id = "fiTencoso" type = "text" maxlength="250"
+                                                   class="form-control" field="moh_typea_co_so_bao_hanh" require=true>
+                                            <label class="input-invaild-text" id="message-fiTencoso"></label>
+                                        </td>
+                                        
+                                        <td><input name = "fiDiachics" id="fiDiachics" type="text" maxlength="250"
+                                                class="form-control" field="moh_typea_co_so_bao_hanh_diachi" require = true>
+                                            <label class="input-invaild-text" id="message-fiDiachics"></label>
+                                        </td>
+                                        
+                                        <td><input name = "fiDienthoai" id="fiDienthoai" is="number" type="text" maxlength="50"
+                                                class="form-control" field="moh_typea_baohanh_dien_thoai">
+                                             <label class="input-invaild-text" id="message-fiDienthoai"></label>
+                                        </td>
+                                       
+                                        <td><input name = "fiDidong" id="fiDidong" is="number" type="text" maxlength="50"
+                                                class="form-control" field="moh_typea_baohanh_di_dong">
+                                            <label class="input-invaild-text" id="message-fiDidong"></label>
+                                        </td>
+                                        
+                                        <td style="width:12%"><button id = 'save' class="btn btn-success action" style="display:{{data.isView}}">{{_lang "common_button_luu"}}</button>
+                                            <button id = 'cancelWarr' class="btn btn-danger action" style="display:{{data.isView}}"> {{_lang "huy"}}</button>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </tbody>
+                        </table>     
+                    </form>
+                    <hr>
+                </fieldset>
+                </div>
+                <div class="col col-lg-5 "></div>
+                    <input class="btn btn-primary action" type = "submit" id="addEquip" value="{{_lang "them"}}">
+                    <button id="huyTB" class="btn btn-danger action">{{_lang "huy"}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+      

@@ -1,0 +1,12 @@
+{{#data}}
+    <tr class="odd gradeX">
+        <td class="nsw-text-center">{{inc @index}}</td>
+        <td>{{fiTenLoai}}</td>
+        <td class="nsw-text-center">{{convertToDateFromTimeStamp fiNgayCap false}}</td>
+        <td><a href="{{buildDownloadUrl 'most' '01' fiGuiId fiIdDinhkem}}">{{fiTenTep}}</a></td>
+        <td class="nsw-text-center" style="display: {{IsView}}">
+            <a><i class="fa fa-lg fa-remove tooltips" data-placement="top" 
+              data-original-title="{{getCommandName 'most_01_tailieukhac_command_xoa'}}" data-container="body" item="{{fiIdDinhkem}}" code="{{fiTenTep}}"></i></a>
+        </td>
+    </tr>
+{{/data}}

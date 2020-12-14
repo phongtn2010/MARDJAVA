@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ECUS:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>ECUS</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="ECUS.war">
+      <element id="artifact" artifact-name="ECUS:war exploded" />
+    </root>
+  </artifact>
+</component>
