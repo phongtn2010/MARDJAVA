@@ -229,9 +229,9 @@
                                                                         src="" alt=""/></a>
                                     </td>
                                     <td class="text-center">
-                                        <a href="javascript:void(0)"><i class="fa fa-lg fa-search tooltips"
+                                        <a href="javascript:void(0)" data-bind="visible:fiTrangthai==4"><i class="fa fa-lg fa-search tooltips"
                                                                         data-original-title="Xem thông báo"
-                                                                        data-bind=""
+                                                                        data-bind="click: goViewCert"
                                                                         src="" alt=""/></a>
                                     </td>
                                     <td class="text-center">

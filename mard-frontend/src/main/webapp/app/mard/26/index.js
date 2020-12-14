@@ -34,6 +34,7 @@ function IndexVM(data) {
     index26Self.ngayTaoDenNgay = ko.observable(null);
     index26Self.ngayCapTuNgay = ko.observable(null);
     index26Self.ngayCapDenNgay = ko.observable(null);
+    index26Self.selectedHoso = ko.observable(null);
 
     index26Self.maSoThue = ko.observable(null);
 
@@ -126,6 +127,9 @@ function IndexVM(data) {
     }
     index26Self.goCopyHS = function (item) {
         document.location = app.appContext + '/mard/26/copy/'+item.fiIdHoSo26;
+    }
+    index26Self.goViewCert =function (item) {
+        index26Self.selectedHoso(item);
     }
 }
 function init(data) {
