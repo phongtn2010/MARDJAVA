@@ -2,6 +2,7 @@ package com.nsw.backend.mard.p26.controller;
 
 import com.nsw.backend.controller.BaseController;
 import com.nsw.backend.helper.RabbitMQErrorHelper;
+import com.nsw.backend.mard.p25.model.TbdHoso25;
 import com.nsw.backend.mard.p26.constant.Constant26;
 import com.nsw.backend.mard.p26.model.FilterForm;
 import com.nsw.backend.mard.p26.model.TbdHanghoa26;
@@ -149,5 +150,24 @@ public class TbdHoso26Controller extends BaseController {
     private List<TbdHoso26> checkTonTaiCongVanMienKiem(TbdHoso26 tbdHoso26){
         List<TbdHoso26> tbdHoso26List=tbdHoso26Service.findCongVanMienKiem(new Date(),tbdHoso26.getFiMasothue());
         return tbdHoso26List;
+    }
+    @GetMapping("/delete")
+    public ResponseEntity<ResponseJson> deleteHoso(
+            @RequestParam Integer fiIdHS,
+            @RequestParam String fiTaxCode) {
+        try {
+            TbdHoso26 regProfile = tbdHoso26Service.findById(fiIdHS);
+            if (regProfile == null || !regProfile.getFiMasothue().equals(fiTaxCode)) {
+                throw new IllegalArgumentException("Hồ sơ không thuộc đơn vị đăng ký");
+            } else {
+                regProfile.setFiActive(false);
+                tbdHoso26Service.update(regProfile);
+                return createResponse("", true, "", HttpStatus.OK);
+            }
+        } catch (Exception ex) {
+            LOG.error(TAG + ex.getMessage(), ex);
+            RabbitMQErrorHelper.pushLogToRabbitMQ(getErrorInfo(TAG, ex), rabbitMQService.getRabbitMQInfo());
+            return createErrorResponse(ex.getMessage(), HttpStatus.OK);
+        }
     }
 }

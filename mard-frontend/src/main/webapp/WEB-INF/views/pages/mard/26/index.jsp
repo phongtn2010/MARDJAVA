@@ -238,7 +238,7 @@
                                         <a href="javascript:void(0)"><i class="fa fa-lg fa-close tooltips"
                                                                         style="color:red"
                                                                         data-original-title="Xoá hồ sơ"
-                                                                        data-bind=""
+                                                                        data-bind="click: goDeleteHoso"
                                                                         src="" alt=""/></a>
                                     </td>
                                 </tr>

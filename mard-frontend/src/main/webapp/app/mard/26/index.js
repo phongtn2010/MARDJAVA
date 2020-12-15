@@ -131,6 +131,56 @@ function IndexVM(data) {
     index26Self.goViewCert =function (item) {
         index26Self.selectedHoso(item);
     }
+    index26Self.goDeleteHoso =function (item) {
+        index26Self.pop = app.popup({
+            title: 'Thông báo',
+            html: '<b>Bạn chắc chắn muốn xóa hồ sơ ' + item.fiMaHoso + '?</b>',
+            width: 450,
+            buttons: [
+                {
+                    name: NSWLang["common_button_toi_chac_chan"],
+                    class: 'btn',
+                    icon: 'fa-save',
+                    action: function () {
+                        app.popupRemove(index26Self.pop.selector);
+                        $.ajax({
+                            async: true,
+                            type: 'GET',
+                            cache: false,
+                            crossDomain: true,
+                            url: app.appContext + "/mard/26/hoso/delete?fiIdHS=" + item.fiIdHoSo26 + "&fiTaxCode=" + hosoUsername,
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader(CSRF_TOKEN_NAME, CSRF_TOKEN_VALUE);
+                                $('#loading10').show();
+                            },
+                            success: function (res) {
+                                $('#loading10').hide();
+                                if (res.success) {
+                                    app.Alert('Xóa hồ sơ thành công');
+                                    index26Self.searchHoso(index26Self.currentPage());
+                                } else {
+                                    app.Alert(d.message);
+                                }
+                            },
+                            error: function (err) {
+                            },
+                            complete: function (jqXHR, textStatus) {
+                                $('#loading10').hide();
+                            }
+                        });
+                    }
+                },
+                {
+                    name: 'Huỷ',
+                    class: 'btn',
+                    icon: 'fa-close',
+                    action: function () {
+                        app.popupRemove(self.pop.selector);
+                    }
+                }
+            ]
+        });
+    }
 }
 function init(data) {
     var index26VM = new IndexVM(data);

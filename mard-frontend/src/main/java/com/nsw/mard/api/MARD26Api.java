@@ -185,6 +185,31 @@ public class MARD26Api extends BaseApi {
             return returnJson;
         }
     }
+    @RequestMapping(value = "/hoso/delete", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseJson deleteHoso(
+            @RequestParam String fiIdHS,
+            @RequestParam String fiTaxCode
+    ) {
+        ResponseJson returnJson = new ResponseJson();
+        if (!isOwner(fiIdHS, null)) {
+            returnJson.setSuccess(false);
+            returnJson.setMessage("Không có quyền truy cập hồ sơ");
+            return returnJson;
+        }
+        try {
+            ResponseJson json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, MARD26Constant.TbdHoso26API.HOSO_DELETE) + "?fiIdHS=" + fiIdHS + "&fiTaxCode=" + fiTaxCode);
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            returnJson.setData(null);
+            returnJson.setSuccess(false);
+            returnJson.setMessage(ex.getMessage());
+            return returnJson;
+        }
+    }
     private boolean isOwner(String idHS, String nswFileCode) {
         ResponseJson json = BackendRequestHelper.getInstance().doGetRequest(
                 MARD26Constant.getInstance().getApiUrl(
