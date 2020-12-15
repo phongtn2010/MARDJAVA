@@ -210,6 +210,33 @@ public class MARD26Api extends BaseApi {
             return returnJson;
         }
     }
+
+    @RequestMapping(value = "/hoso/lichsu", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseJson getLichsu(
+            @RequestParam(name = "fiIdHs") Integer fiIdHs,
+            @RequestParam(required = false) Integer p,
+            @RequestParam(required = false) Integer s
+    ) {
+        ResponseJson json = new ResponseJson();
+        try {
+            if (!isOwner(fiIdHs.toString(), null)) {
+                json.setSuccess(false);
+                json.setMessage("Không có quyền truy cập hồ sơ");
+                return json;
+            }
+            json = BackendRequestHelper.getInstance().doGetRequest(MARD26Constant.getInstance().getApiUrl(environment, MARD26Constant.TbdHoso26API.LICHSU_SEARCH) + "?fiIdHs=" + fiIdHs + "&p=" + p + "&s=" + s);
+            return json;
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+            String errorInfo = AppConstant.APP_NAME + AppConstant.MESSAGE_SEPARATOR + TAG + AppConstant.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName() + AppConstant.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, getRabbitMQ());
+            json.setData(null);
+            json.setSuccess(false);
+            json.setMessage(ex.getMessage());
+            return json;
+        }
+    }
     private boolean isOwner(String idHS, String nswFileCode) {
         ResponseJson json = BackendRequestHelper.getInstance().doGetRequest(
                 MARD26Constant.getInstance().getApiUrl(

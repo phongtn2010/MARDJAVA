@@ -17,6 +17,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -168,6 +170,22 @@ public class TbdHoso26Controller extends BaseController {
             LOG.error(TAG + ex.getMessage(), ex);
             RabbitMQErrorHelper.pushLogToRabbitMQ(getErrorInfo(TAG, ex), rabbitMQService.getRabbitMQInfo());
             return createErrorResponse(ex.getMessage(), HttpStatus.OK);
+        }
+    }
+    @GetMapping("/history")
+    public ResponseEntity<ResponseJson> getListByHSCode(@RequestParam Integer fiIdHs,
+                                                        @RequestParam(required = false) Integer p,
+                                                        @RequestParam(required = false) Integer s) {
+        if (p == null) {
+            return createSuccessResponse(tbdLichsu26Service.findByFiIdHS(fiIdHs), HttpStatus.OK);
+        } else {
+            PageRequest pageRequest = new PageRequest(p, s);
+            ResponseJson response = new ResponseJson();
+            Page<TbdLichsu26> tbdLichsu26s=tbdLichsu26Service.findByFiIdHSOrderByFiCreatedDate(fiIdHs,pageRequest);
+            response.setTotal(tbdLichsu26s.getTotalElements());
+            response.setSuccess(true);
+            response.setData(tbdLichsu26s.getContent());
+            return ResponseEntity.ok(response);
         }
     }
 }

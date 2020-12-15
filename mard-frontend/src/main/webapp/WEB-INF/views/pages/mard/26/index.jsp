@@ -119,14 +119,14 @@
                                                                    data-bind="value : soCongVan, executeOnEnter : searchFieldEnter, valueUpdate: 'input'"
                                                                    placeholder="Số giấy phép được cấp" type="text">
                                                         </div>
-                                                        <div class="col-md-2 nsw-text-right">
-                                                            <label><spring:message code="mard.tracuu.masothue"/></label>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <input class="form-control" name="maSoThue" id="maSoThue"
-                                                                   data-bind="value : maSoThue, executeOnEnter : searchFieldEnter, valueUpdate: 'input'"
-                                                                   placeholder="Mã doanh nghiệp" type="text">
-                                                        </div>
+<%--                                                        <div class="col-md-2 nsw-text-right">--%>
+<%--                                                            <label><spring:message code="mard.tracuu.masothue"/></label>--%>
+<%--                                                        </div>--%>
+<%--                                                        <div class="col-md-4">--%>
+<%--                                                            <input class="form-control" name="maSoThue" id="maSoThue"--%>
+<%--                                                                   data-bind="value : maSoThue, executeOnEnter : searchFieldEnter, valueUpdate: 'input'"--%>
+<%--                                                                   placeholder="Mã doanh nghiệp" type="text">--%>
+<%--                                                        </div>--%>
                                                     </div>
                                                 </div>
                                                 <div class="form-group nsw-text-center">
@@ -207,8 +207,7 @@
                                     </td>
                                     <td class="text-center">
                                         <a href="javascript:void(0)"><i class="fa fa-history"
-                                                                        data-bind=""
-                                                                        src="" alt=""/></a>
+                                                                        data-bind="click: $parent.goViewHistory"/></a>
                                     </td>
                                     <td class="text-center">
                                         <a href="javascript:void(0)" data-bind="click: $parent.goCopyHS"><i class="fa fa-copy"
@@ -225,20 +224,20 @@
                                     <td class="text-center">
                                         <a href="javascript:void(0)"><i class="fa fa-lg fa-edit tooltips"
                                                                         data-original-title="Sửa hồ sơ"
-                                                                        data-bind="click: $parent.onEditHS"
+                                                                        data-bind="click: $parent.onEditHS,visible: fiTrangthai==0"
                                                                         src="" alt=""/></a>
                                     </td>
                                     <td class="text-center">
                                         <a href="javascript:void(0)" data-bind="visible:fiTrangthai==4"><i class="fa fa-lg fa-search tooltips"
                                                                         data-original-title="Xem thông báo"
-                                                                        data-bind="click: goViewCert"
+                                                                        data-bind="click: $parent.goViewCert"
                                                                         src="" alt=""/></a>
                                     </td>
                                     <td class="text-center">
                                         <a href="javascript:void(0)"><i class="fa fa-lg fa-close tooltips"
                                                                         style="color:red"
                                                                         data-original-title="Xoá hồ sơ"
-                                                                        data-bind="click: goDeleteHoso"
+                                                                        data-bind="click: $parent.goDeleteHoso,visible: fiTrangthai==0"
                                                                         src="" alt=""/></a>
                                     </td>
                                 </tr>
@@ -423,6 +422,7 @@
                 </div>
             </form>
         </template>
+    <%@include file="inc_view_lichsuXuly.jsp" %>
 <%--    </div>--%>
 </fieldset>
 

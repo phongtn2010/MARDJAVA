@@ -97,7 +97,8 @@
                             </div>
                             <div class="col-md-4">
                                 <select data-bind="options : lstNhom, optionsValue : 'fiidcat',  optionsText : 'fiCatTypeName',
-                                                    value: fiProIdNhom, event : {change : eventChangeNhom()}, enable: fiHSType()!=4" class="form-control"></select>
+                                optionsCaption: '<spring:message code="mard.25.chon.nhom"/>',
+                                                    value: fiProIdNhom, event : {change : eventChangeNhom}, enable: fiHSType()!=4" class="form-control"></select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -106,6 +107,7 @@
                             </div>
                             <div class="col-md-4">
                                 <select data-bind="options : lstPhanNhom, optionsValue : 'fiidcat',  optionsText : 'fiCatTypeName',
+                                optionsCaption: '<spring:message code="mard.25.chon.phannhom"/>',
                                                     value: fiProIdPhanNhom ,event : {change : eventChangePhanNhom}, enable: fiHSType()!=4" class="form-control"></select>
                             </div>
                             <div class="col-md-2 nsw-text-right">
@@ -114,7 +116,7 @@
                             <div class="col-md-4">
                                 <select data-bind="options: lstLoai,
                                                     optionsText: 'fiCatTypeName',
-                                                    optionsValue: 'fiidcat',
+                                                    optionsValue: 'fiidcat',optionsCaption: '<spring:message code="mard.25.chon.loai"/>',
                                                     value: fiProIdLoai,event : {change : eventChangeLoai}, enable: fiHSType()!=4" class="form-control"></select>
                             </div>
                         </div>
@@ -126,7 +128,7 @@
                                 <select
                                         data-bind="options: lstPhanLoai,
                                                     optionsText: 'fiCatTypeName',
-                                                    optionsValue: 'fiidcat',
+                                                    optionsValue: 'fiidcat',optionsCaption: '<spring:message code="mard.25.chon.phanloai"/>',
                                                     value: fiProIdPhanLoai, enable: fiHSType()!=4" class="form-control"></select>
                             </div>
                             <div class="col-md-2 nsw-text-right">

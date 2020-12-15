@@ -12,6 +12,7 @@ function ThongTinChungVM(data) {
 
     ttcVMSelf.isEditHS = ko.observable((data && data.hasOwnProperty('isEditHS')) ? data.isEditHS : null);
     ttcVMSelf.errors = ko.validation.group(ttcVMSelf);
+    ttcVMSelf.isUpdateHangHoa = ko.observable(null);
     ttcVMSelf.selectedIndex = ko.observable(null);
     ttcVMSelf.selectedHangHoa = ko.observable(null);
     ttcVMSelf.lstProfileStatus = ko.observableArray((data && data.hasOwnProperty('lstProfileStatus')) ? data.lstProfileStatus : []);
@@ -80,11 +81,11 @@ function ThongTinChungVM(data) {
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
-    ttcVMSelf.fiPurchFromDate = ko.observable((data && data.hasOwnProperty('fiPurchFromDate')) ? new Date(data.fiPurchFromDate) : new Date()).
+    ttcVMSelf.fiPurchFromDate = ko.observable((data && data.hasOwnProperty('fiPurchFromDate')) ? new Date(data.fiPurchFromDate) : null).
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
-    ttcVMSelf.fiPurchToDate = ko.observable((data && data.hasOwnProperty('fiPurchToDate')) ? new Date(data.fiPurchToDate) : new Date()).
+    ttcVMSelf.fiPurchToDate = ko.observable((data && data.hasOwnProperty('fiPurchToDate')) ? new Date(data.fiPurchToDate) : null).
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
@@ -367,7 +368,9 @@ function ThongTinChungVM(data) {
     }
     ttcVMSelf.eventChangeNhom =function(){
         var id =ttcVMSelf.fiProIdNhom();
-        if(id !== 'undefined'){
+        console.log("Change nhom");
+        if(id !== 'undefined'&&id!=null){
+            ttcVMSelf.lstPhanNhom([]);
             app.makeGet({
                 url: '/mard/25/danhmuc/getby-catparent/'+id,
                 success: function(res) {
@@ -378,7 +381,9 @@ function ThongTinChungVM(data) {
     }
     ttcVMSelf.eventChangePhanNhom =function(){
         var id =ttcVMSelf.fiProIdPhanNhom();
-        if(id !== 'undefined'){
+        console.log("Change phan nhom");
+        if(id !== 'undefined'&&id!=null){
+            ttcVMSelf.lstLoai([]);
             app.makeGet({
                 url: '/mard/25/danhmuc/getby-catparent/'+id,
                 success: function(res) {
@@ -389,7 +394,10 @@ function ThongTinChungVM(data) {
     }
     ttcVMSelf.eventChangeLoai =function(){
         var id =ttcVMSelf.fiProIdLoai();
-        if(id !== 'undefined'){
+
+        console.log("Change loai");
+        if(id !== 'undefined'&&id!=null){
+            ttcVMSelf.lstPhanLoai([]);
             app.makeGet({
                 url: '/mard/25/danhmuc/getby-catparent/'+id,
                 success: function(res) {
@@ -882,6 +890,7 @@ function ThongTinChungVM(data) {
         return true;
     }
     ttcVMSelf.openAddHangHoa=function(){
+        // ttcVMSelf.isUpdateHangHoa(false);
         $("#modal_addAnimal").modal("show");
     }
     ttcVMSelf.closeHangHoa =function(){
@@ -906,6 +915,30 @@ function ThongTinChungVM(data) {
                 kl.lstDMDVTSL = ttcVMSelf.lstDMDVTSL();
             });
         }
+        // ttcVMSelf.isUpdateHangHoa(true);
+        // ttcVMSelf.fiProName(data.fiProName);
+        // ttcVMSelf.fiProNameSelect(data.fiProNameSelect);
+        // ttcVMSelf.fiProIdNhom(data.fiProIdNhom);
+        // ttcVMSelf.fiProIdPhanNhom(data.fiProIdNhom);
+        // ttcVMSelf.fiProIdLoai(data.fiProIdLoai);
+        // ttcVMSelf.fiProIdPhanLoai(data.fiProIdPhanLoai);
+        // ttcVMSelf.fiProCode(data.fiProCode);
+        // ttcVMSelf.fiProMadeIn(data.fiProMadeIn);
+        // ttcVMSelf.fiProCountryCode(data.fiProCountryCode);
+        // ttcVMSelf.fiProCountryName(data.fiProCountryName);
+        // ttcVMSelf.fiProThanhPhan(data.fiProThanhPhan);
+        // ttcVMSelf.fiProColor(data.fiProColor);
+        // ttcVMSelf.fiProSoHieu(data.fiProSoHieu);
+        // ttcVMSelf.fiProQuyChuan(data.fiProQuyChuan);
+        // ttcVMSelf.fiProCVMienGiam(data.fiProCVMienGiam);
+        // ttcVMSelf.fiProCVMienGiamNgay(data.fiProCVMienGiamNgay);
+        // ttcVMSelf.fiProValueVN(data.fiProValueVN);
+        // ttcVMSelf.fiProValueUSD(data.fiProValueUSD);
+        // ttcVMSelf.fiPackageUnitName(data.fiPackageUnitName);
+        // ttcVMSelf.fiPackageUnitCode(data.fiPackageUnitCode);
+        // ttcVMSelf.fiProCLList(data.fiProCLList);
+        // ttcVMSelf.fiProATList(data.fiProATList);
+        // ttcVMSelf.fiProSLKLList(data.fiProSLKLList);
         ko.mapping.fromJS(data, {}, ttcVMSelf);
         ttcVMSelf.selectedIndex(index);
         ttcVMSelf.selectedHangHoa(data);

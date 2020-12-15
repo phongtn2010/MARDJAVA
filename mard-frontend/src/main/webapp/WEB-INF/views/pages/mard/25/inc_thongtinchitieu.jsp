@@ -77,7 +77,7 @@
                                 <select id="EfiProCLUnitIDCBB"
                                         data-bind="options: lstChiTieuAT,
                                                     optionsText: 'fiCatTypeName',
-                                                    optionsValue: 'fiCatNote',
+                                                    optionsValue: 'fiCatNote',optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.chat_luong.dvt"/>',
                                                     value: EfiProCLUnitID, enable: fiHSType()!=4" class="form-control"></select>
                             </td>
                             <td data-bind="visible: $root.isEditable" class="text-center">
