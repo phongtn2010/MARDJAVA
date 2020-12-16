@@ -12,6 +12,7 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -92,10 +93,10 @@ public class TbdHanghoa25 extends CmonBaseEntity implements Serializable {
     private String fiProQuyChuan;
 
     @Column(name = "FI_PRO_VALUE_VN", precision = 15, scale = 6)
-    private Float fiProValueVN;
+    private BigDecimal fiProValueVN;
 
     @Column(name = "FI_PRO_VALUE_USD", precision = 15, scale = 6)
-    private Float fiProValueUSD;
+    private BigDecimal fiProValueUSD;
 
     @Column(name = "FI_PACKAGE_UNIT_CODE")
     private String fiPackageUnitCode;

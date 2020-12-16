@@ -26,7 +26,7 @@
                                         BỘ NÔNG NGHIỆP VÀ PHÁT TRIỂN NÔNG THÔN
                                     </h4>
                                     <h4 style="font-weight: bold">
-                                        CỤC THÚ Y
+                                        CỤC CHĂN NUÔI
                                     </h4>
 
                                     <div style="border-top: #000000 solid 1px; margin: auto; width: 160px"></div>

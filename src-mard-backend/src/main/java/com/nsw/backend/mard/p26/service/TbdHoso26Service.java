@@ -17,4 +17,5 @@ public interface TbdHoso26Service {
 
     TbdHoso26 findByFiHSCode(String nswFileCode);
     List<TbdHoso26> findCongVanMienKiem(Date now,String taxcode);
+    List<TbdHoso26> findDSMienKiem(String taxcode);
 }

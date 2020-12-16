@@ -64,4 +64,9 @@ public class TbdHoso26ServiceImpl implements TbdHoso26Service{
     public List<TbdHoso26> findCongVanMienKiem(Date now, String taxcode) {
         return repository.findCongVanMienKiem(now,taxcode);
     }
+
+    @Override
+    public List<TbdHoso26> findDSMienKiem(String taxcode) {
+        return repository.findDSMienKiem(taxcode);
+    }
 }

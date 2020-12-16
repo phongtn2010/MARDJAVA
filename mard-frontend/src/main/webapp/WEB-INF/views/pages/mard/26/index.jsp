@@ -423,6 +423,14 @@
             </form>
         </template>
     <%@include file="inc_view_lichsuXuly.jsp" %>
+    <div id="mard26ViewCert" data-bind="with: selectedHoso" class="modal container in modal-overflow" tabindex="-1">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        </div>
+        <div class="modal-body container" style="display: flex">
+            <%@include file="cert.jsp" %>
+        </div>
+    </div>
 <%--    </div>--%>
 </fieldset>
 

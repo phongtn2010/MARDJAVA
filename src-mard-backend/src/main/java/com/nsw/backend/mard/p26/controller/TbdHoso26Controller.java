@@ -122,8 +122,8 @@ public class TbdHoso26Controller extends BaseController {
             profileHst.setFiStatus(result.getFiTrangthai());
             profileHst.setFiSenderCode(result.getFiCreatedBy());
             profileHst.setFiSenderName(result.getFiMasothue());
-            //profileHst.setFiSenderUnitName(result.getFiImporterName());
-            profileHst.setFiContent("Gửi mới hồ sơ");
+            profileHst.setFiSenderUnitName(result.getFiTenDn());
+            profileHst.setFiContent("Cập nhập hồ sơ");
             profile.setFiTrangthai(profile.getFiTrangthai());
             profileHst.setFiStatus(profile.getFiTrangthai());
             tbdHoso26Service.update(profile);

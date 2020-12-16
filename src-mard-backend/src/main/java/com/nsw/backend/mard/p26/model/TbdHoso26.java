@@ -43,21 +43,19 @@ public class TbdHoso26 extends CmonBaseEntity implements Serializable {
     private Integer fiTrangthai;
 
     @Column(name = "FI_ACTIVE_STATUS")
-    private boolean fiActive = true;
+    private Boolean fiActive;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "FI_HS_CREATED_DATE")
     private Date fiNgaytao;
 
-    //Các field phục vụ yêu cầu sửa.
-    @Column(name = "FI_MODIFY_REASON", length = 250)
-    private String fiReason;
 
     @Column(name = "FI_REQUEST_DATE")
     private String fiRequestDate;
 
-    @Column(name = "FI_HS_ID_PARENT")
-    private Integer fiIdHSParent;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "FI_SEND_DATE")
+    private Date fiNgayGui;
 
     //Thông tin to chuc, ca nhan
     @Column(name = "FI_TAX_CODE", length = 25)

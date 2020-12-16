@@ -311,11 +311,18 @@ $(document).ready(function () {
             app.sendGetRequest("/mard/25/danhmuc/getby-catno/7", function (res) {
                 options['lstDMDVTSL'] = res.data;
             })
-            // ,
+            ,
             // Get danh muc dvt
-            // app.sendGetRequest("/mard/25/hoso/dshosomienkiem/"+hosoUsername, function (res) {
-            //     options['lstDSHosoMK'] = res.data;
-            // })
+            app.sendGetRequest("/mard/25/hoso/dshosomienkiem/"+hosoUsername, function (res) {
+                options['lstDSHosoMK'] = arrProduct;
+                var arrProduct=[];
+                if(res.data!=null){
+                    res.data.forEach(function(item,index){
+                        arrProduct.push(item.fiProductList[0]);
+                    });
+                }
+                options['lstDSHosoMK'] = arrProduct;
+            })
         ).done(function (data) {
             $('#loading10').hide();
             init(options);

@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dev
+    active: hq_test
 ---
 server:
   port: 8081

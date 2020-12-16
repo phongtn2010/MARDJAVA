@@ -4,6 +4,7 @@ import com.vnsw.ws.p26.entity.receive.Ananytical;
 import lombok.Data;
 
 import javax.xml.bind.annotation.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 @XmlType(name = "Goods")
@@ -87,13 +88,13 @@ public class TbdHanghoa26 {
     @XmlElement(name = "SafetyCriteria")
     private List<SafetyCriteria> fiProATList;
     @XmlElement(name = "GoodsValue")
-    private Float fiProValueVN;
+    private BigDecimal fiProValueVN;
     @XmlElement(name = "GoodsValueUnitCode")
     private String fiPackageUnitCode;
     @XmlElement(name = "GoodsValueUnitName")
     private String fiPackageUnitName;
     @XmlElement(name = "GoodsValueUSD")
-    private Float fiProValueUSD;
+    private BigDecimal fiProValueUSD;
 
     @XmlElement(name = "NoteGoods")
     private String fiNoteGoods;

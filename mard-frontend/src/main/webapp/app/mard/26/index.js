@@ -128,8 +128,39 @@ function IndexVM(data) {
     index26Self.goCopyHS = function (item) {
         document.location = app.appContext + '/mard/26/copy/'+item.fiIdHoSo26;
     }
+    index26Self.getHinhThucCB=function(id){
+        switch (Number(id)) {
+            case 0:
+                return "Không có";
+            case 1:
+                return "<";
+            case 2:
+                return ">";
+            case 3:
+                return "=";
+            case 4:
+                return "<=";
+            case 5:
+                return ">=";
+            case 6:
+                return "min-max";
+        }
+    }
     index26Self.goViewCert =function (item) {
+        item.tenTACN=ko.observable(item.fiProductList[0].fiProName);
+        item.maSCN=ko.observable(item.fiProductList[0].fiProCode);
+        item.nhomTACN=ko.observable(item.fiProductList[0].fiProNameNhom);
+        item.loaiTACN=ko.observable(item.fiProductList[0].fiProNameLoai);
+        item.hangSX=ko.observable(item.fiProductList[0].fiProMadeIn);
+        item.nuocSX=ko.observable(item.fiProductList[0].fiProCountryName);
+        item.thanhPhan=ko.observable(item.fiProductList[0].fiProThanhPhan);
+        item.dangMau=ko.observable(item.fiProductList[0].fiProColor);
+        item.tieuchuan=ko.observable(item.fiProductList[0].fiProSoHieu);
+        item.CLList=ko.observableArray(item.fiProductList[0].fiProCLList);
+        item.ATList=ko.observableArray(item.fiProductList[0].fiProATList);
+
         index26Self.selectedHoso(item);
+        $("#mard26ViewCert").modal("show");
     }
     index26Self.goDeleteHoso =function (item) {
         index26Self.pop = app.popup({

@@ -1,9 +1,17 @@
 function ThongTinChungVM(data) {
     var ttcVMSelf = this;
+    ttcVMSelf.fiProIdNhomTemp = ko.observable(null);
+    ttcVMSelf.fiProIdPhanNhomTemp = ko.observable(null);
+    ttcVMSelf.fiProIdLoaiTemp = ko.observable(null);
+    ttcVMSelf.fiProIdPhanLoaiTemp = ko.observable(null);
 
+    ttcVMSelf.fiProNhom2D = ko.observable(null);
+    ttcVMSelf.fiProPhanNhom2D = ko.observable(null);
+    ttcVMSelf.fiProLoai2D = ko.observable(null);
+    ttcVMSelf.fiProPhanLoai2D = ko.observable(null);
 
     ttcVMSelf.lstDSHosoMK = ko.observableArray((data && data.hasOwnProperty('lstDSHosoMK')) ? data.lstDSHosoMK : []);
-    ttcVMSelf.fiMaHoso = ko.observable(null);
+    ttcVMSelf.fiIdProduct25 = ko.observable(null);
     ttcVMSelf.fiProNameSelect = ko.observable(null);
     ttcVMSelf.lstChiTieuAT = ko.observableArray((data && data.hasOwnProperty('lstChiTieuAT')) ? data.lstChiTieuAT : []);
     ttcVMSelf.listCL = ko.observableArray((data && data.hasOwnProperty('listCL')) ? data.listCL : []);
@@ -96,7 +104,8 @@ function ThongTinChungVM(data) {
     });
 
     ttcVMSelf.fiProCVMienGiam = ko.observable((data && data.hasOwnProperty('fiProCVMienGiam')) ? data.fiProCVMienGiam : null);
-    ttcVMSelf.fiProCVMienGiamNgay = ko.observable((data && data.hasOwnProperty('fiProCVMienGiamNgay')) ? new Date(data.fiProCVMienGiamNgay) : null);
+    ttcVMSelf.fiProCVMienGiamNgay = ko.observable(null);
+    ttcVMSelf.fiProCVMienGiamNgayText = ko.observable(null);
 
     ttcVMSelf.fiProName = ko.observable((data && data.hasOwnProperty('fiProName')) ? data.fiProName : null).
     extend({
@@ -245,22 +254,10 @@ function ThongTinChungVM(data) {
     ttcVMSelf.lstHoSoType  = ko.observableArray((data && data.hasOwnProperty('lstHoSoType')) ? data.lstHoSoType : []);
     
 
-    ttcVMSelf.fiProIdNhom = ko.observable(null).
-    extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-    });
-    ttcVMSelf.fiProIdPhanNhom = ko.observable(null).
-    extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-    });
-    ttcVMSelf.fiProIdLoai = ko.observable(null).
-    extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-    });
-    ttcVMSelf.fiProIdPhanLoai = ko.observable(null).
-    extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-    });
+    ttcVMSelf.fiProIdNhom = ko.observable(null);
+    ttcVMSelf.fiProIdPhanNhom = ko.observable(null);
+    ttcVMSelf.fiProIdLoai = ko.observable(null);
+    ttcVMSelf.fiProIdPhanLoai = ko.observable(null);
     ttcVMSelf.fiProCountryCode = ko.observable((data && data.hasOwnProperty('fiProCountryCode')) ? data.fiProCountryCode : null);
     ttcVMSelf.fiProCountryName = ko.observable((data && data.hasOwnProperty('fiProCountryName')) ? data.fiProCountryName : null);
     ttcVMSelf.lstUOMAnimal = ko.observable((data && data.hasOwnProperty('lstUOMAnimal')) ? data.lstUOMAnimal : null);
@@ -366,44 +363,75 @@ function ThongTinChungVM(data) {
             ttcVMSelf.fiGDK(pos.fiGDKR);
 
     }
-    ttcVMSelf.eventChangeNhom =function(){
+    ttcVMSelf.eventChangeNhom =function(obj,event){
         var id =ttcVMSelf.fiProIdNhom();
-        console.log("Change nhom");
-        if(id !== 'undefined'&&id!=null){
-            ttcVMSelf.lstPhanNhom([]);
-            app.makeGet({
-                url: '/mard/25/danhmuc/getby-catparent/'+id,
-                success: function(res) {
-                    ttcVMSelf.lstPhanNhom(res.data);
-                }
-            });
+        if (event.originalEvent) { //user changed
+            ttcVMSelf.fiProIdNhom(ttcVMSelf.fiProIdNhom());
+            if(id !== 'undefined'&&id!=null){
+                ttcVMSelf.lstPhanNhom([]);
+                app.makeGet({
+                    url: '/mard/25/danhmuc/getby-catparent/'+id,
+                    success: function(res) {
+                        ttcVMSelf.lstPhanNhom(res.data);
+                    }
+                });
+            }
+        } else { // program changed
+            if(id !== 'undefined'&&id!=null){
+                app.makeGet({
+                    url: '/mard/25/danhmuc/getby-catparent/'+id,
+                    success: function(res) {
+                        ttcVMSelf.lstPhanNhom(res.data);
+                    }
+                });
+            }
         }
     }
-    ttcVMSelf.eventChangePhanNhom =function(){
+    ttcVMSelf.eventChangePhanNhom =function(obj,event){
         var id =ttcVMSelf.fiProIdPhanNhom();
-        console.log("Change phan nhom");
-        if(id !== 'undefined'&&id!=null){
-            ttcVMSelf.lstLoai([]);
-            app.makeGet({
-                url: '/mard/25/danhmuc/getby-catparent/'+id,
-                success: function(res) {
-                    ttcVMSelf.lstLoai(res.data);
-                }
-            });
+        if (event.originalEvent) { //user changed
+            if(id !== 'undefined'&&id!=null){
+                ttcVMSelf.lstLoai([]);
+                app.makeGet({
+                    url: '/mard/25/danhmuc/getby-catparent/'+id,
+                    success: function(res) {
+                        ttcVMSelf.lstLoai(res.data);
+                    }
+                });
+            }
+        }else{
+            if(id !== 'undefined'&&id!=null){
+                app.makeGet({
+                    url: '/mard/25/danhmuc/getby-catparent/'+id,
+                    success: function(res) {
+                        ttcVMSelf.lstLoai(res.data);
+                    }
+                });
+            }
         }
-    }
-    ttcVMSelf.eventChangeLoai =function(){
-        var id =ttcVMSelf.fiProIdLoai();
 
-        console.log("Change loai");
-        if(id !== 'undefined'&&id!=null){
-            ttcVMSelf.lstPhanLoai([]);
-            app.makeGet({
-                url: '/mard/25/danhmuc/getby-catparent/'+id,
-                success: function(res) {
-                    ttcVMSelf.lstPhanLoai(res.data);
-                }
-            });
+    }
+    ttcVMSelf.eventChangeLoai =function(obj,event){
+        var id =ttcVMSelf.fiProIdLoai();
+        if (event.originalEvent) { //user changed
+            if(id !== 'undefined'&&id!=null){
+                ttcVMSelf.lstPhanLoai([]);
+                app.makeGet({
+                    url: '/mard/25/danhmuc/getby-catparent/'+id,
+                    success: function(res) {
+                        ttcVMSelf.lstPhanLoai(res.data);
+                    }
+                });
+            }
+        }else{
+            if(id !== 'undefined'&&id!=null){
+                app.makeGet({
+                    url: '/mard/25/danhmuc/getby-catparent/'+id,
+                    success: function(res) {
+                        ttcVMSelf.lstPhanLoai(res.data);
+                    }
+                });
+            }
         }
     }
 
@@ -422,32 +450,59 @@ function ThongTinChungVM(data) {
 
     ttcVMSelf.eventChangeHangHoa =function(){
         var lst = ttcVMSelf.lstDSHosoMK();
-        var res = lst.find(function (e) {
-            return e.fiMaHoso == self.fiMaHoso();
+        var pos = lst.find(function (e) {
+            return e.fiIdProduct == ttcVMSelf.fiIdProduct25();
         });
-        if (res){
-            var pos = res.fiProductList[0];
-            ko.mapping.fromJS(pos, {}, ttcVMSelf);
-            // ttcVMSelf.fiProIdNhom(pos.fiProIdNhom);
-            // ttcVMSelf.fiProIdPhanNhom(pos.fiProIdNhom);
-            // ttcVMSelf.fiProIdLoai(pos.fiProIdLoai);
-            // ttcVMSelf.fiProIdPhanLoai(pos.fiProIdPhanLoai);
-            // ttcVMSelf.fiProCode(pos.fiProCode);
-            // ttcVMSelf.fiProMadeIn(pos.fiProMadeIn);
-            // ttcVMSelf.fiProCountryCode(pos.fiProCountryCode);
-            // ttcVMSelf.fiProCountryName(pos.fiProCountryName);
-            // ttcVMSelf.fiProThanhPhan(pos.fiProThanhPhan);
-            // ttcVMSelf.fiProColor(pos.fiProColor);
-            // ttcVMSelf.fiProSoHieu(pos.fiProSoHieu);
-            // ttcVMSelf.fiProQuyChuan(pos.fiProQuyChuan);
-            // ttcVMSelf.fiProCVMienGiam(pos.fiProCVMienGiam);
-            // ttcVMSelf.fiProCVMienGiamNgay(pos.fiProCVMienGiamNgay);
-            // ttcVMSelf.fiProValueVN(pos.fiProValueVN);
-            // ttcVMSelf.fiProValueUSD(pos.fiProValueUSD);
-            // ttcVMSelf.fiPackageUnitName(pos.fiPackageUnitName);
-            // ttcVMSelf.fiPackageUnitCode(pos.fiPackageUnitCode);
-            // ttcVMSelf.fiProCLList(pos.fiProCLList);
-            // ttcVMSelf.fiProATList(pos.fiProATList);
+        if (pos){
+            // ko.mapping.fromJS(pos, {}, ttcVMSelf);
+            ttcVMSelf.fiProCVMienGiam(pos.fiProCVMienGiam);
+            ttcVMSelf.fiProCVMienGiamNgay(pos.fiProCVMienGiamNgay==null?null:new Date(pos.fiProCVMienGiamNgay));
+            ttcVMSelf.fiProCVMienGiamNgayText(new Date(pos.fiProCVMienGiamNgay).toShortDateString());
+
+            ttcVMSelf.fiProName(pos.fiProNameSelect);
+            ttcVMSelf.fiProIdNhom(pos.fiProIdNhom);
+            ttcVMSelf.fiProIdPhanNhom(pos.fiProIdPhanNhom);
+            ttcVMSelf.fiProIdLoai(pos.fiProIdLoai);
+            ttcVMSelf.fiProIdPhanLoai(pos.fiProIdPhanLoai);
+
+            ttcVMSelf.fiProIdNhomTemp(pos.fiProIdNhom);
+            ttcVMSelf.fiProIdPhanNhomTemp(pos.fiProIdPhanNhom);
+            ttcVMSelf.fiProIdLoaiTemp(pos.fiProIdLoai);
+            ttcVMSelf.fiProIdPhanLoaiTemp(pos.fiProIdPhanLoai);
+
+            ttcVMSelf.fiProNhom2D(pos.fiProNameNhom);
+            ttcVMSelf.fiProPhanNhom2D(pos.fiProNamePhanNhom);
+            ttcVMSelf.fiProLoai2D(pos.fiProNameLoai);
+            ttcVMSelf.fiProPhanLoai2D(pos.fiProNamePhanLoai);
+
+            ttcVMSelf.fiProCode(pos.fiProCode);
+            ttcVMSelf.fiProMadeIn(pos.fiProMadeIn);
+            ttcVMSelf.fiProCountryCode(pos.fiProCountryCode);
+            ttcVMSelf.fiProCountryName(pos.fiProCountryName);
+            ttcVMSelf.fiProThanhPhan(pos.fiProThanhPhan);
+            ttcVMSelf.fiProColor(pos.fiProColor);
+            ttcVMSelf.fiProSoHieu(pos.fiProSoHieu);
+            ttcVMSelf.fiProQuyChuan(pos.fiProQuyChuan);
+            ttcVMSelf.fiProCVMienGiam(pos.fiProCVMienGiam);
+            ttcVMSelf.fiProCVMienGiamNgay(pos.fiProCVMienGiamNgay);
+            ttcVMSelf.fiPackageUnitName(pos.fiPackageUnitName);
+            ttcVMSelf.fiPackageUnitCode(pos.fiPackageUnitCode);
+
+            ko.utils.arrayForEach(pos.fiProATList, function(at) {
+                at.isEnable=ko.observable(false);
+                at.isUpdate=ko.observable(false);
+                at.lstChiTieuAT = ttcVMSelf.lstChiTieuAT();
+            });
+            ko.utils.arrayForEach(pos.fiProCLList, function(cl) {
+                cl.isEnable =ko.observable(false);
+                cl.isUpdate =ko.observable(false);
+                cl.lstChiTieuAT = ttcVMSelf.lstChiTieuAT();
+            });
+            ttcVMSelf.fiProCLList(pos.fiProCLList);
+            ttcVMSelf.fiProATList(pos.fiProATList);
+
+        }else{
+            ttcVMSelf.clearForm();
         }
     }
 
@@ -489,12 +544,43 @@ function ThongTinChungVM(data) {
         ttcVMSelf.fiProValueUSD(null);
         ttcVMSelf.selectedHangHoa(null);
         ttcVMSelf.selectedIndex(null);
+        ttcVMSelf.fiProCVMienGiam(null);
+        ttcVMSelf.fiProCVMienGiamNgay(null);
+        ttcVMSelf.fiProQuyChuan(null);
+    }
+    ttcVMSelf.validateHangHoa=function(){
+        if(ttcVMSelf.fiHSType!=4){
+            if (ttcVMSelf.fiProIdNhom()==null){
+                app.Alert("Chưa chọn nhóm TACN");
+                return false;
+            }
+            if (ttcVMSelf.fiProIdPhanNhom()==null){
+                app.Alert("Chưa chọn phân nhóm TACN");
+                return false;
+            }
+            if (ttcVMSelf.fiProIdLoai()==null){
+                app.Alert("Chưa chọn loại TACN");
+                return false;
+            }
+            if (ttcVMSelf.fiProIdPhanLoai()==null){
+                app.Alert("Chưa chọn phân loại TACN");
+                return false;
+            }
+        }else{
+            if(ttcVMSelf.fiIdProduct25()==null){
+                app.Alert("Chưa chọn hàng hóa miễn kiểm");
+                return false;
+            }
+        }
+        return true;
     }
     ttcVMSelf.addProduct=function(data){
         var getAllForm = [ttcVMSelf.fiProSLKLList, ttcVMSelf.fiProATList,ttcVMSelf.fiProCLList];
         ttcVMSelf.errors = ko.validation.group(getAllForm, {deep: true, live: true, observable: true});
         if (!ttcVMSelf.validate()) return;
-
+        if(!ttcVMSelf.validateHangHoa()){
+         return;
+        }
         for (var i =0;i<ttcVMSelf.fiProCLList().length;i++){
             var getList = {
                 fiProCLTarg: ttcVMSelf.fiProCLList()[i].fiProCLTarg(),
@@ -915,30 +1001,10 @@ function ThongTinChungVM(data) {
                 kl.lstDMDVTSL = ttcVMSelf.lstDMDVTSL();
             });
         }
-        // ttcVMSelf.isUpdateHangHoa(true);
-        // ttcVMSelf.fiProName(data.fiProName);
-        // ttcVMSelf.fiProNameSelect(data.fiProNameSelect);
-        // ttcVMSelf.fiProIdNhom(data.fiProIdNhom);
-        // ttcVMSelf.fiProIdPhanNhom(data.fiProIdNhom);
-        // ttcVMSelf.fiProIdLoai(data.fiProIdLoai);
-        // ttcVMSelf.fiProIdPhanLoai(data.fiProIdPhanLoai);
-        // ttcVMSelf.fiProCode(data.fiProCode);
-        // ttcVMSelf.fiProMadeIn(data.fiProMadeIn);
-        // ttcVMSelf.fiProCountryCode(data.fiProCountryCode);
-        // ttcVMSelf.fiProCountryName(data.fiProCountryName);
-        // ttcVMSelf.fiProThanhPhan(data.fiProThanhPhan);
-        // ttcVMSelf.fiProColor(data.fiProColor);
-        // ttcVMSelf.fiProSoHieu(data.fiProSoHieu);
-        // ttcVMSelf.fiProQuyChuan(data.fiProQuyChuan);
-        // ttcVMSelf.fiProCVMienGiam(data.fiProCVMienGiam);
-        // ttcVMSelf.fiProCVMienGiamNgay(data.fiProCVMienGiamNgay);
-        // ttcVMSelf.fiProValueVN(data.fiProValueVN);
-        // ttcVMSelf.fiProValueUSD(data.fiProValueUSD);
-        // ttcVMSelf.fiPackageUnitName(data.fiPackageUnitName);
-        // ttcVMSelf.fiPackageUnitCode(data.fiPackageUnitCode);
-        // ttcVMSelf.fiProCLList(data.fiProCLList);
-        // ttcVMSelf.fiProATList(data.fiProATList);
-        // ttcVMSelf.fiProSLKLList(data.fiProSLKLList);
+        console.log(data);
+        ttcVMSelf.fiProIdPhanNhomTemp(data.fiProIdPhanNhom);
+        ttcVMSelf.fiProIdLoaiTemp(data.fiProIdLoai);
+        ttcVMSelf.fiProIdPhanLoaiTemp(data.fiProIdLoai);
         ko.mapping.fromJS(data, {}, ttcVMSelf);
         ttcVMSelf.selectedIndex(index);
         ttcVMSelf.selectedHangHoa(data);

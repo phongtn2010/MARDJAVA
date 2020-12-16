@@ -14,7 +14,11 @@ public interface TbdHoso26Repository extends JpaRepository<TbdHoso26, Integer>, 
     TbdHoso26 findByFiIdHoSo26(Integer parseInt);
     TbdHoso26 findByFiMaHoso(String nswFileCode);
 
-    @Query("select hs from TbdHoso26 hs where hs.fiActive=true and hs.fiSoCVMienKiem is not null and hs.fiHieuLucToiNgay<=?1 and hs.fiMasothue=?2 " +
-            "and hs.fiTrangthai=4 order by hs.fiNgayKyCV")
+    @Query("select hs from TbdHoso26 hs where hs.fiActive=true and hs.fiSoCVMienKiem is not null and hs.fiHieuLucToiNgay>=?1 and hs.fiMasothue=?2  " +
+            " and hs.fiTrangthai=4 order by hs.fiNgayKyCV")
     List<TbdHoso26> findCongVanMienKiem(Date now,String taxcode);
+
+    @Query("select hs from TbdHoso26 hs where hs.fiActive=true  and hs.fiMasothue=?1 " +
+            " and hs.fiTrangthai=4 order by hs.fiNgayKyCV")
+    List<TbdHoso26> findDSMienKiem(String taxcode);
 }

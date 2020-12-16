@@ -58,7 +58,9 @@ public class WebService26Impl implements WebService26{
         ResponseJson response = WsServiceHelper.createSendRequest(Constant26.WebServiceURL.get(environment), message);
         if(response.isSuccess()){
             tbdHoso26.setFiTrangthai(statusUpdate);
+            tbdHoso26.setFiNgayGui(new Date());
         }
+        tbdHoso26Service.update(tbdHoso26);
         tbdLichsu26Service.save(createLichSuEntity(tbdHoso26,"Gửi mới hồ sơ",null,createHeaderFromTBDHoso26(tbdHoso26)));
         return response;
     }
@@ -115,6 +117,10 @@ public class WebService26Impl implements WebService26{
             tbdHoso26.setFiTenNguoiKyCV(cvMK.getFiTenNguoiKyCV());
             tbdHoso26.setFiHieuLucTuNgay(cvMK.getFiHieuLucTuNgay());
             tbdHoso26.setFiHieuLucToiNgay(cvMK.getFiHieuLucToiNgay());
+
+            tbdHoso26.getFiProductList().get(0).setFiProCVMienGiam(cvMK.getFiSoCVMienKiem());
+            tbdHoso26.getFiProductList().get(0).setFiProCVMienGiamNgay(cvMK.getFiNgayKyCV());
+
             tbdHoso26Service.update(tbdHoso26);
             tbdLichsu26Service.save(createLichSuEntity(tbdHoso26,"BNN gửi CV miễn giảm kiểm tra",
                     tbdHoso26.getFiTenNguoiKyCV(),createHeaderFromTBDHoso26(tbdHoso26)));
