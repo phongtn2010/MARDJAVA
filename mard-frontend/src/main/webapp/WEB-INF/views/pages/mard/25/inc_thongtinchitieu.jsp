@@ -41,7 +41,7 @@
                                     <a data-bind="click: $parent.updateListCL"> <i class="fa fa-save" aria-hidden="true"></i>
                                         </a>
                                 </span>
-
+                            <div data-bind="visible: $parent.fiHSType()!=4">
                                 <span data-bind="if: (!isUpdate())">
 						            &nbsp;&nbsp;&nbsp;
 						            <a data-bind="click: $parent.editHangHoa.bind($data, $data, $index())"> <i class="fa fa-edit" aria-hidden="true"></i> </a>
@@ -50,6 +50,7 @@
                                     <i class="fa fa-lg fa-trash"></i>
                                 </a>
 					            </span>
+                            </div>
                             </td>
                         </tr>
                         </tbody>
@@ -134,7 +135,7 @@
                                     <a data-bind="click: $parent.updateListAT"> <i class="fa fa-save" aria-hidden="true"></i>
                                         </a>
                                 </span>
-
+                                <div data-bind="visible: $parent.fiHSType()!=4">
                                 <span data-bind="if: (!isUpdate())">
 						            &nbsp;&nbsp;&nbsp;
 						            <a data-bind="click: $parent.editHangHoa.bind($data, $data, $index())"> <i class="fa fa-edit" aria-hidden="true"></i> </a>
@@ -143,6 +144,7 @@
                                     <i class="fa fa-lg fa-trash"></i>
                                 </a>
 					            </span>
+                                </div>
                             </td>
                         </tr>
                         </tbody>

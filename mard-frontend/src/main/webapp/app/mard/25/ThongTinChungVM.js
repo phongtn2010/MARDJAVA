@@ -5,6 +5,11 @@ function ThongTinChungVM(data) {
     ttcVMSelf.fiProIdLoaiTemp = ko.observable(null);
     ttcVMSelf.fiProIdPhanLoaiTemp = ko.observable(null);
 
+    ttcVMSelf.fiProIdNhomUpdate = ko.observable(null);
+    ttcVMSelf.fiProIdPhanNhomUpdate= ko.observable(null);
+    ttcVMSelf.fiProIdLoaiUpdate = ko.observable(null);
+    ttcVMSelf.fiProIdPhanLoaiUpdate = ko.observable(null);
+
     ttcVMSelf.fiProNhom2D = ko.observable(null);
     ttcVMSelf.fiProPhanNhom2D = ko.observable(null);
     ttcVMSelf.fiProLoai2D = ko.observable(null);
@@ -157,13 +162,8 @@ function ThongTinChungVM(data) {
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
 
-    ttcVMSelf.changeHoSoType =function(hsType){
-        // if(hsType!=4){
-        //     $("#model-congvan").hide();
-        // }else {
-        //     $("#model-congvan").show();
-        // }
-        // console.log(ttcVMSelf.fiHSType());
+    ttcVMSelf.changeHoSoType =function(){
+        ttcVMSelf.fiProductList([]);
     }
     ttcVMSelf.fiProValueVN  = ko.observable((data && data.hasOwnProperty('fiProValueVN ')) ? data.fiProValueVN  : null).
     extend({
@@ -363,75 +363,52 @@ function ThongTinChungVM(data) {
             ttcVMSelf.fiGDK(pos.fiGDKR);
 
     }
-    ttcVMSelf.eventChangeNhom =function(obj,event){
+    ttcVMSelf.eventChangeNhom =function(){
         var id =ttcVMSelf.fiProIdNhom();
-        if (event.originalEvent) { //user changed
-            ttcVMSelf.fiProIdNhom(ttcVMSelf.fiProIdNhom());
-            if(id !== 'undefined'&&id!=null){
-                ttcVMSelf.lstPhanNhom([]);
-                app.makeGet({
-                    url: '/mard/25/danhmuc/getby-catparent/'+id,
-                    success: function(res) {
-                        ttcVMSelf.lstPhanNhom(res.data);
+        if(id !== 'undefined'&&id!=null){
+            app.makeGet({
+                url: '/mard/25/danhmuc/getby-catparent/'+id,
+                success: function(res) {
+                    ttcVMSelf.lstPhanNhom(res.data);
+                    if(ttcVMSelf.fiProIdPhanNhomTemp()!=null){
+                        var idPhanNhom = ttcVMSelf.findCatIdByCatNote(ttcVMSelf.lstPhanNhom(),ttcVMSelf.fiProIdPhanNhomTemp());
+                        ttcVMSelf.fiProIdPhanNhom(idPhanNhom);
                     }
-                });
-            }
-        } else { // program changed
-            if(id !== 'undefined'&&id!=null){
-                app.makeGet({
-                    url: '/mard/25/danhmuc/getby-catparent/'+id,
-                    success: function(res) {
-                        ttcVMSelf.lstPhanNhom(res.data);
-                    }
-                });
-            }
+                }
+            });
         }
     }
-    ttcVMSelf.eventChangePhanNhom =function(obj,event){
-        var id =ttcVMSelf.fiProIdPhanNhom();
-        if (event.originalEvent) { //user changed
-            if(id !== 'undefined'&&id!=null){
-                ttcVMSelf.lstLoai([]);
-                app.makeGet({
-                    url: '/mard/25/danhmuc/getby-catparent/'+id,
-                    success: function(res) {
-                        ttcVMSelf.lstLoai(res.data);
-                    }
-                });
-            }
-        }else{
-            if(id !== 'undefined'&&id!=null){
-                app.makeGet({
-                    url: '/mard/25/danhmuc/getby-catparent/'+id,
-                    success: function(res) {
-                        ttcVMSelf.lstLoai(res.data);
-                    }
-                });
-            }
-        }
 
+    ttcVMSelf.eventChangePhanNhom =function(){
+        var id =ttcVMSelf.fiProIdPhanNhom();
+        if(id !== 'undefined'&&id!=null){
+            ttcVMSelf.lstLoai([]);
+            app.makeGet({
+                url: '/mard/25/danhmuc/getby-catparent/'+id,
+                success: function(res) {
+                    ttcVMSelf.lstLoai(res.data);
+                    if(ttcVMSelf.fiProIdLoaiTemp()!=null){
+                        var idLoai = ttcVMSelf.findCatIdByCatNote(ttcVMSelf.lstLoai(),ttcVMSelf.fiProIdLoaiTemp());
+                        ttcVMSelf.fiProIdLoai(idLoai);
+                    }
+                }
+            });
+        }
     }
-    ttcVMSelf.eventChangeLoai =function(obj,event){
+    ttcVMSelf.eventChangeLoai =function(){
         var id =ttcVMSelf.fiProIdLoai();
-        if (event.originalEvent) { //user changed
-            if(id !== 'undefined'&&id!=null){
-                ttcVMSelf.lstPhanLoai([]);
-                app.makeGet({
-                    url: '/mard/25/danhmuc/getby-catparent/'+id,
-                    success: function(res) {
-                        ttcVMSelf.lstPhanLoai(res.data);
+        ttcVMSelf.lstPhanLoai([]);
+        if(id !== 'undefined'&&id!=null){
+            app.makeGet({
+                url: '/mard/25/danhmuc/getby-catparent/'+id,
+                success: function(res) {
+                    ttcVMSelf.lstPhanLoai(res.data);
+                    if(ttcVMSelf.fiProIdPhanLoaiTemp()!=null){
+                        var idPhanLoai = ttcVMSelf.findCatIdByCatNote(ttcVMSelf.lstPhanLoai(),ttcVMSelf.fiProIdPhanLoaiTemp());
+                        ttcVMSelf.fiProIdPhanLoai(idPhanLoai);
                     }
-                });
-            }
-        }else{
-            if(id !== 'undefined'&&id!=null){
-                app.makeGet({
-                    url: '/mard/25/danhmuc/getby-catparent/'+id,
-                    success: function(res) {
-                        ttcVMSelf.lstPhanLoai(res.data);
-                    }
-                });
-            }
+                }
+            });
         }
     }
 
@@ -459,7 +436,7 @@ function ThongTinChungVM(data) {
             ttcVMSelf.fiProCVMienGiamNgay(pos.fiProCVMienGiamNgay==null?null:new Date(pos.fiProCVMienGiamNgay));
             ttcVMSelf.fiProCVMienGiamNgayText(new Date(pos.fiProCVMienGiamNgay).toShortDateString());
 
-            ttcVMSelf.fiProName(pos.fiProNameSelect);
+            ttcVMSelf.fiProName(pos.fiProName);
             ttcVMSelf.fiProIdNhom(pos.fiProIdNhom);
             ttcVMSelf.fiProIdPhanNhom(pos.fiProIdPhanNhom);
             ttcVMSelf.fiProIdLoai(pos.fiProIdLoai);
@@ -492,11 +469,13 @@ function ThongTinChungVM(data) {
                 at.isEnable=ko.observable(false);
                 at.isUpdate=ko.observable(false);
                 at.lstChiTieuAT = ttcVMSelf.lstChiTieuAT();
+                at.fiIdProAT=null;
             });
             ko.utils.arrayForEach(pos.fiProCLList, function(cl) {
                 cl.isEnable =ko.observable(false);
                 cl.isUpdate =ko.observable(false);
                 cl.lstChiTieuAT = ttcVMSelf.lstChiTieuAT();
+                cl.fiIdProCL=null;
             });
             ttcVMSelf.fiProCLList(pos.fiProCLList);
             ttcVMSelf.fiProATList(pos.fiProATList);
@@ -549,7 +528,7 @@ function ThongTinChungVM(data) {
         ttcVMSelf.fiProQuyChuan(null);
     }
     ttcVMSelf.validateHangHoa=function(){
-        if(ttcVMSelf.fiHSType!=4){
+        if(ttcVMSelf.fiHSType()!=4){
             if (ttcVMSelf.fiProIdNhom()==null){
                 app.Alert("Chưa chọn nhóm TACN");
                 return false;
@@ -574,7 +553,82 @@ function ThongTinChungVM(data) {
         }
         return true;
     }
+    ttcVMSelf.addProduct2D=function(){
+        var getAllForm = [ttcVMSelf.fiProSLKLList, ttcVMSelf.fiProATList,ttcVMSelf.fiProCLList];
+        ttcVMSelf.errors = ko.validation.group(getAllForm, {deep: true, live: true, observable: true});
+        if (!ttcVMSelf.validate()) return;
+        if(!ttcVMSelf.validateHangHoa()){
+            return;
+        }
+        for (var i =0;i<ttcVMSelf.fiProSLKLList().length;i++){
+            var massName=ttcVMSelf.findNameByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode);
+            var amountName=ttcVMSelf.findNameByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode);
+            var getList = {
+                fiProSLKLMass: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMass,
+                fiProSLKLMassTan: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassTan,
+                fiProSLKLMassUnitName: massName,
+                fiProSLKLMassUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode(),
+                fiProSLKLAmount: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmount,
+                fiProSLKLAmountUnitName: amountName,
+                lstDMDVT: ttcVMSelf.lstDMDVT(),
+                lstDMDVTSL: ttcVMSelf.lstDMDVTSL(),
+                isEnable: ttcVMSelf.fiProSLKLList()[i].isEnable,
+                isUpdate: ttcVMSelf.fiProSLKLList()[i].isUpdate,
+                fiProSLKLAmountUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode
+            }
+            ttcVMSelf.listSLKL.push(getList);
+        }
+        var kl;
+        var sl;
+        ko.utils.arrayForEach(ttcVMSelf.listSLKL(), function(slkl) {
+            kl=slkl.fiProSLKLMass()+' '+slkl.fiProSLKLMassUnitName();
+            sl=slkl.fiProSLKLAmount()+' '+slkl.fiProSLKLAmountUnitName();
+        });
+        var item ={
+            fiIdProduct:null,
+            fiProName: ttcVMSelf.fiProName(),
+            fiTrangThaiHangHoa: ttcVMSelf.fiTrangThaiHangHoa(),
+            fiProductKL: kl,
+            fiProductSL: sl,
+            fiProThanhPhan: ttcVMSelf.fiProThanhPhan(),
+            fiProIdNhom: ttcVMSelf.fiProIdNhomTemp(),
+            fiProNameNhom: ttcVMSelf.fiProNhom2D(),
+            fiProIdPhanNhom: ttcVMSelf.fiProIdPhanNhomTemp(),
+            fiProNamePhanNhom: ttcVMSelf.fiProPhanNhom2D,
+            fiProIdLoai: ttcVMSelf.fiProIdLoaiTemp(),
+            fiProNameLoai: ttcVMSelf.fiProLoai2D(),
+            fiProIdPhanLoai: ttcVMSelf.fiProIdPhanLoaiTemp(),
+            fiProNamePhanLoai: ttcVMSelf.fiProPhanLoai2D(),
+            fiProCode: ttcVMSelf.fiProCode(),
+            fiProMadeIn: ttcVMSelf.fiProMadeIn(),
+            fiProCountryName: ttcVMSelf.fiProCountryName(),
+            fiProCountryCode: ttcVMSelf.fiProCountryCode(),
+            fiProValueVN: ttcVMSelf.fiProValueVN(),
+            fiProColor: ttcVMSelf.fiProColor(),
+            fiProSoHieu: ttcVMSelf.fiProSoHieu(),
+            fiProQuyChuan: ttcVMSelf.fiProQuyChuan(),
+            fiProValueUSD: ttcVMSelf.fiProValueUSD(),
+            fiPackageUnitCode: ttcVMSelf.fiPackageUnitCode(),
+            fiPackageUnitName: ttcVMSelf.fiPackageUnitName(),
+            fiProCLList:  ttcVMSelf.fiProCLList(),
+            fiProSLKLList: ttcVMSelf.listSLKL(),
+            fiProATList: ttcVMSelf.fiProATList(),
+            fiTaxCode: hosoUsername
+        }
+        if(ttcVMSelf.selectedHangHoa()!=null&&ttcVMSelf.selectedIndex()!=null){
+            ttcVMSelf.fiProductList.splice(ttcVMSelf.selectedIndex(), 1);
+            ttcVMSelf.fiProductList.splice(ttcVMSelf.selectedIndex(), 0, item);
+        }else{
+            ttcVMSelf.fiProductList.push(item);
+        }
+        ttcVMSelf.clearForm();
+        $("#modal_addAnimal").modal('hide');
+    }
     ttcVMSelf.addProduct=function(data){
+        if (ttcVMSelf.fiHSType()==4){
+            ttcVMSelf.addProduct2D();
+            return;
+        }
         var getAllForm = [ttcVMSelf.fiProSLKLList, ttcVMSelf.fiProATList,ttcVMSelf.fiProCLList];
         ttcVMSelf.errors = ko.validation.group(getAllForm, {deep: true, live: true, observable: true});
         if (!ttcVMSelf.validate()) return;
@@ -641,7 +695,7 @@ function ThongTinChungVM(data) {
         var loai=ttcVMSelf.findCatNoteById(ttcVMSelf.lstLoai(),ttcVMSelf.fiProIdLoai());
         var phanLoai=ttcVMSelf.findCatNoteById(ttcVMSelf.lstPhanLoai(),ttcVMSelf.fiProIdPhanLoai());
         var item ={
-            fiProName: ttcVMSelf.fiProName()==null?ttcVMSelf.fiProNameSelect():ttcVMSelf.fiProName(),
+            fiProName: ttcVMSelf.fiProName(),
             fiTrangThaiHangHoa: ttcVMSelf.fiTrangThaiHangHoa(),
             fiProductKL: kl,
             fiProductSL: sl,
@@ -787,7 +841,7 @@ function ThongTinChungVM(data) {
         if ($('#modal_updateAnimal').hasClass('in')) {
             $('#modal_updateAnimal').modal('hide')
         }
-        ;
+
     }
 
     ttcVMSelf.updateListCL= function (item) {
@@ -1064,6 +1118,15 @@ function ThongTinChungVM(data) {
         })
         if (pos)
             return pos.fiCatNote;
+        else
+            return code;
+    }
+    ttcVMSelf.findCatIdByCatNote = function(lst,code){
+        var pos = lst.find(function (e) {
+            return e.fiCatNote == code;
+        });
+        if (pos)
+            return pos.fiidcat;
         else
             return code;
     }

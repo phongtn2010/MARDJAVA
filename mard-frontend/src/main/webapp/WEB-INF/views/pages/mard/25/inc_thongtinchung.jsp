@@ -120,7 +120,7 @@
                             <select class="form-control"  data-bind="options : lstHoSoType, optionsValue : 'fiCatType',
                                                                      selectedText:fiHSTypeName,
                                                                      optionsText : 'fiCatTypeName',
-                                                    value: fiHSType, enable: $root.isEditable(), event: {change: changeHoSoType(fiHSType())}">
+                                                    value: fiHSType, enable: $root.isEditable(), event: {change: changeHoSoType}">
                             </select>
                         </div>
                     </div>
