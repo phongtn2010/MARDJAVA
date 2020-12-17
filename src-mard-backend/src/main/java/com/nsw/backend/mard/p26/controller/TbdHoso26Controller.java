@@ -138,7 +138,7 @@ public class TbdHoso26Controller extends BaseController {
                                 "Có lỗi trong quá trình gửi! " + response.getMessage(), HttpStatus.OK);
             }
             else{
-                return createResponse(null,true, "Bạn đã được cấp công văn số: "+tbdHoso26List.get(0).getFiSoCVMienKiem()
+                return createResponse(null,false, "Bạn đã được cấp công văn số: "+tbdHoso26List.get(0).getFiSoCVMienKiem()
                         +" vào năm nay, bạn không thể thực hiện yêu cầu xin cấp tiếp", HttpStatus.OK);
             }
 

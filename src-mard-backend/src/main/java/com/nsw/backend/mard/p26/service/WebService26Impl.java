@@ -59,9 +59,9 @@ public class WebService26Impl implements WebService26{
         if(response.isSuccess()){
             tbdHoso26.setFiTrangthai(statusUpdate);
             tbdHoso26.setFiNgayGui(new Date());
+            tbdHoso26Service.update(tbdHoso26);
+            tbdLichsu26Service.save(createLichSuEntity(tbdHoso26,"Gửi mới hồ sơ",null,createHeaderFromTBDHoso26(tbdHoso26)));
         }
-        tbdHoso26Service.update(tbdHoso26);
-        tbdLichsu26Service.save(createLichSuEntity(tbdHoso26,"Gửi mới hồ sơ",null,createHeaderFromTBDHoso26(tbdHoso26)));
         return response;
     }
 

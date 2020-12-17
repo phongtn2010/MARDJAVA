@@ -5,10 +5,7 @@ function ThongTinChungVM(data) {
     ttcVMSelf.fiProIdLoaiTemp = ko.observable(null);
     ttcVMSelf.fiProIdPhanLoaiTemp = ko.observable(null);
 
-    ttcVMSelf.fiProIdNhomUpdate = ko.observable(null);
-    ttcVMSelf.fiProIdPhanNhomUpdate= ko.observable(null);
-    ttcVMSelf.fiProIdLoaiUpdate = ko.observable(null);
-    ttcVMSelf.fiProIdPhanLoaiUpdate = ko.observable(null);
+
 
     ttcVMSelf.fiProNhom2D = ko.observable(null);
     ttcVMSelf.fiProPhanNhom2D = ko.observable(null);
@@ -526,6 +523,16 @@ function ThongTinChungVM(data) {
         ttcVMSelf.fiProCVMienGiam(null);
         ttcVMSelf.fiProCVMienGiamNgay(null);
         ttcVMSelf.fiProQuyChuan(null);
+
+        ttcVMSelf.fiProIdNhomTemp(null);
+        ttcVMSelf.fiProIdPhanNhomTemp(null);
+        ttcVMSelf.fiProIdLoaiTemp(null);
+        ttcVMSelf.fiProIdPhanLoaiTemp(null);
+
+        ttcVMSelf.fiProNhom2D(null);
+        ttcVMSelf.fiProPhanNhom2D(null);
+        ttcVMSelf.fiProLoai2D(null);
+        ttcVMSelf.fiProPhanLoai2D(null);
     }
     ttcVMSelf.validateHangHoa=function(){
         if(ttcVMSelf.fiHSType()!=4){

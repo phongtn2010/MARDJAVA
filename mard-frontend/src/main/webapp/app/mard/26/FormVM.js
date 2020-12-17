@@ -73,7 +73,7 @@ function FormVM(options) {
             // form26Sefl.lstHanghoa=ko.observableArray(product);
             for (var j =0;j<getLstCL.length;j++){
                 getLstCL[j].fiIdHH26=null;
-                getLstCL[j].fiIdProCL26=null;
+                getLstCL[j].fiIdCL26=null;
             }
             for (var j =0;j<getLstAT.length;j++){
                 getLstAT[j].fiIdHH26=null;
@@ -81,7 +81,7 @@ function FormVM(options) {
             }
             for (var j =0;j<getLstSLKL.length;j++){
                 getLstSLKL[j].fiIdHH26=null;
-                getLstSLKL[j].fiIdProSLKL26=null;
+                getLstSLKL[j].fiIdSLKL26=null;
             }
         });
 
@@ -300,6 +300,7 @@ function FormVM(options) {
             fiProductList:form26Sefl.lstHanghoa(),
             fiMasothue:hosoUsername,
         }
+        console.log(item);
         return item;
     }
     // form26Sefl.applyStates =function () {
