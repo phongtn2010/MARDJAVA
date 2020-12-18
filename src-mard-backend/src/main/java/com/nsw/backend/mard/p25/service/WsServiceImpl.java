@@ -772,13 +772,17 @@ public class WsServiceImpl implements WsService {
 
     private void themHangHoaMK(TbdHoso25 tbdHoso25, TbdHanghoa25 tbdHanghoa25) {
         TbdHanghoaMK25 tbdHanghoaMK25 = new TbdHanghoaMK25();
-        BeanUtils.copyProperties(tbdHanghoa25, tbdHanghoaMK25);
+        TbdHanghoaMK25 hanghoaMK25 = tbdHanghoaMK25Service.findByFiIdProduct(tbdHanghoa25.getFiIdProduct());
+        if (hanghoaMK25!=null){
+            tbdHanghoaMK25.setFiIdMienKiem(hanghoaMK25.getFiIdMienKiem());
+        }else{
+            BeanUtils.copyProperties(tbdHanghoa25, tbdHanghoaMK25);
+        }
         tbdHanghoaMK25.setFiTaxCode(tbdHoso25.getFiTaxCode());
         tbdHanghoaMK25.setFiProHash(Constant25.hashString(tbdHanghoa25.tbdHangHoa25ToString()));
         tbdHanghoaMK25.setFiHsType(tbdHoso25.getFiHSType());
         tbdHanghoaMK25.setFiNgayCap(new Date());
         tbdHanghoaMK25.setFiActive(Boolean.TRUE);
-
         List<TbdHanghoaMK25> mk25List = tbdHanghoaMK25Service.findByFiProHash(tbdHanghoaMK25.getFiProHash());
         tbdHanghoaMK25.setFiOrder(mk25List.size() + 1);
         tbdHanghoaMK25Service.save(tbdHanghoaMK25);

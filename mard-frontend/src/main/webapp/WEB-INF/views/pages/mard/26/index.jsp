@@ -218,7 +218,7 @@
                                            data-bind="text : fiMaHoso"></a>
                                     </td>
                                     <td class="text-center" data-bind="date: fiNgaytao"></td>
-                                    <td class="text-center" data-bind=""></td>
+                                    <td class="text-center" data-bind="date: fiNgayKyCV"></td>
                                     <td class="text-center" data-bind="text: fiTenDn"></td>
                                     <td class="text-center" data-bind="text: $parent.getTrangThaiHS(fiTrangthai)"></td>
                                     <td class="text-center">

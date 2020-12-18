@@ -99,6 +99,7 @@ public class MARD26Api extends BaseApi {
             @RequestBody FilterForm filter
     ) {
         filter.setNguoiTao(getUsername());
+        filter.setMaSoThue(getUsername());
         ResponseJson json = BackendRequestHelper.getInstance().doPostRequest(MARD26Constant.getInstance().getApiUrl(environment, MARD26Constant.TbdHoso26API.HOSO_SEARCH), filter);
         return json;
     }

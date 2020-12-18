@@ -24,7 +24,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Table(name = "TBDHANGHOAMK25", schema = "MARD")
-public class TbdHanghoaMK25 implements Serializable {
+public class TbdHanghoaMK25 extends CmonBaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public static final String SEQUENCE_NAME = "TBDHANGHOAMK25_SEQ";
@@ -156,21 +156,21 @@ public class TbdHanghoaMK25 implements Serializable {
     @Column(name = "FI_NGAYTHUHOI")
     private Date fiNgayThuHoi;
 
-
-    //Danh sách chất lượng kèm theo
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "FI_PRO_ID")
-    private List<TbdHanghoaCL25> fiProCLList;
-
-    //Danh sách an toàn kèm theo
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "FI_PRO_ID")
-    private List<TbdHanghoaAT25> fiProATList;
-
-    //Danh sách số lượng khối lượng kèm theo
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "FI_PRO_ID")
-    private List<TbdHanghoaSLKL25> fiProSLKLList;
+//
+//    //Danh sách chất lượng kèm theo
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name = "FI_ID_MK")
+//    private List<TbdHanghoaCL25> fiProCLList;
+//
+//    //Danh sách an toàn kèm theo
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name = "FI_ID_MK")
+//    private List<TbdHanghoaAT25> fiProATList;
+//
+//    //Danh sách số lượng khối lượng kèm theo
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name = "FI_ID_MK")
+//    private List<TbdHanghoaSLKL25> fiProSLKLList;
 
 
     //File kèm theo
@@ -178,14 +178,14 @@ public class TbdHanghoaMK25 implements Serializable {
 //    @JoinColumn(name = "FI_ID_HANGHOA")
 //    private List<TbdHangHoaFile25> fiHangHoaFileList;
 
-    @Transient
-    private List<TbdChiTieuDG25> fiListChiTieu;
-    public TbdHanghoaMK25() {
-        super();
-        fiProCLList = new ArrayList<>();
-        fiProATList = new ArrayList<>();
-        fiProSLKLList = new ArrayList<>();
-    }
+//    @Transient
+//    private List<TbdChiTieuDG25> fiListChiTieu;
+//    public TbdHanghoaMK25() {
+//        super();
+//        fiProCLList = new ArrayList<>();
+//        fiProATList = new ArrayList<>();
+//        fiProSLKLList = new ArrayList<>();
+//    }
 
 
 }

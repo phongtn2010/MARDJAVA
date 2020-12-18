@@ -110,7 +110,7 @@
                             <div class="col-md-4">
                                 <select data-bind="options : lstPhanNhom, optionsValue : 'fiidcat',  optionsText : 'fiCatTypeName',
                                 optionsCaption: '<spring:message code="mard.25.chon.phannhom"/>',
-                                                    value: fiProIdPhanNhom ,event : {change : eventChangePhanNhom}, visible: fiHSType()!=4" class="form-control"></select>
+                                                    value: fiProIdPhanNhom ,event : {click : eventChangePhanNhom}, visible: fiHSType()!=4" class="form-control"></select>
                                 <input data-bind="trimedValue: fiProPhanNhom2D, visible: fiHSType()==4" class="form-control" value="" disabled/>
                             </div>
                             <div class="col-md-2 nsw-text-right">
@@ -120,7 +120,7 @@
                                 <select data-bind="options: lstLoai,
                                                     optionsText: 'fiCatTypeName',
                                                     optionsValue: 'fiidcat',optionsCaption: '<spring:message code="mard.25.chon.loai"/>',
-                                                    value: fiProIdLoai,event : {change : eventChangeLoai}, visible: fiHSType()!=4" class="form-control"></select>
+                                                    value: fiProIdLoai,event : {click : eventChangeLoai}, visible: fiHSType()!=4" class="form-control"></select>
                                 <input data-bind="trimedValue: fiProLoai2D, visible: fiHSType()==4" class="form-control" value="" disabled/>
                             </div>
                         </div>

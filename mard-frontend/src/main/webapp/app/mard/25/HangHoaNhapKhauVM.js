@@ -200,6 +200,11 @@ function HangHoaNhapKhauVM (options) {
         }
         kdnkVMSelf.errors = ko.validation.group({benBan,benMua,thongTinKy,thongTinLienHe}, {deep: true, live: true, observable: true});
         // kdnkVMSelf.errors = ko.validation.group(kdnkVMSelf.thongtinChungVM, {deep: true, live: true, observable: true});
+        if (kdnkVMSelf.fiProductList().length < 1) {
+            kdnkVMSelf.errors.showAllMessages();
+            app.Alert("Bạn chưa nhập hàng hóa !");
+            return false;
+        }
         if (kdnkVMSelf.errors().length > 0) {
             kdnkVMSelf.errors.showAllMessages();
             app.Alert("Bạn cần nhập đầy đủ các trường bắt buộc");

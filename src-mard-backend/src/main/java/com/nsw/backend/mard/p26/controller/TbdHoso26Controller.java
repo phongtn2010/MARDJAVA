@@ -139,7 +139,8 @@ public class TbdHoso26Controller extends BaseController {
             }
             else{
                 return createResponse(null,false, "Bạn đã được cấp công văn số: "+tbdHoso26List.get(0).getFiSoCVMienKiem()
-                        +" vào năm nay, bạn không thể thực hiện yêu cầu xin cấp tiếp", HttpStatus.OK);
+                        +" vào ngày: "+tbdHoso26List.get(0).getFiNgayKyCV()+". Bạn không thể xin cấp công văn trước khi hiệu lực của công văn: " +tbdHoso26List.get(0).getFiSoCVMienKiem() +
+                        " hết hạn vào ngày "+tbdHoso26List.get(0).getFiHieuLucToiNgay(), HttpStatus.OK);
             }
 
 

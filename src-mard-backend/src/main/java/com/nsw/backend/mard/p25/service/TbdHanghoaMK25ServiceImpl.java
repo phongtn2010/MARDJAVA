@@ -1,5 +1,7 @@
 package com.nsw.backend.mard.p25.service;
 
+import com.nsw.backend.mard.p25.dto.FilterFormHangHoaMK25;
+import com.nsw.backend.mard.p25.dto.FilterResultHangHoaMK25;
 import com.nsw.backend.mard.p25.model.TbdHanghoaMK25;
 import com.nsw.backend.mard.p25.repositories.TbdHanghoaMK25Repository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +33,10 @@ public class TbdHanghoaMK25ServiceImpl implements TbdHanghoaMK25Service {
     @Override
     public TbdHanghoaMK25 findByFiIdProduct(Integer fiIdProduct) {
         return tbdHanghoaMK25Repository.findByFiIdProduct(fiIdProduct);
+    }
+
+    @Override
+    public FilterResultHangHoaMK25 searchHanghoaMK25(FilterFormHangHoaMK25 filter) {
+        return tbdHanghoaMK25Repository.searchHanghoaMK25(filter);
     }
 }

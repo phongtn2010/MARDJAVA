@@ -66,6 +66,7 @@ public class TbdHoso25 implements Serializable {
     private Date fiProCVMienGiamNgay;
     private String fiIdDVXL;
     private String fiNameDVXL;
+    private String fiSoXacNhanDon;
 
     private List<TbdHanghoa25> fiProductList;
 

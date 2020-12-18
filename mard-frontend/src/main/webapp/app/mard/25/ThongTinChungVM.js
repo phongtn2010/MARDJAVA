@@ -360,52 +360,65 @@ function ThongTinChungVM(data) {
             ttcVMSelf.fiGDK(pos.fiGDKR);
 
     }
+    ttcVMSelf.getCatByParentTACN =function(id,callback){
+        app.makeGet({
+            url: '/mard/25/danhmuc/getby-catparent/'+id,
+            success: function(res) {
+                callback(res.data);
+            }
+        });
+    }
     ttcVMSelf.eventChangeNhom =function(){
         var id =ttcVMSelf.fiProIdNhom();
+        console.log("change ");
+        ttcVMSelf.lstPhanNhom([]);
         if(id !== 'undefined'&&id!=null){
-            app.makeGet({
-                url: '/mard/25/danhmuc/getby-catparent/'+id,
-                success: function(res) {
-                    ttcVMSelf.lstPhanNhom(res.data);
-                    if(ttcVMSelf.fiProIdPhanNhomTemp()!=null){
-                        var idPhanNhom = ttcVMSelf.findCatIdByCatNote(ttcVMSelf.lstPhanNhom(),ttcVMSelf.fiProIdPhanNhomTemp());
-                        ttcVMSelf.fiProIdPhanNhom(idPhanNhom);
-                    }
+            ttcVMSelf.getCatByParentTACN(id,function (res) {
+                ttcVMSelf.lstPhanNhom(res);
+                console.log(ttcVMSelf.fiProIdPhanNhomTemp());
+                if(ttcVMSelf.fiProIdPhanNhomTemp()!=null){
+                    var idPhanNhom = ttcVMSelf.findCatIdByCatNote(ttcVMSelf.lstPhanNhom(),ttcVMSelf.fiProIdPhanNhomTemp());
+                    ttcVMSelf.fiProIdPhanNhom(idPhanNhom);
                 }
-            });
-        }
-    }
+                if(ttcVMSelf.fiProIdPhanNhom()!=null){
+                    ttcVMSelf.getCatByParentTACN(ttcVMSelf.fiProIdPhanNhom(),function (res) {
+                        ttcVMSelf.lstLoai(res);
+                        if(ttcVMSelf.fiProIdLoaiTemp()!=null){
+                            var idLoai = ttcVMSelf.findCatIdByCatNote(ttcVMSelf.lstLoai(),ttcVMSelf.fiProIdLoaiTemp());
+                            ttcVMSelf.fiProIdLoai(idLoai);
+                        }
+                        if(ttcVMSelf.fiProIdLoai()!=null){
+                            ttcVMSelf.getCatByParentTACN(ttcVMSelf.fiProIdLoai(),function (res) {
+                                ttcVMSelf.lstPhanLoai(res);
+                                if(ttcVMSelf.fiProIdPhanLoaiTemp()!=null){
+                                    var idPhanLoai = ttcVMSelf.findCatIdByCatNote(ttcVMSelf.lstPhanLoai(),ttcVMSelf.fiProIdPhanLoaiTemp());
+                                    ttcVMSelf.fiProIdPhanLoai(idPhanLoai);
+                                }
+                            })
+                        }
+                    })
+                }
 
+            })
+        }
+
+    }
     ttcVMSelf.eventChangePhanNhom =function(){
         var id =ttcVMSelf.fiProIdPhanNhom();
+        ttcVMSelf.lstLoai([]);
         if(id !== 'undefined'&&id!=null){
-            ttcVMSelf.lstLoai([]);
-            app.makeGet({
-                url: '/mard/25/danhmuc/getby-catparent/'+id,
-                success: function(res) {
-                    ttcVMSelf.lstLoai(res.data);
-                    if(ttcVMSelf.fiProIdLoaiTemp()!=null){
-                        var idLoai = ttcVMSelf.findCatIdByCatNote(ttcVMSelf.lstLoai(),ttcVMSelf.fiProIdLoaiTemp());
-                        ttcVMSelf.fiProIdLoai(idLoai);
-                    }
-                }
-            });
+            ttcVMSelf.getCatByParentTACN(id,function (res) {
+                ttcVMSelf.lstLoai(res);
+            })
         }
     }
     ttcVMSelf.eventChangeLoai =function(){
         var id =ttcVMSelf.fiProIdLoai();
         ttcVMSelf.lstPhanLoai([]);
         if(id !== 'undefined'&&id!=null){
-            app.makeGet({
-                url: '/mard/25/danhmuc/getby-catparent/'+id,
-                success: function(res) {
-                    ttcVMSelf.lstPhanLoai(res.data);
-                    if(ttcVMSelf.fiProIdPhanLoaiTemp()!=null){
-                        var idPhanLoai = ttcVMSelf.findCatIdByCatNote(ttcVMSelf.lstPhanLoai(),ttcVMSelf.fiProIdPhanLoaiTemp());
-                        ttcVMSelf.fiProIdPhanLoai(idPhanLoai);
-                    }
-                }
-            });
+            ttcVMSelf.getCatByParentTACN(id,function (res) {
+                ttcVMSelf.lstPhanLoai(res);
+            })
         }
     }
 
@@ -1063,10 +1076,15 @@ function ThongTinChungVM(data) {
             });
         }
         console.log(data);
+
+        ttcVMSelf.fiProIdNhom(data.fiProIdNhom);
+        ttcVMSelf.fiProIdNhomTemp(data.fiProIdNhom);
         ttcVMSelf.fiProIdPhanNhomTemp(data.fiProIdPhanNhom);
         ttcVMSelf.fiProIdLoaiTemp(data.fiProIdLoai);
-        ttcVMSelf.fiProIdPhanLoaiTemp(data.fiProIdLoai);
+        ttcVMSelf.fiProIdPhanLoaiTemp(data.fiProIdPhanLoai);
+
         ko.mapping.fromJS(data, {}, ttcVMSelf);
+        ttcVMSelf.eventChangeNhom();
         ttcVMSelf.selectedIndex(index);
         ttcVMSelf.selectedHangHoa(data);
         if (type == '1' || type == 1) {

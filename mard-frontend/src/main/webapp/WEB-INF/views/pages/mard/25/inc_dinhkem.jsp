@@ -28,7 +28,7 @@
                             <td data-bind="visible: $root.isEditable" class="text-center">
 <%--                                <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;--%>
                                 <a href="#" data-bind="click: $parent.removeLstHD.bind($data, $index()), visible: $root.isEditable()"><i class="fa fa-lg fa-trash"></i></a>&nbsp;&nbsp;
-                                <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-download"></i></a>
+                                <a href="#" data-bind="click: $parent.viewFile, visible: $root.isEditable()"><i class="fa fa-lg fa-download"></i></a>
                             </td>
                         </tr>
                         </tbody>
@@ -82,7 +82,7 @@
                         <td data-bind="visible: $root.isEditable" class="text-center">
 <%--                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;--%>
                             <a href="#" data-bind="click: $parent.removeLstHoaDon.bind($data, $index()), visible: $root.isEditable()"><i class="fa fa-lg fa-trash"></i></a>&nbsp;&nbsp;
-                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-download"></i></a>
+                            <a href="#" data-bind="click: $parent.viewFile, visible: $root.isEditable()"><i class="fa fa-lg fa-download"></i></a>
                         </td>
                     </tr>
                     </tbody>
@@ -135,7 +135,7 @@
                         <td data-bind="visible: $root.isEditable" class="text-center">
 <%--                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;--%>
                             <a href="#" data-bind="click: $parent.removeLstPhieu.bind($data, $index()), visible: $root.isEditable()"><i class="fa fa-lg fa-trash"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-download"></i></a>
+                            <a href="#" data-bind="click: $parent.viewFile, visible: $root.isEditable()"><i class="fa fa-lg fa-download"></i></a>
                         </td>
                     </tr>
                     </tbody>
@@ -186,7 +186,7 @@
                         <td data-bind="visible: $root.isEditable" class="text-center">
 <%--                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;--%>
                             <a href="#" data-bind="click: $parent.removeLstKQ.bind($data, $index()), visible: $root.isEditable()"><i class="fa fa-lg fa-trash"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-download"></i></a>
+                            <a href="#" data-bind="click: $parent.viewFile, visible: $root.isEditable()"><i class="fa fa-lg fa-download"></i></a>
                         </td>
                     </tr>
                     </tbody>
@@ -233,7 +233,7 @@
                         <td data-bind="visible: $root.isEditable" class="text-center">
 <%--                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;--%>
                             <a href="#" data-bind="click: $parent.removeLstTC.bind($data, $index()), visible: $root.isEditable()"><i class="fa fa-lg fa-trash"></i></a>&nbsp;&nbsp;&nbsp;
-                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-download"></i></a>
+                            <a href="#" data-bind="click: $parent.viewFile, visible: $root.isEditable()"><i class="fa fa-lg fa-download"></i></a>
                         </td>
                     </tr>
                     </tbody>
@@ -280,7 +280,7 @@
                         <td data-bind="visible: $root.isEditable" class="text-center">
 <%--                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;--%>
                             <a href="#" data-bind="click: $parent.removeLstCNLH.bind($data, $index()), visible: $root.isEditable()"><i class="fa fa-lg fa-trash"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-download"></i></a>
+                            <a href="#" data-bind="click: $parent.viewFile, visible: $root.isEditable()"><i class="fa fa-lg fa-download"></i></a>
                         </td>
                     </tr>
                     </tbody>
@@ -327,7 +327,7 @@
                         <td data-bind="visible: $root.isEditable" class="text-center">
 <%--                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-edit"></i></a>&nbsp;&nbsp;--%>
                             <a href="#" data-bind="click: $parent.removeLstCNPT.bind($data, $index()), visible: $root.isEditable()"><i class="fa fa-lg fa-trash"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-download"></i></a>
+                            <a href="#" data-bind="click: $parent.viewFile, visible: $root.isEditable()"><i class="fa fa-lg fa-download"></i></a>
                         </td>
                     </tr>
                     </tbody>
@@ -400,7 +400,7 @@
                             <a href="#" data-bind="click: $parent.viewFile, visible: $root.isEditable()"><i class="fa fa-lg fa-eye"></i></a>
                         </td>
                         <td data-bind="visible: $root.isEditable" class="text-center">
-                            <a href="#" data-bind="click: $parent.doDelete, visible: $root.isEditable()"><i class="fa fa-lg fa-download"></i></a>
+                            <a href="#" data-bind="click: $parent.viewFile, visible: $root.isEditable()"><i class="fa fa-lg fa-download"></i></a>
                         </td>
                         <td data-bind="visible: $root.isEditable" class="text-center">
                             <a href="#" data-bind="click: $parent.removeLstAtch.bind($data, $index()), visible: $root.isEditable()"><i class="fa fa-lg fa-trash"></i></a>

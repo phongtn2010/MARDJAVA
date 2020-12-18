@@ -57,7 +57,7 @@
 
                 <div style="border-top: #000000 solid 1px; margin: auto; width: 160px"></div>
                 <div class="right text-right-center">
-                    Hà Nội, <span data-bind="text: fiNgayKyCV"></span>
+                    Hà Nội, <span data-bind="date: fiNgayKyCV"></span>
                 </div>
             </div>
         </div>
@@ -67,12 +67,12 @@
         Kính gửi: <span data-bind="text : fiTenDn"></span>
     </p><br/>
     <p class="content">
-        Cục Chăn nuôi đã nhận được Văn bản số <span data-bind="text : fiMaHoso"></span>. ngày <span data-bind="text : fiNgayGui"></span>. của <span data-bind="text : fiTenDn"></span> đề nghị
+        Cục Chăn nuôi đã nhận được Văn bản số <span data-bind="text : fiMaHoso"></span>. ngày <span data-bind="date : fiNgayGui"></span>. của <span data-bind="text : fiTenDn"></span> đề nghị
         miễn giảm kiểm tra chất lượng có thời hạn đối với thức ăn chăn nuôi nhập khẩu. Sau khi thẩm định hồ sơ, Cục Chăn nuôi có ý kiến như sau:
     </p>    
     <p class="content">
         1. Sản phẩm thức ăn chăn nuôi nhập khẩu dưới đây được áp dụng chế độ miễn giảm kiểm tra chất lượng theo quy định tại điểm a khoản 5 Điều 18 Nghị định số 13/2020/NĐ-CP kể từ ngày
-        <span data-bind="text : fiHieuLucTuNgay"></span> đến hết ngày <span data-bind="text : fiHieuLucToiNgay"></span>
+        <span data-bind="date : fiHieuLucTuNgay"></span> đến hết ngày <span data-bind="date : fiHieuLucToiNgay"></span>
     </p>
     <p class="content">
         Tên TACN: <span data-bind="text : tenTACN"></span>
