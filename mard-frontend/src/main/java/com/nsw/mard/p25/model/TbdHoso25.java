@@ -17,7 +17,7 @@ public class TbdHoso25 implements Serializable {
     private Date fiHSCreatedDate;
     private String fiNSWFileCode;
     private String fiNSWFileCodeReplace;
-    private String fiGDK;
+    private String fiSoGDK;
     private String fiLinkGDK;
     private String fiFileNameGDK;
     private String fiFileIdGDK;
@@ -67,6 +67,7 @@ public class TbdHoso25 implements Serializable {
     private String fiIdDVXL;
     private String fiNameDVXL;
     private String fiSoXacNhanDon;
+    private Date fiNgayCapGDK;
 
     private List<TbdHanghoa25> fiProductList;
 

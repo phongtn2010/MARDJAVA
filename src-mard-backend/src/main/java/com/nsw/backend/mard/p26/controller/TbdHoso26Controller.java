@@ -2,12 +2,12 @@ package com.nsw.backend.mard.p26.controller;
 
 import com.nsw.backend.controller.BaseController;
 import com.nsw.backend.helper.RabbitMQErrorHelper;
+import com.nsw.backend.mard.p25.model.TbdHanghoa25;
+import com.nsw.backend.mard.p25.model.TbdHanghoaAT25;
 import com.nsw.backend.mard.p25.model.TbdHoso25;
+import com.nsw.backend.mard.p25.service.TbdHangHoa25Service;
 import com.nsw.backend.mard.p26.constant.Constant26;
-import com.nsw.backend.mard.p26.model.FilterForm;
-import com.nsw.backend.mard.p26.model.TbdHanghoa26;
-import com.nsw.backend.mard.p26.model.TbdHoso26;
-import com.nsw.backend.mard.p26.model.TbdLichsu26;
+import com.nsw.backend.mard.p26.model.*;
 import com.nsw.backend.mard.p26.service.TbdHoso26Service;
 import com.nsw.backend.mard.p26.service.TbdLichsu26Service;
 import com.nsw.backend.mard.p26.service.WebService26;
@@ -16,6 +16,7 @@ import com.nsw.backend.util.ResponseJson;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,6 +24,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,13 +36,15 @@ public class TbdHoso26Controller extends BaseController {
     private final RabbitMQService rabbitMQService;
     private final TbdHoso26Service tbdHoso26Service;
     private final TbdLichsu26Service tbdLichsu26Service;
+    private final TbdHangHoa25Service tbdHangHoa25Service;
     private final WebService26 webService26;
     @Autowired
-    public TbdHoso26Controller(RabbitMQService rabbitMQService, TbdHoso26Service tbdHoso26Service, TbdLichsu26Service tbdLichsu26Service, WebService26 webService26) {
+    public TbdHoso26Controller(RabbitMQService rabbitMQService, TbdHoso26Service tbdHoso26Service, TbdLichsu26Service tbdLichsu26Service, WebService26 webService26, TbdHangHoa25Service tbdHangHoa25Service) {
         this.rabbitMQService = rabbitMQService;
         this.tbdHoso26Service = tbdHoso26Service;
         this.tbdLichsu26Service = tbdLichsu26Service;
         this.webService26 = webService26;
+        this.tbdHangHoa25Service = tbdHangHoa25Service;
     }
 
     @PostMapping("/create")
@@ -52,8 +56,14 @@ public class TbdHoso26Controller extends BaseController {
             TbdHanghoa26 tbdHanghoa26 = profile.getFiProductList().get(0);
             profile.setFiHangSX(tbdHanghoa26.getFiProMadeIn());
             profile.setFiNuocSX(tbdHanghoa26.getFiProCountryName());
-            TbdHoso26 result = saveDraftTbdhoso26(profile);
+            TbdHanghoa25 tbdHanghoa25 = tbdHangHoa25Service.findByFiIdProduct(tbdHanghoa26.getFiIdProduct());
+            tbdHanghoa26= copyPropertiesHangHoa(tbdHanghoa25,tbdHanghoa26);
 
+            List<TbdHanghoa26> hanghoa26List = new ArrayList<>();
+            hanghoa26List.add(tbdHanghoa26);
+            profile.setFiProductList(hanghoa26List);
+
+            TbdHoso26 result = saveDraftTbdhoso26(profile);
             return createSuccessResponse(result, HttpStatus.OK);
         } catch (Exception ex) {
             LOG.error(TAG + ex.getMessage(), ex);
@@ -188,5 +198,20 @@ public class TbdHoso26Controller extends BaseController {
             response.setData(tbdLichsu26s.getContent());
             return ResponseEntity.ok(response);
         }
+    }
+    private TbdHanghoa26 copyPropertiesHangHoa(TbdHanghoa25 tbdHanghoa25, TbdHanghoa26 tbdHanghoa26){
+        List<TbdHanghoaCL26> listCL26 = new ArrayList<>();
+        List<TbdHanghoaAT26> listAT26 = new ArrayList<>();
+        tbdHanghoa25.getFiProCLList().forEach(cl ->{
+            TbdHanghoaCL26 tbdHanghoaCL26 = new TbdHanghoaCL26();
+            BeanUtils.copyProperties(cl,tbdHanghoaCL26);
+            listCL26.add(tbdHanghoaCL26);
+        });
+        tbdHanghoa25.getFiProATList().forEach(at ->{
+            TbdHanghoaAT26 tbdHanghoaAT26 = new TbdHanghoaAT26();
+            BeanUtils.copyProperties(at,tbdHanghoaAT26);
+            listAT26.add(tbdHanghoaAT26);
+        });
+        return tbdHanghoa26;
     }
 }

@@ -29,7 +29,7 @@
                         Độc lập - Tự do - Hạnh phúc
                     </h5>
                     <div style="border-top: #000000 solid 1px; margin: auto; width: 160px"></div>
-                    <span data-bind="text: ngayKyXNCL"></span>
+                    <span data-bind="text: noiKyXNCL"></span>, <span data-bind="text: ngayKyXNCL"></span>
                 </div>
             </div>
             <div class="row text-center">
@@ -80,17 +80,18 @@
                 - Thuộc lô hàng có các chứng từ sau: <br/>
                 + Hợp đồng số: <span data-bind="text: hopDong"></span><br/>
                 + Hóa đơn số: <span data-bind="text: hoaDon"></span><br/>
-                + Giấy đăng ký kiểm tra xác nhận chất lượng số:<span data-bind="text: soGDK"></span><br/>
+                + Giấy đăng ký kiểm tra xác nhận chất lượng số: <span data-bind="text: soGDK"></span> <span data-bind="text: ngayCapGDK"></span><br/>
                 - Tên tổ chức nhập khẩu: <span data-bind="text: tenCongTyNK"></span><br/>
                 Địa chỉ: <span data-bind="text: diaChiCongTyNK"></span><br/>
             </div>
             <div class="row">
                 <b>2. Căn cứ kiểm tra:</b><br/>
                 + Tiêu chuẩn công bố áp dụng (số hiệu TCCS): <span data-bind="text: tieuChuanApDung"></span><br/>
-                + Quy chuẩn kỹ thuật (nhóm, loại hàng hóa tại QCVN 01-190/BNNPTNT): <span data-bind="text: quyChuanKT"></span><br/>
+                + Quy chuẩn kỹ thuật (nhóm, loại hàng hóa tại QCVN 01-190/BNNPTNT): <span data-bind="text: fiProNhomName"></span>,<span data-bind="text: fiProLoaiName"></span>
+            tại <span data-bind="text: quyChuanKT"></span><br/>
                 <b>3. Kết quả đánh giá sự phù hợp</b><br/>
-                Giấy chứng nhận hợp quy lô TACN nhập khẩu số: <span data-bind="text: soGXNCL"></span><br/>
-                <b>3. Kết quả kiểm tra nhà nước:</b><br/>
+                Giấy chứng nhận hợp quy lô TACN nhập khẩu số: <span data-bind="text: soGXNCL"></span> do <span data-bind="text: donvicap"></span> ngày: <span data-bind="text: ngaycapShort"></span><br/>
+                <b>4. Kết quả kiểm tra nhà nước:</b><br/>
                 Lô hàng đáp ứng yêu cầu chất lượng hàng hóa nhập khẩu./.<br/>
 
             </div>
@@ -108,7 +109,7 @@
     </div>
     <div class="modal-footer">
         <div class="text-center">
-            <a class="btn green" data-bind="">
+            <a class="btn green" data-bind="click: taiGiayXNCL">
                 <spring:message code="common.button.tai_ve"/>
             </a>
             <a class="btn" data-dismiss="modal" data-bind="click: closeThongBao">

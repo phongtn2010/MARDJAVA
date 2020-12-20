@@ -33,8 +33,26 @@ function ThongTinChungVM(data) {
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
     ttcVMSelf.fiNSWFileCodeReplace = ko.observable((data && data.hasOwnProperty('fiNSWFileCodeReplace')) ? data.fiNSWFileCodeReplace : null);
-    ttcVMSelf.fiGDK = ko.observable((data && data.hasOwnProperty('fiGDK')) ? data.fiGDK : null);
-    ttcVMSelf.fiGDKFile = ko.observable((data && data.hasOwnProperty('fiGDKFile')) ? data.fiGDKFile : null);
+    ttcVMSelf.fiSoGDK = ko.observable((data && data.hasOwnProperty('fiSoGDK')) ? data.fiSoGDK : null);
+    ttcVMSelf.fiGDKFile = ko.observable((data && data.hasOwnProperty('fiGDKFile')) ? data.fiGDKFile : null).extend({
+        validation: {
+            validator: function (val) {
+                if (val != null) {
+                    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+                    var getFile = $('#fiGDKFile')[0].files[0];
+                    var totalSize = getFile.size / 1000;
+                    var getFile = getFile.name;
+                    var extension = getFile.substr((getFile.lastIndexOf('.') + 1));
+                    var maxSize = 50 * 1000;
+                    var getName = getFile.split('.').slice(0, -1).join('.')
+                    if (((extension == "png") ||(extension == "PNG") ||(extension == "jpg") || (extension == "jpg") || (extension == "pdf") || (extension == "PDF") || (extension == "TIF") || (extension == "tif")) && (totalSize <= maxSize) && (!format.test(getName))) {
+                        return true;
+                    }
+                } else return true;
+            },
+            message: 'File không hợp lê'
+        }
+    });
 
     ttcVMSelf.fiNSWFileCode = ko.observable((data && data.hasOwnProperty('fiNSWFileCode')) ? data.fiNSWFileCode : null);
 
@@ -354,10 +372,14 @@ function ThongTinChungVM(data) {
     ttcVMSelf.changeMaHSThayThe =function(){
         var lstHoso = ttcVMSelf.lstMaHoSoThayThe();
         var pos = lstHoso.find(function (e) {
-            return e.fiIdHSR == ttcVMSelf.fiNSWFileCodeReplace();
+            return e.fiNSWFileCodeR == ttcVMSelf.fiNSWFileCodeReplace();
         })
-        if (pos)
-            ttcVMSelf.fiGDK(pos.fiGDKR);
+        if (pos){
+            ttcVMSelf.fiSoGDK(pos.fiGDKR);
+        }else{
+            ttcVMSelf.fiSoGDK(null);
+        }
+
 
     }
     ttcVMSelf.getCatByParentTACN =function(id,callback){
@@ -1168,11 +1190,11 @@ function ThongTinChungVM(data) {
                     ttcVMSelf.fiFileIdGDK(d.data.itemId);
                     ttcVMSelf.fiFileNameGDK(files[0].name);
                 }else{
-                    app.Alert("Có lỗi tải file lên");
+                    app.Alert("Có lỗi tải file lên"+d.message);
                 }
             },
             error: function (e) {
-                app.Alert("Có lỗi tải file lên");
+                app.Alert("Có lỗi tải file lên: "+e);
             }
         });
     }

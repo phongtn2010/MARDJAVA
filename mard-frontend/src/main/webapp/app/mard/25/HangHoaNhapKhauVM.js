@@ -192,6 +192,7 @@ function HangHoaNhapKhauVM (options) {
         // var diaDiemTapKet = [ttc.fiAddressGath,ttc.fiRegSamFromDate,ttc.fiAddressRegSample,ttc.fiProductList];
         var thongTinLienHe = [ttc.fiContactName,ttc.fiContactAddress];
         var thongTinKy = [ttc.fiSignName,ttc.fiSignAddress,ttc.fiSignPosition];
+        console.log(ttc.fiNSWFileCodeReplace());
         if(ttc.fiNSWFileCodeReplace()!=null){
             if (ttc.fiFileNameGDK()==null){
                 app.Alert("Bạn chưa đính kèm file GDK");
@@ -200,7 +201,8 @@ function HangHoaNhapKhauVM (options) {
         }
         kdnkVMSelf.errors = ko.validation.group({benBan,benMua,thongTinKy,thongTinLienHe}, {deep: true, live: true, observable: true});
         // kdnkVMSelf.errors = ko.validation.group(kdnkVMSelf.thongtinChungVM, {deep: true, live: true, observable: true});
-        if (kdnkVMSelf.fiProductList().length < 1) {
+        if (ttc.fiProductList().length < 1) {
+            console.log(ttc.fiProductList());
             kdnkVMSelf.errors.showAllMessages();
             app.Alert("Bạn chưa nhập hàng hóa !");
             return false;
@@ -210,6 +212,7 @@ function HangHoaNhapKhauVM (options) {
             app.Alert("Bạn cần nhập đầy đủ các trường bắt buộc");
             return false;
         }
+
         if (ttc.fiHSType()==2||ttc.fiHSType()==3) {
             if (ttc.fiAddressGath()==null||ttc.fiAddressGath()==''){
                 app.Alert("Đối với hồ sơ 2b hoặc 2c bạn cần nhập thông tin địa điểm tập kết hàng");
@@ -298,8 +301,10 @@ function HangHoaNhapKhauVM (options) {
             "fiHSType": kdnkVMSelf.thongtinChungVM().fiHSType(),
             "fiHSCreatedDate": new Date(kdnkVMSelf.thongtinChungVM().fiHSCreatedDate()).getTime(),
             "fiNSWFileCodeReplace": kdnkVMSelf.thongtinChungVM().fiNSWFileCodeReplace(),
-            "fiGDK": kdnkVMSelf.thongtinChungVM().fiGDK(),
-            // "fiGDKFile": kdnkVMSelf.thongtinChungVM().fiGDKFile(),
+            "fiSoGDK": kdnkVMSelf.thongtinChungVM().fiSoGDK(),
+            "fiLinkGDK": kdnkVMSelf.thongtinChungVM().fiLinkGDK(),
+            "fiFileIdGDK": kdnkVMSelf.thongtinChungVM().fiFileIdGDK(),
+            "fiFileNameGDK": kdnkVMSelf.thongtinChungVM().fiFileNameGDK(),
 
             "fiSellName": kdnkVMSelf.thongtinChungVM().fiSellName(),
             "fiSellCountryCode": kdnkVMSelf.thongtinChungVM().fiSellCountryCode(),

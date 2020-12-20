@@ -134,7 +134,7 @@
                         <div class="col-md-4">
                             <select class="form-control"  data-bind="options:lstMaHoSoThayThe,optionsCaption: 'Chọn...',
                                                                      optionsValue : 'fiNSWFileCodeR',
-                                                                     optionsText : 'fiNSWFileCodeR', event: {change: changeMaHSThayThe},
+                                                                     optionsText : 'fiNSWFileCodeR', event: {click: changeMaHSThayThe},
                                                                      value: fiNSWFileCodeReplace, enable: $root.isEditable()">
                             </select>
                         </div>
@@ -144,7 +144,7 @@
                         </div>
                         <div class="col-md-4">
                             <input
-                                    data-bind="value: fiGDK"
+                                    data-bind="value: fiSoGDK"
                                     class="form-control"/>
                         </div>
                     </div>
@@ -158,7 +158,7 @@
                                     code="mard.25.tokhai.thong_tin_giay_thay_the"/></label>
                         </div>
                         <div class="col-md-4">
-                            <input class="form-control" type="file" data-bind="event:{change: changeFileGDK},value: fiGDKFile"/>
+                            <input class="form-control" id="fiGDKFile" type="file" data-bind="event:{change: changeFileGDK},value: fiGDKFile"/>
                         </div>
                     </div>
                 </div>

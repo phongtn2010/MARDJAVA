@@ -22,6 +22,7 @@ import com.nsw.util.Utility;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.FileSystemResource;
@@ -795,6 +796,49 @@ public class Mard25Api extends BaseApi {
         }
     }
 
+    @RequestMapping(value = "/taigiayxncl/{idHS}/{idHH}", method = RequestMethod.GET)
+    public @ResponseBody
+    void taiGiayXNCL(HttpServletRequest request, HttpServletResponse response, @PathVariable Integer idHS, @PathVariable Long idHH) {
+        try {
+            if (!isOwner(idHS.toString(), null)) {
+                return;
+            }
+            ResponseJson hosoJson = getHoSoByID(idHS.toString());
+            TbdHoso25 tbdHoso25 = GsonUtils.getInstance().transform(hosoJson.getData(), TbdHoso25.class);
+            TbdHanghoa25 tbdHanghoa25 =new TbdHanghoa25();
+            tbdHoso25.getFiProductList().forEach(hanghoa ->{
+                if (hanghoa.getFiIdProduct()==idHH||hanghoa.getFiIdProduct().equals(idHH)){
+                    BeanUtils.copyProperties(hanghoa,tbdHanghoa25);
+                }
+            });
+            ResponseJson giayXNCL25 = getGiayXN(idHS.toString());
+            TbdGiayXNCL25 tbdGiayXNCL25 = GsonUtils.getInstance().transform(giayXNCL25.getData(), TbdGiayXNCL25.class);
+
+            String templatePath = null;
+            String tempFoleder = environment.getRequiredProperty(AppConstant.Folder.TemSaveFolder);
+
+            String fileName = new Date().getTime() + "_" + tbdHoso25.getFiNSWFileCode() + ".docx";
+            File tempFile;
+            Docx docx;
+            // preparing variables
+            Variables variables = genVariablesGiayXNCL(tbdHanghoa25,tbdHoso25,tbdGiayXNCL25);
+            templatePath = request.getRealPath("/WEB-INF/downloads/mard/25/giay_xncl.docx");
+
+            tempFile = new File(tempFoleder + fileName);
+            docx = new Docx(templatePath);
+            docx.setVariablePattern(new VariablePattern("#{", "}"));
+            docx.fillTemplate(variables);
+            // save filled .docx file
+            docx.save(tempFile.getPath());
+            response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+            response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+            response.setHeader("Pragma", "no-cache");
+            response.setHeader("Cache-Control", "no-cache");
+            response.getOutputStream().write(loadFile(tempFile));
+        } catch (Exception ex) {
+            LogUtil.addLog(ex);
+        }
+    }
 
     @RequestMapping(value = "/hoso/dshosomienkiem/{taxCode}", method = RequestMethod.GET)
     public @ResponseBody
@@ -872,12 +916,30 @@ public class Mard25Api extends BaseApi {
         donDKVariables.addTextVariable(new TextVariable("#{fiLoaiHS}", Mard25Hepler.getLoaiHoSo(donDangKy.getFiHSType())));
 
         StringBuffer soHD = new StringBuffer();
-        String ngayHD;
         donDangKy.getFiAttachmentList().forEach(att -> {
             if (att.getFiFileTypeID() == 1L) {
-                att.getFiFileHD();
+                soHD.append("Số: "+att.getFiFileHD()).append(", ").append("Ngày: "+Mard25Hepler.toShortStringDate(att.getFiFileHDDate())).append("; ");
             }
         });
+
+        StringBuffer soHoaDon = new StringBuffer();
+        donDangKy.getFiAttachmentList().forEach(att -> {
+            if (att.getFiFileTypeID() == 2L) {
+                soHoaDon.append("Số: "+att.getFiFileHD()).append(", ").append("Ngày: "+Mard25Hepler.toShortStringDate(att.getFiFileHDDate())).append("; ");
+            }
+        });
+
+        StringBuffer soPhieu = new StringBuffer();
+        donDangKy.getFiAttachmentList().forEach(att -> {
+            if (att.getFiFileTypeID() == 3L) {
+                soPhieu.append("Số: "+att.getFiFileHD()).append(", ").append("Ngày: "+Mard25Hepler.toShortStringDate(att.getFiFileHDDate())).append("; ");
+            }
+        });
+
+        donDKVariables.addTextVariable(new TextVariable("#{fiSoHD}", org.springframework.util.StringUtils.isEmpty(soHD.toString()) ? "" : soHD.toString()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiSoHoaDon}", org.springframework.util.StringUtils.isEmpty(soHoaDon.toString()) ? "" : soHD.toString()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiSoPhieu}", org.springframework.util.StringUtils.isEmpty(soPhieu.toString()) ? "" : soHD.toString()));
+
 
         donDKVariables.addTextVariable(new TextVariable("#{fiNameDVXL}", donDangKy.getFiNameDVXL() == null ? "" : donDangKy.getFiNameDVXL()));
 
@@ -966,5 +1028,59 @@ public class Mard25Api extends BaseApi {
         donDKVariables.addTableVariable(productTableVariable);
         donDKVariables.addTableVariable(chiTieuTableVariable);
         return donDKVariables;
+    }
+
+    private Variables genVariablesGiayXNCL(TbdHanghoa25 tbdHanghoa25,TbdHoso25 tbdHoso25, TbdGiayXNCL25 tbdGiayXNCL25) {
+
+        Variables giayXNCLVariables = new Variables();
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiSoGXNCL}", tbdGiayXNCL25.getFiGCNHopQuy() == null ? "" : tbdGiayXNCL25.getFiGCNHopQuy()));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiNgayCap}", Mard25Hepler.toVNStringDate(tbdGiayXNCL25.getFiNgayCap())));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiNgayCapShort}", Mard25Hepler.toShortStringDate(tbdGiayXNCL25.getFiNgayCap())));
+
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiProName}", tbdHanghoa25.getFiProName() == null ? "" : tbdHanghoa25.getFiProName()));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiProCode}", tbdHanghoa25.getFiProCode() == null ? "" : tbdHanghoa25.getFiProCode()));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiProMadeIn}", tbdHanghoa25.getFiProMadeIn() == null ? "" : tbdHanghoa25.getFiProMadeIn()));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiProCountryName}", tbdHanghoa25.getFiProCountryName() == null ? "" : tbdHanghoa25.getFiProCountryName()));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiProKL}", tbdHanghoa25.getFiProductKL() == null ? "" : tbdHanghoa25.getFiProductKL()));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiProSL}", tbdHanghoa25.getFiProductSL() == null ? "" : tbdHanghoa25.getFiProductSL()));
+
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiProTieuChuan}", tbdHanghoa25.getFiProSoHieu()==null?"":tbdHanghoa25.getFiProSoHieu()));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiProNhomName}", tbdHanghoa25.getFiProNameNhom()==null?"":tbdHanghoa25.getFiProNameNhom()));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiProLoaiName}", tbdHanghoa25.getFiProNameLoai()==null?"":tbdHanghoa25.getFiProNameLoai()));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiProQuyChuan}", tbdHanghoa25.getFiProQuyChuan()==null?"":tbdHanghoa25.getFiProQuyChuan()));
+
+
+
+
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiCuaKhau}", ""));
+
+
+        StringBuffer soHD = new StringBuffer();
+        tbdHoso25.getFiAttachmentList().forEach(att -> {
+            if (att.getFiFileTypeID() == 1L) {
+                soHD.append("Số: "+att.getFiFileHD()).append(", ").append("Ngày: "+Mard25Hepler.toShortStringDate(att.getFiFileHDDate())).append("; ");
+            }
+        });
+
+        StringBuffer soHoaDon = new StringBuffer();
+        tbdHoso25.getFiAttachmentList().forEach(att -> {
+            if (att.getFiFileTypeID() == 2L) {
+                soHoaDon.append("Số: "+att.getFiFileHD()).append(", ").append("Ngày: "+Mard25Hepler.toShortStringDate(att.getFiFileHDDate())).append("; ");
+            }
+        });
+
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiSoHD}", org.springframework.util.StringUtils.isEmpty(soHD.toString()) ? "" : soHD.toString()));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiSoHoaDon}", org.springframework.util.StringUtils.isEmpty(soHoaDon.toString()) ? "" : soHD.toString()));
+
+
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiSoGDK}", tbdHoso25.getFiSoXacNhanDon()==null?"":tbdHoso25.getFiSoXacNhanDon()));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiNgayCapGDK}", Mard25Hepler.toVNStringDate(tbdHoso25.getFiNgayCapGDK())));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiImporterName}", tbdHoso25.getFiImporterName()==null?"":tbdHoso25.getFiImporterName()));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiImporterAddress}", tbdHoso25.getFiImporterAddress()==null?"":tbdHoso25.getFiImporterAddress()));
+
+
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiNameDVXL}", tbdGiayXNCL25.getFiNameCoQuanDanhGia()==null?"":tbdGiayXNCL25.getFiNameCoQuanDanhGia()));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiNguoiKy}", tbdGiayXNCL25.getFiNguoiKy()==null?"":tbdGiayXNCL25.getFiNguoiKy()));
+        return giayXNCLVariables;
     }
 }

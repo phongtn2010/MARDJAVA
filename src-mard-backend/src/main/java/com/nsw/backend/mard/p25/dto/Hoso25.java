@@ -23,13 +23,13 @@ public class Hoso25 {
 
     String fiNSWFileCodeOld;
 
-    String fiGDK;
+    String fiSoGDK;
 
-    String fiGDKId;
+    String fiFileIdGDK;
 
-    String fiGDKName;
+    String fiFileNameGDK;
 
-    String fiGDKLink;
+    String fiLinkGDK;
 
     String DepartmentCode;
 

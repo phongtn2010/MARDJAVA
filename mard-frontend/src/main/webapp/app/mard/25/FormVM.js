@@ -1426,7 +1426,7 @@ function FileVM(options) {
 
     fileVMSelf.downloadFile = function (data) {
         var link = document.createElement('a');
-        link.href = data.fiPath();
+        link.href = data.fiLinkBNN();
         link.target = '_blank';
         document.body.appendChild(link);
         link.click();

@@ -20,16 +20,16 @@ public class Hoso25 {
     String fiNSWFileCodeOld;
 
     @XmlElement(name = "AniFeedConfirmOldNo")
-    String fiGDK;
+    String fiSoGDK;
 
     @XmlElement(name = "AniFeedConfirmOldId")
-    String fiGDKId;
+    String fiFileIdGDK;
 
     @XmlElement(name = "AniFeedConfirmOldName")
-    String fiGDKName;
+    String fiFileNameGDK;
 
     @XmlElement(name = "AniFeedConfirmOldFileLink")
-    String fiGDKLink;
+    String fiLinkGDK;
 
     @XmlElement(name = "DepartmentCode")
     String DepartmentCode;

@@ -153,6 +153,7 @@ public class WsServiceImpl implements WsService {
         mappingXacNhanDon(xnd);
         tbdHoso25.setFiHSStatus(status);
         tbdHoso25.setFiSoXacNhanDon(xnd.getFiSoGXN());
+        tbdHoso25.setFiNgayCapGDK(xnd.getFiNgayXN());
         List<TbdHanghoa25> tbdHanghoa25s = tbdHangHoa25Service.findByFiIdHS(tbdHoso25.getFiIdHS());
         for (TbdHanghoa25 hanghoa25 : tbdHanghoa25s) {
             hanghoa25.setFiTrangThaiHangHoa(status);

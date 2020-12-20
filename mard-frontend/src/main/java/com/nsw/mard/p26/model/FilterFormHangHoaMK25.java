@@ -1,4 +1,4 @@
-package com.nsw.backend.mard.p25.dto;
+package com.nsw.mard.p26.model;
 
 import lombok.Data;
 

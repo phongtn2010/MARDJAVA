@@ -468,8 +468,18 @@ function ThongBaoKQVM() {
     thongBaoVMSefl.hoaDon=ko.observable('');
     thongBaoVMSefl.soGXNCL=ko.observable(null);
     thongBaoVMSefl.ngayKyXNCL=ko.observable('');
+    thongBaoVMSefl.fiIdHS = ko .observable(null);
+    thongBaoVMSefl.fiIdHangHoa = ko .observable(null);
+    thongBaoVMSefl.noiKyXNCL = ko .observable(null);
+    thongBaoVMSefl.ngayCapGDK = ko .observable(null);
+    thongBaoVMSefl.fiProNhomName = ko .observable(null);
+    thongBaoVMSefl.fiProLoaiName = ko .observable(null);
+    thongBaoVMSefl.donvicap = ko .observable(null);
+    thongBaoVMSefl.ngaycapShort = ko .observable(null);
     thongBaoVMSefl.update=function(index,hoso){
         thongBaoVMSefl.listHangHoa(index);
+        thongBaoVMSefl.fiIdHangHoa(index.fiIdProduct)
+        thongBaoVMSefl.fiIdHS(hoso.fiIdHS)
         thongBaoVMSefl.thoiGianNhap("Từ ngày: "+  new Date(hoso.fiPurchFromDate).toShortDateString() + " tới ngày " + new Date(hoso.fiPurchToDate).toShortDateString());
         thongBaoVMSefl.tenCongTyNK(hoso.fiImporterName);
         thongBaoVMSefl.diaChiCongTyNK(hoso.fiImporterAddress);
@@ -504,10 +514,25 @@ function ThongBaoKQVM() {
         });
         thongBaoVMSefl.hopDong(hopDong);
         thongBaoVMSefl.hoaDon(hoaDon);
+
+        thongBaoVMSefl.ngayCapGDK(hoso.fiNgayCapGDK==null?null:new Date(hoso.fiNgayCapGDK).toDateString());
+        thongBaoVMSefl.fiProNhomName(index.fiProNameNhom);
+        thongBaoVMSefl.fiProLoaiName(index.fiProLoaiName);
         findGiayxncl(index.fiIdProduct,function (res) {
             thongBaoVMSefl.soGXNCL(res.data.fiSoGCN);
             thongBaoVMSefl.ngayKyXNCL(res.data.fiNgayKy==null?new Date(res.data.fiCreatedDate).toDateString():new Date(res.data.fiNgayKy).toDateString());
+            thongBaoVMSefl.noiKyXNCL(res.data.fiNoiKy);
+            thongBaoVMSefl.donvicap(res.data.fiNameCoQuanDanhGia);
+            thongBaoVMSefl.ngaycapShort(res.data.fiNgayKy==null?new Date(res.data.fiCreatedDate).toDateString():new Date(res.data.fiNgayKy).toShortDateString());
         });
+    }
+    thongBaoVMSefl.taiGiayXNCL= function(){
+        var link = document.createElement('a');
+        link.href = '/mard/25/taigiayxncl/' + thongBaoVMSefl.fiIdHS()+"/"+thongBaoVMSefl.fiIdHangHoa();
+        link.target = '_blank';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
     }
     thongBaoVMSefl.closeThongBao = function(data,type,index){
         $("#mard25KQKT").modal("hide");

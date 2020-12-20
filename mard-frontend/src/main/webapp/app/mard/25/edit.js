@@ -3,6 +3,7 @@ function Mard25EditVM () {
     editVMSefl.kdnkVM = ko.observable(null);
     editVMSefl.isEditable = ko.observable(true)
     editVMSefl.applyState = function (options) {
+        console.log(options);
         options["isEditHS"]="1";
         if (isCopy) {
             options["fiIdHS"]=null;

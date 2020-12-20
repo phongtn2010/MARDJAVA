@@ -238,11 +238,8 @@ function FormVM(options) {
     }
     form26Sefl.searchHangHoa =function(page){
         var filter ={
-            taxCode:hosoUsername,
             page: page,
-            size:MAX_PAGE_SIZE,
-            sortBy: form26Sefl.sortBy(),
-            order: form26Sefl.order()
+            size: MAX_PAGE_SIZE
         }
         $.ajax({
             async: true,

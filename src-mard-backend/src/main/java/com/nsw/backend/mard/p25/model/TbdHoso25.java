@@ -187,6 +187,10 @@ public class TbdHoso25 extends CmonBaseEntity implements Serializable {
 
     @Column(name = "FI_SO_GXN", length = 500)
     private String fiSoXacNhanDon;
+
+    @Column(name = "FI_NGAYCAP_GXN")
+    private Date fiNgayCapGDK;
+
     //Danh sách thông tin kèm theo
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "FI_HS_ID")
