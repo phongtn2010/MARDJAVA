@@ -604,7 +604,7 @@ function ThongTinChungVM(data) {
         }
         for (var i =0;i<ttcVMSelf.fiProSLKLList().length;i++){
             var massName=ttcVMSelf.findNameByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode);
-            var amountName=ttcVMSelf.findNameByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode);
+            var amountName=ttcVMSelf.findNameSLByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode);
             var getList = {
                 fiProSLKLMass: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMass,
                 fiProSLKLMassTan: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassTan,
@@ -706,7 +706,7 @@ function ThongTinChungVM(data) {
         }
         for (var i =0;i<ttcVMSelf.fiProSLKLList().length;i++){
             var massName=ttcVMSelf.findNameByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode());
-            var amountName=ttcVMSelf.findNameByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode());
+            var amountName=ttcVMSelf.findNameSLByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode());
             var getList = {
                 fiProSLKLMass: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMass(),
                 fiProSLKLMassTan: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassTan(),
@@ -813,7 +813,7 @@ function ThongTinChungVM(data) {
         }
         for (var i =0;i<ttcVMSelf.fiProSLKLList().length;i++){
             var massName=ttcVMSelf.findNameByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode());
-            var amountName=ttcVMSelf.findNameByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode());
+            var amountName=ttcVMSelf.findNameSLByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode());
             var getList = {
                 fiProSLKLMass: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMass(),
                 fiProSLKLMassTan: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassTan(),
@@ -1026,7 +1026,7 @@ function ThongTinChungVM(data) {
         ttcVMSelf.errors = ko.validation.group(chiTieuKL, {deep: true, live: true, observable: true});
         if (!ttcVMSelf.validate()) return;
         var massName=ttcVMSelf.findNameByCatNote(ttcVMSelf.EfiProSLKLMassUnitCode());
-        var amountName=ttcVMSelf.findNameByCatNote(ttcVMSelf.EfiProSLKLAmountUnitCode());
+        var amountName=ttcVMSelf.findNameSLByCatNote(ttcVMSelf.EfiProSLKLAmountUnitCode());
         var item = {
             fiProSLKLMass: ttcVMSelf.EfiProSLKLMass(),
             fiProSLKLMassTan:ttcVMSelf.EfiProSLKLMassTan(),
@@ -1134,6 +1134,15 @@ function ThongTinChungVM(data) {
     }
     ttcVMSelf.findNameByCatNote = function(code){
         var pos = ttcVMSelf.lstDMDVT().find(function (e) {
+            return e.fiCatNote == code;
+        })
+        if (pos)
+            return pos.fiCatTypeName;
+        else
+            return code;
+    }
+    ttcVMSelf.findNameSLByCatNote = function(code){
+        var pos = ttcVMSelf.lstDMDVTSL().find(function (e) {
             return e.fiCatNote == code;
         })
         if (pos)

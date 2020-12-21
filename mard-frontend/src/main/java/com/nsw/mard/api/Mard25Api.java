@@ -805,13 +805,13 @@ public class Mard25Api extends BaseApi {
             }
             ResponseJson hosoJson = getHoSoByID(idHS.toString());
             TbdHoso25 tbdHoso25 = GsonUtils.getInstance().transform(hosoJson.getData(), TbdHoso25.class);
-            TbdHanghoa25 tbdHanghoa25 =new TbdHanghoa25();
-            tbdHoso25.getFiProductList().forEach(hanghoa ->{
-                if (hanghoa.getFiIdProduct()==idHH||hanghoa.getFiIdProduct().equals(idHH)){
-                    BeanUtils.copyProperties(hanghoa,tbdHanghoa25);
+            TbdHanghoa25 tbdHanghoa25 = new TbdHanghoa25();
+            tbdHoso25.getFiProductList().forEach(hanghoa -> {
+                if (hanghoa.getFiIdProduct() == idHH || hanghoa.getFiIdProduct().equals(idHH)) {
+                    BeanUtils.copyProperties(hanghoa, tbdHanghoa25);
                 }
             });
-            ResponseJson giayXNCL25 = getGiayXN(idHS.toString());
+            ResponseJson giayXNCL25 = findGiayXNCL(idHH.intValue());
             TbdGiayXNCL25 tbdGiayXNCL25 = GsonUtils.getInstance().transform(giayXNCL25.getData(), TbdGiayXNCL25.class);
 
             String templatePath = null;
@@ -821,7 +821,7 @@ public class Mard25Api extends BaseApi {
             File tempFile;
             Docx docx;
             // preparing variables
-            Variables variables = genVariablesGiayXNCL(tbdHanghoa25,tbdHoso25,tbdGiayXNCL25);
+            Variables variables = genVariablesGiayXNCL(tbdHanghoa25, tbdHoso25, tbdGiayXNCL25);
             templatePath = request.getRealPath("/WEB-INF/downloads/mard/25/giay_xncl.docx");
 
             tempFile = new File(tempFoleder + fileName);
@@ -845,17 +845,19 @@ public class Mard25Api extends BaseApi {
     ResponseJson getDSHosoMK(
             @PathVariable String taxCode
     ) {
-        ResponseJson json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.FIND_DS_HOSO_MIEN_KIEM)+ taxCode);
+        ResponseJson json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.FIND_DS_HOSO_MIEN_KIEM) + taxCode);
         return json;
     }
+
     @RequestMapping(value = "/hoso/findgiayxncl/{fiIdHangHoa}", method = RequestMethod.GET)
     public @ResponseBody
-    ResponseJson getDSHosoMK(
+    ResponseJson findGiayXNCL(
             @PathVariable Integer fiIdHangHoa
     ) {
-        ResponseJson json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.FIND_GIAYXNCL)+ fiIdHangHoa);
+        ResponseJson json = BackendRequestHelper.getInstance().doGetRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.FIND_GIAYXNCL) + fiIdHangHoa);
         return json;
     }
+
     private SignData getXMLForSign(SendMessage sendMessage) throws Exception {
         ResponseJson resultSignFlow = BackendRequestHelper.getInstance()
                 .doPostRequest(Mard25Constant.getInstance().getApiUrl(environment, Mard25Constant.API.GET_XML), sendMessage);
@@ -918,21 +920,21 @@ public class Mard25Api extends BaseApi {
         StringBuffer soHD = new StringBuffer();
         donDangKy.getFiAttachmentList().forEach(att -> {
             if (att.getFiFileTypeID() == 1L) {
-                soHD.append("Số: "+att.getFiFileHD()).append(", ").append("Ngày: "+Mard25Hepler.toShortStringDate(att.getFiFileHDDate())).append("; ");
+                soHD.append("Số: " + att.getFiFileHD()).append(", ").append("Ngày: " + Mard25Hepler.toShortStringDate(att.getFiFileHDDate())).append("; ");
             }
         });
 
         StringBuffer soHoaDon = new StringBuffer();
         donDangKy.getFiAttachmentList().forEach(att -> {
             if (att.getFiFileTypeID() == 2L) {
-                soHoaDon.append("Số: "+att.getFiFileHD()).append(", ").append("Ngày: "+Mard25Hepler.toShortStringDate(att.getFiFileHDDate())).append("; ");
+                soHoaDon.append("Số: " + att.getFiFileHD()).append(", ").append("Ngày: " + Mard25Hepler.toShortStringDate(att.getFiFileHDDate())).append("; ");
             }
         });
 
         StringBuffer soPhieu = new StringBuffer();
         donDangKy.getFiAttachmentList().forEach(att -> {
             if (att.getFiFileTypeID() == 3L) {
-                soPhieu.append("Số: "+att.getFiFileHD()).append(", ").append("Ngày: "+Mard25Hepler.toShortStringDate(att.getFiFileHDDate())).append("; ");
+                soPhieu.append("Số: " + att.getFiFileHD()).append(", ").append("Ngày: " + Mard25Hepler.toShortStringDate(att.getFiFileHDDate())).append("; ");
             }
         });
 
@@ -1030,7 +1032,7 @@ public class Mard25Api extends BaseApi {
         return donDKVariables;
     }
 
-    private Variables genVariablesGiayXNCL(TbdHanghoa25 tbdHanghoa25,TbdHoso25 tbdHoso25, TbdGiayXNCL25 tbdGiayXNCL25) {
+    private Variables genVariablesGiayXNCL(TbdHanghoa25 tbdHanghoa25, TbdHoso25 tbdHoso25, TbdGiayXNCL25 tbdGiayXNCL25) {
 
         Variables giayXNCLVariables = new Variables();
         giayXNCLVariables.addTextVariable(new TextVariable("#{fiSoGXNCL}", tbdGiayXNCL25.getFiGCNHopQuy() == null ? "" : tbdGiayXNCL25.getFiGCNHopQuy()));
@@ -1044,13 +1046,14 @@ public class Mard25Api extends BaseApi {
         giayXNCLVariables.addTextVariable(new TextVariable("#{fiProKL}", tbdHanghoa25.getFiProductKL() == null ? "" : tbdHanghoa25.getFiProductKL()));
         giayXNCLVariables.addTextVariable(new TextVariable("#{fiProSL}", tbdHanghoa25.getFiProductSL() == null ? "" : tbdHanghoa25.getFiProductSL()));
 
-        giayXNCLVariables.addTextVariable(new TextVariable("#{fiProTieuChuan}", tbdHanghoa25.getFiProSoHieu()==null?"":tbdHanghoa25.getFiProSoHieu()));
-        giayXNCLVariables.addTextVariable(new TextVariable("#{fiProNhomName}", tbdHanghoa25.getFiProNameNhom()==null?"":tbdHanghoa25.getFiProNameNhom()));
-        giayXNCLVariables.addTextVariable(new TextVariable("#{fiProLoaiName}", tbdHanghoa25.getFiProNameLoai()==null?"":tbdHanghoa25.getFiProNameLoai()));
-        giayXNCLVariables.addTextVariable(new TextVariable("#{fiProQuyChuan}", tbdHanghoa25.getFiProQuyChuan()==null?"":tbdHanghoa25.getFiProQuyChuan()));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiProTieuChuan}", tbdHanghoa25.getFiProSoHieu() == null ? "" : tbdHanghoa25.getFiProSoHieu()));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiProNhomName}", tbdHanghoa25.getFiProNameNhom() == null ? "" : tbdHanghoa25.getFiProNameNhom()));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiProLoaiName}", tbdHanghoa25.getFiProNameLoai() == null ? "" : tbdHanghoa25.getFiProNameLoai()));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiProQuyChuan}", tbdHanghoa25.getFiProQuyChuan() == null ? "" :
+                tbdHanghoa25.getFiProQuyChuan().equals("1") ? "QCVN 01-190: 2020/BNNPTNT" : "QCVN 01-183: 2016/BNNPTNT"));
 
 
-
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiThoiGianNK}", Mard25Hepler.toShortStringDate(tbdHoso25.getFiPurchToDate()) + "-" + Mard25Hepler.toShortStringDate(tbdHoso25.getFiPurchToDate())));
 
         giayXNCLVariables.addTextVariable(new TextVariable("#{fiCuaKhau}", ""));
 
@@ -1058,14 +1061,14 @@ public class Mard25Api extends BaseApi {
         StringBuffer soHD = new StringBuffer();
         tbdHoso25.getFiAttachmentList().forEach(att -> {
             if (att.getFiFileTypeID() == 1L) {
-                soHD.append("Số: "+att.getFiFileHD()).append(", ").append("Ngày: "+Mard25Hepler.toShortStringDate(att.getFiFileHDDate())).append("; ");
+                soHD.append("Số: " + att.getFiFileHD()).append(", ").append("Ngày: " + Mard25Hepler.toShortStringDate(att.getFiFileHDDate())).append("; ");
             }
         });
 
         StringBuffer soHoaDon = new StringBuffer();
         tbdHoso25.getFiAttachmentList().forEach(att -> {
             if (att.getFiFileTypeID() == 2L) {
-                soHoaDon.append("Số: "+att.getFiFileHD()).append(", ").append("Ngày: "+Mard25Hepler.toShortStringDate(att.getFiFileHDDate())).append("; ");
+                soHoaDon.append("Số: " + att.getFiFileHD()).append(", ").append("Ngày: " + Mard25Hepler.toShortStringDate(att.getFiFileHDDate())).append("; ");
             }
         });
 
@@ -1073,14 +1076,14 @@ public class Mard25Api extends BaseApi {
         giayXNCLVariables.addTextVariable(new TextVariable("#{fiSoHoaDon}", org.springframework.util.StringUtils.isEmpty(soHoaDon.toString()) ? "" : soHD.toString()));
 
 
-        giayXNCLVariables.addTextVariable(new TextVariable("#{fiSoGDK}", tbdHoso25.getFiSoXacNhanDon()==null?"":tbdHoso25.getFiSoXacNhanDon()));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiSoGDK}", tbdHoso25.getFiSoXacNhanDon() == null ? "" : tbdHoso25.getFiSoXacNhanDon()));
         giayXNCLVariables.addTextVariable(new TextVariable("#{fiNgayCapGDK}", Mard25Hepler.toVNStringDate(tbdHoso25.getFiNgayCapGDK())));
-        giayXNCLVariables.addTextVariable(new TextVariable("#{fiImporterName}", tbdHoso25.getFiImporterName()==null?"":tbdHoso25.getFiImporterName()));
-        giayXNCLVariables.addTextVariable(new TextVariable("#{fiImporterAddress}", tbdHoso25.getFiImporterAddress()==null?"":tbdHoso25.getFiImporterAddress()));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiImporterName}", tbdHoso25.getFiImporterName() == null ? "" : tbdHoso25.getFiImporterName()));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiImporterAddress}", tbdHoso25.getFiImporterAddress() == null ? "" : tbdHoso25.getFiImporterAddress()));
 
 
-        giayXNCLVariables.addTextVariable(new TextVariable("#{fiNameDVXL}", tbdGiayXNCL25.getFiNameCoQuanDanhGia()==null?"":tbdGiayXNCL25.getFiNameCoQuanDanhGia()));
-        giayXNCLVariables.addTextVariable(new TextVariable("#{fiNguoiKy}", tbdGiayXNCL25.getFiNguoiKy()==null?"":tbdGiayXNCL25.getFiNguoiKy()));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiNameDVXL}", tbdGiayXNCL25.getFiNameCoQuanDanhGia() == null ? "" : tbdGiayXNCL25.getFiNameCoQuanDanhGia()));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiNguoiKy}", tbdGiayXNCL25.getFiNguoiKy() == null ? "" : tbdGiayXNCL25.getFiNguoiKy()));
         return giayXNCLVariables;
     }
 }

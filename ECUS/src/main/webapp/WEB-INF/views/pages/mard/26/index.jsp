@@ -201,7 +201,7 @@
                                     </td>
                                     <td class="text-center">
                                         <a href="javascript:void(0)"><i class="fa fa-history"
-                                                                        data-bind=""
+                                                                        data-bind="click: $parent.goViewHistory"
                                                                         src="" alt=""/></a>
                                     </td>
                                     <td class="text-center">
@@ -215,7 +215,7 @@
                                     <td class="text-center" >
                                         <a href="javascript:void(0)"><i class="fa fa-lg fa-search tooltips"
                                                                         data-original-title="Xem thông báo"
-                                                                        data-bind="visible: fiTrangthai==4"
+                                                                        data-bind="click: $parent.goViewCert,visible: fiTrangthai==4"
                                                                         src="" alt=""/></a>
                                     </td>
                                 </tr>
@@ -400,6 +400,15 @@
                 </div>
             </form>
         </template>
+    <%@include file="inc_view_lichsuXuly.jsp" %>
+    <div id="mard26ViewCert" data-bind="with: selectedHoso" class="modal container in modal-overflow" tabindex="-1">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        </div>
+        <div class="modal-body container" style="display: flex">
+            <%@include file="cert.jsp" %>
+        </div>
+    </div>
 <%--    </div>--%>
 </fieldset>
 

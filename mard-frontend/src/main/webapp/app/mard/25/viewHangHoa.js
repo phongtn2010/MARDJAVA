@@ -483,7 +483,7 @@ function ThongBaoKQVM() {
         thongBaoVMSefl.thoiGianNhap("Từ ngày: "+  new Date(hoso.fiPurchFromDate).toShortDateString() + " tới ngày " + new Date(hoso.fiPurchToDate).toShortDateString());
         thongBaoVMSefl.tenCongTyNK(hoso.fiImporterName);
         thongBaoVMSefl.diaChiCongTyNK(hoso.fiImporterAddress);
-        thongBaoVMSefl.quyChuanKT(index.fiProQuyChuan);
+        thongBaoVMSefl.quyChuanKT(index.fiProQuyChuan==1?'QCVN 01-190: 2020/BNNPTNT':'QCVN 01-183: 2016/BNNPTNT');
         thongBaoVMSefl.tieuChuanApDung(index.fiProSoHieu);
         thongBaoVMSefl.giayCN(hoso.fiSoXacNhanDon);
         thongBaoVMSefl.ngayKy(index.ngayKy==null?null:new Date(index.ngayKy).toDateString());
@@ -517,7 +517,7 @@ function ThongBaoKQVM() {
 
         thongBaoVMSefl.ngayCapGDK(hoso.fiNgayCapGDK==null?null:new Date(hoso.fiNgayCapGDK).toDateString());
         thongBaoVMSefl.fiProNhomName(index.fiProNameNhom);
-        thongBaoVMSefl.fiProLoaiName(index.fiProLoaiName);
+        thongBaoVMSefl.fiProLoaiName(index.fiProNameLoai);
         findGiayxncl(index.fiIdProduct,function (res) {
             thongBaoVMSefl.soGXNCL(res.data.fiSoGCN);
             thongBaoVMSefl.ngayKyXNCL(res.data.fiNgayKy==null?new Date(res.data.fiCreatedDate).toDateString():new Date(res.data.fiNgayKy).toDateString());

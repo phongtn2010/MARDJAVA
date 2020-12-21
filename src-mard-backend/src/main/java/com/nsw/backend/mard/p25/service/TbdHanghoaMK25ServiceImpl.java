@@ -22,8 +22,8 @@ public class TbdHanghoaMK25ServiceImpl implements TbdHanghoaMK25Service {
     }
 
     @Override
-    public List<TbdHanghoaMK25> findByFiProHash(String hash) {
-        return tbdHanghoaMK25Repository.findByFiProHash(hash);
+    public List<TbdHanghoaMK25> findByFiProHashOrderByFiOrderDesc(String hash) {
+        return tbdHanghoaMK25Repository.findByFiProHashOrderByFiOrderDesc(hash);
     }
     @Override
     public void save(TbdHanghoaMK25 tbdHanghoaMK25){
@@ -38,5 +38,10 @@ public class TbdHanghoaMK25ServiceImpl implements TbdHanghoaMK25Service {
     @Override
     public FilterResultHangHoaMK25 searchHanghoaMK25(FilterFormHangHoaMK25 filter) {
         return tbdHanghoaMK25Repository.searchHanghoaMK25(filter);
+    }
+
+    @Override
+    public void saveAll(List<TbdHanghoaMK25> mk25List) {
+        tbdHanghoaMK25Repository.save(mk25List);
     }
 }

@@ -216,7 +216,7 @@ function FormVM(options) {
                             form26Sefl.lstHanghoa([]);
                             form26Sefl.lstHangHoaChosen([]);
                             form26Sefl.searchHangHoa(page,true);
-                            $("#modal_add_hanghoa").modal("show");
+
                         }
                     },
                     {
@@ -268,10 +268,13 @@ function FormVM(options) {
                         pageSize: MAX_PAGE_SIZE,
                         currentPage: 1
                     });
+                    $("#modal_add_hanghoa").modal("show");
+                }else{
+                    app.Alert("Có lỗi xảy ra: "+res.message);
                 }
             },
             error: function (err) {
-                console.log(err);
+                app.Alert("Có lỗi xảy ra: "+err);
             },
             complete: function (jqXHR, textStatus) {
                 $('#loading08').hide();

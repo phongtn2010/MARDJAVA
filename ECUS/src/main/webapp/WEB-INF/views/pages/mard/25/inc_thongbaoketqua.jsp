@@ -108,7 +108,7 @@
     </div>
     <div class="modal-footer">
         <div class="text-center">
-            <a class="btn green" data-bind="">
+            <a class="btn green" data-bind="click: taiGiayXNCL">
                 <spring:message code="common.button.tai_ve"/>
             </a>
             <a class="btn" data-dismiss="modal" data-bind="click: closeThongBao">

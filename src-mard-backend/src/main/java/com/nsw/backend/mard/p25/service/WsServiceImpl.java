@@ -438,7 +438,7 @@ public class WsServiceImpl implements WsService {
             tbdHangHoa25Service.save(hangHoaHoso);
             tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25, tbdHanghoa25, "Bộ Nông nghiệp gửi giấy xác nhận chất lượng", tbdGiayXNCL25.getFiNguoiKy(), action, Constant25.BNN_SEND, null));
             if(checkHangHoaDuDieuKienMK(type,function,tbdHoso25.getFiHSType())){
-                themHangHoaMK(tbdHoso25,tbdHanghoa25);
+                themHangHoaMK(tbdHoso25,hangHoaHoso);
             }
         } catch (Exception e) {
             log.info(e.getMessage());
@@ -775,7 +775,7 @@ public class WsServiceImpl implements WsService {
         TbdHanghoaMK25 tbdHanghoaMK25 = new TbdHanghoaMK25();
         TbdHanghoaMK25 hanghoaMK25 = tbdHanghoaMK25Service.findByFiIdProduct(tbdHanghoa25.getFiIdProduct());
         if (hanghoaMK25!=null){
-            tbdHanghoaMK25.setFiIdMienKiem(hanghoaMK25.getFiIdMienKiem());
+            return;
         }else{
             BeanUtils.copyProperties(tbdHanghoa25, tbdHanghoaMK25);
         }
@@ -783,9 +783,46 @@ public class WsServiceImpl implements WsService {
         tbdHanghoaMK25.setFiProHash(Constant25.hashString(tbdHanghoa25.tbdHangHoa25ToString()));
         tbdHanghoaMK25.setFiHsType(tbdHoso25.getFiHSType());
         tbdHanghoaMK25.setFiNgayCap(new Date());
-        tbdHanghoaMK25.setFiActive(Boolean.TRUE);
-        List<TbdHanghoaMK25> mk25List = tbdHanghoaMK25Service.findByFiProHash(tbdHanghoaMK25.getFiProHash());
-        tbdHanghoaMK25.setFiOrder(mk25List.size() + 1);
+        tbdHanghoaMK25.setFiNSWFileCode(tbdHoso25.getFiNSWFileCode());
+        List<TbdHanghoaMK25> mk25List = tbdHanghoaMK25Service.findByFiProHashOrderByFiOrderDesc(tbdHanghoaMK25.getFiProHash());
+        if(mk25List!=null&&!mk25List.isEmpty()){ //Neu da dat yeu cau truoc do
+            if (mk25List.size()<2){ //Neu nho hon 2 lan
+                tbdHanghoaMK25.setFiOrder(mk25List.size() + 1);
+                tbdHanghoaMK25.setFiActive(Boolean.FALSE);
+            }else{ //Neu lon hon hoac bang 2 lan
+                tbdHanghoaMK25.setFiOrder(mk25List.size() + 1); // them hang hoa moi
+                tbdHanghoaMK25.setFiActive(Boolean.TRUE);
+                if(mk25List.size()>=3){ //Neu lon hon hoac bang 3 lan
+                    int dem =(mk25List.size()+1)-3; //Update lai trang thai cua cac lan truoc do vd: 3 lan => 3+1=4; 4-3=1 => update order<=1 ve false
+                    List<TbdHanghoaMK25> listMKTemp = new ArrayList<>(mk25List);
+                    //Xoa 2 hang hoa gan nhat
+                    listMKTemp.remove(listMKTemp.get(0));
+                    listMKTemp.remove(listMKTemp.get(0));
+                    while (dem>=1){
+                        for (TbdHanghoaMK25 hangHoaMK25Temp: listMKTemp){
+                            if (hangHoaMK25Temp.getFiOrder()==dem){
+                                hangHoaMK25Temp.setFiActive(Boolean.FALSE);
+                                dem=dem-1;
+                                tbdHanghoaMK25Service.save(hangHoaMK25Temp);
+                                listMKTemp.remove(hangHoaMK25Temp);
+                                break;
+                            }
+                        }
+                    }
+                }else{ // Neu bang 2
+                    mk25List.forEach(hangHoaMK25 -> {
+                        hangHoaMK25.setFiActive(Boolean.TRUE);
+                    });
+                    tbdHanghoaMK25Service.saveAll(mk25List);
+                }
+
+            }
+
+        }else{  //Neu chua co lan nao
+            tbdHanghoaMK25.setFiOrder(1);
+            tbdHanghoaMK25.setFiActive(Boolean.FALSE);
+        }
+
         tbdHanghoaMK25Service.save(tbdHanghoaMK25);
     }
 

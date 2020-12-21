@@ -47,6 +47,9 @@ public class TbdHanghoaMK25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_HS_ID")
     private Integer fiIdHS;
 
+    @Column(name = "FI_HS_CODE")
+    private String fiNSWFileCode;
+
     @Column(name = "FI_TAXCODE", length = 50)
     private String fiTaxCode;
 

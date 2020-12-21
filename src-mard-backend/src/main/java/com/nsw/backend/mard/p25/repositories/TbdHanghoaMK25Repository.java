@@ -10,7 +10,7 @@ import java.util.List;
 public interface TbdHanghoaMK25Repository extends JpaRepository<TbdHanghoaMK25, Integer>,TbdHanghoaMK25RepositoryCustom{
 
     List<TbdHanghoaMK25> findByFiTaxCode(String taxCode);
-    List<TbdHanghoaMK25> findByFiProHash(String hash);
+    List<TbdHanghoaMK25> findByFiProHashOrderByFiOrderDesc(String hash);
 
     TbdHanghoaMK25 findByFiIdProduct(Integer fiIdProduct);
 }

@@ -127,6 +127,127 @@ function IndexVM(data) {
     index26Self.goCopyHS = function (item) {
         document.location = app.appContext + '/mard/26/copy/'+item.fiIdHoSo26;
     }
+    index26Self.lichsuXuly = ko.observable(null);
+    index26Self.goViewHistory=function(item){
+        console.log(item);
+        index26Self.lichsuXuly(new LichSu26VM(item));
+        index26Self.lichsuXuly().searchLichSu();
+    }
+    index26Self.goViewCert =function (item) {
+        item.tenTACN=ko.observable(item.fiProductList[0].fiProName);
+        item.maSCN=ko.observable(item.fiProductList[0].fiProCode);
+        item.nhomTACN=ko.observable(item.fiProductList[0].fiProNameNhom);
+        item.loaiTACN=ko.observable(item.fiProductList[0].fiProNameLoai);
+        item.hangSX=ko.observable(item.fiProductList[0].fiProMadeIn);
+        item.nuocSX=ko.observable(item.fiProductList[0].fiProCountryName);
+        item.thanhPhan=ko.observable(item.fiProductList[0].fiProThanhPhan);
+        item.dangMau=ko.observable(item.fiProductList[0].fiProColor);
+        item.tieuchuan=ko.observable(item.fiProductList[0].fiProSoHieu);
+        item.CLList=ko.observableArray(item.fiProductList[0].fiProCLList);
+        item.ATList=ko.observableArray(item.fiProductList[0].fiProATList);
+
+        index26Self.selectedHoso(item);
+        $("#mard26ViewCert").modal("show");
+    }
+}
+function LichSu26VM(data){
+    var self=this;
+    self.fiIdHoSo26 =  ko.observable((data && data.hasOwnProperty('fiIdHoSo26')) ? data.fiIdHoSo26 :null);
+    self.historyItems =ko.observableArray([]);
+    self.fiMaHoso = ko.observable((data && data.hasOwnProperty('fiMaHoso')) ? data.fiMaHoso :null);
+    var pageable = { size: 5, number: 0, sort: 'fiCreateDate', direction: 'desc'};
+    self.historyPageingVM = new PagingVM({
+        pageSize : pageable.size,
+        totalCount : 0
+    });
+    self.historyItems(ko.utils.arrayMap([], function (item) {
+        var itemVM = {};
+        ko.mapping.fromJS(item, {}, itemVM);
+        //    itemVM.fiStatus = ko.observable(mapTrangthai[item.fiStatus.toString()]);
+        return itemVM;
+    }));
+    self.searchLichSu=function () {
+        $("#loading10").show();
+        pageable.number = self.historyPageingVM.currentPage() - 1;
+        app.makeGet({
+            url: '/mard/26/hoso/lichsu?fiIdHs=' + self.fiIdHoSo26() + '&p=' + pageable.number + '&s=5',
+            success: function(res) {
+                $("#loading10").hide();
+                self.historyPageingVM.totalCount(res.total);
+                self.historyItems(ko.utils.arrayMap(res.data, function (item) {
+                    var itemVM = {};
+                    ko.mapping.fromJS(item, {}, itemVM);
+                    return itemVM;
+                }));
+                $("#modal_lichsuXuly").modal('toggle');
+            },
+            error: function (d) {
+                $("#loading10").hide();
+                self.pageContents.removeAll();
+                readArrayObjects(d.content, function (loopItem) {
+                    self.pageContents.push(loopItem);
+                });
+                self.historyPageingVM.totalCount(d.totalElements);
+            }
+        });
+    }
+    self.goToPage = function(page) {
+        if (page >= self.historyPageingVM.firstPage && page <= self.historyPageingVM.lastPage()) {
+            self.historyPageingVM.setCurrentPage(page);
+            self.searchingAfterShow();
+        }
+    };
+
+    self.goToFirst = function() {
+        self.historyPageingVM.setCurrentPage(self.historyPageingVM.firstPage);
+        self.searchingAfterShow();
+    };
+
+    self.goToPrevious = function() {
+        var previous = self.historyPageingVM.previousPage();
+        if (previous != null) {
+            self.historyPageingVM.setCurrentPage(previous);
+            self.searchingAfterShow();
+        }
+
+    };
+
+    self.goToNext = function() {
+        var next = self.historyPageingVM.nextPage();
+        if (next != null) {
+            self.historyPageingVM.setCurrentPage(next);
+            self.searchingAfterShow();
+        }
+    };
+
+    self.goToLast = function() {
+        self.historyPageingVM.setCurrentPage(self.historyPageingVM.lastPage());
+        self.searchingAfterShow();
+    };
+    self.searchingAfterShow = function() {
+        pageable.number = self.historyPageingVM.currentPage() - 1;
+        app.makeGet({
+            url: '/mard/26/hoso/lichsu?fiIdHs=' + self.fiIdHoSo26() + '&p=' + pageable.number + '&s=5',
+            success: function(res) {
+                self.historyPageingVM.totalCount(res.total);
+                self.historyItems(ko.utils.arrayMap(res.data, function (item) {
+                    var itemVM = {};
+                    ko.mapping.fromJS(item, {}, itemVM);
+                    itemVM.fiHSStatus = ko.observable(mapTrangthai[item.fiHSStatus.toString()]);
+                    return itemVM;
+                }));
+
+            },
+            error: function (d) {
+                $("#loading10").hide();
+                self.pageContents.removeAll();
+                readArrayObjects(d.content, function (loopItem) {
+                    self.pageContents.push(loopItem);
+                });
+                self.historyPageingVM.totalCount(d.totalElements);
+            }
+        });
+    }
 }
 function init(data) {
     var index26VM = new IndexVM(data);

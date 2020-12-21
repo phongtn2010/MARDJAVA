@@ -8,8 +8,9 @@ import java.util.List;
 
 public interface TbdHanghoaMK25Service {
     List<TbdHanghoaMK25> findByFiTaxCode(String taxCode);
-    List<TbdHanghoaMK25> findByFiProHash(String hash);
+    List<TbdHanghoaMK25> findByFiProHashOrderByFiOrderDesc(String hash);
     void save(TbdHanghoaMK25 tbdHanghoaMK25);
+    void saveAll(List<TbdHanghoaMK25> mk25List);
     TbdHanghoaMK25 findByFiIdProduct(Integer fiIdProduct);
     public FilterResultHangHoaMK25 searchHanghoaMK25(FilterFormHangHoaMK25 filter);
 }

@@ -27,13 +27,20 @@ public class TbdHanghoaMK25RepositoryImpl implements TbdHanghoaMK25RepositoryCus
             listPredicate.add(cb.like(root.get("fiTaxCode"), String.format("%%%s%%", filter.getTaxCode())));
         }
         listPredicate.add(cb.equal(root.get("fiActive"), Boolean.TRUE));
-        Path<Object> sortBy = root.get(filter.getSortBy());
-        Order order = (filter.getOrder().equals("asc")) ? cb.asc(sortBy) : cb.desc(sortBy);
+        Path<Object> sortByAsc = root.get(filter.getSortBy());
+        Path<Object> sortByDesc = root.get(filter.getFiOrder());
+//        Order order = (filter.getOrder().equals("asc")) ? cb.asc(sortBy) : cb.desc(sortBy);
+
+        List<Order> orderList = new ArrayList();
+        Order orderAsc = cb.asc(sortByAsc);
+        Order orderDesc = cb.desc(sortByDesc);
+        orderList.add(orderAsc);
+        orderList.add(orderDesc);
         Predicate[] finalPredicate = new Predicate[listPredicate.size()];
         listPredicate.toArray(finalPredicate);
 
         //Initialize Pagination
-        TypedQuery<TbdHanghoaMK25> query = em.createQuery(cq.select(root).where(cb.and(finalPredicate)).orderBy(order));
+        TypedQuery<TbdHanghoaMK25> query = em.createQuery(cq.select(root).where(cb.and(finalPredicate)).orderBy(orderList));
         query.setMaxResults(filter.getSize());
         query.setFirstResult(filter.getPage() * filter.getSize());
 

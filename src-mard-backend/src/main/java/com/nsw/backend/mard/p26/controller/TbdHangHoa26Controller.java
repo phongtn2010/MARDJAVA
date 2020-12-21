@@ -6,6 +6,7 @@ import com.nsw.backend.mard.p25.dto.FilterFormHangHoa26;
 import com.nsw.backend.mard.p25.dto.FilterFormHangHoaMK25;
 import com.nsw.backend.mard.p25.dto.FilterResultHangHoaMK25;
 import com.nsw.backend.mard.p25.model.TbdHanghoa25;
+import com.nsw.backend.mard.p25.model.TbdHanghoaMK25;
 import com.nsw.backend.mard.p25.model.TbdHoso25;
 import com.nsw.backend.mard.p25.service.TbdHangHoa25Service;
 import com.nsw.backend.mard.p25.service.TbdHanghoaMK25Service;

@@ -212,6 +212,8 @@ public class TbdHoso26Controller extends BaseController {
             BeanUtils.copyProperties(at,tbdHanghoaAT26);
             listAT26.add(tbdHanghoaAT26);
         });
+        tbdHanghoa26.setFiProATList(listAT26);
+        tbdHanghoa26.setFiProCLList(listCL26);
         return tbdHanghoa26;
     }
 }
