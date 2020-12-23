@@ -833,11 +833,18 @@ function UploadFileVM(options) {
     ufVMSelf.uploadedFiles = ko.observableArray([]);
 
 
-    ufVMSelf.fiFilePath = ko.observable(null);
+    ufVMSelf.fiFilePath = ko.observable(null).extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    });
     ufVMSelf.fiFileType = ko.observable(null);
 
-    ufVMSelf.fiFileHD = ko.observable(null);
-    ufVMSelf.fiFileHDDate = ko.observable(null);
+    ufVMSelf.fiFileHD = ko.observable(null).extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+        maxLength: {message: 'Tối đa 50 ký tự', params: 50}
+    });
+    ufVMSelf.fiFileHDDate = ko.observable(null).extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    });
     ufVMSelf.fiFileHDPath = ko.observable(null).extend({
         validation: {
             validator: function (val) {
@@ -864,8 +871,13 @@ function UploadFileVM(options) {
     ufVMSelf.lstHoaDon = ko.observableArray([]).extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
-    ufVMSelf.fiFileHoaDon = ko.observable(null);
-    ufVMSelf.fiFileHoaDonDate = ko.observable(null);
+    ufVMSelf.fiFileHoaDon = ko.observable(null).extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+        maxLength: {message: 'Tối đa 50 ký tự', params: 50}
+    });
+    ufVMSelf.fiFileHoaDonDate = ko.observable(null).extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    });
     ufVMSelf.fiFileHoaDonPath = ko.observable(null).extend({
         validation: {
             validator: function (val) {
@@ -889,8 +901,13 @@ function UploadFileVM(options) {
     ufVMSelf.lstPhieu = ko.observableArray([]).extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
-    ufVMSelf.fiFilePhieu = ko.observable(null);
-    ufVMSelf.fiFilePhieuDate = ko.observable(null);
+    ufVMSelf.fiFilePhieu = ko.observable(null).extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+        maxLength: {message: 'Tối đa 50 ký tự', params: 50}
+    });
+    ufVMSelf.fiFilePhieuDate = ko.observable(null).extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    });
     ufVMSelf.fiFilePhieuPath = ko.observable(null).extend({
         validation: {
             validator: function (val) {
@@ -914,7 +931,9 @@ function UploadFileVM(options) {
     ufVMSelf.lstKQ = ko.observableArray([]).extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
-    ufVMSelf.fiFileKQ = ko.observable(null);
+    ufVMSelf.fiFileKQ = ko.observable(null).extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    });
     ufVMSelf.fiFileKQPath = ko.observable(null).extend({
         validation: {
             validator: function (val) {
@@ -938,7 +957,9 @@ function UploadFileVM(options) {
     ufVMSelf.lstTC = ko.observableArray([]).extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
-    ufVMSelf.fiFileTC = ko.observable(null);
+    ufVMSelf.fiFileTC = ko.observable(null).extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    });
     ufVMSelf.fiFileTCPath = ko.observable(null).extend({
         validation: {
             validator: function (val) {
@@ -960,7 +981,9 @@ function UploadFileVM(options) {
     });
 
     ufVMSelf.lstCNLH = ko.observableArray([]);
-    ufVMSelf.fiFileCNLH = ko.observable(null);
+    ufVMSelf.fiFileCNLH = ko.observable(null).extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    });
     ufVMSelf.fiFileCNLHPath = ko.observable(null).extend({
         validation: {
             validator: function (val) {
@@ -982,7 +1005,9 @@ function UploadFileVM(options) {
     });
 
     ufVMSelf.lstCNPT = ko.observableArray([]);
-    ufVMSelf.fiFileCNPT = ko.observable(null);
+    ufVMSelf.fiFileCNPT = ko.observable(null).extend({
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+    });
     ufVMSelf.fiFileCNPTPath = ko.observable(null).extend({
         validation: {
             validator: function (val) {
@@ -1075,12 +1100,83 @@ function UploadFileVM(options) {
         ufVMSelf.lstAtch.splice(index, 1);
         ufVMSelf.fiAttachmentList.splice(index, 1);
     }
-
-    ufVMSelf.addFile = function (data, param) {
-        var checkFiles = [ufVMSelf.fiFileHDPath, ufVMSelf.fiFileHoaDonPath, ufVMSelf.fiFilePhieuPath, ufVMSelf.fiFileKQPath, ufVMSelf.fiFileTCPath
-            , ufVMSelf.fiFileCNLHPath, ufVMSelf.fiFileCNPTPath, ufVMSelf.fiFilePath];
+    ufVMSelf.validateHopDong=function(){
+        var checkFiles = [ufVMSelf.fiFileHDPath, ufVMSelf.fiFileHD,ufVMSelf.fiFileHDDate];
         ufVMSelf.errors = ko.validation.group(checkFiles, {deep: true, live: true, observable: true});
-        if (!ufVMSelf.validateForm()) return;
+        if (!ufVMSelf.validateForm())
+            return false;
+        else
+            return true;
+    }
+    ufVMSelf.validateHoaDon=function(){
+        var checkFiles = [ufVMSelf.fiFileHoaDonPath, ufVMSelf.fiFileHoaDon,ufVMSelf.fiFileHoaDonDate];
+        ufVMSelf.errors = ko.validation.group(checkFiles, {deep: true, live: true, observable: true});
+        if (!ufVMSelf.validateForm())
+            return false;
+        else
+            return true;
+    }
+    ufVMSelf.validatePhieu=function(){
+        var checkFiles = [ufVMSelf.fiFilePhieuPath, ufVMSelf.fiFilePhieu,ufVMSelf.fiFilePhieuDate];
+        ufVMSelf.errors = ko.validation.group(checkFiles, {deep: true, live: true, observable: true});
+        if (!ufVMSelf.validateForm())
+            return false;
+        else
+            return true;
+    }
+    ufVMSelf.validateKQPT=function(){
+        var checkFiles = [ufVMSelf.fiFileKQPath, ufVMSelf.fiFileKQ];
+        ufVMSelf.errors = ko.validation.group(checkFiles, {deep: true, live: true, observable: true});
+        if (!ufVMSelf.validateForm())
+            return false;
+        else
+            return true;
+    }
+    ufVMSelf.validateKQPT=function(){
+        var checkFiles = [ufVMSelf.fiFileKQPath, ufVMSelf.fiFileKQ];
+        ufVMSelf.errors = ko.validation.group(checkFiles, {deep: true, live: true, observable: true});
+        if (!ufVMSelf.validateForm())
+            return false;
+        else
+            return true;
+    }
+    ufVMSelf.validateTC=function(){
+        var checkFiles = [ufVMSelf.fiFileTCPath, ufVMSelf.fiFileTC];
+        ufVMSelf.errors = ko.validation.group(checkFiles, {deep: true, live: true, observable: true});
+        if (!ufVMSelf.validateForm())
+            return false;
+        else
+            return true;
+    }
+    ufVMSelf.validateCNLH=function(){
+        var checkFiles = [ufVMSelf.fiFileCNLHPath, ufVMSelf.fiFileCNLH];
+        ufVMSelf.errors = ko.validation.group(checkFiles, {deep: true, live: true, observable: true});
+        if (!ufVMSelf.validateForm())
+            return false;
+        else
+            return true;
+    }
+    ufVMSelf.validateCNPT=function(){
+        var checkFiles = [ufVMSelf.fiFileCNPT, ufVMSelf.fiFileCNLHPath];
+        ufVMSelf.errors = ko.validation.group(checkFiles, {deep: true, live: true, observable: true});
+        if (!ufVMSelf.validateForm())
+            return false;
+        else
+            return true;
+    }
+    ufVMSelf.validateFileKhac=function(){
+        var checkFiles = [ufVMSelf.fiFilePath];
+        ufVMSelf.errors = ko.validation.group(checkFiles, {deep: true, live: true, observable: true});
+        if (!ufVMSelf.validateForm())
+            return false;
+        else
+            return true;
+    }
+    ufVMSelf.addFile = function (data, param) {
+        // var checkFiles = [ufVMSelf.fiFileHDPath, ufVMSelf.fiFileHoaDonPath, ufVMSelf.fiFilePhieuPath, ufVMSelf.fiFileKQPath, ufVMSelf.fiFileTCPath
+        //     , ufVMSelf.fiFileCNLHPath, ufVMSelf.fiFileCNPTPath, ufVMSelf.fiFilePath];
+        // ufVMSelf.errors = ko.validation.group(checkFiles, {deep: true, live: true, observable: true});
+        // if (!ufVMSelf.validateForm()) return;
         var fileName = '';
         var fiFileTypeBNN;
         var files;
@@ -1092,35 +1188,43 @@ function UploadFileVM(options) {
         switch (data) {
             case "1":
                 files = $("#file-HD")[0].files[0];
+                if(!ufVMSelf.validateHopDong()) return;
                 break;
             case "2":
                 files = $("#file-HoaDon")[0].files[0];
+                if(!ufVMSelf.validateHoaDon()) return;
                 break;
             case "3":
                 files = $("#file-Phieu")[0].files[0];
+                if(!ufVMSelf.validatePhieu()) return;
                 break;
             case "4":
                 files = $("#file-KQ")[0].files[0];
+                if(!ufVMSelf.validateKQPT()) return;
                 fiFileTypeBNN=1; //1. Phiếu kết quả phân tích chất lượng của nước xuất khẩu cấp cho lô hàng (Certificate of Analysis); (Bắt buộc)
                 break;
             case "5":
                 files = $("#file-TC")[0].files[0];
+                if(!ufVMSelf.validateTC()) return;
                 fiFileTypeBNN=3; //3. Bản tiêu chuẩn công bố áp dụng của tổ chức, cá nhân nhập khẩu; (Bắt buộc)
                 break;
             case "6":
                 files = $("#file-CNLH")[0].files[0];
+                if(!ufVMSelf.validateCNLH()) return;
                 fiFileTypeBNN=5; //5. Giấy chứng nhận lưu hành tự do hoặc văn bản có giá trị tương đương do
                 // cơ quan có thẩm quyền của nước xuất xứ cấp đối với nguyên liệu đơn, thức ăn truyền thống; (Bắt buộc đối với GroupFoodOfGoods = 1,4)
                 break;
             case "7":
                 files = $("#file-CNPT")[0].files[0]; //6. Giấy chứng nhận phân tích nguy cơ và kiểm soát điểm tới hạn (HACCP)
                 // hoặc giấy chứng nhận tương đương của cơ sở sản xuất đối với nguyên liệu đơn. (bắt buộc đối với GroupFoodOfGoods =4)
+                if(!ufVMSelf.validateCNPT()) return;
                 fiFileTypeBNN=6;
                 break;
             default:
                 files = $("#file-Khac")[0].files[0];
                 fileName = ufVMSelf.fiFileKhacName();
-                fiFileTypeBNN=ufVMSelf.fiFileKhacID()
+                fiFileTypeBNN=ufVMSelf.fiFileKhacID();
+                if(!ufVMSelf.validateFileKhac()) return;
                 break;
         }
 

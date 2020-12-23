@@ -33,7 +33,10 @@ function ThongTinChungVM(data) {
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
     ttcVMSelf.fiNSWFileCodeReplace = ko.observable((data && data.hasOwnProperty('fiNSWFileCodeReplace')) ? data.fiNSWFileCodeReplace : null);
-    ttcVMSelf.fiSoGDK = ko.observable((data && data.hasOwnProperty('fiSoGDK')) ? data.fiSoGDK : null);
+    ttcVMSelf.fiSoGDK = ko.observable((data && data.hasOwnProperty('fiSoGDK')) ? data.fiSoGDK : null).extend({
+
+        maxLength: {message: 'Tối đa 20 ký tự', params: 20}
+    });
     ttcVMSelf.fiGDKFile = ko.observable((data && data.hasOwnProperty('fiGDKFile')) ? data.fiGDKFile : null).extend({
         validation: {
             validator: function (val) {
@@ -60,7 +63,8 @@ function ThongTinChungVM(data) {
 
     //inc_thongtindangky.jsp
     ttcVMSelf.fiSellName = ko.observable((data && data.hasOwnProperty('fiSellName')) ? data.fiSellName : null).extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+        maxLength: {message: 'Tối đa 250 ký tự', params: 250}
     });
     ttcVMSelf.lstCountry = ko.observableArray((data && data.hasOwnProperty('lstCountry')) ? data.lstCountry : []);
     ttcVMSelf.lstDMDVT = ko.observableArray((data && data.hasOwnProperty('lstDMDVT')) ? data.lstDMDVT : []);
@@ -75,19 +79,20 @@ function ThongTinChungVM(data) {
     ttcVMSelf.fiSellCountryName = ko.observable((data && data.hasOwnProperty('fiSellCountryName')) ? data.fiSellCountryName : null);
 
     ttcVMSelf.fiSellAddress = ko.observable((data && data.hasOwnProperty('fiSellAddress')) ? data.fiSellAddress : null).extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+        maxLength: {message: 'Tối đa 250 ký tự', params: 250}
     });
-    ttcVMSelf.fiSellTel = ko.observable((data && data.hasOwnProperty('fiSellTel')) ? data.fiSellTel : null);
-    //     .extend({
-    //     // pattern: {
-    //     //     params: '^0[1-9][0-9]{8,9}$',
-    //     //     message: "Số điện thoại không hợp lệ."
-    //     // }
-    //     required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-    // });
-    ttcVMSelf.fiSellFax = ko.observable((data && data.hasOwnProperty('fiSellFax')) ? data.fiSellFax : null);
+    ttcVMSelf.fiSellTel = ko.observable((data && data.hasOwnProperty('fiSellTel')) ? data.fiSellTel : null).extend({
+
+        maxLength: {message: 'Tối đa 50 ký tự', params: 50}
+    });
+    ttcVMSelf.fiSellFax = ko.observable((data && data.hasOwnProperty('fiSellFax')) ? data.fiSellFax : null).extend({
+
+        maxLength: {message: 'Tối đa 50 ký tự', params: 50}
+    });
     ttcVMSelf.fiSellExport = ko.observable((data && data.hasOwnProperty('fiSellExport')) ? data.fiSellExport : null).extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+        maxLength: {message: 'Tối đa 250 ký tự', params: 250}
     });
 
     // ttcVMSelf.fiPurchName = ko.observable((data && data.hasOwnProperty('fiPurchName')) ? data.fiPurchName : null).
@@ -107,7 +112,8 @@ function ThongTinChungVM(data) {
     ttcVMSelf.fiPurchFax = ko.observable((data && data.hasOwnProperty('fiPurchFax')) ? data.fiPurchFax : null);
     ttcVMSelf.fiPurchReci = ko.observable((data && data.hasOwnProperty('fiPurchReci')) ? data.fiPurchReci : null).
     extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+        maxLength: {message: 'Tối đa 250 ký tự', params: 250}
     });
     ttcVMSelf.fiPurchFromDate = ko.observable((data && data.hasOwnProperty('fiPurchFromDate')) ? new Date(data.fiPurchFromDate) : null).
     extend({
@@ -123,17 +129,22 @@ function ThongTinChungVM(data) {
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
 
-    ttcVMSelf.fiProCVMienGiam = ko.observable((data && data.hasOwnProperty('fiProCVMienGiam')) ? data.fiProCVMienGiam : null);
+    ttcVMSelf.fiProCVMienGiam = ko.observable((data && data.hasOwnProperty('fiProCVMienGiam')) ? data.fiProCVMienGiam : null).
+    extend({
+        maxLength: {message: 'Tối đa 20 ký tự', params: 20}
+    });
     ttcVMSelf.fiProCVMienGiamNgay = ko.observable(null);
     ttcVMSelf.fiProCVMienGiamNgayText = ko.observable(null);
 
     ttcVMSelf.fiProName = ko.observable((data && data.hasOwnProperty('fiProName')) ? data.fiProName : null).
     extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+        maxLength: {message: 'Tối đa 250 ký tự', params: 250}
     });
     ttcVMSelf.fiProCode = ko.observable((data && data.hasOwnProperty('fiProCode')) ? data.fiProCode : null).
     extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+        maxLength: {message: 'Tối đa 200 ký tự', params: 200}
     });
     ttcVMSelf.fiProMadeIn = ko.observable((data && data.hasOwnProperty('fiProMadeIn')) ? data.fiProMadeIn : null).
     extend({
@@ -141,15 +152,18 @@ function ThongTinChungVM(data) {
     });
     ttcVMSelf.fiProThanhPhan = ko.observable((data && data.hasOwnProperty('fiProThanhPhan')) ? data.fiProThanhPhan : null).
     extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+        maxLength: {message: 'Tối đa 4000 ký tự', params: 4000}
     });
     ttcVMSelf.fiProColor = ko.observable((data && data.hasOwnProperty('fiProColor')) ? data.fiProColor : null).
     extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+        maxLength: {message: 'Tối đa 200 ký tự', params: 200}
     });
     ttcVMSelf.fiProSoHieu = ko.observable((data && data.hasOwnProperty('fiProSoHieu')) ? data.fiProSoHieu : null).
     extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+        maxLength: {message: 'Tối đa 200 ký tự', params: 200}
     });
     ttcVMSelf.fiProQuyChuan = ko.observable((data && data.hasOwnProperty('fiProQuyChuan')) ? data.fiProQuyChuan : null).
     extend({
@@ -162,7 +176,8 @@ function ThongTinChungVM(data) {
     });
     ttcVMSelf.EfiProCLTarg = ko.observable(null).
     extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+        maxLength: {message: 'Tối đa 100 ký tự', params: 100}
     });
     ttcVMSelf.EfiProCLCompare = ko.observable(null).
     extend({
@@ -183,13 +198,13 @@ function ThongTinChungVM(data) {
     ttcVMSelf.fiProValueVN  = ko.observable((data && data.hasOwnProperty('fiProValueVN ')) ? data.fiProValueVN  : null).
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
-        number: {params: true},
+        number: {message:"Yêu cầu nhâp số",params: true},
         min: 0
     });
     ttcVMSelf.fiProValueUSD   = ko.observable((data && data.hasOwnProperty('fiProValueUSD  ')) ? data.fiProValueUSD  : null).
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
-        number: {params: true},
+        number: {message:"Yêu cầu nhâp số",params: true},
         min: 0
     });
 
@@ -199,7 +214,8 @@ function ThongTinChungVM(data) {
     });
     ttcVMSelf.EfiProATTarg = ko.observable(null).
     extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+        maxLength: {message: 'Tối đa 100 ký tự', params: 100}
     });
     ttcVMSelf.EfiProATCompare = ko.observable(null).
     extend({
@@ -221,13 +237,13 @@ function ThongTinChungVM(data) {
     ttcVMSelf.EfiProSLKLMass = ko.observable(null).
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
-        number: {params: true},
+        number: {message:"Yêu cầu nhâp số",params: true},
         min: 0
     });
     ttcVMSelf.EfiProSLKLMassTan = ko.observable(null).
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
-        number: {params: true},
+        number: {message:"Yêu cầu nhâp số",params: true},
         min: 0
     });
     ttcVMSelf.EfiProSLKLMassUnitCode = ko.observable(null).
@@ -237,7 +253,7 @@ function ThongTinChungVM(data) {
     ttcVMSelf.EfiProSLKLAmount = ko.observable(null).
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
-        number: {params: true},
+        number: {message:"Yêu cầu nhâp số",params: true},
         min: 0
     });
     ttcVMSelf.EfiProSLKLAmountUnitCode = ko.observable(null).
@@ -253,7 +269,8 @@ function ThongTinChungVM(data) {
     });
     ttcVMSelf.fiSignName = ko.observable((data && data.hasOwnProperty('fiSignName')) ? data.fiSignName : null).
     extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+        maxLength: {message: 'Tối đa 100 ký tự', params: 100}
     });
     ttcVMSelf.fiSignPosition = ko.observable((data && data.hasOwnProperty('fiSignPosition')) ? data.fiSignPosition : null).
     extend({
@@ -286,18 +303,20 @@ function ThongTinChungVM(data) {
     ttcVMSelf.fiImporterName = ko.observable((data && data.hasOwnProperty('fiImporterName')) ? data.fiImporterName : null)
         .extend({
             required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+            maxLength: {message: 'Tối đa 250 ký tự', params: 250}
         });
     ttcVMSelf.fiImporterAddress = ko.observable((data && data.hasOwnProperty('fiImporterAddress')) ? data.fiImporterAddress : null)
         .extend({
             required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+            maxLength: {message: 'Tối đa 250 ký tự', params: 250}
         });
-    ttcVMSelf.fiImporterTel = ko.observable((data && data.hasOwnProperty('fiImporterTel')) ? data.fiImporterTel : null);
-        // .extend({
-        //     required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-        // });
+    ttcVMSelf.fiImporterTel = ko.observable((data && data.hasOwnProperty('fiImporterTel')) ? data.fiImporterTel : null).extend({
+
+        maxLength: {message: 'Tối đa 50 ký tự', params: 50}
+    });
     ttcVMSelf.fiImporterFax = ko.observable((data && data.hasOwnProperty('fiImporterFax')) ? data.fiImporterFax : null).
     extend({
-        number: {params: true}
+        maxLength: {message: 'Tối đa 50 ký tự', params: 50}
     });
     ttcVMSelf.fiImporterEmail = ko.observable((data && data.hasOwnProperty('fiImporterEmail')) ? data.fiImporterEmail : null)
         .extend({
@@ -307,7 +326,10 @@ function ThongTinChungVM(data) {
 
 
     //inc_thongtinkhac.jsp
-    ttcVMSelf.fiAddressGath = ko.observable((data && data.hasOwnProperty('fiAddressGath')) ? data.fiAddressGath : null);
+    ttcVMSelf.fiAddressGath = ko.observable((data && data.hasOwnProperty('fiAddressGath')) ? data.fiAddressGath : null).
+    extend({
+        maxLength: {message: 'Tối đa 250 ký tự', params: 250}
+    });
     // extend({
     //     required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     // });
@@ -319,27 +341,28 @@ function ThongTinChungVM(data) {
     // extend({
     //     required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     // });
-    ttcVMSelf.fiAddressRegSample = ko.observable((data && data.hasOwnProperty('fiAddressRegSample')) ? data.fiAddressRegSample : null);
+    ttcVMSelf.fiAddressRegSample = ko.observable((data && data.hasOwnProperty('fiAddressRegSample')) ? data.fiAddressRegSample : null).
+    extend({
+        maxLength: {message: 'Tối đa 250 ký tự', params: 250}
+    });
     // extend({
     //     required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     // });
 
     ttcVMSelf.fiContactName = ko.observable((data && data.hasOwnProperty('fiContactName')) ? data.fiContactName : null).
     extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+        maxLength: {message: 'Tối đa 250 ký tự', params: 250}
     });
-    ttcVMSelf.fiContactTel = ko.observable((data && data.hasOwnProperty('fiContactTel')) ? data.fiContactTel : null);
-        // .extend({
-        // pattern: {
-        //     params: '^0[1-9][0-9]{8,9}$',
-        //     message: "Số điện thoại không hợp lệ."}
-    // });
-    ttcVMSelf.fiContactAddress = ko.observable((data && data.hasOwnProperty('fiContactAddress')) ? data.fiContactAddress : null);
-    // extend({
-    //     required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
-    // });
+    ttcVMSelf.fiContactTel = ko.observable((data && data.hasOwnProperty('fiContactTel')) ? data.fiContactTel : null).extend({
+        maxLength: {message: 'Tối đa 50 ký tự', params: 50}
+    });
+    ttcVMSelf.fiContactAddress = ko.observable((data && data.hasOwnProperty('fiContactAddress')) ? data.fiContactAddress : null).
+    extend({
+        maxLength: {message: 'Tối đa 250 ký tự', params: 250}
+    });
     ttcVMSelf.fiContactEmail = ko.observable((data && data.hasOwnProperty('fiContactEmail')) ? data.fiContactEmail : null).extend({
-        email: {params: true, message: NSWLang["common_msg_invalid_email"]}
+        maxLength: {message: 'Tối đa 50 ký tự', params: 50}
     });
 
     ttcVMSelf.lstLoaiTienTe  = ko.observableArray((data && data.hasOwnProperty('lstLoaiTienTe')) ? data.lstLoaiTienTe : []);
@@ -1042,12 +1065,12 @@ function ThongTinChungVM(data) {
         }
         item.fiProSLKLMass = ko.observable((item && item.hasOwnProperty('fiProSLKLMass')) ? item.fiProSLKLMass : null).extend({
             required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
-            number: {params: true},
+            number: {message:"Yêu cầu nhâp số",params: true},
             min: 0
         });
         item.fiProSLKLMassTan = ko.observable((item && item.hasOwnProperty('fiProSLKLMassTan')) ? item.fiProSLKLMassTan : null).extend({
             required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
-            number: {params: true},
+            number: {message:"Yêu cầu nhâp số",params: true},
             min: 0
         });
         item.fiProSLKLAmountUnitCode = ko.observable((item && item.hasOwnProperty('fiProSLKLAmountUnitCode')) ? item.fiProSLKLAmountUnitCode : null).extend({
@@ -1055,7 +1078,7 @@ function ThongTinChungVM(data) {
         });
         item.fiProSLKLAmount = ko.observable((item && item.hasOwnProperty('fiProSLKLAmount')) ? item.fiProSLKLAmount : null).extend({
             required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
-            number: {params: true},
+            number: {message:"Yêu cầu nhâp số",params: true},
             min: 0
         });
         item.fiProSLKLMassUnitCode = ko.observable((item && item.hasOwnProperty('fiProSLKLMassUnitCode')) ? item.fiProSLKLMassUnitCode : null).extend({
