@@ -625,15 +625,16 @@ function Mard25VM() {
             ]
         });
     }
-    self.permissionViewChuyen = function(item){
+    self.permissionViewChuyen = function(){
+        var item = self.selectedHoSo();
         console.log(item);
-        console.log(item.fiProductList[0].fiTrangThaiHangHoa);
-        if (item.fiProductList[0].fiTrangThaiHangHoa>26){
-            return false;
-        }else{
-            return true;
+        if(item!=null){
+            if (item.fiProductList[0].fiTrangThaiHangHoa>26){
+                return false;
+            }else{
+                return true;
+            }
         }
-        // return true;
     }
 
     self.closeViewChuyen = function(){

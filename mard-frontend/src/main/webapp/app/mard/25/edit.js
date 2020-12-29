@@ -7,6 +7,7 @@ function Mard25EditVM () {
         options["isEditHS"]="1";
         if (isCopy) {
             options["fiIdHS"]=null;
+            options["fiHSStatus"]=null;
             options["fiNSWFileCode"]=null;
             options["fiSoXacNhanDon"]=null;
             for (var i =0;i<options.fiProductList.length;i++){

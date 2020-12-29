@@ -33,7 +33,7 @@
                             <td><input class="form-control" type="text" data-bind="value: fiProCLContent, enable: isEnable()"></td>
                             <td><select class="form-control" data-bind="options: lstChiTieuAT,
                                                     optionsText: 'fiCatTypeName',
-                                                    optionsValue: 'fiCatNote',
+                                                    optionsValue: 'fiCatNote',selectedText:fiProCLUnitName,
                                                     optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.chat_luong.dvt"/>',
                                                     value: fiProCLUnitID, enable: isEnable() "></select></td>
                             <td class="text-center" data-bind="visible: $root.isEditable()">
@@ -77,7 +77,7 @@
                             <td>
                                 <select id="EfiProCLUnitIDCBB"
                                         data-bind="options: lstChiTieuAT,
-                                                    optionsText: 'fiCatTypeName',
+                                                    optionsText: 'fiCatTypeName',selectedText: EfiProCLUnitName,
                                                     optionsValue: 'fiCatNote',optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.chat_luong.dvt"/>',
                                                     value: EfiProCLUnitID, enable: fiHSType()!=4" class="form-control"></select>
                             </td>
@@ -127,7 +127,7 @@
                             <td><input class="form-control" type="text" data-bind="value: fiProATContent,  enable: isEnable()"></td>
                             <td><select class="form-control" data-bind="options: lstChiTieuAT,
                                                     optionsText: 'fiCatTypeName',
-                                                    optionsValue: 'fiCatNote',
+                                                    optionsValue: 'fiCatNote',selectedText:fiProATUnitName,
                                                     optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.chat_luong.dvt"/>',
                                                     value: fiProATUnitID, enable: isEnable() "></select></td>
                             <td class="text-center" data-bind="visible: $root.isEditable()">
@@ -172,7 +172,7 @@
                                 <select
                                         data-bind="options: lstChiTieuAT,
                                                     optionsText: 'fiCatTypeName',
-                                                    optionsValue: 'fiCatNote',
+                                                    optionsValue: 'fiCatNote',selectedText:EfiProATUnitName,
                                                     optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.an_toan.dvt"/>',
                                                     value: EfiProATUnitID, enable: fiHSType()!=4" class="form-control"></select>
                             </td>
@@ -213,13 +213,15 @@
                             <td><input class="form-control" type="text" data-bind="value: fiProSLKLMass, enable: isEnable()"></td>
                             <td><select class="form-control" data-bind="options: lstDMDVT,
                                                     optionsText: 'fiCatTypeName',
-                                                    optionsValue: 'fiCatNote',
+                                                    optionsValue: 'fiCatNote',selectedText:fiProSLKLMassUnitName,
+                                                    optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.dinh_luong.dvtkl"/>',
                                                     value: fiProSLKLMassUnitCode, enable: isEnable() "></select></td>
                             <td><input class="form-control" type="text" data-bind="value: fiProSLKLMassTan,  enable: isEnable()"></td>
                             <td><input class="form-control" type="text" data-bind="value: fiProSLKLAmount, enable: isEnable()"></td>
                             <td><select class="form-control" data-bind="options: lstDMDVTSL,
                                                     optionsText: 'fiCatTypeName',
-                                                    optionsValue: 'fiCatNote',
+                                                    optionsValue: 'fiCatNote',selectedText:fiProSLKLAmountUnitName,
+                                                    optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.dinh_luong.dvtsl"/>',
                                                     value: fiProSLKLAmountUnitCode, enable: isEnable() "></select></td>
                             <td class="text-center" data-bind="visible: $root.isEditable()">
                                <span data-bind="if: (isUpdate())">
@@ -248,7 +250,7 @@
                                 <select
                                         data-bind="options: lstDMDVT,
                                                     optionsText: 'fiCatTypeName',
-                                                    optionsValue: 'fiCatNote',
+                                                    optionsValue: 'fiCatNote',selectedText:EfiProSLKLMassUnitName,
                                                     optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.dinh_luong.dvtkl"/>',
                                                     value: EfiProSLKLMassUnitCode" class="form-control"></select>
                             </td>
@@ -262,7 +264,7 @@
                                 <select
                                         data-bind="options: lstDMDVTSL,
                                                     optionsText: 'fiCatTypeName',
-                                                    optionsValue: 'fiCatNote',
+                                                    optionsValue: 'fiCatNote',selectedText:EfiProSLKLAmountUnitName,
                                                     optionsCaption: '<spring:message code="mard.25.tokhai.hang_hoa.dinh_luong.dvtsl"/>',
                                                     value: EfiProSLKLAmountUnitCode" class="form-control"></select>
                             </td>

@@ -35,6 +35,7 @@ function HistoryPopupView() {
 
     //self.searching();
     self.goToPage = function(page) {
+        console.log(page);
         if (page >= self.historyPageingVM.firstPage && page <= self.historyPageingVM.lastPage()) {
             self.historyPageingVM.setCurrentPage(page);
             self.searchingAfterShow();

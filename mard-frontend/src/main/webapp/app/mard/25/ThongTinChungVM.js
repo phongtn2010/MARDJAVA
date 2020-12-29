@@ -185,8 +185,10 @@ function ThongTinChungVM(data) {
     });
     ttcVMSelf.EfiProCLContent = ko.observable(null).
     extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+        maxLength: {message: 'Tối đa 25 ký tự', params: 25}
     });
+    ttcVMSelf.EfiProCLUnitName = ko.observable(null);
     ttcVMSelf.EfiProCLUnitID = ko.observable(null).
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
@@ -223,8 +225,10 @@ function ThongTinChungVM(data) {
     });
     ttcVMSelf.EfiProATContent = ko.observable(null).
     extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+        required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+        maxLength: {message: 'Tối đa 25 ký tự', params: 25}
     });
+    ttcVMSelf.EfiProATUnitName = ko.observable(null);
     ttcVMSelf.EfiProATUnitID = ko.observable(null).
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
@@ -246,6 +250,7 @@ function ThongTinChungVM(data) {
         number: {message:"Yêu cầu nhâp số",params: true},
         min: 0
     });
+    ttcVMSelf.EfiProSLKLMassUnitName = ko.observable(null);
     ttcVMSelf.EfiProSLKLMassUnitCode = ko.observable(null).
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
@@ -256,6 +261,7 @@ function ThongTinChungVM(data) {
         number: {message:"Yêu cầu nhâp số",params: true},
         min: 0
     });
+    ttcVMSelf.EfiProSLKLAmountUnitName = ko.observable(null)
     ttcVMSelf.EfiProSLKLAmountUnitCode = ko.observable(null).
     extend({
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
@@ -626,20 +632,20 @@ function ThongTinChungVM(data) {
             return;
         }
         for (var i =0;i<ttcVMSelf.fiProSLKLList().length;i++){
-            var massName=ttcVMSelf.findNameByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode);
-            var amountName=ttcVMSelf.findNameSLByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode);
+            //var massName=ttcVMSelf.findNameByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode);
+            //var amountName=ttcVMSelf.findNameSLByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode);
             var getList = {
                 fiProSLKLMass: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMass,
                 fiProSLKLMassTan: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassTan,
-                fiProSLKLMassUnitName: massName,
+                fiProSLKLMassUnitName: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitName(),
                 fiProSLKLMassUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode(),
                 fiProSLKLAmount: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmount,
-                fiProSLKLAmountUnitName: amountName,
+                fiProSLKLAmountUnitName: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitName(),
                 lstDMDVT: ttcVMSelf.lstDMDVT(),
                 lstDMDVTSL: ttcVMSelf.lstDMDVTSL(),
                 isEnable: ttcVMSelf.fiProSLKLList()[i].isEnable,
                 isUpdate: ttcVMSelf.fiProSLKLList()[i].isUpdate,
-                fiProSLKLAmountUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode
+                fiProSLKLAmountUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode()
             }
             ttcVMSelf.listSLKL.push(getList);
         }
@@ -709,7 +715,7 @@ function ThongTinChungVM(data) {
                 lstChiTieuAT: ttcVMSelf.lstChiTieuAT,
                 isEnable: ttcVMSelf.fiProCLList()[i].isEnable(),
                 isUpdate: ttcVMSelf.fiProCLList()[i].isUpdate(),
-                fiProCLUnitID: ttcVMSelf.fiProCLList()[i].fiProCLUnitID
+                fiProCLUnitID: ttcVMSelf.fiProCLList()[i].fiProCLUnitID()
             }
             ttcVMSelf.listCL.push(getList);
         }
@@ -720,23 +726,23 @@ function ThongTinChungVM(data) {
                 fiProATCompare: ttcVMSelf.fiProATList()[i].fiProATCompare(),
                 fiProATContent:  ttcVMSelf.fiProATList()[i].fiProATContent(),
                 fiProATUnitName: ttcVMSelf.fiProATList()[i].fiProATUnitName(),
-                lstChiTieuAT: ttcVMSelf.lstChiTieuAT,
+                lstChiTieuAT: ttcVMSelf.lstChiTieuAT(),
                 isEnable: ttcVMSelf.fiProATList()[i].isEnable(),
                 isUpdate: ttcVMSelf.fiProATList()[i].isUpdate(),
-                fiProATUnitID:  ttcVMSelf.fiProATList()[i].fiProATUnitID
+                fiProATUnitID:  ttcVMSelf.fiProATList()[i].fiProATUnitID()
         }
             ttcVMSelf.listAT.push(getList);
         }
         for (var i =0;i<ttcVMSelf.fiProSLKLList().length;i++){
-            var massName=ttcVMSelf.findNameByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode());
-            var amountName=ttcVMSelf.findNameSLByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode());
+            //var massName=ttcVMSelf.findNameByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode());
+            //var amountName=ttcVMSelf.findNameSLByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode());
             var getList = {
                 fiProSLKLMass: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMass(),
                 fiProSLKLMassTan: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassTan(),
-                fiProSLKLMassUnitName: massName,
+                fiProSLKLMassUnitName: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitName(),
                 fiProSLKLMassUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode(),
                 fiProSLKLAmount: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmount(),
-                fiProSLKLAmountUnitName: amountName,
+                fiProSLKLAmountUnitName: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitName(),
                 lstDMDVT: ttcVMSelf.lstDMDVT(),
                 lstDMDVTSL: ttcVMSelf.lstDMDVTSL(),
                 isEnable: ttcVMSelf.fiProSLKLList()[i].isEnable(),
@@ -747,9 +753,11 @@ function ThongTinChungVM(data) {
         }
         var kl;
         var sl;
-        ko.utils.arrayForEach(ttcVMSelf.listSLKL(), function(slkl) {
-            kl=slkl.fiProSLKLMass+' '+slkl.fiProSLKLMassUnitName;
-            sl=slkl.fiProSLKLAmount+' '+slkl.fiProSLKLAmountUnitName;
+        console.log(ttcVMSelf.listSLKL());
+        console.log(ttcVMSelf.fiProSLKLList());
+        ko.utils.arrayForEach(ttcVMSelf.fiProSLKLList(), function(slkl) {
+            kl=slkl.fiProSLKLMass()+' '+slkl.fiProSLKLMassUnitName() +' ';
+            sl=slkl.fiProSLKLAmount()+' '+slkl.fiProSLKLAmountUnitName() +' ';
         });
         var nameNhom=ttcVMSelf.findCodeName(ttcVMSelf.lstNhom(),ttcVMSelf.fiProIdNhom());
         var namePhanNhom=ttcVMSelf.findCodeName(ttcVMSelf.lstPhanNhom(),ttcVMSelf.fiProIdPhanNhom());
@@ -951,6 +959,7 @@ function ThongTinChungVM(data) {
         ttcVMSelf.EfiProCLContent(null);
         ttcVMSelf.EfiProCLCompare(null);
         ttcVMSelf.EfiProCLUnitID(null);
+        ttcVMSelf.EfiProCLUnitName(null);
         ttcVMSelf.EfiProCLTarg(null);
     }
 
@@ -958,29 +967,37 @@ function ThongTinChungVM(data) {
         var chiTieuChatLuong = [ttcVMSelf.EfiProCLContent, ttcVMSelf.EfiProCLCompare, ttcVMSelf.EfiProCLUnitID,ttcVMSelf.EfiProCLTarg];
         ttcVMSelf.errors = ko.validation.group(chiTieuChatLuong, {deep: true, live: true, observable: true});
         if (!ttcVMSelf.validate()) return;
-        var unitName= ttcVMSelf.findNameByCatNote2(ttcVMSelf.lstChiTieuAT(),ttcVMSelf.EfiProCLUnitID());
+        // var unitName= ttcVMSelf.findNameByCatNote2(ttcVMSelf.lstChiTieuAT(),ttcVMSelf.EfiProCLUnitID());
         var item = {
+            fiProCLUnitID: ttcVMSelf.EfiProCLUnitID(),
             fiProCLTarg: ttcVMSelf.EfiProCLTarg(),
             fiProCLCompare: ttcVMSelf.EfiProCLCompare(),
             fiProCLContent: ttcVMSelf.EfiProCLContent(),
-            fiProCLUnitName: unitName,
-            lstChiTieuAT: ttcVMSelf.lstChiTieuAT,
+            fiProCLUnitName: ttcVMSelf.EfiProCLUnitName(),
+            lstChiTieuAT: ttcVMSelf.lstChiTieuAT(),
             isEnable:ko.observable(false),
             isUpdate:ko.observable(false),
-            fiProCLUnitID: ttcVMSelf.EfiProCLUnitID()
+
         }
+        console.log(item);
         item.fiProCLTarg = ko.observable((item && item.hasOwnProperty('fiProCLTarg')) ? item.fiProCLTarg : null).extend({
-            required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+            required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+			maxLength: {message: 'Tối đa 100 ký tự', params: 100}
         });
         item.fiProCLCompare = ko.observable((item && item.hasOwnProperty('fiProCLCompare')) ? item.fiProCLCompare : null).extend({
             required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
         });
         item.fiProCLContent = ko.observable((item && item.hasOwnProperty('fiProCLContent')) ? item.fiProCLContent : null).extend({
-            required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+            required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+			maxLength: {message: 'Tối đa 25 ký tự', params: 25}
         });
         item.fiProCLUnitName = ko.observable((item && item.hasOwnProperty('fiProCLUnitName')) ? item.fiProCLUnitName : null).extend({
             required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
         });
+        item.fiProCLUnitID = ko.observable((item && item.hasOwnProperty('fiProCLUnitID')) ? item.fiProCLUnitID : null).extend({
+            required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+        });
+        console.log(item);
         ttcVMSelf.fiProCLList.push(item);
         ttcVMSelf.clearFormCL();
     }
@@ -1000,6 +1017,7 @@ function ThongTinChungVM(data) {
         ttcVMSelf.EfiProATTarg(null);
         ttcVMSelf.EfiProATCompare(null);
         ttcVMSelf.EfiProATUnitID(null);
+        ttcVMSelf.EfiProATUnitName(null);
     }
     ttcVMSelf.addThongTinChiTieuAT=function () {
         var chiTieuAT = [ttcVMSelf.EfiProATContent, ttcVMSelf.EfiProATTarg, ttcVMSelf.EfiProATCompare,ttcVMSelf.EfiProATUnitID];
@@ -1013,19 +1031,24 @@ function ThongTinChungVM(data) {
             isEnable:ko.observable(false),
             isUpdate:ko.observable(false),
             lstChiTieuAT: ttcVMSelf.lstChiTieuAT,
-            fiProATUnitName: unitName,
+            fiProATUnitName: ttcVMSelf.EfiProATUnitName(),
             fiProATUnitID: ttcVMSelf.EfiProATUnitID()
         }
         item.fiProATTarg = ko.observable((item && item.hasOwnProperty('fiProATTarg')) ? item.fiProATTarg : null).extend({
-            required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+            required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+			maxLength: {message: 'Tối đa 100 ký tự', params: 100}
         });
         item.fiProATCompare = ko.observable((item && item.hasOwnProperty('fiProATCompare')) ? item.fiProATCompare : null).extend({
             required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
         });
         item.fiProATContent = ko.observable((item && item.hasOwnProperty('fiProATContent')) ? item.fiProATContent : null).extend({
-            required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+            required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+			maxLength: {message: 'Tối đa 25 ký tự', params: 25}
         });
         item.fiProATUnitName = ko.observable((item && item.hasOwnProperty('fiProATUnitName')) ? item.fiProATUnitName : null).extend({
+            required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+        });
+        item.fiProATUnitID = ko.observable((item && item.hasOwnProperty('fiProATUnitID')) ? item.fiProATUnitID : null).extend({
             required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
         });
         ttcVMSelf.fiProATList.push(item);
@@ -1042,27 +1065,33 @@ function ThongTinChungVM(data) {
         ttcVMSelf.EfiProSLKLMassTan(null);
         ttcVMSelf.EfiProSLKLAmount(null);
         ttcVMSelf.EfiProSLKLAmountUnitCode(null);
+        ttcVMSelf.EfiProSLKLAmountUnitName(null);
         ttcVMSelf.EfiProSLKLMassUnitCode(null);
+        ttcVMSelf.EfiProSLKLMassUnitName(null);
     }
     ttcVMSelf.addThongTinChiTieuKL=function () {
         var chiTieuKL = [ttcVMSelf.EfiProSLKLMass, ttcVMSelf.EfiProSLKLMassTan, ttcVMSelf.EfiProSLKLAmount,ttcVMSelf.EfiProSLKLAmountUnitCode,ttcVMSelf.EfiProSLKLMassUnitCode];
         ttcVMSelf.errors = ko.validation.group(chiTieuKL, {deep: true, live: true, observable: true});
         if (!ttcVMSelf.validate()) return;
-        var massName=ttcVMSelf.findNameByCatNote(ttcVMSelf.EfiProSLKLMassUnitCode());
-        var amountName=ttcVMSelf.findNameSLByCatNote(ttcVMSelf.EfiProSLKLAmountUnitCode());
+        // var massName=ttcVMSelf.findNameByCatNote(ttcVMSelf.EfiProSLKLMassUnitCode());
+        // var amountName=ttcVMSelf.findNameSLByCatNote(ttcVMSelf.EfiProSLKLAmountUnitCode());
+        console.log(ttcVMSelf.EfiProSLKLAmountUnitName);
+        console.log(ttcVMSelf.EfiProSLKLMassUnitName);
         var item = {
             fiProSLKLMass: ttcVMSelf.EfiProSLKLMass(),
             fiProSLKLMassTan:ttcVMSelf.EfiProSLKLMassTan(),
-            fiProSLKLMassUnitName: massName,
+            fiProSLKLMassUnitName: ttcVMSelf.EfiProSLKLMassUnitName(),
             fiProSLKLMassUnitCode: ttcVMSelf.EfiProSLKLMassUnitCode(),
             fiProSLKLAmount: ttcVMSelf.EfiProSLKLAmount(),
             isEnable:ko.observable(false),
             isUpdate:ko.observable(false),
             lstDMDVT: ttcVMSelf.lstDMDVT(),
             lstDMDVTSL: ttcVMSelf.lstDMDVTSL(),
-            fiProSLKLAmountUnitName: amountName,
+            fiProSLKLAmountUnitName: ttcVMSelf.EfiProSLKLAmountUnitName(),
             fiProSLKLAmountUnitCode: ttcVMSelf.EfiProSLKLAmountUnitCode()
         }
+
+        console.log(item);
         item.fiProSLKLMass = ko.observable((item && item.hasOwnProperty('fiProSLKLMass')) ? item.fiProSLKLMass : null).extend({
             required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
             number: {message:"Yêu cầu nhâp số",params: true},
@@ -1073,6 +1102,9 @@ function ThongTinChungVM(data) {
             number: {message:"Yêu cầu nhâp số",params: true},
             min: 0
         });
+        item.fiProSLKLAmountUnitName = ko.observable((item && item.hasOwnProperty('fiProSLKLAmountUnitName')) ? ttcVMSelf.EfiProSLKLAmountUnitName() : null).extend({
+            required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+        });
         item.fiProSLKLAmountUnitCode = ko.observable((item && item.hasOwnProperty('fiProSLKLAmountUnitCode')) ? item.fiProSLKLAmountUnitCode : null).extend({
             required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
         });
@@ -1081,9 +1113,14 @@ function ThongTinChungVM(data) {
             number: {message:"Yêu cầu nhâp số",params: true},
             min: 0
         });
+        item.fiProSLKLMassUnitName = ko.observable((item && item.hasOwnProperty('fiProSLKLMassUnitName')) ? ttcVMSelf.EfiProSLKLMassUnitName() : null).extend({
+            required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
+        });
         item.fiProSLKLMassUnitCode = ko.observable((item && item.hasOwnProperty('fiProSLKLMassUnitCode')) ? item.fiProSLKLMassUnitCode : null).extend({
             required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
         });
+        console.log(item);
+
         ttcVMSelf.fiProSLKLList.push(item);
         ttcVMSelf.clearFormKL();
     }

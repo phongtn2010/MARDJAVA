@@ -70,7 +70,7 @@ public class Hoso25 {
 
     @XmlJavaTypeAdapter(DateSerialization.class)
     @XmlElement(name = "CreateDate")
-    Date fiHSCreatedDate;
+    Date fiUpdatedDate;
     @XmlElement(name = "SignPlace")
     String fiSignAddressName;
     @XmlElement(name = "SignName")

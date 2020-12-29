@@ -319,6 +319,19 @@ function FormVM(options) {
     //         error: function (e) { }
     //     });
     // };
-
+    form26Sefl.validateHoso= function () {
+        if (form26Sefl.lstHanghoa().length<1){
+            app.Alert("Bạn chưa nhập hàng hóa");
+            return false;
+        }
+        var check = [form26Sefl.fiNguoiKy,form26Sefl.fiDiadiemKy];
+        form26Sefl.errors = ko.validation.group({check}, {deep: true, live: true, observable: true});
+        if (form26Sefl.errors().length > 0) {
+            form26Sefl.errors.showAllMessages();
+            app.Alert("Bạn cần nhập đầy đủ các trường bắt buộc");
+            return false;
+        }
+        return true;
+    }
 }
 

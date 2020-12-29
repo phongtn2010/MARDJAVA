@@ -178,7 +178,11 @@ public class Tbdhoso25Controller extends BaseController {
 
             TbdHoso25 regProfile = tbdHoso25Service.findByFiHSCode(requestCancel.getFiNSWFileCode());
             ResponseJson response = wsService.yeuCauRutHS(requestCancel);
-            return  ResponseEntity.ok(response);
+//            return  ResponseEntity.ok(response);
+            return createResponse(null, response.isSuccess(),
+                    response.isSuccess() ?
+                            "Xin rút hồ sơ thành công!" :
+                            "Có lỗi trong quá trình gửi! " + response.getMessage(), HttpStatus.OK);
         } catch (Exception ex) {
             LOG.error(TAG + ex.getMessage(), ex);
             RabbitMQErrorHelper.pushLogToRabbitMQ(getErrorInfo(TAG, ex), rabbitMQService.getRabbitMQInfo());

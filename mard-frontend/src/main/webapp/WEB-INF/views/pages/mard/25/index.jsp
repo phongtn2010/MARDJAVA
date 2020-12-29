@@ -239,8 +239,7 @@
                                 </div>
                             </td>
                             <td class="text-center">
-                                <div data-bind="visible: $parent.getHoSoType(fiHSType)=='2c' && fiHSStatus ==26 &&
-                                $parent.permissionViewChuyen($data, $data, $index())">
+                                <div data-bind="visible: $parent.getHoSoType(fiHSType)=='2c' && fiHSStatus ==26">
                                     <a data-bind="click: $parent.chuyenTCCD.bind($data,$data,$index())"><i
                                             class="fa fa-eye"></i></a>
                                 </div>
@@ -332,7 +331,7 @@
                         <div class="row margin-bottom-15">
                             <div class="form-group nsw-text-center">
                                 <button class="btn green"
-                                        data-bind="click: chuyenChiTieu"
+                                        data-bind="click: chuyenChiTieu, visible: $root.permissionViewChuyen()"
                                 ><i class="fa fa-send"></i> <spring:message code="mard.25.tccd.panel_chuyen_btn"/>
                                 </button>
                             </div>

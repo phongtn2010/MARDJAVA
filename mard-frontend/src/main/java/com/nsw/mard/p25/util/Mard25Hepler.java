@@ -13,7 +13,7 @@ public class Mard25Hepler {
         }else{
             StringBuffer stringBuffer = new StringBuffer("ngày ");
             stringBuffer.append(date.getDate()+ " tháng ");
-            stringBuffer.append(date.getMonth()+ " năm ");
+            stringBuffer.append((date.getMonth()+1)+ " năm ");
             stringBuffer.append(date.getYear()+1900);
             return stringBuffer.toString();
         }

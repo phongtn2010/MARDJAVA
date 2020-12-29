@@ -267,19 +267,19 @@ function HangHoaNhapKhauVM (options) {
             return false;
         }
         var checkGroupFood=false;
+        // ko.utils.arrayForEach(kdnkVMSelf.thongtinChungVM().fiProductList(),function (product) {
+        //     if (product.fiProIdNhom==1||product.fiProIdNhom==4){
+        //         checkGroupFood=true;
+        //     }
+        // });
+        // if(checkGroupFood){
+        //     if(uploadFileVM.lstCNLH().length<1){
+        //         app.Alert("Chưa đính kèm file Giấy chứng nhận lưu hành tự do (đối với nguyên liệu đơn, thức ăn truyền thống)");
+        //         return false;
+        //     }
+        // }
         ko.utils.arrayForEach(kdnkVMSelf.thongtinChungVM().fiProductList(),function (product) {
-            if (product.fiProIdNhom==1||product.fiProIdNhom==4){
-                checkGroupFood=true;
-            }
-        });
-        if(checkGroupFood){
-            if(uploadFileVM.lstCNLH().length<1){
-                app.Alert("Chưa đính kèm file Giấy chứng nhận lưu hành tự do (đối với nguyên liệu đơn, thức ăn truyền thống)");
-                return false;
-            }
-        }
-        ko.utils.arrayForEach(kdnkVMSelf.thongtinChungVM().fiProductList(),function (product) {
-            if (product.fiProIdNhom==1){
+            if (product.fiProIdNhom==4){
                 checkGroupFood=true;
             }
         });
@@ -289,6 +289,31 @@ function HangHoaNhapKhauVM (options) {
                 return false;
             }
         }
+        uploadFileVM.fiAttachmentList([]);
+        ko.utils.arrayForEach(uploadFileVM.lstHD(),function (item) {
+            uploadFileVM.fiAttachmentList.push(item);
+        });
+        ko.utils.arrayForEach(uploadFileVM.lstHoaDon(),function (item) {
+            uploadFileVM.fiAttachmentList.push(item);
+        });
+        ko.utils.arrayForEach(uploadFileVM.lstPhieu(),function (item) {
+            uploadFileVM.fiAttachmentList.push(item);
+        });
+        ko.utils.arrayForEach(uploadFileVM.lstKQ(),function (item) {
+            uploadFileVM.fiAttachmentList.push(item);
+        });
+        ko.utils.arrayForEach(uploadFileVM.lstTC(),function (item) {
+            uploadFileVM.fiAttachmentList.push(item);
+        });
+        ko.utils.arrayForEach(uploadFileVM.lstCNLH(),function (item) {
+            uploadFileVM.fiAttachmentList.push(item);
+        });
+        ko.utils.arrayForEach(uploadFileVM.lstCNPT(),function (item) {
+            uploadFileVM.fiAttachmentList.push(item);
+        });
+        ko.utils.arrayForEach(uploadFileVM.lstAtch(),function (item) {
+            uploadFileVM.fiAttachmentList.push(item);
+        });
         return true;
     }
 

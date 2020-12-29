@@ -1070,35 +1070,35 @@ function UploadFileVM(options) {
     }
     ufVMSelf.removeLstHD = function (index) {
         ufVMSelf.lstHD.splice(index, 1);
-        ufVMSelf.fiAttachmentList.splice(index, 1);
+        // ufVMSelf.fiAttachmentList.splice(index, 1);
     }
     ufVMSelf.removeLstHoaDon = function (index) {
         ufVMSelf.lstHoaDon.splice(index, 1);
-        ufVMSelf.fiAttachmentList.splice(index, 1);
+        // ufVMSelf.fiAttachmentList.splice(index, 1);
     }
     ufVMSelf.removeLstPhieu = function (index) {
         ufVMSelf.lstPhieu.splice(index, 1);
-        ufVMSelf.fiAttachmentList.splice(index, 1);
+        // ufVMSelf.fiAttachmentList.splice(index, 1);
     }
     ufVMSelf.removeLstKQ = function (index) {
         ufVMSelf.lstKQ.splice(index, 1);
-        ufVMSelf.fiAttachmentList.splice(index, 1);
+        // ufVMSelf.fiAttachmentList.splice(index, 1);
     }
     ufVMSelf.removeLstTC = function (index) {
         ufVMSelf.lstTC.splice(index, 1);
-        ufVMSelf.fiAttachmentList.splice(index, 1);
+        // ufVMSelf.fiAttachmentList.splice(index, 1);
     }
     ufVMSelf.removeLstCNLH = function (index) {
         ufVMSelf.lstCNLH.splice(index, 1);
-        ufVMSelf.fiAttachmentList.splice(index, 1);
+        // ufVMSelf.fiAttachmentList.splice(index, 1);
     }
     ufVMSelf.removeLstCNPT = function (index) {
         ufVMSelf.lstCNPT.splice(index, 1);
-        ufVMSelf.fiAttachmentList.splice(index, 1);
+        // ufVMSelf.fiAttachmentList.splice(index, 1);
     }
     ufVMSelf.removeLstAtch = function (index) {
         ufVMSelf.lstAtch.splice(index, 1);
-        ufVMSelf.fiAttachmentList.splice(index, 1);
+        // ufVMSelf.fiAttachmentList.splice(index, 1);
     }
     ufVMSelf.validateHopDong=function(){
         var checkFiles = [ufVMSelf.fiFileHDPath, ufVMSelf.fiFileHD,ufVMSelf.fiFileHDDate];
@@ -1246,9 +1246,14 @@ function UploadFileVM(options) {
                 pcode: '25',
                 url: '/mard/25/upload',
                 success: function (d) {
-                    var fileLink = d.data.urlFile;
-                    var fileId = d.data.itemId;
-                    ufVMSelf.switchFileType(data, fileName, fileLink, fileId,fiFileTypeBNN);
+                    if (d.success){
+                        var fileLink = d.data.urlFile;
+                        var fileId = d.data.itemId;
+                        ufVMSelf.switchFileType(data, fileName, fileLink, fileId,fiFileTypeBNN);
+                    }else{
+                        app.Alert("Có lỗi khi tải file lên: "+d.message);
+                    }
+
                     $('#loading08').hide();
                 },
                 error: function (e) {
@@ -1378,7 +1383,7 @@ function UploadFileVM(options) {
                 ufVMSelf.lstAtch.push(item);
                 break;
         }
-        ufVMSelf.fiAttachmentList.push(item);
+        // ufVMSelf.fiAttachmentList.push(item);
         ufVMSelf.clearFormUploadFile();
     }
 

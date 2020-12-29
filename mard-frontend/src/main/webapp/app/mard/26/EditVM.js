@@ -23,6 +23,7 @@ function EditVM(options) {
     }
 
     edit26VMSefl.btnLuuClick= function () {
+        if (!edit26VMSefl.form26VM().validateHoso()) return;
         var body = edit26VMSefl.form26VM().getData();
         console.log(body);
         edit26VMSefl.pop = app.popup({
@@ -74,6 +75,7 @@ function EditVM(options) {
         });
     }
     edit26VMSefl.btnGuiClick =function () {
+        if (!edit26VMSefl.form26VM().validateHoso()) return;
         var body = edit26VMSefl.form26VM().getData();
         edit26VMSefl.pop = app.popup({
             title: 'Thông báo',

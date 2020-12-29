@@ -774,7 +774,11 @@ public class Mard25Api extends BaseApi {
             // preparing variables
             Variables variables = genVariablesDonDangKy(donDangKy);
             if (null != donDangKy.getXacNhanDon()) {
-                templatePath = request.getRealPath("/WEB-INF/downloads/mard/25/don_dang_ky_phuluc.docx");
+                if(Integer.parseInt(donDangKy.getFiHSType())==Mard25Constant.LoaiHS._2C.getId()){
+                    templatePath = request.getRealPath("/WEB-INF/downloads/mard/25/don_dang_ky_phuluc_2c.docx");
+                }else{
+                    templatePath = request.getRealPath("/WEB-INF/downloads/mard/25/don_dang_ky_phuluc.docx");
+                }
             } else {
                 templatePath = request.getRealPath("/WEB-INF/downloads/mard/25/don_dang_ky.docx");
             }

@@ -41,13 +41,13 @@ public class TbdHanghoaCL25 extends CmonBaseEntity implements Serializable {
     @Column(name = "FI_PRO_ID")
     private Integer fiIdProduct;
 
-    @Column(name = "FI_PROCL_TARG", nullable = false, length = 50)
+    @Column(name = "FI_PROCL_TARG")
     private String fiProCLTarg;
 
-    @Column(name = "FI_PROCL_COMPARE", nullable = false, length = 15)
+    @Column(name = "FI_PROCL_COMPARE")
     private String fiProCLCompare;
 
-    @Column(name = "FI_PROCL_CONTENT", nullable = false, length = 15)
+    @Column(name = "FI_PROCL_CONTENT")
     private String fiProCLContent;
 
     @Column(name = "FI_PROCL_UNIT_ID")
