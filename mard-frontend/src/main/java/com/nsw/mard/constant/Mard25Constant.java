@@ -241,10 +241,10 @@ public class Mard25Constant {
     @JsonFormat(shape = JsonFormat.Shape.OBJECT)
     @Getter
     public enum LoaiHS {
-        _2A(0,"2a - Dựa trên kết quả tự đánh giá sự phù hợp của tổ chức, cá nhân"),
-        _2B(1,"2b -  Dựa trên kết quả chứng nhận của tổ chức chứng nhận đã đăng ký"),
-        _2C(2,"2c - Dựa trên kết quả chứng nhận của tổ chức chứng nhận được chỉ định"),
-        _2D(3,"2d - Miễn giảm kiểm tra");
+        _2A(1,"2a - Dựa trên kết quả tự đánh giá sự phù hợp của tổ chức, cá nhân"),
+        _2B(2,"2b -  Dựa trên kết quả chứng nhận của tổ chức chứng nhận đã đăng ký"),
+        _2C(3,"2c - Dựa trên kết quả chứng nhận của tổ chức chứng nhận được chỉ định"),
+        _2D(4,"2d - Miễn giảm kiểm tra");
 
         private int id;
         private String name;

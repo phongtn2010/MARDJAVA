@@ -700,11 +700,19 @@ function ThongTinChungVM(data) {
             ttcVMSelf.addProduct2D();
             return;
         }
-        var getAllForm = [ttcVMSelf.fiProSLKLList, ttcVMSelf.fiProATList,ttcVMSelf.fiProCLList];
+        var getAllForm = [ttcVMSelf.fiProSLKLList, ttcVMSelf.fiProATList,ttcVMSelf.fiProCLList,ttcVMSelf.fiProCode,ttcVMSelf.fiProQuyChuan,
+            ttcVMSelf.fiProThanhPhan,ttcVMSelf.fiProSoHieu,ttcVMSelf.fiProColor,ttcVMSelf.fiProMadeIn,ttcVMSelf.fiProCountryCode];
+
         ttcVMSelf.errors = ko.validation.group(getAllForm, {deep: true, live: true, observable: true});
         if (!ttcVMSelf.validate()) return;
         if(!ttcVMSelf.validateHangHoa()){
          return;
+        }
+        if(ttcVMSelf.fiHSType()!=4){
+            if(ttcVMSelf.fiProName()==null||ttcVMSelf.fiProName()==""){
+                app.Alert("Chưa nhập thông tin tên hàng");
+                return;
+            }
         }
         for (var i =0;i<ttcVMSelf.fiProCLList().length;i++){
             var getList = {

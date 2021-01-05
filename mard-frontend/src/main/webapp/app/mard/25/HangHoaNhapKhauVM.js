@@ -202,9 +202,14 @@ function HangHoaNhapKhauVM (options) {
         kdnkVMSelf.errors = ko.validation.group({benBan,benMua,thongTinKy,thongTinLienHe}, {deep: true, live: true, observable: true});
         // kdnkVMSelf.errors = ko.validation.group(kdnkVMSelf.thongtinChungVM, {deep: true, live: true, observable: true});
         if (ttc.fiProductList().length < 1) {
-            console.log(ttc.fiProductList());
+
             kdnkVMSelf.errors.showAllMessages();
             app.Alert("Bạn chưa nhập hàng hóa !");
+            return false;
+        }
+        if(ttc.fiProductList().length>5){
+            kdnkVMSelf.errors.showAllMessages();
+            app.Alert("Một hồ sơ chỉ tối đa 5 hàng hóa, yêu cầu bạn kiểm tra lại !");
             return false;
         }
         if (kdnkVMSelf.errors().length > 0) {

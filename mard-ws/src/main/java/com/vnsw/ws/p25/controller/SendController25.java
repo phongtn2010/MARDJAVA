@@ -131,6 +131,7 @@ public class SendController25 {
                     case Constants25.MARD25_TYPE.TYPE_10: // DN gui ho so
                         hoso25.setDepartmentCode("1");
                         hoso25.setDepartmentName("1");
+                        hoso25.setFiHSCreatedDate(new Date());
 //                        hoso25.getFiProductList().get(0).setFiBanChat("1");
                         content.setHoso25(hoso25);
                         body = envelopeService.createBody(content);
