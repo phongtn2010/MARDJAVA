@@ -7,10 +7,10 @@ function ThongTinChungVM(data) {
 
 
 
-    ttcVMSelf.fiProNhom2D = ko.observable(null);
-    ttcVMSelf.fiProPhanNhom2D = ko.observable(null);
-    ttcVMSelf.fiProLoai2D = ko.observable(null);
-    ttcVMSelf.fiProPhanLoai2D = ko.observable(null);
+    // ttcVMSelf.fiProNhom2D = ko.observable(null);
+    // ttcVMSelf.fiProPhanNhom2D = ko.observable(null);
+    // ttcVMSelf.fiProLoai2D = ko.observable(null);
+    // ttcVMSelf.fiProPhanLoai2D = ko.observable(null);
 
     ttcVMSelf.lstDSHosoMK = ko.observableArray((data && data.hasOwnProperty('lstDSHosoMK')) ? data.lstDSHosoMK : []);
     ttcVMSelf.fiIdProduct25 = ko.observable(null);
@@ -508,10 +508,10 @@ function ThongTinChungVM(data) {
             ttcVMSelf.fiProIdLoaiTemp(pos.fiProIdLoai);
             ttcVMSelf.fiProIdPhanLoaiTemp(pos.fiProIdPhanLoai);
 
-            ttcVMSelf.fiProNhom2D(pos.fiProNameNhom);
-            ttcVMSelf.fiProPhanNhom2D(pos.fiProNamePhanNhom);
-            ttcVMSelf.fiProLoai2D(pos.fiProNameLoai);
-            ttcVMSelf.fiProPhanLoai2D(pos.fiProNamePhanLoai);
+            // ttcVMSelf.fiProNhom2D(pos.fiProNameNhom);
+            // ttcVMSelf.fiProPhanNhom2D(pos.fiProNamePhanNhom);
+            // ttcVMSelf.fiProLoai2D(pos.fiProNameLoai);
+            // ttcVMSelf.fiProPhanLoai2D(pos.fiProNamePhanLoai);
 
             ttcVMSelf.fiProCode(pos.fiProCode);
             ttcVMSelf.fiProMadeIn(pos.fiProMadeIn);
@@ -593,10 +593,10 @@ function ThongTinChungVM(data) {
         ttcVMSelf.fiProIdLoaiTemp(null);
         ttcVMSelf.fiProIdPhanLoaiTemp(null);
 
-        ttcVMSelf.fiProNhom2D(null);
-        ttcVMSelf.fiProPhanNhom2D(null);
-        ttcVMSelf.fiProLoai2D(null);
-        ttcVMSelf.fiProPhanLoai2D(null);
+        // ttcVMSelf.fiProNhom2D(null);
+        // ttcVMSelf.fiProPhanNhom2D(null);
+        // ttcVMSelf.fiProLoai2D(null);
+        // ttcVMSelf.fiProPhanLoai2D(null);
     }
     ttcVMSelf.validateHangHoa=function(){
         if(ttcVMSelf.fiHSType()!=4){
@@ -624,82 +624,82 @@ function ThongTinChungVM(data) {
         }
         return true;
     }
-    ttcVMSelf.addProduct2D=function(){
-        var getAllForm = [ttcVMSelf.fiProSLKLList, ttcVMSelf.fiProATList,ttcVMSelf.fiProCLList];
-        ttcVMSelf.errors = ko.validation.group(getAllForm, {deep: true, live: true, observable: true});
-        if (!ttcVMSelf.validate()) return;
-        if(!ttcVMSelf.validateHangHoa()){
-            return;
-        }
-        for (var i =0;i<ttcVMSelf.fiProSLKLList().length;i++){
-            //var massName=ttcVMSelf.findNameByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode);
-            //var amountName=ttcVMSelf.findNameSLByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode);
-            var getList = {
-                fiProSLKLMass: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMass,
-                fiProSLKLMassTan: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassTan,
-                fiProSLKLMassUnitName: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitName(),
-                fiProSLKLMassUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode(),
-                fiProSLKLAmount: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmount,
-                fiProSLKLAmountUnitName: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitName(),
-                lstDMDVT: ttcVMSelf.lstDMDVT(),
-                lstDMDVTSL: ttcVMSelf.lstDMDVTSL(),
-                isEnable: ttcVMSelf.fiProSLKLList()[i].isEnable,
-                isUpdate: ttcVMSelf.fiProSLKLList()[i].isUpdate,
-                fiProSLKLAmountUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode()
-            }
-            ttcVMSelf.listSLKL.push(getList);
-        }
-        var kl;
-        var sl;
-        ko.utils.arrayForEach(ttcVMSelf.listSLKL(), function(slkl) {
-            kl=slkl.fiProSLKLMass()+' '+slkl.fiProSLKLMassUnitName();
-            sl=slkl.fiProSLKLAmount()+' '+slkl.fiProSLKLAmountUnitName();
-        });
-        var item ={
-            fiIdProduct:null,
-            fiProName: ttcVMSelf.fiProName(),
-            fiTrangThaiHangHoa: ttcVMSelf.fiTrangThaiHangHoa(),
-            fiProductKL: kl,
-            fiProductSL: sl,
-            fiProThanhPhan: ttcVMSelf.fiProThanhPhan(),
-            fiProIdNhom: ttcVMSelf.fiProIdNhomTemp(),
-            fiProNameNhom: ttcVMSelf.fiProNhom2D(),
-            fiProIdPhanNhom: ttcVMSelf.fiProIdPhanNhomTemp(),
-            fiProNamePhanNhom: ttcVMSelf.fiProPhanNhom2D,
-            fiProIdLoai: ttcVMSelf.fiProIdLoaiTemp(),
-            fiProNameLoai: ttcVMSelf.fiProLoai2D(),
-            fiProIdPhanLoai: ttcVMSelf.fiProIdPhanLoaiTemp(),
-            fiProNamePhanLoai: ttcVMSelf.fiProPhanLoai2D(),
-            fiProCode: ttcVMSelf.fiProCode(),
-            fiProMadeIn: ttcVMSelf.fiProMadeIn(),
-            fiProCountryName: ttcVMSelf.fiProCountryName(),
-            fiProCountryCode: ttcVMSelf.fiProCountryCode(),
-            fiProValueVN: ttcVMSelf.fiProValueVN(),
-            fiProColor: ttcVMSelf.fiProColor(),
-            fiProSoHieu: ttcVMSelf.fiProSoHieu(),
-            fiProQuyChuan: ttcVMSelf.fiProQuyChuan(),
-            fiProValueUSD: ttcVMSelf.fiProValueUSD(),
-            fiPackageUnitCode: ttcVMSelf.fiPackageUnitCode(),
-            fiPackageUnitName: ttcVMSelf.fiPackageUnitName(),
-            fiProCLList:  ttcVMSelf.fiProCLList(),
-            fiProSLKLList: ttcVMSelf.listSLKL(),
-            fiProATList: ttcVMSelf.fiProATList(),
-            fiTaxCode: hosoUsername
-        }
-        if(ttcVMSelf.selectedHangHoa()!=null&&ttcVMSelf.selectedIndex()!=null){
-            ttcVMSelf.fiProductList.splice(ttcVMSelf.selectedIndex(), 1);
-            ttcVMSelf.fiProductList.splice(ttcVMSelf.selectedIndex(), 0, item);
-        }else{
-            ttcVMSelf.fiProductList.push(item);
-        }
-        ttcVMSelf.clearForm();
-        $("#modal_addAnimal").modal('hide');
-    }
+    // ttcVMSelf.addProduct2D=function(){
+    //     var getAllForm = [ttcVMSelf.fiProSLKLList, ttcVMSelf.fiProATList,ttcVMSelf.fiProCLList];
+    //     ttcVMSelf.errors = ko.validation.group(getAllForm, {deep: true, live: true, observable: true});
+    //     if (!ttcVMSelf.validate()) return;
+    //     if(!ttcVMSelf.validateHangHoa()){
+    //         return;
+    //     }
+    //     for (var i =0;i<ttcVMSelf.fiProSLKLList().length;i++){
+    //         //var massName=ttcVMSelf.findNameByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode);
+    //         //var amountName=ttcVMSelf.findNameSLByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode);
+    //         var getList = {
+    //             fiProSLKLMass: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMass,
+    //             fiProSLKLMassTan: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassTan,
+    //             fiProSLKLMassUnitName: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitName(),
+    //             fiProSLKLMassUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode(),
+    //             fiProSLKLAmount: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmount,
+    //             fiProSLKLAmountUnitName: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitName(),
+    //             lstDMDVT: ttcVMSelf.lstDMDVT(),
+    //             lstDMDVTSL: ttcVMSelf.lstDMDVTSL(),
+    //             isEnable: ttcVMSelf.fiProSLKLList()[i].isEnable,
+    //             isUpdate: ttcVMSelf.fiProSLKLList()[i].isUpdate,
+    //             fiProSLKLAmountUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode()
+    //         }
+    //         ttcVMSelf.listSLKL.push(getList);
+    //     }
+    //     var kl;
+    //     var sl;
+    //     ko.utils.arrayForEach(ttcVMSelf.listSLKL(), function(slkl) {
+    //         kl=slkl.fiProSLKLMass()+' '+slkl.fiProSLKLMassUnitName();
+    //         sl=slkl.fiProSLKLAmount()+' '+slkl.fiProSLKLAmountUnitName();
+    //     });
+    //     var item ={
+    //         fiIdProduct:null,
+    //         fiProName: ttcVMSelf.fiProName(),
+    //         fiTrangThaiHangHoa: ttcVMSelf.fiTrangThaiHangHoa(),
+    //         fiProductKL: kl,
+    //         fiProductSL: sl,
+    //         fiProThanhPhan: ttcVMSelf.fiProThanhPhan(),
+    //         fiProIdNhom: ttcVMSelf.fiProIdNhomTemp(),
+    //         fiProNameNhom: ttcVMSelf.fiProNhom2D(),
+    //         fiProIdPhanNhom: ttcVMSelf.fiProIdPhanNhomTemp(),
+    //         fiProNamePhanNhom: ttcVMSelf.fiProPhanNhom2D,
+    //         fiProIdLoai: ttcVMSelf.fiProIdLoaiTemp(),
+    //         fiProNameLoai: ttcVMSelf.fiProLoai2D(),
+    //         fiProIdPhanLoai: ttcVMSelf.fiProIdPhanLoaiTemp(),
+    //         fiProNamePhanLoai: ttcVMSelf.fiProPhanLoai2D(),
+    //         fiProCode: ttcVMSelf.fiProCode(),
+    //         fiProMadeIn: ttcVMSelf.fiProMadeIn(),
+    //         fiProCountryName: ttcVMSelf.fiProCountryName(),
+    //         fiProCountryCode: ttcVMSelf.fiProCountryCode(),
+    //         fiProValueVN: ttcVMSelf.fiProValueVN(),
+    //         fiProColor: ttcVMSelf.fiProColor(),
+    //         fiProSoHieu: ttcVMSelf.fiProSoHieu(),
+    //         fiProQuyChuan: ttcVMSelf.fiProQuyChuan(),
+    //         fiProValueUSD: ttcVMSelf.fiProValueUSD(),
+    //         fiPackageUnitCode: ttcVMSelf.fiPackageUnitCode(),
+    //         fiPackageUnitName: ttcVMSelf.fiPackageUnitName(),
+    //         fiProCLList:  ttcVMSelf.fiProCLList(),
+    //         fiProSLKLList: ttcVMSelf.listSLKL(),
+    //         fiProATList: ttcVMSelf.fiProATList(),
+    //         fiTaxCode: hosoUsername
+    //     }
+    //     if(ttcVMSelf.selectedHangHoa()!=null&&ttcVMSelf.selectedIndex()!=null){
+    //         ttcVMSelf.fiProductList.splice(ttcVMSelf.selectedIndex(), 1);
+    //         ttcVMSelf.fiProductList.splice(ttcVMSelf.selectedIndex(), 0, item);
+    //     }else{
+    //         ttcVMSelf.fiProductList.push(item);
+    //     }
+    //     ttcVMSelf.clearForm();
+    //     $("#modal_addAnimal").modal('hide');
+    // }
     ttcVMSelf.addProduct=function(data){
-        if (ttcVMSelf.fiHSType()==4){
-            ttcVMSelf.addProduct2D();
-            return;
-        }
+        // if (ttcVMSelf.fiHSType()==4){
+        //     ttcVMSelf.addProduct2D();
+        //     return;
+        // }
         var getAllForm = [ttcVMSelf.fiProSLKLList, ttcVMSelf.fiProATList,ttcVMSelf.fiProCLList,ttcVMSelf.fiProCode,ttcVMSelf.fiProQuyChuan,
             ttcVMSelf.fiProThanhPhan,ttcVMSelf.fiProSoHieu,ttcVMSelf.fiProColor,ttcVMSelf.fiProMadeIn,ttcVMSelf.fiProCountryCode];
 

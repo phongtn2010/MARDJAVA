@@ -116,10 +116,10 @@
                             <div class="col-md-4">
                                 <select data-bind="options : lstNhom, optionsValue : 'fiidcat',  optionsText : 'fiCatTypeName',
                                 optionsCaption: '<spring:message code="mard.25.chon.nhom"/>',
-                                                    value: fiProIdNhom, event : {change : eventChangeNhom}, visible: fiHSType()!=4"
+                                                    value: fiProIdNhom, event : {change : eventChangeNhom}, enable: fiHSType()!=4"
                                         class="form-control"></select>
-                                <input data-bind="trimedValue: fiProNhom2D, visible: fiHSType()==4" class="form-control"
-                                       value="" disabled/>
+<%--                                <input data-bind="trimedValue: fiProNhom2D, visible: fiHSType()==4" class="form-control"--%>
+<%--                                       value="" disabled/>--%>
                             </div>
                         </div>
                         <div class="form-group">
@@ -130,10 +130,10 @@
                             <div class="col-md-4">
                                 <select data-bind="options : lstPhanNhom, optionsValue : 'fiidcat',  optionsText : 'fiCatTypeName',
                                 optionsCaption: '<spring:message code="mard.25.chon.phannhom"/>',
-                                                    value: fiProIdPhanNhom ,event : {click : eventChangePhanNhom}, visible: fiHSType()!=4"
+                                                    value: fiProIdPhanNhom ,event : {click : eventChangePhanNhom}, enable: fiHSType()!=4"
                                         class="form-control"></select>
-                                <input data-bind="trimedValue: fiProPhanNhom2D, visible: fiHSType()==4"
-                                       class="form-control" value="" disabled/>
+<%--                                <input data-bind="trimedValue: fiProPhanNhom2D, visible: fiHSType()==4"--%>
+<%--                                       class="form-control" value="" disabled/>--%>
                             </div>
                             <div class="col-md-2 nsw-text-right">
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.loai"/><a
@@ -143,10 +143,10 @@
                                 <select data-bind="options: lstLoai,
                                                     optionsText: 'fiCatTypeName',
                                                     optionsValue: 'fiidcat',optionsCaption: '<spring:message code="mard.25.chon.loai"/>',
-                                                    value: fiProIdLoai,event : {click : eventChangeLoai}, visible: fiHSType()!=4"
+                                                    value: fiProIdLoai,event : {click : eventChangeLoai}, enable: fiHSType()!=4"
                                         class="form-control"></select>
-                                <input data-bind="trimedValue: fiProLoai2D, visible: fiHSType()==4" class="form-control"
-                                       value="" disabled/>
+<%--                                <input data-bind="trimedValue: fiProLoai2D, visible: fiHSType()==4" class="form-control"--%>
+<%--                                       value="" disabled/>--%>
                             </div>
                         </div>
                         <div class="form-group">
@@ -159,10 +159,10 @@
                                         data-bind="options: lstPhanLoai,
                                                     optionsText: 'fiCatTypeName',
                                                     optionsValue: 'fiidcat',optionsCaption: '<spring:message code="mard.25.chon.phanloai"/>',
-                                                    value: fiProIdPhanLoai, visible: fiHSType()!=4"
+                                                    value: fiProIdPhanLoai, enable: fiHSType()!=4"
                                         class="form-control"></select>
-                                <input data-bind="trimedValue: fiProPhanLoai2D, visible: fiHSType()==4"
-                                       class="form-control" value="" disabled/>
+<%--                                <input data-bind="trimedValue: fiProPhanLoai2D, visible: fiHSType()==4"--%>
+<%--                                       class="form-control" value="" disabled/>--%>
                             </div>
                             <div class="col-md-2 nsw-text-right">
                                 <label><spring:message code="mard.25.tokhai.hang_hoa.ma_so_cong_nhan"/><a
