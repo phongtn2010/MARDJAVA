@@ -223,7 +223,8 @@ public class Mard25Constant {
         EQUAL(3,"="),
         IS_LESS_THAN_OR_EQUAL_TO(4,"<="),
         IS_GREATER_THAN_OR_EQUAL_TO(5,">="),
-        MIN_MAX(6,"min-max");
+        MIN_MAX(6,"min-max"),
+        EXCEP(-1,"");
 
         private int id;
         private String name;

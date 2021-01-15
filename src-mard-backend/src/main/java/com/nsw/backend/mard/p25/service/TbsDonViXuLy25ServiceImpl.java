@@ -15,6 +15,6 @@ public class TbsDonViXuLy25ServiceImpl implements TbsDonViXuLy25Service {
     private TbsDonViXuLy25Repository repository;
     @Override
     public List<TbsDonViXuLy25> findByFiPUType(Integer fiPuType) {
-        return repository.findByFiPUType(fiPuType);
+        return repository.findByFiPUTypeOrderByFiPUOrder(fiPuType);
     }
 }

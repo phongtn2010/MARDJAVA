@@ -97,6 +97,7 @@ public class Mard25Api extends BaseApi {
             logger.info("Thời gian upload: " + (to - from) / 1000 + " giây");
             Gson g = new Gson();
             ResponeUploadFile responeUploadFile = g.fromJson(responseEntity.getBody().substring(1, responseEntity.getBody().length() - 1), ResponeUploadFile.class);
+//            ResponeUploadFile responeUploadFile = new ResponeUploadFile("123","https://vnsw.gov.vn");
             json.setSuccess(true);
             json.setData(responeUploadFile);
             json.setMessage("Upload file thành công");
@@ -943,8 +944,8 @@ public class Mard25Api extends BaseApi {
         });
 
         donDKVariables.addTextVariable(new TextVariable("#{fiSoHD}", org.springframework.util.StringUtils.isEmpty(soHD.toString()) ? "" : soHD.toString()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiSoHoaDon}", org.springframework.util.StringUtils.isEmpty(soHoaDon.toString()) ? "" : soHD.toString()));
-        donDKVariables.addTextVariable(new TextVariable("#{fiSoPhieu}", org.springframework.util.StringUtils.isEmpty(soPhieu.toString()) ? "" : soHD.toString()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiSoHoaDon}", org.springframework.util.StringUtils.isEmpty(soHoaDon.toString()) ? "" : soHoaDon.toString()));
+        donDKVariables.addTextVariable(new TextVariable("#{fiSoPhieu}", org.springframework.util.StringUtils.isEmpty(soPhieu.toString()) ? "" : soPhieu.toString()));
 
 
         donDKVariables.addTextVariable(new TextVariable("#{fiNameDVXL}", donDangKy.getFiNameDVXL() == null ? "" : donDangKy.getFiNameDVXL()));
@@ -1039,7 +1040,7 @@ public class Mard25Api extends BaseApi {
     private Variables genVariablesGiayXNCL(TbdHanghoa25 tbdHanghoa25, TbdHoso25 tbdHoso25, TbdGiayXNCL25 tbdGiayXNCL25) {
 
         Variables giayXNCLVariables = new Variables();
-        giayXNCLVariables.addTextVariable(new TextVariable("#{fiSoGXNCL}", tbdGiayXNCL25.getFiGCNHopQuy() == null ? "" : tbdGiayXNCL25.getFiGCNHopQuy()));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiSoGXNCL}", tbdGiayXNCL25.getFiSoGCN() == null ? "" : tbdGiayXNCL25.getFiSoGCN()));
         giayXNCLVariables.addTextVariable(new TextVariable("#{fiNgayCap}", Mard25Hepler.toVNStringDate(tbdGiayXNCL25.getFiNgayCap())));
         giayXNCLVariables.addTextVariable(new TextVariable("#{fiNgayCapShort}", Mard25Hepler.toShortStringDate(tbdGiayXNCL25.getFiNgayCap())));
 
@@ -1077,7 +1078,7 @@ public class Mard25Api extends BaseApi {
         });
 
         giayXNCLVariables.addTextVariable(new TextVariable("#{fiSoHD}", org.springframework.util.StringUtils.isEmpty(soHD.toString()) ? "" : soHD.toString()));
-        giayXNCLVariables.addTextVariable(new TextVariable("#{fiSoHoaDon}", org.springframework.util.StringUtils.isEmpty(soHoaDon.toString()) ? "" : soHD.toString()));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiSoHoaDon}", org.springframework.util.StringUtils.isEmpty(soHoaDon.toString()) ? "" : soHoaDon.toString()));
 
 
         giayXNCLVariables.addTextVariable(new TextVariable("#{fiSoGDK}", tbdHoso25.getFiSoXacNhanDon() == null ? "" : tbdHoso25.getFiSoXacNhanDon()));

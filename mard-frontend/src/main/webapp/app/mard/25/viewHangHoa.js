@@ -169,15 +169,18 @@ function Mard25ViewHangHoaVM (options) {
         });
     }
     self.xemKQDGSPH = function(data,type,index){
+        console.log(self.fiHS());
         self.getFileGCN(index.fiIdProduct,function (res) {
+            console.log(res.data[0].fiLoaiDanhgia);
             self.lstFileGCN(res.data);
-            self.fiMaCqkt(self.lstFileGCN.fiMaCqkt);
-            self.fiLoaiDanhGia(self.lstFileGCN.fiLoaiDanhgia);
+            self.fiLoaiDanhGia(res.data[0].fiLoaiDanhgia);
         });
         self.getFileKQPT(index.fiIdProduct,function (res) {
             self.lstFilePT(res.data);
         });
         self.fiProName(index.fiProName);
+        self.fiNSWFileCode(self.fiHS().fiNSWFileCode);
+        self.fiMaCqkt(self.fiHS().fiIdDVXL);
         $("#modal_view").show();
     }
     self.downloadFile =function(data,type,index){

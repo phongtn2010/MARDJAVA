@@ -41,8 +41,10 @@ public class Mard25Hepler {
                 return Mard25Constant.HinhThucCB.IS_LESS_THAN_OR_EQUAL_TO.getName();
             }else if(ht==Mard25Constant.HinhThucCB.IS_GREATER_THAN_OR_EQUAL_TO.getId()){
                 return Mard25Constant.HinhThucCB.IS_GREATER_THAN_OR_EQUAL_TO.getName();
-            }else{
+            }else if(ht==Mard25Constant.HinhThucCB.MIN_MAX.getId()){
                 return Mard25Constant.HinhThucCB.MIN_MAX.getName();
+            }else{
+                return "";
             }
         }
     }
