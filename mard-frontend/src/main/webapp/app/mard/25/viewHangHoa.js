@@ -312,6 +312,14 @@ function Mard25ViewHangHoaVM (options) {
                 app.Alert("Chưa đính kèm phiếu kết quả phân tích (đối với hàng 2C)");
                 return false;
             }
+            if(self.fiLoaiDanhGia()==0|self.fiLoaiDanhGia=='0'){
+                app.Alert("Chưa chọn loại đánh giá sự phù hợp");
+                return false;
+            }
+            if(self.fiToChucDanhGia()==null||self.fiToChucDanhGia==''){
+                app.Alert("Chưa chọn tổ chức đánh giá sự phù hợp");
+                return false;
+            }
         }
         if(self.fiFileGCN()==null){
             app.Alert("Chưa có file GCN hợp quy");

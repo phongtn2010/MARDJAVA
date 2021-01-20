@@ -28,6 +28,7 @@
                     </div>
                     <div class="col-md-4">
                         <select class="form-control" data-bind="value: fiLoaiDanhGia">
+                            <option value="0"> <spring:message code="mard.25.chon"/></option>
                             <option value="1"> <spring:message code="mard.25.hanghoa.hinh_thuc_danh_gia_ko_phu_hop"/></option>
                             <option value="2"> <spring:message code="mard.25.hanghoa.hinh_thuc_danh_gia_phu_hop"/></option>
                         </select>
@@ -42,7 +43,7 @@
                                 data-bind="options: lstToChucDanhGia,
                                                     optionsText: 'fiPUName',
                                                     optionsValue: 'fiPUCode',
-                                                    selectedText: fiNameTCCD,
+                                                    selectedText: fiNameTCCD, optionsCaption:'<spring:message code="mard.25.chon"/>',
                                                     value: fiToChucDanhGia" class="form-control"></select>
                     </div>
                 </div>
