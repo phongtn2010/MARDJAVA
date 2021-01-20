@@ -17,7 +17,7 @@ public class Hoso25 {
     String fiNSWFileCode;
 
     @XmlElement(name = "NSWFileCodeOld")
-    String fiNSWFileCodeOld;
+    String fiNSWFileCodeReplace;
 
     @XmlElement(name = "AniFeedConfirmOldNo")
     String fiSoGDK;

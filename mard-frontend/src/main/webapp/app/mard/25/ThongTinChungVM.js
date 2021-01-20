@@ -33,6 +33,7 @@ function ThongTinChungVM(data) {
         required: {params: true, message: NSWLang["common_msg_formvaild_required"]}
     });
     ttcVMSelf.fiNSWFileCodeReplace = ko.observable((data && data.hasOwnProperty('fiNSWFileCodeReplace')) ? data.fiNSWFileCodeReplace : null);
+    console.log(ttcVMSelf.fiNSWFileCodeReplace());
     ttcVMSelf.fiSoGDK = ko.observable((data && data.hasOwnProperty('fiSoGDK')) ? data.fiSoGDK : null).extend({
 
         maxLength: {message: 'Tối đa 20 ký tự', params: 20}
@@ -375,31 +376,32 @@ function ThongTinChungVM(data) {
 
     ttcVMSelf.lstLoaiTienTe  = ko.observableArray((data && data.hasOwnProperty('lstLoaiTienTe')) ? data.lstLoaiTienTe : []);
     ttcVMSelf.fiSignAddressName  = ko.observable(null);
-    ttcVMSelf.lstMaHoSoThayThe = ko.observableArray([]);
+    ttcVMSelf.lstMaHoSoThayThe = ko.observableArray((data && data.hasOwnProperty('lstMaHoSoThayThe')) ? data.lstMaHoSoThayThe : []);
 
-    ttcVMSelf.fiLinkGDK  = ko.observable(null);
-    ttcVMSelf.fiFileNameGDK  = ko.observable(null);
-    ttcVMSelf.fiFileIdGDK  = ko.observable(null);
+    ttcVMSelf.fiLinkGDK  = ko.observable((data && data.hasOwnProperty('fiLinkGDK')) ? data.fiLinkGDK : null);
+    ttcVMSelf.fiFileNameGDK  = ko.observable((data && data.hasOwnProperty('fiFileNameGDK')) ? data.fiFileNameGDK : null);
+    ttcVMSelf.fiFileIdGDK  = ko.observable((data && data.hasOwnProperty('fiFileIdGDK')) ? data.fiFileIdGDK : null);
 
-    app.makeGet({
-        url: '/mard/25/hoso/find-by-status?taxCode=' + ttcVMSelf.fiTaxCode() + '&from=26',
-        success: function(res) {
-            if (res.data){
-                var arr=res.data;
-                for (var i=0;i<arr.length;i++){
-                    var item = {
-                        fiNSWFileCodeR:arr[i].fiNSWFileCode,
-                        fiIdHSR:arr[i].fiIdHS,
-                        fiGDKR:arr[i].fiSoXacNhanDon
-                    };
-                    ttcVMSelf.lstMaHoSoThayThe.push(item);
-                }
-            }
-        },
-        error: function (d) {
-
-        }
-    });
+    ttcVMSelf.isUploadGDK=ko.observable((data && data.hasOwnProperty('fiLinkGDK')) ? true :false);
+    // app.makeGet({
+    //     url: '/mard/25/hoso/find-by-status?taxCode=' + ttcVMSelf.fiTaxCode() + '&from=26',
+    //     success: function(res) {
+    //         if (res.data){
+    //             var arr=res.data;
+    //             for (var i=0;i<arr.length;i++){
+    //                 var item = {
+    //                     fiNSWFileCodeR:arr[i].fiNSWFileCode,
+    //                     fiIdHSR:arr[i].fiIdHS,
+    //                     fiGDKR:arr[i].fiSoXacNhanDon
+    //                 };
+    //                 ttcVMSelf.lstMaHoSoThayThe.push(item);
+    //             }
+    //         }
+    //     },
+    //     error: function (d) {
+    //
+    //     }
+    // });
     ttcVMSelf.changeMaHSThayThe =function(){
         var lstHoso = ttcVMSelf.lstMaHoSoThayThe();
         var pos = lstHoso.find(function (e) {
@@ -1268,6 +1270,8 @@ function ThongTinChungVM(data) {
                     ttcVMSelf.fiLinkGDK(d.data.urlFile);
                     ttcVMSelf.fiFileIdGDK(d.data.itemId);
                     ttcVMSelf.fiFileNameGDK(files[0].name);
+                    ttcVMSelf.isUploadGDK(true);
+                    $('#fiGDKFile').hide();
                 }else{
                     app.Alert("Có lỗi tải file lên"+d.message);
                 }
@@ -1276,5 +1280,37 @@ function ThongTinChungVM(data) {
                 app.Alert("Có lỗi tải file lên: "+e);
             }
         });
+    }
+    ttcVMSelf.deleteFileGDK=function () {
+        ttcVMSelf.pop = app.popup({
+            title: 'Thông báo',
+            html: '<b>Bạn chắc chắn muốn xóa file GĐK này?</b>',
+            width: 450,
+            buttons: [
+                {
+                    name: NSWLang["common_button_toi_chac_chan"],
+                    class: 'btn',
+                    icon: 'fa-save',
+                    action: function () {
+                        ttcVMSelf.fiLinkGDK(null);
+                        ttcVMSelf.fiFileIdGDK(null);
+                        ttcVMSelf.fiFileNameGDK(null);
+                        ttcVMSelf.isUploadGDK(false);
+                        $('#fiGDKFile').show();
+                        app.popupRemove(ttcVMSelf.pop.selector);
+
+                    }
+                },
+                {
+                    name: 'Huỷ',
+                    class: 'btn',
+                    icon: 'fa-close',
+                    action: function () {
+                        app.popupRemove(ttcVMSelf.pop.selector);
+                    }
+                }
+            ]
+        });
+        console.log(ttcVMSelf.isUploadGDK());
     }
 }

@@ -281,10 +281,21 @@ $(document).ready(function () {
             console.log(arrProduct);
             options['lstDSHosoMK'] = arrProduct;
         })
-        // // Get attach types
-        // app.sendGetRequest("/mard/25/danhmuc/dinhkem?systemId=6", function (res) {
-        //     options['lstAtchType'] = res.data;
-        // })
+        ,
+        app.sendGetRequest("/mard/25/hoso/find-by-status?taxCode=" + hosoUsername + "&from=26", function (res) {
+            var arr=res.data;
+            var arrItem=[];
+            for (var i=0;i<arr.length;i++){
+                var item = {
+                    fiNSWFileCodeR:arr[i].fiNSWFileCode,
+                    fiIdHSR:arr[i].fiIdHS,
+                    fiGDKR:arr[i].fiSoXacNhanDon
+                };
+                arrItem.push(item);
+            }
+            options['lstMaHoSoThayThe'] = arrItem;
+        })
+
     ).done(function (data) {
         $('#loading10').hide();
         init(options);
