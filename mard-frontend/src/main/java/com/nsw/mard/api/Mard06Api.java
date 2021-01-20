@@ -715,7 +715,7 @@ public class Mard06Api extends BaseApi {
 //
         responseJson.setSuccess(true);
         return responseJson;
-//        return this.verifySignature(token);
+//        return this.verifySignature(token);verify
     }
 
     private ResponseJson save(TbdHoso06 tbdhoso06) {

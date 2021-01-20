@@ -195,7 +195,9 @@ function ThongTinChungVM(data) {
     });
 
     ttcVMSelf.changeHoSoType =function(){
-        ttcVMSelf.fiProductList([]);
+        if(ttcVMSelf.fiHSType()==4){
+            ttcVMSelf.fiProductList([]);
+        }
     }
     ttcVMSelf.fiProValueVN  = ko.observable((data && data.hasOwnProperty('fiProValueVN ')) ? data.fiProValueVN  : null).
     extend({

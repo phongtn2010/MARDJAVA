@@ -25,24 +25,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98ccbf76-6cd9-45d1-baba-32ef6c479bbb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nsw/mard/p25/model/TbdGiayXNCL25.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pages/mard/26/inc_view_lichsuXuly.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ECUS.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ECUS.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nsw/mard/api/Mard25Api.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nsw/mard/api/Mard25Api.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nsw/mard/p25/model/TbdHoso25.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nsw/mard/p25/model/TbdHoso25.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pages/mard/25/inc_thongbaoketqua.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pages/mard/25/inc_thongbaoketqua.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pages/mard/26/cert.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pages/mard/26/cert.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pages/mard/26/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pages/mard/26/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/mard/25/viewHangHoa.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/mard/25/viewHangHoa.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/mard/26/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/mard/26/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../mard-frontend/src/main/java/com/nsw/mard/api/Mard25Api.java" beforeDir="false" afterPath="$PROJECT_DIR$/../mard-frontend/src/main/java/com/nsw/mard/api/Mard25Api.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mard-frontend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../mard-frontend/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mard-frontend/src/main/webapp/WEB-INF/views/pages/mard/25/inc_thongtinhanghoa.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../mard-frontend/src/main/webapp/WEB-INF/views/pages/mard/25/inc_thongtinhanghoa.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mard-frontend/src/main/webapp/app/mard/25/viewHangHoa.js" beforeDir="false" afterPath="$PROJECT_DIR$/../mard-frontend/src/main/webapp/app/mard/25/viewHangHoa.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src-mard-backend/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../src-mard-backend/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mard-frontend/src/main/webapp/WEB-INF/views/pages/mard/25/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../mard-frontend/src/main/webapp/WEB-INF/views/pages/mard/25/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mard-frontend/src/main/webapp/app/mard/25/ThongTinChungVM.js" beforeDir="false" afterPath="$PROJECT_DIR$/../mard-frontend/src/main/webapp/app/mard/25/ThongTinChungVM.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mard-frontend/src/main/webapp/app/mard/25/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../mard-frontend/src/main/webapp/app/mard/25/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,12 +60,6 @@
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1040" />
-    <option name="height" value="784" />
-  </component>
   <component name="ProjectId" id="1lwm7970jECoR3ZJ3oX0qKW1xVv" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -88,7 +70,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pages/mard/26" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../REVOT/ECUS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
@@ -190,6 +172,7 @@
       <workItem from="1576572686685" duration="68000" />
       <workItem from="1607947304554" duration="2885000" />
       <workItem from="1608516361543" duration="703000" />
+      <workItem from="1609988368043" duration="1513000" />
     </task>
     <servers />
   </component>
@@ -206,8 +189,81 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="414" y="173" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1609990071590">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="173" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1609990071590" />
+    <state x="740" y="273" key="FileChooserDialogImpl" timestamp="1609990371896">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="273" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1609990371896" />
+    <state width="1292" height="277" key="GridCell.Tab.0.bottom" timestamp="1609990372685">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1292" height="277" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1609990372685" />
+    <state width="1292" height="277" key="GridCell.Tab.0.center" timestamp="1609990372685">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1292" height="277" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1609990372685" />
+    <state width="1292" height="277" key="GridCell.Tab.0.left" timestamp="1609990372685">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1292" height="277" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1609990372685" />
+    <state width="1292" height="277" key="GridCell.Tab.0.right" timestamp="1609990372685">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1292" height="277" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1609990372685" />
+    <state width="1292" height="277" key="GridCell.Tab.1.bottom" timestamp="1609990372686">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1292" height="277" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1609990372686" />
+    <state width="1292" height="277" key="GridCell.Tab.1.center" timestamp="1609990372686">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1292" height="277" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1609990372686" />
+    <state width="1292" height="277" key="GridCell.Tab.1.left" timestamp="1609990372686">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1292" height="277" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1609990372686" />
+    <state width="1292" height="277" key="GridCell.Tab.1.right" timestamp="1609990372686">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1292" height="277" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1609990372686" />
+    <state width="1292" height="277" key="GridCell.Tab.2.bottom" timestamp="1609990372687">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1292" height="277" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1609990372687" />
+    <state width="1292" height="277" key="GridCell.Tab.2.center" timestamp="1609990372686">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1292" height="277" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1609990372686" />
+    <state width="1292" height="277" key="GridCell.Tab.2.left" timestamp="1609990372686">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1292" height="277" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1609990372686" />
+    <state width="1292" height="277" key="GridCell.Tab.2.right" timestamp="1609990372686">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1292" height="277" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1609990372686" />
+    <state width="1292" height="277" key="GridCell.Tab.3.bottom" timestamp="1609990372687">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1292" height="277" key="GridCell.Tab.3.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1609990372687" />
+    <state width="1292" height="277" key="GridCell.Tab.3.center" timestamp="1609990372687">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1292" height="277" key="GridCell.Tab.3.center/0.0.1920.1040@0.0.1920.1040" timestamp="1609990372687" />
+    <state width="1292" height="277" key="GridCell.Tab.3.left" timestamp="1609990372687">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1292" height="277" key="GridCell.Tab.3.left/0.0.1920.1040@0.0.1920.1040" timestamp="1609990372687" />
+    <state width="1292" height="277" key="GridCell.Tab.3.right" timestamp="1609990372687">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1292" height="277" key="GridCell.Tab.3.right/0.0.1920.1040@0.0.1920.1040" timestamp="1609990372687" />
     <state x="461" y="150" key="SettingsEditor" timestamp="1608516845474">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

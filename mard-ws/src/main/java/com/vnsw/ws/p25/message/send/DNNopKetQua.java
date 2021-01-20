@@ -43,5 +43,5 @@ public class DNNopKetQua {
 
     @XmlElementWrapper(name = "AttachmentResultList")
     @XmlElement(name = "AttachmentResult")
-    private List<AttachmentResult> fiListDinhKem;
+    private List<AttachmentResult> fiListHangHoaFile;
 }

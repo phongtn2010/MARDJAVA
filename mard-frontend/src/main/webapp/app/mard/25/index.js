@@ -538,7 +538,7 @@ function Mard25VM() {
         self.lichsuXuly().show(item.fiNSWFileCode)
         return false;
     };
-
+    self.isSend=ko.observable(true);
     self.chuyenTCCD = function (data,type,index) {
         index.nguoixn=ko.observable(null);
         index.ngayXN=ko.observable(null);
@@ -564,7 +564,12 @@ function Mard25VM() {
                 });
             });
         }
+        if(index.fiIdDVXL){
+            self.isSend(false);
+            self.fiIdTCCD(index.fiIdDVXL);
+        }
         self.selectedHoSo(index);
+        console.log(self.fiIdTCCD());
         app.makeGet({
             url: '/mard/25/chitieu/'+index.fiNSWFileCode,
             success: function(res) {
@@ -660,6 +665,10 @@ function Mard25VM() {
                 return ">=";
             case 6:
                 return "min-max";
+            case -1:
+                return "";
+            default:
+                return "";
         }
     }
 }

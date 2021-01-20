@@ -20,4 +20,5 @@ public class Tbdattach25{
 
     private String fiFileLink;
 
+    private Integer fiFileTypeBNN;
 }

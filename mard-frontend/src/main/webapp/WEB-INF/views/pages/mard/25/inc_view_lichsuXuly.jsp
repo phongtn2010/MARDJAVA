@@ -42,7 +42,7 @@
                         <td data-bind="text: fiSenderName"></td>
                         <td data-bind="datetime: fiCreatedDate"></td>
                         <td data-bind="html: fiContent"></td>
-                        <td></td>
+                        <td><a data-bind="click: $parent.downloadFile"><span data-bind="text: fiTenFile"></span></a></td>
                         <td data-bind="text: $root.getProfileStatus(fiStatus())"></td>
                     </tr>
                     </tbody>

@@ -11,14 +11,14 @@ import javax.xml.bind.annotation.XmlType;
 @Data
 public class AttachmentResult {
 
-    private Long fiFileCode;
+    private Long fiLoaiFile;
 
 
-    private String fiAttachmentId;
+    private String fiFileId;
 
 
-    private String fiNameOfAttachment;
+    private String fiFileName;
 
 
-    private String fiLinkFile;
+    private String fiFileLink;
 }

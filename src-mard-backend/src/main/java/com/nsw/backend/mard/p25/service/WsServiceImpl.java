@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -197,10 +198,10 @@ public class WsServiceImpl implements WsService {
         KetQuaXuLy ketQuaXuLy = null;
         try {
             ketQuaXuLy = getGson().fromJson(getGson().toJson(request.getData()), KetQuaXuLy.class);
-            if(ketQuaXuLy.getFiReason()!=null&&!ketQuaXuLy.getFiReason().equals("")){
-                action=ketQuaXuLy.getFiReason();
+            if (ketQuaXuLy.getFiReason() != null && !ketQuaXuLy.getFiReason().equals("")) {
+                action = ketQuaXuLy.getFiReason();
             }
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             log.info(ex.getMessage());
         }
         internalStatusUpdate(request.getHeader(), ketQuaXuLy.getFiNameOfStaff(), status, ketQuaXuLy.getFiReason());
@@ -258,7 +259,7 @@ public class WsServiceImpl implements WsService {
         switch (function) {
             case Constant25.MessageFunction.FUNC_12:
                 status = Constant25.HosoStatus.DA_THU_HOI_GXN.getId();
-                statusStr=Constant25.HosoStatus.DA_THU_HOI_GXN.getName();
+                statusStr = Constant25.HosoStatus.DA_THU_HOI_GXN.getName();
                 break;
             default:
                 return new ResponseJson(false, "", "MESSAGE 14 - " + function + " CHUA DUOC DINH NGHIA");
@@ -313,15 +314,15 @@ public class WsServiceImpl implements WsService {
             fileBNNDto.setFiLinkFile(kqkt.getFiLinkFileGCN());
 
             for (TbdHanghoa25 hanghoa25 : listHanghoa25) {
-                if (hanghoa25.getFiIdProduct().equals(Integer.valueOf(kqkt.getFiMaHangHoa()))) {
-                    List<TbdHangHoaFile25> listHangHoa = new ArrayList<>();
+                if (hanghoa25.getFiIdProduct().equals(Integer.valueOf(kqkt.getFiMaHangHoa())) || hanghoa25.getFiIdProduct() == Integer.valueOf(kqkt.getFiMaHangHoa())) {
                     hanghoa25.setFiTrangThaiHangHoa(status);
+                    List<TbdHangHoaFile25> listHangHoa = new ArrayList<>();
                     for (AttachmentResult attach : kqkt.getFiDanhSachDinhKem()) {
                         TbdHangHoaFile25 hanghoaFile = new TbdHangHoaFile25();
                         hanghoaFile.setFiIDHangHoa(kqkt.getFiMaHangHoa());
-                        hanghoaFile.setFiFileId(attach.getFiAttachmentId());
-                        hanghoaFile.setFiFileLink(attach.getFiLinkFile());
-                        hanghoaFile.setFiFileName(attach.getFiNameOfAttachment());
+                        hanghoaFile.setFiFileId(attach.getFiFileId());
+                        hanghoaFile.setFiFileLink(attach.getFiFileLink());
+                        hanghoaFile.setFiFileName(attach.getFiFileName());
                         hanghoaFile.setFiLoaiFile(1);
                         hanghoaFile.setFiTenLoai("File thông tin kết quả phân tích");
                         listHangHoa.add(hanghoaFile);
@@ -380,8 +381,8 @@ public class WsServiceImpl implements WsService {
 
             }
             BNNXuLyKQ bnnXuLyKQ = getGson().fromJson(getGson().toJson(request.getData()), BNNXuLyKQ.class);
-            if (bnnXuLyKQ.getFiLyDo()!=null&&!bnnXuLyKQ.getFiLyDo().equals("")){
-                action=bnnXuLyKQ.getFiLyDo();
+            if (bnnXuLyKQ.getFiLyDo() != null && !bnnXuLyKQ.getFiLyDo().equals("")) {
+                action = bnnXuLyKQ.getFiLyDo();
             }
             TbdKQXL25 tbdKQXL25 = tbdKQXL25Service.findByFiNSWFileCodeAndFiProId(bnnXuLyKQ.getFiNSWFileCode(), bnnXuLyKQ.getFiMaHangHoa());
             TbdHanghoa25 tbdHanghoa25 = tbdHangHoa25Service.findByFiIdProduct(bnnXuLyKQ.getFiMaHangHoa());
@@ -403,8 +404,8 @@ public class WsServiceImpl implements WsService {
             fileBNNDto.setFiTenFile(bnnXuLyKQ.getFiFileName());
 
             tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25, tbdHanghoa25, action, bnnXuLyKQ.getFiNameOfStaff(), statusStr, Constant25.BNN_SEND, fileBNNDto));
-            if(checkHangHoaDuDieuKienMK(type,function,tbdHoso25.getFiHSType())){
-                themHangHoaMK(tbdHoso25,tbdHanghoa25);
+            if (checkHangHoaDuDieuKienMK(type, function, tbdHoso25.getFiHSType())) {
+                themHangHoaMK(tbdHoso25, tbdHanghoa25);
             }
         } catch (Exception ex) {
             return new ResponseJson(false, "", ex.getMessage());
@@ -444,8 +445,8 @@ public class WsServiceImpl implements WsService {
             tbdGiayXNCL25Service.save(tbdGiayXNCL25);
             tbdHangHoa25Service.save(hangHoaHoso);
             tbdLichSuHH25Service.save(createLichSuHangHoa(tbdHoso25, tbdHanghoa25, "Bộ Nông nghiệp gửi giấy xác nhận chất lượng", tbdGiayXNCL25.getFiNguoiKy(), action, Constant25.BNN_SEND, null));
-            if(checkHangHoaDuDieuKienMK(type,function,tbdHoso25.getFiHSType())){
-                themHangHoaMK(tbdHoso25,hangHoaHoso);
+            if (checkHangHoaDuDieuKienMK(type, function, tbdHoso25.getFiHSType())) {
+                themHangHoaMK(tbdHoso25, hangHoaHoso);
             }
         } catch (Exception e) {
             log.info(e.getMessage());
@@ -474,8 +475,8 @@ public class WsServiceImpl implements WsService {
             TbdThuHoiGXNCL25 tbdThuHoiGXNCL25 = getGson().fromJson(getGson().toJson(request.getData()), TbdThuHoiGXNCL25.class);
 
             TbdGiayXNCL25 tbdGiayXNCL25 = tbdGiayXNCL25Service.findByFiNSWFileCodeAndFiSoGCN(tbdThuHoiGXNCL25.getFiNSWFileCode(), tbdThuHoiGXNCL25.getFiSoGXN());
-            if (tbdThuHoiGXNCL25.getFiLyDo()!=null&&!tbdThuHoiGXNCL25.getFiLyDo().equals("")){
-                action=tbdThuHoiGXNCL25.getFiLyDo();
+            if (tbdThuHoiGXNCL25.getFiLyDo() != null && !tbdThuHoiGXNCL25.getFiLyDo().equals("")) {
+                action = tbdThuHoiGXNCL25.getFiLyDo();
             }
             if (tbdGiayXNCL25 == null) {
                 return new ResponseJson(false, "Không tồn tại giấy xác nhận chất lượng");
@@ -566,7 +567,7 @@ public class WsServiceImpl implements WsService {
         if (response.isSuccess()) {
             TbdHoso25 hs25 = tbdHoso25Service.findById(requestCancel.getFiIdHS());
             hs25.setFiHSStatus(Constant25.HosoStatus.DA_RUT_HO_SO.getId());
-            tbdLichsu25Service.save(createHistory(hs25, "Yêu cầu rút hồ sơ: "+requestCancel.getFiReason(), null));
+            tbdLichsu25Service.save(createHistory(hs25, "Yêu cầu rút hồ sơ: " + requestCancel.getFiReason(), null));
             tbdHoso25Service.save(hs25);
             response.setSuccess(true);
 //            response.setMessage("Rút hồ sơ thành công");
@@ -787,9 +788,9 @@ public class WsServiceImpl implements WsService {
     private void themHangHoaMK(TbdHoso25 tbdHoso25, TbdHanghoa25 tbdHanghoa25) {
         TbdHanghoaMK25 tbdHanghoaMK25 = new TbdHanghoaMK25();
         TbdHanghoaMK25 hanghoaMK25 = tbdHanghoaMK25Service.findByFiIdProduct(tbdHanghoa25.getFiIdProduct());
-        if (hanghoaMK25!=null){
+        if (hanghoaMK25 != null) {
             return;
-        }else{
+        } else {
             BeanUtils.copyProperties(tbdHanghoa25, tbdHanghoaMK25);
         }
         tbdHanghoaMK25.setFiTaxCode(tbdHoso25.getFiTaxCode());
@@ -798,31 +799,31 @@ public class WsServiceImpl implements WsService {
         tbdHanghoaMK25.setFiNgayCap(new Date());
         tbdHanghoaMK25.setFiNSWFileCode(tbdHoso25.getFiNSWFileCode());
         List<TbdHanghoaMK25> mk25List = tbdHanghoaMK25Service.findByFiProHashOrderByFiOrderDesc(tbdHanghoaMK25.getFiProHash());
-        if(mk25List!=null&&!mk25List.isEmpty()){ //Neu da dat yeu cau truoc do
-            if (mk25List.size()<2){ //Neu nho hon 2 lan
+        if (mk25List != null && !mk25List.isEmpty()) { //Neu da dat yeu cau truoc do
+            if (mk25List.size() < 2) { //Neu nho hon 2 lan
                 tbdHanghoaMK25.setFiOrder(mk25List.size() + 1);
                 tbdHanghoaMK25.setFiActive(Boolean.FALSE);
-            }else{ //Neu lon hon hoac bang 2 lan
+            } else { //Neu lon hon hoac bang 2 lan
                 tbdHanghoaMK25.setFiOrder(mk25List.size() + 1); // them hang hoa moi
                 tbdHanghoaMK25.setFiActive(Boolean.TRUE);
-                if(mk25List.size()>=3){ //Neu lon hon hoac bang 3 lan
-                    int dem =(mk25List.size()+1)-3; //Update lai trang thai cua cac lan truoc do vd: 3 lan => 3+1=4; 4-3=1 => update order<=1 ve false
+                if (mk25List.size() >= 3) { //Neu lon hon hoac bang 3 lan
+                    int dem = (mk25List.size() + 1) - 3; //Update lai trang thai cua cac lan truoc do vd: 3 lan => 3+1=4; 4-3=1 => update order<=1 ve false
                     List<TbdHanghoaMK25> listMKTemp = new ArrayList<>(mk25List);
                     //Xoa 2 hang hoa gan nhat
                     listMKTemp.remove(listMKTemp.get(0));
                     listMKTemp.remove(listMKTemp.get(0));
-                    while (dem>=1){
-                        for (TbdHanghoaMK25 hangHoaMK25Temp: listMKTemp){
-                            if (hangHoaMK25Temp.getFiOrder()==dem){
+                    while (dem >= 1) {
+                        for (TbdHanghoaMK25 hangHoaMK25Temp : listMKTemp) {
+                            if (hangHoaMK25Temp.getFiOrder() == dem) {
                                 hangHoaMK25Temp.setFiActive(Boolean.FALSE);
-                                dem=dem-1;
+                                dem = dem - 1;
                                 tbdHanghoaMK25Service.save(hangHoaMK25Temp);
                                 listMKTemp.remove(hangHoaMK25Temp);
                                 break;
                             }
                         }
                     }
-                }else{ // Neu bang 2
+                } else { // Neu bang 2
                     mk25List.forEach(hangHoaMK25 -> {
                         hangHoaMK25.setFiActive(Boolean.TRUE);
                     });
@@ -831,7 +832,7 @@ public class WsServiceImpl implements WsService {
 
             }
 
-        }else{  //Neu chua co lan nao
+        } else {  //Neu chua co lan nao
             tbdHanghoaMK25.setFiOrder(1);
             tbdHanghoaMK25.setFiActive(Boolean.FALSE);
         }

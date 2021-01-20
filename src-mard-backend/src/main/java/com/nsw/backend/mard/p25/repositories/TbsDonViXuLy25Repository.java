@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface TbsDonViXuLy25Repository extends JpaRepository<TbsDonViXuLy25, Integer>, JpaSpecificationExecutor<TbsDonViXuLy25> {
-    public List<TbsDonViXuLy25> findByFiPUType(Integer fiPuType);
+    public List<TbsDonViXuLy25> findByFiPUTypeOrderByFiPUOrder(Integer fiPuType);
 }

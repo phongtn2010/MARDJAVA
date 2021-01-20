@@ -156,6 +156,7 @@ public class Hoso25 {
                 tbdattach25.setFiFileId(atch.getFiGuidBNN());
                 tbdattach25.setFiFileName(atch.getFiFileName());
                 tbdattach25.setFiFileLink(atch.getFiLinkBNN());
+                tbdattach25.setFiFileTypeBNN(atch.getFiFileTypeBNN());
                 profile.getFiAttach().add(tbdattach25);
             }
 

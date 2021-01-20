@@ -50,6 +50,8 @@ public class TbsDonViXuLy25 implements Serializable {
     @Column(name = "FI_PU_TYPE_NAME")
     private String fiPUTypeName;
 
+    @Column(name = "FI_PU_ORDER")
+    private Integer fiPUOrder;
     public TbsDonViXuLy25() {
     }
 

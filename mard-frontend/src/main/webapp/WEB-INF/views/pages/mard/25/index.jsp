@@ -320,12 +320,12 @@
                             <div class="col-md-2 nsw-text-right">
                                 <label><spring:message code="mard.25.tccd.panel_chuyen_ten_tccd"/><a class="nsw-require-field">*</a></label>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-8">
                                <select data-bind="options: lstDVXL,
                                                     optionsText: 'fiPUName',
                                                     optionsValue: 'fiPUCode',
                                                     selectedText: fiNameTCCD,
-                                                    value: fiIdTCCD" class="form-control"></select>
+                                                    value: fiIdTCCD,enable:isSend" class="form-control" w></select>
                             </div>
                         </div>
                         <div class="row margin-bottom-15">

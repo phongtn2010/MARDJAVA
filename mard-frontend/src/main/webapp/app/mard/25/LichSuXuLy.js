@@ -126,16 +126,17 @@ function HistoryPopupView() {
     self.searchingAfterShow = function() {
         pageable.number = self.historyPageingVM.currentPage() - 1;
         app.makeGet({
-            url: '/mard/25/lichsu?fiHSCode=' + self.idHoSo + '&p=' + pageable.number + '&s=5',
+            url: '/mard/25/lichsu?fiHSCode=' + self.mahoso + '&p=' + pageable.number + '&s=5',
             success: function(res) {
+                console.log(res);
+                $("#loading10").hide();
                 self.historyPageingVM.totalCount(res.total);
                 self.historyItems(ko.utils.arrayMap(res.data, function (item) {
                     var itemVM = {};
                     ko.mapping.fromJS(item, {}, itemVM);
-                    itemVM.fiHSStatus = ko.observable(mapTrangthai[item.fiHSStatus.toString()]);
+                    // itemVM.fiStatus = ko.observable(mapTrangthai[item.fiStatus.toString()]);
                     return itemVM;
                 }));
-
             },
             error: function (d) {
                 $("#loading10").hide();
@@ -148,4 +149,10 @@ function HistoryPopupView() {
         });
     }
 
+    self.downloadFile =function (index) {
+        console.log(index);
+        if(index.fiLinkFile()){
+            window.open(index.fiLinkFile());
+        }
+    }
 }

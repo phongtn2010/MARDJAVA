@@ -6,4 +6,9 @@ import lombok.Data;
 public class ResponeUploadFile {
     String ItemId;
     String UrlFile;
+
+    public ResponeUploadFile(String itemId, String urlFile) {
+        ItemId = itemId;
+        UrlFile = urlFile;
+    }
 }
