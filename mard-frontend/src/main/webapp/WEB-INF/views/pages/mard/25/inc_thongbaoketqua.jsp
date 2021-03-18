@@ -90,7 +90,7 @@
                 + Quy chuẩn kỹ thuật (nhóm, loại hàng hóa tại QCVN 01-190/BNNPTNT): <span data-bind="text: fiProNhomName"></span>,<span data-bind="text: fiProLoaiName"></span>
             tại <span data-bind="text: quyChuanKT"></span><br/>
                 <b>3. Kết quả đánh giá sự phù hợp</b><br/>
-                Giấy chứng nhận hợp quy lô TACN nhập khẩu số: <span data-bind="text: soGXNCL"></span> do <span data-bind="text: donvicap"></span> ngày: <span data-bind="text: ngaycapShort"></span><br/>
+                Giấy chứng nhận hợp quy lô TACN nhập khẩu số: <span data-bind="text: soGCNHQ"></span> do <span data-bind="text: donvicap"></span> ngày: <span data-bind="text: ngaycapShort"></span><br/>
                 <b>4. Kết quả kiểm tra nhà nước:</b><br/>
                 Lô hàng đáp ứng yêu cầu chất lượng hàng hóa nhập khẩu./.<br/>
 

@@ -1041,8 +1041,9 @@ public class Mard25Api extends BaseApi {
 
         Variables giayXNCLVariables = new Variables();
         giayXNCLVariables.addTextVariable(new TextVariable("#{fiSoGXNCL}", tbdGiayXNCL25.getFiSoGCN() == null ? "" : tbdGiayXNCL25.getFiSoGCN()));
-        giayXNCLVariables.addTextVariable(new TextVariable("#{fiNgayCap}", Mard25Hepler.toVNStringDate(tbdGiayXNCL25.getFiNgayCap())));
-        giayXNCLVariables.addTextVariable(new TextVariable("#{fiNgayCapShort}", Mard25Hepler.toShortStringDate(tbdGiayXNCL25.getFiNgayCap())));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiSoGCNHQ}", tbdGiayXNCL25.getFiGCNHopQuy() == null ? "" : tbdGiayXNCL25.getFiGCNHopQuy()));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiNgayCap}", Mard25Hepler.toVNStringDate(tbdGiayXNCL25.getFiNgayKy())));
+        giayXNCLVariables.addTextVariable(new TextVariable("#{fiNgayCapShort}", Mard25Hepler.toVNStringDate(tbdGiayXNCL25.getFiNgayKy())));
 
         giayXNCLVariables.addTextVariable(new TextVariable("#{fiProName}", tbdHanghoa25.getFiProName() == null ? "" : tbdHanghoa25.getFiProName()));
         giayXNCLVariables.addTextVariable(new TextVariable("#{fiProCode}", tbdHanghoa25.getFiProCode() == null ? "" : tbdHanghoa25.getFiProCode()));

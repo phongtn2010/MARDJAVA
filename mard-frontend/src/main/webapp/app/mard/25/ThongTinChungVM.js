@@ -177,7 +177,7 @@ function ThongTinChungVM(data) {
     });
     ttcVMSelf.EfiProCLTarg = ko.observable(null).
     extend({
-        required: {params: true, message: NSWLang["common_msg_formvaild_required"]},
+        required: {params: true, messaisUploadGDKge: NSWLang["common_msg_formvaild_required"]},
         maxLength: {message: 'Tối đa 100 ký tự', params: 100}
     });
     ttcVMSelf.EfiProCLCompare = ko.observable(null).
@@ -382,7 +382,11 @@ function ThongTinChungVM(data) {
     ttcVMSelf.fiFileNameGDK  = ko.observable((data && data.hasOwnProperty('fiFileNameGDK')) ? data.fiFileNameGDK : null);
     ttcVMSelf.fiFileIdGDK  = ko.observable((data && data.hasOwnProperty('fiFileIdGDK')) ? data.fiFileIdGDK : null);
 
-    ttcVMSelf.isUploadGDK=ko.observable((data && data.hasOwnProperty('fiLinkGDK')) ? true :false);
+    ttcVMSelf.isUploadGDK=ko.observable(false);
+    if(data.fiFileNameGDK!=null&&data.fiFileNameGDK!=''){
+        ttcVMSelf.isUploadGDK(true);
+    }
+    console.log(ttcVMSelf.isUploadGDK());
     // app.makeGet({
     //     url: '/mard/25/hoso/find-by-status?taxCode=' + ttcVMSelf.fiTaxCode() + '&from=26',
     //     success: function(res) {
@@ -718,51 +722,56 @@ function ThongTinChungVM(data) {
                 return;
             }
         }
-        for (var i =0;i<ttcVMSelf.fiProCLList().length;i++){
-            var getList = {
-                fiProCLTarg: ttcVMSelf.fiProCLList()[i].fiProCLTarg(),
-                fiProCLCompare: ttcVMSelf.fiProCLList()[i].fiProCLCompare(),
-                fiProCLContent: ttcVMSelf.fiProCLList()[i].fiProCLContent(),
-                fiProCLUnitName: ttcVMSelf.fiProCLList()[i].fiProCLUnitName(),
-                lstChiTieuAT: ttcVMSelf.lstChiTieuAT,
-                isEnable: ttcVMSelf.fiProCLList()[i].isEnable(),
-                isUpdate: ttcVMSelf.fiProCLList()[i].isUpdate(),
-                fiProCLUnitID: ttcVMSelf.fiProCLList()[i].fiProCLUnitID()
+        if(ttcVMSelf.fiHSType()==4){
+
+        }else{
+            for (var i =0;i<ttcVMSelf.fiProCLList().length;i++){
+                var getList = {
+                    fiProCLTarg: ttcVMSelf.fiProCLList()[i].fiProCLTarg(),
+                    fiProCLCompare: ttcVMSelf.fiProCLList()[i].fiProCLCompare(),
+                    fiProCLContent: ttcVMSelf.fiProCLList()[i].fiProCLContent(),
+                    fiProCLUnitName: ttcVMSelf.fiProCLList()[i].fiProCLUnitName(),
+                    lstChiTieuAT: ttcVMSelf.lstChiTieuAT,
+                    isEnable: ttcVMSelf.fiProCLList()[i].isEnable(),
+                    isUpdate: ttcVMSelf.fiProCLList()[i].isUpdate(),
+                    fiProCLUnitID: ttcVMSelf.fiProCLList()[i].fiProCLUnitID()
+                }
+                ttcVMSelf.listCL.push(getList);
             }
-            ttcVMSelf.listCL.push(getList);
+
+            for (var i =0;i<ttcVMSelf.fiProATList().length;i++){
+                var getList = {
+                    fiProATTarg:  ttcVMSelf.fiProATList()[i].fiProATTarg(),
+                    fiProATCompare: ttcVMSelf.fiProATList()[i].fiProATCompare(),
+                    fiProATContent:  ttcVMSelf.fiProATList()[i].fiProATContent(),
+                    fiProATUnitName: ttcVMSelf.fiProATList()[i].fiProATUnitName(),
+                    lstChiTieuAT: ttcVMSelf.lstChiTieuAT(),
+                    isEnable: ttcVMSelf.fiProATList()[i].isEnable(),
+                    isUpdate: ttcVMSelf.fiProATList()[i].isUpdate(),
+                    fiProATUnitID:  ttcVMSelf.fiProATList()[i].fiProATUnitID()
+                }
+                ttcVMSelf.listAT.push(getList);
+            }
+            for (var i =0;i<ttcVMSelf.fiProSLKLList().length;i++){
+                //var massName=ttcVMSelf.findNameByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode());
+                //var amountName=ttcVMSelf.findNameSLByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode());
+                var getList = {
+                    fiProSLKLMass: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMass(),
+                    fiProSLKLMassTan: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassTan(),
+                    fiProSLKLMassUnitName: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitName(),
+                    fiProSLKLMassUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode(),
+                    fiProSLKLAmount: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmount(),
+                    fiProSLKLAmountUnitName: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitName(),
+                    lstDMDVT: ttcVMSelf.lstDMDVT(),
+                    lstDMDVTSL: ttcVMSelf.lstDMDVTSL(),
+                    isEnable: ttcVMSelf.fiProSLKLList()[i].isEnable(),
+                    isUpdate: ttcVMSelf.fiProSLKLList()[i].isUpdate(),
+                    fiProSLKLAmountUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode()
+                }
+                ttcVMSelf.listSLKL.push(getList);
+            }
         }
 
-        for (var i =0;i<ttcVMSelf.fiProATList().length;i++){
-            var getList = {
-                fiProATTarg:  ttcVMSelf.fiProATList()[i].fiProATTarg(),
-                fiProATCompare: ttcVMSelf.fiProATList()[i].fiProATCompare(),
-                fiProATContent:  ttcVMSelf.fiProATList()[i].fiProATContent(),
-                fiProATUnitName: ttcVMSelf.fiProATList()[i].fiProATUnitName(),
-                lstChiTieuAT: ttcVMSelf.lstChiTieuAT(),
-                isEnable: ttcVMSelf.fiProATList()[i].isEnable(),
-                isUpdate: ttcVMSelf.fiProATList()[i].isUpdate(),
-                fiProATUnitID:  ttcVMSelf.fiProATList()[i].fiProATUnitID()
-        }
-            ttcVMSelf.listAT.push(getList);
-        }
-        for (var i =0;i<ttcVMSelf.fiProSLKLList().length;i++){
-            //var massName=ttcVMSelf.findNameByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode());
-            //var amountName=ttcVMSelf.findNameSLByCatNote(ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode());
-            var getList = {
-                fiProSLKLMass: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMass(),
-                fiProSLKLMassTan: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassTan(),
-                fiProSLKLMassUnitName: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitName(),
-                fiProSLKLMassUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLMassUnitCode(),
-                fiProSLKLAmount: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmount(),
-                fiProSLKLAmountUnitName: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitName(),
-                lstDMDVT: ttcVMSelf.lstDMDVT(),
-                lstDMDVTSL: ttcVMSelf.lstDMDVTSL(),
-                isEnable: ttcVMSelf.fiProSLKLList()[i].isEnable(),
-                isUpdate: ttcVMSelf.fiProSLKLList()[i].isUpdate(),
-                fiProSLKLAmountUnitCode: ttcVMSelf.fiProSLKLList()[i].fiProSLKLAmountUnitCode()
-            }
-            ttcVMSelf.listSLKL.push(getList);
-        }
         var kl;
         var sl;
         console.log(ttcVMSelf.listSLKL());

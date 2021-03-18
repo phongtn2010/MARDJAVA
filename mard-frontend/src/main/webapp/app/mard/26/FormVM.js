@@ -257,7 +257,8 @@ function FormVM(options) {
             success: function (res) {
                 if (res.success) {
                     console.log(res.data);
-                    var list = res.data ? res.data.data : [];
+                    var list = res.data ? res.data.listTbdHanghoaMK25 : [];
+                    console.log(list);
                     ko.utils.arrayForEach(list, function(product) {
                         product.isSelected = ko.observable(true);
                         product.label = ko.observable('Chọn');

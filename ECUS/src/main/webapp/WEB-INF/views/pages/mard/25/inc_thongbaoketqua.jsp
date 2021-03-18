@@ -89,7 +89,7 @@
                 + Tiêu chuẩn công bố áp dụng (số hiệu TCCS): <span data-bind="text: tieuChuanApDung"></span><br/>
                 + Quy chuẩn kỹ thuật (nhóm, loại hàng hóa tại QCVN 01-190/BNNPTNT): <span data-bind="text: quyChuanKT"></span><br/>
                 <b>3. Kết quả đánh giá sự phù hợp</b><br/>
-                Giấy chứng nhận hợp quy lô TACN nhập khẩu số: <span data-bind="text: soGXNCL"></span><br/>
+                Giấy chứng nhận hợp quy lô TACN nhập khẩu số: <span data-bind="text: soGCNHQ"></span><br/>
                 <b>3. Kết quả kiểm tra nhà nước:</b><br/>
                 Lô hàng đáp ứng yêu cầu chất lượng hàng hóa nhập khẩu./.<br/>
 

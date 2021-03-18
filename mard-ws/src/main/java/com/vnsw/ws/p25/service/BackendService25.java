@@ -6,6 +6,8 @@
 package com.vnsw.ws.p25.service;
 
 import com.vnsw.ws.common.entity.json.ResponseJson;
+import com.vnsw.ws.p25.envelop.Content25;
+import com.vnsw.ws.p25.envelop.Envelope25;
 import com.vnsw.ws.p25.message.ResponseWrapper;
 
 
@@ -26,4 +28,5 @@ public interface BackendService25 {
 
     ResponseJson tiepNhanHD2D(ResponseWrapper responseWrapper);
 
+    ResponseJson guiHosoVNC(Envelope25 content);
 }

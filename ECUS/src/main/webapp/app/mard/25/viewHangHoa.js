@@ -466,6 +466,7 @@ function ThongBaoKQVM() {
     thongBaoVMSefl.hopDong=ko.observable('');
     thongBaoVMSefl.hoaDon=ko.observable('');
     thongBaoVMSefl.soGXNCL=ko.observable(null);
+    thongBaoVMSefl.soGCNHQ=ko.observable(null);
     thongBaoVMSefl.ngayKyXNCL=ko.observable('');
     thongBaoVMSefl.fiIdHS = ko .observable(null);
     thongBaoVMSefl.fiIdHangHoa = ko .observable(null);
@@ -519,6 +520,7 @@ function ThongBaoKQVM() {
         thongBaoVMSefl.fiProLoaiName(index.fiProNameLoai);
         findGiayxncl(index.fiIdProduct,function (res) {
             thongBaoVMSefl.soGXNCL(res.data.fiSoGCN);
+            thongBaoVMSefl.soGCNHQ(res.data.fiGCNHopQuy);
             thongBaoVMSefl.ngayKyXNCL(res.data.fiNgayKy==null?new Date(res.data.fiCreatedDate).toDateString():new Date(res.data.fiNgayKy).toDateString());
             thongBaoVMSefl.noiKyXNCL(res.data.fiNoiKy);
             thongBaoVMSefl.donvicap(res.data.fiNameCoQuanDanhGia);

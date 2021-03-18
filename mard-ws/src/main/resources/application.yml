@@ -1,9 +1,9 @@
 spring:
   profiles:
-    active: blameo_test
+    active: hq_test
 ---
 server:
-  port: 8080
+  port: 8082
   contextPath: /MARDWs
 --- 
 spring:
@@ -96,9 +96,12 @@ spring:
 management:
     security:
         enabled: false
-URI_BACKEND_ADDRESS: http://192.168.0.99:8100/MARDBackend
+URI_BACKEND_ADDRESS: http://localhost:8081/MARDBackend
 URI_ADDRESS_FILE_SERVER: http://10.224.128.132:8005/FileServices
 URI_SERVICE_BKHCN: http://10.224.164.16:8008/KHCN/ImportDocumentService?wsdl
+#VNC
+SEND_VNC: 1
+URI_VNC_ADDRESS: http://localhost:8083/VROOT
 # ENCRYPT MESAGE
 KEY_AES: gWoUo9NBRyTYD234
 ENCRYPT: false

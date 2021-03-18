@@ -184,7 +184,7 @@
                                         code="mard.danhsach.stt"/></th>
                                 <th class="text-center" style="width: 100px;"><spring:message
                                         code="mard.danhsach.lichsuxuly"/></th>
-                                <th class="text-center" style="width: 100px;">Sao chép hồ sơ</th>
+                                <%-- <th class="text-center" style="width: 100px;">Sao chép hồ sơ</th>--%>
                                 <th class="text-center" style="width: 100px;"><spring:message
                                         code="mard.danhsach.mahoso"/></th>
                                 <th class="text-center" style="width: 100px;">Ngày tạo</th>
@@ -209,10 +209,10 @@
                                         <a href="javascript:void(0)"><i class="fa fa-history"
                                                                         data-bind="click: $parent.goViewHistory"/></a>
                                     </td>
-                                    <td class="text-center">
-                                        <a href="javascript:void(0)" data-bind="click: $parent.goCopyHS"><i class="fa fa-copy"
-                                                                        /></a>
-                                    </td>
+<%--                                    <td class="text-center">--%>
+<%--                                        <a href="javascript:void(0)" data-bind="click: $parent.goCopyHS"><i class="fa fa-copy"--%>
+<%--                                                                        /></a>--%>
+<%--                                    </td>--%>
                                     <td class="text-center">
                                         <a href="javascript:void(0)"
                                            data-bind="text : fiMaHoso"></a>

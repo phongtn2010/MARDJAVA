@@ -4,8 +4,10 @@ import com.nsw.backend.controller.BaseController;
 import com.nsw.backend.helper.RabbitMQErrorHelper;
 import com.nsw.backend.mard.p25.model.TbdHanghoa25;
 import com.nsw.backend.mard.p25.model.TbdHanghoaAT25;
+import com.nsw.backend.mard.p25.model.TbdHanghoaMK25;
 import com.nsw.backend.mard.p25.model.TbdHoso25;
 import com.nsw.backend.mard.p25.service.TbdHangHoa25Service;
+import com.nsw.backend.mard.p25.service.TbdHanghoaMK25Service;
 import com.nsw.backend.mard.p26.constant.Constant26;
 import com.nsw.backend.mard.p26.model.*;
 import com.nsw.backend.mard.p26.service.TbdHoso26Service;
@@ -37,14 +39,16 @@ public class TbdHoso26Controller extends BaseController {
     private final TbdHoso26Service tbdHoso26Service;
     private final TbdLichsu26Service tbdLichsu26Service;
     private final TbdHangHoa25Service tbdHangHoa25Service;
+    private final TbdHanghoaMK25Service tbdHanghoaMK25Service;
     private final WebService26 webService26;
     @Autowired
-    public TbdHoso26Controller(RabbitMQService rabbitMQService, TbdHoso26Service tbdHoso26Service, TbdLichsu26Service tbdLichsu26Service, WebService26 webService26, TbdHangHoa25Service tbdHangHoa25Service) {
+    public TbdHoso26Controller(RabbitMQService rabbitMQService, TbdHoso26Service tbdHoso26Service, TbdLichsu26Service tbdLichsu26Service, WebService26 webService26, TbdHangHoa25Service tbdHangHoa25Service, TbdHanghoaMK25Service tbdHanghoaMK25Service) {
         this.rabbitMQService = rabbitMQService;
         this.tbdHoso26Service = tbdHoso26Service;
         this.tbdLichsu26Service = tbdLichsu26Service;
         this.webService26 = webService26;
         this.tbdHangHoa25Service = tbdHangHoa25Service;
+        this.tbdHanghoaMK25Service = tbdHanghoaMK25Service;
     }
 
     @PostMapping("/create")
@@ -73,6 +77,7 @@ public class TbdHoso26Controller extends BaseController {
     }
     private TbdHoso26 saveDraftTbdhoso26(@RequestBody TbdHoso26 tbdHoso26) {
         String historyContent;
+        tbdHoso26.setFiActive(Boolean.TRUE);
         if (tbdHoso26.getFiIdHoSo26() == null || tbdHoso26.getFiTrangthai() == null) {
             tbdHoso26.setFiTrangthai(Constant26.HosoStatus.TAO_MOI.getId());
             tbdHoso26.setFiNgaytao(new Date());
@@ -91,6 +96,13 @@ public class TbdHoso26Controller extends BaseController {
         profileHst.setFiSenderName(tbdHoso26.getFiTenDn());
         profileHst.setFiContent(historyContent);
         tbdLichsu26Service.save(profileHst);
+
+        String hashProduct = tbdHoso26.getFiProductList().get(0).getFiProHash();
+        List<TbdHanghoaMK25> mk25List=tbdHanghoaMK25Service.findByFiProHashOrderByFiOrderDesc(hashProduct);
+        mk25List.forEach(tbdHanghoaMK25 -> {
+            tbdHanghoaMK25.setFiActive(Boolean.FALSE);
+        });
+        tbdHanghoaMK25Service.saveAll(mk25List);
         return tbdHoso26;
     }
     @PostMapping("/timkiem")
@@ -124,6 +136,16 @@ public class TbdHoso26Controller extends BaseController {
             if (profile == null) {
                 return createErrorResponse("No content", HttpStatus.NO_CONTENT);
             }
+
+            TbdHanghoa26 tbdHanghoa26 = profile.getFiProductList().get(0);
+            profile.setFiHangSX(tbdHanghoa26.getFiProMadeIn());
+            profile.setFiNuocSX(tbdHanghoa26.getFiProCountryName());
+            TbdHanghoa25 tbdHanghoa25 = tbdHangHoa25Service.findByFiIdProduct(tbdHanghoa26.getFiIdProduct());
+            tbdHanghoa26= copyPropertiesHangHoa(tbdHanghoa25,tbdHanghoa26);
+
+            List<TbdHanghoa26> hanghoa26List = new ArrayList<>();
+            hanghoa26List.add(tbdHanghoa26);
+            profile.setFiProductList(hanghoa26List);
 
             TbdHoso26 result = saveDraftTbdhoso26(profile);
             TbdLichsu26 profileHst = new TbdLichsu26();

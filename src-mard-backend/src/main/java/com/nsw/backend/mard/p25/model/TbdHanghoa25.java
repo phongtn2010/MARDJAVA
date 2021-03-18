@@ -13,9 +13,7 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Persistent class for entity stored in table "25" - Hồ sơ Đăng ký
@@ -173,6 +171,26 @@ public class TbdHanghoa25 extends CmonBaseEntity implements Serializable {
                 .append("|").append(fiProIdPhanLoai).append("|").append(fiProCode).append("|").append(fiProMadeIn)
                 .append("|").append(fiProCountryCode).append("|").append(fiProThanhPhan).append("|").append(fiProColor).append("|").append(fiProSoHieu).append("|").append(fiProQuyChuan);
         StringBuffer sbAT = new StringBuffer();
+        Collections.sort(fiProATList, new Comparator<TbdHanghoaAT25>() {
+            @Override
+            public int compare(TbdHanghoaAT25 o1, TbdHanghoaAT25 o2) {
+                int kq=0;
+                if(o1.getFiIdProAT()>o2.getFiIdProAT()) kq=1;
+                else if (o1.getFiIdProAT()<o2.getFiIdProAT()) kq=-1;
+                else kq=0;
+                return kq;
+            }
+        });
+        Collections.sort(fiProCLList, new Comparator<TbdHanghoaCL25>() {
+            @Override
+            public int compare(TbdHanghoaCL25 o1, TbdHanghoaCL25 o2) {
+                int kq=0;
+                if(o1.getFiIdProCL()>o2.getFiIdProCL()) kq=1;
+                else if (o1.getFiIdProCL()<o2.getFiIdProCL()) kq=-1;
+                else kq=0;
+                return kq;
+            }
+        });
         for (TbdHanghoaAT25 tbdHanghoaAT25: fiProATList){
             sbAT.append(tbdHanghoaAT25.tbdHanghoaAT25ToString());
         }

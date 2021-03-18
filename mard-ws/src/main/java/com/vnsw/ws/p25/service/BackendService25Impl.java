@@ -9,6 +9,8 @@ import com.vnsw.ws.common.entity.json.ResponseJson;
 import com.vnsw.ws.common.service.RabbitMQService;
 import com.vnsw.ws.helper.RabbitMQErrorHelper;
 import com.vnsw.ws.p25.common.Constants25;
+import com.vnsw.ws.p25.envelop.Content25;
+import com.vnsw.ws.p25.envelop.Envelope25;
 import com.vnsw.ws.p25.message.ResponseWrapper;
 import com.vnsw.ws.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,7 @@ public class BackendService25Impl implements BackendService25 {
 
     private static final String URI_BACKEND_ADDRESS = "URI_BACKEND_ADDRESS";
 
+    private static final String URI_VNC_ADDRESS = "URI_VNC_ADDRESS";
     @Autowired
     RabbitMQService rabbitMQService;
 
@@ -121,6 +124,41 @@ public class BackendService25Impl implements BackendService25 {
         return callServiceBackend(responseWrapper,restUri);
     }
 
+    @Override
+    public ResponseJson guiHosoVNC(Envelope25 content) {
+        try {
+            String restUri = environment.getRequiredProperty(URI_VNC_ADDRESS) + "/controller/get-message";
+            return callServiceVNC(content,restUri);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseJson(false,null,0L,"");
+        }
+
+    }
+    private ResponseJson callServiceVNC(Envelope25 content, String restUri){
+        ResponseJson responseJson = new ResponseJson();
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            FormHttpMessageConverter formConverter = new FormHttpMessageConverter();
+            formConverter.setCharset(StandardCharsets.UTF_8);
+            restTemplate.getMessageConverters().add(formConverter);
+            restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+            ResponseEntity responseEntity = null;
+            responseEntity = restTemplate.postForEntity(restUri, content, ResponseJson.class);
+//            return (ResponseJson) responseEntity.getBody();
+            responseJson = receiveService.callResforEntity(restUri, content, Constants.RES_METHOD.POST);
+        } catch (Exception ex) {
+            responseJson.setSuccess(false);
+            responseJson.setMessage(ex.getMessage());
+            String errorInfo = Constants.APP_NAME + Constants.MESSAGE_SEPARATOR + CLASS_NAME
+                    + Constants.MESSAGE_SEPARATOR + Thread.currentThread().getStackTrace()[1].getMethodName()
+                    + Constants.MESSAGE_SEPARATOR + ex.toString();
+            RabbitMQErrorHelper.pushLogToRabbitMQ(errorInfo, rabbitMQService.getRabbitMQInfo());
+            return responseJson;
+        }
+        return responseJson;
+    }
+
     private ResponseJson callServiceBackend(ResponseWrapper responseWrapper, String restUri){
         ResponseJson responseJson = new ResponseJson();
         try {
@@ -135,7 +173,6 @@ public class BackendService25Impl implements BackendService25 {
         }
         return responseJson;
     }
-
     private ResponseJson makeSuccess(){
         return new ResponseJson(true, null, null,"Thành công");
     }

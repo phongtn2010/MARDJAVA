@@ -159,7 +159,7 @@
                                     code="mard.25.tokhai.thong_tin_giay_thay_the"/></label>
                         </div>
                         <div class="col-md-4">
-                            <input class="form-control" id="fiGDKFile" type="file" data-bind="event:{change: changeFileGDK},value: fiGDKFile, visible: !isUploadGDK"/>
+                            <input class="form-control" id="fiGDKFile" type="file" data-bind="event:{change: changeFileGDK},value: fiGDKFile, visible: !isUploadGDK()"/>
                             <a><span data-bind="text:fiFileNameGDK, visible: isUploadGDK"></span></a>
                             <a><i data-bind="visible: isUploadGDK, click: deleteFileGDK" class="fa fa-close"></i></a>
                         </div>

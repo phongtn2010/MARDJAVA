@@ -3,6 +3,8 @@ package com.nsw.backend.mard.p26.service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
+import com.nsw.backend.mard.p25.model.TbdHanghoaMK25;
+import com.nsw.backend.mard.p25.service.TbdHanghoaMK25Service;
 import com.nsw.backend.mard.p26.client.From;
 import com.nsw.backend.mard.p26.client.Header;
 import com.nsw.backend.mard.p26.client.ResponseWrapper;
@@ -21,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 @Service("webService26")
 @Transactional(rollbackFor = NSWException.class)

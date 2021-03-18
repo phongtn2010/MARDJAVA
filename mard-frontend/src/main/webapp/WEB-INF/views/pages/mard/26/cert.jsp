@@ -174,7 +174,7 @@
             <span class="bold">LÃNH ĐẠO CỤC</span><br/>
             <br/>
             <br/>
-            <span class="bold" data-bind="text : fiNguoiKy"></span>
+            <span class="bold" data-bind="text : fiTenNguoiKyCV"></span>
         </div>
     </div>
 <%--    <table class="tb-content tb-none-border w100p">--%>

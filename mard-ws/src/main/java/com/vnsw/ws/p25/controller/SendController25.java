@@ -113,6 +113,7 @@ public class SendController25 {
 //            String isTest = environment.getRequiredProperty("IS_TEST");
             String isTest = "0";
             boolean debugMode = Boolean.parseBoolean(environment.getProperty("DEBUG_MODE"));
+            String isSend =environment.getProperty("SEND_VNC");
             Long fileStatus;
             //RequestCancel requestCancel = null;
             if (response != null && response.isSuccess()) {
@@ -137,9 +138,10 @@ public class SendController25 {
                         body = envelopeService.createBody(content);
                         envelopeSend = envelopeService.createMessage(header, body);
                         // Gui message
-                        if (Boolean.TRUE.equals(sendMessage.getXmlOnly())) {
-                            String xml = convertXmlService.ObjectToXml(envelopeSend);
-                            return createResponse(xml, true, errorMessage, httpStatus, null);
+                        if ("1".equals(isSend)) {
+//                            String xml = convertXmlService.ObjectToXml(envelopeSend);
+                            ResponseJson res=backendService.guiHosoVNC(envelopeSend);
+                            logger.info("Gui VNC: "+res.getMessage());
                         }
                         if (isTest.equals(Constants.STATUS.ACTIVE)) {
                             isSuccess = true;
