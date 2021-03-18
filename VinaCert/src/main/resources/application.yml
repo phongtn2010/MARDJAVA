@@ -1,0 +1,87 @@
+spring:
+  profiles:
+    active: live
+---
+server:
+  port: 8083
+  contextPath: /VROOT
+---
+spring:
+  profiles: local, default, dev
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  http:
+      multipart:
+       max-file-size: 10MB
+       max-request-size: 10MB
+  jmx:
+    default-domain: VROOT
+datasource:
+  VROOT:
+    url: jdbc:oracle:thin:@10.224.130.194:1521/nswstandby
+    username: NSW
+    password: 123456789
+    driverClassName: oracle.jdbc.OracleDriver
+    defaultSchema: MARD
+    maxPoolSize: 20
+    hibernate:
+      hbm2ddl.method: update
+      show_sql: false
+      format_sql: false
+      dialect: org.hibernate.dialect.Oracle10gDialect
+management:
+    security:
+        enabled: false
+
+TOKEN: YSxjZ3gwYHh5MHpgZmVgZS02eyptMnp5NCpnbylsY302bng1
+URL_SERVICE: http://crm.vinacert.vn:82/api/resource/index.php
+# Thong tin rabbitMQ
+activemq.host: 10.224.164.16
+activemq.port: 5672
+activemq.user: nswlog
+activemq.password: nswlog
+activemq.virtualHost: /
+activemq.exchangeName: logExchange
+activemq.queueName: Log_Error_Queue
+activemq.routingKey: error
+---
+spring:
+  profiles: live
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  http:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  jmx:
+    default-domain: VROOT
+datasource:
+  VROOT:
+    url: jdbc:oracle:thin:@10.224.130.231:1521/nswdb
+    username: NSW
+    password: 123456789
+    driverClassName: oracle.jdbc.OracleDriver
+    defaultSchema: MARD
+    maxPoolSize: 20
+    hibernate:
+      hbm2ddl.method: update
+      show_sql: false
+      format_sql: false
+      dialect: org.hibernate.dialect.Oracle10gDialect
+management:
+  security:
+    enabled: false
+
+TOKEN: 68C18EBCF56166BB3BFFB69F0CA634
+URL_SERVICE: http://vinacert.vn:82/api/resource/index.php
+# Thong tin rabbitMQ
+activemq.host: 10.224.164.16
+activemq.port: 5672
+activemq.user: nswlog
+activemq.password: nswlog
+activemq.virtualHost: /
+activemq.exchangeName: logExchange
+activemq.queueName: Log_Error_Queue
+activemq.routingKey: error
